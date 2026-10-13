@@ -1,0 +1,4 @@
+Binary Placement
+
+Place the target `transfermovil.apk` file in this directory for local analysis.
+This folder is excluded from version control via `.gitignore`.

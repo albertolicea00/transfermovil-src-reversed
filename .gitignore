@@ -42,5 +42,6 @@ dist/
 *.trace
 
 # Workspace
-.workspace/*
-!.workspace/.gitkeep
+.workspace/**
+!.workspace/**/
+!.workspace/**/.gitkeep
