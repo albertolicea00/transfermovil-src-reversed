@@ -8,7 +8,7 @@
 
 <!-- 50 blocks (each block █ = 2%) (░ empty blocks) -->
 <span style="white-space: nowrap;"><code>[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0%</code></span>
-
+<progress value="0.01" max="100"></progress> 0.01%
 ## Overview
 
 This repository contains reverse-engineered source code, extracted resources, and structural analysis of the Transfermóvil client binary. The primary objective is to inspect implementation details, verify communication protocols (USSD/SMS/HTTP), and document internal logic.
