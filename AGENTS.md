@@ -5,4 +5,4 @@
 - `docs/target-metadata.md`: how to extract package, version, SDK levels, and SHA-256 from an APK.
 - Keep detailed procedures in separate `docs/*.md` files and add a one-line summary and link here for each new document.
 - Read only the documentation relevant to the current task.
-- Update `CHANGELOG.md` for every completed change with a brief summary; do not repeat full metadata tables there.
+- Update `CHANGELOG.md` for every completed change; put the date, APK filename, and SHA-256 in each analysis session's `##` heading.
