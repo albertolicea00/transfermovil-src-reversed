@@ -1,0 +1,46 @@
+# Operating System & Editors
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# IDEs & Code Editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Decompiler Artifacts & Logs
+*.log
+jadx.log
+apktool.log
+
+# Jadx GUI cache directories
+.jadx/
+jadx-cache/
+
+# Apktool build/repack outputs
+build/
+dist/
+
+# Binaries & Intermediate Files
+# Uncomment if you prefer hosting the original APK in Releases instead of git history
+# *.apk
+
+# Intermediate Dalvik executables & resources
+*.dex
+*.odex
+*.oat
+*.arsc
+
+# Native compiled shared libraries (uncomment if you only want Java/Smali code)
+# **/lib/**/*.so
+
+# Crash dumps & memory profiles
+*.hprof
+*.dump
+*.trace
+
+# Workspace
+.workspace/*
+!.workspace/.gitkeep
