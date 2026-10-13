@@ -4,3 +4,4 @@
 
 - Created the repository for Transfermóvil reverse engineering and documentation.
 - Added the current APK metadata to `README.md` and its extraction procedure to `docs/target-metadata.md`.
+- Added an extraction progress checklist and a note to `README.md` clarifying that analysis tasks depend on the decompiled APK.
