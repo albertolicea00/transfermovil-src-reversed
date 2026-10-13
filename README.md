@@ -7,7 +7,7 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-October%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks (each block █ = 2%) (░ empty blocks) -->
-`[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]` **0.01%**
+<span style="white-space: nowrap;"><code>[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0%</code></span>
 
 ## Overview
 
