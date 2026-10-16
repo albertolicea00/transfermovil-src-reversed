@@ -43,3 +43,15 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 > **Note:** Specific analysis tasks will be decided after inspecting the decompiled APK. The checklist does not assume which features or components the app contains.
 
 *Check out the [TODO](../TODO.md) file for our complete development roadmap.*
+
+---
+
+## Legal Notice
+
+**This is not the official source code for Transfermóvil.** It is a close approximation reconstructed from the publicly distributed build of the application for research purposes.
+
+The Copyright Laws of the United States recognize "fair use" of copyrighted content. Section 107 of the U.S. Copyright Act states:
+
+> "Notwithstanding the provisions of sections 106 and 106A, the fair use of a copyrighted work, including such use by reproduction in copies or phonorecords or by any other means specified by that section, for purposes such as criticism, comment, news reporting, teaching (including multiple copies for classroom use), scholarship, or research, is not an infringement of copyright."
+
+This repository and its contents are covered under fair use for the purposes of interoperability research, security auditing, and protocol analysis. Any DMCA takedown notice targeting this repository on these grounds would be invalid.
