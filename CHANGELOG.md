@@ -2,8 +2,11 @@
 
 ## 2026-10-16 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
-- Restructured repo: `src/` now holds raw JADX output (obfuscated), `app/src/main/java/` is the clean reconstructed source target, `mappings/classes.json` tracks obfuscated → semantic name mappings (22 classes, fields, enums mapped so far).
+- Restructured repo: `src/` now holds raw JADX output (obfuscated), `app/src/main/java/` is the clean reconstructed source target, `mappings/classes.json` tracks obfuscated → semantic name mappings.
 - Security audit: exported components (deep link handler accepts unvalidated payment params from any app), FileProvider exposes entire sandbox, SharedPreferences stores auth tokens plaintext, no root/emulator detection.
+- Added Makefile + 4 scripts: `decompile.sh`, `verify-apk.sh`, `mapping-stats.sh`, `search-strings.sh`.
+- 10 clean reconstructed classes: USSD cipher (4 classes), CryptoProvider (7 AES schemes), BankAccount, AgentAccount, SessionManager, ApiClient (TLS bypass documented), AuthValidator (30-min session).
+- 30 classes, 14 fields, 2 enums mapped in `mappings/classes.json`.
 - Decoded the AndroidManifest via aapt: mapped all activities, services, receivers, providers, permissions, intent filters, and deep links.
 - Documented architecture in `docs/architecture.md`: two drawer modes (Agent/General), navigation tree, 3439 obfuscated app classes, e-commerce module, 30+ bundled JSON asset files, dependency inventory.
 - Documented telephony in `docs/telephony.md`: USSD send/receive mechanism via accessibility service monitoring `com.android.phone`, 10 USSD codes found (`*222*` prefix family), SMS receiver `X9ZiE8XZNKy`.
