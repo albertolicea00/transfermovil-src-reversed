@@ -159,15 +159,30 @@ This chains schemes 7 → 2: SHA-256 of `cv` → AES/ECB/PKCS5Padding with Base6
 
 ## USSD Code Encoding
 
-The `code()` method (745 lines) uses a proprietary encoding for USSD parameters:
+The `code()` method uses a proprietary two-stage numeric cipher for USSD parameters.
 
-- **Encoder class:** `AFm1GraXBXUkpF1hmOdV.Tz34gww2TFwrsuT8ukpL`
-- **Constructor:** `(code_version, crude_code)` — both hardcoded static values
-- **Encoding method:** `aSHV52SplNh3HfZBSmJe(List<String> numbers)`
-- Splits input on `*`, separates numeric from non-numeric (Nauta emails bypass encoding)
-- Pads single-digit encoded results with leading "0"
+### Architecture (4 classes in `AFm1GraXBXUkpF1hmOdV`)
 
-This is obfuscation, not encryption — deterministic and reversible with the static constants from the APK.
+| Class | Role |
+|:---|:---|
+| `Tz34gww2TFwrsuT8ukpL` | Orchestrator — random seed + delegates |
+| `YzK9tTZsYVnC5kFxSie` | Lookup table builder — parses `crude_code` into substitution matrix |
+| `hKRRh7lnIpNaVleqsuo` | Digit-pair substitution via matrix |
+| `ytpPfHi93O3gQEyZrT9r` | XOR step — substituted value ⊕ cyclic key from matrix |
+
+### Encoding flow
+
+1. Parse `crude_code` (1024-char binary string) using `code_version` digits: for each digit `d`, shift binary string left by `d` positions, take first 8 bits → int entry in substitution list
+2. Generate random seed 0-99 per encoding instance
+3. For each numeric parameter:
+   - **Stage 1 — Substitution**: take digit pairs (2 chars), look up combined 2-digit number in substitution list → replacement value
+   - **Stage 2 — XOR**: build cyclic key stream from matrix, XOR substituted value (as long) with key (as long) via `xor-long/2addr`
+4. Pad single-digit results with leading "0"
+5. Non-numeric strings (Nauta emails) go through separate path (`kR22DOzTiB.getCodes()`)
+
+### Assessment
+
+This is **obfuscation, not encryption** — fully deterministic and reversible with the static constants from the APK. The random seed (0-99) provides minimal per-session variation. The `code_version` and `crude_code` are effectively a shared secret between client and ETECSA's USSD gateway.
 
 ## Database Entities (ORMLite)
 

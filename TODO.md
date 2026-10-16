@@ -20,11 +20,11 @@
 
 - [x] Map manifest components (activities, services, receivers, providers)
 - [x] Identify two app modes: Agent and General
-- [ ] Trace launch activity → main screen flow
+- [x] Trace launch activity → main screen flow
 - [ ] Map fragment-to-screen assignments for each drawer menu item
-- [ ] Identify how agent vs general mode is selected and persisted
-- [ ] Document the splash/intro flow (first-run vs returning user)
-- [ ] Map the `generalVsAgentVersion` logic
+- [x] Identify how agent vs general mode is selected and persisted
+- [x] Document the splash/intro flow (first-run vs returning user)
+- [x] Map the `generalVsAgentVersion` logic
 - [ ] Document the e-commerce module activation path
 
 ## USSD / Telephony
