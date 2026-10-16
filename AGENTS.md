@@ -3,6 +3,9 @@
 - Structure: `app/` holds app source and resources; `smali/` holds disassembly; `scripts/` holds tooling; `docs/` holds topic-specific notes.
 - `.workspace/bin/` holds local APK inputs; `README.md` shows the current target metadata; `CHANGELOG.md` tracks substantive project changes.
 - `docs/target-metadata.md`: how to extract package, version, SDK levels, and SHA-256 from an APK.
+- `docs/architecture.md`: manifest components, navigation structure, dependencies, obfuscation, asset data.
+- `docs/telephony.md`: USSD codes, SMS handling, accessibility-based USSD response capture.
+- `docs/networking.md`: OkHttp stack, known URLs, auth tokens, TLS/cert pinning, local storage (ORMLite/SharedPrefs).
 - Keep detailed procedures in separate `docs/*.md` files and add a one-line summary and link here for each new document.
 - Read only the documentation relevant to the current task.
 - Update `CHANGELOG.md` for every completed change; put the date, APK filename, and SHA-256 in each analysis session's `##` heading.

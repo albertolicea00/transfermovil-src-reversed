@@ -7,7 +7,7 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-October%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks (each block █ = 2%) (░ empty blocks) -->
-<span style="white-space: nowrap;"><code>[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0.01%</code></span>
+<span style="white-space: nowrap;"><code>[██████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 12%</code></span>
 
 ## Overview
 
@@ -33,11 +33,11 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 
 - [x] Identify the target APK and verify its SHA-256 hash.
 - [x] Extract and document package, version, and SDK metadata.
-- [ ] Inventory the APK contents and record the extraction tools used.
-- [ ] Decode the manifest and resources.
+- [x] Inventory the APK contents and record the extraction tools used.
+- [x] Decode the manifest and resources.
 - [ ] Decompile the bytecode and check the quality and completeness of the output.
 - [ ] Organize the extracted files in the repository.
 - [ ] Review what was extracted and define the next analysis tasks from the evidence.
-- [ ] Document verified findings in focused `docs/` files.
+- [x] Document verified findings in focused `docs/` files.
 
 > **Note:** Specific analysis tasks will be decided after inspecting the decompiled APK. The checklist does not assume which features or components the app contains.
