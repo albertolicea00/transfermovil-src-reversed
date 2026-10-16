@@ -183,6 +183,35 @@ Also has `readSmsInbox(ContentResolver)` returning `ArrayList<rIgmgP6JXL>` — r
 
 **Dynamic receiver** in `rDEl7rW1aN` — field `mReceivedSMSReceiver` (inner class `$18`) is a runtime-registered `BroadcastReceiver` for incoming SMS processing.
 
+### SMS Response Parsing (`g0xM9kQCsqu`)
+
+13,840-line parser class. `parse(rIgmgP6JXL) → RecordSMS` is the main entry (~6,200 lines of if/else chain).
+
+**Gateway sender ID**: `"PAGOxMOVIL"` — all bank/service responses arrive from this sender.
+
+**Parsing strategy**: pattern-matches Spanish-language SMS body against templates, then extracts fields by positional split indices (split on spaces, hardcoded indices for amount, currency, account, etc.).
+
+**32 recognized service types**:
+
+| Category | Services |
+|:---|:---|
+| Recargas | Recarga Movil, Recarga Nauta, Recarga Propia, Recarga de Saldo Movil, Recarga nauta banco, Recarga Nauta MLC, Recarga Nauta Hogar 4G, Recarga CUP Monedero |
+| Pagos | Pago Factura, Pago Electricidad, Pago Agua, Pago Gas, Pago ONAT, Pago de Multa, Pago Telefono(P), Pago Telefono(T) |
+| Transferencias | Transferencia, Giro postal |
+| Otros | Combustible, Amortizar, Aporte Patrimonio, Caja Extra, Compra en linea, Compra Mi Boleto, Sello de Timbre, Nauta Hogar, Gigas Nauta Hogar 4G, Paquete MLC, Mi Turno, Joven Club, Factura Telefonica, Visitas-Recorridos |
+
+**Keyword matching examples**:
+- "La recarga se realizo con exito" → Recarga type
+- "El pago de la factura" → Pago type
+- "La Transferencia" → Transferencia
+- "Giro Postal" → Giro postal
+- "PIN de combustible" → Combustible
+- "INFORMACION:" → Promotional (classified by bank: BPA, Bandec, Metropolitano, ETECSA)
+
+**Activation SMS parsing** (`parse_fill_sms_data`): Handles "Bienvenido al sistema TRANSFERMOVIL" welcome SMS. Extracts by positional index: phone number (index 6), version (index 10), and module-specific activation codes (bank, agent, bulevar, boleto).
+
+**Validated currencies**: CUP, CUC, USD, MLC (enforced in `RecordSMS.setMoneda`)
+
 ### SMS Code Extraction
 
 `rDEl7rW1aN` has methods to extract activation/auth codes from received SMS via `ContentResolver`:

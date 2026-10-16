@@ -45,6 +45,7 @@
 - [x] Identify SMS receiver (X9ZiE8XZNKy)
 - [x] Decompile SMS receiver — stub/no-op, real handling elsewhere
 - [x] Document outgoing SMS format (HzjedYqYeh.send_sms via SmsManager)
+- [x] Document SMS response parsing (g0xM9kQCsqu, 32 service types, PAGOxMOVIL sender)
 - [ ] Map "Servicios SMS" menu operations
 - [ ] Identify SMS-based operations vs USSD-based operations
 
@@ -123,9 +124,9 @@
 
 - [x] Identify ORMLite as ORM, SharedPreferences keys
 - [x] Found CodigoAcceso table in migration
-- [ ] Decompile database helper — list all tables and schemas
-- [ ] Document what data is persisted locally
-- [ ] Trace the CodigoAcceso (access code) table usage
+- [x] Decompile database helper — list all tables and schemas
+- [x] Document what data is persisted locally
+- [x] Trace the CodigoAcceso (access code) table usage
 - [ ] Map SharedPreferences usage across the app
 - [ ] Document Nauta account storage (nautaListDao, nautaCuentas)
 
