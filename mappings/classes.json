@@ -115,6 +115,26 @@
       "clean": "cu.etecsa.transfermovil.crypto.ussd.XorCipherStep",
       "role": "XOR step: substituted value XOR cyclic key from matrix",
       "confidence": "high"
+    },
+    "cu.etecsa.tm.ecommerce.qHBfDCWv13G.IGxV3uh9sw": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.MessageHandler",
+      "role": "Global message/error handler singleton, WriteLog, getMessage, getErrorMessage",
+      "confidence": "medium"
+    },
+    "cu.etecsa.tm.ecommerce.qHBfDCWv13G.UZsizlaDNk": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.ErrorType",
+      "role": "Error type enum passed to getErrorMessage()",
+      "confidence": "medium"
+    },
+    "cu.etecsa.tm.ecommerce.qHBfDCWv13G.ThptISKBHA": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.GrantPermission",
+      "role": "Permission grant enum with numeric IDs for checkUserPermission()",
+      "confidence": "medium"
+    },
+    "cu.etecsa.tm.ecommerce.a7Y4bbw8Os": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.LoginActivity",
+      "role": "E-commerce login activity — session expired dialog redirects here",
+      "confidence": "medium"
     }
   },
   "fields": {
@@ -138,6 +158,18 @@
       "pmetro": { "clean": "pinMetropolitano", "role": "Metropolitano bank PIN (plaintext)" },
       "pbpa": { "clean": "pinBpa", "role": "BPA bank PIN (plaintext)" },
       "pbandec": { "clean": "pinBandec", "role": "BANDEC bank PIN (plaintext)" }
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0": {
+      "encryptionKey": { "clean": "HARDCODED_AES_KEY", "value": "ABCDEFGHIJKLMNOP", "role": "AES/CBC key for scheme 3 (trivially extractable)" },
+      "HEX": { "clean": "HEX_CHARS", "role": "Hex alphabet for encoding" }
+    },
+    "cu.etecsa.tm.ecommerce.qHBfDCWv13G.UhA7J2923N": {
+      "SESSION_SHARE_DATA": { "clean": "PREFS_NAME", "role": "SharedPreferences file name" },
+      "ACCESS_TOKEN": { "clean": "KEY_ACCESS_TOKEN", "role": "Bearer auth token (plaintext)" },
+      "CSRF_TOKEN": { "clean": "KEY_CSRF_TOKEN", "role": "XSRF token (plaintext)" },
+      "API_URL": { "clean": "KEY_API_URL", "role": "Dynamic e-commerce base URL" },
+      "USER_ROL": { "clean": "KEY_USER_ROL", "role": "User role string (privilege escalation risk)" },
+      "GRANTS": { "clean": "KEY_GRANTS", "role": "Pipe-delimited permission grant IDs" }
     }
   },
   "enums": {
