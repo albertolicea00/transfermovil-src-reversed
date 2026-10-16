@@ -110,9 +110,9 @@
 
 - [x] Note debuggable=true, allowBackup=true, usesCleartextTraffic=true
 - [x] Identify CryptoProvider inner class
-- [ ] Decompile CryptoProvider — identify algorithms (AES? RSA?)
-- [ ] Determine what data is encrypted and when
-- [ ] Check for hardcoded keys or predictable IVs
+- [x] Decompile CryptoProvider — identify algorithms (AES? RSA?)
+- [x] Determine what data is encrypted and when
+- [x] Check for hardcoded keys or predictable IVs
 - [ ] Audit certificate pinning implementation strength
 - [ ] Audit SharedPreferences for sensitive data storage
 - [ ] Check for root/emulator detection
