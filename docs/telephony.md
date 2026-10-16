@@ -85,11 +85,20 @@ Operations under "Servicios SMS" in the general drawer menu. Banking operations 
 
 ### Receiving
 
-**Broadcast receiver** `X9ZiE8XZNKy`:
+**Broadcast receiver** `X9ZiE8XZNKy` — **stub/no-op in current build:**
+
 - Listens for `android.provider.Telephony.SMS_RECEIVED`
 - Requires `android.permission.BROADCAST_SMS` sender permission
 - Exported — receives system SMS broadcasts
-- Parses incoming SMS for operation confirmations, balance updates, or transaction codes
+- `onReceive()`: stores context, logs `"SMS_IN" → "ok"`, returns immediately
+- Does **not** call `getMessagesFromIntent()`, extract sender/body, or forward data
+- Contains dead code `displayAlert(String)` that shows an AlertDialog titled "Nuevo mensaje" — never called from `onReceive`
+- Fields: `ACTION = "android.provider.Telephony.SMS_RECEIVED"` (set in constructor, never read), `myContext` (stored, unused)
+
+**Implication:** Real SMS processing happens elsewhere. Likely candidates:
+1. **Dynamic receiver** — app declares `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, suggesting runtime-registered BroadcastReceivers
+2. **ContentResolver polling** — read SMS via content provider after USSD/SMS operations complete
+3. The manifest registration may serve to hold the SMS permission grant or ensure app wakes on SMS arrival
 
 ## Multi-Step Operation Flow (Hypothesis)
 

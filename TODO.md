@@ -11,9 +11,9 @@
 - [x] Identify named (unobfuscated) classes and infer package roles
 - [x] Document asset JSON files (banking, geographic, tax, transit data)
 - [ ] Install JADX and decompile bytecode to Java source
-- [ ] Install Apktool and decode resources to readable XML
-- [ ] Organize decompiled source into `app/` directory
-- [ ] Extract smali disassembly into `smali/` directory
+- [x] Install Apktool and decode resources to readable XML
+- [x] Organize decompiled source into `app/` directory
+- [x] Extract smali disassembly into `smali/` directory
 - [ ] Verify decompilation quality and completeness
 
 ## Architecture & Navigation
@@ -43,7 +43,7 @@
 ## SMS
 
 - [x] Identify SMS receiver (X9ZiE8XZNKy)
-- [ ] Decompile SMS receiver — parse incoming SMS formats
+- [x] Decompile SMS receiver — stub/no-op, real handling elsewhere
 - [ ] Document outgoing SMS format for banking operations
 - [ ] Map "Servicios SMS" menu operations
 - [ ] Identify SMS-based operations vs USSD-based operations
@@ -52,7 +52,7 @@
 
 - [x] List banking operations from string resources
 - [x] Identify BancoService as banking service handler
-- [ ] Decompile BancoService — map banking operation dispatch
+- [x] Decompile BancoService — ORMLite entity, stores bank PINs plaintext
 - [ ] Document authentication flow (frmAuthBanco, validateAuth)
 - [ ] Trace balance inquiry flow (banco_saldo → USSD/SMS)
 - [ ] Trace transfer flow (banco_transferencia → code construction)

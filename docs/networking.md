@@ -163,7 +163,15 @@ The app uses ORMLite ORM for local database storage. String evidence:
 - `queryForLong from database failed:` — long/count queries
 - `DatabaseField`, `DatabaseTable` annotations — ORM entity definitions
 
-**Stored data likely includes:** operation history, cached account info, saved contacts/phone numbers, app configuration.
+**Known entities (from smali analysis):**
+
+| Entity Class | Table Fields | Notes |
+|:---|:---|:---|
+| `BancoService` (ORMLite POJO) | `id`, `code`, `phone`, `pmetro`, `pbpa`, `pbandec` | **Stores bank PINs in plaintext** — `pmetro` (Metropolitano), `pbpa` (BPA), `pbandec` (BANDEC) are PIN fields stored without encryption in SQLite |
+
+> **Security finding:** Bank PINs stored as plaintext strings in local SQLite database. Combined with `allowBackup=true` and `debuggable=true`, any device with USB debugging or ADB backup can extract all stored bank PINs.
+
+**Stored data likely includes:** operation history, cached account info, saved contacts/phone numbers, app configuration, **bank PINs (plaintext)**.
 
 ### SharedPreferences
 
