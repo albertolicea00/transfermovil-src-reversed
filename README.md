@@ -7,7 +7,7 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-October%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks (each block █ = 2%) (░ empty blocks) -->
-<span style="white-space: nowrap;"><code>[████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 25%</code></span>
+<span style="white-space: nowrap;"><code>[███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░] 47%</code></span>
 
 ## Overview
 
@@ -35,7 +35,7 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 - [x] Extract and document package, version, and SDK metadata.
 - [x] Inventory the APK contents and record the extraction tools used.
 - [x] Decode the manifest and resources.
-- [ ] Decompile the bytecode and check the quality and completeness of the output.
+- [x] Decompile the bytecode and check the quality and completeness of the output.
 - [x] Organize the extracted files in the repository.
 - [x] Review what was extracted and define the next analysis tasks from the evidence.
 - [x] Document verified findings in focused `docs/` files.

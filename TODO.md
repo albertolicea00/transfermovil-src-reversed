@@ -10,11 +10,11 @@
 - [x] Extract REST API endpoints from DEX strings
 - [x] Identify named (unobfuscated) classes and infer package roles
 - [x] Document asset JSON files (banking, geographic, tax, transit data)
-- [ ] Install JADX and decompile bytecode to Java source
+- [x] Install JADX and decompile bytecode to Java source
 - [x] Install Apktool and decode resources to readable XML
 - [x] Organize decompiled source into `app/` directory
 - [x] Extract smali disassembly into `smali/` directory
-- [ ] Verify decompilation quality and completeness
+- [x] Verify decompilation quality and completeness (98.8%, 40 errors)
 
 ## Architecture & Navigation
 
@@ -54,7 +54,7 @@
 - [x] List banking operations from string resources
 - [x] Identify BancoService as banking service handler
 - [x] Decompile BancoService — ORMLite entity, stores bank PINs plaintext
-- [ ] Document authentication flow (frmAuthBanco, validateAuth)
+- [x] Document authentication flow (30-min session via AOperKey table)
 - [ ] Trace balance inquiry flow (banco_saldo → USSD/SMS)
 - [ ] Trace transfer flow (banco_transferencia → code construction)
 - [ ] Trace PIN change flow (banco_cambiar_clave)
@@ -87,9 +87,9 @@
 
 - [x] List REST API endpoints (/api/payment/*, /api/business/*, etc.)
 - [x] Identify deep links (transfermovil.app, transfermovil://)
-- [ ] Identify base URL for API (likely miboleto.mibulevar.com)
-- [ ] Decompile API client — trace request/response handling
-- [ ] Document authentication flow (ACCESS_TOKEN, X-XSRF-TOKEN)
+- [x] Identify base URL for API (dynamic from SharedPreferences, not hardcoded)
+- [x] Decompile API client — y6NQQxH0NI singleton, getUnsafeOkHttpClient
+- [x] Document authentication flow (/loginapk, /loginfactorapk, Bearer+XSRF)
 - [ ] Map business/merchant registration flow
 - [ ] Trace payment processing flow (/api/payment/store)
 - [ ] Document refund flow (/api/refunds/store)
@@ -103,7 +103,7 @@
 - [ ] Decompile OkHttp interceptor chain
 - [ ] Extract pinned certificates and target hosts
 - [ ] Document TLS configuration (min version, cipher suites)
-- [ ] Identify any custom trust manager / cert validation bypass
+- [x] Identify custom trust manager — e-commerce uses getUnsafeOkHttpClient (trusts ALL certs)
 - [ ] Document cleartext traffic usage (which hosts allow HTTP?)
 - [ ] Trace self-update mechanism (REQUEST_INSTALL_PACKAGES)
 

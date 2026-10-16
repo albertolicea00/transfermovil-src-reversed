@@ -19,12 +19,18 @@
 - SMS code extraction methods found: `sms_code_bank`, `sms_code_agente`, `sms_code_boleto`, `sms_code_bulevar`.
 - SMS parser analysis: `g0xM9kQCsqu` is a 13,840-line parser with 32 service types, gateway sender "PAGOxMOVIL", positional field extraction, activation code parsing from welcome SMS.
 - USSD dispatch class `FBsQzP3Zfj` (8,898 lines): 12 `actionCallUSSD*` overloads, full format `tel:*{codigo}*{service}*{data}*{version}#`.
-- Main activities identified: `S9ycHcoxAzy` (Agent mode), `IHVTCBmiLV` (General mode), both extend `rDEl7rW1aN`.
+- Main activities identified: `IHVTCBmiLV` (Agent mode, `drawermenu`), `S9ycHcoxAzy` (General mode, `drawermenu_general`), both extend `rDEl7rW1aN`. Splash router `prPzLeyxKk` dispatches via `generalVsAgentVersion()`.
 - Full database schema documented in `docs/storage.md`: 26 tables in `TransferMDB.sqlite` v162, migration logic drops legacy CodigoAcceso/Version tables.
 - AppConfig entity: stores `codigo` (access code), `imei`, `phone`, `code_bank`, feature flags.
 - Updated `docs/telephony.md`, `docs/security.md`, `docs/networking.md` with confirmed findings.
 - Created `docs/domain-model.md`: complete catalog of 45 entity classes, 47 operations enum, 14 currencies, all field types. Security: only CuentaBanco.cuenta uses encryption; PINs, PII, IMEI all plaintext.
 - Documented USSD packet protocol in telephony.md: `*<access>*<service>*<pos><max>*<seq>*<oper>*<agency>*<params>*<version>#`, packet splitting at 52 chars, SDK-dependent dispatch (TelephonyManager ≥26, accessibility <26).
+- JADX 1.5.6 installed and decompiled full APK: 790 app Java classes + 4 encoding classes (98.8% success, 40 errors). Source in `app/src/`.
+- 32 JSON asset files extracted and committed to `app/assets/` (bank branches, gas stations, provinces, Cubacel plans, transit fines, etc.).
+- Created `docs/ecommerce.md`: e-commerce API client (`y6NQQxH0NI`) uses `getUnsafeOkHttpClient()` — TLS completely disabled (trusts ALL certs, no hostname verification). Login via `/loginapk` (email+password) and `/loginfactorapk` (2FA). 33 REST endpoints confirmed from Java source.
+- Banking auth flow traced: `validateAuth()` checks `AOperKey` table, 30-minute session timeout, 4 auth states (NO_REGISTRADO, AUTH_OK, NO_AUTH, ERRO_AUTH). Local-only session management.
+- Launch flow: `prPzLeyxKk` (splash) → `generalVsAgentVersion()` checks agent activation code → Agent mode (`IHVTCBmiLV`) or General mode (`S9ycHcoxAzy`).
+- Full operation dispatch enum `FdonIAFI9w`: 332 operations across 5 banks (Metropolitano 61, BFI 61, BANDEC 60, BPA 55, Wallet 47).
 
 ## 2026-10-13 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
