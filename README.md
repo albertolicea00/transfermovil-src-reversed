@@ -41,3 +41,5 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 - [x] Document verified findings in focused `docs/` files.
 
 > **Note:** Specific analysis tasks will be decided after inspecting the decompiled APK. The checklist does not assume which features or components the app contains.
+
+*Check out the [TODO](../TODO.md) file for our complete development roadmap.*
