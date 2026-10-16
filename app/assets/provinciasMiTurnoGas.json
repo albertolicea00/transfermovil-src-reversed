@@ -1,0 +1,74 @@
+﻿{
+    "ProvinciasMiTurnoGas": [
+        {
+            "Code": "21",
+            "Nombre": "Pinar del Río",
+            "Abreviatura": "Pinar del Río"
+        },
+        {
+            "Code": "25",
+            "Nombre": "Matanzas",
+            "Abreviatura": "Matanzas"
+        },
+        {
+            "Code": "23",
+            "Nombre": "La Habana",
+            "Abreviatura": "La Habana"
+        },
+        {
+            "Code": "26",
+            "Nombre": "Villa Clara",
+            "Abreviatura": "Villa Clara"
+        },
+        {
+            "Code": "27",
+            "Nombre": "Cienfuegos",
+            "Abreviatura": "Cienfuegos"
+        },
+        {
+            "Code": "28",
+            "Nombre": "Sancti Spíritus",
+            "Abreviatura": "Sancti Spíritus"
+        },
+        {
+            "Code": "29",
+            "Nombre": "Ciego de Ávila",
+            "Abreviatura": "Ciego de Ávila"
+        },
+        {
+            "Code": "30",
+            "Nombre": "Camagüey",
+            "Abreviatura": "Camagüey"
+        },
+        {
+            "Code": "31",
+            "Nombre": "Las Tunas",
+            "Abreviatura": "Las Tunas"
+        },
+        {
+            "Code": "32",
+            "Nombre": "Holguín",
+            "Abreviatura": "Holguín"
+        },
+        {
+            "Code": "33",
+            "Nombre": "Granma",
+            "Abreviatura": "Granma"
+        },
+        {
+            "Code": "34",
+            "Nombre": "Santiago de Cuba",
+            "Abreviatura": "Santiago de Cuba"
+        },
+        {
+            "Code": "35",
+            "Nombre": "Guantánamo",
+            "Abreviatura": "Guantánamo"
+        },
+        {
+            "Code": "40",
+            "Nombre": "Isla de la Juventud",
+            "Abreviatura": "Isla de la Juventud"
+        }
+    ]
+}

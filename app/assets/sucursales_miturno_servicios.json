@@ -1,0 +1,64 @@
+{
+  "sucursales": [
+    {
+      "cod_dpa": "4289476",
+      "nom_suc": "247 - Sucursal 23 y Montero",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289477",
+      "nom_suc": "250 - Línea y Paseo",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289478",
+      "nom_suc": "280 - Sucursal de Guanabacoa",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289479",
+      "nom_suc": "286 - San Miguel del Padron",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289480",
+      "nom_suc": "308 - Obispo y Cuba",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289481",
+      "nom_suc": "313 - Sucursal Marianao Le Van Tan",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289483",
+      "nom_suc": "266 - Sucursal O Reilly y Compostela",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289482",
+      "nom_suc": "262 - Cuba y Oreily",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289484",
+      "nom_suc": "248 - Focsa",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289485",
+      "nom_suc": "274 - Centro Comercial Alamar",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289486",
+      "nom_suc": "300 - 10 de Octubre y Lacret",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "4289487",
+      "nom_suc": "326 - Boyeros",
+      "cod_provincia": "23"
+    }
+  ]
+}

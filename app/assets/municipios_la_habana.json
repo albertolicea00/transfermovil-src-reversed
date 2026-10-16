@@ -1,0 +1,262 @@
+{
+  "MunicipiosLaHabana": [
+    {
+      "cod_dpa": "01",
+      "nombre": "Playa",
+      "abreviatura": "Playa",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "02",
+      "nombre": "Plaza de la Revolución",
+      "abreviatura": "Plaza de la Revolución",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "05",
+      "nombre": "Regla",
+      "abreviatura": "Regla",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "06",
+      "nombre": "La Habana del Este",
+      "abreviatura": "La Habana del Este",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "07",
+      "nombre": "Guanabacoa",
+      "abreviatura": "Guanabacoa",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "08",
+      "nombre": "San Miguel del Padrón",
+      "abreviatura": "San Miguel del Padrón",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "09",
+      "nombre": "Diez de Octubre",
+      "abreviatura": "Diez de Octubre",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "10",
+      "nombre": "Cerro",
+      "abreviatura": "Cerro",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "11",
+      "nombre": "Marianao",
+      "abreviatura": "Marianao",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "12",
+      "nombre": "La Lisa",
+      "abreviatura": "La Lisa",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "13",
+      "nombre": "Boyeros",
+      "abreviatura": "Boyeros",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "14",
+      "nombre": "Arroyo Naranjo",
+      "abreviatura": "Arroyo Naranjo",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_dpa": "15",
+      "nombre": "Cotorro",
+      "abreviatura": "Cotorro",
+      "cod_provincia": "23"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "01",
+      "nombre": "Contramaestre",
+      "abreviatura": "Contramaestre"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "02",
+      "nombre": "Mella",
+      "abreviatura": "Mella"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "03",
+      "nombre": "San Luis",
+      "abreviatura": "San Luis"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "04",
+      "nombre": "Segundo Frente",
+      "abreviatura": "Segundo Frente"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "05",
+      "nombre": "Songo La Maya",
+      "abreviatura": "Songo"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "07",
+      "nombre": "Palma Soriano",
+      "abreviatura": "Palma"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "08",
+      "nombre": "Tercer Frente",
+      "abreviatura": "Tercer Frente"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "10",
+      "nombre": "Casa Comercial José Martí",
+      "abreviatura": "Casa Comercial José Martí"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "11",
+      "nombre": "Casa Comercial Centro",
+      "abreviatura": "Casa Comercial Centro"
+    },
+    {
+      "cod_provincia": "34",
+      "cod_dpa": "12",
+      "nombre": "Casa Comercial Abel Santa María",
+      "abreviatura": "Casa Comercial Abel Santa María"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "1",
+      "nombre": "Esmeralda",
+      "abreviatura": "Esmeralda"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "2",
+      "nombre": "Minas",
+      "abreviatura": "Minas"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "3",
+      "nombre": "Nuevitas",
+      "abreviatura": "Nuevitas"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "4",
+      "nombre": "Guáimaro",
+      "abreviatura": "Guáimaro"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "5",
+      "nombre": "Camagüey",
+      "abreviatura": "Camagüey"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "6",
+      "nombre": "Florida",
+      "abreviatura": "Florida"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "7",
+      "nombre": "Vertientes",
+      "abreviatura": "Vertientes"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "8",
+      "nombre": "Jimaguayú",
+      "abreviatura": "Jimaguayú"
+    },
+    {
+      "cod_provincia": "30",
+      "cod_dpa": "9",
+      "nombre": "Santa Cruz del Sur",
+      "abreviatura": "Santa Cruz del Sur"
+    },
+    {
+      "cod_provincia": "21",
+      "cod_dpa": "1",
+      "nombre": "Los Palacios",
+      "abreviatura": "Los Palacios"
+    },
+    {
+      "cod_provincia": "21",
+      "cod_dpa": "2",
+      "nombre": "Consolación del Sur",
+      "abreviatura": "Consolación del Sur"
+    },
+    {
+      "cod_provincia": "21",
+      "cod_dpa": "3",
+      "nombre": "Pinar del Río",
+      "abreviatura": "Pinar del Río"
+    },
+    {
+      "cod_provincia": "31",
+      "cod_dpa": "1",
+      "nombre": "Manatí",
+      "abreviatura": "Manatí"
+    },
+    {
+      "cod_provincia": "31",
+      "cod_dpa": "2",
+      "nombre": "Puerto Padre",
+      "abreviatura": "Puerto Padre"
+    },
+    {
+      "cod_provincia": "31",
+      "cod_dpa": "3",
+      "nombre": "Jesús Menéndez",
+      "abreviatura": "Jesús Menéndez"
+    },
+    {
+      "cod_provincia": "31",
+      "cod_dpa": "4",
+      "nombre": "Majibacoa",
+      "abreviatura": "Majibacoa"
+    },
+    {
+      "cod_provincia": "31",
+      "cod_dpa": "5",
+      "nombre": "Las Tunas",
+      "abreviatura": "Las Tunas"
+    },
+    {
+      "cod_provincia": "31",
+      "cod_dpa": "6",
+      "nombre": "Jobabo",
+      "abreviatura": "Jobabo"
+    },
+    {
+      "cod_provincia": "31",
+      "cod_dpa": "7",
+      "nombre": "Colombia",
+      "abreviatura": "Colombia"
+    },
+    {
+      "cod_provincia": "31",
+      "cod_dpa": "8",
+      "nombre": "Amancio",
+      "abreviatura": "Amancio"
+    }
+  ]
+}

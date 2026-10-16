@@ -1,0 +1,1384 @@
+{
+  "sucursales": [
+    {
+      "cod_ccosto": "104",
+      "nom_ccosto": "Sucursal 1041 Las Martinas",
+      "cod_provincia": "21",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "105",
+      "nom_ccosto": "Sucursal 1051 Sandino",
+      "cod_provincia": "21",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "108",
+      "nom_ccosto": "Sucursal 1081 Mantua",
+      "cod_provincia": "21",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "114",
+      "nom_ccosto": "Sucursal 1141 Minas de Matahambre",
+      "cod_provincia": "21",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "118",
+      "nom_ccosto": "Sucursal 1181 Viñales",
+      "cod_provincia": "21",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "122",
+      "nom_ccosto": "Sucursal 1221 La Palma",
+      "cod_provincia": "21",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "128",
+      "nom_ccosto": "Sucursal 1281 Bahía Honda",
+      "cod_provincia": "22",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "132",
+      "nom_ccosto": "Sucursal 1321 Candelaria",
+      "cod_provincia": "22",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "136",
+      "nom_ccosto": "Sucursal 1361 San Cristóbal",
+      "cod_provincia": "22",
+      "cod_municipio": "11"
+    },
+    {
+      "cod_ccosto": "140",
+      "nom_ccosto": "Sucursal 1401 Los Palacios",
+      "cod_provincia": "21",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "146",
+      "nom_ccosto": "Sucursal 1461 Consolación del Sur",
+      "cod_provincia": "21",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "154",
+      "nom_ccosto": "Sucursal 1541 Pinar del Río",
+      "cod_provincia": "21",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "155",
+      "nom_ccosto": "Sucursal 1551 Pinar del Río",
+      "cod_provincia": "21",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "156",
+      "nom_ccosto": "Sucursal 1561 Pinar del Río",
+      "cod_provincia": "21",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "158",
+      "nom_ccosto": "Sucursal 1581 San Luis",
+      "cod_provincia": "21",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "159",
+      "nom_ccosto": "Sucursal 1591 Pinar del Río",
+      "cod_provincia": "21",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "162",
+      "nom_ccosto": "Sucursal 1621 San Juan y Martínez",
+      "cod_provincia": "21",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "166",
+      "nom_ccosto": "Sucursal 1661 Guane",
+      "cod_provincia": "21",
+      "cod_municipio": "11"
+    },
+    {
+      "cod_ccosto": "170",
+      "nom_ccosto": "Dirección Provincial 1701 Pinar del Río",
+      "cod_provincia": "21",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "174",
+      "nom_ccosto": "Sucursal 1741 Mariel",
+      "cod_provincia": "22",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "176",
+      "nom_ccosto": "Sucursal 1761 Guanajay",
+      "cod_provincia": "22",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "178",
+      "nom_ccosto": "Sucursal 1781 Caimito",
+      "cod_provincia": "22",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "182",
+      "nom_ccosto": "Sucursal 1821 Bauta",
+      "cod_provincia": "22",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "186",
+      "nom_ccosto": "Sucursal 1861 San Antonio",
+      "cod_provincia": "22",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "188",
+      "nom_ccosto": "Sucursal 1881 Bejucal",
+      "cod_provincia": "24",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "192",
+      "nom_ccosto": "Sucursal 1921 San José",
+      "cod_provincia": "24",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "194",
+      "nom_ccosto": "Sucursal 1941 Jaruco",
+      "cod_provincia": "24",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "198",
+      "nom_ccosto": "Sucursal 1981 Santa Cruz del Norte",
+      "cod_provincia": "24",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "201",
+      "nom_ccosto": "Centro Contable Provincia Artemisa",
+      "cod_provincia": "22",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "202",
+      "nom_ccosto": "Sucursal 2021 Madruga",
+      "cod_provincia": "24",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "204",
+      "nom_ccosto": "Sucursal 2041 Nueva Paz",
+      "cod_provincia": "24",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "206",
+      "nom_ccosto": "Sucursal 2061 San Nicolás",
+      "cod_provincia": "24",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "210",
+      "nom_ccosto": "Sucursal 2101 Guines",
+      "cod_provincia": "24",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "212",
+      "nom_ccosto": "Sucursal 2121 Melena del Sur",
+      "cod_provincia": "24",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "214",
+      "nom_ccosto": "Sucursal 2141 Batabanó",
+      "cod_provincia": "24",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "218",
+      "nom_ccosto": "Sucursal 2181 Quivicán",
+      "cod_provincia": "24",
+      "cod_municipio": "11"
+    },
+    {
+      "cod_ccosto": "221",
+      "nom_ccosto": "Centro Contable Provincia Mayabeque",
+      "cod_provincia": "24",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "224",
+      "nom_ccosto": "Sucursal 2241 Güira de Melena",
+      "cod_provincia": "22",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "226",
+      "nom_ccosto": "Sucursal 2261 Alquízar",
+      "cod_provincia": "22",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "228",
+      "nom_ccosto": "Sucursal 2281 Artemisa",
+      "cod_provincia": "22",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "230",
+      "nom_ccosto": "Sucursal 2301 Aguiar y Obispo",
+      "cod_provincia": "23",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "232",
+      "nom_ccosto": "Centro Contable 2321 Provincia Habana",
+      "cod_provincia": "23",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "254",
+      "nom_ccosto": "Sucursal 2541 MINFAR",
+      "cod_provincia": "23",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "257",
+      "nom_ccosto": "Sucursal 2571 MININT ",
+      "cod_provincia": "23",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "261",
+      "nom_ccosto": "Sucursal 2611 MINAZ",
+      "cod_provincia": "23",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "269",
+      "nom_ccosto": "Sucursal 2691",
+      "cod_provincia": "23",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "345",
+      "nom_ccosto": "Sucursal 3451 Estado Mayor Ejército Central",
+      "cod_provincia": "25",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "346",
+      "nom_ccosto": "Sucursal 3461 Matanzas",
+      "cod_provincia": "25",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "347",
+      "nom_ccosto": "Sucursal 3471 Matanzas",
+      "cod_provincia": "25",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "350",
+      "nom_ccosto": "Sucursal 3501 Cárdenas",
+      "cod_provincia": "25",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "352",
+      "nom_ccosto": "Sucursal 3521 Varadero",
+      "cod_provincia": "25",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "354",
+      "nom_ccosto": "Sucursal 3541 Martí",
+      "cod_provincia": "25",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "358",
+      "nom_ccosto": "Sucursal 3581 Colón",
+      "cod_provincia": "25",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "362",
+      "nom_ccosto": "Sucursal 3621 Perico",
+      "cod_provincia": "25",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "366",
+      "nom_ccosto": "Sucursal 3661 Jovellanos",
+      "cod_provincia": "25",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "370",
+      "nom_ccosto": "Sucursal 3701 Pedro Betancourt",
+      "cod_provincia": "25",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "372",
+      "nom_ccosto": "Sucursal 3721 Limonar",
+      "cod_provincia": "25",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "378",
+      "nom_ccosto": "Sucursal 3781 Unión de Reyes",
+      "cod_provincia": "25",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "380",
+      "nom_ccosto": "Sucursal 3801 Cienaga de Zapata",
+      "cod_provincia": "25",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "384",
+      "nom_ccosto": "Sucursal 3841 Jagüey Grande",
+      "cod_provincia": "25",
+      "cod_municipio": "11"
+    },
+    {
+      "cod_ccosto": "386",
+      "nom_ccosto": "Sucursal 3861 Calimete",
+      "cod_provincia": "25",
+      "cod_municipio": "12"
+    },
+    {
+      "cod_ccosto": "389",
+      "nom_ccosto": "Sucursal 3891 Los Arabos",
+      "cod_provincia": "25",
+      "cod_municipio": "13"
+    },
+    {
+      "cod_ccosto": "392",
+      "nom_ccosto": "Dirección Provincial 3921 Matanzas",
+      "cod_provincia": "25",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "398",
+      "nom_ccosto": "Sucursal Corralillo 3981",
+      "cod_provincia": "26",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "400",
+      "nom_ccosto": "Sucursal 4001 Quemado de Güines",
+      "cod_provincia": "26",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "404",
+      "nom_ccosto": "Sucursal 4041 Sagua la Grande",
+      "cod_provincia": "26",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "408",
+      "nom_ccosto": "Sucursal 4081 Encrucijada",
+      "cod_provincia": "26",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "412",
+      "nom_ccosto": "Sucursal 4121 Camajuaní",
+      "cod_provincia": "26",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "416",
+      "nom_ccosto": "Sucursal 4161 Caibarién",
+      "cod_provincia": "26",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "420",
+      "nom_ccosto": "Sucursal 4201 Remedios",
+      "cod_provincia": "26",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "424",
+      "nom_ccosto": "Sucursal 4241 Placetas",
+      "cod_provincia": "26",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "432",
+      "nom_ccosto": "Sucursal 4321 Santa Clara",
+      "cod_provincia": "26",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "433",
+      "nom_ccosto": "Sucursal 4331 Santa Clara",
+      "cod_provincia": "26",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "434",
+      "nom_ccosto": "Sucursal 4341 Santa Clara",
+      "cod_provincia": "26",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "435",
+      "nom_ccosto": "Sucursal 4351 Santa Clara",
+      "cod_provincia": "26",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "436",
+      "nom_ccosto": "Sucursal 4361 Santa Clara MININT",
+      "cod_provincia": "26",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "437",
+      "nom_ccosto": "Sucursal 4371 Cifuentes",
+      "cod_provincia": "26",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "441",
+      "nom_ccosto": "Sucursal 4411 Santo Domingo",
+      "cod_provincia": "26",
+      "cod_municipio": "11"
+    },
+    {
+      "cod_ccosto": "445",
+      "nom_ccosto": "Sucursal 4451 Ranchuelo",
+      "cod_provincia": "26",
+      "cod_municipio": "12"
+    },
+    {
+      "cod_ccosto": "449",
+      "nom_ccosto": "Sucursal 4491 Manicaragua",
+      "cod_provincia": "26",
+      "cod_municipio": "13"
+    },
+    {
+      "cod_ccosto": "453",
+      "nom_ccosto": "Dirección Provincial 4531 Santa Clara",
+      "cod_provincia": "26",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "457",
+      "nom_ccosto": "Sucursal 4571 Aguada",
+      "cod_provincia": "27",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "461",
+      "nom_ccosto": "Sucursal 4611 Rodas",
+      "cod_provincia": "27",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "465",
+      "nom_ccosto": "Sucursal 4651 Palmira",
+      "cod_provincia": "27",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "467",
+      "nom_ccosto": "Sucursal  4671 Lajas",
+      "cod_provincia": "27",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "471",
+      "nom_ccosto": "Sucursal 4711 Cruces",
+      "cod_provincia": "27",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "475",
+      "nom_ccosto": "Sucursal 4751 Cumanayagua",
+      "cod_provincia": "27",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "482",
+      "nom_ccosto": "Sucursal 4821 Cienfuegos",
+      "cod_provincia": "27",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "483",
+      "nom_ccosto": "Sucursal 4831 Cienfuegos",
+      "cod_provincia": "27",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "487",
+      "nom_ccosto": "Sucursal 4871 Abreus",
+      "cod_provincia": "27",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "490",
+      "nom_ccosto": "Dirección Provincial 4901 Cienfuegos",
+      "cod_provincia": "27",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "496",
+      "nom_ccosto": "Sucursal 4961 Yaguajay ",
+      "cod_provincia": "28",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "500",
+      "nom_ccosto": "Sucursal 5001 Jatibonico",
+      "cod_provincia": "28",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "504",
+      "nom_ccosto": "Sucursal 5041 Taguasco",
+      "cod_provincia": "28",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "510",
+      "nom_ccosto": "Sucursal 5101 Cabaiguán",
+      "cod_provincia": "28",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "512",
+      "nom_ccosto": "Sucursal 5121 Fomento",
+      "cod_provincia": "28",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "513",
+      "nom_ccosto": "Sucursal 5131 Sancti Spíritus",
+      "cod_provincia": "28",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "518",
+      "nom_ccosto": "Sucursal 5181 Trinidad",
+      "cod_provincia": "28",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "524",
+      "nom_ccosto": "Sucursal 5241 Sancti Spíritus",
+      "cod_provincia": "28",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "525",
+      "nom_ccosto": "Sucursal 5251 Sancti Spíritus",
+      "cod_provincia": "28",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "528",
+      "nom_ccosto": "Sucursal 5281 La Sierpe",
+      "cod_provincia": "28",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "530",
+      "nom_ccosto": "Dirección Provincial  5301 Sancti Spíritus",
+      "cod_provincia": "28",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "534",
+      "nom_ccosto": "Sucursal 5341 Chambas",
+      "cod_provincia": "29",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "538",
+      "nom_ccosto": "Sucursal 5381 Morón",
+      "cod_provincia": "29",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "539",
+      "nom_ccosto": "Sucursal 5391 Cayo COCO",
+      "cod_provincia": "29",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "540",
+      "nom_ccosto": "Sucursal 5401 Bolivia",
+      "cod_provincia": "29",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "542",
+      "nom_ccosto": "Sucursal 5421 Primero de Enero",
+      "cod_provincia": "29",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "544",
+      "nom_ccosto": "Sucursal 5441 Ciro Redondo",
+      "cod_provincia": "29",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "546",
+      "nom_ccosto": "Sucursal 5461 Florencia",
+      "cod_provincia": "29",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "550",
+      "nom_ccosto": "Sucursal 5501 Majagua",
+      "cod_provincia": "29",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "554",
+      "nom_ccosto": "Sucursal 5541 Ciego de Ávila",
+      "cod_provincia": "29",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "555",
+      "nom_ccosto": "Sucursal 5551 Imprenta",
+      "cod_provincia": "29",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "556",
+      "nom_ccosto": "Sucursal 5561 Ciego de Ávila",
+      "cod_provincia": "29",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "558",
+      "nom_ccosto": "Sucursal 5581 Venezuela",
+      "cod_provincia": "29",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "560",
+      "nom_ccosto": "Sucursal 5601 Baraguá",
+      "cod_provincia": "29",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "564",
+      "nom_ccosto": "Dirección Provincial 5641 Ciego de Ávila",
+      "cod_provincia": "29",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "566",
+      "nom_ccosto": "Sucursal 5661 Céspedes",
+      "cod_provincia": "30",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "570",
+      "nom_ccosto": "Sucursal 5701 Esmeralda",
+      "cod_provincia": "30",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "573",
+      "nom_ccosto": "Sucursal 5731 Sola",
+      "cod_provincia": "30",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "576",
+      "nom_ccosto": "Sucursal 5761 Minas",
+      "cod_provincia": "30",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "578",
+      "nom_ccosto": "Sucursal 5781 Nuevitas",
+      "cod_provincia": "30",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "579",
+      "nom_ccosto": "Sucursal 5791 Santa Lucía",
+      "cod_provincia": "30",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "582",
+      "nom_ccosto": "Sucursal 5821 Guáimaro",
+      "cod_provincia": "30",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "584",
+      "nom_ccosto": "Sucursal 5841 Sibanicú",
+      "cod_provincia": "30",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "596",
+      "nom_ccosto": "Sucursal 5961 Camagüey",
+      "cod_provincia": "30",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "597",
+      "nom_ccosto": "Sucursal 5971 Camagüey",
+      "cod_provincia": "30",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "598",
+      "nom_ccosto": "Sucursal 5981 Camagüey",
+      "cod_provincia": "30",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "602",
+      "nom_ccosto": "Sucursal 6021 Florida",
+      "cod_provincia": "30",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "606",
+      "nom_ccosto": "Sucursal 6061 Vertientes",
+      "cod_provincia": "30",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "610",
+      "nom_ccosto": "Sucursal 6101 Jimaguayú",
+      "cod_provincia": "30",
+      "cod_municipio": "11"
+    },
+    {
+      "cod_ccosto": "612",
+      "nom_ccosto": "Sucursal 6121 Najasa",
+      "cod_provincia": "30",
+      "cod_municipio": "12"
+    },
+    {
+      "cod_ccosto": "616",
+      "nom_ccosto": "Sucursal 6161 Santa Cruz del Sur",
+      "cod_provincia": "30",
+      "cod_municipio": "13"
+    },
+    {
+      "cod_ccosto": "620",
+      "nom_ccosto": "Dirección Provincial 6201 Camagüey",
+      "cod_provincia": "30",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "624",
+      "nom_ccosto": "Sucursal 6241 Manatí ",
+      "cod_provincia": "31",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "630",
+      "nom_ccosto": "Sucursal 6301 Puerto Padre",
+      "cod_provincia": "31",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "634",
+      "nom_ccosto": "Sucursal 6341 Jesús Menéndez",
+      "cod_provincia": "31",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "638",
+      "nom_ccosto": "Sucursal 6381 Majibacoa",
+      "cod_provincia": "31",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "644",
+      "nom_ccosto": "Sucursal 6441 Las Tunas",
+      "cod_provincia": "31",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "646",
+      "nom_ccosto": "Sucursal 6461 Las Tunas",
+      "cod_provincia": "31",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "648",
+      "nom_ccosto": "Sucursal 6481 Jobabo",
+      "cod_provincia": "31",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "652",
+      "nom_ccosto": "Sucursal 6521 Colombia",
+      "cod_provincia": "31",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "656",
+      "nom_ccosto": "Sucursal 6561 Amancio",
+      "cod_provincia": "31",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "660",
+      "nom_ccosto": "Dirección Provincial 6601 Las Tunas",
+      "cod_provincia": "31",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "662",
+      "nom_ccosto": "Sucursal 6621 MININT Las Tunas",
+      "cod_provincia": "31",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "663",
+      "nom_ccosto": "Sucursal 6631 Las Tunas III",
+      "cod_provincia": "31",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "665",
+      "nom_ccosto": "Sucursal 6651 Cacocum",
+      "cod_provincia": "32",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "666",
+      "nom_ccosto": "Sucursal 6661 Gibara",
+      "cod_provincia": "32",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "667",
+      "nom_ccosto": "Sucursal 6671 Velazco",
+      "cod_provincia": "32",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "670",
+      "nom_ccosto": "Sucursal 6701 R.Freyre",
+      "cod_provincia": "32",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "676",
+      "nom_ccosto": "Sucursal 6761 Banes",
+      "cod_provincia": "32",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "678",
+      "nom_ccosto": "Sucursal 6781 Antilla",
+      "cod_provincia": "32",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "682",
+      "nom_ccosto": "Sucursal 6821 Baguanos",
+      "cod_provincia": "32",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "691",
+      "nom_ccosto": "Centro de ATM Holguín",
+      "cod_provincia": "32",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "692",
+      "nom_ccosto": "Sucursal 6921 Holguín",
+      "cod_provincia": "32",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "693",
+      "nom_ccosto": "Sucursal 6931 Holguín",
+      "cod_provincia": "32",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "694",
+      "nom_ccosto": "Sucursal 6941 Holguín",
+      "cod_provincia": "32",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "695",
+      "nom_ccosto": "Sucursal 6951 Calixto García",
+      "cod_provincia": "32",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "696",
+      "nom_ccosto": "Sucursal 6961 Holguín",
+      "cod_provincia": "32",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "697",
+      "nom_ccosto": "Sucursal 6971 MINFAR",
+      "cod_provincia": "32",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "699",
+      "nom_ccosto": "Sucursal 6991 Holguín",
+      "cod_provincia": "32",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "700",
+      "nom_ccosto": "Sucursal 7001 Holguín",
+      "cod_provincia": "32",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "704",
+      "nom_ccosto": "Sucursal 7041 Urbano Noris",
+      "cod_provincia": "32",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "708",
+      "nom_ccosto": "Sucursal 7081 Cueto",
+      "cod_provincia": "32",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "714",
+      "nom_ccosto": "Sucursal 7141 Mayarí",
+      "cod_provincia": "32",
+      "cod_municipio": "11"
+    },
+    {
+      "cod_ccosto": "718",
+      "nom_ccosto": "Sucursal 7181 Frank País",
+      "cod_provincia": "32",
+      "cod_municipio": "12"
+    },
+    {
+      "cod_ccosto": "724",
+      "nom_ccosto": "Sucursal 7241 Sagua de Tanámo",
+      "cod_provincia": "32",
+      "cod_municipio": "13"
+    },
+    {
+      "cod_ccosto": "730",
+      "nom_ccosto": "Dirección Provincial 7301 Holguín",
+      "cod_provincia": "32",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "734",
+      "nom_ccosto": "Sucursal 7341 Río Cauto",
+      "cod_provincia": "33",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "736",
+      "nom_ccosto": "Sucursal 7361 Cauto Cristo",
+      "cod_provincia": "33",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "740",
+      "nom_ccosto": "Sucursal 7401 Jiguaní",
+      "cod_provincia": "33",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "747",
+      "nom_ccosto": "Sucursal 7471 Bayamo",
+      "cod_provincia": "33",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "748",
+      "nom_ccosto": "Sucursal 7481 Bayamo",
+      "cod_provincia": "33",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "749",
+      "nom_ccosto": "Sucursal 7491 Bayamo",
+      "cod_provincia": "33",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "752",
+      "nom_ccosto": "Sucursal 7521 Yara",
+      "cod_provincia": "33",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "760",
+      "nom_ccosto": "Sucursal 7601 Manzanillo",
+      "cod_provincia": "33",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "761",
+      "nom_ccosto": "Sucursal 7611 Manzanillo",
+      "cod_provincia": "33",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "764",
+      "nom_ccosto": "Sucursal 7641 Campechuela",
+      "cod_provincia": "33",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "768",
+      "nom_ccosto": "Sucursal 7681 Media Luna",
+      "cod_provincia": "33",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "772",
+      "nom_ccosto": "Sucursal 7721 Niquero",
+      "cod_provincia": "33",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "776",
+      "nom_ccosto": "Sucursal 7761 Pilón",
+      "cod_provincia": "33",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "780",
+      "nom_ccosto": "Sucursal 7801 Bartolomé Masó",
+      "cod_provincia": "33",
+      "cod_municipio": "11"
+    },
+    {
+      "cod_ccosto": "784",
+      "nom_ccosto": "Sucursal 7841 Buey Arriba",
+      "cod_provincia": "33",
+      "cod_municipio": "12"
+    },
+    {
+      "cod_ccosto": "788",
+      "nom_ccosto": "Sucursal 7881 Guisa",
+      "cod_provincia": "33",
+      "cod_municipio": "13"
+    },
+    {
+      "cod_ccosto": "790",
+      "nom_ccosto": "Dirección Provincial 7901 Bayamo",
+      "cod_provincia": "33",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "794",
+      "nom_ccosto": "Sucursal 7941 Contramaestre",
+      "cod_provincia": "34",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "798",
+      "nom_ccosto": "Sucursal 7981 MELLA",
+      "cod_provincia": "34",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "804",
+      "nom_ccosto": "Sucursal 8041 San Luis",
+      "cod_provincia": "34",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "808",
+      "nom_ccosto": "Sucursal 8081 II Frente",
+      "cod_provincia": "34",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "814",
+      "nom_ccosto": "Sucursal 8141 Songo La Maya",
+      "cod_provincia": "34",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "830",
+      "nom_ccosto": "Sucursal 8301 Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "831",
+      "nom_ccosto": "Sucursal 8311 Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "832",
+      "nom_ccosto": "Sucursal 8321 Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "833",
+      "nom_ccosto": "Sucursal 8331 Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "834",
+      "nom_ccosto": "Sucursal 8341 Ramón de las Yaguas",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "835",
+      "nom_ccosto": "Sucursal 8351 Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "838",
+      "nom_ccosto": "Sucursal 8381 Palma Soriano",
+      "cod_provincia": "34",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "839",
+      "nom_ccosto": "Sucursal 8391 Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "840",
+      "nom_ccosto": "Sucursal 8401 Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "842",
+      "nom_ccosto": "Sucursal 8421 III Frente",
+      "cod_provincia": "34",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "843",
+      "nom_ccosto": "Sucursal 8431 Matías",
+      "cod_provincia": "34",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "846",
+      "nom_ccosto": "Sucursal 8461 Guamá",
+      "cod_provincia": "34",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "847",
+      "nom_ccosto": "Centro de ATM Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "850",
+      "nom_ccosto": "Dirección Provincial 8501 Santiago de Cuba",
+      "cod_provincia": "34",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "851",
+      "nom_ccosto": "Sucursal 8512 El Salvador",
+      "cod_provincia": "35",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "852",
+      "nom_ccosto": "Oficina de Trámite 8521 Bayate",
+      "cod_provincia": "35",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "853",
+      "nom_ccosto": "Oficina de Trámite 8531 Costa Rica",
+      "cod_provincia": "35",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "857",
+      "nom_ccosto": "Sucursal 8572 Reparto Caribe",
+      "cod_provincia": "35",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "858",
+      "nom_ccosto": "Sucursal 8582 Reparto Obrero",
+      "cod_provincia": "35",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "859",
+      "nom_ccosto": "Sucursal 8592 Zona Sur",
+      "cod_provincia": "35",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "862",
+      "nom_ccosto": "Sucursal 8621 Guantánamo",
+      "cod_provincia": "35",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "863",
+      "nom_ccosto": "Sucursal 8631 Guantánamo",
+      "cod_provincia": "35",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "864",
+      "nom_ccosto": "Sucursal 8641 Guantánamo",
+      "cod_provincia": "35",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "867",
+      "nom_ccosto": "Oficina de Trámite 8671 La Tagua",
+      "cod_provincia": "35",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "868",
+      "nom_ccosto": "Sucursal 8681 Jamaica",
+      "cod_provincia": "35",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "869",
+      "nom_ccosto": "Sucursal 8691 Yateras",
+      "cod_provincia": "35",
+      "cod_municipio": "03"
+    },
+    {
+      "cod_ccosto": "872",
+      "nom_ccosto": "Sucursal 8721 Baracoa",
+      "cod_provincia": "35",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "876",
+      "nom_ccosto": "Sucursal 8761 Maisí",
+      "cod_provincia": "35",
+      "cod_municipio": "05"
+    },
+    {
+      "cod_ccosto": "877",
+      "nom_ccosto": "Sucursal 8772 Imías",
+      "cod_provincia": "35",
+      "cod_municipio": "06"
+    },
+    {
+      "cod_ccosto": "882",
+      "nom_ccosto": "Sucursal 8821 San Antonio del Sur",
+      "cod_provincia": "35",
+      "cod_municipio": "07"
+    },
+    {
+      "cod_ccosto": "883",
+      "nom_ccosto": "Sucursal 8832 Manuel Tames",
+      "cod_provincia": "35",
+      "cod_municipio": "02"
+    },
+    {
+      "cod_ccosto": "885",
+      "nom_ccosto": "Sucursal 8852 Caimanera",
+      "cod_provincia": "35",
+      "cod_municipio": "08"
+    },
+    {
+      "cod_ccosto": "887",
+      "nom_ccosto": "Sucursal 8872 Niceto Perez",
+      "cod_provincia": "35",
+      "cod_municipio": "10"
+    },
+    {
+      "cod_ccosto": "890",
+      "nom_ccosto": "Dirección Provincial  8901 Guantánamo",
+      "cod_provincia": "35",
+      "cod_municipio": "09"
+    },
+    {
+      "cod_ccosto": "898",
+      "nom_ccosto": "Sucursal 898 Isla de la Juventud",
+      "cod_provincia": "40",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "899",
+      "nom_ccosto": "Sucursal 8991 Cayo Largo",
+      "cod_provincia": "40",
+      "cod_municipio": "01"
+    },
+    {
+      "cod_ccosto": "918",
+      "nom_ccosto": "Sucursal 9181",
+      "cod_provincia": "23",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "949",
+      "nom_ccosto": "Sucursal de Operaciones",
+      "cod_provincia": "23",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "960",
+      "nom_ccosto": "Centro Contable SLBTR",
+      "cod_provincia": "23",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "980",
+      "nom_ccosto": "Centro Contable 9801 DAFI",
+      "cod_provincia": "23",
+      "cod_municipio": "04"
+    },
+    {
+      "cod_ccosto": "999",
+      "nom_ccosto": "Sucursal Electrónica",
+      "cod_provincia": "23",
+      "cod_municipio": "04"
+    }
+  ]
+}

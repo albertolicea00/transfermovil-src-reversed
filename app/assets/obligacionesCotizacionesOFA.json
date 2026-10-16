@@ -1,0 +1,19 @@
+﻿{
+    "ObligacionesOFA": [
+        {
+            "Code": "10",
+            "Nombre": "Cotización",
+            "Abreviatura": "Cotización"
+        },
+        {
+            "Code": "11",
+            "Nombre": "Aporte voluntario",
+            "Abreviatura": "Aporte voluntario"
+        },
+        {
+            "Code": "12",
+            "Nombre": "Donación",
+            "Abreviatura": "Donación"
+        }
+    ]
+}

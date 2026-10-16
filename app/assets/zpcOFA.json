@@ -1,0 +1,79 @@
+﻿{
+    "zpcOFA": [
+        {
+            "Code": "16000",
+            "Nombre": "La Habana",
+            "Abreviatura": "HAB"
+        },
+        {
+            "Code": "16001",
+            "Nombre": "Santiago de Cuba",
+            "Abreviatura": "SC"
+        },
+        {
+            "Code": "16002",
+            "Nombre": "Camagüey",
+            "Abreviatura": "CY"
+        },
+        {
+            "Code": "16003",
+            "Nombre": "Trinidad",
+            "Abreviatura": "TR"
+        },
+        {
+            "Code": "16004",
+            "Nombre": "Cienfuegos",
+            "Abreviatura": "CF"
+        },
+        {
+            "Code": "16005",
+            "Nombre": "Bayamo",
+            "Abreviatura": "BY"
+        },
+        {
+            "Code": "16006",
+            "Nombre": "Matanzas",
+            "Abreviatura": "MZ"
+        },
+        {
+            "Code": "16007",
+            "Nombre": "Sancti Spíritus",
+            "Abreviatura": "SS"
+        },
+        {
+            "Code": "16008",
+            "Nombre": "Remedios",
+            "Abreviatura": "RM"
+        },
+        {
+            "Code": "16009",
+            "Nombre": "Baracoa",
+            "Abreviatura": "BC"
+        },
+        {
+            "Code": "16010",
+            "Nombre": "Viñales",
+            "Abreviatura": "VL"
+        },
+        {
+            "Code": "16011",
+            "Nombre": "Cárdenas",
+            "Abreviatura": "CD"
+        },
+        {
+            "Code": "16012",
+            "Nombre": "Guanabacoa",
+            "Abreviatura": "GU"
+        },
+        {
+            "Code": "16013",
+            "Nombre": "Gibara",
+            "Abreviatura": "GB"
+        },
+        {
+            "Code": "16014",
+            "Nombre": "Sagua la Grande",
+            "Abreviatura": "SG"
+        }
+    ]
+}

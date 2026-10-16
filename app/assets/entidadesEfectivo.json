@@ -1,0 +1,16 @@
+﻿{
+    "EntEmp": [
+        {
+            "Code": "22001",
+            "Nombre": "Cadeca",
+            "Abreviatura": "NONE",
+            "Moneda": "CUP"
+        },
+        {
+            "Code": "22002",
+            "Nombre": "Cadeca",
+            "Abreviatura": "NONE",
+            "Moneda": "USD"
+        }
+    ]
+}

@@ -1,0 +1,309 @@
+﻿{
+    "sucursales": [
+        {
+            "cod_dpa": "030313",
+            "nom_suc": "Mónaco",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "030316",
+            "nom_suc": "21 y 42",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "033120",
+            "nom_suc": "Alamar",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "033147",
+            "nom_suc": "Belascoaín",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "033163",
+            "nom_suc": "Fontanar",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "033269",
+            "nom_suc": "23 y J",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "030334",
+            "nom_suc": "Línea y Paseo",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "033291",
+            "nom_suc": "Galería 3ra y 70",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "033103",
+            "nom_suc": "Neptuno",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "033278",
+            "nom_suc": "Santa Catalina",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "010101",
+            "nom_suc": "Pinar del Río",
+            "cod_provincia": "21"
+        },
+        {
+            "cod_dpa": "010105",
+            "nom_suc": "Viñales",
+            "cod_provincia": "21"
+        },
+        {
+            "cod_dpa": "010108",
+            "nom_suc": "Consolación del Sur",
+            "cod_provincia": "21"
+        },
+        {
+            "cod_dpa": "010115",
+            "nom_suc": "Sandino",
+            "cod_provincia": "21"
+        },
+        {
+            "cod_dpa": "010102",
+            "nom_suc": "Calle Martí",
+            "cod_provincia": "21"
+        },
+        {
+            "cod_dpa": "220201",
+            "nom_suc": "Artemisa",
+            "cod_provincia": "22"
+        },
+        {
+            "cod_dpa": "220205",
+            "nom_suc": "San Antonio de los Baños",
+            "cod_provincia": "22"
+        },
+        {
+            "cod_dpa": "220214",
+            "nom_suc": "Bauta",
+            "cod_provincia": "22"
+        },
+        {
+            "cod_dpa": "220207",
+            "nom_suc": "San José Lajas",
+            "cod_provincia": "24"
+        },
+        {
+            "cod_dpa": "220209",
+            "nom_suc": "Santa Cruz del Norte",
+            "cod_provincia": "24"
+        },
+        {
+            "cod_dpa": "220206",
+            "nom_suc": "Güines",
+            "cod_provincia": "24"
+        },
+        {
+            "cod_dpa": "040403",
+            "nom_suc": "Cárdenas",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "040407",
+            "nom_suc": "Santa Marta",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "040409",
+            "nom_suc": "Jagüey",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "040437",
+            "nom_suc": "Arenas Blancas",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "040457",
+            "nom_suc": "Matanzas",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "040450",
+            "nom_suc": "CC 8 mil taquillas",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "050501",
+            "nom_suc": "Parque Vidal",
+            "cod_provincia": "26"
+        },
+        {
+            "cod_dpa": "050503",
+            "nom_suc": "Sagua la Grande",
+            "cod_provincia": "26"
+        },
+        {
+            "cod_dpa": "050512",
+            "nom_suc": "Camajuaní",
+            "cod_provincia": "26"
+        },
+        {
+            "cod_dpa": "050506",
+            "nom_suc": "Ciencias Médicas",
+            "cod_provincia": "26"
+        },
+        {
+            "cod_dpa": "050504",
+            "nom_suc": "Caibarién",
+            "cod_provincia": "26"
+        },
+        {
+            "cod_dpa": "050516",
+            "nom_suc": "Remedios",
+            "cod_provincia": "26"
+        },
+        {
+            "cod_dpa": "050545",
+            "nom_suc": "La Campana",
+            "cod_provincia": "26"
+        },
+        {
+            "cod_dpa": "060601",
+            "nom_suc": "Cienfuegos",
+            "cod_provincia": "27"
+        },
+        {
+            "cod_dpa": "060612",
+            "nom_suc": "Punta Gorda",
+            "cod_provincia": "27"
+        },
+        {
+            "cod_dpa": "780701",
+            "nom_suc": "Boulevard Sancti Spíritus",
+            "cod_provincia": "28"
+        },
+        {
+            "cod_dpa": "780702",
+            "nom_suc": "Trinidad",
+            "cod_provincia": "28"
+        },
+        {
+            "cod_dpa": "780716",
+            "nom_suc": "Hospital Provincial",
+            "cod_provincia": "28"
+        },
+        {
+            "cod_dpa": "780703",
+            "nom_suc": "Cabaiguán",
+            "cod_provincia": "28"
+        },
+        {
+            "cod_dpa": "080801",
+            "nom_suc": "Boulevard Ciego",
+            "cod_provincia": "29"
+        },
+        {
+            "cod_dpa": "080802",
+            "nom_suc": "Morón",
+            "cod_provincia": "29"
+        },
+        {
+            "cod_dpa": "080823",
+            "nom_suc": "La Gaviota",
+            "cod_provincia": "29"
+        },
+        {
+            "cod_dpa": "090901",
+            "nom_suc": "Boulevard Camagüey",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "090922",
+            "nom_suc": "Maceo",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "090914",
+            "nom_suc": "Florida",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "090907",
+            "nom_suc": "Esmeralda",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "101001",
+            "nom_suc": "Boulevard Las Tunas",
+            "cod_provincia": "31"
+        },
+        {
+            "cod_dpa": "101002",
+            "nom_suc": "Puerto Padre",
+            "cod_provincia": "31"
+        },
+        {
+            "cod_dpa": "111100",
+            "nom_suc": "Holguín Frexes",
+            "cod_provincia": "32"
+        },
+        {
+            "cod_dpa": "111105",
+            "nom_suc": "Boulevard Holguín",
+            "cod_provincia": "32"
+        },
+        {
+            "cod_dpa": "111131",
+            "nom_suc": "Plaza Pesquero",
+            "cod_provincia": "32"
+        },
+        {
+            "cod_dpa": "121202",
+            "nom_suc": "Bayamo",
+            "cod_provincia": "33"
+        },
+        {
+            "cod_dpa": "121203",
+            "nom_suc": "Manzanillo",
+            "cod_provincia": "33"
+        },
+        {
+            "cod_dpa": "131301",
+            "nom_suc": "Aguilera",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "131303",
+            "nom_suc": "Ferreiro",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "131311",
+            "nom_suc": "Palma",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "141401",
+            "nom_suc": "Guantánamo",
+            "cod_provincia": "35"
+        },
+        {
+            "cod_dpa": "141402",
+            "nom_suc": "Baracoa",
+            "cod_provincia": "35"
+        },
+        {
+            "cod_dpa": "141406",
+            "nom_suc": "Guantánamo II",
+            "cod_provincia": "35"
+        },
+        {
+            "cod_dpa": "151501",
+            "nom_suc": "Nueva Gerona",
+            "cod_provincia": "40"
+        }
+    ]
+}

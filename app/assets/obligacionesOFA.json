@@ -1,0 +1,44 @@
+﻿{
+    "ObligacionesOFA": [
+        {
+            "Code": "01",
+            "Nombre": "Contribución al Patrimonio",
+            "Abreviatura": "Contrib. Patrim"
+        },
+        {
+            "Code": "02",
+            "Nombre": "Canon",
+            "Abreviatura": "Canon"
+        },
+        {
+            "Code": "03",
+            "Nombre": "Arrendamiento Stand",
+            "Abreviatura": "Arr. Stand"
+        },
+        {
+            "Code": "04",
+            "Nombre": "Arrendamiento Local",
+            "Abreviatura": "Arr. Local"
+        },
+        {
+            "Code": "06",
+            "Nombre": "Estacionamiento",
+            "Abreviatura": "Est. Auto"
+        },
+        {
+            "Code": "08",
+            "Nombre": "Recargo",
+            "Abreviatura": "Recargo"
+        },
+        {
+            "Code": "09",
+            "Nombre": "Provisión de Fondos",
+            "Abreviatura": "Prov. Fondos"
+        },
+        {
+            "Code": "10",
+            "Nombre": "Donación",
+            "Abreviatura": "Donación"
+        }
+    ]
+}

@@ -1,0 +1,224 @@
+﻿{
+    "sucursales": [
+        {
+            "cod_dpa": "22050",
+            "nom_suc": "Casa Comercial Pinar del Río",
+            "cod_provincia": "21"
+        },
+        {
+            "cod_dpa": "22051",
+            "nom_suc": "Casa Comercial Matanzas",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "4224471",
+            "nom_suc": "Casa Comercial Planta Gas",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "4224476",
+            "nom_suc": "Casa Comercial Edificio Administrativo",
+            "cod_provincia": "25"
+        },
+        {
+            "cod_dpa": "22052",
+            "nom_suc": "Casa Comercial Villa Clara",
+            "cod_provincia": "26"
+        },
+        {
+            "cod_dpa": "22053",
+            "nom_suc": "Casa Comercial Cienfuegos",
+            "cod_provincia": "27"
+        },
+        {
+            "cod_dpa": "22054",
+            "nom_suc": "Casa Comercial Sancti Spiritus",
+            "cod_provincia": "28"
+        },
+        {
+            "cod_dpa": "22055",
+            "nom_suc": "Casa Comercial Ciego de Avila",
+            "cod_provincia": "29"
+        },
+        {
+            "cod_dpa": "4223388",
+            "nom_suc": "Casa Comercial Morón",
+            "cod_provincia": "29"
+        },
+        {
+            "cod_dpa": "22056",
+            "nom_suc": "Agencia Florida",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "22057",
+            "nom_suc": "Agencia Minas",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "22058",
+            "nom_suc": "Agencia Esmeralda",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "22063",
+            "nom_suc": "Agencia Nuevitas",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "22062",
+            "nom_suc": "Agencia Guáimaro",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "22061",
+            "nom_suc": "Agencia Vertientes",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "22059",
+            "nom_suc": "Agencia Santa Cruz del Sur",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "22060",
+            "nom_suc": "Oficina de atención Camagüey",
+            "cod_provincia": "30"
+        },
+        {
+            "cod_dpa": "22064",
+            "nom_suc": "Casa Comercial Las Tunas",
+            "cod_provincia": "31"
+        },
+        {
+            "cod_dpa": "22065",
+            "nom_suc": "Casa Comercial Moa",
+            "cod_provincia": "32"
+        },
+        {
+            "cod_dpa": "22066",
+            "nom_suc": "Casa Comercial Antilla",
+            "cod_provincia": "32"
+        },
+        {
+            "cod_dpa": "22067",
+            "nom_suc": "Casa Comercial Holguín",
+            "cod_provincia": "32"
+        },
+        {
+            "cod_dpa": "22068",
+            "nom_suc": "Casa Comercial Bayamo",
+            "cod_provincia": "33"
+        },
+        {
+            "cod_dpa": "22078",
+            "nom_suc": "Casa Comercial Manzanillo",
+            "cod_provincia": "33"
+        },
+        {
+            "cod_dpa": "22069",
+            "nom_suc": "Casa Comercial José Martí",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "22070",
+            "nom_suc": "Casa Comercial Centro",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "22071",
+            "nom_suc": "Casa Comercial Abel Santa María",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "22074",
+            "nom_suc": "Casa Comercial Contramaestre",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "22073",
+            "nom_suc": "Casa Comercial Palma Soriano",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "22072",
+            "nom_suc": "Casa Comercial Segundo Frente",
+            "cod_provincia": "34"
+        },
+        {
+            "cod_dpa": "22075",
+            "nom_suc": "Casa Comercial Guantánamo",
+            "cod_provincia": "35"
+        },
+        {
+            "cod_dpa": "4248882",
+            "nom_suc": "Casa Comercial Trámites Paseo",
+            "cod_provincia": "35"
+        },
+        {
+            "cod_dpa": "22076",
+            "nom_suc": "Casa Comercial Gerona",
+            "cod_provincia": "40"
+        },
+        {
+            "cod_dpa": "22077",
+            "nom_suc": "Casa Comercial La Fé",
+            "cod_provincia": "40"
+        },
+        {
+            "cod_dpa": "4218386",
+            "nom_suc": "Casa Comercial Regla",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218394",
+            "nom_suc": "Casa Comercial Playa",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218407",
+            "nom_suc": "Casa Comercial 10 de Octubre",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218412",
+            "nom_suc": "Casa Comercial Habana del Este",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218415",
+            "nom_suc": "Casa Comercial Guanabacoa",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218416",
+            "nom_suc": "Casa Comercial San Miguel P",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218418",
+            "nom_suc": "Casa Comercial Marianao",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218420",
+            "nom_suc": "Casa Comercial La Lisa",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218421",
+            "nom_suc": "Casa Comercial Boyeros",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218424",
+            "nom_suc": "Casa Comercial Arroyo Naranjo",
+            "cod_provincia": "23"
+        },
+        {
+            "cod_dpa": "4218426",
+            "nom_suc": "Casa Comercial Cotorro",
+            "cod_provincia": "23"
+        }
+    ]
+}

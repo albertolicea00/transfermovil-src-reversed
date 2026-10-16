@@ -1,0 +1,129 @@
+{
+    "data": [
+        {
+            "id": 100,
+            "description": "Visualizar Pagos",
+            "enabled": 1
+        },
+        {
+            "id": 101,
+            "description": "Gestionar Pagos",
+            "enabled": 1
+        },
+        {
+            "id": 102,
+            "description": "Exportar Pagos a PDF",
+            "enabled": 1
+        },
+        {
+            "id": 103,
+            "description": "Exportar Pagos a Exce",
+            "enabled": 1
+        },
+        {
+            "id": 200,
+            "description": "Visualizar Devolución",
+            "enabled": 1
+        },
+        {
+            "id": 201,
+            "description": "Gestionar Devolución",
+            "enabled": 1
+        },
+        {
+            "id": 202,
+            "description": "Exportar Devoluciones a PDF",
+            "enabled":1
+        },
+        {
+            "id": 203,
+            "description": "Exportar Devoluciones a Excel",
+            "enabled": 1
+        },
+        {
+            "id": 201,
+            "description": "Gestionar Devolución",
+            "enabled": 1
+        },
+        {
+            "id": 300,
+            "description": "Visualizar Negocios",
+            "enabled": 1
+        },
+        {
+            "id": 301,
+            "description": "Gestionar  Negocios",
+            "enabled": 1
+        },
+        {
+            "id": 400,
+            "description": "Visualizar Provincias",
+            "enabled": 1
+        },
+        {
+            "id": 401,
+            "description": "Gestionar Provincias",
+            "enabled": 1
+        },
+        {
+            "id": 500,
+            "description": "Visualizar Municipios",
+            "enabled": 1
+        },
+        {
+            "id": 501,
+            "description": "Gestionar Municipios",
+            "enabled": 1
+        },
+        {
+            "id": 600,
+            "description": "Visualizar Administración",
+            "enabled": 1
+        },
+        {
+            "id": 601,
+            "description": "Visualizar Usuarios",
+            "enabled": 1
+        },
+        {
+            "id": 602,
+            "description": "Gestionar Usuarios",
+            "enabled": 1
+        },
+        {
+            "id": 603,
+            "description": "Gestionar Email en Perfil de Usuario",
+            "enabled": 1
+        },
+        {
+            "id": 604,
+            "description": "Visualizar Roles",
+            "enabled": 1
+        },
+        {
+            "id": 605,
+            "description": "Gestionar Roles",
+            "enabled": 1
+        },
+        {
+            "id": 606,
+            "description": "Visualizar Acciones",
+            "enabled": 1
+        },
+        {
+            "id": 700,
+            "description": "Gestionar Ayuda",
+            "enabled": 1
+        },
+        {
+            "id": 800,
+            "description": "Visualizar Usuarios Hijos",
+            "enabled": 1
+        },
+        {
+            "id": 801,
+            "description": "Gestionar Usuarios Hijos",
+            "enabled": 1
+        }
+    ]
+}

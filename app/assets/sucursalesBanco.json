@@ -1,0 +1,424 @@
+{
+	"sucursales":[
+		{
+			"cod_dpa": "2301",
+			"nom_munic": "PLAYA ",
+			"cod_ccosto": "238",
+			"nom_ccosto": "41 y 46"
+		},
+		{
+			"cod_dpa": "2301",
+			"nom_munic": "PLAYA ",
+			"cod_ccosto": "239",
+			"nom_ccosto": "ELAM"
+		},
+		{
+			"cod_dpa": "2301",
+			"nom_munic": "PLAYA ",
+			"cod_ccosto": "240",
+			"nom_ccosto": "Santa Fé"
+		},
+		{
+			"cod_dpa": "2301",
+			"nom_munic": "PLAYA ",
+			"cod_ccosto": "241",
+			"nom_ccosto": "5ta y 84"
+		},
+		{
+			"cod_dpa": "2301",
+			"nom_munic": "PLAYA ",
+			"cod_ccosto": "242",
+			"nom_ccosto": "42 y 29"
+		},
+		{
+			"cod_dpa": "2301",
+			"nom_munic": "PLAYA ",
+			"cod_ccosto": "244",
+			"nom_ccosto": "31 y 42"
+		},
+		{
+			"cod_dpa": "2301",
+			"nom_munic": "PLAYA ",
+			"cod_ccosto": "232",
+			"nom_ccosto": "Palacio de las Convenciones"
+		},
+		{
+			"cod_dpa": "2301",
+			"nom_munic": "PLAYA ",
+			"cod_ccosto": "233",
+			"nom_ccosto": "5TA Y 112"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "281",
+			"nom_ccosto": "Línea y M"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "235",
+			"nom_ccosto": "MINAGRI"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "260",
+			"nom_ccosto": "Consejo de Ministro"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "245",
+			"nom_ccosto": "26 y 37"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "246",
+			"nom_ccosto": "MITRANS"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "247",
+			"nom_ccosto": "23 y Montero Sánchez"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "248",
+			"nom_ccosto": "FOCSA"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "250",
+			"nom_ccosto": "Línea y Paseo"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "251",
+			"nom_ccosto": "23 y J"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "252",
+			"nom_ccosto": "MICONS"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "253",
+			"nom_ccosto": "Terminal de Omnibus"
+		},
+		{
+			"cod_dpa": "2302",
+			"nom_munic": "PLAZA DE LA REVOLUCION ",
+			"cod_ccosto": "264",
+			"nom_ccosto": "La Rampa"
+		},
+		{
+			"cod_dpa": "2303",
+			"nom_munic": "CENTRO HABANA ",
+			"cod_ccosto": "254",
+			"nom_ccosto": "Belascoain y San José"
+		},
+		{
+			"cod_dpa": "2303",
+			"nom_munic": "CENTRO HABANA ",
+			"cod_ccosto": "258",
+			"nom_ccosto": "Galiano y San José"
+		},
+		{
+			"cod_dpa": "2303",
+			"nom_munic": "CENTRO HABANA ",
+			"cod_ccosto": "259",
+			"nom_ccosto": "Zanja y Belascoain"
+		},
+		{
+			"cod_dpa": "2304",
+			"nom_munic": "LA HABANA VIEJA ",
+			"cod_ccosto": "262",
+			"nom_ccosto": "Cuba y O' Reilly"
+		},
+		{
+			"cod_dpa": "2304",
+			"nom_munic": "LA HABANA VIEJA ",
+			"cod_ccosto": "263",
+			"nom_ccosto": "Monte y Carmen"
+		},
+		{
+			"cod_dpa": "2304",
+			"nom_munic": "LA HABANA VIEJA ",
+			"cod_ccosto": "266",
+			"nom_ccosto": "O' Reilly y Compostela"
+		},
+		{
+			"cod_dpa": "2304",
+			"nom_munic": "LA HABANA VIEJA ",
+			"cod_ccosto": "267",
+			"nom_ccosto": "Prado y Ánimas"
+		},
+		{
+			"cod_dpa": "2305",
+			"nom_munic": "REGLA ",
+			"cod_ccosto": "270",
+			"nom_ccosto": "Regla y Aranguren"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "271",
+			"nom_ccosto": "5ta e/ 478 y 480"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "272",
+			"nom_ccosto": "Camilo Cienfuegos"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "274",
+			"nom_ccosto": "Alamar- Zona 6"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "275",
+			"nom_ccosto": "5ta e/ 470 y 472"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "276",
+			"nom_ccosto": "Villa Panamericana"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "277",
+			"nom_ccosto": "Guiteras"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "278",
+			"nom_ccosto": "12 Plantas"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "284",
+			"nom_ccosto": "Academia Militar"
+		},
+		{
+			"cod_dpa": "2306",
+			"nom_munic": "LA HABANA DEL ESTE ",
+			"cod_ccosto": "289",
+			"nom_ccosto": "Campo Florido"
+		},
+		{
+			"cod_dpa": "2307",
+			"nom_munic": "GUANABACOA ",
+			"cod_ccosto": "279",
+			"nom_ccosto": "Pepe Antonio"
+		},
+		{
+			"cod_dpa": "2307",
+			"nom_munic": "GUANABACOA ",
+			"cod_ccosto": "280",
+			"nom_ccosto": "Martí"
+		},
+		{
+			"cod_dpa": "2308",
+			"nom_munic": "SAN MIGUEL DEL PADRON ",
+			"cod_ccosto": "286",
+			"nom_ccosto": "Czda Guines"
+		},
+		{
+			"cod_dpa": "2308",
+			"nom_munic": "SAN MIGUEL DEL PADRON ",
+			"cod_ccosto": "288",
+			"nom_ccosto": "Czda de Guanabacoa"
+		},
+		{
+			"cod_dpa": "2308",
+			"nom_munic": "SAN MIGUEL DEL PADRON ",
+			"cod_ccosto": "282",
+			"nom_ccosto": "San Francisco"
+		},
+		{
+			"cod_dpa": "2309",
+			"nom_munic": "DIEZ DE OCTUBRE ",
+			"cod_ccosto": "302",
+			"nom_ccosto": "Concha y Fábrica"
+		},
+		{
+			"cod_dpa": "2309",
+			"nom_munic": "DIEZ DE OCTUBRE ",
+			"cod_ccosto": "293",
+			"nom_ccosto": "Concha y Luyanó"
+		},
+		{
+			"cod_dpa": "2309",
+			"nom_munic": "DIEZ DE OCTUBRE ",
+			"cod_ccosto": "294",
+			"nom_ccosto": "10 de Octubre y Patrocinio"
+		},
+		{
+			"cod_dpa": "2309",
+			"nom_munic": "DIEZ DE OCTUBRE ",
+			"cod_ccosto": "295",
+			"nom_ccosto": "10 de Octubre y Luyanó"
+		},
+		{
+			"cod_dpa": "2309",
+			"nom_munic": "DIEZ DE OCTUBRE ",
+			"cod_ccosto": "296",
+			"nom_ccosto": "Juan Delgado y Lacret"
+		},
+		{
+			"cod_dpa": "2309",
+			"nom_munic": "DIEZ DE OCTUBRE ",
+			"cod_ccosto": "297",
+			"nom_ccosto": "Mónaco"
+		},
+		{
+			"cod_dpa": "2309",
+			"nom_munic": "DIEZ DE OCTUBRE ",
+			"cod_ccosto": "298",
+			"nom_ccosto": "Dolores y 18"
+		},
+		{
+			"cod_dpa": "2309",
+			"nom_munic": "DIEZ DE OCTUBRE ",
+			"cod_ccosto": "300",
+			"nom_ccosto": "10 de Octubre y Lacret"
+		},
+		{
+			"cod_dpa": "2310",
+			"nom_munic": "CERRO ",
+			"cod_ccosto": "303",
+			"nom_ccosto": "Casino Deportivo"
+		},
+		{
+			"cod_dpa": "2310",
+			"nom_munic": "CERRO ",
+			"cod_ccosto": "304",
+			"nom_ccosto": "Cerro y Arzobispo"
+		},
+		{
+			"cod_dpa": "2310",
+			"nom_munic": "CERRO ",
+			"cod_ccosto": "307",
+			"nom_ccosto": "Ayestarán y Aranguren"
+		},
+		{
+			"cod_dpa": "2311",
+			"nom_munic": "MARIANAO ",
+			"cod_ccosto": "311",
+			"nom_ccosto": "Calle 82 e/ 33 y 33A"
+		},
+		{
+			"cod_dpa": "2311",
+			"nom_munic": "MARIANAO ",
+			"cod_ccosto": "313",
+			"nom_ccosto": "Le Van Tan"
+		},
+		{
+			"cod_dpa": "2311",
+			"nom_munic": "MARIANAO ",
+			"cod_ccosto": "314",
+			"nom_ccosto": "51 y 112"
+		},
+		{
+			"cod_dpa": "2312",
+			"nom_munic": "LA LISA ",
+			"cod_ccosto": "315",
+			"nom_ccosto": "Ave 51 e/ 210 y 212"
+		},
+		{
+			"cod_dpa": "2312",
+			"nom_munic": "LA LISA ",
+			"cod_ccosto": "320",
+			"nom_ccosto": "Arroyo Arenas"
+		},
+		{
+			"cod_dpa": "2313",
+			"nom_munic": "BOYEROS ",
+			"cod_ccosto": "321",
+			"nom_ccosto": "Altahabana"
+		},
+		{
+			"cod_dpa": "2313",
+			"nom_munic": "BOYEROS ",
+			"cod_ccosto": "322",
+			"nom_ccosto": "Wajay"
+		},
+		{
+			"cod_dpa": "2313",
+			"nom_munic": "BOYEROS ",
+			"cod_ccosto": "323",
+			"nom_ccosto": "Santiago de las Vegas"
+		},
+		{
+			"cod_dpa": "2313",
+			"nom_munic": "BOYEROS ",
+			"cod_ccosto": "324",
+			"nom_ccosto": "Boyeros"
+		},
+		{
+			"cod_dpa": "2313",
+			"nom_munic": "BOYEROS ",
+			"cod_ccosto": "326",
+			"nom_ccosto": "100 y Boyeros"
+		},
+		{
+			"cod_dpa": "2313",
+			"nom_munic": "BOYEROS ",
+			"cod_ccosto": "328",
+			"nom_ccosto": "Aeropuerto"
+		},
+		{
+			"cod_dpa": "2314",
+			"nom_munic": "ARROYO NARANJO ",
+			"cod_ccosto": "331",
+			"nom_ccosto": "Managua"
+		},
+		{
+			"cod_dpa": "2314",
+			"nom_munic": "ARROYO NARANJO ",
+			"cod_ccosto": "332",
+			"nom_ccosto": "La Guinera"
+		},
+		{
+			"cod_dpa": "2314",
+			"nom_munic": "ARROYO NARANJO ",
+			"cod_ccosto": "333",
+			"nom_ccosto": "10 de Octubre y Bellavista"
+		},
+		{
+			"cod_dpa": "2314",
+			"nom_munic": "ARROYO NARANJO ",
+			"cod_ccosto": "334",
+			"nom_ccosto": "La Lira"
+		},
+		{
+			"cod_dpa": "2315",
+			"nom_munic": "COTORRO ",
+			"cod_ccosto": "336",
+			"nom_ccosto": "Centro Cotorro"
+		},
+		{
+			"cod_dpa": "2315",
+			"nom_munic": "COTORRO ",
+			"cod_ccosto": "338",
+			"nom_ccosto": "Las Brisas"
+		}
+	]
+}

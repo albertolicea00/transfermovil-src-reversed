@@ -1,0 +1,17 @@
+﻿{
+    "EntEmp": [
+        {
+            "Code": "95016",
+            "Nombre": "Trámites MININT",
+            "Abreviatura": "NONE",
+            "Ministerio": "MFP"
+        },
+        {
+            "Code": "95013",
+            "Nombre": "Otros trámites",
+            "Abreviatura": "NONE",
+            "Ministerio": "MFP"
+        }
+
+    ]
+}

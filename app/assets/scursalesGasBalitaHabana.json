@@ -1,0 +1,2698 @@
+{
+  "sucursales": [
+    {
+      "cod_dpa": "4226326",
+      "nom_suc": "PV Villa Panamericana",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226664",
+      "nom_suc": "PV Alfredo López",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226673",
+      "nom_suc": "PV Anita e/ A y B",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226231",
+      "nom_suc": "PV Cojímar 2",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226241",
+      "nom_suc": "PV Camilo 1",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226305",
+      "nom_suc": "PV Celimar",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226494",
+      "nom_suc": "PV Managua 1",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226658",
+      "nom_suc": "PV 9na y 4ta, Parcelación",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226307",
+      "nom_suc": "PV Tarará",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226669",
+      "nom_suc": "PV Ponce",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226247",
+      "nom_suc": "PV Guiteras 1",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226258",
+      "nom_suc": "PV Guiteras 2",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226236",
+      "nom_suc": "PV Cojímar 3",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226275",
+      "nom_suc": "PV A. Marbella",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226310",
+      "nom_suc": "PV Guiteras 4",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226498",
+      "nom_suc": "PV Managua 2",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226682",
+      "nom_suc": "PV María Luisa",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226185",
+      "nom_suc": "PV Alamar 11",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226219",
+      "nom_suc": "PV Micro X",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226503",
+      "nom_suc": "PV La Solita",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226663",
+      "nom_suc": "PV Remedios",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226251",
+      "nom_suc": "PV Guanabo 1",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226333",
+      "nom_suc": "PV Diez de Octubre",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226660",
+      "nom_suc": "PV Martí",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226677",
+      "nom_suc": "PV Mayía Rodríguez",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226698",
+      "nom_suc": "PV Jacomino",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226699",
+      "nom_suc": "PV Monterrey",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226700",
+      "nom_suc": "PV Rosalía",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226701",
+      "nom_suc": "PV Luyanó Moderno",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226702",
+      "nom_suc": "PV Mirador",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226703",
+      "nom_suc": "PV Ciudamar",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226704",
+      "nom_suc": "PV 8 Vías",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226705",
+      "nom_suc": "PV 2da Ampliación",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226706",
+      "nom_suc": "PV Afán",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226707",
+      "nom_suc": "PV Longa",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226708",
+      "nom_suc": "PV Merceditas",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226709",
+      "nom_suc": "PV Mayor",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226710",
+      "nom_suc": "PV Guadalupe",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226711",
+      "nom_suc": "PV California",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226712",
+      "nom_suc": "PV María Cristina",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226713",
+      "nom_suc": "PV Los Ángeles",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226714",
+      "nom_suc": "PV Dolores",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226715",
+      "nom_suc": "PV Cumbre",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226716",
+      "nom_suc": "PV Romanech",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226717",
+      "nom_suc": "PV Siboney y C",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226718",
+      "nom_suc": "PV Caraballo",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226719",
+      "nom_suc": "PV Villalobos",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226720",
+      "nom_suc": "PV Las Piedras",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226721",
+      "nom_suc": "PV 2da y Guarina",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226722",
+      "nom_suc": "PV Reboledo",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226723",
+      "nom_suc": "PV San Matías",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226724",
+      "nom_suc": "PV La Granja",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226725",
+      "nom_suc": "PV Cambute",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226726",
+      "nom_suc": "PV La Rosita",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226728",
+      "nom_suc": "PV La Corea",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226729",
+      "nom_suc": "PV Diezmero 2",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226263",
+      "nom_suc": "PV Reparto",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226309",
+      "nom_suc": "PV Boca Ciega",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226667",
+      "nom_suc": "PV F y 2da, Güinera",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226330",
+      "nom_suc": "PV Eléctrico",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226347",
+      "nom_suc": "PV Parque y Entrada",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226181",
+      "nom_suc": "PV Alamar 6",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226222",
+      "nom_suc": "PV Alamar 19",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226228",
+      "nom_suc": "PV Cojímar 1",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226349",
+      "nom_suc": "PV Cuba y Tunicú",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226348",
+      "nom_suc": "PV Don Tomás y Mirador",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226483",
+      "nom_suc": "PV Rodríguez de Armas",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226196",
+      "nom_suc": "PV Alamar 15",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226245",
+      "nom_suc": "PV Cabaña",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226286",
+      "nom_suc": "PV Caserío Guanabo",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226254",
+      "nom_suc": "PV Guanabo 2",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226259",
+      "nom_suc": "PV Campo Florido",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226202",
+      "nom_suc": "PV Alamar 25",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226285",
+      "nom_suc": "PV 508 y 5ta C",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226291",
+      "nom_suc": "PV Guiteras 3",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226209",
+      "nom_suc": "PV Alamar 1",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226217",
+      "nom_suc": "PV Alamar 24",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226243",
+      "nom_suc": "PV Camilo 2",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226320",
+      "nom_suc": "PV Sibarimar",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226327",
+      "nom_suc": "PV Boulevard",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226271",
+      "nom_suc": "PV Bajurayabo",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226492",
+      "nom_suc": "PV Frank País",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226501",
+      "nom_suc": "PV 6ta y 2da, Mantilla",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226684",
+      "nom_suc": "PV Esperanza y Franklin",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226180",
+      "nom_suc": "PV Alamar 5",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226277",
+      "nom_suc": "PV La Coca",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226300",
+      "nom_suc": "PV Justiz Abajo",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226346",
+      "nom_suc": "PV Estrella y Nueva Gerona",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226391",
+      "nom_suc": "PV Poey 1",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226188",
+      "nom_suc": "PV Alamar 12",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226324",
+      "nom_suc": "PV El Yoyo",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226489",
+      "nom_suc": "PV Lechuga",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226656",
+      "nom_suc": "PV Las Lajas",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226396",
+      "nom_suc": "PV Poey 2",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226487",
+      "nom_suc": "PV Las Guasimas",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226662",
+      "nom_suc": "PV Marrero",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226671",
+      "nom_suc": "PV Callejón del Muerto",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226679",
+      "nom_suc": "PV Pasaje Herrera",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226681",
+      "nom_suc": "PV Hatuey y Pinar del Río",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226683",
+      "nom_suc": "PV Matanzas",
+      "cod_provincia": "23",
+      "cod_mun": "14"
+    },
+    {
+      "cod_dpa": "4226694",
+      "nom_suc": "PV Veracruz",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226695",
+      "nom_suc": "PV Diezmero",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226697",
+      "nom_suc": "PV San Juan de los Pinos",
+      "cod_provincia": "23",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4226184",
+      "nom_suc": "PV Alamar 7",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226279",
+      "nom_suc": "PV 472 y 7ma",
+      "cod_provincia": "23",
+      "cod_mun": "06"
+    },
+    {
+      "cod_dpa": "4226884",
+      "nom_suc": "PV Gertrudis y DStrampes",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226885",
+      "nom_suc": "PV Goicuría y Espadero",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226886",
+      "nom_suc": "PV A e 16 y 17",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226887",
+      "nom_suc": "PV Gertrudis y Finlay",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226888",
+      "nom_suc": "PV 15 y Eduardo Lores",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226889",
+      "nom_suc": "PV 23 y Comezanas",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226890",
+      "nom_suc": "PV 9na e/ D y E",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226891",
+      "nom_suc": "PV 9na y Lagueruela",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226892",
+      "nom_suc": "PV Aguilera y Lugareño",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226893",
+      "nom_suc": "PV B y Martinez",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4226894",
+      "nom_suc": "PV 11 e A y B",
+      "cod_provincia": "23",
+      "cod_mun": "09"
+    },
+    {
+      "cod_dpa": "4227073",
+      "nom_suc": "PV Com. Revolución",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227074",
+      "nom_suc": "PV Mazorra",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227360",
+      "nom_suc": "PV Nalón",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227361",
+      "nom_suc": "PV Roble",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227362",
+      "nom_suc": "PV Chivás",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227363",
+      "nom_suc": "PV D' Beche",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227364",
+      "nom_suc": "PV Calle Real Sta. Fé",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227365",
+      "nom_suc": "PV La Ceiba",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227366",
+      "nom_suc": "PV Bertematti",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227367",
+      "nom_suc": "PV Habana Nueva",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227368",
+      "nom_suc": "PV Versalles",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227369",
+      "nom_suc": "PV Dr. Mora",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227370",
+      "nom_suc": "PV La Previsora",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227371",
+      "nom_suc": "PV Mañana",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227372",
+      "nom_suc": "PV Sta. María",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227373",
+      "nom_suc": "PV Barreto",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227374",
+      "nom_suc": "PV Apodaca",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227375",
+      "nom_suc": "PV Calixto García y Dguez.",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227376",
+      "nom_suc": "PV La Gallega",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227377",
+      "nom_suc": "PV Azotea",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227378",
+      "nom_suc": "PV Cubana de Bronce",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227379",
+      "nom_suc": "PV Villa María",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227380",
+      "nom_suc": "PV La Yuca",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227381",
+      "nom_suc": "PV Peñalver",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227382",
+      "nom_suc": "PV Los Mangos",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227383",
+      "nom_suc": "PV Bacuranao",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227384",
+      "nom_suc": "PV El Repollo",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227385",
+      "nom_suc": "PV Alecrín",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227386",
+      "nom_suc": "PV La Lima",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227387",
+      "nom_suc": "PV Escala",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227388",
+      "nom_suc": "PV Ricabal",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227389",
+      "nom_suc": "PV Barrera",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227390",
+      "nom_suc": "PV La Pelá",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227391",
+      "nom_suc": "PV Arango",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227392",
+      "nom_suc": "PV Minas",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227393",
+      "nom_suc": "PV Sepultura",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227394",
+      "nom_suc": "PV Roble Hata",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227395",
+      "nom_suc": "PV Fuente y Obispo",
+      "cod_provincia": "23",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4227473",
+      "nom_suc": "PV 119 y 120, Toledo",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227474",
+      "nom_suc": "PV 134 y 57, La Ceiba",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227475",
+      "nom_suc": "PV 130 y 41",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227476",
+      "nom_suc": "PV 96 y 67",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227477",
+      "nom_suc": "PV El Palmar 128B y 95",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227478",
+      "nom_suc": "PV Puente Nuevo",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227479",
+      "nom_suc": "PV 102 y 33, Los Hornos",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227480",
+      "nom_suc": "PV 67 y 114 Los Ángeles",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227481",
+      "nom_suc": "PV 33 y 128",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227482",
+      "nom_suc": "PV 142 y 41",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227483",
+      "nom_suc": "PV 132 y 85",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227484",
+      "nom_suc": "PV 112 e/ 41 y 43",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227485",
+      "nom_suc": "PV 122 y 63",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227486",
+      "nom_suc": "PV Husillo",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227487",
+      "nom_suc": "PV Andrade",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4227498",
+      "nom_suc": "PV 10 de Oct. y C. de Regla",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227499",
+      "nom_suc": "PV C. Cfgos. y V. Dapena",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227500",
+      "nom_suc": "PV 4ta y C. Modelo",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227501",
+      "nom_suc": "PV Díaz Benítez y Aranguren",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227502",
+      "nom_suc": "PV Camino de la Virgen y C",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227503",
+      "nom_suc": "PV Casablanca",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227504",
+      "nom_suc": "PV Artex y Animas",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227505",
+      "nom_suc": "PV Carretera del Asilo",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227506",
+      "nom_suc": "PV Recreo y Agramonte",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227507",
+      "nom_suc": "PV San Luis y C",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4227508",
+      "nom_suc": "PV Calixto García esq. Aran",
+      "cod_provincia": "23",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4226937",
+      "nom_suc": "PV El Cano",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226938",
+      "nom_suc": "PV 81 y 236, Bello 26",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226939",
+      "nom_suc": "PV Palenque",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226940",
+      "nom_suc": "PV Fraga",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226941",
+      "nom_suc": "PV 170 y 51",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226942",
+      "nom_suc": "PV San Agustin 4",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226943",
+      "nom_suc": "PV 45 y 154, Versalles 2",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226944",
+      "nom_suc": "PV Los leones",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226945",
+      "nom_suc": "PV Cruz de Piedra",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226946",
+      "nom_suc": "PV Alturas de la Lisa",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226947",
+      "nom_suc": "PV Bar Madera",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226948",
+      "nom_suc": "PV Los Avioncitos",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226949",
+      "nom_suc": "PV El Morado",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4227022",
+      "nom_suc": "PV Mulgoba 1",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227023",
+      "nom_suc": "PV Lutgardita 1",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227024",
+      "nom_suc": "PV A. Sta María 1",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227025",
+      "nom_suc": "PV Fontanar 1",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227026",
+      "nom_suc": "PV Altahabana 1",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227027",
+      "nom_suc": "PV Embill",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227028",
+      "nom_suc": "PV A. Sta María 2",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227029",
+      "nom_suc": "PV Altahabana 2",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227030",
+      "nom_suc": "PV Stgo. Vegas",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227031",
+      "nom_suc": "PV 5ta y Carlos Nuñez",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227032",
+      "nom_suc": "PV Wajay",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227033",
+      "nom_suc": "PV Río Verde",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227034",
+      "nom_suc": "PV Villa Nueva",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227035",
+      "nom_suc": "PV La Aurora",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227036",
+      "nom_suc": "PV Capdevila",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227037",
+      "nom_suc": "PV Panamérica",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227038",
+      "nom_suc": "PV 1ro de Mayo",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227039",
+      "nom_suc": "PV Rincón",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227040",
+      "nom_suc": "PV Sierra Maestra 1",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227041",
+      "nom_suc": "PV La Catalina",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227042",
+      "nom_suc": "PV Beatriz esquina 10",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227043",
+      "nom_suc": "PV J. M. Márquez",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227044",
+      "nom_suc": "PV El Chico",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227045",
+      "nom_suc": "PV Fontanar 2",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227046",
+      "nom_suc": "PV Mulgoba 2",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227047",
+      "nom_suc": "PV Sierra Maestra 2",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227048",
+      "nom_suc": "PV Lutgardita 2",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227049",
+      "nom_suc": "PV Nazareno",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227050",
+      "nom_suc": "PV Dinorah",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227051",
+      "nom_suc": "PV Calabazar",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227052",
+      "nom_suc": "PV El Globo",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227053",
+      "nom_suc": "PV Las Cañas",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227054",
+      "nom_suc": "PV Parajón",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227055",
+      "nom_suc": "PV Trébol García",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227056",
+      "nom_suc": "PV Berenguer",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227057",
+      "nom_suc": "PV Los Cocos",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227058",
+      "nom_suc": "PV Nacional y 13",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227059",
+      "nom_suc": "PV La Fortuna",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227060",
+      "nom_suc": "PV Miraflores Viejo",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227061",
+      "nom_suc": "PV Miraflores Nuevo",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227062",
+      "nom_suc": "PV María del Carmen",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227063",
+      "nom_suc": "PV Cacahual",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227064",
+      "nom_suc": "PV Aguada del Cura",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227065",
+      "nom_suc": "PV Murgas",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227066",
+      "nom_suc": "PV Nueva Aurora",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227067",
+      "nom_suc": "PV Torrens",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227068",
+      "nom_suc": "PV Carbo Servia",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227069",
+      "nom_suc": "PV El Gavilán",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227070",
+      "nom_suc": "PV Com. Los Cocos",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227071",
+      "nom_suc": "PV Com. Lutgardita",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227072",
+      "nom_suc": "PV Res. Almendares",
+      "cod_provincia": "23",
+      "cod_mun": "13"
+    },
+    {
+      "cod_dpa": "4227151",
+      "nom_suc": "PV Alberro 1",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227152",
+      "nom_suc": "PV C. Caminos",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227153",
+      "nom_suc": "PV Sta. María",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227154",
+      "nom_suc": "PV América",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227155",
+      "nom_suc": "PV San Pedro",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227156",
+      "nom_suc": "PV Cruz Verde",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227157",
+      "nom_suc": "PV Calle 16, Paraíso",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227158",
+      "nom_suc": "PV La Purísima",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227159",
+      "nom_suc": "PV Alberro 2",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227160",
+      "nom_suc": "PV Sta. Ana",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227161",
+      "nom_suc": "PV Vista Alegre",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227162",
+      "nom_suc": "PV Las Delicias",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227163",
+      "nom_suc": "PV La Portada",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227164",
+      "nom_suc": "PV Lotería",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227165",
+      "nom_suc": "PV Sta. Amelia",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227166",
+      "nom_suc": "PV Torriente",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227167",
+      "nom_suc": "PV C. Cotorro",
+      "cod_provincia": "23",
+      "cod_mun": "15"
+    },
+    {
+      "cod_dpa": "4227396",
+      "nom_suc": "PV 26 y Sta Rosa",
+      "cod_provincia": "23",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4227397",
+      "nom_suc": "PV El Bosque",
+      "cod_provincia": "23",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4227398",
+      "nom_suc": "PV El Fanguito",
+      "cod_provincia": "23",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4227399",
+      "nom_suc": "PV Estancia y Lombillo",
+      "cod_provincia": "23",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4227400",
+      "nom_suc": "PV Mariposa",
+      "cod_provincia": "23",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4227401",
+      "nom_suc": "PV La Tropical",
+      "cod_provincia": "23",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4227402",
+      "nom_suc": "PV Vedado",
+      "cod_provincia": "23",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4226855",
+      "nom_suc": "PV 9na y 112, Romerillo",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226856",
+      "nom_suc": "PV 1ra y 296, Sta Fé",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226857",
+      "nom_suc": "PV 17 y 78",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226858",
+      "nom_suc": "PV 1ra y 172, Flores",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226859",
+      "nom_suc": "PV 214 y 198, Siboney",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226860",
+      "nom_suc": "PV 23 y 308, Barbosa",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226861",
+      "nom_suc": "PV 3ra y 238, Jaimanita",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226862",
+      "nom_suc": "PV 156 y 1ra, Náutico",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226863",
+      "nom_suc": "PV 19B y 214, Atabey",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226864",
+      "nom_suc": "PV Juan Manuel Márquez",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226865",
+      "nom_suc": "PV 7ma Y 92A",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226866",
+      "nom_suc": "PV 190 y 37, Genética",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226867",
+      "nom_suc": "PV 3ra y 306, Bajo de Santa Fé",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226868",
+      "nom_suc": "PV Puente Grande",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226869",
+      "nom_suc": "PV Jaimanitas",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226870",
+      "nom_suc": "PV 306 e/ 17 y 19, Roble",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226871",
+      "nom_suc": "PV Cubanacán",
+      "cod_provincia": "23",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4226899",
+      "nom_suc": "PV 4ta e/ 3ra y 5ta Casino D.",
+      "cod_provincia": "23",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4226900",
+      "nom_suc": "PV Ave. del Este",
+      "cod_provincia": "23",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4226901",
+      "nom_suc": "PV Ave. del Sur y Lazada 1",
+      "cod_provincia": "23",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4226902",
+      "nom_suc": "PV 12 y Canal C. Deport.",
+      "cod_provincia": "23",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4226903",
+      "nom_suc": "PV Ayestarán y Domínguez",
+      "cod_provincia": "23",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4226904",
+      "nom_suc": "PV Martí e Independencia",
+      "cod_provincia": "23",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4226906",
+      "nom_suc": "PV Fábrica y Aspuro",
+      "cod_provincia": "23",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4226907",
+      "nom_suc": "PV La Guayaba",
+      "cod_provincia": "23",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4226923",
+      "nom_suc": "PV San Agustin 1",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226924",
+      "nom_suc": "PV 252 y 37, San Agustin 2",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226925",
+      "nom_suc": "PV 44 y 251, Punta Brava",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226926",
+      "nom_suc": "PV XX Aniversario",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226927",
+      "nom_suc": "PV 77 y 216",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226928",
+      "nom_suc": "PV San Agustin 3",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226929",
+      "nom_suc": "PV 97 y 202, Novoa",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226930",
+      "nom_suc": "PV La Coronela",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226931",
+      "nom_suc": "PV Valle Grande",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226932",
+      "nom_suc": "PV 44 y 279, Guatao",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226933",
+      "nom_suc": "PV 67 y 218",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226934",
+      "nom_suc": "PV Arroyo Arenas",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226935",
+      "nom_suc": "PV La Concepción",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226936",
+      "nom_suc": "PV 39 y 186, Versalles",
+      "cod_provincia": "23",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4226905",
+      "nom_suc": "PV 120B y 27, Las Piedras",
+      "cod_provincia": "23",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252475",
+      "nom_suc": "PV Palma Soriano",
+      "cod_provincia": "34",
+      "cod_mun": "07"
+    },
+    {
+      "cod_dpa": "4252476",
+      "nom_suc": "PV San Luis",
+      "cod_provincia": "34",
+      "cod_mun": "03"
+    },
+    {
+      "cod_dpa": "4252477",
+      "nom_suc": "PV Mella",
+      "cod_provincia": "34",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4252478",
+      "nom_suc": "PV Baraguá",
+      "cod_provincia": "34",
+      "cod_mun": "02"
+    },
+    {
+      "cod_dpa": "4252480",
+      "nom_suc": "PV Contramaestre",
+      "cod_provincia": "34",
+      "cod_mun": "01"
+    },
+    {
+      "cod_dpa": "4252481",
+      "nom_suc": "PV Tercer Frente",
+      "cod_provincia": "34",
+      "cod_mun": "08"
+    },
+    {
+      "cod_dpa": "4252482",
+      "nom_suc": "PV Segundo Frente",
+      "cod_provincia": "34",
+      "cod_mun": "04"
+    },
+    {
+      "cod_dpa": "4252483",
+      "nom_suc": "PV La Maya Este",
+      "cod_provincia": "34",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4252484",
+      "nom_suc": "PV La Maya Oeste",
+      "cod_provincia": "34",
+      "cod_mun": "05"
+    },
+    {
+      "cod_dpa": "4252423",
+      "nom_suc": "PV 11 Santa Elena",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252424",
+      "nom_suc": "PV 12 Marimón",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252425",
+      "nom_suc": "PV 13 Agüero",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252426",
+      "nom_suc": "PV 14 Micro 10- La risueña",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252427",
+      "nom_suc": "PV 15 Los Pinos",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252428",
+      "nom_suc": "PV 16 San Pedrito",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252429",
+      "nom_suc": "PV 17 Avenida Patria",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252430",
+      "nom_suc": "PV 19 Los Cocos",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252431",
+      "nom_suc": "PV 59 Bloque C",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252432",
+      "nom_suc": "PV 60 Bloque D",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252433",
+      "nom_suc": "PV 61 Bloque G-H",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252434",
+      "nom_suc": "PV 62 Bloque J",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252435",
+      "nom_suc": "PV 63 Micro 9 Alto",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252436",
+      "nom_suc": "PV 64 Micro 8",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252437",
+      "nom_suc": "PV 65 Micro 9 Bajo",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252438",
+      "nom_suc": "PV 66 Micro 7 Alto",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252439",
+      "nom_suc": "PV 67 Micro 7 Bajo",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252440",
+      "nom_suc": "PV 68 El Cobre",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252441",
+      "nom_suc": "PV 69 Melgarejo",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252442",
+      "nom_suc": "PV 70 Boniato",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252443",
+      "nom_suc": "PV 71 Cubitas",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252444",
+      "nom_suc": "PV 72 Santa María",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252445",
+      "nom_suc": "PV 84 El Espaldillo",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252446",
+      "nom_suc": "PV 87 San Vicente",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252447",
+      "nom_suc": "PV 95 El Castillo",
+      "cod_provincia": "34",
+      "cod_mun": "10"
+    },
+    {
+      "cod_dpa": "4252449",
+      "nom_suc": "PV 9 Versalles",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252450",
+      "nom_suc": "PV 10 CU Antonio Maceo",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252451",
+      "nom_suc": "PV 18 Los Holmos",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252452",
+      "nom_suc": "PV 37 Asunción",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252453",
+      "nom_suc": "PV 38 Rpto. Municipal",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252454",
+      "nom_suc": "PV 39 EL Polvorín",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252455",
+      "nom_suc": "PV 40 Ctra. del Morro",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252456",
+      "nom_suc": "PV 41 Calle F, Altamira",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252457",
+      "nom_suc": "PV 42 Ciudamar",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252458",
+      "nom_suc": "PV 43 Venceremos",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252459",
+      "nom_suc": "PV 44 Veguita de Galo",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252460",
+      "nom_suc": "PV 45 Vista Hermosa",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252461",
+      "nom_suc": "PV 46 Reparto Mármol",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252462",
+      "nom_suc": "PV 47 Ateneo",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252463",
+      "nom_suc": "PV 48 Calle K, Chicharrones",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252464",
+      "nom_suc": "PV 57 Calle A, Vista Hermosa",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252465",
+      "nom_suc": "PV 58 Sorribes",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252466",
+      "nom_suc": "PV 73 Princesa",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252467",
+      "nom_suc": "PV 74 Carlos Duboys",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252468",
+      "nom_suc": "PV 75 San Germán",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252469",
+      "nom_suc": "PV 76 Gallo",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252470",
+      "nom_suc": "PV 77 Habana",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252471",
+      "nom_suc": "PV 78 San Félix",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252472",
+      "nom_suc": "PV 79 Trinidad",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252473",
+      "nom_suc": "PV 81 San Carlos",
+      "cod_provincia": "34",
+      "cod_mun": "11"
+    },
+    {
+      "cod_dpa": "4252487",
+      "nom_suc": "PV 1 Micro 3",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252488",
+      "nom_suc": "PV 2 Micro 3",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252489",
+      "nom_suc": "PV 3 Micro 3",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252490",
+      "nom_suc": "PV 4 Micro 1 A",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252491",
+      "nom_suc": "PV 5 Micro 1 B",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252492",
+      "nom_suc": "PV 6 Micro 2",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252493",
+      "nom_suc": "PV 7 Rajayoga",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252494",
+      "nom_suc": "PV 8 Rpto. Pastorita",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252495",
+      "nom_suc": "PV 20 Rpto. 30 de Noviembre",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252496",
+      "nom_suc": "PV 21 Rpto. Sueño",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252497",
+      "nom_suc": "PV 22 Escario, 18 Plantas",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252498",
+      "nom_suc": "PV 23 Escario, 18 Plantas",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252499",
+      "nom_suc": "PV 24 Vista Alegre",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252500",
+      "nom_suc": "PV 25 Vitiry",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252501",
+      "nom_suc": "PV 26 La Estrellita",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252502",
+      "nom_suc": "PV 27 Rpto. Flores",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252503",
+      "nom_suc": "PV 33 Jose Martí, Caney",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252504",
+      "nom_suc": "PV 34 Las Flores, Caney",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252505",
+      "nom_suc": "PV 35 Santa Teresa, Caney",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252506",
+      "nom_suc": "PV 36 Terraza, Rpto. Militar",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252507",
+      "nom_suc": "PV 82 El Cristo",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252509",
+      "nom_suc": "PV 85 Siboney",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4252508",
+      "nom_suc": "PV 88 Sevilla",
+      "cod_provincia": "34",
+      "cod_mun": "12"
+    },
+    {
+      "cod_dpa": "4256207",
+      "nom_suc": "PV Mella 1",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256208",
+      "nom_suc": "PV Previsora",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256209",
+      "nom_suc": "PV Lenin",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256210",
+      "nom_suc": "PV Planta Mecánica",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256211",
+      "nom_suc": "PV Santayana",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256212",
+      "nom_suc": "PV Mercedes",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256213",
+      "nom_suc": "PV El Retiro",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256214",
+      "nom_suc": "PV Zambrana",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256215",
+      "nom_suc": "PV Puerto Príncipe",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256216",
+      "nom_suc": "PV Mella 2",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256217",
+      "nom_suc": "PV Altagracia",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256218",
+      "nom_suc": "PV Plaza Méndez",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256219",
+      "nom_suc": "PV Garrido",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256220",
+      "nom_suc": "PV Yaba",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256221",
+      "nom_suc": "PV Agramonte",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256222",
+      "nom_suc": "PV Guernica",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256223",
+      "nom_suc": "PV Juruquey",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256224",
+      "nom_suc": "PV Sánchez Soto",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256234",
+      "nom_suc": "PV Planta Gas Licuado",
+      "cod_provincia": "30",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4256227",
+      "nom_suc": "PV Nuevitas",
+      "cod_provincia": "30",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4256226",
+      "nom_suc": "PV Agencia Nuevitas",
+      "cod_provincia": "30",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4256228",
+      "nom_suc": "PV Minas",
+      "cod_provincia": "30",
+      "cod_mun": "2"
+    },
+    {
+      "cod_dpa": "4256229",
+      "nom_suc": "PV Guáimaro",
+      "cod_provincia": "30",
+      "cod_mun": "4"
+    },
+    {
+      "cod_dpa": "4256230",
+      "nom_suc": "PV Vertientes",
+      "cod_provincia": "30",
+      "cod_mun": "7"
+    },
+    {
+      "cod_dpa": "4256231",
+      "nom_suc": "PV Sta Cruz",
+      "cod_provincia": "30",
+      "cod_mun": "9"
+    },
+    {
+      "cod_dpa": "4256232",
+      "nom_suc": "PV Florida",
+      "cod_provincia": "30",
+      "cod_mun": "6"
+    },
+    {
+      "cod_dpa": "4256233",
+      "nom_suc": "PV Esmeralda",
+      "cod_provincia": "30",
+      "cod_mun": "1"
+    },
+    {
+      "cod_dpa": "4256225",
+      "nom_suc": "PV Jimaguayú",
+      "cod_provincia": "30",
+      "cod_mun": "8"
+    },
+    {
+      "cod_dpa": "4255520",
+      "nom_suc": "PV Los Palacios",
+      "cod_provincia": "21",
+      "cod_mun": "1"
+    },
+    {
+      "cod_dpa": "4255521",
+      "nom_suc": "PV Consolacion del Sur 1",
+      "cod_provincia": "21",
+      "cod_mun": "2"
+    },
+    {
+      "cod_dpa": "4255522",
+      "nom_suc": "PV Consolacion del Sur 2",
+      "cod_provincia": "21",
+      "cod_mun": "2"
+    },
+    {
+      "cod_dpa": "4255508",
+      "nom_suc": "PV Hnos. Cruz 1",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255509",
+      "nom_suc": "PV Hnos. Cruz 2",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255510",
+      "nom_suc": "PV Hnos. Cruz 3",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255518",
+      "nom_suc": "PV Ceferino Fernández",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255517",
+      "nom_suc": "PV Cuba Libre",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255512",
+      "nom_suc": "PV Raul Sánchez",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255513",
+      "nom_suc": "PV Carlos Manuel",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255514",
+      "nom_suc": "PV Hnos Barcón",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255515",
+      "nom_suc": "PV Celso Maragoto",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255519",
+      "nom_suc": "PV 10 de Octubre",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255511",
+      "nom_suc": "PV Villamil",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4255516",
+      "nom_suc": "PV Guanajera",
+      "cod_provincia": "21",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4222325",
+      "nom_suc": "PV Lora",
+      "cod_provincia": "31",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4222324",
+      "nom_suc": "PV Cementerio",
+      "cod_provincia": "31",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4222323",
+      "nom_suc": "PV Sto. Domingo",
+      "cod_provincia": "31",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4222316",
+      "nom_suc": "PV Las 40",
+      "cod_provincia": "31",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4222315",
+      "nom_suc": "PV Buena Vista",
+      "cod_provincia": "31",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4222313",
+      "nom_suc": "PV La Victoria",
+      "cod_provincia": "31",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4222314",
+      "nom_suc": "PV Los Pinos",
+      "cod_provincia": "31",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4222311",
+      "nom_suc": "PV San Antonio",
+      "cod_provincia": "31",
+      "cod_mun": "5"
+    },
+    {
+      "cod_dpa": "4222306",
+      "nom_suc": "PV Jesús Menéndez",
+      "cod_provincia": "31",
+      "cod_mun": "3"
+    },
+    {
+      "cod_dpa": "4222304",
+      "nom_suc": "PV Puerto Padre 1",
+      "cod_provincia": "31",
+      "cod_mun": "2"
+    },
+    {
+      "cod_dpa": "4222301",
+      "nom_suc": "PV Puerto Padre 2",
+      "cod_provincia": "31",
+      "cod_mun": "2"
+    },
+    {
+      "cod_dpa": "4222299",
+      "nom_suc": "PV Majibacoa",
+      "cod_provincia": "31",
+      "cod_mun": "4"
+    },
+    {
+      "cod_dpa": "4222295",
+      "nom_suc": "PV Amancio",
+      "cod_provincia": "31",
+      "cod_mun": "8"
+    },
+    {
+      "cod_dpa": "4222196",
+      "nom_suc": "PV Manatí",
+      "cod_provincia": "31",
+      "cod_mun": "1"
+    },
+    {
+      "cod_dpa": "4222195",
+      "nom_suc": "PV Colombia",
+      "cod_provincia": "31",
+      "cod_mun": "7"
+    },
+    {
+      "cod_dpa": "4222194",
+      "nom_suc": "PV Jobabo",
+      "cod_provincia": "31",
+      "cod_mun": "6"
+    }
+  ]
+}

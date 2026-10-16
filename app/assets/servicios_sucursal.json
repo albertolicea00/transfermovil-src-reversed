@@ -1,0 +1,598 @@
+{
+  "servicios_sucursal": [
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de ahorro"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "8",
+      "nom_servicio": "Obtención de título de propiedad"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289476",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289477",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "10",
+      "nom_servicio": "Extracciones por el Cajero automático"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289478",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "8",
+      "nom_servicio": "Obtención de título de propiedad"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289479",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+
+    {
+      "cod_dpa": "4289480",
+      "cod_servicio": "10",
+      "nom_servicio": "Extracciones por el Cajero automático"
+    },
+
+
+
+
+
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "8",
+      "nom_servicio": "Obtención de título de propiedad"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289481",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+
+
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289482",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+
+
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "10",
+      "nom_servicio": "Extracciones por el Cajero automático"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289483",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "8",
+      "nom_servicio": "Obtención de título de propiedad"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289484",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "10",
+      "nom_servicio": "Extracciones por el Cajero automático"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289485",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+
+
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289486",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    },
+
+
+
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "4",
+      "nom_servicio": "Apertura o traslado de cuenta de Ahorro"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "5",
+      "nom_servicio": "Certificaciones o estados de cuentas"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "6",
+      "nom_servicio": "Solicitud o ampliación de créditos"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "7",
+      "nom_servicio": "Solicitud de cheque de Gerencia"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "9",
+      "nom_servicio": "Operaciones de Caja"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "10",
+      "nom_servicio": "Extracciones por el Cajero automático"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "11",
+      "nom_servicio": "Trámite de beneficiarios y herederos"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "12",
+      "nom_servicio": "Contratación telebanca y reimpresión pin"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "13",
+      "nom_servicio": "Traslado de adeudos de Créditos y LGV"
+    },
+    {
+      "cod_dpa": "4289487",
+      "cod_servicio": "14",
+      "nom_servicio": "Certifico de adeudos/operaciones"
+    }
+
+  ]
+}

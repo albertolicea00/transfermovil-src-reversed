@@ -1,0 +1,16 @@
+﻿{
+    "Prelacion": [
+        {
+            "Code": "1",
+            "Nombre": "Verificar saldo tarjeta y si no entonces verificar contra la línea de crédito"
+        },
+        {
+            "Code": "2",
+            "Nombre": "Verificar saldo de la línea de crédito y si no entonces verificar contra saldo de la tarjeta"
+        },
+        {
+            "Code": "3",
+            "Nombre": "Verificar contra línea de crédito"
+        }
+    ]
+}

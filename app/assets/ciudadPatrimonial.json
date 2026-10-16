@@ -1,0 +1,29 @@
+﻿{
+    "CiudadPatrimonialOFA": [
+        {
+            "Code": "23",
+            "Nombre": "La Habana",
+            "Abreviatura": "HAB"
+        },
+        {
+            "Code": "25",
+            "Nombre": "Matanzas",
+            "Abreviatura": "Matanzas"
+        },
+        {
+            "Code": "27",
+            "Nombre": "Cienfuegos",
+            "Abreviatura": "Cienfuegos"
+        },
+        {
+            "Code": "34",
+            "Nombre": "Santiago de Cuba",
+            "Abreviatura": "Santiago de Cuba"
+        },
+        {
+            "Code": "35",
+            "Nombre": "Baracoa",
+            "Abreviatura": "Baracoa"
+        }
+    ]
+}

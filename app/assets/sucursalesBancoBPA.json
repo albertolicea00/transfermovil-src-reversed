@@ -1,0 +1,1390 @@
+﻿{
+    "sucursales": [
+        {
+            "cod_ccosto": "101",
+            "nom_ccosto": "SANDINO",
+            "cod_provincia": "21",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "106",
+            "nom_ccosto": "MANTUA",
+            "cod_provincia": "21",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "113",
+            "nom_ccosto": "MINAS DE MATAHAMBRE",
+            "cod_provincia": "21",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "116",
+            "nom_ccosto": "VIÑALES",
+            "cod_provincia": "21",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "120",
+            "nom_ccosto": "LA PALMA",
+            "cod_provincia": "21",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "138",
+            "nom_ccosto": "LOS PALACIOS",
+            "cod_provincia": "21",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "142",
+            "nom_ccosto": "CONSOLACION DEL SUR",
+            "cod_provincia": "21",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "149",
+            "nom_ccosto": "MARTI 61",
+            "cod_provincia": "21",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "150",
+            "nom_ccosto": "ALAMEDA",
+            "cod_provincia": "21",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "153",
+            "nom_ccosto": "PINAR DEL RIO",
+            "cod_provincia": "21",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "156",
+            "nom_ccosto": "SAN LUIS (PINAR DEL RIO)",
+            "cod_provincia": "21",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "161",
+            "nom_ccosto": "SAN JUAN Y MARTINEZ",
+            "cod_provincia": "21",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "164",
+            "nom_ccosto": "GUANES",
+            "cod_provincia": "21",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "124",
+            "nom_ccosto": "BAHIA HONDA",
+            "cod_provincia": "22",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "172",
+            "nom_ccosto": "CABAÑAS",
+            "cod_provincia": "22",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "173",
+            "nom_ccosto": "MARIEL",
+            "cod_provincia": "22",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "175",
+            "nom_ccosto": "GUANAJAY",
+            "cod_provincia": "22",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "177",
+            "nom_ccosto": "CAIMITO",
+            "cod_provincia": "22",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "180",
+            "nom_ccosto": "BAUTA",
+            "cod_provincia": "22",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "184",
+            "nom_ccosto": "SAN ANTONIO DE LOS BAÑOS",
+            "cod_provincia": "22",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "223",
+            "nom_ccosto": "GUIRA DE MELENA",
+            "cod_provincia": "22",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "225",
+            "nom_ccosto": "ALQUIZAR",
+            "cod_provincia": "22",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "227",
+            "nom_ccosto": "ARTEMISA",
+            "cod_provincia": "22",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "131",
+            "nom_ccosto": "CANDELARIA",
+            "cod_provincia": "22",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "135",
+            "nom_ccosto": "SAN CRISTOBAL",
+            "cod_provincia": "22",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "220",
+            "nom_ccosto": "SUCURSAL 2202",
+            "cod_provincia": "23",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "187",
+            "nom_ccosto": "BEJUCAL",
+            "cod_provincia": "24",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "189",
+            "nom_ccosto": "LIBERACION",
+            "cod_provincia": "24",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "190",
+            "nom_ccosto": "SAN ANTONIO DE LAS VEGAS",
+            "cod_provincia": "24",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "191",
+            "nom_ccosto": "SAN JOSÉ DE LAS LAJAS",
+            "cod_provincia": "24",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "193",
+            "nom_ccosto": "JARUCO",
+            "cod_provincia": "24",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "196",
+            "nom_ccosto": "ARCOS DE CANASI",
+            "cod_provincia": "24",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "197",
+            "nom_ccosto": "SANTA CRUZ DEL NORTE",
+            "cod_provincia": "24",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "200",
+            "nom_ccosto": "AGUACATE",
+            "cod_provincia": "24",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "203",
+            "nom_ccosto": "NUEVA PAZ",
+            "cod_provincia": "24",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "205",
+            "nom_ccosto": "SAN NICOLAS DE BARI",
+            "cod_provincia": "24",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "207",
+            "nom_ccosto": "CATALINA DE GÜINES",
+            "cod_provincia": "24",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "209",
+            "nom_ccosto": "GUINES",
+            "cod_provincia": "24",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "211",
+            "nom_ccosto": "MELENA DEL SUR",
+            "cod_provincia": "24",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "213",
+            "nom_ccosto": "BATABANO",
+            "cod_provincia": "24",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "216",
+            "nom_ccosto": "LA SALUD",
+            "cod_provincia": "24",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "217",
+            "nom_ccosto": "QUIVICAN",
+            "cod_provincia": "24",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "341",
+            "nom_ccosto": "CONTRERAS",
+            "cod_provincia": "25",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "345",
+            "nom_ccosto": "MATANZAS",
+            "cod_provincia": "25",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "349",
+            "nom_ccosto": "CARDENAS",
+            "cod_provincia": "25",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "351",
+            "nom_ccosto": "VARADERO",
+            "cod_provincia": "25",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "353",
+            "nom_ccosto": "MARTI",
+            "cod_provincia": "25",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "357",
+            "nom_ccosto": "COLON",
+            "cod_provincia": "25",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "360",
+            "nom_ccosto": "MAXIMO GOMEZ",
+            "cod_provincia": "25",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "361",
+            "nom_ccosto": "PERICO",
+            "cod_provincia": "25",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "364",
+            "nom_ccosto": "CARLOS ROJAS",
+            "cod_provincia": "25",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "365",
+            "nom_ccosto": "JOVELLANOS",
+            "cod_provincia": "25",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "368",
+            "nom_ccosto": "BOLONDRON",
+            "cod_provincia": "25",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "369",
+            "nom_ccosto": "PEDRO BETANCOURT",
+            "cod_provincia": "25",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "371",
+            "nom_ccosto": "LIMONAR",
+            "cod_provincia": "25",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "374",
+            "nom_ccosto": "ALACRANES",
+            "cod_provincia": "25",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "375",
+            "nom_ccosto": "JUAN GUALBERTO GOMEZ",
+            "cod_provincia": "25",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "376",
+            "nom_ccosto": "SAN ANTONIO DE CABEZAS",
+            "cod_provincia": "25",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "377",
+            "nom_ccosto": "UNION DE REYES",
+            "cod_provincia": "25",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "382",
+            "nom_ccosto": "AGRAMONTE",
+            "cod_provincia": "25",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "383",
+            "nom_ccosto": "JAGUEY GRANDE",
+            "cod_provincia": "25",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "385",
+            "nom_ccosto": "CALIMETE",
+            "cod_provincia": "25",
+            "cod_municipio": "12"
+        },
+        {
+            "cod_ccosto": "386",
+            "nom_ccosto": "AMARILLAS",
+            "cod_provincia": "25",
+            "cod_municipio": "12"
+        },
+        {
+            "cod_ccosto": "388",
+            "nom_ccosto": "LOS ARABOS",
+            "cod_provincia": "25",
+            "cod_municipio": "13"
+        },
+        {
+            "cod_ccosto": "393",
+            "nom_ccosto": "CORRALILLO",
+            "cod_provincia": "26",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "396",
+            "nom_ccosto": "RANCHO VELOZ",
+            "cod_provincia": "26",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "399",
+            "nom_ccosto": "QUEMADO DE GUINES",
+            "cod_provincia": "26",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "403",
+            "nom_ccosto": "SAGUA LA GRANDE",
+            "cod_provincia": "26",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "406",
+            "nom_ccosto": "CALABAZAR DE SAGUA",
+            "cod_provincia": "26",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "407",
+            "nom_ccosto": "ENCRUCIJADA",
+            "cod_provincia": "26",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "409",
+            "nom_ccosto": "CAMAJUANI",
+            "cod_provincia": "26",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "410",
+            "nom_ccosto": "SAN ANTONIO DE VUELTAS",
+            "cod_provincia": "26",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "415",
+            "nom_ccosto": "CAIBARIEN",
+            "cod_provincia": "26",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "418",
+            "nom_ccosto": "ZULUETA",
+            "cod_provincia": "26",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "419",
+            "nom_ccosto": "REMEDIOS",
+            "cod_provincia": "26",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "423",
+            "nom_ccosto": "PLACETAS",
+            "cod_provincia": "26",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "426",
+            "nom_ccosto": "TRISTA",
+            "cod_provincia": "26",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "427",
+            "nom_ccosto": "TEXTILERA SANTA CLARA",
+            "cod_provincia": "26",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "428",
+            "nom_ccosto": "PLANTA MECANICA",
+            "cod_provincia": "26",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "429",
+            "nom_ccosto": "GUAJUMA",
+            "cod_provincia": "26",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "430",
+            "nom_ccosto": "PARQUE VIDAL",
+            "cod_provincia": "26",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "431",
+            "nom_ccosto": "CUBA Y CANDELARIA",
+            "cod_provincia": "26",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "433",
+            "nom_ccosto": "HOSPITAL",
+            "cod_provincia": "26",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "435",
+            "nom_ccosto": "SAN DIEGO DEL VALLE",
+            "cod_provincia": "26",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "436",
+            "nom_ccosto": "CIFUENTES",
+            "cod_provincia": "26",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "439",
+            "nom_ccosto": "MANACAS",
+            "cod_provincia": "26",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "440",
+            "nom_ccosto": "SANTO DOMINGO",
+            "cod_provincia": "26",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "442",
+            "nom_ccosto": "SAN JUAN DE LOS YERAS",
+            "cod_provincia": "26",
+            "cod_municipio": "12"
+        },
+        {
+            "cod_ccosto": "443",
+            "nom_ccosto": "ESPERANZA",
+            "cod_provincia": "26",
+            "cod_municipio": "12"
+        },
+        {
+            "cod_ccosto": "444",
+            "nom_ccosto": "RANCHUELO",
+            "cod_provincia": "26",
+            "cod_municipio": "12"
+        },
+        {
+            "cod_ccosto": "448",
+            "nom_ccosto": "MANICARAGUA",
+            "cod_provincia": "26",
+            "cod_municipio": "13"
+        },
+        {
+            "cod_ccosto": "454",
+            "nom_ccosto": "AGUADA DE PASAJEROS",
+            "cod_provincia": "27",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "459",
+            "nom_ccosto": "RODAS",
+            "cod_provincia": "27",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "463",
+            "nom_ccosto": "SAN FERNANDO DE CAMARONES",
+            "cod_provincia": "27",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "464",
+            "nom_ccosto": "PALMIRA",
+            "cod_provincia": "27",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "466",
+            "nom_ccosto": "LAJAS",
+            "cod_provincia": "27",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "469",
+            "nom_ccosto": "CRUCES",
+            "cod_provincia": "27",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "473",
+            "nom_ccosto": "CUMANAYAGUA",
+            "cod_provincia": "27",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "474",
+            "nom_ccosto": "CUATRO VIENTOS",
+            "cod_provincia": "27",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "479",
+            "nom_ccosto": "LA CALZADA",
+            "cod_provincia": "27",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "480",
+            "nom_ccosto": "CIUDAD NUCLEAR",
+            "cod_provincia": "27",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "481",
+            "nom_ccosto": "CALLE 35 NO.5603 % 56 Y 58",
+            "cod_provincia": "27",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "482",
+            "nom_ccosto": "BULEVAR",
+            "cod_provincia": "27",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "486",
+            "nom_ccosto": "ABREUS",
+            "cod_provincia": "27",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "487",
+            "nom_ccosto": "HORQUITA",
+            "cod_provincia": "27",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "493",
+            "nom_ccosto": "MAYAJIGUA",
+            "cod_provincia": "28",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "494",
+            "nom_ccosto": "YAGUAJAY",
+            "cod_provincia": "28",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "498",
+            "nom_ccosto": "JATIBONICO",
+            "cod_provincia": "28",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "502",
+            "nom_ccosto": "TAGUASCO",
+            "cod_provincia": "28",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "503",
+            "nom_ccosto": "ZAZA DEL MEDIO",
+            "cod_provincia": "28",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "507",
+            "nom_ccosto": "GUAYOS",
+            "cod_provincia": "28",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "508",
+            "nom_ccosto": "CABAIGUAN",
+            "cod_provincia": "28",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "511",
+            "nom_ccosto": "FOMENTO",
+            "cod_provincia": "28",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "515",
+            "nom_ccosto": "TRINIDAD",
+            "cod_provincia": "28",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "520",
+            "nom_ccosto": "BARRIO COLON",
+            "cod_provincia": "28",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "521",
+            "nom_ccosto": "MAXIMO GOMEZ",
+            "cod_provincia": "28",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "522",
+            "nom_ccosto": "12 PLANTAS SANCTI SPIRITUS",
+            "cod_provincia": "28",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "523",
+            "nom_ccosto": "SANCTI SPIRITUS",
+            "cod_provincia": "28",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "524",
+            "nom_ccosto": "LA SIERPE",
+            "cod_provincia": "28",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "532",
+            "nom_ccosto": "PUNTA ALEGRE",
+            "cod_provincia": "29",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "533",
+            "nom_ccosto": "CHAMBAS",
+            "cod_provincia": "29",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "537",
+            "nom_ccosto": "MORON",
+            "cod_provincia": "29",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "539",
+            "nom_ccosto": "BOLIVIA",
+            "cod_provincia": "29",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "541",
+            "nom_ccosto": "VIOLETA",
+            "cod_provincia": "29",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "543",
+            "nom_ccosto": "PINA",
+            "cod_provincia": "29",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "545",
+            "nom_ccosto": "FLORENCIA",
+            "cod_provincia": "29",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "547",
+            "nom_ccosto": "TAMARINDO",
+            "cod_provincia": "29",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "549",
+            "nom_ccosto": "MAJAGUA",
+            "cod_provincia": "29",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "551",
+            "nom_ccosto": "LIBERTAD",
+            "cod_provincia": "29",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "552",
+            "nom_ccosto": "INDEPENDENCIA Y S. REYES",
+            "cod_provincia": "29",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "553",
+            "nom_ccosto": "CIEGO DE AVILA",
+            "cod_provincia": "29",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "555",
+            "nom_ccosto": "CEBALLOS",
+            "cod_provincia": "29",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "557",
+            "nom_ccosto": "VENEZUELA",
+            "cod_provincia": "29",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "559",
+            "nom_ccosto": "GASPAR",
+            "cod_provincia": "29",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "565",
+            "nom_ccosto": "CESPEDES",
+            "cod_provincia": "30",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "568",
+            "nom_ccosto": "CENTRAL BRASIL",
+            "cod_provincia": "30",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "569",
+            "nom_ccosto": "ESMERALDA",
+            "cod_provincia": "30",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "572",
+            "nom_ccosto": "SOLA",
+            "cod_provincia": "30",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "574",
+            "nom_ccosto": "LUGAREÑO",
+            "cod_provincia": "30",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "575",
+            "nom_ccosto": "MINAS",
+            "cod_provincia": "30",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "577",
+            "nom_ccosto": "NUEVITAS",
+            "cod_provincia": "30",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "580",
+            "nom_ccosto": "CAMALOTE",
+            "cod_provincia": "30",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "581",
+            "nom_ccosto": "GUAIMARO",
+            "cod_provincia": "30",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "583",
+            "nom_ccosto": "SIBANICU",
+            "cod_provincia": "30",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "587",
+            "nom_ccosto": "LA CARIDAD",
+            "cod_provincia": "30",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "588",
+            "nom_ccosto": "DESMONTE",
+            "cod_provincia": "30",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "589",
+            "nom_ccosto": "JULIO ANTONIO MELLA",
+            "cod_provincia": "30",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "594",
+            "nom_ccosto": "LA VIGIA",
+            "cod_provincia": "30",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "595",
+            "nom_ccosto": "CISNEROS 224",
+            "cod_provincia": "30",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "596",
+            "nom_ccosto": "REPUBLICA",
+            "cod_provincia": "30",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "599",
+            "nom_ccosto": "FLORIDA",
+            "cod_provincia": "30",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "604",
+            "nom_ccosto": "VERTIENTES",
+            "cod_provincia": "30",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "609",
+            "nom_ccosto": "JIMAGUAYU",
+            "cod_provincia": "30",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "614",
+            "nom_ccosto": "SANTA CRUZ DEL SUR",
+            "cod_provincia": "30",
+            "cod_municipio": "13"
+        },
+        {
+            "cod_ccosto": "621",
+            "nom_ccosto": "MANATI",
+            "cod_provincia": "31",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "626",
+            "nom_ccosto": "PUERTO PADRE",
+            "cod_provincia": "31",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "632",
+            "nom_ccosto": "JESUS MENENDEZ",
+            "cod_provincia": "31",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "637",
+            "nom_ccosto": "CALIXTO",
+            "cod_provincia": "31",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "639",
+            "nom_ccosto": "CENTRAL MAJIBACOA",
+            "cod_provincia": "31",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "640",
+            "nom_ccosto": "CENTRO COMERCIAL",
+            "cod_provincia": "31",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "642",
+            "nom_ccosto": "BUENA VISTA",
+            "cod_provincia": "31",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "643",
+            "nom_ccosto": "LAS TUNAS",
+            "cod_provincia": "31",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "646",
+            "nom_ccosto": "JOBABO",
+            "cod_provincia": "31",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "651",
+            "nom_ccosto": "COLOMBIA",
+            "cod_provincia": "31",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "654",
+            "nom_ccosto": "AMANCIO RODRIGUEZ",
+            "cod_provincia": "31",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "663",
+            "nom_ccosto": "VELASCO",
+            "cod_provincia": "32",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "665",
+            "nom_ccosto": "GIBARA",
+            "cod_provincia": "32",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "669",
+            "nom_ccosto": "SANTA LUCIA",
+            "cod_provincia": "32",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "675",
+            "nom_ccosto": "BANES",
+            "cod_provincia": "32",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "677",
+            "nom_ccosto": "ANTILLA",
+            "cod_provincia": "32",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "680",
+            "nom_ccosto": "TACAJO",
+            "cod_provincia": "32",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "681",
+            "nom_ccosto": "BAGUANOS",
+            "cod_provincia": "32",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "684",
+            "nom_ccosto": "SAN FIEL",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "685",
+            "nom_ccosto": "ALCIDES PINO",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "686",
+            "nom_ccosto": "PEDRO DIAZ COELLO",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "687",
+            "nom_ccosto": "GELMA- HOLGUÍN",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "689",
+            "nom_ccosto": "SAN ANDRES",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "690",
+            "nom_ccosto": "AGUILERA",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "691",
+            "nom_ccosto": "MARTI",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "692",
+            "nom_ccosto": "LENIN",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "693",
+            "nom_ccosto": "VISTA ALEGRE",
+            "cod_provincia": "32",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "694",
+            "nom_ccosto": "BUENAVENTURA",
+            "cod_provincia": "32",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "698",
+            "nom_ccosto": "CACOCUM",
+            "cod_provincia": "32",
+            "cod_municipio": "08"
+        },
+        {
+            "cod_ccosto": "703",
+            "nom_ccosto": "SAN GERMAN",
+            "cod_provincia": "32",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "707",
+            "nom_ccosto": "CUETO",
+            "cod_provincia": "32",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "712",
+            "nom_ccosto": "NICARO",
+            "cod_provincia": "32",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "713",
+            "nom_ccosto": "MAYARI",
+            "cod_provincia": "32",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "717",
+            "nom_ccosto": "FRANK PAIS",
+            "cod_provincia": "32",
+            "cod_municipio": "12"
+        },
+        {
+            "cod_ccosto": "723",
+            "nom_ccosto": "SAGUA DE TANAMO",
+            "cod_provincia": "32",
+            "cod_municipio": "13"
+        },
+        {
+            "cod_ccosto": "726",
+            "nom_ccosto": "MOA",
+            "cod_provincia": "32",
+            "cod_municipio": "14"
+        },
+        {
+            "cod_ccosto": "727",
+            "nom_ccosto": "NUEVO MOA",
+            "cod_provincia": "32",
+            "cod_municipio": "14"
+        },
+        {
+            "cod_ccosto": "731",
+            "nom_ccosto": "RIO CAUTO",
+            "cod_provincia": "33",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "735",
+            "nom_ccosto": "CAUTO CRISTO",
+            "cod_provincia": "33",
+            "cod_municipio": "02"
+        },
+        {
+            "cod_ccosto": "737",
+            "nom_ccosto": "SANTA RITA",
+            "cod_provincia": "33",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "738",
+            "nom_ccosto": "JIGUANI",
+            "cod_provincia": "33",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "743",
+            "nom_ccosto": "PERUCHO FIGUEREDO",
+            "cod_provincia": "33",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "746",
+            "nom_ccosto": "NUEVO BAYAMO",
+            "cod_provincia": "33",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "747",
+            "nom_ccosto": "BAYAMO",
+            "cod_provincia": "33",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "751",
+            "nom_ccosto": "YARA",
+            "cod_provincia": "33",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "755",
+            "nom_ccosto": "MANZANILLO (MERCHAN)",
+            "cod_provincia": "33",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "756",
+            "nom_ccosto": "PAQUITO ROSALES",
+            "cod_provincia": "33",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "757",
+            "nom_ccosto": "CELIA SANCHEZ MANDULEY",
+            "cod_provincia": "33",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "759",
+            "nom_ccosto": "MANZANILLO (CODINA)",
+            "cod_provincia": "33",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "762",
+            "nom_ccosto": "CAMPECHUELA",
+            "cod_provincia": "33",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "770",
+            "nom_ccosto": "NIQUERO",
+            "cod_provincia": "33",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "773",
+            "nom_ccosto": "PILON",
+            "cod_provincia": "33",
+            "cod_municipio": "10"
+        },
+        {
+            "cod_ccosto": "779",
+            "nom_ccosto": "BARTOLOME MASO",
+            "cod_provincia": "33",
+            "cod_municipio": "11"
+        },
+        {
+            "cod_ccosto": "783",
+            "nom_ccosto": "BUEY ARRIBA",
+            "cod_provincia": "33",
+            "cod_municipio": "12"
+        },
+        {
+            "cod_ccosto": "786",
+            "nom_ccosto": "GUISA",
+            "cod_provincia": "33",
+            "cod_municipio": "13"
+        },
+        {
+            "cod_ccosto": "791",
+            "nom_ccosto": "CONTRAMAESTRE",
+            "cod_provincia": "34",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "803",
+            "nom_ccosto": "SAN LUIS (STGO.DE CUBA)",
+            "cod_provincia": "34",
+            "cod_municipio": "03"
+        },
+        {
+            "cod_ccosto": "806",
+            "nom_ccosto": "SEGUNDO FRENTE",
+            "cod_provincia": "34",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "810",
+            "nom_ccosto": "LA MAYA",
+            "cod_provincia": "34",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "811",
+            "nom_ccosto": "LOS REYNALDOS",
+            "cod_provincia": "34",
+            "cod_municipio": "05"
+        },
+        {
+            "cod_ccosto": "815",
+            "nom_ccosto": "ENRAMADA Y FELIX PENA",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "816",
+            "nom_ccosto": "DISTRITO JOSE MARTI",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "818",
+            "nom_ccosto": "EL CRISTO",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "819",
+            "nom_ccosto": "MARTI Y BARNADA",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "825",
+            "nom_ccosto": "EL CANEY",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "826",
+            "nom_ccosto": "EL COBRE",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "828",
+            "nom_ccosto": "ENRAMADA Y CORONA",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "829",
+            "nom_ccosto": "PLAZA DE DOLORES",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "831",
+            "nom_ccosto": "GARZON Y 3RA",
+            "cod_provincia": "34",
+            "cod_municipio": "06"
+        },
+        {
+            "cod_ccosto": "833",
+            "nom_ccosto": "PALMA SORIANO",
+            "cod_provincia": "34",
+            "cod_municipio": "07"
+        },
+        {
+            "cod_ccosto": "869",
+            "nom_ccosto": "BARACOA",
+            "cod_provincia": "35",
+            "cod_municipio": "04"
+        },
+        {
+            "cod_ccosto": "860",
+            "nom_ccosto": "PRADO",
+            "cod_provincia": "35",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "863",
+            "nom_ccosto": "LOS MACEO",
+            "cod_provincia": "35",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "865",
+            "nom_ccosto": "HOSPITAL GENERAL AGUSTINO NETO",
+            "cod_provincia": "35",
+            "cod_municipio": "09"
+        },
+        {
+            "cod_ccosto": "896",
+            "nom_ccosto": "SANTA FE (I. DE LA JUVENTUD)",
+            "cod_provincia": "40",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "897",
+            "nom_ccosto": "GERONA",
+            "cod_provincia": "40",
+            "cod_municipio": "01"
+        },
+        {
+            "cod_ccosto": "898",
+            "nom_ccosto": "18 Y 45",
+            "cod_provincia": "40",
+            "cod_municipio": "01"
+        }
+    ]
+}

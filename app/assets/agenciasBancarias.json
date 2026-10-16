@@ -1,0 +1,19 @@
+﻿{
+    "Agencias": [
+        {
+            "Code": "01",
+            "Abreviatura": "BPA",
+            "Nombre": "Banco Popular de Ahorro"
+        },
+        {
+            "Code": "02",
+            "Abreviatura": "BANDEC",
+            "Nombre": "Banco de Crédito y Comercio"
+        },
+        {
+            "Code": "03",
+            "Abreviatura": "BANMET",
+            "Nombre": "Banco Metropolitano"
+        }
+    ]
+}

@@ -1,0 +1,1102 @@
+﻿{
+    "Prov": [
+        {
+            "Prov": "21",
+            "Nombre": "Pinar del Río",
+            "Abreviatura": "Pinar del Río"
+        },
+        {
+            "Prov": "22",
+            "Nombre": "Artemisa",
+            "Abreviatura": "Artemisa"
+        },
+        {
+            "Prov": "23",
+            "Nombre": "La Habana",
+            "Abreviatura": "La Habana"
+        },
+        {
+            "Prov": "24",
+            "Nombre": "Mayabeque",
+            "Abreviatura": "Mayabeque"
+        },
+        {
+            "Prov": "25",
+            "Nombre": "Matanzas",
+            "Abreviatura": "Matanzas"
+        },
+        {
+            "Prov": "26",
+            "Nombre": "Villa Clara",
+            "Abreviatura": "Villa Clara"
+        },
+        {
+            "Prov": "27",
+            "Nombre": "Cienfuegos",
+            "Abreviatura": "Cienfuegos"
+        },
+        {
+            "Prov": "28",
+            "Nombre": "Sancti Spíritus",
+            "Abreviatura": "Sancti Spíritus"
+        },
+        {
+            "Prov": "29",
+            "Nombre": "Ciego de Ávila",
+            "Abreviatura": "Ciego de Ávila"
+        },
+        {
+            "Prov": "30",
+            "Nombre": "Camagüey",
+            "Abreviatura": "Camagüey"
+        },
+        {
+            "Prov": "31",
+            "Nombre": "Las Tunas",
+            "Abreviatura": "Las Tunas"
+        },
+        {
+            "Prov": "32",
+            "Nombre": "Holguín",
+            "Abreviatura": "Holguín"
+        },
+        {
+            "Prov": "33",
+            "Nombre": "Granma",
+            "Abreviatura": "Granma"
+        },
+        {
+            "Prov": "34",
+            "Nombre": "Santiago de Cuba",
+            "Abreviatura": "Santiago Cuba"
+        },
+        {
+            "Prov": "35",
+            "Nombre": "Guantánamo",
+            "Abreviatura": "Guantánamo"
+        },
+        {
+            "Prov": "40",
+            "Nombre": "Isla de la Juventud",
+            "Abreviatura": "Isla Juventud"
+        }
+    ],
+    "Mun": [
+        {
+            "Prov": "21",
+            "Mun": "01",
+            "Nombre": "Sandino",
+            "Abreviatura": "Sandino"
+        },
+        {
+            "Prov": "21",
+            "Mun": "02",
+            "Nombre": "Mantua",
+            "Abreviatura": "Mantua"
+        },
+        {
+            "Prov": "21",
+            "Mun": "03",
+            "Nombre": "Minas de Matahambre",
+            "Abreviatura": "Minas Matahambre"
+        },
+        {
+            "Prov": "21",
+            "Mun": "04",
+            "Nombre": "Viñales",
+            "Abreviatura": "Viñales"
+        },
+        {
+            "Prov": "21",
+            "Mun": "05",
+            "Nombre": "La Palma",
+            "Abreviatura": "La Palma"
+        },
+        {
+            "Prov": "21",
+            "Mun": "06",
+            "Nombre": "Los Palacios",
+            "Abreviatura": "Los Palacios"
+        },
+        {
+            "Prov": "21",
+            "Mun": "07",
+            "Nombre": "Consolación del Sur",
+            "Abreviatura": "Consolación del Sur"
+        },
+        {
+            "Prov": "21",
+            "Mun": "08",
+            "Nombre": "Pinar del Río",
+            "Abreviatura": "Pinar del Río"
+        },
+        {
+            "Prov": "21",
+            "Mun": "09",
+            "Nombre": "San Luis",
+            "Abreviatura": "San Luis"
+        },
+        {
+            "Prov": "21",
+            "Mun": "10",
+            "Nombre": "San Juan y Martínez",
+            "Abreviatura": "San Juan"
+        },
+        {
+            "Prov": "21",
+            "Mun": "11",
+            "Nombre": "Guane",
+            "Abreviatura": "Guane"
+        },
+        {
+            "Prov": "22",
+            "Mun": "01",
+            "Nombre": "Bahía Honda",
+            "Abreviatura": "Bahía Honda"
+        },
+        {
+            "Prov": "22",
+            "Mun": "02",
+            "Nombre": "Mariel",
+            "Abreviatura": "Mariel"
+        },
+        {
+            "Prov": "22",
+            "Mun": "03",
+            "Nombre": "Guanajay",
+            "Abreviatura": "Guanajay"
+        },
+        {
+            "Prov": "22",
+            "Mun": "04",
+            "Nombre": "Caimito",
+            "Abreviatura": "Caimito"
+        },
+        {
+            "Prov": "22",
+            "Mun": "05",
+            "Nombre": "Bauta",
+            "Abreviatura": "Bauta"
+        },
+        {
+            "Prov": "22",
+            "Mun": "06",
+            "Nombre": "San Antonio de los Baños",
+            "Abreviatura": "San Antonio Baños"
+        },
+        {
+            "Prov": "22",
+            "Mun": "07",
+            "Nombre": "Güira de Melena",
+            "Abreviatura": "Güira de Melena"
+        },
+        {
+            "Prov": "22",
+            "Mun": "08",
+            "Nombre": "Alquízar",
+            "Abreviatura": "Alquízar"
+        },
+        {
+            "Prov": "22",
+            "Mun": "09",
+            "Nombre": "Artemisa",
+            "Abreviatura": "Artemisa"
+        },
+        {
+            "Prov": "22",
+            "Mun": "10",
+            "Nombre": "Candelaria",
+            "Abreviatura": "Candelaria"
+        },
+        {
+            "Prov": "22",
+            "Mun": "11",
+            "Nombre": "San Cristóbal",
+            "Abreviatura": "San Cristóbal"
+        },
+        {
+            "Prov": "23",
+            "Mun": "01",
+            "Nombre": "Playa",
+            "Abreviatura": "Playa"
+        },
+        {
+            "Prov": "23",
+            "Mun": "02",
+            "Nombre": "Plaza de la Revolución",
+            "Abreviatura": "Plaza"
+        },
+        {
+            "Prov": "23",
+            "Mun": "03",
+            "Nombre": "Centro Habana",
+            "Abreviatura": "Centro Habana"
+        },
+        {
+            "Prov": "23",
+            "Mun": "04",
+            "Nombre": "Habana Vieja",
+            "Abreviatura": "Habana Vieja"
+        },
+        {
+            "Prov": "23",
+            "Mun": "05",
+            "Nombre": "Regla",
+            "Abreviatura": "Regla"
+        },
+        {
+            "Prov": "23",
+            "Mun": "06",
+            "Nombre": "Habana del Este",
+            "Abreviatura": "Habana del Este"
+        },
+        {
+            "Prov": "23",
+            "Mun": "07",
+            "Nombre": "Guanabacoa",
+            "Abreviatura": "Guanabacoa"
+        },
+        {
+            "Prov": "23",
+            "Mun": "08",
+            "Nombre": "San Miguel del Padrón",
+            "Abreviatura": "San Miguel"
+        },
+        {
+            "Prov": "23",
+            "Mun": "09",
+            "Nombre": "Diez de Octubre",
+            "Abreviatura": "Diez de Octubre"
+        },
+        {
+            "Prov": "23",
+            "Mun": "10",
+            "Nombre": "Cerro",
+            "Abreviatura": "Cerro"
+        },
+        {
+            "Prov": "23",
+            "Mun": "11",
+            "Nombre": "Marianao",
+            "Abreviatura": "Marianao"
+        },
+        {
+            "Prov": "23",
+            "Mun": "12",
+            "Nombre": "La Lisa",
+            "Abreviatura": "La Lisa"
+        },
+        {
+            "Prov": "23",
+            "Mun": "13",
+            "Nombre": "Boyeros",
+            "Abreviatura": "Boyeros"
+        },
+        {
+            "Prov": "23",
+            "Mun": "14",
+            "Nombre": "Arroyo Naranjo",
+            "Abreviatura": "Arroyo Naranjo"
+        },
+        {
+            "Prov": "23",
+            "Mun": "15",
+            "Nombre": "Cotorro",
+            "Abreviatura": "Cotorro"
+        },
+        {
+            "Prov": "24",
+            "Mun": "01",
+            "Nombre": "Bejucal",
+            "Abreviatura": "Bejucal"
+        },
+        {
+            "Prov": "24",
+            "Mun": "02",
+            "Nombre": "San José de las Lajas",
+            "Abreviatura": "San José Lajas"
+        },
+        {
+            "Prov": "24",
+            "Mun": "03",
+            "Nombre": "Jaruco",
+            "Abreviatura": "Jaruco"
+        },
+        {
+            "Prov": "24",
+            "Mun": "04",
+            "Nombre": "Santa Cruz del Norte",
+            "Abreviatura": "Santa Cruz del Norte"
+        },
+        {
+            "Prov": "24",
+            "Mun": "05",
+            "Nombre": "Madruga",
+            "Abreviatura": "Madruga"
+        },
+        {
+            "Prov": "24",
+            "Mun": "06",
+            "Nombre": "Nueva Paz",
+            "Abreviatura": "Nueva Paz"
+        },
+        {
+            "Prov": "24",
+            "Mun": "07",
+            "Nombre": "San Nicolás",
+            "Abreviatura": "San Nicolás"
+        },
+        {
+            "Prov": "24",
+            "Mun": "08",
+            "Nombre": "Güines",
+            "Abreviatura": "Güines"
+        },
+        {
+            "Prov": "24",
+            "Mun": "09",
+            "Nombre": "Melena del Sur",
+            "Abreviatura": "Melena del Sur"
+        },
+        {
+            "Prov": "24",
+            "Mun": "10",
+            "Nombre": "Batabanó",
+            "Abreviatura": "Batabanó"
+        },
+        {
+            "Prov": "24",
+            "Mun": "11",
+            "Nombre": "Quivicán",
+            "Abreviatura": "Quivicán"
+        },
+        {
+            "Prov": "25",
+            "Mun": "01",
+            "Nombre": "Matanzas",
+            "Abreviatura": "Matanzas"
+        },
+        {
+            "Prov": "25",
+            "Mun": "02",
+            "Nombre": "Cárdenas",
+            "Abreviatura": "Cárdenas"
+        },
+        {
+            "Prov": "25",
+            "Mun": "03",
+            "Nombre": "Martí",
+            "Abreviatura": "Martí"
+        },
+        {
+            "Prov": "25",
+            "Mun": "04",
+            "Nombre": "Colón",
+            "Abreviatura": "Colón"
+        },
+        {
+            "Prov": "25",
+            "Mun": "05",
+            "Nombre": "Perico",
+            "Abreviatura": "Perico"
+        },
+        {
+            "Prov": "25",
+            "Mun": "06",
+            "Nombre": "Jovellanos",
+            "Abreviatura": "Jovellanos"
+        },
+        {
+            "Prov": "25",
+            "Mun": "07",
+            "Nombre": "Pedro Betancourt",
+            "Abreviatura": "Pedro Betancourt"
+        },
+        {
+            "Prov": "25",
+            "Mun": "08",
+            "Nombre": "Limonar",
+            "Abreviatura": "Limonar"
+        },
+        {
+            "Prov": "25",
+            "Mun": "09",
+            "Nombre": "Unión de Reyes",
+            "Abreviatura": "Unión de Reyes"
+        },
+        {
+            "Prov": "25",
+            "Mun": "10",
+            "Nombre": "Ciénaga de Zapata",
+            "Abreviatura": "Ciénaga de Zapata"
+        },
+        {
+            "Prov": "25",
+            "Mun": "11",
+            "Nombre": "Jagüey Grande",
+            "Abreviatura": "Jagüey Grande"
+        },
+        {
+            "Prov": "25",
+            "Mun": "12",
+            "Nombre": "Calimete",
+            "Abreviatura": "Calimete"
+        },
+        {
+            "Prov": "25",
+            "Mun": "13",
+            "Nombre": "Los Arabos",
+            "Abreviatura": "Los Arabos"
+        },
+        {
+            "Prov": "26",
+            "Mun": "01",
+            "Nombre": "Corralillo",
+            "Abreviatura": "Corralillo"
+        },
+        {
+            "Prov": "26",
+            "Mun": "02",
+            "Nombre": "Quemado de Güines",
+            "Abreviatura": "Quemado de Güines"
+        },
+        {
+            "Prov": "26",
+            "Mun": "03",
+            "Nombre": "Sagua la Grande",
+            "Abreviatura": "Sagua la Grande"
+        },
+        {
+            "Prov": "26",
+            "Mun": "04",
+            "Nombre": "Encrucijada",
+            "Abreviatura": "Encrucijada"
+        },
+        {
+            "Prov": "26",
+            "Mun": "05",
+            "Nombre": "Camajuaní",
+            "Abreviatura": "Camajuaní"
+        },
+        {
+            "Prov": "26",
+            "Mun": "06",
+            "Nombre": "Caibarién",
+            "Abreviatura": "Caibarién"
+        },
+        {
+            "Prov": "26",
+            "Mun": "07",
+            "Nombre": "Remedios",
+            "Abreviatura": "Remedios"
+        },
+        {
+            "Prov": "26",
+            "Mun": "08",
+            "Nombre": "Placetas",
+            "Abreviatura": "Placetas"
+        },
+        {
+            "Prov": "26",
+            "Mun": "09",
+            "Nombre": "Santa Clara",
+            "Abreviatura": "Santa Clara"
+        },
+        {
+            "Prov": "26",
+            "Mun": "10",
+            "Nombre": "Cifuentes",
+            "Abreviatura": "Cifuentes"
+        },
+        {
+            "Prov": "26",
+            "Mun": "11",
+            "Nombre": "Santo Domingo",
+            "Abreviatura": "Santo Domingo"
+        },
+        {
+            "Prov": "26",
+            "Mun": "12",
+            "Nombre": "Ranchuelo",
+            "Abreviatura": "Ranchuelo"
+        },
+        {
+            "Prov": "26",
+            "Mun": "13",
+            "Nombre": "Manicaragua",
+            "Abreviatura": "Manicaragua"
+        },
+        {
+            "Prov": "27",
+            "Mun": "01",
+            "Nombre": "Aguada de Pasajeros",
+            "Abreviatura": "Aguada de Pasajeros"
+        },
+        {
+            "Prov": "27",
+            "Mun": "02",
+            "Nombre": "Rodas",
+            "Abreviatura": "Rodas"
+        },
+        {
+            "Prov": "27",
+            "Mun": "03",
+            "Nombre": "Palmira",
+            "Abreviatura": "Palmira"
+        },
+        {
+            "Prov": "27",
+            "Mun": "04",
+            "Nombre": "Lajas",
+            "Abreviatura": "Lajas"
+        },
+        {
+            "Prov": "27",
+            "Mun": "05",
+            "Nombre": "Cruces",
+            "Abreviatura": "Cruces"
+        },
+        {
+            "Prov": "27",
+            "Mun": "06",
+            "Nombre": "Cumanayagua",
+            "Abreviatura": "Cumanayagua"
+        },
+        {
+            "Prov": "27",
+            "Mun": "07",
+            "Nombre": "Cienfuegos",
+            "Abreviatura": "Cienfuegos"
+        },
+        {
+            "Prov": "27",
+            "Mun": "08",
+            "Nombre": "Abreus",
+            "Abreviatura": "Abreus"
+        },
+        {
+            "Prov": "28",
+            "Mun": "01",
+            "Nombre": "Yaguajay",
+            "Abreviatura": "Yaguajay"
+        },
+        {
+            "Prov": "28",
+            "Mun": "02",
+            "Nombre": "Jatibonico",
+            "Abreviatura": "Jatibonico"
+        },
+        {
+            "Prov": "28",
+            "Mun": "03",
+            "Nombre": "Taguasco",
+            "Abreviatura": "Taguasco"
+        },
+        {
+            "Prov": "28",
+            "Mun": "04",
+            "Nombre": "Cabaiguán",
+            "Abreviatura": "Cabaiguán"
+        },
+        {
+            "Prov": "28",
+            "Mun": "05",
+            "Nombre": "Fomento",
+            "Abreviatura": "Fomento"
+        },
+        {
+            "Prov": "28",
+            "Mun": "06",
+            "Nombre": "Trinidad",
+            "Abreviatura": "Trinidad"
+        },
+        {
+            "Prov": "28",
+            "Mun": "07",
+            "Nombre": "Sancti Spíritus",
+            "Abreviatura": "Sancti Spíritus"
+        },
+        {
+            "Prov": "28",
+            "Mun": "08",
+            "Nombre": "La Sierpe",
+            "Abreviatura": "La Sierpe"
+        },
+        {
+            "Prov": "29",
+            "Mun": "01",
+            "Nombre": "Chambas",
+            "Abreviatura": "Chambas"
+        },
+        {
+            "Prov": "29",
+            "Mun": "02",
+            "Nombre": "Morón",
+            "Abreviatura": "Morón"
+        },
+        {
+            "Prov": "29",
+            "Mun": "03",
+            "Nombre": "Bolivia",
+            "Abreviatura": "Bolivia"
+        },
+        {
+            "Prov": "29",
+            "Mun": "04",
+            "Nombre": "Primero de Enero",
+            "Abreviatura": "Primero de Enero"
+        },
+        {
+            "Prov": "29",
+            "Mun": "05",
+            "Nombre": "Ciro Redondo",
+            "Abreviatura": "Ciro Redondo"
+        },
+        {
+            "Prov": "29",
+            "Mun": "06",
+            "Nombre": "Florencia",
+            "Abreviatura": "Florencia"
+        },
+        {
+            "Prov": "29",
+            "Mun": "07",
+            "Nombre": "Majagua",
+            "Abreviatura": "Majagua"
+        },
+        {
+            "Prov": "29",
+            "Mun": "08",
+            "Nombre": "Ciego de Ávila",
+            "Abreviatura": "Ciego de Ávila"
+        },
+        {
+            "Prov": "29",
+            "Mun": "09",
+            "Nombre": "Venezuela",
+            "Abreviatura": "Venezuela"
+        },
+        {
+            "Prov": "29",
+            "Mun": "10",
+            "Nombre": "Baraguá",
+            "Abreviatura": "Baraguá"
+        },
+        {
+            "Prov": "30",
+            "Mun": "01",
+            "Nombre": "Carlos Manuel de Céspedes",
+            "Abreviatura": "Céspedes"
+        },
+        {
+            "Prov": "30",
+            "Mun": "02",
+            "Nombre": "Esmeralda",
+            "Abreviatura": "Esmeralda"
+        },
+        {
+            "Prov": "30",
+            "Mun": "03",
+            "Nombre": "Sierra de Cubitas",
+            "Abreviatura": "Sierra de Cubitas"
+        },
+        {
+            "Prov": "30",
+            "Mun": "04",
+            "Nombre": "Minas",
+            "Abreviatura": "Minas"
+        },
+        {
+            "Prov": "30",
+            "Mun": "05",
+            "Nombre": "Nuevitas",
+            "Abreviatura": "Nuevitas"
+        },
+        {
+            "Prov": "30",
+            "Mun": "06",
+            "Nombre": "Guáimaro",
+            "Abreviatura": "Guáimaro"
+        },
+        {
+            "Prov": "30",
+            "Mun": "07",
+            "Nombre": "Sibanicú",
+            "Abreviatura": "Sibanicú"
+        },
+        {
+            "Prov": "30",
+            "Mun": "08",
+            "Nombre": "Camagüey",
+            "Abreviatura": "Camagüey"
+        },
+        {
+            "Prov": "30",
+            "Mun": "09",
+            "Nombre": "Florida",
+            "Abreviatura": "Florida"
+        },
+        {
+            "Prov": "30",
+            "Mun": "10",
+            "Nombre": "Vertientes",
+            "Abreviatura": "Vertientes"
+        },
+        {
+            "Prov": "30",
+            "Mun": "11",
+            "Nombre": "Jimaguayú",
+            "Abreviatura": "Jimaguayú"
+        },
+        {
+            "Prov": "30",
+            "Mun": "12",
+            "Nombre": "Najasa",
+            "Abreviatura": "Najasa"
+        },
+        {
+            "Prov": "30",
+            "Mun": "13",
+            "Nombre": "Santa Cruz del Sur",
+            "Abreviatura": "Santa Cruz del Sur"
+        },
+        {
+            "Prov": "31",
+            "Mun": "01",
+            "Nombre": "Manatí",
+            "Abreviatura": "Manatí"
+        },
+        {
+            "Prov": "31",
+            "Mun": "02",
+            "Nombre": "Puerto Padre",
+            "Abreviatura": "Puerto Padre"
+        },
+        {
+            "Prov": "31",
+            "Mun": "03",
+            "Nombre": "Jesús Menéndez",
+            "Abreviatura": "Jesús Menéndez"
+        },
+        {
+            "Prov": "31",
+            "Mun": "04",
+            "Nombre": "Majibacoa",
+            "Abreviatura": "Majibacoa"
+        },
+        {
+            "Prov": "31",
+            "Mun": "05",
+            "Nombre": "Las Tunas",
+            "Abreviatura": "Las Tunas"
+        },
+        {
+            "Prov": "31",
+            "Mun": "06",
+            "Nombre": "Jobabo",
+            "Abreviatura": "Jobabo"
+        },
+        {
+            "Prov": "31",
+            "Mun": "07",
+            "Nombre": "Colombia",
+            "Abreviatura": "Colombia"
+        },
+        {
+            "Prov": "31",
+            "Mun": "08",
+            "Nombre": "Amancio",
+            "Abreviatura": "Amancio"
+        },
+        {
+            "Prov": "32",
+            "Mun": "01",
+            "Nombre": "Gibara",
+            "Abreviatura": "Gibara"
+        },
+        {
+            "Prov": "32",
+            "Mun": "02",
+            "Nombre": "Rafael Freire",
+            "Abreviatura": "Rafael Freire"
+        },
+        {
+            "Prov": "32",
+            "Mun": "03",
+            "Nombre": "Banes",
+            "Abreviatura": "Banes"
+        },
+        {
+            "Prov": "32",
+            "Mun": "04",
+            "Nombre": "Antilla",
+            "Abreviatura": "Antilla"
+        },
+        {
+            "Prov": "32",
+            "Mun": "05",
+            "Nombre": "Báguanos",
+            "Abreviatura": "Báguanos"
+        },
+        {
+            "Prov": "32",
+            "Mun": "06",
+            "Nombre": "Holguín",
+            "Abreviatura": "Holguín"
+        },
+        {
+            "Prov": "32",
+            "Mun": "07",
+            "Nombre": "Calixto García",
+            "Abreviatura": "Calixto García"
+        },
+        {
+            "Prov": "32",
+            "Mun": "08",
+            "Nombre": "Cacocum",
+            "Abreviatura": "Cacocum"
+        },
+        {
+            "Prov": "32",
+            "Mun": "09",
+            "Nombre": "Urbano Noris",
+            "Abreviatura": "Urbano Noris"
+        },
+        {
+            "Prov": "32",
+            "Mun": "10",
+            "Nombre": "Cueto",
+            "Abreviatura": "Cueto"
+        },
+        {
+            "Prov": "32",
+            "Mun": "11",
+            "Nombre": "Mayarí",
+            "Abreviatura": "Mayarí"
+        },
+        {
+            "Prov": "32",
+            "Mun": "12",
+            "Nombre": "Frank País",
+            "Abreviatura": "Frank País"
+        },
+        {
+            "Prov": "32",
+            "Mun": "13",
+            "Nombre": "Sagua de Tánamo",
+            "Abreviatura": "Sagua de Tánamo"
+        },
+        {
+            "Prov": "32",
+            "Mun": "14",
+            "Nombre": "Moa",
+            "Abreviatura": "Moa"
+        },
+        {
+            "Prov": "33",
+            "Mun": "01",
+            "Nombre": "Río Cauto",
+            "Abreviatura": "Río Cauto"
+        },
+        {
+            "Prov": "33",
+            "Mun": "02",
+            "Nombre": "Cauto Cristo",
+            "Abreviatura": "Cauto Cristo"
+        },
+        {
+            "Prov": "33",
+            "Mun": "03",
+            "Nombre": "Jiguaní",
+            "Abreviatura": "Jiguaní"
+        },
+        {
+            "Prov": "33",
+            "Mun": "04",
+            "Nombre": "Bayamo",
+            "Abreviatura": "Bayamo"
+        },
+        {
+            "Prov": "33",
+            "Mun": "05",
+            "Nombre": "Yara",
+            "Abreviatura": "Yara"
+        },
+        {
+            "Prov": "33",
+            "Mun": "06",
+            "Nombre": "Manzanillo",
+            "Abreviatura": "Manzanillo"
+        },
+        {
+            "Prov": "33",
+            "Mun": "07",
+            "Nombre": "Campechuela",
+            "Abreviatura": "Campechuela"
+        },
+        {
+            "Prov": "33",
+            "Mun": "08",
+            "Nombre": "Media Luna",
+            "Abreviatura": "Media Luna"
+        },
+        {
+            "Prov": "33",
+            "Mun": "09",
+            "Nombre": "Niquero",
+            "Abreviatura": "Niquero"
+        },
+        {
+            "Prov": "33",
+            "Mun": "10",
+            "Nombre": "Pilón",
+            "Abreviatura": "Pilón"
+        },
+        {
+            "Prov": "33",
+            "Mun": "11",
+            "Nombre": "Bartolomé Masó",
+            "Abreviatura": "Bartolomé Masó"
+        },
+        {
+            "Prov": "33",
+            "Mun": "12",
+            "Nombre": "Buey Arriba",
+            "Abreviatura": "Buey Arriba"
+        },
+        {
+            "Prov": "33",
+            "Mun": "13",
+            "Nombre": "Guisa",
+            "Abreviatura": "Guisa"
+        },
+        {
+            "Prov": "34",
+            "Mun": "01",
+            "Nombre": "Contramaestre",
+            "Abreviatura": "Contramaestre"
+        },
+        {
+            "Prov": "34",
+            "Mun": "02",
+            "Nombre": "Mella",
+            "Abreviatura": "Mella"
+        },
+        {
+            "Prov": "34",
+            "Mun": "03",
+            "Nombre": "San Luis",
+            "Abreviatura": "San Luis"
+        },
+        {
+            "Prov": "34",
+            "Mun": "04",
+            "Nombre": "Segundo Frente",
+            "Abreviatura": "Segundo Frente"
+        },
+        {
+            "Prov": "34",
+            "Mun": "05",
+            "Nombre": "Songo La Maya",
+            "Abreviatura": "Songo"
+        },
+        {
+            "Prov": "34",
+            "Mun": "06",
+            "Nombre": "Santiago de Cuba",
+            "Abreviatura": "Santiago de Cuba"
+        },
+        {
+            "Prov": "34",
+            "Mun": "07",
+            "Nombre": "Palma Soriano",
+            "Abreviatura": "Palma"
+        },
+        {
+            "Prov": "34",
+            "Mun": "08",
+            "Nombre": "Tercer Frente",
+            "Abreviatura": "Tercer Frente"
+        },
+        {
+            "Prov": "34",
+            "Mun": "09",
+            "Nombre": "Guamá",
+            "Abreviatura": "Guamá"
+        },
+        {
+            "Prov": "35",
+            "Mun": "01",
+            "Nombre": "El Salvador",
+            "Abreviatura": "El Salvador"
+        },
+        {
+            "Prov": "35",
+            "Mun": "02",
+            "Nombre": "Manuel Tames",
+            "Abreviatura": "Manuel Tames"
+        },
+        {
+            "Prov": "35",
+            "Mun": "03",
+            "Nombre": "Yateras",
+            "Abreviatura": "Yateras"
+        },
+        {
+            "Prov": "35",
+            "Mun": "04",
+            "Nombre": "Baracoa",
+            "Abreviatura": "Baracoa"
+        },
+        {
+            "Prov": "35",
+            "Mun": "05",
+            "Nombre": "Maisí",
+            "Abreviatura": "Maisí"
+        },
+        {
+            "Prov": "35",
+            "Mun": "06",
+            "Nombre": "Imías",
+            "Abreviatura": "Imías"
+        },
+        {
+            "Prov": "35",
+            "Mun": "07",
+            "Nombre": "San Antonio del Sur",
+            "Abreviatura": "San Antonio del Sur"
+        },
+        {
+            "Prov": "35",
+            "Mun": "08",
+            "Nombre": "Caimanera",
+            "Abreviatura": "Caimanera"
+        },
+        {
+            "Prov": "35",
+            "Mun": "09",
+            "Nombre": "Guantánamo",
+            "Abreviatura": "Guantánamo"
+        },
+        {
+            "Prov": "35",
+            "Mun": "10",
+            "Nombre": "Niceto Pérez",
+            "Abreviatura": "Niceto Pérez"
+        },
+        {
+            "Prov": "40",
+            "Mun": "01",
+            "Nombre": "Isla de la Juventud",
+            "Abreviatura": "Isla de la Juventud"
+        }
+    ],
+    "Sheet2": [
+        {
+            "Nacional": "Provincial"
+        },
+        {
+            "Nacional": "Municipal"
+        }
+    ]
+}

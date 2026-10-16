@@ -1,0 +1,300 @@
+﻿{
+  "tributos": [
+    {
+      "Codigo": "0114022",
+      "Nombre": "Impuesto sobre las ventas o servicios - PN",
+      "Abreviatura": "Impuesto sobre las ventas o servicios - PN",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0510122",
+      "Nombre": "Impuesto sobre los ingresos personales.Trabajador por cuenta propia",
+      "Abreviatura": "Impuesto sobre los ingresos personales.Trabajador por cuenta propia",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0510522",
+      "Nombre": "Régimen Simplificado-Personas Naturales",
+      "Abreviatura": "Régimen Simplificado-Personas Naturales",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0520322",
+      "Nombre": "Imp. sobre los Ing.Pers.(retenciones y pagos parciales) Otros",
+      "Abreviatura": "Imp. sobre los Ing.Pers.(retenciones y pagos parciales) Otros",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0510422",
+      "Nombre": "Otras Actividades",
+      "Abreviatura": "Otras Actividades",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0520522",
+      "Nombre": "Impuesto sobre Ingresos Personales - Retención TCP",
+      "Abreviatura": "Impuesto sobre Ingresos Personales - Retención TCP",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0530102",
+      "Nombre": "Impuesto sobre Ingresos Personales. Liquidación Adicional. Sector Cañero",
+      "Abreviatura": "Impuesto sobre Ingresos Personales. Liquidación Adicional. Sector Cañero",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0530122",
+      "Nombre": "Impuesto sobre Ingresos Personales. Liquidación Adicional Sector Agropecuario",
+      "Abreviatura": "Impuesto sobre Ingresos Personales. Liquidación Adicional Sector Agropecuario",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0530222",
+      "Nombre": "Impuesto sobre Ingresos Personales. Liquidación Adicional",
+      "Abreviatura": "Impuesto sobre Ingresos Personales. Liquidación Adicional",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0530322",
+      "Nombre": "Ingresos Personales Eventuales",
+      "Abreviatura": "Ingresos Personales Eventuales",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0530422",
+      "Nombre": "Impuesto Ingresos Personales - Contratación en el exterior",
+      "Abreviatura": "Impuesto Ingresos Personales - Contratación en el exterior",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0610322",
+      "Nombre": "Impuesto por la utilización de la fuerza de trabajo PN",
+      "Abreviatura": "Impuesto por la utilización de la fuerza de trabajo PN",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0620102",
+      "Nombre": "Impuesto por la utilización y explotación recursos forestales y fauna",
+      "Abreviatura": "Impuesto por la utilización y explotación recursos forestales y fauna",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0620702",
+      "Nombre": "Impuesto por el uso y explotación de Bahías",
+      "Abreviatura": "Impuesto por el uso y explotación de Bahías",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0710122",
+      "Nombre": "Impuesto sobre la propiedad o posesión  viviendas",
+      "Abreviatura": "Impuesto sobre la propiedad o posesión  viviendas",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0710522",
+      "Nombre": "Impuesto sobre la propiedad de embarcaciones",
+      "Abreviatura": "Impuesto sobre la propiedad de embarcaciones",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0710622",
+      "Nombre": "Impuesto sobre transporte terrestre",
+      "Abreviatura": "Impuesto sobre transporte terrestre",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0720122",
+      "Nombre": "Impuesto por la transmisión de bienes o herencias",
+      "Abreviatura": "Impuesto por la transmisión de bienes o herencias",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0730122",
+      "Nombre": "Impuesto sobre documentos (Sellos del timbre)",
+      "Abreviatura": "Impuesto sobre documentos (Sellos del timbre)",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0810132",
+      "Nombre": "Contribución a la Seguridad Social.",
+      "Abreviatura": "Contribución a la Seguridad Social.",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0810232",
+      "Nombre": "Contribución a la Seguridad Social artes plasticas  y aplicadas",
+      "Abreviatura": "Contribución a la Seguridad Social artes plasticas  y aplicadas",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0810432",
+      "Nombre": "Contribución a la Seguridad Social de usufructuarios de tierra.",
+      "Abreviatura": "Contribución a la Seguridad Social de usufructuarios de tierra.",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0820232",
+      "Nombre": "Contribución Especial de Trabajadores a la Seguridad Social Retenciones",
+      "Abreviatura": "Contribución Especial de Trabajadores a la Seguridad Social Retenciones",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0820132",
+      "Nombre": "Contribución Especial de trab a la Seguridad Social",
+      "Abreviatura": "Contribución Especial de trab a la Seguridad Social",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0820332",
+      "Nombre": "Contribución Especial a la Seg. Soc. - Gente de Mar",
+      "Abreviatura": "Contribución Especial a la Seg. Soc. - Gente de Mar",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0900122",
+      "Nombre": "Tasa por radicación anuncios y propaganda comercial",
+      "Abreviatura": "Tasa por radicación anuncios y propaganda comercial",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1010602",
+      "Nombre": "Otros derechos",
+      "Abreviatura": "Otros derechos",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1020102",
+      "Nombre": "Licencias de acciones constructivas",
+      "Abreviatura": "Licencias de acciones constructivas",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1030102",
+      "Nombre": "Multa forestal",
+      "Abreviatura": "Multa forestal",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1030122",
+      "Nombre": "Multas del Código penal.Contravenciones y otras",
+      "Abreviatura": "Multas del Código penal.Contravenciones y otras",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1030202",
+      "Nombre": "Multa medio ambiente",
+      "Abreviatura": "Multa medio ambiente",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1060122",
+      "Nombre": "Recargo por mora",
+      "Abreviatura": "Recargo por mora",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1060522",
+      "Nombre": "Recargo de Apremio",
+      "Abreviatura": "Recargo de Apremio",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1060922",
+      "Nombre": "Interés por aplazamiento de pago de la deuda tributaria",
+      "Abreviatura": "Interés por aplazamiento de pago de la deuda tributaria",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1240102",
+      "Nombre": "Donaciones",
+      "Abreviatura": "Donaciones",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "0710422",
+      "Nombre": "Impuesto sobre la propiedad o posesión de tierras ociosas",
+      "Abreviatura": "Impuesto sobre la propiedad o posesión de tierras ociosas",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    },
+    {
+      "Codigo": "1050322",
+      "Nombre": "Solares Yermos",
+      "Abreviatura": "Solares Yermos",
+      "TipoPersona": "Natural",
+      "Moneda": "CUP",
+      "Tipo": "none"
+    }
+  ]
+}

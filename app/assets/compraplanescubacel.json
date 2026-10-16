@@ -1,0 +1,39 @@
+{
+  "Ofertas": [
+    {
+      "nombre": "Planes Datos Adicionales",
+      "id": "1",
+      "version": "2"
+    },
+    {
+      "nombre": "Planes de Datos Extra",
+      "id": "2",
+      "version": "2"
+    },
+    {
+      "nombre": "Planes de Voz",
+      "id": "3",
+      "version": "2"
+    },
+    {
+      "nombre": "Planes de SMS",
+      "id": "4",
+      "version": "2"
+    },
+    {
+      "nombre": "Plan Todus",
+      "id": "5",
+      "version": "2"
+    },
+    {
+      "nombre": "Planes Datos Sectorial",
+      "id": "6",
+      "version": "2"
+    },
+    {
+      "nombre": "Planes Voz Extra",
+      "id": "7",
+      "version": "2"
+    }
+  ]
+}

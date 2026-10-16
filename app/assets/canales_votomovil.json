@@ -1,0 +1,104 @@
+{
+  "canales": [
+    {
+      "nombre": "L1",
+      "id": "1",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L2",
+      "id": "2",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L3",
+      "id": "3",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L4",
+      "id": "4",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L5",
+      "id": "5",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L6",
+      "id": "6",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L7",
+      "id": "7",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L8",
+      "id": "8",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L9",
+      "id": "9",
+      "esDePago": 0
+    },
+    {
+      "nombre": "L10",
+      "id": "10",
+      "esDePago": 0
+    },
+    {
+      "nombre": "P21",
+      "id": "21",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P22",
+      "id": "22",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P23",
+      "id": "23",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P24",
+      "id": "24",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P25",
+      "id": "25",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P26",
+      "id": "26",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P27",
+      "id": "27",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P28",
+      "id": "28",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P29",
+      "id": "29",
+      "esDePago": 1
+    },
+    {
+      "nombre": "P30",
+      "id": "30",
+      "esDePago": 1
+    }
+  ]
+}
