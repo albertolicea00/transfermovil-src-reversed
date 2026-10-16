@@ -94,56 +94,42 @@ All model classes in `cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL`.
 
 ## Enums
 
-### Operations (`Nl0yptXmjQ`) — 47 operations
+### Operation Types (`Nl0yptXmjQ`) — 47 abstract operations
 
-| Value | Inferred Purpose |
+High-level operation categories used in entity fields. See `FdonIAFI9w` for the full per-bank dispatch enum.
+
+| Value | Purpose |
 |:---|:---|
 | `Login` | Session authentication |
 | `Consulta` | Balance inquiry |
 | `Transferencia` | Bank transfer |
-| `TransferenciaEmpresa` | Business transfer |
-| `Pago` | Generic payment |
-| `Pago_Electricidad` | Electricity bill |
-| `Pago_Agua` | Water bill |
-| `Pago_Gas` | Gas bill |
-| `Pago_ONAT` | Tax payment (ONAT) |
-| `Pago_Telefono` | Phone bill |
-| `Pago_Factura_Telefonica` | Phone invoice |
-| `Recarga_Movil` | Mobile top-up |
-| `Recarga_Movil_Banco` | Mobile top-up via bank |
-| `Recarga_Propia` | Self top-up |
-| `Recarga_Nauta` | Nauta top-up |
-| `Recarga_Nauta_Banco` | Nauta top-up via bank |
-| `Recarga_Nauta_Hogar_Banco` | Nauta home via bank |
-| `RecargaNautaHogar4G` | Nauta home 4G |
-| `RecargaNautaMLC` | Nauta MLC top-up |
-| `RecargaCUPBolsa` | CUP wallet top-up |
-| `Recarga_Cupon` | Coupon top-up |
-| `CompraPaquetesCubacel` | Cubacel package purchase |
-| `PaqueteMLC` | MLC package |
-| `GigasNautaHogare4G` | Nauta home 4G data |
-| `Giro` | Money order/wire |
-| `SelloTimbre` | Stamp purchase |
-| `CuentaFiscal` | Fiscal account |
-| `CajaExtra` | Extra cash operation |
-| `Amortizacion` | Loan amortization |
-| `Aporte_Patrimonio` | Equity contribution |
-| `BOLSATransferirBancos` | Wallet-to-bank transfer |
-| `PCC` | Party contribution (PCC) |
-| `JClub` | Club membership |
-| `Ticket_Combustible_Gestion` | Fuel ticket management |
-| `Ticket_MiBoleto_Gestion` | MiBoleto ticket management |
-| `VendedorMiBoleto` | MiBoleto vendor |
-| `ReservasTicket` | Ticket reservation |
-| `ConsultarReservasTicket` | Check reservation |
-| `ModificarReservasTicket` | Modify reservation |
-| `EliminarReservasTicket` | Delete reservation |
-| `ConsultarPagosSindicato` | Union payment query |
-| `VisitaRecorridos` | Heritage city visits |
-| `VotoMovil` | Mobile voting |
-| `Eqj43O0pUx` | Obfuscated (unknown) |
-| `TBaFnBLjEA` | Obfuscated (unknown) |
-| `xf94v3SFEM` | Obfuscated (unknown) |
+| `Pago_Electricidad` / `Pago_Agua` / `Pago_Gas` / `Pago_ONAT` / `Pago_Telefono` | Utility/tax payments |
+| `Recarga_Movil` / `Recarga_Nauta` / `Recarga_Propia` / `RecargaCUPBolsa` | Top-ups |
+| `CompraPaquetesCubacel` / `PaqueteMLC` / `GigasNautaHogare4G` | Package purchases |
+| `Giro` / `SelloTimbre` / `CuentaFiscal` / `CajaExtra` / `Amortizacion` | Financial operations |
+| `Ticket_Combustible_Gestion` / `Ticket_MiBoleto_Gestion` / `ReservasTicket` | Ticket management |
+| `VotoMovil` / `VisitaRecorridos` / `JClub` / `PCC` | Civic/membership |
+| `Eqj43O0pUx` / `TBaFnBLjEA` / `xf94v3SFEM` | Obfuscated (unknown) |
+
+### Full Operation Dispatch (`FdonIAFI9w`) — 332 operations
+
+Each bank/module replicates the same operation set with its own prefix:
+
+| Prefix | Module | Count |
+|:---|:---|:---|
+| `METRO*` | Banco Metropolitano | 61 |
+| `BFI*` | Banco de Fomento Integral | 61 |
+| `BAN*` | BANDEC | 60 |
+| `BPA*` | Banco Popular de Ahorro | 55 |
+| `BOLSA*` | Wallet (MiTransfer) | 47 |
+| `BOLSAAG*` | Wallet-Agent operations | 10 |
+| `AG*` | Agent operations | 13 |
+| `Conf*` | Configuration | 6 |
+| `Consultar*` | Cubacel plan queries | 5 |
+| (other) | General (calls, voting, etc.) | 14 |
+
+**Common operation suffixes** (repeated per bank):
+`Autenticarse`, `Desconectar`, `ConsultarSaldo`, `Transferencia`/`TransferirEfectivo`, `RecargaMovil`, `RecargaNauta`, `RecargaPropia`, `RecargaBolsa`, `Electricidad`, `Agua`, `Gas`, `ONAT`/`Impuestos`, `Telefono`, `GiroPostal`, `PagoExterno`, `CombustibleCompra`/`ConsultaEstado`/`ActToken`/`UltOper`, `PlazoFijo`, `CierrePlazoFijo`, `ReservasTicket`, `PaquetesCubacel`, `JClub`, `PCC`, `CuentaFiscal`, `ConsultaLimite`, `CambioLimite`, `MultaTransito`, `MultiContravension`, `PatrimoniOfa`, `PinDigital`, `TipoCambio`, `UltimasOperaciones`
 
 ### Banks / Service Types (`R1sDOSqZ2z`)
 
