@@ -135,6 +135,26 @@
       "clean": "cu.etecsa.transfermovil.ecommerce.LoginActivity",
       "role": "E-commerce login activity — session expired dialog redirects here",
       "confidence": "medium"
+    },
+    "cu.etecsa.tm.ecommerce.Dyporpu9vbM.tQvDIr4mUHh.zDPt4FP8OC": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.ApiResponse",
+      "role": "API response wrapper: error flag, HTTP code, message, JSONObject",
+      "confidence": "high"
+    },
+    "cu.etecsa.tm.ecommerce.Dyporpu9vbM.tQvDIr4mUHh.XpLbwNXtZPa.fGYt3sYXbt": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.model.BaseRequest",
+      "role": "Base interface/class for API request parameters (serialized by Gson)",
+      "confidence": "medium"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY": {
+      "clean": "cu.etecsa.transfermovil.data.DatabaseHelper",
+      "role": "ORMLite database helper singleton: DAO access for all 26 tables",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AOperKey": {
+      "clean": "cu.etecsa.transfermovil.data.entity.AuthSession",
+      "role": "ORMLite entity: auth state per operation (isAuth, authDate for 30-min window)",
+      "confidence": "high"
     }
   },
   "fields": {
