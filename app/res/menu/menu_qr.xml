@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:myapp="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/qrcode_scan" android:id="@id/qrscan" android:title="QRScan" myapp:showAsAction="ifRoom" />
+    <item android:icon="@drawable/qrcode" android:id="@id/qrsgen" android:title="Generar Codigo QR" myapp:showAsAction="ifRoom" />
+    <item android:icon="@drawable/ic_share_data" android:id="@id/qrshare" android:visible="false" android:title="Compartir QR" myapp:showAsAction="ifRoom" />
+    <item android:id="@id/itemCargarLink" android:visible="false" android:title="Insertar enlace compartido" />
+    <item android:id="@id/itemLeerImagenQR" android:visible="false" android:title="Cargar imagen de QR" />
+</menu>

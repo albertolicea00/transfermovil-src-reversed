@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@drawable/ico_inicio" android:id="@id/inicio" android:title="Inicio" />
+    <item android:title="Servicios">
+        <menu>
+            <item android:icon="@drawable/call_phone" android:id="@id/llamadas" android:title="Llamadas" />
+            <item android:icon="@drawable/operacion" android:id="@id/operaciones" android:title="Operaciones" />
+            <item android:icon="@drawable/service_sms" android:id="@id/servicios" android:title="Servicios SMS" />
+            <item android:icon="@drawable/utiles" android:id="@id/tel_utiles" android:title="Teléfonos Útiles" />
+            <item android:icon="@drawable/nauta_menu" android:enabled="false" android:id="@id/nauta" android:visible="false" android:title="Nauta" />
+        </menu>
+    </item>
+    <item android:title="Monedero">
+        <menu>
+            <item android:icon="@drawable/mitransfer_negro" android:id="@id/bolsa_etecsa" android:title="MiTransfer" />
+            <item android:icon="@drawable/ic_scanner_miboleto_negro" android:id="@id/vendedor_miboleto" android:visible="false" android:title="MiBoleto QR" />
+        </menu>
+    </item>
+    <item android:id="@id/group_bancos_menu" android:visible="false" android:title="Bancos">
+        <menu>
+            <item android:icon="@drawable/logo_bpa" android:id="@id/bpa" android:title="BPA" />
+            <item android:icon="@drawable/logo_bandec" android:id="@id/bandec" android:title="BANDEC" />
+            <item android:icon="@drawable/logo_metro" android:id="@id/metro" android:title="Metropolitano" />
+            <item android:icon="@drawable/logo_bfi" android:id="@id/bfi" android:visible="true" android:title="BFI" />
+            <item android:icon="@drawable/ico_gestion" android:id="@id/gestion" android:title="@string/gestion" />
+            <item android:icon="@drawable/ico_banco" android:id="@id/cuentas" android:title="@string/mis_cuentas" />
+        </menu>
+    </item>
+    <item android:id="@id/group_comercio" android:visible="false" android:title="Comercio">
+        <menu>
+            <item android:icon="@drawable/tienda" android:id="@id/bulevar" android:title="Bulevar" />
+        </menu>
+    </item>
+    <item android:id="@id/group_estadisticas" android:visible="false" android:title="Estadisticas">
+        <menu>
+            <item android:icon="@drawable/detalles" android:id="@id/resumidas" android:title="Resumen de Operaciones" />
+            <item android:icon="@drawable/estadistica_resumen" android:id="@id/detalladas" android:title="Detalle de Operaciones" />
+        </menu>
+    </item>
+    <group android:id="@id/group_settings_id">
+        <item android:icon="@drawable/ico_conf" android:enabled="true" android:id="@id/setting" android:visible="true" android:title="Configuración" />
+        <item android:icon="@drawable/ico_ayuda" android:enabled="false" android:id="@id/help" android:visible="false" android:title="Ayuda" />
+    </group>
+</menu>

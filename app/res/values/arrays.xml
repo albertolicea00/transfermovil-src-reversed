@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="accounts">
+        <item>-MIS CUENTAS-</item>
+        <item>-INSERTAR CUENTA-</item>
+    </string-array>
+    <string-array name="array_ag_recarga_movil_agencia">
+        <item>Autenticar</item>
+        <item>Consultar Saldo</item>
+        <item>Recargar Móvil</item>
+        <item>Últimas Recargas</item>
+        <item>Cambiar Clave</item>
+        <item>Desconectar</item>
+    </string-array>
+    <string-array name="array_agua_bandec">
+        <item>Deuda Total</item>
+        <item>Deuda Actual</item>
+        <item>Anticipo</item>
+    </string-array>
+    <string-array name="array_agua_region">
+        <item>Aguas de la Habana</item>
+        <item>Resto del país</item>
+        <item>Aguas Varadero</item>
+    </string-array>
+    <string-array name="array_agua_region_habana">
+        <item>Aguas de la Habana</item>
+        <item>Aguas Varadero</item>
+    </string-array>
+    <string-array name="array_agua_tipo_pago">
+        <item>Total</item>
+    </string-array>
+    <string-array name="array_agua_tipo_pago_varadero">
+        <item>Total</item>
+        <item>Parcial</item>
+    </string-array>
+    <string-array name="array_articulos_multa">
+        <item>61</item>
+        <item>63</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>72</item>
+        <item>73</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
+        <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>95</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
+        <item>105</item>
+        <item>106</item>
+        <item>107</item>
+        <item>108</item>
+        <item>109</item>
+        <item>110</item>
+        <item>111</item>
+        <item>112</item>
+        <item>115</item>
+        <item>117</item>
+        <item>118</item>
+        <item>120</item>
+        <item>121</item>
+        <item>122</item>
+        <item>123</item>
+        <item>124</item>
+        <item>125</item>
+        <item>126</item>
+        <item>127</item>
+        <item>128</item>
+        <item>131</item>
+        <item>132</item>
+        <item>134</item>
+        <item>135</item>
+        <item>136</item>
+        <item>137</item>
+        <item>138</item>
+        <item>139</item>
+        <item>140</item>
+        <item>142</item>
+        <item>144</item>
+        <item>145</item>
+        <item>146</item>
+        <item>148</item>
+        <item>150</item>
+        <item>151</item>
+        <item>152</item>
+        <item>153</item>
+        <item>154</item>
+        <item>155</item>
+        <item>164</item>
+        <item>166</item>
+        <item>174</item>
+        <item>178</item>
+        <item>179</item>
+        <item>180</item>
+        <item>181</item>
+        <item>182</item>
+        <item>184</item>
+        <item>185</item>
+        <item>186</item>
+        <item>187</item>
+        <item>188</item>
+        <item>190</item>
+        <item>191</item>
+        <item>192</item>
+        <item>193</item>
+        <item>194</item>
+        <item>195</item>
+        <item>196</item>
+        <item>197</item>
+        <item>198</item>
+        <item>199</item>
+        <item>200</item>
+        <item>201</item>
+        <item>202</item>
+        <item>217</item>
+    </string-array>
+    <string-array name="array_bolsa_consulta_saldo">
+        <item>Consulta Saldo MiTransfer</item>
+        <item>Consulta Saldo Clásica</item>
+    </string-array>
+    <string-array name="array_bolsa_consulta_ticket">
+        <item>Consulta integrada</item>
+        <item>Consulta por CI</item>
+    </string-array>
+    <string-array name="array_bolsa_mas_mis_cuentas">
+        <item>Cuenta USD</item>
+        <item>Cuenta CUP</item>
+        <item>-MIS CUENTAS-</item>
+    </string-array>
+    <string-array name="array_bolsa_mis_cuentas">
+        <item>-MIS CUENTAS-</item>
+    </string-array>
+    <string-array name="array_bolsa_tipo">
+        <item>Cuenta USD</item>
+        <item>Cuenta CUP</item>
+    </string-array>
+    <string-array name="array_bolsa_tipo_solo_cup">
+        <item>Cuenta CUP</item>
+    </string-array>
+    <string-array name="array_bolsa_tipo_solo_usd">
+        <item>Cuenta USD</item>
+    </string-array>
+    <string-array name="array_bolsa_ult_oper">
+        <item>Últimas operaciones USD</item>
+        <item>Últimas operaciones CUP</item>
+        <item>Últimas operaciones Clásica</item>
+    </string-array>
+    <string-array name="array_consulta_reserva_ofa">
+        <item>Listado</item>
+        <item>Específico</item>
+    </string-array>
+    <string-array name="array_entidad_ticket">
+        <item>Compra de divisas en CADECA</item>
+        <item>Trámite Comercial Gas Licuado</item>
+        <item>Venta de Gas Licuado</item>
+    </string-array>
+    <string-array name="array_entidad_ticket_metro">
+        <item>Compra de divisas en CADECA</item>
+        <item>Trámite Comercial Gas Licuado</item>
+        <item>Venta de Gas Licuado</item>
+        <item>Servicios Banco Metropolitano</item>
+    </string-array>
+    <string-array name="array_gas_bandec">
+        <item>Deuda Total</item>
+        <item>Deuda Mensual</item>
+    </string-array>
+    <string-array name="array_gas_tipo_pago">
+        <item>Deuda Total</item>
+        <item>Deuda Mensual</item>
+    </string-array>
+    <string-array name="array_multa_peligrosidad">
+        <item>1 -Muy Peligrosa- 12 pts</item>
+        <item>2 -Peligrosa- 8 pts</item>
+        <item>3 -Menos Peligrosa- 6 pts</item>
+    </string-array>
+    <string-array name="array_organizacion_politica">
+        <item>PCC</item>
+        <item>UJC</item>
+    </string-array>
+    <string-array name="array_provincias_miTurno">
+        <item>La Habana</item>
+    </string-array>
+    <string-array name="array_reimprimir_bandec">
+        <item>Extravío</item>
+        <item>Deterioro</item>
+        <item>Olvido de Pin</item>
+    </string-array>
+    <string-array name="array_servicios">
+        <item>Factura Telecomunicaciones</item>
+        <item>Factura Eléctrica</item>
+        <item>Factura Agua</item>
+        <item>Factura Gas</item>
+    </string-array>
+    <string-array name="array_servicios_bancarios_miturno">
+        <item>Apertura o traslado de cuenta de Ahorro</item>
+        <item>Certificaciones o estados de cuentas</item>
+        <item>Solicitud o ampliación de créditos</item>
+        <item>Solicitud de cheque de Gerencia</item>
+        <item>Obtención de título de propiedad</item>
+        <item>Operaciones de Caja</item>
+        <item>Extracciones por el Cajero automático</item>
+        <item>Trámite de beneficiarios y herederos</item>
+        <item>Contratación de telebanca/reimpresión de pin</item>
+        <item>Traslado de adeudos de Créditos y LGV</item>
+        <item>Certifico de adeudos/operaciones recibidas</item>
+    </string-array>
+    <string-array name="array_servicios_banco">
+        <item>Factura Telecomunicaciones</item>
+        <item>Factura Eléctrica</item>
+    </string-array>
+    <string-array name="array_servicios_banco_bandec">
+        <item>Factura Telecomunicaciones</item>
+        <item>Factura Eléctrica</item>
+        <item>Servicio ONAT Completo</item>
+        <item>Servicio ONAT con RC04</item>
+        <item>Factura Gas</item>
+        <item>Factura Aguas de la Habana</item>
+        <item>Factura Agua Resto el País</item>
+        <item>Sellos del Timbre</item>
+        <item>Factura Aguas Varadero</item>
+    </string-array>
+    <string-array name="array_servicios_banco_bpa">
+        <item>Factura Telecomunicaciones</item>
+        <item>Factura Eléctrica</item>
+        <item>Factura Aguas de la Habana</item>
+        <item>Factura Gas</item>
+        <item>Factura Agua Resto el País</item>
+        <item>Sellos del Timbre</item>
+        <item>Factura Aguas Varadero</item>
+    </string-array>
+    <string-array name="array_servicios_banco_gestion_metro">
+        <item>Factura Telecomunicaciones</item>
+        <item>Factura Eléctrica</item>
+        <item>Factura Aguas de la Habana</item>
+        <item>Factura Gas de la Habana</item>
+    </string-array>
+    <string-array name="array_servicios_banco_metro">
+        <item>Factura Telecomunicaciones</item>
+        <item>Factura Eléctrica</item>
+        <item>Factura Aguas de la Habana</item>
+        <item>Factura Gas de la Habana</item>
+        <item>ONAT Vector fiscal(RC-04A)</item>
+        <item>Factura Agua Resto el País</item>
+        <item>Sellos del Timbre</item>
+        <item>Factura Aguas Varadero</item>
+    </string-array>
+    <string-array name="array_servicios_bancos_consulta">
+        <item>Factura Telecomunicaciones</item>
+        <item>Factura Eléctrica</item>
+        <item>Factura Aguas de la Habana</item>
+        <item>Factura Gas de la Habana</item>
+        <item>ONAT</item>
+    </string-array>
+    <string-array name="array_servicios_bolsa">
+        <item>Factura Telecomunicaciones</item>
+        <item>Factura Eléctrica</item>
+        <item>Factura Aguas de la Habana</item>
+        <item>Factura del Gas</item>
+        <item>Factura Aguas Varadero</item>
+    </string-array>
+    <string-array name="array_servicios_publicos">
+        <item>ONAT</item>
+    </string-array>
+    <string-array name="array_tipo_cliente">
+        <item>Nacional</item>
+        <item>Extranjero</item>
+    </string-array>
+    <string-array name="array_tipo_cuenta_nauta">
+        <item>Navegación Internacional</item>
+        <item>Navegación Nacional</item>
+    </string-array>
+    <string-array name="array_tipo_fwa">
+        <item>Prepago</item>
+        <item>Pospago</item>
+        <item>Pospago residencial</item>
+    </string-array>
+    <string-array name="array_tipo_recarga">
+        <item>Recarga Móvil con tarjeta CUP</item>
+    </string-array>
+    <string-array name="array_ultimas_operaciones">
+        <item>Todas las operaciones</item>
+        <item>Telecomunicaciones</item>
+        <item>Eléctrica</item>
+        <item>Aguas de la Habana</item>
+        <item>Transferencias</item>
+        <item>ONAT</item>
+        <item>Recarga Móvil</item>
+        <item>Microrecarga Móvil</item>
+        <item>Recarga Nauta</item>
+        <item>Gas</item>
+        <item>Giro Postal</item>
+        <item>Pago en línea</item>
+    </string-array>
+    <string-array name="array_ultimos_pagos_bandec">
+        <item>Todos</item>
+        <item>Telecomunicaciones</item>
+        <item>Eléctrica</item>
+        <item>Transferencias</item>
+        <item>Recarga Móvil</item>
+        <item>Microrecarga Móvil</item>
+        <item>Recarga Nauta</item>
+        <item>Amortización</item>
+        <item>Giro Postal</item>
+        <item>Pago en línea</item>
+    </string-array>
+    <string-array name="array_voto">
+        <item>2899</item>
+        <item>3099</item>
+    </string-array>
+    <string-array name="categ_tranfer_bfi">
+        <item>Pago de facturas</item>
+        <item>Pago de dividendos</item>
+        <item>Pago de salario, utilidades y gratificaciones</item>
+        <item>Pago de fletes</item>
+        <item>Pago de seguros</item>
+        <item>Pago de tributos</item>
+        <item>Penalidades</item>
+        <item>Devolución de fondos</item>
+        <item>Pago de trámites consulares</item>
+    </string-array>
+    <string-array name="currency">
+        <item>CUP</item>
+        <item>CUC</item>
+        <item>USD</item>
+    </string-array>
+    <string-array name="currency_account">
+        <item>CUP</item>
+        <item>CUC</item>
+        <item>USD</item>
+        <item>-MIS CUENTAS-</item>
+        <item>-INSERTAR CUENTA-</item>
+    </string-array>
+    <string-array name="currency_account_bandec">
+        <item>CUENTA ACTUAL</item>
+        <item>-MIS CUENTAS-</item>
+        <item>-INSERTAR CUENTA-</item>
+    </string-array>
+    <string-array name="currency_bfi">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>CAD</item>
+        <item>CHF</item>
+        <item>MXN</item>
+        <item>SEK</item>
+        <item>DKK</item>
+        <item>NOK</item>
+        <item>JPY</item>
+        <item>CUP</item>
+    </string-array>
+    <string-array name="currency_clasica">
+        <item>USD</item>
+    </string-array>
+    <string-array name="currency_no_cuc">
+        <item>CUP</item>
+        <item>USD</item>
+    </string-array>
+    <string-array name="currency_no_usd">
+        <item>CUP</item>
+        <item>CUC</item>
+    </string-array>
+    <string-array name="currency_no_usd_account">
+        <item>CUP</item>
+        <item>CUC</item>
+        <item>-MIS CUENTAS-</item>
+        <item>-INSERTAR CUENTA-</item>
+    </string-array>
+    <string-array name="currency_only_cup">
+        <item>CUP</item>
+        <item>-MIS CUENTAS-</item>
+        <item>-INSERTAR CUENTA-</item>
+    </string-array>
+    <string-array name="currency_only_mlc">
+        <item>USD</item>
+        <item>-MIS CUENTAS-</item>
+        <item>-INSERTAR CUENTA-</item>
+    </string-array>
+    <string-array name="plazo_fijo_cobro_interes">
+        <item>Mensual</item>
+        <item>Anual</item>
+    </string-array>
+    <string-array name="plazo_fijo_cobro_interes_deposito">
+        <item>Mensual</item>
+        <item>Al Vencimiento</item>
+    </string-array>
+    <string-array name="plazo_fijo_meses_adelanto">
+        <item>12 meses</item>
+        <item>24 meses</item>
+        <item>36 meses</item>
+        <item>60 meses</item>
+        <item>72 meses</item>
+    </string-array>
+    <string-array name="plazo_fijo_meses_adelanto_bandec">
+        <item>72 meses</item>
+    </string-array>
+    <string-array name="plazo_fijo_meses_adelanto_metro">
+        <item>12 meses</item>
+        <item>24 meses</item>
+        <item>36 meses</item>
+        <item>60 meses</item>
+    </string-array>
+    <string-array name="plazo_fijo_meses_bandec">
+        <item>3 meses</item>
+        <item>6 meses</item>
+        <item>12 meses</item>
+        <item>24 meses</item>
+        <item>36 meses</item>
+        <item>48 meses</item>
+        <item>60 meses</item>
+    </string-array>
+    <string-array name="plazo_fijo_meses_no_adelanto">
+        <item>72 meses</item>
+    </string-array>
+    <string-array name="plazo_fijo_modalidad">
+        <item>Plazo Fijo Interés Adelantado</item>
+        <item>Plazo Fijo Sin Adelanto de Interés</item>
+    </string-array>
+    <string-array name="plazo_fijo_modalidad_bandec">
+        <item>Plazo Fijo sin Pago Adelantado</item>
+        <item>Plazo Fijo con Pago Adelantado</item>
+    </string-array>
+    <string-array name="tipo_giro">
+        <item>Ayuda Estudiante</item>
+        <item>Pensión Alimenticia</item>
+        <item>Ayuda Económica</item>
+        <item>Solidario</item>
+        <item>Otros</item>
+    </string-array>
+</resources>

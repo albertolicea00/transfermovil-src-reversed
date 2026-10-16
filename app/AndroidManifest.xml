@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="34" android:compileSdkVersionCodename="14" package="cu.etecsa.cubacel.tr.tm" platformBuildVersionCode="34" platformBuildVersionName="14">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:maxSdkVersion="28" android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/>
+    <uses-permission android:name="android.hardware.telephony"/>
+    <permission android:name="cu.etecsa.cubacel.tr.tm.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="cu.etecsa.cubacel.tr.tm.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:debuggable="true" android:icon="@mipmap/ic_launcher_etecsa_rectangle" android:label="@string/app_name" android:name="cu.etecsa.tm.ecommerce.qHBfDCWv13G.UhA7J2923N" android:requestLegacyExternalStorage="true" android:supportsRtl="true" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
+        <receiver android:exported="true" android:name="cu.etecsa.cubacel.tr.tm.X9ZiE8XZNKy" android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="true" android:name="cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.Jayac1C1XVL.ZJDahAOo71x.O7xyZJJBFWg" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility_service_config"/>
+        </service>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.IHVTCBmiLV" android:screenOrientation="portrait"/>
+        <activity android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.prPzLeyxKk">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="transfermovil.app" android:pathPrefix="/action" android:scheme="https"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="tm_compra_en_linea" android:pathPattern="/action" android:scheme="transfermovil"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.QqWqw83vJf"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.nNLWm3R1aPI.wComYkZMDc" android:theme="@style/FullscreenTheme"/>
+        <provider android:authorities="cu.etecsa.cubacel.tr.tm.provider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:name="ar.com.daidalos.afiledialog.FileChooserActivity"/>
+        <activity android:name="cu.etecsa.tm.ecommerce.yzjeVbN3sq"/>
+        <activity android:label="@string/title_activity_main" android:name="cu.etecsa.tm.ecommerce.mBdwa3RRkn" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
+        <activity android:name="cu.etecsa.tm.ecommerce.a7Y4bbw8Os" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
+        <activity android:label="@string/app_name" android:name="cu.etecsa.tm.ecommerce.bAogvejtBb" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
+        <activity android:name="cu.etecsa.tm.ecommerce.H9l22AIYKkA" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
+        <activity android:name="cu.etecsa.tm.ecommerce.C1b1PWKeZSE" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
+        <activity android:name="cu.etecsa.tm.ecommerce.hd5jZHAGaN" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
+        <activity android:label="@string/title_activity_scrolling" android:name="cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.vHqHzxi5J3" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
+        <service android:enabled="false" android:exported="false" android:name="androidx.camera.core.impl.MetadataHolderService">
+            <meta-data android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER" android:value="androidx.camera.camera2.Camera2Config$DefaultProvider"/>
+        </service>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <provider android:authorities="cu.etecsa.cubacel.tr.tm.mlkitinitprovider" android:exported="false" android:initOrder="99" android:name="com.google.mlkit.common.internal.MlKitInitProvider"/>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <provider android:authorities="cu.etecsa.cubacel.tr.tm.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+        </provider>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+            <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+        </service>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+    </application>
+</manifest>
