@@ -167,11 +167,14 @@ The app uses ORMLite ORM for local database storage. String evidence:
 
 | Entity Class | Table Fields | Notes |
 |:---|:---|:---|
-| `BancoService` (ORMLite POJO) | `id`, `code`, `phone`, `pmetro`, `pbpa`, `pbandec` | **Stores bank PINs in plaintext** — `pmetro` (Metropolitano), `pbpa` (BPA), `pbandec` (BANDEC) are PIN fields stored without encryption in SQLite |
+| `BancoService` | `id`, `code`, `phone`, `pmetro`, `pbpa`, `pbandec` | **Stores bank PINs in plaintext** per bank |
+| `AgentService` | `id`, `code`, `phone` | Agent credentials |
+| `AppConfig` | `codigo` (at minimum) | App configuration, access code for USSD |
+| `CodigoAcceso` | (from migration strings) | Access code storage |
 
-> **Security finding:** Bank PINs stored as plaintext strings in local SQLite database. Combined with `allowBackup=true` and `debuggable=true`, any device with USB debugging or ADB backup can extract all stored bank PINs.
+> **Security finding:** Bank PINs stored as plaintext strings in local SQLite database. Combined with `allowBackup=true` and `debuggable=true`, any device with USB debugging or ADB backup can extract all stored bank PINs. See [crypto.md](crypto.md) for full security analysis.
 
-**Stored data likely includes:** operation history, cached account info, saved contacts/phone numbers, app configuration, **bank PINs (plaintext)**.
+**Stored data includes:** operation history, cached account info, saved contacts/phone numbers, app configuration, **bank PINs (plaintext)**, agent codes.
 
 ### SharedPreferences
 

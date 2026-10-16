@@ -19,7 +19,67 @@ Analysis of USSD and SMS handling in Transfermóvil v1.260416.
 
 ### Sending
 
-USSD codes sent via `CALL_PHONE` intent. String analysis reveals these code-related identifiers:
+USSD codes sent via `ACTION_CALL` intent with `tel:` URI. Confirmed from smali analysis of `rDEl7rW1aN`:
+
+### USSD Code Format
+
+```
+tel:*{codeAcceso}*{codeService}#{encoded}
+```
+
+- `codeAcceso` — access code from `AppConfig.getCodigo()` (ORMLite entity via `unYp8VQThY` singleton), falls back to string resource `0x7f100078`
+- `codeService` — operation-specific code
+- URI-encoded `#` terminator
+
+### USSD Dispatch Class: `FBsQzP3Zfj`
+
+8898-line static utility class. All USSD dialing goes through here. ~12 overloads:
+
+| Method | Behavior |
+|:---|:---|
+| `actionCallUSSDBack(ctx, codeService, codeToSend, msg, viewGroup, fm)` | Standard: confirm dialog → dial → auto-back |
+| `actionCallUSSDBack(simSlot, ctx, ...)` | Dual-SIM: specifies SIM slot |
+| `actionCallUSSDBack(simSlot, ctx, ..., activity)` | With Activity reference for result |
+| `actionCallUSSDBack454(ctx, ...)` | Variant for specific operation (454) |
+| `actionCallUSSDBackAsocClasica(ctx, ..., observer)` | With observer callback (association) |
+| `actionCallUSSDBackHttp(ctx, ..., SpannableString)` | HTTP-style styled message |
+| `actionCallUSSDBackObserver(ctx, ..., observer)` | Generic observer-pattern callback |
+| `actionCallUSSDBackWithRetun(ctx, ...)` | With return value |
+| `actionCallUSSDNOBack(ctx, activity, ...)` | No auto-back action |
+| `actionCallUSSDNoBackSimple(ctx, ...)` | Simple no-back |
+| `actionCallUSSDSimple(ctx, code, msg)` | Minimal: no view group, no fragment |
+| `callLenght(ctx, code)` | Returns USSD code length (validation) |
+
+Full USSD string construction (from `actionCallUSSDBack`):
+
+```
+tel:*{codigo}*{codeService}*{codeSendTo}*{number}#
+```
+
+- `codigo` = `AppConfig.getCodigo()` — access code from registration
+- `codeService` = operation identifier passed by caller
+- `codeSendTo` = processed via `rDEl7rW1aN.code()` (may encode/transform)
+- `number` = `AppConfig.getNumber()` — app version/identifier
+- `#` is URI-encoded
+
+All overloads show a confirmation dialog ("Confirmar"/"Cancelar") before dialing, except `actionCallUSSDSimple` which may dial directly.
+
+Also contains: `closeSessionBank()`, `getDialogOperation()`, `getBundleOperation()`, `goToFragment()`, fragment navigation, and survey/evaluation UI.
+
+### USSD Code Obfuscation (`code()` method)
+
+The `code(String)` method (745 lines) transforms USSD parameters before dialing:
+
+1. Splits input on `*`
+2. Separates numeric parts from non-numeric (e.g., Nauta email addresses)
+3. Uses `Tz34gww2TFwrsuT8ukpL` with hardcoded `code_version` and `crude_code` to encode numbers
+4. Pads single-digit encoded numbers with leading `"0"`
+
+**Hardcoded constants:**
+- `code_version = "372653282298718711"`
+- `crude_code` = 1024-character binary string (lookup table for numeric encoding)
+
+### String identifiers found
 
 - `sendDataUSSD` — primary USSD send function
 - `sendNextUssd` — sequential USSD code sending (multi-step operations)
@@ -34,17 +94,46 @@ USSD codes sent via `CALL_PHONE` intent. String analysis reveals these code-rela
 
 ### Receiving (Accessibility Service)
 
-The accessibility service (`l08fNVC4KOKK...O7xyZJJBFWg`) is configured to:
+The accessibility service (`l08fNVC4KOKK...O7xyZJJBFWg`) extends `AccessibilityService`. Smali analysis confirms:
+
+**Configuration** (set programmatically in `onServiceConnected`):
 
 - **Monitor package:** `com.android.phone`
-- **Event types:** All (`0xffffffff`)
-- **Feedback type:** Spoken (0x1)
-- **Flags:** `DEFAULT` (0x1)
-- **Can retrieve window content:** `true`
+- **Event types:** `0x20` (`TYPE_WINDOW_STATE_CHANGED`)
+- **Feedback type:** `0x10` (`FEEDBACK_GENERIC`)
+- **Flags:** `0x1` (`FLAG_INCLUDE_NOT_IMPORTANT_VIEWS`)
 
-**How it works:** When the phone app shows a USSD response dialog, the accessibility service reads the dialog text content. This is the standard pattern for USSD automation on Android, since there is no public API to programmatically read USSD responses on most SDK levels. The service intercepts `TYPE_WINDOW_STATE_CHANGED` and similar events from `com.android.phone`, extracts the response text, and routes it back to the app for parsing.
+**Control flow:**
 
-> **Hypothesis:** The settings activity reference `MainGeneralActivity` in the accessibility config likely doesn't exist as declared — this is an alias or obfuscated mapping. Needs JADX decompilation to confirm.
+1. App broadcasts `START_LISTENING` → service's inner `BroadcastReceiver` ($1) sets `shouldListen = true`
+2. App dials USSD via `tel:` intent
+3. Phone app shows USSD response dialog → `onAccessibilityEvent` fires
+4. Service checks `shouldListen == true` AND `eventType == 0x20`
+5. Extracts event text via `getText()`
+6. Text matching chain (all case-insensitive):
+   - Contains `"USSD"` → `performGlobalAction(GLOBAL_ACTION_BACK)` + `respondToUssd()`
+   - Contains `"si"` → BACK + `respondToUssd()` + callback `onUssdReceived()`
+   - Contains `"ok"` → BACK + `respondToUssd()` + callback `onUssdReceived()`
+   - Contains `"aceptar"` → BACK + `respondToUssd()` + callback `onUssdReceived()`
+7. `respondToUssd()` searches for button labeled `"ACEPTAR"` and clicks it (`ACTION_CLICK`)
+8. Callback via singleton `Ax4arraYwv.getInstance().getCallback()` → `TVYvUziTDv.onUssdReceived()`
+9. App broadcasts `STOP_LISTENING` when done
+
+**Key classes:**
+
+| Class | Role |
+|:---|:---|
+| `O7xyZJJBFWg` | AccessibilityService implementation |
+| `O7xyZJJBFWg$1` | BroadcastReceiver for START/STOP_LISTENING |
+| `O7xyZJJBFWg$2` | Cancel button click handler (dialog) |
+| `O7xyZJJBFWg$3` | "Ir a Configuración" click → opens accessibility settings |
+| `Ax4arraYwv` | Singleton holding callback reference |
+| `TVYvUziTDv` | Interface with `onUssdReceived()` method |
+| `w9YDCnqpz8I` | Utility with `isAccessibilityServiceEnabled(context, class)` |
+
+**User-facing dialog** (`showAccessibilityServiceDialog`): Shows Spanish AlertDialog asking permission — "Para que esta aplicación funcione correctamente, necesitas activar el servicio de accesibilidad. Esto nos permitirá interactuar con las ventanas de USSD."
+
+> **Security note:** The service auto-clicks "ACEPTAR" on any USSD dialog from `com.android.phone`. No validation of dialog source or content. Any USSD prompt that contains "si", "ok", or "aceptar" in its text gets auto-dismissed.
 
 ## USSD Codes Found in Binary
 
@@ -76,54 +165,82 @@ This is speculative — requires code-level confirmation.
 
 ## SMS Mechanism
 
-### Sending
+### Sending (`HzjedYqYeh.send_sms`)
 
-Operations under "Servicios SMS" in the general drawer menu. Banking operations also use SMS as a transport. Relevant string patterns:
+Static method `send_sms(String number, String body_text, Context context)`:
 
-- `consultar_plan_sms` — query SMS plan
-- `Servicios SMS` — SMS services menu section
+1. Checks `SEND_SMS` permission via `ContextCompat.checkSelfPermission`
+2. **If no permission:** falls back to `ACTION_SENDTO` intent (`smsto:{number}`) with `sms_body` extra — opens default SMS app
+3. **If has permission:** uses `SmsManager.getDefault().sendTextMessage(number, null, body, null, null)` — sends directly, no delivery/sent callbacks
+4. Shows toast: "SMS enviado. espere un SMS de respuesta" (SMS sent, wait for a reply SMS)
+5. On exception: shows "Ha ocurrido un error. SMS no enviado"
+
+Also has `readSmsInbox(ContentResolver)` returning `ArrayList<rIgmgP6JXL>` — reads SMS inbox via content provider.
 
 ### Receiving
 
-**Broadcast receiver** `X9ZiE8XZNKy` — **stub/no-op in current build:**
+**Manifest receiver** `X9ZiE8XZNKy` — **stub/no-op in current build.** `onReceive()` just logs `"SMS_IN" → "ok"` and returns.
 
-- Listens for `android.provider.Telephony.SMS_RECEIVED`
-- Requires `android.permission.BROADCAST_SMS` sender permission
-- Exported — receives system SMS broadcasts
-- `onReceive()`: stores context, logs `"SMS_IN" → "ok"`, returns immediately
-- Does **not** call `getMessagesFromIntent()`, extract sender/body, or forward data
-- Contains dead code `displayAlert(String)` that shows an AlertDialog titled "Nuevo mensaje" — never called from `onReceive`
-- Fields: `ACTION = "android.provider.Telephony.SMS_RECEIVED"` (set in constructor, never read), `myContext` (stored, unused)
+**Dynamic receiver** in `rDEl7rW1aN` — field `mReceivedSMSReceiver` (inner class `$18`) is a runtime-registered `BroadcastReceiver` for incoming SMS processing.
 
-**Implication:** Real SMS processing happens elsewhere. Likely candidates:
-1. **Dynamic receiver** — app declares `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, suggesting runtime-registered BroadcastReceivers
-2. **ContentResolver polling** — read SMS via content provider after USSD/SMS operations complete
-3. The manifest registration may serve to hold the SMS permission grant or ensure app wakes on SMS arrival
+### SMS Code Extraction
 
-## Multi-Step Operation Flow (Hypothesis)
+`rDEl7rW1aN` has methods to extract activation/auth codes from received SMS via `ContentResolver`:
 
-Based on the `sendNextUssd` / `nextUssdCode` pattern, banking operations likely follow this flow:
+| Method | Purpose |
+|:---|:---|
+| `sms_code_bank(ContentResolver)` | Extract bank activation code from SMS |
+| `sms_code_agente(ContentResolver)` | Extract agent code from SMS |
+| `sms_code_boleto(ContentResolver)` | Extract boleto code from SMS |
+| `sms_code_bulevar(ContentResolver)` | Extract bulevar code from SMS |
+| `sms_actualizar_bd(ContentResolver)` | Update local DB from SMS data |
+| `sms_actualizar_bd_datos_app(ContentResolver)` | Update app config data from SMS |
+
+## Confirmed Operation Flow
 
 ```
 1. User selects operation (e.g., transfer)
-2. App constructs USSD code: *222*<operation>*<params>#
-3. sendDataUSSD → dials code via CALL_PHONE intent
-4. Accessibility service intercepts USSD response dialog
-5. App parses response text
-6. If multi-step: sendNextUssd constructs follow-up code
-7. Repeat until operation complete or error
+2. App broadcasts START_LISTENING → accessibility service activates
+3. code() encodes parameters using crude_code binary lookup table
+4. actionCallUSSD() builds: tel:*{access}*{encoded_params}#
+5. ACTION_CALL intent dials USSD
+6. Phone shows USSD dialog → accessibility service fires
+7. Service checks text for "USSD"/"si"/"ok"/"aceptar"
+8. Auto-clicks "ACEPTAR" button, presses BACK
+9. Calls TVYvUziTDv.onUssdReceived() callback
+10. If multi-step: sendNextUssd constructs follow-up code
+11. App broadcasts STOP_LISTENING when done
 ```
-
-This matches ETECSA's menu-driven USSD banking system where each response may require further input.
 
 ## SIM Selection
 
 `READ_PHONE_STATE` permission enables SIM detection. On dual-SIM devices, the app likely allows selecting which SIM to use for USSD/SMS operations. Requires decompiled code to confirm SIM selection UI and logic.
 
+## Key Class Map
+
+| Obfuscated Name | Role |
+|:---|:---|
+| `S9ycHcoxAzy` | **Agent mode main activity** — extends `rDEl7rW1aN`, has drawer, FABs, QR, SMS receiver field |
+| `IHVTCBmiLV` | **General mode main activity** — extends `rDEl7rW1aN`, same layout, no SMS receiver field |
+| `rDEl7rW1aN` | Base activity — USSD dialing, SMS extraction, encryption, code construction |
+| `FBsQzP3Zfj` | **USSD dispatch class** — 12 `actionCallUSSD*` overloads, dialog management, fragment navigation |
+| `HzjedYqYeh` | SMS sender (`send_sms` static) + inbox reader |
+| `O7xyZJJBFWg` | Accessibility service for USSD response capture |
+| `Ax4arraYwv` | Singleton callback holder for USSD responses |
+| `TVYvUziTDv` | Callback interface (`onUssdReceived()`) |
+| `Tz34gww2TFwrsuT8ukpL` | USSD code encoder (uses `code_version` + `crude_code`) |
+| `unYp8VQThY` | AppConfig singleton/DB helper (holds access code, DAOs) |
+| `X9ZiE8XZNKy` | Manifest SMS receiver (stub) |
+| `rDEl7rW1aN$18` | Dynamic SMS receiver (runtime-registered) |
+| `g0xM9kQCsqu` | SMS parser — `parse(rIgmgP6JXL)` → `RecordSMS` |
+| `rIgmgP6JXL` | SMS data object (raw message container) |
+
 ## Open Questions
 
-1. **USSD code parameter format:** How are account numbers, PINs, and amounts encoded in the USSD string?
-2. **Response parsing:** What patterns does the accessibility service use to extract data from USSD response dialogs?
+1. ~~USSD code parameter format~~ — **Answered:** encoded via `code()` with binary lookup table
+2. ~~Response parsing~~ — **Answered:** accessibility service matches text for "USSD"/"si"/"ok"/"aceptar"
 3. **SMS format:** What is the structure of outgoing and incoming SMS for banking operations?
 4. **Error handling:** How does the app handle USSD timeouts, malformed responses, or accessibility service unavailability?
 5. **SIM selection:** Is there explicit dual-SIM handling, or does it rely on the system default?
+6. **Code encoder details:** What does `Tz34gww2TFwrsuT8ukpL.aSHV52SplNh3HfZBSmJe()` actually compute from the binary lookup table?
+7. **AppConfig access code:** What is the default access code (string resource `0x7f100078`)?

@@ -94,6 +94,9 @@ Methods: `shKey(String)`, `shKey(byte[])`, `getSha256(data)` — straightforward
 | Value | Location | Usage |
 |:---|:---|:---|
 | `"ABCDEFGHIJKLMNOP"` | `encryptionKey` field | AES key for single-param encrypt/decrypt |
+| `"708091521823824654864548452244"` | `rDEl7rW1aN.cv` (static) | Key material for `generateKey()` → AES SecretKey |
+| `"372653282298718711"` | `rDEl7rW1aN.code_version` (static) | USSD code encoder version identifier |
+| `crude_code` (1024-char binary) | `rDEl7rW1aN` instance field | Binary lookup table for USSD parameter encoding |
 | `"1927271231"` | `procesarDatos`, `validarLLaveDerivada` | Salt for card decryption |
 | `"12345678"` | `cH`, `validarLLaveDerivada` | `tfmid` — likely device/app identifier |
 | `"Referencia001delbanco3"` | `validarLLaveDerivada` | Test bank reference |
@@ -117,13 +120,17 @@ Methods: `shKey(String)`, `shKey(byte[])`, `getSha256(data)` — straightforward
 
 **Critical**:
 - Hardcoded AES key `"ABCDEFGHIJKLMNOP"` — any data encrypted with single-param `encryptAES`/`decryptAES` is recoverable by anyone with the APK
+- **Bank PINs stored in plaintext** — `BancoService` table has `pbpa`, `pmetro`, `pbandec` columns (BPA, Metropolitano, BANDEC bank PINs) as plain strings in SQLite
 - ECB mode usage leaks plaintext structure
 - `debuggable=true` in production APK
+- Hardcoded encryption key `"708091521823824654864548452244"` in `rDEl7rW1aN.cv` — used for AES/ECB encryption of stored data
 
 **High**:
 - Hardcoded salt `"1927271231"` with only 2 iterations — card encryption key derivation trivially brute-forceable
 - Key reused as IV in hardcoded-key AES/CBC
-- `allowBackup=true` — all app data extractable via ADB
+- `allowBackup=true` — all app data extractable via ADB (combined with plaintext PINs = full credential theft)
+- `Pin` table stores recharge card PINs — also in `TransferMDB.sqlite`
+- IMEI stored in `AppConfig` table — device fingerprinting data in local DB
 
 **Medium**:
 - `usesCleartextTraffic=true` — HTTP connections allowed
@@ -133,3 +140,58 @@ Methods: `shKey(String)`, `shKey(byte[])`, `getSha256(data)` — straightforward
 **Low / Positive**:
 - Wallet operations use proper PBKDF2WithHmacSHA1 + random IV
 - Certificate pinning evidence in OkHttp configuration
+
+## Encryption Usage in `rDEl7rW1aN`
+
+The main activity base class uses scheme 7 (`generateKey`) with the static `cv` field:
+
+```
+encryption(plaintext):
+  key = V5FFEZ0Qrr0.generateKey("708091521823824654864548452244")
+  return V5FFEZ0Qrr0.encryptMsg(plaintext, key)
+
+decryption(ciphertext):
+  key = V5FFEZ0Qrr0.generateKey("708091521823824654864548452244")
+  return V5FFEZ0Qrr0.decryptMsg(ciphertext, key)
+```
+
+This chains schemes 7 → 2: SHA-256 of `cv` → AES/ECB/PKCS5Padding with Base64 encoding. Both the key material and algorithm are fully deterministic and extractable.
+
+## USSD Code Encoding
+
+The `code()` method (745 lines) uses a proprietary encoding for USSD parameters:
+
+- **Encoder class:** `AFm1GraXBXUkpF1hmOdV.Tz34gww2TFwrsuT8ukpL`
+- **Constructor:** `(code_version, crude_code)` — both hardcoded static values
+- **Encoding method:** `aSHV52SplNh3HfZBSmJe(List<String> numbers)`
+- Splits input on `*`, separates numeric from non-numeric (Nauta emails bypass encoding)
+- Pads single-digit encoded results with leading "0"
+
+This is obfuscation, not encryption — deterministic and reversible with the static constants from the APK.
+
+## Database Entities (ORMLite)
+
+### BancoService
+
+| Field | Type | Notes |
+|:---|:---|:---|
+| `id` | int | Auto-generated primary key |
+| `code` | String | Bank service code |
+| `phone` | String | Associated phone number |
+| `pmetro` | String | **Metropolitano bank password (plaintext)** |
+| `pbpa` | String | **BPA bank password (plaintext)** |
+| `pbandec` | String | **BANDEC bank password (plaintext)** |
+
+### AgentService
+
+| Field | Type | Notes |
+|:---|:---|:---|
+| `id` | int | Auto-generated primary key |
+| `code` | String | Agent service code |
+| `phone` | String | Agent phone number |
+
+> Bank PINs for three banks stored as unencrypted strings. With `debuggable=true` + `allowBackup=true`, full credential extraction is trivial via ADB.
+
+## Accessibility Service Security
+
+The USSD response capture service (`O7xyZJJBFWg`) auto-clicks any button labeled "ACEPTAR" on any USSD dialog from `com.android.phone` when `shouldListen=true`. No validation of dialog source content beyond string matching for "USSD", "si", "ok", or "aceptar". A malicious USSD push containing these keywords would be auto-dismissed.

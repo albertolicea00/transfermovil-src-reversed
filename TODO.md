@@ -32,19 +32,19 @@
 - [x] Document USSD send mechanism (tel: intent + CALL_PHONE)
 - [x] Document accessibility service USSD response capture
 - [x] List discovered USSD codes (*222*, *100*, *111, *133, *234)
-- [ ] Decompile `sendDataUSSD` and trace full USSD code construction
-- [ ] Decompile accessibility service response parsing logic
+- [x] Decompile `sendDataUSSD` and trace full USSD code construction
+- [x] Decompile accessibility service response parsing logic
 - [ ] Map USSD code → operation mapping (what does *222*264 do?)
-- [ ] Document multi-step USSD flows (sendNextUssd / nextUssdCode)
+- [x] Document multi-step USSD flows (sendNextUssd / nextUssdCode)
 - [ ] Trace SIM selection logic for dual-SIM devices
 - [ ] Document USSD error handling and timeout behavior
-- [ ] Map USSD code format: `*222*<op>*<params>#`
+- [x] Map USSD code format: `*{access}*{service}#` via actionCallUSSD
 
 ## SMS
 
 - [x] Identify SMS receiver (X9ZiE8XZNKy)
 - [x] Decompile SMS receiver — stub/no-op, real handling elsewhere
-- [ ] Document outgoing SMS format for banking operations
+- [x] Document outgoing SMS format (HzjedYqYeh.send_sms via SmsManager)
 - [ ] Map "Servicios SMS" menu operations
 - [ ] Identify SMS-based operations vs USSD-based operations
 
