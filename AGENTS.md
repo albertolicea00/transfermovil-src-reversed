@@ -1,6 +1,6 @@
 # Repository guide
 - Goal: reverse engineer the Transfermóvil Android client for interoperability, protocol analysis, and security research.
-- Structure: `app/` holds app source and resources; `smali/` holds disassembly; `scripts/` holds tooling; `docs/` holds topic-specific notes.
+- Structure: `app/` holds clean reconstructed source and resources; `src/` holds raw JADX decompiled output (obfuscated); `mappings/` holds obfuscated-to-clean name mappings; `smali/` holds disassembly; `scripts/` holds tooling; `docs/` holds topic-specific notes.
 - `.workspace/bin/` holds local APK inputs; `README.md` shows the current target metadata; `CHANGELOG.md` tracks substantive project changes.
 - `docs/target-metadata.md`: how to extract package, version, SDK levels, and SHA-256 from an APK.
 - `docs/architecture.md`: manifest components, navigation structure, dependencies, obfuscation, asset data.
@@ -10,6 +10,7 @@
 - `docs/storage.md`: SQLite schema (26 tables), ORMLite entities, migration logic, SharedPreferences.
 - `docs/domain-model.md`: complete entity catalog (45 classes, 47 operations, 14 currencies), enum mappings, security findings.
 - `docs/ecommerce.md`: e-commerce API client, 33 endpoints, login flow, TLS bypass, session management.
+- `mappings/classes.json`: obfuscated → clean class/field/enum name mappings with roles and confidence.
 - Keep detailed procedures in separate `docs/*.md` files and add a one-line summary and link here for each new document.
 - Read only the documentation relevant to the current task.
 - Update `CHANGELOG.md` for every completed change; put the date, APK filename, and SHA-256 in each analysis session's `##` heading.

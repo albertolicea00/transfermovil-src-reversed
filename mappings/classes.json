@@ -1,0 +1,153 @@
+{
+  "_meta": {
+    "apk_version": "1.260416",
+    "version_code": 162,
+    "format": "obfuscated → clean mapping",
+    "notes": "Derived from static analysis of JADX decompiled source"
+  },
+  "classes": {
+    "cu.etecsa.cubacel.tr.tm.prPzLeyxKk": {
+      "clean": "cu.etecsa.transfermovil.ui.SplashActivity",
+      "role": "Launcher/splash screen, routes to Agent or General mode",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy": {
+      "clean": "cu.etecsa.transfermovil.ui.GeneralMainActivity",
+      "role": "General (end-user) mode main activity with drawer menu",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.IHVTCBmiLV": {
+      "clean": "cu.etecsa.transfermovil.ui.AgentMainActivity",
+      "role": "Agent (business) mode main activity with drawer menu",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.rDEl7rW1aN": {
+      "clean": "cu.etecsa.transfermovil.base.BaseMainActivity",
+      "role": "Base activity for both Agent/General, contains USSD dispatch, encryption, SMS handling",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0": {
+      "clean": "cu.etecsa.transfermovil.crypto.CryptoProvider",
+      "role": "AES encryption/decryption (7 schemes), SHA-256, key derivation",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.BancoService": {
+      "clean": "cu.etecsa.transfermovil.data.entity.BankAccount",
+      "role": "ORMLite entity storing bank service code, phone, and plaintext PINs per bank",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AgentService": {
+      "clean": "cu.etecsa.transfermovil.data.entity.AgentAccount",
+      "role": "ORMLite entity storing agent code and phone",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.O7xyZJJBFWg": {
+      "clean": "cu.etecsa.transfermovil.service.UssdAccessibilityService",
+      "role": "AccessibilityService capturing USSD dialog responses from com.android.phone",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.X9ZiE8XZNKy": {
+      "clean": "cu.etecsa.transfermovil.receiver.SmsReceiver",
+      "role": "BroadcastReceiver for SMS (stub/no-op, real handling elsewhere)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.FBsQzP3Zfj": {
+      "clean": "cu.etecsa.transfermovil.ussd.UssdDispatcher",
+      "role": "USSD code construction and dispatch (8898 lines, 12 actionCallUSSD overloads)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.HzjedYqYeh": {
+      "clean": "cu.etecsa.transfermovil.sms.SmsSender",
+      "role": "Outgoing SMS via SmsManager (send_sms method)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.g0xM9kQCsqu": {
+      "clean": "cu.etecsa.transfermovil.sms.SmsResponseParser",
+      "role": "SMS response parser (13840 lines, 32 service types, PAGOxMOVIL gateway)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.puGDXabehz": {
+      "clean": "cu.etecsa.transfermovil.banking.AuthValidator",
+      "role": "Banking auth: validateAuth() checks AOperKey table, 30-min session timeout",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FdonIAFI9w": {
+      "clean": "cu.etecsa.transfermovil.banking.BankOperationCode",
+      "role": "Enum: 332 operations across 5 banks (Metropolitano, BFI, BANDEC, BPA, Wallet)",
+      "confidence": "high"
+    },
+    "cu.etecsa.tm.ecommerce.Dyporpu9vbM.tQvDIr4mUHh.y6NQQxH0NI": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.ApiClient",
+      "role": "E-commerce API singleton with getUnsafeOkHttpClient (TLS disabled)",
+      "confidence": "high"
+    },
+    "cu.etecsa.tm.ecommerce.qHBfDCWv13G.UhA7J2923N": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.SessionManager",
+      "role": "E-commerce SharedPreferences manager (tokens, user data, API URL)",
+      "confidence": "high"
+    },
+    "cu.etecsa.tm.ecommerce.UE0rwmdgIVT.AfjNivq1ga0.XMAvvl35Dj": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.model.LoginRequest",
+      "role": "Login request body: email + password",
+      "confidence": "high"
+    },
+    "cu.etecsa.tm.ecommerce.UE0rwmdgIVT.AfjNivq1ga0.L9hiDpmAir": {
+      "clean": "cu.etecsa.transfermovil.ecommerce.model.TwoFactorLoginRequest",
+      "role": "2FA login request body: email + password + factor",
+      "confidence": "high"
+    },
+    "AFm1GraXBXUkpF1hmOdV.Tz34gww2TFwrsuT8ukpL": {
+      "clean": "cu.etecsa.transfermovil.crypto.ussd.UssdCipherOrchestrator",
+      "role": "USSD encoding orchestrator: random seed + delegates to substitution/XOR",
+      "confidence": "high"
+    },
+    "AFm1GraXBXUkpF1hmOdV.YzK9tTZsYVnC5kFxSie": {
+      "clean": "cu.etecsa.transfermovil.crypto.ussd.SubstitutionTableBuilder",
+      "role": "Parses crude_code binary string into substitution matrix",
+      "confidence": "high"
+    },
+    "AFm1GraXBXUkpF1hmOdV.hKRRh7lnIpNaVleqsuo": {
+      "clean": "cu.etecsa.transfermovil.crypto.ussd.DigitSubstituter",
+      "role": "Digit-pair substitution via matrix lookup",
+      "confidence": "high"
+    },
+    "AFm1GraXBXUkpF1hmOdV.ytpPfHi93O3gQEyZrT9r": {
+      "clean": "cu.etecsa.transfermovil.crypto.ussd.XorCipherStep",
+      "role": "XOR step: substituted value XOR cyclic key from matrix",
+      "confidence": "high"
+    }
+  },
+  "fields": {
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.rDEl7rW1aN": {
+      "cv": {
+        "clean": "ENCRYPTION_KEY",
+        "value": "708091521823824654864548452244",
+        "role": "AES key material for generateKey() → encryptMsg/decryptMsg"
+      },
+      "code_version": {
+        "clean": "USSD_CODE_VERSION",
+        "value": "372653282298718711",
+        "role": "Version identifier for USSD parameter encoding"
+      },
+      "crude_code": {
+        "clean": "USSD_SUBSTITUTION_TABLE",
+        "role": "1024-char binary string used as lookup table for USSD encoding"
+      }
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.BancoService": {
+      "pmetro": { "clean": "pinMetropolitano", "role": "Metropolitano bank PIN (plaintext)" },
+      "pbpa": { "clean": "pinBpa", "role": "BPA bank PIN (plaintext)" },
+      "pbandec": { "clean": "pinBandec", "role": "BANDEC bank PIN (plaintext)" }
+    }
+  },
+  "enums": {
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.Nl0yptXmjQ": {
+      "clean": "cu.etecsa.transfermovil.banking.OperationType",
+      "role": "Banking operation type enum"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.R1sDOSqZ2z": {
+      "clean": "cu.etecsa.transfermovil.banking.BankType",
+      "role": "Bank identifier enum (BPA, BANDEC, Metropolitano, MiTransfer, BFI)"
+    }
+  }
+}
