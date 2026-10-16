@@ -23,6 +23,8 @@
 - Full database schema documented in `docs/storage.md`: 26 tables in `TransferMDB.sqlite` v162, migration logic drops legacy CodigoAcceso/Version tables.
 - AppConfig entity: stores `codigo` (access code), `imei`, `phone`, `code_bank`, feature flags.
 - Updated `docs/telephony.md`, `docs/security.md`, `docs/networking.md` with confirmed findings.
+- Created `docs/domain-model.md`: complete catalog of 45 entity classes, 47 operations enum, 14 currencies, all field types. Security: only CuentaBanco.cuenta uses encryption; PINs, PII, IMEI all plaintext.
+- Documented USSD packet protocol in telephony.md: `*<access>*<service>*<pos><max>*<seq>*<oper>*<agency>*<params>*<version>#`, packet splitting at 52 chars, SDK-dependent dispatch (TelephonyManager ≥26, accessibility <26).
 
 ## 2026-10-13 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

@@ -150,7 +150,38 @@ The accessibility service (`l08fNVC4KOKK...O7xyZJJBFWg`) extends `AccessibilityS
 | `*222*869` | Banking operation (specific service) |
 | `*234*3` | Additional service code |
 
-> **Note:** USSD codes like `*222*NNN` typically encode operations as `*prefix*operation_code*params#`. The exact parameter format (account numbers, PINs, amounts) requires JADX decompilation of the code constructing these strings.
+### USSD Packet Protocol (`pAzq93vIl3`)
+
+Full USSD code format per packet:
+
+```
+*<codeAcceso>*<codeService>*<banderaEmpaquetado>*<codeOper>*<agency>*<encoded_params>*<version>#
+```
+
+| Field | Source | Description |
+|:---|:---|:---|
+| `codeAcceso` | `AppConfig.getCodigo()` | Registration access code |
+| `codeService` | Caller (e.g., `*222`) | Service prefix |
+| `banderaEmpaquetado` | Generated | `<pos><max>*<secuencia>` — 2-digit zero-padded position + total + sequence ID |
+| `codeOper` | Caller (e.g., `264`) | Operation number |
+| `agency` | Agent code or empty | Agent identifier (empty for general users) |
+| `encoded_params` | `rDEl7rW1aN.code()` | Encoded parameters (PINs, amounts, accounts) |
+| `version` | `AppConfig.getNumber()` | App version/identifier |
+
+**Packet splitting:** Parameters split by `*` delimiter. `MAX_PARAMETERS_TOTAL` = 52 chars. `MAX_PARAMETERS_TO_PACKAGE` = 6 (default, configurable). If payload exceeds limit → split into multiple USSD calls with position/total/sequence metadata.
+
+**Sequence ID generation:**
+- SDK < 26: `generarSecuenciaBasica()` → `mmss` (minutes + seconds)
+- SDK ≥ 26: `generarSecuencia()` → `dMHHmss` + last year digit + random 0-9
+
+**Two execution paths based on SDK level:**
+
+| SDK | Method | Mechanism |
+|:---|:---|:---|
+| ≥ 26 (Android 8+) | `MX9gh9mLxd` (UssdHelper) | `TelephonyManager.sendUssdRequest()` with callback listener |
+| < 26 | Accessibility service | `START_LISTENING` broadcast → `sendDataUSSD(0)` → accessibility reads response → `onUssdReceived()` → sends next packet |
+
+**Constants:** `MAX_FALLAS_USSD` = 3 (max retries per failure)
 
 ### USSD Code Number Mapping (Hypothesis)
 

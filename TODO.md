@@ -78,7 +78,7 @@
 ## Agent Operations
 
 - [x] Identify AgentService and agent-specific UI
-- [ ] Decompile AgentService — map agent operation dispatch
+- [x] Decompile AgentService — ORMLite entity (code, phone), no logic
 - [ ] Document agent registration and code retrieval (getCodeAgent)
 - [ ] Trace agent-specific services and generales menus
 - [ ] Document estadisticas (Resumen/Detalle de Operaciones) for agents
