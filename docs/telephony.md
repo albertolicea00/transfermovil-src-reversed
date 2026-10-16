@@ -135,20 +135,45 @@ The accessibility service (`l08fNVC4KOKK...O7xyZJJBFWg`) extends `AccessibilityS
 
 > **Security note:** The service auto-clicks "ACEPTAR" on any USSD dialog from `com.android.phone`. No validation of dialog source or content. Any USSD prompt that contains "si", "ok", or "aceptar" in its text gets auto-dismissed.
 
-## USSD Codes Found in Binary
+## USSD Codes (Confirmed from Java Decompilation)
 
-| Code | Likely Purpose |
+Two USSD gateways are used: `*222` (Transfermóvil/Metropolitano/BPA/Wallet) and `*444` (BANDEC).
+
+### BANDEC (`*444` prefix)
+
+| Code | Operation | Confirmation Message |
+|:---|:---|:---|
+| `*444*3` | Generic query | "¿Desea realizar la consulta?" |
+| `*444*13` | Auth/Register | (dynamic) |
+| `*444*15` | Transfer | (dynamic) |
+| `*444*16` | Electricity payment | (dynamic) |
+| `*444*46` | **Balance inquiry** | "¿Desea consultar el saldo de su tarjeta?" |
+| `*444*48` | Last operations | "¿Desea ver las últimas operaciones?" |
+| `*444*58` | All account balances | "¿Desea consultar el importe de todas sus cuentas?" |
+| `*444*62` | Transaction limits | "¿Desea consultar los límites de sus cuentas bancarias?" |
+| `*444*68*02` | Delete registration | "¿Desea eliminar registro asociado?" |
+| `*444*70` | Close session | (dynamic) |
+| `*444*91` | PIN change | (dynamic) |
+
+### Transfermóvil (`*222` prefix)
+
+| Code | Inferred Operation |
 |:---|:---|
-| `*100*` | Balance inquiry (standard ETECSA) |
+| `*222` | Base service selector |
+| `*222*264` | Metropolitano/BPA banking |
+| `*222*266` | Bonus/wallet operation |
+| `*222*328` | Data/invoice operation |
+| `*222*767` | Service operation |
+| `*222*869` | Service operation |
+
+### Other
+
+| Code | Purpose |
+|:---|:---|
+| `*100*` | ETECSA balance inquiry (standard) |
 | `*111` | Customer service / info line |
-| `*133` | Service code (likely bonus/promo related) |
-| `*222` | Base prefix for Transfermóvil banking operations |
-| `*222*264` | Banking operation (specific service) |
-| `*222*266` | Banking operation (specific service) |
-| `*222*328` | Banking operation (specific service) |
-| `*222*767` | Banking operation (specific service) |
-| `*222*869` | Banking operation (specific service) |
-| `*234*3` | Additional service code |
+| `*133` | Bonus/promo service |
+| `*234*3` | Additional service |
 
 ### USSD Packet Protocol (`pAzq93vIl3`)
 
@@ -280,8 +305,9 @@ Also has `readSmsInbox(ContentResolver)` returning `ArrayList<rIgmgP6JXL>` — r
 
 | Obfuscated Name | Role |
 |:---|:---|
-| `S9ycHcoxAzy` | **Agent mode main activity** — extends `rDEl7rW1aN`, has drawer, FABs, QR, SMS receiver field |
-| `IHVTCBmiLV` | **General mode main activity** — extends `rDEl7rW1aN`, same layout, no SMS receiver field |
+| `S9ycHcoxAzy` | **General mode main activity** — extends `rDEl7rW1aN`, uses `drawermenu_general`, has SMS receiver field |
+| `IHVTCBmiLV` | **Agent mode main activity** — extends `rDEl7rW1aN`, uses `drawermenu` (full agent menu) |
+| `prPzLeyxKk` | **Splash/router activity** — 3s splash, `generalVsAgentVersion()` decides which main activity to launch |
 | `rDEl7rW1aN` | Base activity — USSD dialing, SMS extraction, encryption, code construction |
 | `FBsQzP3Zfj` | **USSD dispatch class** — 12 `actionCallUSSD*` overloads, dialog management, fragment navigation |
 | `HzjedYqYeh` | SMS sender (`send_sms` static) + inbox reader |

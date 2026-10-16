@@ -34,7 +34,7 @@
 - [x] List discovered USSD codes (*222*, *100*, *111, *133, *234)
 - [x] Decompile `sendDataUSSD` and trace full USSD code construction
 - [x] Decompile accessibility service response parsing logic
-- [ ] Map USSD code → operation mapping (what does *222*264 do?)
+- [x] Map USSD code → operation mapping (*444=BANDEC, *222=main, 100+ service codes)
 - [x] Document multi-step USSD flows (sendNextUssd / nextUssdCode)
 - [ ] Trace SIM selection logic for dual-SIM devices
 - [ ] Document USSD error handling and timeout behavior
@@ -115,10 +115,10 @@
 - [x] Determine what data is encrypted and when
 - [x] Check for hardcoded keys or predictable IVs
 - [ ] Audit certificate pinning implementation strength
-- [ ] Audit SharedPreferences for sensitive data storage
-- [ ] Check for root/emulator detection
-- [ ] Audit exported components for unprotected access
-- [ ] Review FileProvider path configuration security
+- [x] Audit SharedPreferences for sensitive data storage
+- [x] Check for root/emulator detection — none found
+- [x] Audit exported components for unprotected access
+- [x] Review FileProvider path configuration security
 
 ## Local Storage
 
@@ -127,7 +127,7 @@
 - [x] Decompile database helper — list all tables and schemas
 - [x] Document what data is persisted locally
 - [x] Trace the CodigoAcceso (access code) table usage
-- [ ] Map SharedPreferences usage across the app
+- [x] Map SharedPreferences usage across the app
 - [ ] Document Nauta account storage (nautaListDao, nautaCuentas)
 
 ## Nauta Integration

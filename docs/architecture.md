@@ -72,9 +72,9 @@ Based on class hierarchy analysis, string references, and named classes:
 
 | Obfuscated Name | Role | Evidence |
 |:---|:---|:---|
-| `prPzLeyxKk` | **Launcher / splash** | `MAIN` + `LAUNCHER` intent filter |
-| `IHVTCBmiLV` | Internal activity | Portrait-locked, config change handling |
-| `S9ycHcoxAzy` | **Deep link handler** | Handles `ACTION_SEND` (text/plain), `ACTION_VIEW` for `https://transfermovil.app/action` and `transfermovil://tm_compra_en_linea/action` |
+| `prPzLeyxKk` | **Launcher / splash** | `MAIN` + `LAUNCHER` intent filter, 3s timeout, routes to Agent or General activity |
+| `IHVTCBmiLV` | **Agent mode main activity** | Uses `drawermenu` (full agent menu), launched when `generalVsAgentVersion()` returns true |
+| `S9ycHcoxAzy` | **General mode main activity** | Uses `drawermenu_general`, handles deep links (`transfermovil.app`, `transfermovil://`), `ACTION_SEND` |
 | `QqWqw83vJf` | Internal activity | No special attributes |
 | `nNLWm3R1aPI.wComYkZMDc` | Custom-themed activity | Config change handling |
 | `FileChooserActivity` | File picker (3rd party) | `ar.com.daidalos.afiledialog` library |

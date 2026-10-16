@@ -207,6 +207,76 @@ This is **obfuscation, not encryption** — fully deterministic and reversible w
 
 > Bank PINs for three banks stored as unencrypted strings. With `debuggable=true` + `allowBackup=true`, full credential extraction is trivial via ADB.
 
+## Exported Components Audit
+
+4 components declared `android:exported="true"` in manifest:
+
+| Component | Type | Protection | Risk |
+|:---|:---|:---|:---|
+| `X9ZiE8XZNKy` | BroadcastReceiver (SMS) | `BROADCAST_SMS` permission | Low — system-protected |
+| `O7xyZJJBFWg` | AccessibilityService | `BIND_ACCESSIBILITY_SERVICE` | Low — system-protected |
+| `prPzLeyxKk` | Activity (launcher) | None (standard launcher) | None |
+| `S9ycHcoxAzy` | Activity (deep links) | None | **High** |
+
+### Deep Link Handler (`S9ycHcoxAzy`)
+
+Handles `ACTION_VIEW` (http/https/transfermovil schemes) and `ACTION_SEND` (text/plain).
+
+**Attack surface**: any app can send an intent with crafted payment parameters:
+- `id_transaccion` — transaction ID
+- `importe` — payment amount
+- `numero_proveedor` — provider number
+- `moneda` — currency
+- `descripcion` — description
+
+These params are parsed from URI query parameters, assembled into a JSON object, and passed directly to `enviarDatos()` → payment fragment (`r7Rinp9ooL` for banks, `s9CT6pjRyD` for MiTransfer). No origin validation, no input sanitization on amount/provider, no confirmation of intent source. User still selects bank from dialog, but pre-filled values could mislead.
+
+**Exploitation**: malicious app sends `Intent(ACTION_VIEW, "transfermovil://pay?id_transaccion=X&importe=99999&numero_proveedor=ATTACKER&moneda=CUP")` → TM opens payment screen with attacker-controlled amount/destination pre-populated.
+
+## FileProvider Configuration
+
+Path config in `app/res/xml/provider_paths.xml`:
+
+```xml
+<cache-path name="cache" path="/" />
+<files-path name="files" path="/" />
+<external-files-path name="files" path="." />
+<external-path name="external" path="." />
+<external-files-path name="external_files" path="." />
+<files-path name="files" path="." />
+```
+
+**Issue**: exposes entire cache, internal files, and external storage directories via content URIs. Any component that generates a `content://` URI from this provider grants read access to the full app sandbox. Combined with `allowBackup=true`, the entire local data store is accessible.
+
+## SharedPreferences Audit
+
+### E-Commerce Module (`SESSION_SHARE_DATA`, mode=MODE_PRIVATE)
+
+Stored in `UhA7J2923N` singleton, all plaintext:
+
+| Key | Content | Risk |
+|:---|:---|:---|
+| `ACCESS_TOKEN` | Bearer auth token | Session hijack if backed up |
+| `CSRF_TOKEN` | XSRF token | CSRF bypass |
+| `TOKEN_TYPE` | Token type string | Low |
+| `API_URL` | Dynamic base URL | API redirect if tampered |
+| `USER_NAME` | E-commerce username | PII exposure |
+| `USER_ID` | E-commerce user ID | PII exposure |
+| `USER_ROL` | User role string | Privilege escalation if tampered |
+| `GRANTS` | Permission grants | Privilege escalation if tampered |
+| `PREF_ACCOUNT` | Account preference | Low |
+| `PREF_CURRENCY` | Currency preference | Low |
+
+MODE_PRIVATE provides app-level isolation, but `allowBackup=true` + `debuggable=true` means all prefs extractable via `adb backup`. Auth tokens, CSRF tokens, and user role stored without encryption.
+
+### Main App SharedPreferences
+
+Main banking module stores sensitive data primarily in ORMLite SQLite (see Database Entities above). SharedPreferences in fragments used for UI state: `returning`, `newEstaditica`, `modulo`, `operacion`, `servicio` — navigation/UI keys, not credentials. Bank PINs go to `BancoService` SQLite table instead.
+
+### No Root/Emulator Detection
+
+No calls to `su`, `/system/xbin/su`, `test-keys`, `Build.FINGERPRINT` checks, `Superuser.apk`, or emulator property checks found in any decompiled source. Banking app with plaintext credentials and no runtime integrity checks.
+
 ## Accessibility Service Security
 
 The USSD response capture service (`O7xyZJJBFWg`) auto-clicks any button labeled "ACEPTAR" on any USSD dialog from `com.android.phone` when `shouldListen=true`. No validation of dialog source content beyond string matching for "USSD", "si", "ok", or "aceptar". A malicious USSD push containing these keywords would be auto-dismissed.
