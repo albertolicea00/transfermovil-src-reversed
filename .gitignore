@@ -14,7 +14,8 @@ Thumbs.db
 *.log
 jadx.log
 apktool.log
-/smali/
+/smali/**
+!/smali/.gitkeep
 
 # Jadx GUI cache directories
 .jadx/

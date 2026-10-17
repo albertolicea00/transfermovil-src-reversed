@@ -97,7 +97,7 @@ For complete details, branching guidelines, and the APK upgrade procedure, see [
 └── README.md
 ```
 
-*Generated files under `.workspace/` and the local `smali/` directory are excluded from Git; `handoff.md` is tracked so a paused session can be resumed. A fresh clone needs the matching APK to regenerate smali, or a separately obtained versioned smali ZIP.*
+*Generated files under `.workspace/` and the local `smali/` directory are excluded from Git, except for `smali/.gitkeep`, which keeps the empty directory in clones. `handoff.md` is tracked so a paused session can be resumed. A fresh clone needs the matching APK to regenerate smali, or a separately obtained versioned smali ZIP.*
 
 Repository inventory for the current target (2026-10-17):
 

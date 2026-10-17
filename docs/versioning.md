@@ -57,7 +57,7 @@ To keep the repository clean and avoid merge overhead between divergent branch s
 
 Keep obfuscated JADX Java in `src/` under Git. Its references support `mappings/classes.json`, full-text search, and line-by-line comparisons between target tags.
 
-Keep Apktool output in the local `smali/` directory, which `.gitignore` excludes. Obfuscation can rename almost every smali file between APKs, limiting Git's cross-version delta compression. Store each version as `.workspace/archives/smali-v<version>.zip` instead of committing either loose smali or the ZIP to Git. The `.workspace/` archive directory is also ignored. A fresh clone therefore has no smali until the matching APK is decompiled or a versioned ZIP is obtained separately.
+Keep Apktool output in the local `smali/` directory. Git tracks only `smali/.gitkeep` so the directory exists in fresh clones; `.gitignore` excludes the disassembly files. Obfuscation can rename almost every smali file between APKs, limiting Git's cross-version delta compression. Store each version as `.workspace/archives/smali-v<version>.zip` instead of committing either loose smali or the ZIP to Git. The `.workspace/` archive directory is also ignored. A fresh clone therefore has no disassembly until the matching APK is decompiled or a versioned ZIP is obtained separately.
 
 Current local archive: `smali-v1.260416.zip`, SHA-256 `77dd5055bd0b9b5e0dea8bf9fb459858170739892fc78a8a9be73f4c12778737`. It contains the top-level `smali/` directory and can be restored with:
 
