@@ -155,6 +155,216 @@
       "clean": "cu.etecsa.transfermovil.data.entity.AuthSession",
       "role": "ORMLite entity: auth state per operation (isAuth, authDate for 30-min window)",
       "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ITMDataDatabase": {
+      "clean": "cu.etecsa.transfermovil.data.ITMDataDatabase",
+      "role": "Interface: entities implement getMetadata() returning table schema descriptor",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AppConfig": {
+      "clean": "cu.etecsa.transfermovil.data.entity.AppConfig",
+      "role": "ORMLite entity: device config (access code, IMEI plaintext, feature flags)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Client": {
+      "clean": "cu.etecsa.transfermovil.data.entity.Client",
+      "role": "ORMLite entity: registered client (name, phone, CI, address). getPhone() hardcoded '66666666'",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CompraBoleto": {
+      "clean": "cu.etecsa.transfermovil.data.entity.TicketPurchase",
+      "role": "ORMLite entity: ticket purchase record (token, offer, amount, state, expiry)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CompraPlanesCubacel": {
+      "clean": "cu.etecsa.transfermovil.data.entity.CubacelPlan",
+      "role": "ORMLite entity: Cubacel data plan purchase (JADX artifact with duplicate fields)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CuentaBanco": {
+      "clean": "cu.etecsa.transfermovil.data.entity.BankAccountCard",
+      "role": "ORMLite entity: bank account card (cuenta ENCRYPTED via AES/ECB, FK→Client)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Factura": {
+      "clean": "cu.etecsa.transfermovil.data.entity.Invoice",
+      "role": "ORMLite entity: utility invoice (factura, tipo, cod_factura, FK→Client)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank": {
+      "clean": "cu.etecsa.transfermovil.data.entity.MobileCardBank",
+      "role": "ORMLite entity: mobile card bank account (cuenta ENCRYPTED, alias, agency)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MiBoletoService": {
+      "clean": "cu.etecsa.transfermovil.data.entity.TicketServiceAccount",
+      "role": "Entity: MiBoleto service account (code, phone). Missing @DatabaseTable",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Municipio": {
+      "clean": "cu.etecsa.transfermovil.data.entity.Municipality",
+      "role": "ORMLite entity: municipality with province code (geographic reference)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Nauta": {
+      "clean": "cu.etecsa.transfermovil.data.entity.NautaAccount",
+      "role": "ORMLite entity: Nauta internet account (cuenta, tipo, FK→Client)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.EntidadesModel": {
+      "clean": "cu.etecsa.transfermovil.data.entity.EntityType",
+      "role": "Enum: data entity types (Clientes, Pines, Nautas, Moviles, Fijos, Factura)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.OfertasBoleto": {
+      "clean": "cu.etecsa.transfermovil.data.entity.TicketOffer",
+      "role": "ORMLite entity: ticket offer (nombre, precio, moneda, validity, capacity)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Operacion": {
+      "clean": "cu.etecsa.transfermovil.data.entity.Operation",
+      "role": "ORMLite entity: UI operation entry (title, fragment, order, bank type)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Pin": {
+      "clean": "cu.etecsa.transfermovil.data.entity.PinEntry",
+      "role": "ORMLite entity: stored PIN with description. ITMDataDatabase",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.PromoSMS": {
+      "clean": "cu.etecsa.transfermovil.data.entity.SmsPromotion",
+      "role": "ORMLite entity: SMS promotional message with date range and bank type",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Provincia": {
+      "clean": "cu.etecsa.transfermovil.data.entity.Province",
+      "role": "ORMLite entity: province (cod_provincia PK, nombre, abreviatura)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.RecordOferta": {
+      "clean": "cu.etecsa.transfermovil.data.entity.OfferRecord",
+      "role": "ORMLite entity: offer transaction record with validation. ITMDataDatabase",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.RecordSMS": {
+      "clean": "cu.etecsa.transfermovil.data.entity.SmsRecord",
+      "role": "ORMLite entity: SMS transaction record with validation. ITMDataDatabase",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ServicioPublico": {
+      "clean": "cu.etecsa.transfermovil.data.entity.PublicService",
+      "role": "ORMLite entity: public utility service (FK→Client). ITMDataDatabase",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TCTicket": {
+      "clean": "cu.etecsa.transfermovil.data.entity.TransportTicket",
+      "role": "ORMLite entity: transport/commerce ticket (serie, importe, consumido). ITMDataDatabase",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TMonedasWallet": {
+      "clean": "cu.etecsa.transfermovil.data.entity.WalletCurrency",
+      "role": "ORMLite entity: wallet currency type (allowTransfer flag)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TarjetaPropia": {
+      "clean": "cu.etecsa.transfermovil.data.entity.OwnCard",
+      "role": "ORMLite entity: own magnetic card (serie, tipo_moneda, FK→Client). ITMDataDatabase",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TeflMovil": {
+      "clean": "cu.etecsa.transfermovil.data.entity.MobilePhone",
+      "role": "ORMLite entity: mobile phone number (FK→Client). ITMDataDatabase",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TelfFijo": {
+      "clean": "cu.etecsa.transfermovil.data.entity.Landline",
+      "role": "ORMLite entity: landline phone number (FK→Client). ITMDataDatabase",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Tributo": {
+      "clean": "cu.etecsa.transfermovil.data.entity.TaxEntry",
+      "role": "ORMLite entity: tax/tribute entry. BUG: getMetadata() says 'Nauta' not 'Tributo'",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Canal": {
+      "clean": "cu.etecsa.transfermovil.data.model.Channel",
+      "role": "POJO: payment channel (nombre, id, consecutivo, esDePago)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CiudadesPatrimoniales": {
+      "clean": "cu.etecsa.transfermovil.data.model.HeritageCity",
+      "role": "POJO: heritage city reference (code, nombre, abreviatura)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.DenominacionSello": {
+      "clean": "cu.etecsa.transfermovil.data.model.StampDenomination",
+      "role": "POJO: postal stamp denomination (importe, nombre, moneda)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Empresa": {
+      "clean": "cu.etecsa.transfermovil.data.model.Company",
+      "role": "POJO: company/enterprise with ministry (code, empresa, ministerio)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.EntidadEfectivo": {
+      "clean": "cu.etecsa.transfermovil.data.model.CashEntity",
+      "role": "POJO: cash handling entity (code, nombre, moneda)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MultasTransito": {
+      "clean": "cu.etecsa.transfermovil.data.model.TrafficFine",
+      "role": "POJO: traffic fine (articulo, inciso, descripcion, peligrosidad)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ObligacionesOFA": {
+      "clean": "cu.etecsa.transfermovil.data.model.OfaObligation",
+      "role": "POJO: OFA/ONAT tax obligation (code, descripcion, abreviatura)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ReservasOFA": {
+      "clean": "cu.etecsa.transfermovil.data.model.OfaReservation",
+      "role": "POJO: OFA reservation with dual pricing (national/foreign)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ServicioSucursal": {
+      "clean": "cu.etecsa.transfermovil.data.model.BranchService",
+      "role": "POJO: branch service mapping (codDpa, codServicio, nomServicio)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalBancaria": {
+      "clean": "cu.etecsa.transfermovil.data.model.BankBranch",
+      "role": "POJO: bank branch (codigoSucursal, dpa, titulo)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalCadeca": {
+      "clean": "cu.etecsa.transfermovil.data.model.CadecaBranch",
+      "role": "POJO: CADECA exchange office (cod_mun, dpa, titulo)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalGas": {
+      "clean": "cu.etecsa.transfermovil.data.model.GasStation",
+      "role": "POJO: gas station (codigoPovincia, dpa, titulo)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TipoPrelacion": {
+      "clean": "cu.etecsa.transfermovil.data.model.PriorityType",
+      "role": "POJO: tax priority type (code, descripcion)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.QRCombustible": {
+      "clean": "cu.etecsa.transfermovil.data.qr.QrFuelData",
+      "role": "POJO: QR data for fuel purchase (Pin, Token)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.QRData": {
+      "clean": "cu.etecsa.transfermovil.data.qr.QrPaymentData",
+      "role": "POJO: QR payment data with Gson @SerializedName (pin, token, ci, details)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.QRMiBoleto": {
+      "clean": "cu.etecsa.transfermovil.data.qr.QrTicketData",
+      "role": "POJO: QR MiBoleto ticket data with pipe-delimited detail parser",
+      "confidence": "high"
     }
   },
   "fields": {
@@ -200,6 +410,106 @@
     "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.R1sDOSqZ2z": {
       "clean": "cu.etecsa.transfermovil.banking.BankType",
       "role": "Bank identifier enum (BPA, BANDEC, Metropolitano, MiTransfer, BFI)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.qTDVwLFEjE": {
+      "clean": "cu.etecsa.transfermovil.core.enums.Currency",
+      "role": "Currency enum (14 values: CUP, CUC, USD, EUR, etc.)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.HrLy23Pb9b": {
+      "clean": "cu.etecsa.transfermovil.core.enums.AuthAction",
+      "role": "Auth action enum (AUTENTICAR, REGISTRO, RESTABLECER)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.KYTjPlWScT": {
+      "clean": "cu.etecsa.transfermovil.core.enums.AgentSource",
+      "role": "Agent bank/source enum (Agentes, BancoMetro, BancoBPA, BancoBANDEC, BolsaEtecsa)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.RiZsr8xXRC": {
+      "clean": "cu.etecsa.transfermovil.core.enums.AccountType",
+      "role": "Account mode enum (CON_CUENTA, SIN_CUENTA)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.f9CS9TjtF3": {
+      "clean": "cu.etecsa.transfermovil.core.enums.MenuType",
+      "role": "QR/menu mode enum (DINAMICO, ESTATICO)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.h79qmyRfm3": {
+      "clean": "cu.etecsa.transfermovil.core.enums.AppStore",
+      "role": "App store enum (UCIAPKLIST, UCIAPKTODUS, CIMEX, TURISMO)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.jceCwl8l2R": {
+      "clean": "cu.etecsa.transfermovil.core.enums.AccountSelection",
+      "role": "Account selection enum (VACIO, MONEDA, MIS_CUENTAS, NUEVA_CUENTA)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.x8AaGMBO19": {
+      "clean": "cu.etecsa.transfermovil.core.enums.CardFormat",
+      "role": "Card format enum (PAN, ESTANDARIZADA, NONE)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.y2Cht3lmjg": {
+      "clean": "cu.etecsa.transfermovil.core.enums.PaymentType",
+      "role": "Payment type enum (ParcialFijoMensual, ParcialFijoAnual, etc.)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.WfyP4YvyPu": {
+      "clean": "cu.etecsa.transfermovil.core.PermissionGrantCallback",
+      "role": "Callback interface for runtime permission results"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.As6QBoLoQJ": {
+      "clean": "cu.etecsa.transfermovil.core.TransactionData",
+      "role": "Static holder for current transaction params (bolsa, cantidad, ci, monto, phone, etc.)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.O40QmFq77yZ": {
+      "clean": "cu.etecsa.transfermovil.core.ImportFlag",
+      "role": "Singleton flag: SMS data import status"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.fqW5f4qWn2": {
+      "clean": "cu.etecsa.transfermovil.util.DeviceInfo",
+      "role": "TelephonyManager wrapper: phone number and IMEI"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.upY36rhCRL": {
+      "clean": "cu.etecsa.transfermovil.core.PermissionRequester",
+      "role": "ActivityResultLauncher wrapper for single-permission requests"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.UkO3Y6TcHD": {
+      "clean": "cu.etecsa.transfermovil.util.Sha256Util",
+      "role": "SHA-256 hash to hex string utility"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.UaLAvTSm1e": {
+      "clean": "cu.etecsa.transfermovil.util.DatePickerData",
+      "role": "Singleton: day/month/year arrays for date picker spinners"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rIgmgP6JXL": {
+      "clean": "cu.etecsa.transfermovil.sms.SmsMessage",
+      "role": "POJO for SMS inbox entries (address, body, date)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.HzjedYqYeh": {
+      "clean": "cu.etecsa.transfermovil.sms.SmsSender",
+      "role": "SMS send + PAGOxMOVIL inbox reader"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.HPuMiTypoW": {
+      "clean": "cu.etecsa.transfermovil.sms.SmsImportTask",
+      "role": "AsyncTask: import PAGOxMOVIL SMS → RecordSMS in DB"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.XYfkGsUkKH": {
+      "clean": "cu.etecsa.transfermovil.sms.FuelSmsImportTask",
+      "role": "AsyncTask: import fuel/combustible SMS"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.DHfGEge8yT": {
+      "clean": "cu.etecsa.transfermovil.sms.OffersSmsTask",
+      "role": "AsyncTask: process today's offer SMS"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.UrwqJEz77K": {
+      "clean": "cu.etecsa.transfermovil.util.ApkDownloader",
+      "role": "APK download via DownloadManager + FileProvider install"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ": {
+      "clean": "cu.etecsa.transfermovil.core.GlobalState",
+      "role": "Global mutable state: transaction params, debug log, wire transfer fee calc, agent check"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.Ytn7eH8pGB": {
+      "clean": "cu.etecsa.transfermovil.ui.widget.CustomAutoCompleteTextView",
+      "role": "AutoCompleteTextView with configurable threshold (allows 0)"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX": {
+      "clean": "cu.etecsa.transfermovil.ui.widget.DropdownSpinnerView",
+      "role": "AutoCompleteTextView as dropdown spinner with accessibility AlertDialog fallback"
     }
   }
 }
