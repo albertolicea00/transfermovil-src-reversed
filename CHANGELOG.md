@@ -2,6 +2,8 @@
 
 ## 2026-10-17 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Recorded 28 interrupted Java reconstruction drafts for later review; several contain stubs and two represent the same obfuscated `OperationMenuBuilder` class.
+- Added reusable `.workspace/handoff.md` with verified file counts, coverage limitations, unresolved source groups, and steps for resuming work.
 - Defined repository versioning strategy and release lifecycle: established target-coupled Semantic Versioning (`MAJOR.MINOR.PATCH`) where MAJOR bumps track new upstream Transfermóvil APK releases, MINOR tracks reconstruction/mapping milestones, and PATCH tracks fixes.
 - Created `docs/versioning.md`: documented single-branch workflow (`main`), Git tag conventions (`target-v<version>` and `v<SemVer>`), native uncompressed text storage rationale, cross-version diffing commands, and step-by-step target upgrade procedure.
 - Updated `README.md` and `AGENTS.md` with versioning strategy overview and documentation links.

@@ -45,3 +45,4 @@ dist/
 .workspace/**
 !.workspace/**/
 !.workspace/**/.gitkeep
+!.workspace/handoff.md
