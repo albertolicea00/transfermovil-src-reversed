@@ -10,21 +10,6 @@
 
 This repository contains reverse-engineered source code, extracted resources, and structural analysis of the Transfermóvil client binary. The primary objective is to inspect implementation details, verify communication protocols (USSD/SMS/HTTP), and document internal logic.
 
-Repository inventory for the current target (2026-10-17):
-
-| Item | Count | Location |
-| :--- | ---: | :--- |
-| Decompiled Java files | 794 | `src/` (including 596 in the main app package) |
-| Clean Java reconstruction files | 504 | `app/src/main/java/` |
-| Smali files | 3,439 | `smali/` |
-| Extracted resource files | 35 | `app/res/` |
-| Extracted asset files | 32 | `app/assets/` |
-| Topic documents | 11 | `docs/` |
-| Class mappings | 72 | `mappings/classes.json` |
-| Analysis scripts | 4 | `scripts/` |
-
-These are file and mapping counts, not a measure of reconstruction completeness; some clean classes are partial or duplicate the same original class.
-
 > [!WARNING]
 > **Disclaimer:** This repository is strictly intended for interoperability research, protocol analysis, and security auditing. All original application logic, trademarks, and associated intellectual property belong to ETECSA. No proprietary binaries are hosted for redistribution.
 
@@ -71,6 +56,22 @@ See the [task list](TODO.md) and the current [session handoff](.workspace/handof
 
 For work in progress, use the [task list](TODO.md) and the temporary [session handoff](.workspace/handoff.md). [CHANGELOG.md](CHANGELOG.md) records completed changes; [AGENTS.md](AGENTS.md) is the repository guide for contributors and coding agents.
 
+---
+
+## Versioning Strategy
+
+This project uses a Semantic Versioning scheme (`MAJOR.MINOR.PATCH`) mapped directly to Transfermóvil releases:
+
+* **MAJOR (`X.0.0`):** Increments **only** when a new Transfermóvil APK version is targeted and imported (e.g., `1.0.0` for APK v1.260416, `2.0.0` for the next APK release).
+* **MINOR (`x.Y.0`):** Increments for significant reconstruction milestones, new class mappings, and architectural documentation for the current target.
+* **PATCH (`x.y.Z`):** Increments for bug fixes, mapping corrections, and minor improvements.
+
+The project follows a **single-branch workflow** (`main`) with version and baseline tags (`target-v<version>` and `v<SemVer>`), allowing immediate line-by-line diffing between APK releases using standard `git diff`.
+
+For complete details, branching guidelines, and the APK upgrade procedure, see [docs/versioning.md](docs/versioning.md).
+
+---
+
 ## Project structure
 
 ```text
@@ -95,23 +96,22 @@ For work in progress, use the [task list](TODO.md) and the temporary [session ha
 └── README.md
 ```
 
-Most generated files under `.workspace/` are excluded from Git; `handoff.md` is tracked so a paused session can be resumed.
+*Most generated files under `.workspace/` are excluded from Git; `handoff.md` is tracked so a paused session can be resumed.*
 
----
+Repository inventory for the current target (2026-10-17):
 
-## Versioning Strategy
+| Item | Count | Location |
+| :--- | ---: | :--- |
+| Decompiled Java files | 794 | `src/` (including 596 in the main app package) |
+| Clean Java reconstruction files | 504 | `app/src/main/java/` |
+| Smali files | 3,439 | `smali/` |
+| Extracted resource files | 35 | `app/res/` |
+| Extracted asset files | 32 | `app/assets/` |
+| Topic documents | 11 | `docs/` |
+| Class mappings | 72 | `mappings/classes.json` |
+| Analysis scripts | 4 | `scripts/` |
 
-This project uses a Semantic Versioning scheme (`MAJOR.MINOR.PATCH`) mapped directly to Transfermóvil releases:
-
-* **MAJOR (`X.0.0`):** Increments **only** when a new Transfermóvil APK version is targeted and imported (e.g., `1.0.0` for APK v1.260416, `2.0.0` for the next APK release).
-* **MINOR (`x.Y.0`):** Increments for significant reconstruction milestones, new class mappings, and architectural documentation for the current target.
-* **PATCH (`x.y.Z`):** Increments for bug fixes, mapping corrections, and minor improvements.
-
-The project follows a **single-branch workflow** (`main`) with version and baseline tags (`target-v<version>` and `v<SemVer>`), allowing immediate line-by-line diffing between APK releases using standard `git diff`.
-
-For complete details, branching guidelines, and the APK upgrade procedure, see [docs/versioning.md](docs/versioning.md).
-
----
+*These are file and mapping counts, not a measure of reconstruction completeness; some clean classes are partial or duplicate the same original class.*
 
 ## Legal Notice
 
