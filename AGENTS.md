@@ -10,6 +10,7 @@
 - `docs/storage.md`: SQLite schema (26 tables), ORMLite entities, migration logic, SharedPreferences.
 - `docs/domain-model.md`: complete entity catalog (45 classes, 47 operations, 14 currencies), enum mappings, security findings.
 - `docs/ecommerce.md`: e-commerce API client, 33 endpoints, login flow, TLS bypass, session management.
+- `docs/versioning.md`: versioning strategy, SemVer mapping to target APKs, git tagging, and cross-version diffing.
 - `mappings/classes.json`: obfuscated → clean class/field/enum name mappings with roles and confidence.
 - Keep detailed procedures in separate `docs/*.md` files and add a one-line summary and link here for each new document.
 - Read only the documentation relevant to the current task.

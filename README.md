@@ -46,6 +46,20 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 
 ---
 
+## Versioning Strategy
+
+This project uses a Semantic Versioning scheme (`MAJOR.MINOR.PATCH`) mapped directly to Transfermóvil releases:
+
+* **MAJOR (`X.0.0`):** Increments **only** when a new Transfermóvil APK version is targeted and imported (e.g., `1.0.0` for APK v1.260416, `2.0.0` for the next APK release).
+* **MINOR (`x.Y.0`):** Increments for significant reconstruction milestones, new class mappings, and architectural documentation for the current target.
+* **PATCH (`x.y.Z`):** Increments for bug fixes, mapping corrections, and minor improvements.
+
+The project follows a **single-branch workflow** (`main`) with version and baseline tags (`target-v<version>` and `v<SemVer>`), allowing immediate line-by-line diffing between APK releases using standard `git diff`.
+
+For complete details, branching guidelines, and the APK upgrade procedure, see [docs/versioning.md](docs/versioning.md).
+
+---
+
 ## Legal Notice
 
 **This is not the official source code for Transfermóvil.** It is a close approximation reconstructed from the publicly distributed build of the application for research purposes.
