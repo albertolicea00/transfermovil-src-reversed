@@ -2,7 +2,7 @@
 
 ## 2026-10-17 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
-- Added repository inventory statistics, a documentation index, and a project tree to `README.md`; removed an undefined completion percentage and fixed the task-list link.
+- Added repository inventory statistics, a documentation index, and a project tree to `README.md`; replaced the misleading all-checked list with explicit project statuses, removed an undefined completion percentage, and fixed the task-list link.
 - Added TODO documents for an evidence-backed USSD code catalog and iOS port feasibility, with links from the repository guide and task list.
 - Committed 28 interrupted Java reconstruction drafts for later review; several contain stubs and two represent the same obfuscated `OperationMenuBuilder` class.
 - Added reusable `.workspace/handoff.md` with verified file counts, coverage limitations, unresolved source groups, and steps for resuming work.

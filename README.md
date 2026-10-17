@@ -6,9 +6,6 @@
 ![Target SDK](https://img.shields.io/badge/Target%20SDK-33-green?style=flat-square)
 ![Last Update](https://img.shields.io/badge/Last%20Update-October%202026-lightgrey?style=flat-square)
 
-<!-- 50 blocks (each block █ = 2%) (░ empty blocks) -->
-<span style="white-space: nowrap;"><code>[███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░] 47%</code></span>
-
 ## Overview
 
 This repository contains reverse-engineered source code, extracted resources, and structural analysis of the Transfermóvil client binary. The primary objective is to inspect implementation details, verify communication protocols (USSD/SMS/HTTP), and document internal logic.
@@ -44,18 +41,17 @@ These are file and mapping counts, not a measure of reconstruction completeness;
 
 See [metadata extraction](docs/target-metadata.md) to reproduce these values from the APK.
 
-## Extraction & Analysis Progress
+## Project status
 
-- [x] Identify the target APK and verify its SHA-256 hash.
-- [x] Extract and document package, version, and SDK metadata.
-- [x] Inventory the APK contents and record the extraction tools used.
-- [x] Decode the manifest and resources.
-- [x] Decompile the bytecode and check the quality and completeness of the output.
-- [x] Organize the extracted files in the repository.
-- [x] Review what was extracted and define the next analysis tasks from the evidence.
-- [x] Document verified findings in focused `docs/` files.
+| Area | Status | Current state |
+| :--- | :--- | :--- |
+| APK identification and extraction | Complete for the current APK | Metadata, manifest, resources, JADX Java, and smali are available. |
+| Clean Java reconstruction | In progress | 504 files exist; some are partial, contain stubs, or duplicate an original class. |
+| Protocol and feature analysis | In progress | Topic documents contain findings; the complete USSD code catalog remains a TODO. |
+| iOS port research | Planned | Feasibility, platform limits, and feature parity remain TODOs. |
+| Build and behavioral validation | Pending | The reconstructed Java tree has not been compiled or verified as a working app. |
 
-The checklist covers extraction and initial analysis, not the completeness of the reconstructed Java source. See the [task list](TODO.md) and the current [session handoff](.workspace/handoff.md) for remaining work.
+See the [task list](TODO.md) and the current [session handoff](.workspace/handoff.md) for specific remaining work. No overall completion percentage has been verified.
 
 ## Documentation
 
