@@ -1,4 +1,4 @@
-# Transfermovile Source (Reversed)
+# Transfermóvil Source (Reversed)
 
 ![Target Version](https://img.shields.io/badge/Target%20Version-1.260416-blue?style=flat-square)
 ![Version Code](https://img.shields.io/badge/Version%20Code-162-informational?style=flat-square)
@@ -12,6 +12,21 @@
 ## Overview
 
 This repository contains reverse-engineered source code, extracted resources, and structural analysis of the Transfermóvil client binary. The primary objective is to inspect implementation details, verify communication protocols (USSD/SMS/HTTP), and document internal logic.
+
+Repository inventory for the current target (2026-10-17):
+
+| Item | Count | Location |
+| :--- | ---: | :--- |
+| Decompiled Java files | 794 | `src/` (including 596 in the main app package) |
+| Clean Java reconstruction files | 504 | `app/src/main/java/` |
+| Smali files | 3,439 | `smali/` |
+| Extracted resource files | 35 | `app/res/` |
+| Extracted asset files | 32 | `app/assets/` |
+| Topic documents | 11 | `docs/` |
+| Class mappings | 72 | `mappings/classes.json` |
+| Analysis scripts | 4 | `scripts/` |
+
+These are file and mapping counts, not a measure of reconstruction completeness; some clean classes are partial or duplicate the same original class.
 
 > [!WARNING]
 > **Disclaimer:** This repository is strictly intended for interoperability research, protocol analysis, and security auditing. All original application logic, trademarks, and associated intellectual property belong to ETECSA. No proprietary binaries are hosted for redistribution.
@@ -40,9 +55,51 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 - [x] Review what was extracted and define the next analysis tasks from the evidence.
 - [x] Document verified findings in focused `docs/` files.
 
-> **Note:** Specific analysis tasks will be decided after inspecting the decompiled APK. The checklist does not assume which features or components the app contains.
+The checklist covers extraction and initial analysis, not the completeness of the reconstructed Java source. See the [task list](TODO.md) and the current [session handoff](.workspace/handoff.md) for remaining work.
 
-*Check out the [TODO](../TODO.md) file for our complete development roadmap.*
+## Documentation
+
+| Document | Contents |
+| :--- | :--- |
+| [Target metadata](docs/target-metadata.md) | APK identity, version, SDK levels, and SHA-256 extraction. |
+| [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
+| [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |
+| [USSD code catalog TODO](docs/ussd-code-catalog.md) | Planned inventory of executed codes, their purposes, and construction algorithms. |
+| [Networking](docs/networking.md) | HTTP stack, URLs, tokens, TLS, and local persistence. |
+| [Security](docs/security.md) | Cryptography, key handling, and security findings. |
+| [Storage](docs/storage.md) | SQLite schema, ORMLite entities, migrations, and preferences. |
+| [Domain model](docs/domain-model.md) | Entities, operations, currencies, and enum mappings. |
+| [E-commerce](docs/ecommerce.md) | API client, endpoints, authentication, and sessions. |
+| [Versioning](docs/versioning.md) | Repository versions, tags, and cross-version comparisons. |
+| [iOS port TODO](docs/ios-port-todo.md) | Planned feasibility study, platform limits, and feature parity decisions. |
+
+For work in progress, use the [task list](TODO.md) and the temporary [session handoff](.workspace/handoff.md). [CHANGELOG.md](CHANGELOG.md) records completed changes; [AGENTS.md](AGENTS.md) is the repository guide for contributors and coding agents.
+
+## Project structure
+
+```text
+.
+├── app/
+│   ├── assets/                     Extracted JSON and other assets
+│   ├── res/                        Extracted Android resources
+│   └── src/main/java/             Clean, still incomplete Java reconstruction
+├── src/                           Raw, obfuscated JADX Java output
+├── smali/                         Dalvik disassembly
+├── mappings/
+│   └── classes.json               Obfuscated-to-clean name mappings
+├── docs/                          Topic-specific analysis and TODOs
+├── scripts/                       Extraction, verification, and search tools
+├── .workspace/
+│   ├── handoff.md                  Temporary pause/resume note, tracked by Git
+│   └── bin/                        Local APK inputs
+├── Makefile                        Analysis commands
+├── TODO.md                         Remaining project tasks
+├── CHANGELOG.md                    Completed changes by analysis session
+├── AGENTS.md                       Repository working guide
+└── README.md
+```
+
+Most generated files under `.workspace/` are excluded from Git; `handoff.md` is tracked so a paused session can be resumed.
 
 ---
 
