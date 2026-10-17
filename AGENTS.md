@@ -5,12 +5,14 @@
 - `docs/target-metadata.md`: how to extract package, version, SDK levels, and SHA-256 from an APK.
 - `docs/architecture.md`: manifest components, navigation structure, dependencies, obfuscation, asset data.
 - `docs/telephony.md`: USSD codes, SMS handling, accessibility-based USSD response capture.
+- `docs/ussd-code-catalog.md`: TODO for an evidence-backed catalog of executed USSD codes, purposes, and construction algorithms.
 - `docs/networking.md`: OkHttp stack, known URLs, auth tokens, TLS/cert pinning, local storage (ORMLite/SharedPrefs).
 - `docs/security.md`: cryptographic schemes (7 AES variants), hardcoded keys, key derivation, security assessment.
 - `docs/storage.md`: SQLite schema (26 tables), ORMLite entities, migration logic, SharedPreferences.
 - `docs/domain-model.md`: complete entity catalog (45 classes, 47 operations, 14 currencies), enum mappings, security findings.
 - `docs/ecommerce.md`: e-commerce API client, 33 endpoints, login flow, TLS bypass, session management.
 - `docs/versioning.md`: versioning strategy, SemVer mapping to target APKs, git tagging, and cross-version diffing.
+- `docs/ios-port-todo.md`: TODO for iOS port feasibility, platform limits, and feature-by-feature migration planning.
 - `.workspace/handoff.md`: current pause/resume handoff; update it when stopping work and remove it when work resumes.
 - `mappings/classes.json`: obfuscated → clean class/field/enum name mappings with roles and confidence.
 - Keep detailed procedures in separate `docs/*.md` files and add a one-line summary and link here for each new document.

@@ -29,6 +29,7 @@
 
 ## USSD / Telephony
 
+- [ ] Complete the dedicated [USSD code catalog](docs/ussd-code-catalog.md): every executed code, purpose, construction algorithm, and source evidence.
 - [x] Document USSD send mechanism (tel: intent + CALL_PHONE)
 - [x] Document accessibility service USSD response capture
 - [x] List discovered USSD codes (*222*, *100*, *111, *133, *234)
@@ -154,6 +155,10 @@
 - [ ] Test USSD code sending (with mock/test only)
 - [ ] Capture network traffic for API calls
 - [ ] Test deep link handling
+
+## iOS Port
+
+- [ ] Complete the [iOS port feasibility and plan](docs/ios-port-todo.md), including public API limits and a feature parity decision.
 
 ## Miscellaneous
 
