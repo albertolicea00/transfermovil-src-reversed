@@ -6,6 +6,9 @@
 ![Target SDK](https://img.shields.io/badge/Target%20SDK-33-green?style=flat-square)
 ![Last Update](https://img.shields.io/badge/Last%20Update-October%202026-lightgrey?style=flat-square)
 
+<!-- 50 blocks (each block █ = 2%) (░ empty blocks) --> <!-- do not delete this progress-bar-->
+<span style="white-space: nowrap;"><code>[███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░] 47%</code></span>
+
 ## Overview
 
 This repository contains reverse-engineered source code, extracted resources, and structural analysis of the Transfermóvil client binary. The primary objective is to inspect implementation details, verify communication protocols (USSD/SMS/HTTP), and document internal logic.
@@ -66,6 +69,12 @@ Release names and Git tags use `<APK versionName>.<APK versionCode>-v<internal v
 The project follows a **single-branch workflow** (`main`). Raw JADX Java in `src/` stays in Git for mapping references and cross-version diffs. Smali stays in the local `smali/` directory, ignored by Git, with APK-specific ZIPs in `.workspace/archives/` for local comparison or possible future Release assets.
 
 For complete details, branching guidelines, and the APK upgrade procedure, see [docs/versioning.md](docs/versioning.md).
+
+## Tag History
+
+| Tag | APK version | Version code | Internal release | GitHub Release |
+| :--- | :--- | ---: | :--- | :--- |
+| [`1.260416.162-v1.0`](https://github.com/albertolicea00/transfermovil-src-reversed/tree/1.260416.162-v1.0) | `1.260416` | `162` | `v1.0` | Not published |
 
 ---
 

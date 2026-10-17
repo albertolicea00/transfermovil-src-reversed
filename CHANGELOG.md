@@ -7,7 +7,8 @@
 - Updated the versioning procedure and README to reflect local smali archives and Git-tracked JADX sources.
 - Added a tracked `smali/.gitkeep` placeholder so fresh clones retain the empty directory while disassembly remains ignored.
 - Replaced the planned SemVer and dual-tag scheme with APK version, versionCode, and internal release tags (`1.260416.162-v1.0`); renamed the local smali archive to `smali-1.260416.162.zip`.
-- Created the first local annotated tag, `1.260416.162-v1.0`, for the current project release; no GitHub Release exists yet.
+- Created and pushed the annotated tag `1.260416.162-v1.0`; no GitHub Release entry exists yet.
+- Added a README tag history table showing the available release tag and APK metadata.
 
 ## 2026-10-17 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
