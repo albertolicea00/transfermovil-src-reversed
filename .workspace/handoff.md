@@ -16,7 +16,7 @@ The user asked to stop reconstruction, document the state, and save existing wor
 | --- | ---: | --- |
 | Java files in `src/cu/etecsa/cubacel/tr/tm/` | 596 | JADX files in the main package, including generated files. |
 | Java files already committed before this handoff | 476 | Files tracked by Git at the start of this session. |
-| Drafts left after those commits | 28 | Untracked files at the start of this session; preserved for review. |
+| Drafts left after those commits | 28 | Previously untracked; committed as incomplete work for later review. |
 | Java files visible in `app/src/main/java/` | 504 | File count, **not** a percentage of faithful reconstruction. |
 | Unique `@obfuscated_class` identifiers | 433 | 372 match Java source paths in `src/` exactly. |
 | `src/` Java files without an exact annotation match | 224 | Review queue; not necessarily 224 missing reconstructions. |
