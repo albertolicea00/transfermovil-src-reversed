@@ -1,7 +1,7 @@
 # Repository guide
 - Goal: reverse engineer the Transfermóvil Android client for interoperability, protocol analysis, and security research.
-- Structure: `app/` holds clean reconstructed source and resources; `src/` holds raw JADX decompiled output (obfuscated); `mappings/` holds obfuscated-to-clean name mappings; `smali/` holds disassembly; `scripts/` holds tooling; `docs/` holds topic-specific notes.
-- `.workspace/bin/` holds local APK inputs; `.workspace/handoff.md` is a temporary, versioned pause/resume note; `README.md` shows the current target metadata; `CHANGELOG.md` tracks substantive project changes.
+- Structure: `app/` holds clean reconstructed source and resources; `src/` holds tracked raw JADX output (obfuscated); `mappings/` holds obfuscated-to-clean name mappings; `smali/` holds local, Git-ignored disassembly; `scripts/` holds tooling; `docs/` holds topic-specific notes.
+- `.workspace/bin/` holds local APK inputs; `.workspace/archives/` holds local versioned smali ZIPs; `.workspace/handoff.md` is a temporary, versioned pause/resume note; `README.md` shows the current target metadata; `CHANGELOG.md` tracks substantive project changes.
 - `docs/target-metadata.md`: how to extract package, version, SDK levels, and SHA-256 from an APK.
 - `docs/architecture.md`: manifest components, navigation structure, dependencies, obfuscation, asset data.
 - `docs/telephony.md`: USSD codes, SMS handling, accessibility-based USSD response capture.

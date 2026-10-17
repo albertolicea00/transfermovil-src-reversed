@@ -48,19 +48,24 @@ To keep the repository clean and avoid merge overhead between divergent branch s
 
 | Tag Pattern | Purpose | Example |
 | :--- | :--- | :--- |
-| `target-v<version>` | Marks the exact commit of raw decompiled baseline files (`src/`, `smali/`, assets) for an APK. | `target-v1.260416` |
+| `target-v<version>` | Marks the committed baseline (`src/`, assets, manifest) for an APK; the matching smali ZIP is stored separately. | `target-v1.260416` |
 | `v<MAJOR>.<MINOR>.<PATCH>` | Marks project releases encompassing reconstructed code, mappings, and documentation. | `v1.0.0`, `v1.1.0` |
 
 ---
 
-## 3. Why Text-Based `src/` and `smali/` are Kept Uncompressed
+## 3. Decompiled Source and Local Smali Archives
 
-Decompiled Java source (`src/`) and Dalvik disassembly (`smali/`) are stored as loose text files rather than compressed archives (such as `.zip`):
+Keep obfuscated JADX Java in `src/` under Git. Its references support `mappings/classes.json`, full-text search, and line-by-line comparisons between target tags.
 
-1. **Native Git Diffing:** Git cannot display line-by-line differences of `.zip` or compressed files. Storing uncompressed text allows `git diff` to show exact modifications across app updates.
-2. **Delta Compression Efficiency:** Git's internal packfile storage computes deltas between commits of text files. Re-compressing into a `.zip` would force Git to store full binary blobs for every release, rapidly bloating the `.git` directory.
-3. **Full-Text Search & Grep:** Retaining uncompressed sources enables instant searching across all decompiled files via `git grep`, editor search, and GitHub web code search.
-4. **Forensic Evidence:** Bytecode disassembly (`smali/`) provides an immutable, reproducible record of the target binary at that exact point in time.
+Keep Apktool output in the local `smali/` directory, which `.gitignore` excludes. Obfuscation can rename almost every smali file between APKs, limiting Git's cross-version delta compression. Store each version as `.workspace/archives/smali-v<version>.zip` instead of committing either loose smali or the ZIP to Git. The `.workspace/` archive directory is also ignored. A fresh clone therefore has no smali until the matching APK is decompiled or a versioned ZIP is obtained separately.
+
+Current local archive: `smali-v1.260416.zip`, SHA-256 `77dd5055bd0b9b5e0dea8bf9fb459858170739892fc78a8a9be73f4c12778737`. It contains the top-level `smali/` directory and can be restored with:
+
+```bash
+unzip .workspace/archives/smali-v1.260416.zip -d .
+```
+
+Record the APK SHA-256, archive SHA-256, and decompiler versions for each target. Local ZIPs can later be uploaded as Release assets if desired; the APK binaries remain local.
 
 ---
 
@@ -74,8 +79,14 @@ git diff target-v1.260416..target-v1.260500 -- src/
 ```
 
 ### Comparing Dalvik Smali Disassembly
+
+Smali is outside Git. Extract two locally available archives into separate directories, then compare them:
+
 ```bash
-git diff target-v1.260416..target-v1.260500 -- smali/
+mkdir -p .workspace/compare/old .workspace/compare/new
+unzip -q .workspace/archives/smali-v1.260416.zip -d .workspace/compare/old
+unzip -q .workspace/archives/smali-v1.260500.zip -d .workspace/compare/new
+diff -ruN .workspace/compare/old/smali .workspace/compare/new/smali
 ```
 
 ### Comparing Manifest, Permissions & Components
@@ -121,21 +132,29 @@ Follow these steps when a new Transfermóvil APK release becomes available:
    make decompile APK=.workspace/bin/cu.etecsa.cubacel.tr.tm-v<code_version>.apk
    ```
 
-4. **Commit Decompiled Baseline:**
-   Commit the decompiled files and apply the target baseline tag:
+4. **Archive Smali Locally:**
+   Package the new `smali/` tree and record its SHA-256. Keep this ZIP outside Git:
    ```bash
-   git add src/ smali/ app/res/ app/assets/ app/AndroidManifest.xml
+   mkdir -p .workspace/archives
+   zip -qr .workspace/archives/smali-v<version>.zip smali/
+   shasum -a 256 .workspace/archives/smali-v<version>.zip
+   ```
+
+5. **Commit Decompiled Baseline:**
+   Commit the JADX source, assets, resources, and manifest; apply the baseline tag:
+   ```bash
+   git add src/ app/res/ app/assets/ app/AndroidManifest.xml
    git commit -m "chore(target): import decompiled baseline for APK v<version> (build <code_version>)"
    git tag -a target-v<version> -m "Raw decompiled baseline for Transfermóvil v<version> (build <code_version>)"
    ```
 
-5. **Analyze Diff & Update Artifacts:**
+6. **Analyze Diff & Update Artifacts:**
    * Run cross-version diffs to detect modified cryptography, new endpoints, altered USSD codes, or schema migrations.
    * Update `mappings/classes.json` to account for new or renamed classes.
    * Adapt clean reconstructed classes in `app/src/main/java/`.
    * Update `README.md` metadata table and log findings in `CHANGELOG.md`.
 
-6. **Tag the Next Major Release:**
+7. **Tag the Next Major Release:**
    ```bash
    git tag -a v<NEW_MAJOR>.0.0 -m "Release v<NEW_MAJOR>.0.0 targeting Transfermóvil v<version>"
    git push origin main --tags

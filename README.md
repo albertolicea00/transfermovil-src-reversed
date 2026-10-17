@@ -66,7 +66,7 @@ This project uses a Semantic Versioning scheme (`MAJOR.MINOR.PATCH`) mapped dire
 * **MINOR (`x.Y.0`):** Increments for significant reconstruction milestones, new class mappings, and architectural documentation for the current target.
 * **PATCH (`x.y.Z`):** Increments for bug fixes, mapping corrections, and minor improvements.
 
-The project follows a **single-branch workflow** (`main`) with version and baseline tags (`target-v<version>` and `v<SemVer>`), allowing immediate line-by-line diffing between APK releases using standard `git diff`.
+The project follows a **single-branch workflow** (`main`) with version and baseline tags (`target-v<version>` and `v<SemVer>`). Raw JADX Java in `src/` stays in Git for mapping references and cross-version diffs. Smali stays in the local `smali/` directory, ignored by Git, with versioned ZIPs in `.workspace/archives/` for local comparison or possible future Release assets.
 
 For complete details, branching guidelines, and the APK upgrade procedure, see [docs/versioning.md](docs/versioning.md).
 
@@ -81,14 +81,15 @@ For complete details, branching guidelines, and the APK upgrade procedure, see [
 │   ├── res/                        Extracted Android resources
 │   └── src/main/java/             Clean, still incomplete Java reconstruction
 ├── src/                           Raw, obfuscated JADX Java output
-├── smali/                         Dalvik disassembly
+├── smali/                         Local Dalvik disassembly (Git-ignored)
 ├── mappings/
 │   └── classes.json               Obfuscated-to-clean name mappings
 ├── docs/                          Topic-specific analysis and TODOs
 ├── scripts/                       Extraction, verification, and search tools
 ├── .workspace/
 │   ├── handoff.md                  Temporary pause/resume note, tracked by Git
-│   └── bin/                        Local APK inputs
+│   ├── bin/                        Local APK inputs
+│   └── archives/                   Local versioned smali ZIPs
 ├── Makefile                        Analysis commands
 ├── TODO.md                         Remaining project tasks
 ├── CHANGELOG.md                    Completed changes by analysis session
@@ -96,7 +97,7 @@ For complete details, branching guidelines, and the APK upgrade procedure, see [
 └── README.md
 ```
 
-*Most generated files under `.workspace/` are excluded from Git; `handoff.md` is tracked so a paused session can be resumed.*
+*Generated files under `.workspace/` and the local `smali/` directory are excluded from Git; `handoff.md` is tracked so a paused session can be resumed. A fresh clone needs the matching APK to regenerate smali, or a separately obtained versioned smali ZIP.*
 
 Repository inventory for the current target (2026-10-17):
 
@@ -104,7 +105,7 @@ Repository inventory for the current target (2026-10-17):
 | :--- | ---: | :--- |
 | Decompiled Java files | 794 | `src/` (including 596 in the main app package) |
 | Clean Java reconstruction files | 504 | `app/src/main/java/` |
-| Smali files | 3,439 | `smali/` |
+| Local smali files | 3,439 | `smali/` (ignored by Git) |
 | Extracted resource files | 35 | `app/res/` |
 | Extracted asset files | 32 | `app/assets/` |
 | Topic documents | 11 | `docs/` |
