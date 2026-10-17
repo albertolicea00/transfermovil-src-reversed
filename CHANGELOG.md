@@ -3,9 +3,11 @@
 ## 2026-10-17 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Removed `smali/` from local Git history while retaining the files in the working directory as ignored, local analysis input; `src/` remains versioned for mapping references and Java diffs.
-- Created `.workspace/archives/smali-v1.260416.zip` (3,439 smali files; SHA-256 `77dd5055bd0b9b5e0dea8bf9fb459858170739892fc78a8a9be73f4c12778737`) for versioned local storage and a possible future Release upload.
+- Created `.workspace/archives/smali-1.260416.162.zip` (3,439 smali files; SHA-256 `77dd5055bd0b9b5e0dea8bf9fb459858170739892fc78a8a9be73f4c12778737`) for versioned local storage and a possible future Release upload.
 - Updated the versioning procedure and README to reflect local smali archives and Git-tracked JADX sources.
 - Added a tracked `smali/.gitkeep` placeholder so fresh clones retain the empty directory while disassembly remains ignored.
+- Replaced the planned SemVer and dual-tag scheme with APK version, versionCode, and internal release tags (`1.260416.162-v1.0`); renamed the local smali archive to `smali-1.260416.162.zip`.
+- Created the first local annotated tag, `1.260416.162-v1.0`, for the current project release; no GitHub Release exists yet.
 
 ## 2026-10-17 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

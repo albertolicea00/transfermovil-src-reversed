@@ -20,6 +20,7 @@ This repository contains reverse-engineered source code, extracted resources, an
 | **Package Name** | `cu.etecsa.cubacel.tr.tm` |
 | **Target Version** | `1.260416` |
 | **Version Code** | `162` |
+| **Project tag** | `1.260416.162-v1.0` |
 | **Min SDK** | `21` |
 | **Target SDK** | `33` |
 | **SHA-256 Hash** | `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a` |
@@ -60,13 +61,9 @@ For work in progress, use the [task list](TODO.md) and the temporary [session ha
 
 ## Versioning Strategy
 
-This project uses a Semantic Versioning scheme (`MAJOR.MINOR.PATCH`) mapped directly to Transfermóvil releases:
+Release names and Git tags use `<APK versionName>.<APK versionCode>-v<internal version>`. The current target's first project release is `1.260416.162-v1.0`. Later work on the same APK uses `-v1.1`, `-v1.2`, and so on; a new APK starts its own internal sequence at `-v1.0`.
 
-* **MAJOR (`X.0.0`):** Increments **only** when a new Transfermóvil APK version is targeted and imported (e.g., `1.0.0` for APK v1.260416, `2.0.0` for the next APK release).
-* **MINOR (`x.Y.0`):** Increments for significant reconstruction milestones, new class mappings, and architectural documentation for the current target.
-* **PATCH (`x.y.Z`):** Increments for bug fixes, mapping corrections, and minor improvements.
-
-The project follows a **single-branch workflow** (`main`) with version and baseline tags (`target-v<version>` and `v<SemVer>`). Raw JADX Java in `src/` stays in Git for mapping references and cross-version diffs. Smali stays in the local `smali/` directory, ignored by Git, with versioned ZIPs in `.workspace/archives/` for local comparison or possible future Release assets.
+The project follows a **single-branch workflow** (`main`). Raw JADX Java in `src/` stays in Git for mapping references and cross-version diffs. Smali stays in the local `smali/` directory, ignored by Git, with APK-specific ZIPs in `.workspace/archives/` for local comparison or possible future Release assets.
 
 For complete details, branching guidelines, and the APK upgrade procedure, see [docs/versioning.md](docs/versioning.md).
 

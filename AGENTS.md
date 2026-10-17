@@ -11,7 +11,7 @@
 - `docs/storage.md`: SQLite schema (26 tables), ORMLite entities, migration logic, SharedPreferences.
 - `docs/domain-model.md`: complete entity catalog (45 classes, 47 operations, 14 currencies), enum mappings, security findings.
 - `docs/ecommerce.md`: e-commerce API client, 33 endpoints, login flow, TLS bypass, session management.
-- `docs/versioning.md`: versioning strategy, SemVer mapping to target APKs, git tagging, and cross-version diffing.
+- `docs/versioning.md`: `<APK versionName>.<versionCode>-v<internal version>` release/tag scheme, local smali archives, and cross-version diffing.
 - `docs/ios-port-todo.md`: TODO for iOS port feasibility, platform limits, and feature-by-feature migration planning.
 - `.workspace/handoff.md`: current pause/resume handoff; update it when stopping work and remove it when work resumes.
 - `mappings/classes.json`: obfuscated → clean class/field/enum name mappings with roles and confidence.
