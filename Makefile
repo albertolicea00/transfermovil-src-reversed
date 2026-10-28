@@ -3,7 +3,8 @@
 # Targets:
 #   make decompile APK=path/to.apk   Decompile APK into src/, smali/, app/
 #   make verify APK=path/to.apk      Verify APK identity (SHA-256, package, version)
-#   make stats                        Show mapping progress (mapped vs total classes)
+#   make stats                        Show reconstruction links and review counts
+#   make inventory                    Save full reconstruction review queue as JSON
 #   make search Q="pattern"           Search decompiled Java source for a pattern
 #   make search-smali Q="pattern"     Search smali disassembly for a pattern
 #   make search-all Q="pattern"       Search both Java and smali
@@ -19,7 +20,7 @@
 #   make stats
 #   make search Q="ACCESS_TOKEN"
 
-.PHONY: help decompile verify stats search search-smali search-all clean-src
+.PHONY: help decompile verify stats inventory search search-smali search-all clean-src
 
 # Default APK path
 APK ?= .workspace/bin/cu.etecsa.cubacel.tr.tm-v162.apk
@@ -40,8 +41,11 @@ decompile: ## Decompile APK into src/ (JADX), smali/ (Apktool), app/ (resources)
 verify: ## Verify APK identity — SHA-256, package, version, SDK levels
 	@bash scripts/verify-apk.sh "$(APK)"
 
-stats: ## Show mapping progress — mapped vs total classes, clean class count
+stats: ## Show reconstruction links and inconsistencies (not completion percentage)
 	@bash scripts/mapping-stats.sh
+
+inventory: ## Save exact source-to-clean review queue in .workspace/
+	@bash scripts/mapping-stats.sh --output .workspace/reconstruction-inventory.json
 
 search: ## Search decompiled Java source (Q="pattern")
 	@bash scripts/search-strings.sh "$(Q)" --java

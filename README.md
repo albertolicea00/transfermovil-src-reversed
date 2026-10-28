@@ -56,6 +56,7 @@ See the [task list](TODO.md) and the current [session handoff](.workspace/handof
 | [Domain model](docs/domain-model.md) | Entities, operations, currencies, and enum mappings. |
 | [E-commerce](docs/ecommerce.md) | API client, endpoints, authentication, and sessions. |
 | [Versioning](docs/versioning.md) | Repository versions, tags, and cross-version comparisons. |
+| [Reconstruction inventory](docs/reconstruction-inventory.md) | Reproducible source links, duplicate candidates, mapping conflicts, and review limits. |
 | [iOS port TODO](docs/ios-port-todo.md) | Planned feasibility study, platform limits, and feature parity decisions. |
 
 For work in progress, use the [task list](TODO.md) and the temporary [session handoff](.workspace/handoff.md). [CHANGELOG.md](CHANGELOG.md) records completed changes; [AGENTS.md](AGENTS.md) is the repository guide for contributors and coding agents.

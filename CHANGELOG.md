@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-28 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Resumed reconstruction from the local Claude session, project memories, and repository handoff.
+- Added a reproducible source-to-clean inventory and `make inventory`; changed `make stats` to report exact links and inconsistencies without a completion percentage or a misleading unmapped-package list.
+- Recorded 71 original paths with multiple candidates and 28 explicit mapping incidences; added reconstruction review tasks and documented `OperationMenuBuilder` integration differences.
+- Verified that the reconstructed `BankOperationCode` preserves all 332 original constants in order; behavioral validation and duplicate resolution remain pending.
+
 ## 2026-10-17 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Removed `smali/` from local Git history while retaining the files in the working directory as ignored, local analysis input; `src/` remains versioned for mapping references and Java diffs.

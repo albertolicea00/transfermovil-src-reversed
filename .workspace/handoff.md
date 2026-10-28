@@ -4,6 +4,30 @@ This is the temporary pause/resume note. Update it when stopping work; remove it
 
 **Snapshot:** 2026-10-17. **APK:** `cu.etecsa.cubacel.tr.tm-v162.apk` (version 1.260416, code 162). **SHA-256:** `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
 
+## Resumption checkpoint — 2026-10-28
+
+Codex recovered Claude session `581986d3-8fc3-4c9e-a8a5-be8ec2012462` and its
+project memories. The latest transcript work was interrupted by API limits;
+the user wanted complete, traceable Java reconstruction. Preferences recovered:
+keep TODO.md current and use short Conventional Commits without co-author lines.
+
+Added `make inventory` and corrected `make stats`; see
+[inventory notes](../../docs/reconstruction-inventory.md). The full generated queue
+is `.workspace/reconstruction-inventory.json` (local, regenerate with Make).
+Across all 794 original Java files: 361 unlinked, 362 single candidates, and
+71 with multiple candidates. Within the 596 main-package originals: 224 unlinked,
+301 single candidates, and 71 with multiple candidates. The explicit mapping
+file has 28 incidences (18 absent clean targets, 6 absent original paths,
+4 annotation conflicts). These are review counts, not behavioral coverage.
+
+Initial checks: both `OperationMenuBuilder` candidates still need method-level
+comparison. The data candidate retains the `fill_all` API used by the database
+helper; the banking candidate renames it. All 332 `BankOperationCode` constants
+match `ZNRpoHwtLXM/FdonIAFI9w.java` in order, but its mapping points to an absent
+original path. No Java reconstruction or authoritative mappings changed in
+this checkpoint. Continue with duplicate and conflict review before expanding
+the reconstructed tree. The earlier draft warnings below still apply.
+
 ## Work in progress
 
 The previous session was moving classes from `src/` (obfuscated JADX output) into `app/src/main/java/` (source with descriptive names), while recording equivalences in `mappings/classes.json`. It created e-commerce, banking UI, general UI, configuration, and utility modules. Its last commits were `783ea41`, `c195786`, `5b69f05`, `1f336e8`, and `d49d372`.

@@ -16,6 +16,15 @@
 - [x] Extract smali disassembly into `smali/` directory
 - [x] Verify decompilation quality and completeness (98.8%, 40 errors)
 
+## Clean Java Reconstruction
+
+- [x] Generate a reproducible [source-to-clean inventory](docs/reconstruction-inventory.md) with duplicate candidates and mapping inconsistencies.
+- [ ] Review 71 original paths with multiple reconstruction candidates; resolve `OperationMenuBuilder` against original behavior and database callers first.
+- [ ] Resolve the 28 mapping incidences reported in the 2026-10-28 inventory against source evidence.
+- [ ] Review the 28 interrupted drafts recorded in `.workspace/handoff.md`; replace incomplete behavior only when supported by source.
+- [ ] Review the 224 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [ ] Compile and validate reconstructed behavior before claiming functional completeness.
+
 ## Architecture & Navigation
 
 - [x] Map manifest components (activities, services, receivers, providers)
