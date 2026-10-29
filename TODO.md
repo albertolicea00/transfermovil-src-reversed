@@ -23,8 +23,9 @@
 - [x] Restore missing phone/card entities and correct DAO entity identities against the original schema.
 - [x] Restore two-factor integer codes, request marker, API response wrapper, and permission/error enums; compare model schemas and accessors against original JVM classes.
 - [x] Restore all 56 e-commerce model/domain/geographic classes against original source, including payment, refund, pagination, profile and QR structures; compare their JSON payloads with Gson.
+- [x] Recover the e-commerce error handler from smali and compare operation/default/null behavior against bytecode evidence.
 - [ ] Review the remaining 70 original paths with multiple reconstruction candidates.
-- [ ] Resolve the remaining 8 mapping incidences reported in the 2026-10-29 inventory against source evidence.
+- [ ] Resolve the remaining 7 mapping incidences reported in the 2026-10-29 inventory against source evidence.
 - [ ] Review the remaining 26 interrupted banking UI drafts recorded in `.workspace/handoff.md`; replace incomplete behavior only when supported by source.
 - [ ] Review the remaining 220 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.

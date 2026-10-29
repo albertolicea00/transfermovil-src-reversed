@@ -1,0 +1,640 @@
+{
+  "apk": "cu.etecsa.cubacel.tr.tm-v162.apk",
+  "apk_sha256": "b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a",
+  "source": "smali/cu/etecsa/tm/ecommerce/qHBfDCWv13G/IGxV3uh9sw.smali",
+  "source_sha256": "6dafa883188bd80fbfc257bb9023c5b2850f5acdca2481a90c247c5ad40ed7f3",
+  "switch_source_sha256": "ddaf07da6103d404d4065055adeed33f2f74fa9bde003fff7f59a0074038187e",
+  "method": "getErrorMessage(ErrorType,String)",
+  "rows": [
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": null,
+      "throws": "NullPointerException"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "0",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "1",
+      "value": "@string/tx_no_item_mostrar"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "09",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "100",
+      "value": "@string/error_msg_no_permiso"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "401",
+      "value": "No autorizado."
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "-1",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "-4",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "-5",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "402",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "xyz",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "0NO",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_GET",
+      "code": "3NP",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": null,
+      "throws": "NullPointerException"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "0",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "1",
+      "value": "@string/tx_no_item_mostrar"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "09",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "100",
+      "value": "@string/error_msg_no_permiso"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "401",
+      "value": "No autorizado."
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "-1",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "-4",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "-5",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "402",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "xyz",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "0NO",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_USERS_SET",
+      "code": "3NP",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": null,
+      "throws": "NullPointerException"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "0",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "1",
+      "value": "@string/tx_no_item_mostrar"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "09",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "100",
+      "value": "@string/error_msg_no_permiso"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "401",
+      "value": "No autorizado."
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "-1",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "-4",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "-5",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "402",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "xyz",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "0NO",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_CUENTAS_GET",
+      "code": "3NP",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": null,
+      "throws": "NullPointerException"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "0",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "1",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "09",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "100",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "401",
+      "value": "No autorizado."
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "-1",
+      "value": "@string/err_login_1"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "-4",
+      "value": "@string/err_login_2"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "-5",
+      "value": "@string/err_login_5"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "402",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "xyz",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "0NO",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LOGIN_SIMPLE",
+      "code": "3NP",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": null,
+      "throws": "NullPointerException"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "0",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "1",
+      "value": "@string/tx_no_item_mostrar"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "09",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "100",
+      "value": "@string/error_msg_no_permiso"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "401",
+      "value": "No autorizado."
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "-1",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "-4",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "-5",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "402",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "xyz",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "0NO",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "PAGO_DINAMICO_POST",
+      "code": "3NP",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": null,
+      "throws": "NullPointerException"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "0",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "1",
+      "value": "@string/tx_no_item_mostrar"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "09",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "100",
+      "value": "@string/error_msg_no_permiso"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "401",
+      "value": "No autorizado."
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "-1",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "-4",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "-5",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "402",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "xyz",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "0NO",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "LISTAR_NEGOCIOS_GET",
+      "code": "3NP",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": null,
+      "throws": "NullPointerException"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "0",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "1",
+      "value": "@string/tx_no_item_mostrar"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "09",
+      "value": "Ya existe una devolución pendiente con el identificador de pago solicitado."
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "100",
+      "value": "@string/error_msg_no_permiso"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "401",
+      "value": "No autorizado."
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "-1",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "-4",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "-5",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "402",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "xyz",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "0NO",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "DEVOLVER_PAGO",
+      "code": "3NP",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": null,
+      "throws": "NullPointerException"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "0",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "1",
+      "value": "@string/tx_no_item_mostrar"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "09",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "100",
+      "value": "@string/error_msg_no_permiso"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "401",
+      "value": "No autorizado."
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "-1",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "-4",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "-5",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "402",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "xyz",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "0NO",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "GET_PERMISOS",
+      "code": "3NP",
+      "value": "@string/default_error_msg"
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": null,
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "0",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "1",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "09",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "100",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "401",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "-1",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "-4",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "-5",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "402",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "xyz",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "0NO",
+      "value": ""
+    },
+    {
+      "operation": "ESTADISTICAS",
+      "code": "3NP",
+      "value": ""
+    }
+  ]
+}

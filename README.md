@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░] 51%</code></span>
 
-**Task-list progress: 68/133 completed; 65 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 69/134 completed; 65 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -37,7 +37,7 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 | Area | Status | Current state |
 | :--- | :--- | :--- |
 | APK identification and extraction | Complete for the current APK | Metadata, manifest, resources, JADX Java, and smali are available. |
-| Clean Java reconstruction | In progress | 511 files exist; some are partial, contain stubs, or duplicate an original class. |
+| Clean Java reconstruction | In progress | 512 files exist; some are partial, contain stubs, or duplicate an original class. |
 | Protocol and feature analysis | In progress | Topic documents contain findings; the complete USSD code catalog remains a TODO. |
 | iOS port research | Planned | Feasibility, platform limits, and feature parity remain TODOs. |
 | Build and behavioral validation | Pending | The reconstructed Java tree has not been compiled or verified as a working app. |
@@ -57,6 +57,7 @@ See the [task list](TODO.md) and the current [session handoff](.workspace/handof
 | [Storage](docs/storage.md) | SQLite schema, ORMLite entities, migrations, and preferences. |
 | [Domain model](docs/domain-model.md) | Entities, operations, currencies, and enum mappings. |
 | [E-commerce](docs/ecommerce.md) | API client, endpoints, authentication, and sessions. |
+| [E-commerce errors](docs/ecommerce-errors.md) | Error-code messages recovered from smali and checked against bytecode evidence. |
 | [Versioning](docs/versioning.md) | Repository versions, tags, and cross-version comparisons. |
 | [Reconstruction inventory](docs/reconstruction-inventory.md) | Reproducible source links, duplicate candidates, mapping conflicts, and review limits. |
 | [iOS port TODO](docs/ios-port-todo.md) | Planned feasibility study, platform limits, and feature parity decisions. |

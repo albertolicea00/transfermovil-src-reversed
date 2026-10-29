@@ -31,12 +31,12 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 353 | 371 | 70 |
+| All `src/` | 794 | 352 | 372 | 70 |
 | Main app package | 596 | 220 | 306 | 70 |
 
-There are 511 clean files and 73 explicit class mappings. All clean files have
+There are 512 clean files and 73 explicit class mappings. All clean files have
 an annotation resolving to an original Java path. The explicit mapping file has
-8 incidences: 7 absent clean targets and 1 absent original path. No class
+7 incidences: 6 absent clean targets and 1 absent original path. No class
 annotation conflicts remain. These counts do not establish a completion percentage.
 
 The stale paths for the base activity, USSD dispatcher, SMS sender and SMS parser
