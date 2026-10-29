@@ -1,11 +1,12 @@
 package cu.etecsa.transfermovil.ecommerce.model.request;
 
 import com.google.gson.annotations.SerializedName;
+import cu.etecsa.transfermovil.ecommerce.model.BaseRequest;
 
 /**
  * @obfuscated_class cu.etecsa.tm.ecommerce.UE0rwmdgIVT.AfjNivq1ga0.XMAvvl35Dj
  */
-public class LoginRequest {
+public class LoginRequest implements BaseRequest {
     @SerializedName("email") public String email;
     @SerializedName("password") public String password;
 

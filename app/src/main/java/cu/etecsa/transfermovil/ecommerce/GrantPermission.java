@@ -1,0 +1,53 @@
+package cu.etecsa.transfermovil.ecommerce;
+
+
+/**
+ * @obfuscated_class cu.etecsa.tm.ecommerce.qHBfDCWv13G.ThptISKBHA
+ * @original_apk_version 1.260416
+ */
+public enum GrantPermission {
+    VER_INICIO(1),
+    DESCARGAR_APK(2),
+    CARGAR_APK(3),
+    VER_PAGOS(100),
+    GESTIONAR_PAGOS(101),
+    EXPORTAR_PAGOS_PDF(102),
+    EXPORTAR_PAGOS_EXCEL(103),
+    VER_DEVOLUCION(200),
+    GESTIONAR_DEVOLUCION(201),
+    EXPORTAR_DEV_PDF(202),
+    EXPORTAR_DEV_EXCEL(203),
+    VER_NEGOCIO(300),
+    GESTIONAR_NEGOCIO(301),
+    VER_PROVINCIAS(400),
+    GESTIONAR_PROVINCIAS(401),
+    VER_MUNICIPIOS(500),
+    GESTIONAR_MUNICIPIOS(501),
+    VER_ADMINSTRACION(600),
+    VER_USUARIOS(601),
+    GESTIONAR_USUARIOS(602),
+    GESTIONAR_EMAIL(603),
+    VER_ROLES(604),
+    GESTIONAR_ROLES(605),
+    VER_ACCIONES(606),
+    VER_ACCIONES_AGENTES(607),
+    GESTIONAR_AYUDA(700),
+    VER_USERS_HIJOS(800),
+    GESTIONAR_USUARIOS_HIJOS(801),
+    VER_CONCILIACION(900),
+    GESTION_CONCILIACION(901),
+    EXPORTAR_CONCILIACION_PDF(902),
+    EXPORTAR_CONCILIACION_EXCEL(903),
+    VER_ESTADISTICA(1000),
+    VER_GRUPO_ENTIDAD(1001);
+
+    private int numVal;
+
+    GrantPermission(int numVal) {
+        this.numVal = numVal;
+    }
+
+    public int getNumVal() {
+        return this.numVal;
+    }
+}

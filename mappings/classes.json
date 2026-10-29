@@ -282,7 +282,7 @@
       "confidence": "high"
     },
     "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TelfFijo": {
-      "clean": "cu.etecsa.transfermovil.data.entity.Landline",
+      "clean": "cu.etecsa.transfermovil.data.entity.LandlinePhone",
       "role": "ORMLite entity: landline phone number (FK→Client). ITMDataDatabase",
       "confidence": "high"
     },

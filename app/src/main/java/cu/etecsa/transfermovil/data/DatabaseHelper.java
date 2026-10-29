@@ -245,12 +245,12 @@ public class DatabaseHelper {
 
     // ========== Get-all lists ==========
 
-    public List<AgentService> getAllAgentServiceLists() {
+    public List<AgentAccount> getAllAgentServiceLists() {
         try { return getHelper().getAgentServiceListDao().queryForAll(); }
         catch (SQLException e) { e.printStackTrace(); return null; }
     }
 
-    public List<MiBoletoService> getAllMiBoletoServiceLists() {
+    public List<TicketServiceAccount> getAllMiBoletoServiceLists() {
         try { return getHelper().getMiBoletoServiceListDao().queryForAll(); }
         catch (SQLException e) { e.printStackTrace(); return null; }
     }
@@ -260,7 +260,7 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); return null; }
     }
 
-    public List<BankService> getAllBancoServiceLists() {
+    public List<BankAccount> getAllBancoServiceLists() {
         try { return getHelper().getBancoServiceListDao().queryForAll(); }
         catch (SQLException e) { e.printStackTrace(); return null; }
     }
@@ -315,7 +315,7 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); return null; }
     }
 
-    public List<TicketServiceAccount> getAllPropiaLists() {
+    public List<OwnCard> getAllPropiaLists() {
         try { return getHelper().getPropiaListDao().queryBuilder().orderBy("serie", true).query(); }
         catch (SQLException e) { e.printStackTrace(); return null; }
     }
@@ -447,7 +447,7 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); return null; }
     }
 
-    public TicketServiceAccount getPropiaListWithID(int id) {
+    public OwnCard getPropiaListWithID(int id) {
         try { return getHelper().getPropiaListDao().queryForId(id); }
         catch (SQLException e) { e.printStackTrace(); return null; }
     }
@@ -485,12 +485,12 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); return false; }
     }
 
-    public boolean deleteAgentService(AgentService agents) {
+    public boolean deleteAgentService(AgentAccount agents) {
         try { getHelper().getAgentServiceListDao().delete(agents); return true; }
         catch (SQLException e) { e.printStackTrace(); return false; }
     }
 
-    public boolean deleteBancoService(BankService agents) {
+    public boolean deleteBancoService(BankAccount agents) {
         try { getHelper().getBancoServiceListDao().delete(agents); return true; }
         catch (SQLException e) { e.printStackTrace(); return false; }
     }
@@ -570,7 +570,7 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); return false; }
     }
 
-    public boolean deletePropia(TicketServiceAccount cuenta) {
+    public boolean deletePropia(OwnCard cuenta) {
         try { getHelper().getPropiaListDao().delete(cuenta); return true; }
         catch (SQLException e) { e.printStackTrace(); return false; }
     }
@@ -628,17 +628,17 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); }
     }
 
-    public void addAgentService(AgentService a) {
+    public void addAgentService(AgentAccount a) {
         try { getHelper().getAgentServiceListDao().create(a); }
         catch (SQLException e) { e.printStackTrace(); }
     }
 
-    public void addMiBoletoService(MiBoletoService a) {
+    public void addMiBoletoService(TicketServiceAccount a) {
         try { getHelper().getMiBoletoServiceListDao().create(a); }
         catch (SQLException e) { e.printStackTrace(); }
     }
 
-    public void addBancoService(BankService a) {
+    public void addBancoService(BankAccount a) {
         try { getHelper().getBancoServiceListDao().create(a); }
         catch (SQLException e) { e.printStackTrace(); }
     }
@@ -705,7 +705,7 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); }
     }
 
-    public void addPropia(TicketServiceAccount s) {
+    public void addPropia(OwnCard s) {
         try { getHelper().getPropiaListDao().create(s); }
         catch (SQLException e) { e.printStackTrace(); }
     }
@@ -771,17 +771,17 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); }
     }
 
-    public void updateAgentService(AgentService a) {
+    public void updateAgentService(AgentAccount a) {
         try { getHelper().getAgentServiceListDao().update(a); }
         catch (SQLException e) { e.printStackTrace(); }
     }
 
-    public void updateMiBoletoService(MiBoletoService a) {
+    public void updateMiBoletoService(TicketServiceAccount a) {
         try { getHelper().getMiBoletoServiceListDao().update(a); }
         catch (SQLException e) { e.printStackTrace(); }
     }
 
-    public void updateBancoService(BankService a) {
+    public void updateBancoService(BankAccount a) {
         try { getHelper().getBancoServiceListDao().update(a); }
         catch (SQLException e) { e.printStackTrace(); }
     }
@@ -836,7 +836,7 @@ public class DatabaseHelper {
         catch (SQLException e) { e.printStackTrace(); }
     }
 
-    public void updatePropia(TicketServiceAccount s) {
+    public void updatePropia(OwnCard s) {
         try { getHelper().getPropiaListDao().update(s); }
         catch (SQLException e) { e.printStackTrace(); }
     }
@@ -878,16 +878,16 @@ public class DatabaseHelper {
 
     // ========== Lookup queries ==========
 
-    public List<AgentService> getAgentServiceWithCode(String code) {
-        QueryBuilder<AgentService, Integer> qb = getHelper().getAgentServiceListDao().queryBuilder();
+    public List<AgentAccount> getAgentServiceWithCode(String code) {
+        QueryBuilder<AgentAccount, Integer> qb = getHelper().getAgentServiceListDao().queryBuilder();
         try {
             qb.where().eq("code", code);
             return getHelper().getAgentServiceListDao().query(qb.prepare());
         } catch (Exception e) { return null; }
     }
 
-    public List<BankService> getBancoServiceWithCode(String code) {
-        QueryBuilder<BankService, Integer> qb = getHelper().getBancoServiceListDao().queryBuilder();
+    public List<BankAccount> getBancoServiceWithCode(String code) {
+        QueryBuilder<BankAccount, Integer> qb = getHelper().getBancoServiceListDao().queryBuilder();
         try {
             qb.where().eq("code", code);
             return getHelper().getBancoServiceListDao().query(qb.prepare());
@@ -1078,8 +1078,8 @@ public class DatabaseHelper {
         catch (Exception e) { return null; }
     }
 
-    public List<TicketServiceAccount> getPropiasListsWithClient(Client cliente) {
-        QueryBuilder<TicketServiceAccount, Integer> qb = getHelper().getPropiaListDao().queryBuilder();
+    public List<OwnCard> getPropiasListsWithClient(Client cliente) {
+        QueryBuilder<OwnCard, Integer> qb = getHelper().getPropiaListDao().queryBuilder();
         try { qb.where().eq("id_client", cliente.getId()); return getHelper().getPropiaListDao().query(qb.prepare()); }
         catch (Exception e) { return null; }
     }
@@ -1144,8 +1144,8 @@ public class DatabaseHelper {
         catch (Exception e) { return null; }
     }
 
-    public List<TicketServiceAccount> getTarjetaPropiaWithSerie(String serie) {
-        QueryBuilder<TicketServiceAccount, Integer> qb = getHelper().getPropiaListDao().queryBuilder();
+    public List<OwnCard> getTarjetaPropiaWithSerie(String serie) {
+        QueryBuilder<OwnCard, Integer> qb = getHelper().getPropiaListDao().queryBuilder();
         try { qb.where().eq("serie", serie); return getHelper().getPropiaListDao().query(qb.prepare()); }
         catch (Exception e) { return null; }
     }

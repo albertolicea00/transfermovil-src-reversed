@@ -31,20 +31,26 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 360 | 364 | 70 |
-| Main app package | 596 | 223 | 303 | 70 |
+| All `src/` | 794 | 353 | 371 | 70 |
+| Main app package | 596 | 220 | 306 | 70 |
 
-There are 504 clean files and 73 explicit class mappings. All clean files have
+There are 511 clean files and 73 explicit class mappings. All clean files have
 an annotation resolving to an original Java path. The explicit mapping file has
-15 incidences: 14 absent clean targets and 1 absent original path. No class
+8 incidences: 7 absent clean targets and 1 absent original path. No class
 annotation conflicts remain. These counts do not establish a completion percentage.
 
 The stale paths for the base activity, USSD dispatcher, SMS sender and SMS parser
 now point to their actual files in `l08fNVC4KOKK/`; the SMS parser target and login
 request packages match existing clean declarations. These are verified identity
 links, not verification of all methods in those reconstructions. In particular,
-the two-factor login request's `factor` is currently a String in clean code but
-an int in the original; correcting that behavior remains pending.
+the two-factor login request's `factor` has been restored from String to int,
+matching the original. Added the missing request marker, API response wrapper,
+permission/error enums, and own-card/mobile/landline entities. The own-card DAO
+now uses `OwnCard`, distinct from the MiBoleto service registration entity.
+JVM tests compare 14 original and clean model pairs: reflected fields and
+annotations, defaults, metadata, enum order/permission IDs, getters, and setters.
+Runtime annotations and JSONObject are substitutes; actual Gson serialization
+and SQLite persistence are not exercised by those comparisons.
 
 ### README task progress
 

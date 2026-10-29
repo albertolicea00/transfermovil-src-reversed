@@ -35,17 +35,17 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "TransferMDB.sqlite";
     private static final int DATABASE_VERSION = 162;
 
-    private Dao<AgentService, Integer> agentServiceListDao;
+    private Dao<AgentAccount, Integer> agentServiceListDao;
     private Dao<AuthSession, Integer> aoperkeyListDao;
     private Dao<AppConfig, Integer> appConfigListDao;
-    private Dao<BankService, Integer> bancoServiceListDao;
+    private Dao<BankAccount, Integer> bancoServiceListDao;
     private Dao<Client, Integer> clientListDao;
     private Dao<TicketPurchase, Integer> compraBoletoListDao;
     private Dao<CubacelPlan, Integer> compraPaquetesDao;
     private Dao<BankAccountCard, Integer> cuentasListDao;
     private Dao<Invoice, Integer> facturasListDao;
     private Dao<MobileCardBank, Integer> mcBanksListDao;
-    private Dao<MiBoletoService, Integer> miboletoServiceListDao;
+    private Dao<TicketServiceAccount, Integer> miboletoServiceListDao;
     private Dao<WalletCurrency, Integer> monedasWalletsListDao;
     private Dao<Municipality, Integer> municipiosListDao;
     public Context mycontex;
@@ -54,7 +54,7 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Operation, Integer> operacionesListDao;
     private Dao<PinEntry, Integer> pinListDao;
     private Dao<SmsPromotion, Integer> promosSMSListDao;
-    private Dao<TicketServiceAccount, Integer> propiaListDao;
+    private Dao<OwnCard, Integer> propiaListDao;
     private Dao<Province, Integer> provinciasListDao;
     private Dao<SmsRecord, Integer> recordSMSListDao;
     private Dao<PublicService, Integer> servicioPublicosListDao;
@@ -80,17 +80,17 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, MobilePhone.class);
             TableUtils.createTable(connectionSource, LandlinePhone.class);
             TableUtils.createTable(connectionSource, NautaAccount.class);
-            TableUtils.createTable(connectionSource, AgentService.class);
+            TableUtils.createTable(connectionSource, AgentAccount.class);
             TableUtils.createTable(connectionSource, SmsRecord.class);
             TableUtils.createTable(connectionSource, AppConfig.class);
-            TableUtils.createTable(connectionSource, BankService.class);
+            TableUtils.createTable(connectionSource, BankAccount.class);
             TableUtils.createTable(connectionSource, Invoice.class);
             TableUtils.createTable(connectionSource, PublicService.class);
             TableUtils.createTable(connectionSource, SmsPromotion.class);
             TableUtils.createTable(connectionSource, Operation.class);
             TableUtils.createTable(connectionSource, BankAccountCard.class);
             TableUtils.createTable(connectionSource, MobileCardBank.class);
-            TableUtils.createTable(connectionSource, TicketServiceAccount.class);
+            TableUtils.createTable(connectionSource, OwnCard.class);
             TableUtils.createTable(connectionSource, Province.class);
             TableUtils.createTable(connectionSource, Municipality.class);
             TableUtils.createTable(connectionSource, TaxRecord.class);
@@ -98,7 +98,7 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, AuthSession.class);
             TableUtils.createTable(connectionSource, TicketOffer.class);
             TableUtils.createTable(connectionSource, TicketPurchase.class);
-            TableUtils.createTable(connectionSource, MiBoletoService.class);
+            TableUtils.createTable(connectionSource, TicketServiceAccount.class);
             TableUtils.createTable(connectionSource, WalletCurrency.class);
             TableUtils.createTable(connectionSource, CubacelPlan.class);
             OperationMenuBuilder fillDB = new OperationMenuBuilder();
@@ -122,7 +122,7 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, Operation.class);
             TableUtils.createTableIfNotExists(connectionSource, BankAccountCard.class);
             TableUtils.createTableIfNotExists(connectionSource, MobileCardBank.class);
-            TableUtils.createTableIfNotExists(connectionSource, TicketServiceAccount.class);
+            TableUtils.createTableIfNotExists(connectionSource, OwnCard.class);
             TableUtils.createTableIfNotExists(connectionSource, Province.class);
             TableUtils.createTableIfNotExists(connectionSource, Municipality.class);
             TableUtils.createTableIfNotExists(connectionSource, TaxRecord.class);
@@ -130,7 +130,7 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, AuthSession.class);
             TableUtils.createTableIfNotExists(connectionSource, TicketOffer.class);
             TableUtils.createTableIfNotExists(connectionSource, TicketPurchase.class);
-            TableUtils.createTableIfNotExists(connectionSource, MiBoletoService.class);
+            TableUtils.createTableIfNotExists(connectionSource, TicketServiceAccount.class);
             TableUtils.createTableIfNotExists(connectionSource, WalletCurrency.class);
             TableUtils.createTableIfNotExists(connectionSource, CubacelPlan.class);
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Version");
@@ -294,7 +294,7 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
         String version = this.mycontex.getString(R.string.version_transfermovil);
         String telefono = "0";
         List<AppConfig> appConfigs = DatabaseHelper.getInstance().getAllAppConfigLists();
-        List<AgentService> agentServiceList = DatabaseHelper.getInstance().getAllAgentServiceLists();
+        List<AgentAccount> agentServiceList = DatabaseHelper.getInstance().getAllAgentServiceLists();
         try {
             telefono = appConfigs.get(0).getPhone();
         } catch (Exception exphone) {
@@ -323,7 +323,7 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
                     }
                     return;
                 }
-                UpdateBuilder<AgentService, Integer> updateBuilderAgente = this.agentServiceListDao.updateBuilder();
+                UpdateBuilder<AgentAccount, Integer> updateBuilderAgente = this.agentServiceListDao.updateBuilder();
                 try {
                     UssdCipher ac = new UssdCipher();
                     String code = ac.en_version(1, version, telefono);
@@ -349,7 +349,7 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
             }
         } catch (Exception ex2) {
             try {
-                AgentService app = DatabaseHelper.getInstance().getAllAgentServiceLists().get(0);
+                AgentAccount app = DatabaseHelper.getInstance().getAllAgentServiceLists().get(0);
                 app.setCode("");
                 DatabaseHelper.getInstance().updateAgentService(app);
             } catch (Exception exe) {
@@ -432,23 +432,23 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
         return this.appConfigListDao;
     }
 
-    public Dao<AgentService, Integer> getAgentServiceListDao() {
+    public Dao<AgentAccount, Integer> getAgentServiceListDao() {
         if (this.agentServiceListDao == null) {
-            try { this.agentServiceListDao = getDao(AgentService.class); } catch (java.sql.SQLException e) { e.printStackTrace(); }
+            try { this.agentServiceListDao = getDao(AgentAccount.class); } catch (java.sql.SQLException e) { e.printStackTrace(); }
         }
         return this.agentServiceListDao;
     }
 
-    public Dao<MiBoletoService, Integer> getMiBoletoServiceListDao() {
+    public Dao<TicketServiceAccount, Integer> getMiBoletoServiceListDao() {
         if (this.miboletoServiceListDao == null) {
-            try { this.miboletoServiceListDao = getDao(MiBoletoService.class); } catch (java.sql.SQLException e) { e.printStackTrace(); }
+            try { this.miboletoServiceListDao = getDao(TicketServiceAccount.class); } catch (java.sql.SQLException e) { e.printStackTrace(); }
         }
         return this.miboletoServiceListDao;
     }
 
-    public Dao<BankService, Integer> getBancoServiceListDao() {
+    public Dao<BankAccount, Integer> getBancoServiceListDao() {
         if (this.bancoServiceListDao == null) {
-            try { this.bancoServiceListDao = getDao(BankService.class); } catch (java.sql.SQLException e) { e.printStackTrace(); }
+            try { this.bancoServiceListDao = getDao(BankAccount.class); } catch (java.sql.SQLException e) { e.printStackTrace(); }
         }
         return this.bancoServiceListDao;
     }
@@ -530,9 +530,9 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
         return this.mcBanksListDao;
     }
 
-    public Dao<TicketServiceAccount, Integer> getPropiaListDao() {
+    public Dao<OwnCard, Integer> getPropiaListDao() {
         if (this.propiaListDao == null) {
-            try { this.propiaListDao = getDao(TicketServiceAccount.class); } catch (java.sql.SQLException e) { e.printStackTrace(); }
+            try { this.propiaListDao = getDao(OwnCard.class); } catch (java.sql.SQLException e) { e.printStackTrace(); }
         }
         return this.propiaListDao;
     }
