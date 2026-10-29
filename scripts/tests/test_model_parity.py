@@ -18,6 +18,11 @@ ENTITIES = "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL."
 ECOMMERCE = "cu.etecsa.tm.ecommerce."
 METADATA = "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.ZbIB2agz7et.KA1Vl8CZhLC."
 PAIRS = [
+    (ENTITIES + "AOperKey", "data.entity.AuthSession"),
+    ("cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ", "core.enums.OperationType"),
+    ("cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.IuGdvowIct", "banking.ui.RefreshCallback"),
+    ("cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.SYLBHJttme", "banking.ui.OffersResultCallback"),
+    ("cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.Ti8eM28U2E", "banking.ui.AccountsResultCallback"),
     (ENTITIES + "TarjetaPropia", "data.entity.OwnCard"),
     (ENTITIES + "TeflMovil", "data.entity.MobilePhone"),
     (ENTITIES + "TelfFijo", "data.entity.LandlinePhone"),
@@ -165,6 +170,7 @@ public class ModelCheck {
     static String snapshot(Object o) throws Exception {
         if(o==null) return "null";
         if(o instanceof String || o instanceof Number || o instanceof Boolean) return o.toString();
+        if(o instanceof Date) return "date:"+((Date)o).getTime();
         if(o instanceof Enum<?>) return ((Enum<?>)o).name();
         if(o instanceof org.json.JSONObject) return o.toString();
         if(o.getClass().isArray()) {
@@ -193,8 +199,14 @@ public class ModelCheck {
         List<String> interfaces=new ArrayList<>();
         for(Class<?> i:c.getInterfaces()) interfaces.add(type(i));
         DatabaseTable db=c.getAnnotation(DatabaseTable.class);
+        Set<String> methods=new TreeSet<>();
+        for(Method m:c.getDeclaredMethods()) if(Modifier.isPublic(m.getModifiers()) && !m.isSynthetic()) {
+            List<String> args=new ArrayList<>();
+            for(Class<?> p:m.getParameterTypes()) args.add(type(p));
+            methods.add(m.getName()+args+":"+type(m.getReturnType()));
+        }
         return fields+":"+interfaces+":"+(c.getSuperclass()==null?"none":type(c.getSuperclass()))
-            +":"+(db==null?"none":db.tableName().isEmpty()?c.getSimpleName():db.tableName());
+            +":"+(db==null?"none":db.tableName().isEmpty()?c.getSimpleName():db.tableName())+":"+methods;
     }
     static Object create(Class<?> c) throws Exception {
         if(c.isMemberClass() && !Modifier.isStatic(c.getModifiers()))
@@ -210,6 +222,7 @@ public class ModelCheck {
         if(c==boolean.class) return number!=0;
         if(c.isEnum()) return c.getEnumConstants()[number%c.getEnumConstants().length];
         if(c==List.class) return new ArrayList<>();
+        if(c==Date.class) return new Date(1700000000000L+number);
         if(c.isArray()) {
             Object a=Array.newInstance(c.getComponentType(),number);
             for(int i=0;i<number;i++) Array.set(a,i,sample(c.getComponentType(),i));

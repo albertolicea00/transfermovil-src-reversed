@@ -390,6 +390,31 @@
       "clean": "cu.etecsa.transfermovil.config.ActivationCodeValidator",
       "role": "Agent activation code verification via phone rotation and digit differences; not USSD encryption",
       "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.F0VSiFomrqH.EKB7Plln4L": {
+      "clean": "cu.etecsa.transfermovil.config.CharacterCodeDictionary",
+      "role": "Original two-digit character substitution dictionary",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.F0VSiFomrqH.kR22DOzTiB": {
+      "clean": "cu.etecsa.transfermovil.config.NautaCodeEncoder",
+      "role": "Text encoder preserving original digit-run markers and unsupported-character behavior",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.IuGdvowIct": {
+      "clean": "cu.etecsa.transfermovil.banking.ui.RefreshCallback",
+      "role": "Data-list refresh callback",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.SYLBHJttme": {
+      "clean": "cu.etecsa.transfermovil.banking.ui.OffersResultCallback",
+      "role": "Offer result/progress callback; primitive boolean success",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.Ti8eM28U2E": {
+      "clean": "cu.etecsa.transfermovil.banking.ui.AccountsResultCallback",
+      "role": "Account result/progress callback; nullable Boolean success",
+      "confidence": "high"
     }
   },
   "fields": {

@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[██████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░] 52%</code></span>
 
-**Task-list progress: 71/136 completed; 65 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 73/138 completed; 65 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -37,12 +37,12 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 | Area | Status | Current state |
 | :--- | :--- | :--- |
 | APK identification and extraction | Complete for the current APK | Metadata, manifest, resources, JADX Java, and smali are available. |
-| Clean Java reconstruction | In progress | 516 files exist; some are partial, contain stubs, or duplicate an original class. |
+| Clean Java reconstruction | In progress | 510 files exist; some are partial, contain stubs, or duplicate an original class. |
 | Protocol and feature analysis | In progress | Topic documents contain findings; the complete USSD code catalog remains a TODO. |
 | iOS port research | Planned | Feasibility, platform limits, and feature parity remain TODOs. |
 | Build and behavioral validation | Pending | The reconstructed Java tree has not been compiled or verified as a working app. |
 
-See the [task list](TODO.md) and the current [session handoff](.workspace/handoff.md) for specific remaining work. The bar above tracks completed checklist items; full reconstruction and Android behavior remain unverified.
+See the [task list](TODO.md) for specific remaining work. Paused sessions record a temporary checkpoint in `.workspace/handoff.md`. The bar above tracks completed checklist items; full reconstruction and Android behavior remain unverified.
 
 ## Documentation
 
@@ -62,7 +62,7 @@ See the [task list](TODO.md) and the current [session handoff](.workspace/handof
 | [Reconstruction inventory](docs/reconstruction-inventory.md) | Reproducible source links, duplicate candidates, mapping conflicts, and review limits. |
 | [iOS port TODO](docs/ios-port-todo.md) | Planned feasibility study, platform limits, and feature parity decisions. |
 
-For work in progress, use the [task list](TODO.md) and the temporary [session handoff](.workspace/handoff.md). [CHANGELOG.md](CHANGELOG.md) records completed changes; [AGENTS.md](AGENTS.md) is the repository guide for contributors and coding agents.
+For work in progress, use the [task list](TODO.md). Paused sessions also provide `.workspace/handoff.md`. [CHANGELOG.md](CHANGELOG.md) records completed changes; [AGENTS.md](AGENTS.md) is the repository guide for contributors and coding agents.
 
 ---
 

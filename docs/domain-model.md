@@ -50,7 +50,7 @@ All model classes in `cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL`.
 
 | Entity | Fields | Notes |
 |:---|:---|:---|
-| `Operacion` | `id:int`, `titulo:String`, `subtitulo:String`, `fragment_name:String`, `imagen:int`, `order:int`, `activo:boolean`, `operacion:Nl0yptXmjQ`, `tipo_servicio:R1sDOSqZ2z` | Operation menu item |
+| `Operacion` | `id:int`, `titulo:String`, `subtitulo:String`, `fragment_name:String`, `imagen:int`, `order:int`, `activo:boolean`, `operacion:FdonIAFI9w`, `tipo_servicio:R1sDOSqZ2z` | Operation menu item; uses the 332-value dispatch enum |
 | `AppConfig` | `id:int`, `phone:String`, `number:String`, `imei:String`, `codigo:String`, `code_bank:String`, `activada:boolean`, `activarMejoraQR:boolean`, `activarmodulomiboleto:boolean`, `activarussdparcial:boolean`, `comprapaquetes:int`, `evaluacion:int`, `mensajeInicio:boolean`, `noMostrarEncuesta:boolean`, `fechaHoraAuthBank:Date`, ... | App configuration — **stores IMEI** |
 | `AOperKey` | `id:int`, `pin:String`, `isAuth:boolean`, `authDate:Date`, `operacion:Nl0yptXmjQ` | Operation auth key — **plaintext PIN** |
 | `CompraPlanesCubacel` | `id:int`, `nombre:String`, `version_ussd:int`, `fechaAct:Date` | Cubacel plan purchase config |
@@ -94,9 +94,15 @@ All model classes in `cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL`.
 
 ## Enums
 
-### Operation Types (`Nl0yptXmjQ`) — 47 abstract operations
+### Operation Types (`Nl0yptXmjQ`) — 46 abstract operations
 
 High-level operation categories used in entity fields. See `FdonIAFI9w` for the full per-bank dispatch enum.
+
+The current clean `OperationType` preserves all 46 constants in original order.
+An earlier draft stopped after `CajaExtra` (26 constants); the missing 20 were
+restored from `src/.../piM0KeORWQz/Nl0yptXmjQ.java` and are covered by JVM enum
+comparisons. `AuthSession` also preserves the original AOperKey schema metadata;
+its auth validation clears the flag/date and calls the DAO update on expiry.
 
 | Value | Purpose |
 |:---|:---|

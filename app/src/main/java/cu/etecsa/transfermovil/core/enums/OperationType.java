@@ -1,12 +1,9 @@
 package cu.etecsa.transfermovil.core.enums;
 
 /**
- * @original_apk_version 1.260416
+ * Original operation identifiers in their persisted enum order.
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ
- * @fingerprint 26+ enum values, Recarga_Cupon through CajaExtra
- *
- * Banking/service operation type. Determines which USSD code, authentication
- * flow, and UI fragment to use. Passed to validateAuth() and the USSD dispatcher.
+ * @original_apk_version 1.260416
  */
 public enum OperationType {
     Recarga_Cupon,
@@ -34,5 +31,25 @@ public enum OperationType {
     Aporte_Patrimonio,
     Ticket_Combustible_Gestion,
     Ticket_MiBoleto_Gestion,
-    CajaExtra
+    CajaExtra,
+    SelloTimbre,
+    RecargaCUPBolsa,
+    PaqueteMLC,
+    RecargaNautaMLC,
+    RecargaNautaHogar4G,
+    GigasNautaHogare4G,
+    BOLSATransferirBancos,
+    PCC,
+    CompraPaquetesCubacel,
+    CuentaFiscal,
+    VisitaRecorridos,
+    ReservasTicket,
+    EliminarReservasTicket,
+    ModificarReservasTicket,
+    ConsultarReservasTicket,
+    ConsultarPagosSindicato,
+    Eqj43O0pUx,
+    TransferenciaEmpresa,
+    VendedorMiBoleto,
+    TBaFnBLjEA
 }

@@ -26,9 +26,11 @@
 - [x] Recover the e-commerce error handler from smali and compare operation/default/null behavior against bytecode evidence.
 - [x] Reconstruct the USSD accessibility service/callback/checker and SMS receiver; compare event/control flow against original classes under simulated Android.
 - [x] Consolidate duplicate activation validators and compare the canonical algorithm against original source for normal/error inputs.
-- [ ] Review the remaining 69 original paths with multiple reconstruction candidates.
+- [x] Restore auth validation/session metadata and all operation enum values; compare expiry boundaries and DAO errors with the original.
+- [x] Consolidate duplicate character/text encoders and callback interfaces; verify dictionary/marker behavior and callback contracts.
+- [ ] Review the remaining 63 original paths with multiple reconstruction candidates.
 - [ ] Resolve the remaining 4 mapping incidences reported in the 2026-10-29 inventory against source evidence.
-- [ ] Review the remaining 26 interrupted banking UI drafts recorded in `.workspace/handoff.md`; replace incomplete behavior only when supported by source.
+- [ ] Review the remaining 26 interrupted banking UI drafts (pagers/tabs/BPA/BFI/Metropolitano/wallet); replace incomplete behavior only when supported by source.
 - [ ] Review the remaining 215 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
 

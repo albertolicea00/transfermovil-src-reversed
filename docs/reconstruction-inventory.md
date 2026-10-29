@@ -31,10 +31,10 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 347 | 378 | 69 |
-| Main app package | 596 | 215 | 312 | 69 |
+| All `src/` | 794 | 347 | 384 | 63 |
+| Main app package | 596 | 215 | 318 | 63 |
 
-There are 516 clean files and 77 explicit class mappings. All clean files have
+There are 510 clean files and 82 explicit class mappings. All clean files have
 an annotation resolving to an original Java path. The explicit mapping file has
 4 incidences, all absent clean targets. No class annotation conflicts or absent
 original paths remain. These counts do not establish a completion percentage.
@@ -60,7 +60,7 @@ original bodies, including inheritance, nested classes, constructors/defaults,
 and accessors. Earlier drafts dropped filters/DTO fields, changed numeric types,
 and replaced a nested user model with a different class.
 
-JVM tests compare 73 original and clean model pairs (including nested classes and
+JVM tests compare 78 original and clean model pairs (including nested classes and
 dependencies): reflected fields and annotations, defaults, metadata, enum
 order/permission IDs, getters, and setter mutations. A second run uses actual
 Gson to compare JSON trees at defaults and after mutations. It uses the local
@@ -68,6 +68,20 @@ Gson 2.9.1 jar when available; set `TRANSFERMOVIL_GSON_JAR` elsewhere. The wire
 test is explicitly skipped when the jar is absent, while schema tests still run.
 JSONObject and database annotations remain substitutes, so this does not test
 SQLite persistence, real JSON-object internals, or Android UI/network flows.
+
+Auth validation now has its original typed implementation instead of the throwing
+placeholder or the alternative draft that omitted clearing expired state. A
+fixed-clock JVM comparison checks 517 operation/state combinations against the
+original, including the inclusive 30-minute boundary, future/null dates and DAO
+failures. Only the clock read is replaced in test copies; production uses Date().
+The original 46-value operation enum and full AuthSession metadata are restored.
+
+Character dictionary/text encoder duplicates and three equivalent callback
+interfaces were consolidated. Encoding comparisons cover every dictionary entry,
+digit-run boundaries, unsupported characters, nulls and Unicode digit inputs.
+The original single-digit marker behavior and literal `null` concatenation in
+`getCodes` are preserved. Callback checks distinguish primitive boolean from
+nullable Boolean result parameters.
 
 ### README task progress
 

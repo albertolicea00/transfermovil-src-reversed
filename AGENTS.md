@@ -9,7 +9,7 @@
 - `docs/networking.md`: OkHttp stack, known URLs, auth tokens, TLS/cert pinning, local storage (ORMLite/SharedPrefs).
 - `docs/security.md`: cryptographic schemes (7 AES variants), hardcoded keys, key derivation, security assessment.
 - `docs/storage.md`: SQLite schema (26 tables), ORMLite entities, migration logic, SharedPreferences.
-- `docs/domain-model.md`: complete entity catalog (45 classes, 47 operations, 14 currencies), enum mappings, security findings.
+- `docs/domain-model.md`: entity catalog (45 classes, 46 high-level operations, 14 currencies), enum mappings, security findings.
 - `docs/ecommerce.md`: e-commerce API client, 33 endpoints, login flow, TLS bypass, session management.
 - `docs/ecommerce-errors.md`: smali-backed error-code messages, null/default behavior, and reproducible JVM checks.
 - `docs/versioning.md`: `<APK versionName>.<versionCode>-v<internal version>` release/tag scheme, local smali archives, and cross-version diffing.

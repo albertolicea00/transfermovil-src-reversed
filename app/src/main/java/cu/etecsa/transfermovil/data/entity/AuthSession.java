@@ -1,51 +1,57 @@
 package cu.etecsa.transfermovil.data.entity;
 
+import cu.etecsa.transfermovil.data.ITMDataDatabase;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
+import cu.etecsa.transfermovil.data.FieldType;
+import cu.etecsa.transfermovil.data.TableMetadata;
+import cu.etecsa.transfermovil.data.FieldSchema;
+import cu.etecsa.transfermovil.core.enums.OperationType;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AOperKey
- * @fingerprint @DatabaseTable, isAuth/authDate/pin/operacion fields, 30-min auth window
- *
- * Tracks per-operation banking authentication state.
- * Each row records whether a specific operation type has been
- * authenticated and when, enforcing a 30-minute validity window.
- *
- * SECURITY: PIN stored as plaintext string.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "AOperKey")
-public class AuthSession {
+public class AuthSession implements ITMDataDatabase {
+
+    @DatabaseField
+    public Date authDate;
 
     @DatabaseField(generatedId = true)
     private int id;
 
     @DatabaseField
-    private boolean isAuth;
+    public boolean isAuth;
 
     @DatabaseField
-    private Date authDate;
+    public OperationType operacion;
 
-    /** Banking PIN — STORED IN PLAINTEXT */
     @DatabaseField
-    private String pin;
+    public String pin;
 
-    /** Operation type enum (obfuscated: Nl0yptXmjQ) */
-    @DatabaseField
-    private OperationType operacion;
-
-    public int getId() {
-        return id;
+    public OperationType getOperacion() {
+        return this.operacion;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOperacion(OperationType operacion) {
+        this.operacion = operacion;
+    }
+
+    public String getPin() {
+        return this.pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 
     public boolean isAuth() {
-        return isAuth;
+        return this.isAuth;
     }
 
     public void setAuth(boolean auth) {
@@ -53,26 +59,32 @@ public class AuthSession {
     }
 
     public Date getAuthDate() {
-        return authDate;
+        return this.authDate;
     }
 
     public void setAuthDate(Date authDate) {
         this.authDate = authDate;
     }
 
-    public String getPin() {
-        return pin;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
-
-    public OperationType getOperacion() {
-        return operacion;
-    }
-
-    public void setOperacion(OperationType operacion) {
-        this.operacion = operacion;
+    @Override // cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ITMDataDatabase
+    public TableMetadata getMetadata() {
+        TableMetadata metadata = new TableMetadata();
+        metadata.setTabla_name("AOperKey");
+        List<FieldSchema> camposList = new ArrayList<>();
+        FieldSchema id = new FieldSchema();
+        id.setNombre("id");
+        id.setTipo(FieldType.PK);
+        camposList.add(id);
+        FieldSchema data = new FieldSchema();
+        data.setNombre("operacion");
+        FieldType dataType = FieldType.DATA;
+        data.setTipo(dataType);
+        camposList.add(data);
+        FieldSchema pin = new FieldSchema();
+        pin.setNombre("pin");
+        pin.setTipo(dataType);
+        camposList.add(pin);
+        metadata.setCamposSquemas(camposList);
+        return metadata;
     }
 }

@@ -2,6 +2,10 @@
 
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Replaced the throwing auth validator placeholder with the original typed state machine, including clearing and updating expired sessions; removed the alternative draft that omitted those writes. Restored AuthSession schema metadata and 20 missing operation enum constants (46 total).
+- Compared 517 auth operation/state cases with a fixed test clock, including the exact 30-minute boundary, invalid dates and DAO errors. Expanded model/contract comparisons to 78 class pairs.
+- Consolidated duplicate text/dictionary encoders and refresh/account/offer callback interfaces. Verified all dictionary entries and digit/unsupported/null/Unicode encoding behavior against the original. Duplicate-candidate originals decreased to 63.
+
 - Reconstructed the USSD accessibility service, callback registry/interface, enabled-service checker and SMS receiver; corrected the original service path mapping. Compared 240 event scenarios, five enablement scenarios and SMS receipt/alert behavior with original classes under simulated Android, without live telephony actions.
 - Consolidated the duplicate activation-code classes under `config/ActivationCodeValidator`, corrected callers and accessor entity imports, and verified 3,272 algorithm comparisons. Four missing clean mapping targets and 69 duplicate-candidate originals remain.
 

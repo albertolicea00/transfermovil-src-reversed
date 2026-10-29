@@ -1,5 +1,7 @@
 package cu.etecsa.transfermovil.banking.ui;
 
+import cu.etecsa.transfermovil.banking.AuthValidator;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
