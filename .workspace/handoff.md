@@ -1,64 +1,60 @@
 # Java reconstruction handoff
 
-This is the temporary pause/resume note. Update it when stopping work; remove it when work resumes.
+Temporary pause/resume checkpoint. Remove when resuming; update when stopping.
 
-**Snapshot:** 2026-10-17. **APK:** `cu.etecsa.cubacel.tr.tm-v162.apk` (version 1.260416, code 162). **SHA-256:** `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
+**Snapshot:** 2026-10-28. **APK:** `cu.etecsa.cubacel.tr.tm-v162.apk`
+(version 1.260416, code 162). **SHA-256:**
+`b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
 
-## Resumption checkpoint — 2026-10-28
+## Recovered context
 
-Codex recovered Claude session `581986d3-8fc3-4c9e-a8a5-be8ec2012462` and its
-project memories. The latest transcript work was interrupted by API limits;
-the user wanted complete, traceable Java reconstruction. Preferences recovered:
-keep TODO.md current and use short Conventional Commits without co-author lines.
+Claude session `581986d3-8fc3-4c9e-a8a5-be8ec2012462` and its project memories
+were read locally. The user wants complete, traceable Java reconstruction.
+Earlier agents stopped on API limits; their drafts were not validated.
+Keep TODO.md current and use short Conventional Commits without co-author lines.
 
-Added `make inventory` and corrected `make stats`; see
-[inventory notes](../../docs/reconstruction-inventory.md). The full generated queue
-is `.workspace/reconstruction-inventory.json` (local, regenerate with Make).
-Across all 794 original Java files: 361 unlinked, 362 single candidates, and
-71 with multiple candidates. Within the 596 main-package originals: 224 unlinked,
-301 single candidates, and 71 with multiple candidates. The explicit mapping
-file has 28 incidences (18 absent clean targets, 6 absent original paths,
-4 annotation conflicts). These are review counts, not behavioral coverage.
+## Completed in the latest continuation
 
-Initial checks: both `OperationMenuBuilder` candidates still need method-level
-comparison. The data candidate retains the `fill_all` API used by the database
-helper; the banking candidate renames it. All 332 `BankOperationCode` constants
-match `ZNRpoHwtLXM/FdonIAFI9w.java` in order, but its mapping points to an absent
-original path. No Java reconstruction or authoritative mappings changed in
-this checkpoint. Continue with duplicate and conflict review before expanding
-the reconstructed tree. The earlier draft warnings below still apply.
+- Kept `data/OperationMenuBuilder.java` as the single reconstruction of
+  `ZNRpoHwtLXM.nljtDl5MIf`, restored all original method bodies with clean
+  dependencies, and removed the banking duplicate containing omitted bodies.
+  The database helper's `fill_all` and `update_*` calls retain their API.
+- Restored `Operation.operacion` to `BankOperationCode` and added the missing
+  `TaxRecord` from `Tributo`, preserving original export metadata quirks.
+- Added/corrected the menu, tax entity and operation enum mappings.
+- `make test-reconstruction` passes four tests, including JVM compilation and
+  85 original-versus-clean menu method/scenario comparisons. Android, resources,
+  JSON fixtures, ORMLite annotations and DAO persistence are substituted.
+  This is not a full Android build or proof of real SQLite/navigation behavior.
 
-## Work in progress
+## Current review inventory
 
-The previous session was moving classes from `src/` (obfuscated JADX output) into `app/src/main/java/` (source with descriptive names), while recording equivalences in `mappings/classes.json`. It created e-commerce, banking UI, general UI, configuration, and utility modules. Its last commits were `783ea41`, `c195786`, `5b69f05`, `1f336e8`, and `d49d372`.
+Run `make inventory` for `.workspace/reconstruction-inventory.json` (local,
+regenerable). See [inventory notes](../../docs/reconstruction-inventory.md).
 
-The user asked to stop reconstruction, document the state, and save existing work with Conventional Commits. The prior session's agents stopped because of a usage limit. Their unfinished tasks must not be treated as complete.
+| Scope | Original files | Unlinked | Single candidate | Multiple candidates |
+| --- | ---: | ---: | ---: | ---: |
+| All src/ | 794 | 360 | 364 | 70 |
+| Main package | 596 | 223 | 303 | 70 |
 
-## Verified state
+504 clean files, 73 explicit class mappings, and 25 mapping incidences remain
+(17 absent clean targets, 5 absent original paths, 3 annotation conflicts).
+These counts are not a completion percentage or proof of faithful behavior.
 
-| Measure | Result | Meaning |
-| --- | ---: | --- |
-| Java files in `src/cu/etecsa/cubacel/tr/tm/` | 596 | JADX files in the main package, including generated files. |
-| Java files already committed before this handoff | 476 | Files tracked by Git at the start of this session. |
-| Drafts left after those commits | 28 | Previously untracked; committed as incomplete work for later review. |
-| Java files visible in `app/src/main/java/` | 504 | File count, **not** a percentage of faithful reconstruction. |
-| Unique `@obfuscated_class` identifiers | 433 | 372 match Java source paths in `src/` exactly. |
-| `src/` Java files without an exact annotation match | 224 | Review queue; not necessarily 224 missing reconstructions. |
+## Remaining work
 
-The **476/596 (80%)** figure in the Claude transcript divides file counts from different trees. Its later estimate of **about 120 remaining files** is also not supported by a one-to-one source mapping. Some clean files lack annotations, annotations are duplicated, and some reconstructed classes are partial outlines. There is **no verified completion percentage**.
+1. Review the remaining 26 interrupted drafts under `banking/ui/` (pagers,
+   tabs, BPA, BFI, Metropolitano, wallet). Several contain stubs, null returns,
+   or fixed values. Compare source before marking complete.
+2. Resolve remaining duplicate candidates and mapping incidences from the JSON
+   review queue. Source-linked classes can still be incomplete or incorrect.
+3. Review 223 unlinked main-package originals, distinguishing generated code
+   from application logic. Prioritize `B0jOLrWx09th/p1CEgMEeWUbD/`
+   `{P2MO7cFkntPD,zpT98w56Knm,DrR0lEVP3qk}`, `B0jOLrWx09th/`
+   `{hTZG5yFgyZY,MqnAp2jnnon,ivq3YYEGPZM,VW6IL66KC6M}`, `B21UyndcVvF`,
+   `oEpx7i6I9Bq`, and `us8tbD58ow4`.
+4. Continue behavior/reference checks. No Gradle project builds the entire clean
+   Java tree yet. Original fragment name strings require coordinated navigation
+   mapping before a runnable reconstruction.
 
-## Drafts needing review
-
-- `app/src/main/java/cu/etecsa/transfermovil/banking/OperationMenuBuilder.java` and `app/src/main/java/cu/etecsa/transfermovil/data/OperationMenuBuilder.java` both claim the same original class: `cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.nljtDl5MIf`. They are alternative versions. Compare both with the original JADX source and choose one before integration.
-- The other 26 drafts are under `banking/ui/` and cover pagers, tabs, BPA, BFI, Metropolitano, and the wallet. Several contain `stub`, `return null`, or fixed return values. Do not assume that they implement the original behavior.
-- The reconstructed source was not compiled. This repository has an analysis `Makefile`, but no Gradle project was found for building `app/src/main/java/` directly.
-- `mappings/classes.json` has 72 entries and was not updated for these 28 drafts. Review the equivalences and confidence levels when work resumes.
-
-## Next session
-
-1. Compare the 28 drafts with `src/`, resolve the duplicate `OperationMenuBuilder`, and replace stubs only where the original behavior can be established.
-2. Build an inventory linking each original path to its clean counterpart. Prioritize these groups among paths without an exact annotation match: `B0jOLrWx09th/p1CEgMEeWUbD/{P2MO7cFkntPD,zpT98w56Knm,DrR0lEVP3qk}`, `B0jOLrWx09th/{hTZG5yFgyZY,MqnAp2jnnon,ivq3YYEGPZM,VW6IL66KC6M}`, `B21UyndcVvF`, `oEpx7i6I9Bq`, and `us8tbD58ow4`. Separate generated classes from application logic.
-3. Update `mappings/classes.json` as each equivalence is verified. Record duplicate mappings and clean classes with unclear origins.
-4. Check reconstructed methods and cross-class references before claiming coverage or attempting a build. Functional analysis tasks remain in [TODO.md](../../TODO.md).
-
-This document is a resumption point. The drafts preserve interrupted work; they are **not validated** as functional source.
+Functional analysis tasks remain in [TODO.md](../../TODO.md).

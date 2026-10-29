@@ -19,10 +19,11 @@
 ## Clean Java Reconstruction
 
 - [x] Generate a reproducible [source-to-clean inventory](docs/reconstruction-inventory.md) with duplicate candidates and mapping inconsistencies.
-- [ ] Review 71 original paths with multiple reconstruction candidates; resolve `OperationMenuBuilder` against original behavior and database callers first.
-- [ ] Resolve the 28 mapping incidences reported in the 2026-10-28 inventory against source evidence.
-- [ ] Review the 28 interrupted drafts recorded in `.workspace/handoff.md`; replace incomplete behavior only when supported by source.
-- [ ] Review the 224 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [x] Resolve `OperationMenuBuilder` duplicates, restore full source behavior and immediate entity dependencies, and compare against JADX in an isolated JVM harness.
+- [ ] Review the remaining 70 original paths with multiple reconstruction candidates.
+- [ ] Resolve the remaining 25 mapping incidences reported in the 2026-10-28 inventory against source evidence.
+- [ ] Review the remaining 26 interrupted banking UI drafts recorded in `.workspace/handoff.md`; replace incomplete behavior only when supported by source.
+- [ ] Review the remaining 223 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
 
 ## Architecture & Navigation

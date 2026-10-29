@@ -31,27 +31,43 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 361 | 362 | 71 |
-| Main app package | 596 | 224 | 301 | 71 |
+| All `src/` | 794 | 360 | 364 | 70 |
+| Main app package | 596 | 223 | 303 | 70 |
 
-There are 504 clean files and 72 explicit class mappings. All clean files have
+There are 504 clean files and 73 explicit class mappings. All clean files have
 an annotation resolving to an original Java path. The explicit mapping file has
-28 incidences: 18 absent clean targets, 6 absent original paths, and 4 annotation
+25 incidences: 17 absent clean targets, 5 absent original paths, and 3 annotation
 conflicts. These counts do not establish a completion percentage.
 
-### Initial source checks
+### Operation menu reconstruction
 
-- `ZNRpoHwtLXM.nljtDl5MIf` has two candidates: `banking/OperationMenuBuilder.java`
-  and `data/OperationMenuBuilder.java`. The original exposes `fill_all`,
-  `fill_generales`, and other underscore-named methods. The data candidate keeps
-  these names; the banking candidate changes them to `fillAll`, `fillGenerales`,
-  etc. `data/TransferMobilDatabaseOpenHelper.java` calls `fill_all` in both
-  creation and upgrade paths. This identifies an integration difference but does
-  not establish either candidate's full behavioral fidelity. Both remain for review.
+- `data/OperationMenuBuilder.java` is the single reconstruction of
+  `ZNRpoHwtLXM.nljtDl5MIf`. The former banking candidate had empty banking fill
+  and update methods and was removed. The remaining candidate was replaced with
+  all original method bodies, adapting dependency names to existing clean classes.
+  It preserves the `fill_all` and `update_*` API called by the database helper.
+- `Operation.operacion` now uses `BankOperationCode`, matching the original
+  `FdonIAFI9w` field and the DAO API. The stale String placeholder was removed.
+- Added the missing `TaxRecord` entity from `Tributo`. Its database table stays
+  `Tributo`; original export metadata quirks (`Nauta` table descriptor and the
+  duplicate `nombre` field descriptor) are preserved explicitly.
 - `banking/BankOperationCode.java` matches all 332 original constants from
-  `ZNRpoHwtLXM/FdonIAFI9w.java`, in their original order. Its mapping entry instead
-  points to `l08fNVC4KOKK.FdonIAFI9w`, which has no Java file in `src/`.
-  Review the mapping against this source evidence before correcting it.
+  `ZNRpoHwtLXM/FdonIAFI9w.java`, in order. Its mapping now names that actual path.
+
+Run `make test-reconstruction` with Python 3 and a JDK. The JVM comparison
+compiles the real reconstructed menu, entities, enums, and metadata classes,
+and compares them with the original JADX menu adapted only for dependency names.
+It checks 17 public methods under five DAO scenarios: missing records, existing
+records, duplicate records, a transient query failure, and persistent query
+failure. It compares ordered DAO/log traces, row field values, returned values,
+exception types, and in-memory menu lists (85 method/scenario pairs).
+
+Android classes, resource IDs/string lookup, ORMLite annotations, JSON data, and
+the DAO implementation are test substitutes. JSON fixtures include valid and
+malformed rows. This verifies menu control flow and data construction under
+those scenarios; it does not validate real asset parsing, SQLite persistence,
+Android navigation, or the full application build. Fragment class strings retain
+APK names; a future runnable app needs coordinated navigation mapping.
 
 Review duplicate candidates and mapping conflicts first, then compare methods
 against JADX and smali where decompilation is incomplete. Record verified

@@ -1,979 +1,1652 @@
 package cu.etecsa.transfermovil.data;
 
 import android.content.Context;
+import cu.etecsa.transfermovil.banking.BankOperationCode;
 import android.util.Log;
-
 import com.github.paolorotolo.appintro.BuildConfig;
-
 import cu.etecsa.transfermovil.R;
-import cu.etecsa.transfermovil.data.entity.Municipio;
-import cu.etecsa.transfermovil.data.entity.Operacion;
-import cu.etecsa.transfermovil.data.entity.Provincia;
-import cu.etecsa.transfermovil.data.entity.Tributo;
-import cu.etecsa.transfermovil.data.model.BankType;
-
+import cu.etecsa.transfermovil.data.entity.Municipality;
+import cu.etecsa.transfermovil.data.entity.Operation;
+import cu.etecsa.transfermovil.data.entity.Province;
+import cu.etecsa.transfermovil.data.entity.TaxRecord;
+import cu.etecsa.transfermovil.core.enums.BankType;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Builds and manages operation menus for all bank/service types in the application.
- * <p>
- * Operations are menu items displayed to users, organized by service type:
- * General (ETECSA mobile services), Agent (recharge agents), BPA, BANDEC,
- * Metropolitano (banks), and MiTransfer/Bolsa (digital wallet).
- * <p>
- * Two population strategies exist:
- * <ul>
- *   <li>{@link #fillList(Context)} - Builds in-memory lists then upserts each operation
- *       via {@link #updateOperation(Operacion)}. Used for app upgrades.</li>
- *   <li>{@link #fill_all(Context)} - Inserts all operations directly to the database.
- *       Used for fresh installs.</li>
- * </ul>
- * <p>
- * Update methods ({@code update_*}) patch icons and fragment references for
- * version-specific UI refreshes without recreating operations.
- * <p>
- * Note: {@code BuildConfig.FLAVOR} resolves to "" (empty string) and is used for
- * operations that have no dedicated fragment (handled by USSD/SMS dispatch instead).
+ * Builds operation menus and loads geographic/tax reference data.
+ * Preserves original installation, upgrade, duplicate repair, and error paths.
+ * Fragment class strings retain APK names for traceability; runtime fragment
+ * renaming must be coordinated with the navigation layer before an app build.
  *
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.nljtDl5MIf
- * @fingerprint 3842-line operation menu builder. Creates bank/service operation lists.
+ * @original_apk_version 1.260416
  */
 public class OperationMenuBuilder {
-
-    private static final String TAG = "OPERLOG";
-
     public Context context;
-    public List<Operacion> listGenerales = new ArrayList<>();
-    public List<Operacion> listAgente = new ArrayList<>();
-    public List<Operacion> listBPA = new ArrayList<>();
-    public List<Operacion> listBANDEC = new ArrayList<>();
-    public List<Operacion> listMETRO = new ArrayList<>();
-    public List<Operacion> listBolsa = new ArrayList<>();
-
-    // -------------------------------------------------------------------------
-    // Helper: creates a fully-configured Operacion instance.
-    // fragment "" means the operation is handled via USSD/SMS, not a UI fragment.
-    // -------------------------------------------------------------------------
-
-    private Operacion createOp(String titulo, String subtitulo, int imagen,
-                               String fragmentName, BankType tipo,
-                               int order, BankOperationCode operacion, boolean activo) {
-        Operacion op = new Operacion();
-        op.setTitulo(titulo);
-        op.setSubtitulo(subtitulo);
-        op.setImagen(imagen);
-        op.setFragment_name(fragmentName);
-        op.setTipo_serivicio(tipo);
-        op.setOrder(order);
-        op.setOperacion(operacion);
-        op.setActivo(activo);
-        return op;
-    }
-
-    // =========================================================================
-    // fillList: Build in-memory lists, then upsert all operations to database.
-    // Used when upgrading from a previous version.
-    // =========================================================================
+    public List<Operation> listGenerales = new ArrayList();
+    public List<Operation> listAgente = new ArrayList();
+    public List<Operation> listBPA = new ArrayList();
+    public List<Operation> listBANDEC = new ArrayList();
+    public List<Operation> listMETRO = new ArrayList();
+    public List<Operation> listBolsa = new ArrayList();
 
     public void fillList(Context context) {
         this.context = context;
-
-        // --- Agent operations (ETECSA recharge agent) ---
-        BankType etecsa = BankType.ETECSA;
-
-        listAgente.add(createOp("Autenticar", "Recarga Movil",
-                R.drawable.ic_autenticacion_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.cwVwMsOO60",
-                etecsa, -1, BankOperationCode.AGAutenticar, true));
-
-        listAgente.add(createOp("Consultar Saldo", "Recarga Movil",
-                R.drawable.ic_consultar_saldo_222,
-                BuildConfig.FLAVOR, etecsa, -1, BankOperationCode.AGConsultarSaldo, true));
-
-        listAgente.add(createOp("Recargar", "Recarga Movil",
-                R.drawable.ic_recargar_saldo_movil,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.A9IFPpW4HW",
-                etecsa, -1, BankOperationCode.AGRecargar, true));
-
-        listAgente.add(createOp("Ultimas Recargas", "Recarga Movil",
-                R.drawable.ic_ultimas_recargas_agente,
-                BuildConfig.FLAVOR, etecsa, -1, BankOperationCode.AGUltimasRecargas, true));
-
-        listAgente.add(createOp("Cambiar clave", "Recarga Movil",
-                R.drawable.ic_cambio_pin_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.VqNI4JnvJD",
-                etecsa, -1, BankOperationCode.AGCambiarclave, true));
-
-        listAgente.add(createOp("Desconectar", "Recarga Movil",
-                R.drawable.ic_desconcetarse_agente,
-                BuildConfig.FLAVOR, etecsa, -1, BankOperationCode.AGDesconectar, true));
-
-        listAgente.add(createOp("Recargar", "Recarga Nauta",
-                R.drawable.ic_recarga_nauta_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.I1YePWjLywK9.NdeFyyhxF1",
-                etecsa, -1, BankOperationCode.AGRecargarNauta, true));
-
-        listAgente.add(createOp("Ultimas recargas", "Recarga Nauta",
-                R.drawable.ic_ultimas_recargas_ag,
-                BuildConfig.FLAVOR, etecsa, -1, BankOperationCode.AGConsultarNautaUlt, true));
-
-        listAgente.add(createOp(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.paquetes_cubacel_agentes,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW",
-                etecsa, -1, BankOperationCode.BOLSAPaquetesCubacel, true));
-
-        listAgente.add(createOp(context.getString(R.string.banco_telefono),
-                context.getString(R.string.banco_sub_telefono),
-                R.drawable.bolsa_ag_factura_telefonica,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.ee4tsHNQiS",
-                etecsa, -1, BankOperationCode.BOLSAAGFacturaTelefonica, true));
-
-        listAgente.add(createOp(context.getString(R.string.menu_title_recarga_movil_bolsa),
-                context.getString(R.string.menu_sub_recarga_movil_bolsa),
-                R.drawable.bolsa_ag_recarga_movil,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.f03gMUuBeK",
-                etecsa, -1, BankOperationCode.BOLSAAGRecargaMovil, true));
-
-        listAgente.add(createOp(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.sub_recarga_nauta),
-                R.drawable.bolsa_ag_recarga_nauta,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.yww1pS0VKU",
-                etecsa, -1, BankOperationCode.BOLSAAGRecargaNauta, true));
-
-        listAgente.add(createOp(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.hint_subtitle_recarga_propia),
-                R.drawable.bolsa_ag_recarga_propia,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.BpgQdOQz0p",
-                etecsa, -1, BankOperationCode.BOLSAAGRecargaPropia, true));
-
-        // --- General operations (ETECSA mobile services, no bank) ---
-        BankType general = BankType.General;
-
-        listGenerales.add(createOp("Consulta tu Saldo Prepago", "Marcando *222#",
-                R.drawable.ico_agent_consultar_factura_color,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.ConsultaSaldo222, true));
-
-        listGenerales.add(createOp("Consulta tu Saldo Pospago", "Marcando *111#",
-                R.drawable.ico_agent_consultar_factura_color,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.ConsultaSaldo111, true));
-
-        listGenerales.add(createOp("LLamar", "Realizar LLamada",
-                R.drawable.ic_llamar,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2",
-                general, -1, BankOperationCode.LLamada, true));
-
-        listGenerales.add(createOp("Llamar con *99", "El destinatario paga",
-                R.drawable.ic_llamar_con_99,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2",
-                general, -1, BankOperationCode.Llamar99, true));
-
-        listGenerales.add(createOp("Recarga tu Movil con Cupon",
-                "Recargar movil con cupon de recarga ",
-                R.drawable.ic_recargar_naura_cupon_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.b0kkzvOCEu",
-                general, -1, BankOperationCode.RecargarMovilBono, true));
-
-        listGenerales.add(createOp("Transferir tu Saldo", "Transferencia de saldo",
-                R.drawable.ic_transferir_saldo,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.C8l2t8799rL",
-                general, -1, BankOperationCode.TransferirSaldoMovil, true));
-
-        listGenerales.add(createOp("Cambiar su clave de transferencia", "Cambio de clave",
-                R.drawable.ic_cambio_pin_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.E1lhoLKryWP",
-                general, -1, BankOperationCode.CambioClave, true));
-
-        listGenerales.add(createOp(context.getString(R.string.title_consultar_estado_bono),
-                context.getString(R.string.subtitle_consultar_estado_bono),
-                R.drawable.ic_consultar_bono,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.ConsultarEstadoBono, true));
-
-        listGenerales.add(createOp(context.getString(R.string.title_gestion_planes),
-                context.getString(R.string.subtitle_gestion_planes),
-                R.drawable.ic_plan_amigos,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.GestionPlanes, true));
-
-        listGenerales.add(createOp(context.getString(R.string.title_consultar_plan_datos),
-                context.getString(R.string.subtitle_consultar_plan_datos),
-                R.drawable.ic_consultar_plan_datos,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.ConsultarPlanDatos, true));
-
-        listGenerales.add(createOp(context.getString(R.string.title_consultar_plan_voz),
-                context.getString(R.string.subtitle_consultar_plan_voz),
-                R.drawable.ic_consultar_plan_voz,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.ConsultarPlanVoz, true));
-
-        listGenerales.add(createOp(context.getString(R.string.consultar_plan_sms),
-                context.getString(R.string.subconsultar_plan_sms),
-                R.drawable.ic_consultar_plan_sms,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.ConsultarPlanSMS, true));
-
-        listGenerales.add(createOp(context.getString(R.string.consultar_plan_amigos),
-                context.getString(R.string.subconsultar_plan_amigos),
-                R.drawable.ic_consultar_plan_amigo,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.ConsultarPlanAmigos, true));
-
-        listGenerales.add(createOp(context.getString(R.string.title_operaciones_adelanta),
-                context.getString(R.string.detail_operaciones_adelanta),
-                R.drawable.ic_adelantar_saldo,
-                BuildConfig.FLAVOR, general, -1, BankOperationCode.AdelantaSaldo, true));
-
-        // --- BPA operations ---
-        BankType bpa = BankType.BPA;
-
-        listBPA.add(createOp("Autenticarse", "BPA",
-                R.drawable.ic_autenticacion_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.lzGEfceoJu",
-                bpa, 6, BankOperationCode.BPAAutenticarse, true));
-
-        listBPA.add(createOp("Transferencia", "BPA",
-                R.drawable.ic_transferencia_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h",
-                bpa, -1, BankOperationCode.BPATransferencia, true));
-
-        listBPA.add(createOp("Electricidad", "BPA",
-                R.drawable.ic_pago_factura_electricidad_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.xSwGh0MTOg",
-                bpa, -1, BankOperationCode.BPAElectricidad, true));
-
-        listBPA.add(createOp("Telecomunicaciones", "BPA",
-                R.drawable.ic_pago_tfa_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.u4QMc0S0ZHo",
-                bpa, -1, BankOperationCode.BPATelefono, true));
-
-        listBPA.add(createOp("ONAT", "BPA",
-                R.drawable.ic_pago_onat_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPAONAT, true));
-
-        listBPA.add(createOp("Consultar Saldo", "BPA",
-                R.drawable.ic_consulta_saldo_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.ix4mhKGJty",
-                bpa, -1, BankOperationCode.BPAConsultarSaldo, true));
-
-        listBPA.add(createOp("Consultar Servicio", "BPA",
-                R.drawable.ic_consultar_servicio_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.xoZnbyoSLT",
-                bpa, -1, BankOperationCode.BPAConsultarServicio, true));
-
-        listBPA.add(createOp("Ultimas operaciones", "BPA",
-                R.drawable.ic_consulta_utlimas_oper_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.h3sd43nvje",
-                bpa, -1, BankOperationCode.BPAUltimasoperaciones, true));
-
-        listBPA.add(createOp("Registrarse", "BPA",
-                R.drawable.ic_registrarse_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.IixhA1yamp",
-                bpa, 5, BankOperationCode.BPARegistrarse, true));
-
-        listBPA.add(createOp("Cambiar clave", "BPA",
-                R.drawable.ic_cambio_pin_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.PQmKwgxZd1",
-                bpa, -1, BankOperationCode.BPACambiarclave, true));
-
-        listBPA.add(createOp("Desconectar", "BPA",
-                R.drawable.ic_desconectarse_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPADesconectar, true));
-
-        listBPA.add(createOp("Recarga Movil", "BPA",
-                R.drawable.ic_recarga_saldo_movil_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPARecargaMovil, true));
-
-        listBPA.add(createOp("Cambio de limite", "BPA",
-                R.drawable.ic_cambio_limites_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.qmcwKV1fzU",
-                bpa, -1, BankOperationCode.BPACambioLimite, true));
-
-        listBPA.add(createOp("Consulta de limites", "BPA",
-                R.drawable.ic_consulta_limites_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.e8WK1Uajbq",
-                bpa, -1, BankOperationCode.BPAConsultaLimite, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_pago_externo),
-                context.getString(R.string.sub_pago_externo),
-                R.drawable.ic_pago_linea_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPAPagoExterno, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.sub_recarga_nauta),
-                R.drawable.ic_pago_nauta_hogar_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPARecargaNauta, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_giro_postal),
-                context.getString(R.string.sub_giro_postal),
-                R.drawable.ic_enviar_giro_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.o6kycf55Gw",
-                bpa, -1, BankOperationCode.BPAGiroPostal, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_consulta_giro),
-                context.getString(R.string.sub_consulta_giros),
-                R.drawable.ic_consultar_giro_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.XvOK7VM4qL",
-                bpa, -1, BankOperationCode.BPAConsultarGiroPostal, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_service_bpa_consulta_integrada),
-                context.getString(R.string.sub_service_bpa_consulta_integrada),
-                R.drawable.ic_consulta_todas_cuentas_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPAConsultarTodasCuentas, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_service_bpa_amortizar),
-                context.getString(R.string.sub_service_bpa_amortizar),
-                R.drawable.ic_amortizar_credito_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.Dm6u4PA5eg",
-                bpa, -1, BankOperationCode.BPAAmortizar, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_service_bpa_consulta_credito),
-                context.getString(R.string.sub_service_consulta_credito),
-                R.drawable.ic_consulta_credito_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPAConsultaCredito, true));
-
-        listBPA.add(createOp(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.hint_subtitle_recarga_propia),
-                R.drawable.ic_recarga_tarjeta_propia_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPARecargaPropia, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_service_bpa_agua),
-                context.getString(R.string.sub_service_bpa_agua),
-                R.drawable.ic_pago_factura_agua_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.zOs55UzH6z",
-                bpa, -1, BankOperationCode.BPAAgua, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_service_bpa_gas),
-                context.getString(R.string.sub_service_bpa_gas),
-                R.drawable.ic_pago_factura_gas_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.FgpBLXKm6t",
-                bpa, -1, BankOperationCode.BPAGas, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_jclub),
-                context.getString(R.string.sub_jclub),
-                R.drawable.ic_pago_joven_club_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPAJClub, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_recarga_bolsa_cup),
-                context.getString(R.string.subtitle_recarga_bolsa_cup),
-                R.drawable.ic_recargar_monedero_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPARecargaBolsa, true));
-
-        listBPA.add(createOp(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_paquetes_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPAPaquetesCubacel, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_reserva_ticket),
-                context.getString(R.string.subtitle_reserva_ticket),
-                R.drawable.ic_compra_miturno_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPAReservasTicket, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_organizacion_politica),
-                context.getString(R.string.subtitle_pcc),
-                R.drawable.ic_pago_organizaciones_masa_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPAPCC, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_recarga_tfa),
-                context.getString(R.string.subtitle_recarga_tfa),
-                R.drawable.ic_pago_tfa_bpa,
-                BuildConfig.FLAVOR, bpa, -1, BankOperationCode.BPARecargaTFA, true));
-
-        // --- BANDEC operations ---
-        BankType bandec = BankType.BANDEC;
-
-        listBANDEC.add(createOp("Autenticarse", "BANDEC",
-                R.drawable.ic_autenticacion_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TGFziPh3KJ",
-                bandec, 8, BankOperationCode.BANAutenticar, true));
-
-        listBANDEC.add(createOp("Transferencia", "BANDEC",
-                R.drawable.ic_transferencia_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ZDkigMAIBm",
-                bandec, -1, BankOperationCode.BANTransferencia, true));
-
-        listBANDEC.add(createOp("Electricidad", "BANDEC",
-                R.drawable.ic_pago_factura_electricidad_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.Q3Nvf439ab",
-                bandec, -1, BankOperationCode.BANElectricidad, true));
-
-        listBANDEC.add(createOp("Telecomunicaciones", "BANDEC",
-                R.drawable.ic_pago_factura_telefono_fijo_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.iQte15zdZs",
-                bandec, -1, BankOperationCode.BANTelefono, true));
-
-        listBANDEC.add(createOp("ONAT", "BANDEC",
-                R.drawable.ic_pago_onat_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANONAT, true));
-
-        listBANDEC.add(createOp("Consultar Saldo", "BANDEC",
-                R.drawable.ic_consulta_saldo_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANConsultarSaldo, true));
-
-        listBANDEC.add(createOp("Consultar Servicio", "BANDEC",
-                R.drawable.ic_consultar_servicio_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.idsoBKS8L3",
-                bandec, -1, BankOperationCode.BANConsultarServicio, true));
-
-        listBANDEC.add(createOp("Ultimas operaciones", "BANDEC",
-                R.drawable.ic_consulta_utlimas_oper_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.D0gaXBEFITec.gaJlF6dT3z",
-                bandec, -1, BankOperationCode.BANUltimasoperaciones, true));
-
-        listBANDEC.add(createOp("Registrarse", "BANDEC",
-                R.drawable.ic_registrarse_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.wLHKkaC4Ha",
-                bandec, 7, BankOperationCode.BANRegistrarse, true));
-
-        listBANDEC.add(createOp("Cambiar clave", "BANDEC",
-                R.drawable.ic_cambio_pin_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.FtAKxvNjrD",
-                bandec, -1, BankOperationCode.BANCambiarclave, true));
-
-        listBANDEC.add(createOp("Desconectar", "BANDEC",
-                R.drawable.ic_desconectarse_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANDesconectar, true));
-
-        listBANDEC.add(createOp("Eliminar Registro", "BANDEC",
-                R.drawable.ic_eliminar_registro_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANEliminarRegistro, true));
-
-        listBANDEC.add(createOp("Recarga Movil", "BANDEC",
-                R.drawable.ic_recarga_saldo_movil_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANRecargaMovil, true));
-
-        listBANDEC.add(createOp("Cambio de limite", "BANDEC",
-                R.drawable.ic_cambio_limites_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.nNSC8tRyptP.uWkWt7AEZ5",
-                bandec, -1, BankOperationCode.BANCambioLimite, true));
-
-        listBANDEC.add(createOp("Consulta de limites", "BANDEC",
-                R.drawable.ic_consulta_limites_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANConsultaLimite, true));
-
-        listBANDEC.add(createOp("Ultimos pagos realizados", "BANDEC",
-                R.drawable.ic_consulta_credito_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANUltimosPagos, true));
-
-        listBANDEC.add(createOp("Cambio de cuenta", "BANDEC",
-                R.drawable.ic_actualizar_cuenta_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.o9swVUfDl4q",
-                bandec, -1, BankOperationCode.BANCambioCuenta, true));
-
-        listBANDEC.add(createOp("Amortizar Credito", "BANDEC",
-                R.drawable.ic_amortizar_credito_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.LZaBQezxPC",
-                bandec, -1, BankOperationCode.BANAmortizar, true));
-
-        listBANDEC.add(createOp("Consultar Todas las Cuentas", "BANDEC",
-                R.drawable.ic_consulta_todas_cuentas_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANConsultarTodasCuentas, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.title_pago_externo),
-                context.getString(R.string.sub_pago_externo),
-                R.drawable.ic_pago_linea_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANPagoExterno, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.sub_recarga_nauta),
-                R.drawable.ic_pago_nauta_hogar_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANRecargaNauta, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.title_giro_postal),
-                context.getString(R.string.sub_giro_postal),
-                R.drawable.ic_enviar_giro_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ASLdujtVtr",
-                bandec, -1, BankOperationCode.BANGiroPostal, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.title_consulta_giro),
-                context.getString(R.string.sub_consulta_giros),
-                R.drawable.ic_consultar_giro_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.gsthr0APCT",
-                bandec, -1, BankOperationCode.BANConsultarGiroPostal, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.title_service_metro_gas),
-                context.getString(R.string.sub_service_metro_gas),
-                R.drawable.ic_pago_factura_gas_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.aiwIHVBe0c",
-                bandec, -1, BankOperationCode.BANGas, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.hint_subtitle_recarga_propia),
-                R.drawable.ic_recarga_tarjeta_propia_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANRecargaPropia, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.title_service_bpa_agua),
-                context.getString(R.string.sub_service_bpa_agua),
-                R.drawable.ic_pago_factura_agua_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.T4RQ5wDJDt",
-                bandec, -1, BankOperationCode.BANAgua, true));
-
-        // NOTE: Original bug - recargaJClubBANDEC is created but recargaJClub (BPA's) is added
-        listBANDEC.add(createOp(context.getString(R.string.title_jclub),
-                context.getString(R.string.sub_jclub),
-                R.drawable.ic_pago_joven_club_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANJClub, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.tx_head_patrimonio2),
-                context.getString(R.string.tx_sub_patrimonio),
-                R.drawable.ic_ofa_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.SZARzeWeX5",
-                bandec, -1, BankOperationCode.BANPatrimoniOfa, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.title_recarga_bolsa_cup),
-                context.getString(R.string.subtitle_recarga_bolsa_cup),
-                R.drawable.ic_recargar_monedero_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANRecargaBolsa, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_paquetes_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANPaquetesCubacel, true));
-
-        listBANDEC.add(createOp(context.getString(R.string.title_reserva_ticket),
-                context.getString(R.string.subtitle_reserva_ticket),
-                R.drawable.ic_compra_miturno_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANReservasTicket, true));
-
-        // NOTE: Original bug - pccBANDEC and tfaBANDEC are added to listBPA instead of listBANDEC
-        listBPA.add(createOp(context.getString(R.string.title_organizacion_politica),
-                context.getString(R.string.subtitle_pcc),
-                R.drawable.ic_pago_organizaciones_masa_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANPCC, true));
-
-        listBPA.add(createOp(context.getString(R.string.title_recarga_tfa),
-                context.getString(R.string.subtitle_recarga_tfa),
-                R.drawable.ic_pago_tfa_bandec,
-                BuildConfig.FLAVOR, bandec, -1, BankOperationCode.BANRecargaTFA, true));
-
-        // --- Metropolitano operations ---
-        BankType metro = BankType.Metropolitano;
-
-        listMETRO.add(createOp("Autenticarse", "Metropolitano",
-                R.drawable.ic_autenticacion_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.PAZK2sdsJ5",
-                metro, 4, BankOperationCode.METROAutenticarse, true));
-
-        listMETRO.add(createOp("Consultar Saldo", "Metropolitano",
-                R.drawable.ic_consulta_saldo_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.dVxDCMi9cK",
-                metro, -1, BankOperationCode.METROConsultarSaldo, true));
-
-        listMETRO.add(createOp("Consultar Servicio", "Metropolitano",
-                R.drawable.ic_consultar_servicio_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.hJhf3aumcr",
-                metro, -1, BankOperationCode.METROConsultarServicio, true));
-
-        listMETRO.add(createOp("Transferir Efectivo", "Metropolitano",
-                R.drawable.ic_transferencia_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.x6Wob3Sa98U",
-                metro, -1, BankOperationCode.METROTransferirEfectivo, true));
-
-        listMETRO.add(createOp("Telecomunicaciones", "Metropolitano",
-                R.drawable.ic_pago_factura_telefono_fijo_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.pnl2Kga8j7",
-                metro, -1, BankOperationCode.METROTelefono, true));
-
-        listMETRO.add(createOp("Electricidad", "Metropolitano",
-                R.drawable.ic_pago_factura_electricidad_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.PliSaYhOg0",
-                metro, -1, BankOperationCode.METROElectricidad, true));
-
-        listMETRO.add(createOp("Agua", "Metropolitano",
-                R.drawable.ic_pago_factura_agua_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.BoMBck6OXT",
-                metro, -1, BankOperationCode.METROAgua, true));
-
-        listMETRO.add(createOp("Impuestos", "Metropolitano",
-                R.drawable.ic_pago_onat_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROImpuestos, true));
-
-        listMETRO.add(createOp("Ultimas operaciones", "Metropolitano",
-                R.drawable.ic_consulta_utlimas_oper_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.GhhAuUBVrI",
-                metro, -1, BankOperationCode.METROUltimasoperaciones, true));
-
-        listMETRO.add(createOp("Registrarse", "Metropolitano",
-                R.drawable.ic_registrarse_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.RFBEnXW0Xr",
-                metro, 3, BankOperationCode.METRORegistrarse, true));
-
-        listMETRO.add(createOp("Desconectar", "Metropolitano",
-                R.drawable.ic_desconectarse_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METRODesconectar, true));
-
-        listMETRO.add(createOp("Actualizar cuenta", "Metropolitano",
-                R.drawable.ic_actualizar_cuenta_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.uurdBwh7ub",
-                metro, -1, BankOperationCode.METROActualizarcuenta, true));
-
-        listMETRO.add(createOp("Recarga Movil", "Metropolitano",
-                R.drawable.ic_recarga_saldo_movil_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METRORecargaMovil, true));
-
-        listMETRO.add(createOp("Cambio de limite", "Metropolitano",
-                R.drawable.ic_cambio_limites_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.G8E5Fjf9l7Y1.xR6zA9CmCE",
-                metro, -1, BankOperationCode.METROCambioLimite, true));
-
-        listMETRO.add(createOp("Consulta de limites", "Metropolitano",
-                R.drawable.ic_consulta_limites_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.gkzzwVYksz",
-                metro, -1, BankOperationCode.METROConsultaLimite, true));
-
-        listMETRO.add(createOp("Consultar Todas las Cuentas", "Metropolitano",
-                R.drawable.ic_consulta_todas_cuentas_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROConsultaTodasCuentas, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_service_metro_gas),
-                context.getString(R.string.sub_service_metro_gas),
-                R.drawable.ic_pago_factura_gas_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.yiqT29TYTb",
-                metro, -1, BankOperationCode.METROGas, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_pago_externo),
-                context.getString(R.string.sub_pago_externo),
-                R.drawable.ic_pago_linea_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROPagoExterno, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_giro_postal),
-                context.getString(R.string.sub_giro_postal),
-                R.drawable.ic_enviar_giro_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.mhElzRz7zH",
-                metro, -1, BankOperationCode.METROGiroPostal, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_consulta_giro),
-                context.getString(R.string.sub_consulta_giros),
-                R.drawable.ic_consultar_giro_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.jyBbMyVMOV",
-                metro, -1, BankOperationCode.METROConsultarGiroPostal, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.sub_recarga_nauta),
-                R.drawable.ic_pago_nauta_hogar_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METRORecargaNauta, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_reimprimir_tarjeta),
-                context.getString(R.string.sub_reimprimir_tarjeta),
-                R.drawable.ic_reimprimir_tarjeta_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROReimprimirTarjeta, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_metro_localizar_transferencias),
-                context.getString(R.string.sub_localizar_transferencias),
-                R.drawable.ic_localizar_transferencia_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROLocalizarTransferencia, true));
-
-        listMETRO.add(createOp(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.hint_subtitle_recarga_propia),
-                R.drawable.ic_recarga_tarjeta_propia_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METRORecargaPropia, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_jclub),
-                context.getString(R.string.sub_jclub),
-                R.drawable.ic_pago_joven_club_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROJClub, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_tipo_cambio),
-                context.getString(R.string.sub_tipo_cambio),
-                R.drawable.ic_tipo_cambio_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROTipoCambio, true));
-
-        listMETRO.add(createOp(context.getString(R.string.tx_head_patrimonio2),
-                context.getString(R.string.tx_sub_patrimonio),
-                R.drawable.ic_ofa_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.lQox6tgMlH",
-                metro, -1, BankOperationCode.METROPatrimoniOfa, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_recarga_bolsa_cup),
-                context.getString(R.string.subtitle_recarga_bolsa_cup),
-                R.drawable.ic_recargar_monedero_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METRORecargaBolsa, true));
-
-        listMETRO.add(createOp(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_paquetes_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROPaquetesCubacel, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_reserva_ticket),
-                context.getString(R.string.subtitle_reserva_ticket),
-                R.drawable.ic_compra_miturno_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROReservasTicket, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_organizacion_politica),
-                context.getString(R.string.subtitle_pcc),
-                R.drawable.ic_pago_organizaciones_masa_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METROPCC, true));
-
-        listMETRO.add(createOp(context.getString(R.string.title_recarga_tfa),
-                context.getString(R.string.subtitle_recarga_tfa),
-                R.drawable.ic_pago_tfa_metro,
-                BuildConfig.FLAVOR, metro, -1, BankOperationCode.METRORecargaTFA, true));
-
-        // --- MiTransfer / Bolsa operations (digital wallet) ---
-        BankType bolsaType = BankType.MiTransfer;
-
-        listBolsa.add(createOp(context.getString(R.string.tx_registrarse),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_registrarse_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.eUkRSfpCKs",
-                bolsaType, 1, BankOperationCode.BOLSARegistrarse, true));
-
-        listBolsa.add(createOp(context.getString(R.string.tx_autenticarse),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_autenticacion_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qZS87tGogtP.R5fFZkKuVnr",
-                bolsaType, 2, BankOperationCode.BOLSAAutenticarse, true));
-
-        listBolsa.add(createOp(context.getString(R.string.tx_consultar_saldo),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_consulta_saldo_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 10, BankOperationCode.BOLSAConsultarSaldo, true));
-
-        listBolsa.add(createOp(context.getString(R.string.tx_ultimas_operaciones),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_consulta_utlimas_oper_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 10, BankOperationCode.BOLSAUltimasOperaciones, true));
-
-        listBolsa.add(createOp(context.getString(R.string.menu_title_transferencia_bolsa),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_transferencia_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 11, BankOperationCode.BOLSATransferencia, true));
-
-        listBolsa.add(createOp(context.getString(R.string.banco_telefono),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_pago_factura_telefono_fijo_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.p5B8KozjvpQ",
-                bolsaType, 12, BankOperationCode.BOLSATelefono, true));
-
-        listBolsa.add(createOp(context.getString(R.string.menu_title_recarga_movil_bolsa),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_recarga_saldo_movil_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 13, BankOperationCode.BOLSARecargaMovil, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_pago_nauta_hogar_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.KtF0PRB8vS",
-                bolsaType, 14, BankOperationCode.BOLSARecargaNauta, true));
-
-        listBolsa.add(createOp(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_recarga_tarjeta_propia_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.JrjJL8mtlI",
-                bolsaType, 15, BankOperationCode.BOLSARecargaPropia, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_pago_externo),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_pago_linea_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 16, BankOperationCode.BOLSAPagoLinea, true));
-
-        listBolsa.add(createOp(context.getString(R.string.menu_title_compra_paquete_mlc_bolsa),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_paquetes_combinados_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.f3Ttlx30sMT",
-                bolsaType, 17, BankOperationCode.BOLSACompraPaqueteMLC, true));
-
-        listBolsa.add(createOp(context.getString(R.string.menu_title_compra_nauta_plus_bolsa),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_pago_nauta_plus_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 18, BankOperationCode.BOLSARecargaNautaMLC, true));
-
-        listBolsa.add(createOp(context.getString(R.string.tx_consultar_servicio_bolsa),
-                context.getString(R.string.tx_sub_consultar_servicio_bolsa),
-                R.drawable.ic_consultar_servicio_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb",
-                bolsaType, 19, BankOperationCode.BOLSAConsultaServicio, true));
-
-        listBolsa.add(createOp(context.getString(R.string.banco_desconectar),
-                context.getString(R.string.banco_sub_desconectar),
-                R.drawable.ic_desconectarse_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 20, BankOperationCode.BOLSADesconectar, true));
-
-        listBolsa.add(createOp(context.getString(R.string.menu_tite_recarga_cup_ticket),
-                context.getString(R.string.menu_sub_recarga_cup_ticket),
-                R.drawable.ic_recargar_monedero_cup_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.P8DtkaSW4dR",
-                bolsaType, 21, BankOperationCode.BOLSARecargaCUPWalletTicket, true));
-
-        listBolsa.add(createOp(context.getString(R.string.menu_tite_extraccion_efectivo_ticket),
-                context.getString(R.string.menu_sub_extraccion_efectivo_ticket),
-                R.drawable.ic_extraer_efectivo_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.f9Reflqt3EZ",
-                bolsaType, 22, BankOperationCode.BOLSAExtraccionWalletTicket, true));
-
-        listBolsa.add(createOp(context.getString(R.string.menu_tite_transferir_bolsa_bancos),
-                context.getString(R.string.menu_sub_transferir_bolsa_bancos),
-                R.drawable.ic_transferir_cuentas_banco_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.H0oV6Ot0bS",
-                bolsaType, 23, BankOperationCode.BOLSATransferirBancos, true));
-
-        listBolsa.add(createOp(context.getString(R.string.banco_electricidad),
-                context.getString(R.string.banco_sub_electricidad),
-                R.drawable.ic_pago_factura_electricidad_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dwdZ5sHcFR",
-                bolsaType, 24, BankOperationCode.BOLSAElectricidad, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_pago_agua_hab),
-                context.getString(R.string.sub_service_bpa_agua),
-                R.drawable.ic_pago_factura_agua_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.U1sIOmca96i",
-                bolsaType, 25, BankOperationCode.BOLSAAgua, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_service_metro_gas),
-                context.getString(R.string.sub_service_metro_gas),
-                R.drawable.ic_pago_factura_gas_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.XCDkgbw8oZ",
-                bolsaType, 26, BankOperationCode.BOLSAgas, true));
-
-        listBolsa.add(createOp(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_paquetes_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW",
-                bolsaType, 27, BankOperationCode.BOLSAPaquetesCubacel, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_reservas_ofa),
-                context.getString(R.string.tx_sub_patrimonio_bolsa),
-                R.drawable.ic_reserva_ofa_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dWLcK5oQoS",
-                bolsaType, 28, BankOperationCode.BOLSAReservasOFA, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_reserva_ticket),
-                context.getString(R.string.subtitle_reserva_ticket),
-                R.drawable.ic_pago_miturno_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 29, BankOperationCode.BOLSAReservasTicket, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_organizacion_politica),
-                context.getString(R.string.subtitle_pcc),
-                R.drawable.ic_pago_organizaciones_masa_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 30, BankOperationCode.BOLSAPCC, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_recarga_tfa),
-                context.getString(R.string.subtitle_recarga_tfa),
-                R.drawable.ic_tfa_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 30, BankOperationCode.BOLSARecargaTFA, true));
-
-        listBolsa.add(createOp(context.getString(R.string.tx_title_clasica),
-                context.getString(R.string.tx_subtitle_clasica),
-                R.drawable.ic_asociar_cuenta_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.HTmIvOo9nb",
-                bolsaType, 31, BankOperationCode.BOLSAAsociarCuenta, true));
-
-        listBolsa.add(createOp(context.getString(R.string.tx_head_patrimonio2),
-                context.getString(R.string.tx_sub_patrimonio),
-                R.drawable.ic_ofa_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.C6ZYln3x19W",
-                bolsaType, 32, BankOperationCode.BOLSAAporteOFA, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_consulta_miboleto),
-                context.getString(R.string.subtitle_consulta_miboleto),
-                R.drawable.ic_consulta_miboleto_bolsa,
-                BuildConfig.FLAVOR, bolsaType, 33, BankOperationCode.BOLSAConsultaMiBoleto, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_compra_miboleto),
-                context.getString(R.string.subtitle_compra_miboleto),
-                R.drawable.ic_miboleto_pago_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.TBaFnBLjEA",
-                bolsaType, 34, BankOperationCode.BOLSACompraMiBoleto, true));
-
-        listBolsa.add(createOp(context.getString(R.string.msg_votomovil_etecsa),
-                context.getString(R.string.msg_votomovil_descrip_etecsa),
-                R.drawable.ic_voto_movil,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.cdINOtQ3iN",
-                bolsaType, 35, BankOperationCode.BOLSAVotoMovil, true));
-
-        listBolsa.add(createOp(context.getString(R.string.tx_transferencia_clasica_empresa),
-                context.getString(R.string.ly_title_transferencia_a_clasica_empresa),
-                R.drawable.ico_transfer_clasica,
-                BuildConfig.FLAVOR, bolsaType, -1,
-                BankOperationCode.BOLSATransferenciaClasicaEmpresarial, true));
-
-        listBolsa.add(createOp(context.getString(R.string.title_pago_externo_empresarial),
-                context.getString(R.string.sub_pago_externo_empresarial),
-                R.drawable.ic_pago_linea_empresarial,
-                BuildConfig.FLAVOR, bolsaType, -1,
-                BankOperationCode.BOLSAPagoExternoClasicaEmpresarial, true));
-
-        // --- Persist all lists to database via upsert ---
-        for (Operacion item : listAgente) {
-            updateOperation(item);
+        Operation recargaMovil1 = new Operation();
+        recargaMovil1.setTitulo("Autenticar");
+        recargaMovil1.setSubtitulo("Recarga Móvil");
+        recargaMovil1.setImagen(R.drawable.ic_autenticacion_agente);
+        recargaMovil1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.cwVwMsOO60");
+        BankType r1sDOSqZ2z = BankType.ETECSA;
+        recargaMovil1.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil1.setOrder(-1);
+        recargaMovil1.setOperacion(BankOperationCode.AGAutenticar);
+        recargaMovil1.setActivo(true);
+        this.listAgente.add(recargaMovil1);
+        Operation recargaMovil2 = new Operation();
+        recargaMovil2.setTitulo("Consultar Saldo");
+        recargaMovil2.setSubtitulo("Recarga Móvil");
+        recargaMovil2.setImagen(R.drawable.ic_consultar_saldo_222);
+        recargaMovil2.setFragment_name(BuildConfig.FLAVOR);
+        recargaMovil2.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil2.setOrder(-1);
+        recargaMovil2.setOperacion(BankOperationCode.AGConsultarSaldo);
+        recargaMovil2.setActivo(true);
+        this.listAgente.add(recargaMovil2);
+        Operation recargaMovil3 = new Operation();
+        recargaMovil3.setTitulo("Recargar");
+        recargaMovil3.setSubtitulo("Recarga Móvil");
+        recargaMovil3.setImagen(R.drawable.ic_recargar_saldo_movil);
+        recargaMovil3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.A9IFPpW4HW");
+        recargaMovil3.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil3.setOrder(-1);
+        recargaMovil3.setOperacion(BankOperationCode.AGRecargar);
+        recargaMovil3.setActivo(true);
+        this.listAgente.add(recargaMovil3);
+        Operation recargaMovil4 = new Operation();
+        recargaMovil4.setTitulo("Últimas Recargas");
+        recargaMovil4.setSubtitulo("Recarga Móvil");
+        recargaMovil4.setImagen(R.drawable.ic_ultimas_recargas_agente);
+        recargaMovil4.setFragment_name(BuildConfig.FLAVOR);
+        recargaMovil4.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil4.setOrder(-1);
+        recargaMovil4.setOperacion(BankOperationCode.AGUltimasRecargas);
+        recargaMovil4.setActivo(true);
+        this.listAgente.add(recargaMovil4);
+        Operation recargaMovil5 = new Operation();
+        recargaMovil5.setTitulo("Cambiar clave");
+        recargaMovil5.setSubtitulo("Recarga Móvil");
+        recargaMovil5.setImagen(R.drawable.ic_cambio_pin_agente);
+        recargaMovil5.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.VqNI4JnvJD");
+        recargaMovil5.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil5.setOrder(-1);
+        recargaMovil5.setOperacion(BankOperationCode.AGCambiarclave);
+        recargaMovil5.setActivo(true);
+        this.listAgente.add(recargaMovil5);
+        Operation recargaMovil6 = new Operation();
+        recargaMovil6.setTitulo("Desconectar");
+        recargaMovil6.setSubtitulo("Recarga Móvil");
+        recargaMovil6.setImagen(R.drawable.ic_desconcetarse_agente);
+        recargaMovil6.setFragment_name(BuildConfig.FLAVOR);
+        recargaMovil6.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil6.setOrder(-1);
+        recargaMovil6.setOperacion(BankOperationCode.AGDesconectar);
+        recargaMovil6.setActivo(true);
+        this.listAgente.add(recargaMovil6);
+        Operation recargaNauta1 = new Operation();
+        recargaNauta1.setTitulo("Recargar");
+        recargaNauta1.setSubtitulo("Recarga Nauta");
+        recargaNauta1.setImagen(R.drawable.ic_recarga_nauta_agente);
+        recargaNauta1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.I1YePWjLywK9.NdeFyyhxF1");
+        recargaNauta1.setTipo_serivicio(r1sDOSqZ2z);
+        recargaNauta1.setOrder(-1);
+        recargaNauta1.setOperacion(BankOperationCode.AGRecargarNauta);
+        recargaNauta1.setActivo(true);
+        this.listAgente.add(recargaNauta1);
+        Operation recargaNauta2 = new Operation();
+        recargaNauta2.setTitulo("Últimas recargas");
+        recargaNauta2.setSubtitulo("Recarga Nauta");
+        recargaNauta2.setImagen(R.drawable.ic_ultimas_recargas_ag);
+        recargaNauta2.setFragment_name(BuildConfig.FLAVOR);
+        recargaNauta2.setTipo_serivicio(r1sDOSqZ2z);
+        recargaNauta2.setOrder(-1);
+        recargaNauta2.setOperacion(BankOperationCode.AGConsultarNautaUlt);
+        recargaNauta2.setActivo(true);
+        this.listAgente.add(recargaNauta2);
+        Operation cubacelAGT = new Operation();
+        cubacelAGT.setTitulo(context.getString(R.string.head_paquetes_cubacel));
+        cubacelAGT.setSubtitulo(context.getString(R.string.sub_compra_paquetes));
+        cubacelAGT.setImagen(R.drawable.paquetes_cubacel_agentes);
+        cubacelAGT.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW");
+        cubacelAGT.setOperacion(BankOperationCode.BOLSAPaquetesCubacel);
+        cubacelAGT.setTipo_serivicio(r1sDOSqZ2z);
+        cubacelAGT.setOrder(-1);
+        cubacelAGT.setActivo(true);
+        this.listAgente.add(cubacelAGT);
+        Operation ag1 = new Operation();
+        ag1.setTitulo(context.getString(R.string.banco_telefono));
+        ag1.setSubtitulo(context.getString(R.string.banco_sub_telefono));
+        ag1.setImagen(R.drawable.bolsa_ag_factura_telefonica);
+        ag1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.ee4tsHNQiS");
+        ag1.setTipo_serivicio(r1sDOSqZ2z);
+        ag1.setOrder(-1);
+        ag1.setOperacion(BankOperationCode.BOLSAAGFacturaTelefonica);
+        ag1.setActivo(true);
+        this.listAgente.add(ag1);
+        Operation ag2 = new Operation();
+        ag2.setTitulo(context.getString(R.string.menu_title_recarga_movil_bolsa));
+        ag2.setSubtitulo(context.getString(R.string.menu_sub_recarga_movil_bolsa));
+        ag2.setImagen(R.drawable.bolsa_ag_recarga_movil);
+        ag2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.f03gMUuBeK");
+        ag2.setTipo_serivicio(r1sDOSqZ2z);
+        ag2.setOrder(-1);
+        ag2.setOperacion(BankOperationCode.BOLSAAGRecargaMovil);
+        ag2.setActivo(true);
+        this.listAgente.add(ag2);
+        Operation ag3 = new Operation();
+        ag3.setTitulo(context.getString(R.string.title_recarga_nauta));
+        ag3.setSubtitulo(context.getString(R.string.sub_recarga_nauta));
+        ag3.setImagen(R.drawable.bolsa_ag_recarga_nauta);
+        ag3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.yww1pS0VKU");
+        ag3.setTipo_serivicio(r1sDOSqZ2z);
+        ag3.setOrder(-1);
+        ag3.setOperacion(BankOperationCode.BOLSAAGRecargaNauta);
+        ag3.setActivo(true);
+        this.listAgente.add(ag3);
+        Operation ag4 = new Operation();
+        ag4.setTitulo(context.getString(R.string.hint_recarga_propia));
+        ag4.setSubtitulo(context.getString(R.string.hint_subtitle_recarga_propia));
+        ag4.setImagen(R.drawable.bolsa_ag_recarga_propia);
+        ag4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.BpgQdOQz0p");
+        ag4.setTipo_serivicio(r1sDOSqZ2z);
+        ag4.setOrder(-1);
+        ag4.setOperacion(BankOperationCode.BOLSAAGRecargaPropia);
+        ag4.setActivo(true);
+        this.listAgente.add(ag4);
+        Operation consultaSaldoPrepago = new Operation();
+        consultaSaldoPrepago.setTitulo("Consulta tu Saldo Prepago");
+        consultaSaldoPrepago.setSubtitulo("Marcando *222#");
+        consultaSaldoPrepago.setImagen(R.drawable.ico_agent_consultar_factura_color);
+        consultaSaldoPrepago.setFragment_name(BuildConfig.FLAVOR);
+        BankType r1sDOSqZ2z2 = BankType.General;
+        consultaSaldoPrepago.setTipo_serivicio(r1sDOSqZ2z2);
+        consultaSaldoPrepago.setOrder(-1);
+        consultaSaldoPrepago.setOperacion(BankOperationCode.ConsultaSaldo222);
+        consultaSaldoPrepago.setActivo(true);
+        this.listGenerales.add(consultaSaldoPrepago);
+        Operation consultaSaldoPospago = new Operation();
+        consultaSaldoPospago.setTitulo("Consulta tu Saldo Pospago");
+        consultaSaldoPospago.setSubtitulo("Marcando *111#");
+        consultaSaldoPospago.setImagen(R.drawable.ico_agent_consultar_factura_color);
+        consultaSaldoPospago.setFragment_name(BuildConfig.FLAVOR);
+        consultaSaldoPospago.setTipo_serivicio(r1sDOSqZ2z2);
+        consultaSaldoPospago.setOrder(-1);
+        consultaSaldoPospago.setOperacion(BankOperationCode.ConsultaSaldo111);
+        consultaSaldoPospago.setActivo(true);
+        this.listGenerales.add(consultaSaldoPospago);
+        Operation realizarLlamada = new Operation();
+        realizarLlamada.setTitulo("LLamar");
+        realizarLlamada.setSubtitulo("Realizar LLamada");
+        realizarLlamada.setImagen(R.drawable.ic_llamar);
+        realizarLlamada.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2");
+        realizarLlamada.setTipo_serivicio(r1sDOSqZ2z2);
+        realizarLlamada.setOrder(-1);
+        realizarLlamada.setOperacion(BankOperationCode.LLamada);
+        realizarLlamada.setActivo(true);
+        this.listGenerales.add(realizarLlamada);
+        Operation realizarLlamada99 = new Operation();
+        realizarLlamada99.setTitulo("Llamar con *99");
+        realizarLlamada99.setSubtitulo("El destinatario paga");
+        realizarLlamada99.setImagen(R.drawable.ic_llamar_con_99);
+        realizarLlamada99.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2");
+        realizarLlamada99.setTipo_serivicio(r1sDOSqZ2z2);
+        realizarLlamada99.setOrder(-1);
+        realizarLlamada99.setOperacion(BankOperationCode.Llamar99);
+        realizarLlamada99.setActivo(true);
+        this.listGenerales.add(realizarLlamada99);
+        Operation recargarConBono = new Operation();
+        recargarConBono.setTitulo("Recarga tu Móvil con Cupón");
+        recargarConBono.setSubtitulo("Recargar móvil con cupón de recarga ");
+        recargarConBono.setImagen(R.drawable.ic_recargar_naura_cupon_agente);
+        recargarConBono.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.b0kkzvOCEu");
+        recargarConBono.setTipo_serivicio(r1sDOSqZ2z2);
+        recargarConBono.setOrder(-1);
+        recargarConBono.setOperacion(BankOperationCode.RecargarMovilBono);
+        recargarConBono.setActivo(true);
+        this.listGenerales.add(recargarConBono);
+        Operation transferirSaldo = new Operation();
+        transferirSaldo.setTitulo("Transferir tu Saldo");
+        transferirSaldo.setSubtitulo("Transferencia de saldo");
+        transferirSaldo.setImagen(R.drawable.ic_transferir_saldo);
+        transferirSaldo.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.C8l2t8799rL");
+        transferirSaldo.setTipo_serivicio(r1sDOSqZ2z2);
+        transferirSaldo.setOrder(-1);
+        transferirSaldo.setOperacion(BankOperationCode.TransferirSaldoMovil);
+        transferirSaldo.setActivo(true);
+        this.listGenerales.add(transferirSaldo);
+        Operation cambioclavetransferirSaldo = new Operation();
+        cambioclavetransferirSaldo.setTitulo("Cambiar su clave de transferencia");
+        cambioclavetransferirSaldo.setSubtitulo("Cambio de clave");
+        cambioclavetransferirSaldo.setImagen(R.drawable.ic_cambio_pin_agente);
+        cambioclavetransferirSaldo.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.E1lhoLKryWP");
+        cambioclavetransferirSaldo.setTipo_serivicio(r1sDOSqZ2z2);
+        cambioclavetransferirSaldo.setOrder(-1);
+        cambioclavetransferirSaldo.setOperacion(BankOperationCode.CambioClave);
+        cambioclavetransferirSaldo.setActivo(true);
+        this.listGenerales.add(cambioclavetransferirSaldo);
+        Operation estadobono = new Operation();
+        estadobono.setTitulo(context.getString(R.string.title_consultar_estado_bono));
+        estadobono.setSubtitulo(context.getString(R.string.subtitle_consultar_estado_bono));
+        estadobono.setImagen(R.drawable.ic_consultar_bono);
+        estadobono.setFragment_name(BuildConfig.FLAVOR);
+        estadobono.setTipo_serivicio(r1sDOSqZ2z2);
+        estadobono.setOrder(-1);
+        estadobono.setOperacion(BankOperationCode.ConsultarEstadoBono);
+        estadobono.setActivo(true);
+        this.listGenerales.add(estadobono);
+        Operation planes = new Operation();
+        planes.setTitulo(context.getString(R.string.title_gestion_planes));
+        planes.setSubtitulo(context.getString(R.string.subtitle_gestion_planes));
+        planes.setImagen(R.drawable.ic_plan_amigos);
+        planes.setFragment_name(BuildConfig.FLAVOR);
+        planes.setTipo_serivicio(r1sDOSqZ2z2);
+        planes.setOrder(-1);
+        planes.setOperacion(BankOperationCode.GestionPlanes);
+        planes.setActivo(true);
+        this.listGenerales.add(planes);
+        Operation bolsa = new Operation();
+        bolsa.setTitulo(context.getString(R.string.title_consultar_plan_datos));
+        bolsa.setSubtitulo(context.getString(R.string.subtitle_consultar_plan_datos));
+        bolsa.setImagen(R.drawable.ic_consultar_plan_datos);
+        bolsa.setFragment_name(BuildConfig.FLAVOR);
+        bolsa.setTipo_serivicio(r1sDOSqZ2z2);
+        bolsa.setOrder(-1);
+        bolsa.setOperacion(BankOperationCode.ConsultarPlanDatos);
+        bolsa.setActivo(true);
+        this.listGenerales.add(bolsa);
+        Operation voz = new Operation();
+        voz.setTitulo(context.getString(R.string.title_consultar_plan_voz));
+        voz.setSubtitulo(context.getString(R.string.subtitle_consultar_plan_voz));
+        voz.setImagen(R.drawable.ic_consultar_plan_voz);
+        voz.setFragment_name(BuildConfig.FLAVOR);
+        voz.setTipo_serivicio(r1sDOSqZ2z2);
+        voz.setOrder(-1);
+        voz.setOperacion(BankOperationCode.ConsultarPlanVoz);
+        voz.setActivo(true);
+        this.listGenerales.add(voz);
+        Operation sms = new Operation();
+        sms.setTitulo(context.getString(R.string.consultar_plan_sms));
+        sms.setSubtitulo(context.getString(R.string.subconsultar_plan_sms));
+        sms.setImagen(R.drawable.ic_consultar_plan_sms);
+        sms.setFragment_name(BuildConfig.FLAVOR);
+        sms.setTipo_serivicio(r1sDOSqZ2z2);
+        sms.setOrder(-1);
+        sms.setOperacion(BankOperationCode.ConsultarPlanSMS);
+        sms.setActivo(true);
+        this.listGenerales.add(sms);
+        Operation amigos = new Operation();
+        amigos.setTitulo(context.getString(R.string.consultar_plan_amigos));
+        amigos.setSubtitulo(context.getString(R.string.subconsultar_plan_amigos));
+        amigos.setImagen(R.drawable.ic_consultar_plan_amigo);
+        amigos.setFragment_name(BuildConfig.FLAVOR);
+        amigos.setTipo_serivicio(r1sDOSqZ2z2);
+        amigos.setOrder(-1);
+        amigos.setOperacion(BankOperationCode.ConsultarPlanAmigos);
+        amigos.setActivo(true);
+        this.listGenerales.add(amigos);
+        Operation adelantaSaldo = new Operation();
+        adelantaSaldo.setTitulo(context.getString(R.string.title_operaciones_adelanta));
+        adelantaSaldo.setSubtitulo(context.getString(R.string.detail_operaciones_adelanta));
+        adelantaSaldo.setImagen(R.drawable.ic_adelantar_saldo);
+        adelantaSaldo.setFragment_name(BuildConfig.FLAVOR);
+        adelantaSaldo.setTipo_serivicio(r1sDOSqZ2z2);
+        adelantaSaldo.setOrder(-1);
+        adelantaSaldo.setOperacion(BankOperationCode.AdelantaSaldo);
+        adelantaSaldo.setActivo(true);
+        this.listGenerales.add(adelantaSaldo);
+        Operation bpa1 = new Operation();
+        bpa1.setTitulo("Autenticarse");
+        bpa1.setSubtitulo("BPA");
+        bpa1.setImagen(R.drawable.ic_autenticacion_bpa);
+        bpa1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.lzGEfceoJu");
+        BankType r1sDOSqZ2z3 = BankType.BPA;
+        bpa1.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa1.setOrder(6);
+        bpa1.setOperacion(BankOperationCode.BPAAutenticarse);
+        bpa1.setActivo(true);
+        this.listBPA.add(bpa1);
+        Operation bpa2 = new Operation();
+        bpa2.setTitulo("Transferencia");
+        bpa2.setSubtitulo("BPA");
+        bpa2.setImagen(R.drawable.ic_transferencia_bpa);
+        bpa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h");
+        bpa2.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa2.setOrder(-1);
+        bpa2.setActivo(true);
+        bpa2.setOperacion(BankOperationCode.BPATransferencia);
+        this.listBPA.add(bpa2);
+        Operation bpa3 = new Operation();
+        bpa3.setTitulo("Electricidad");
+        bpa3.setSubtitulo("BPA");
+        bpa3.setImagen(R.drawable.ic_pago_factura_electricidad_bpa);
+        bpa3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.xSwGh0MTOg");
+        bpa3.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa3.setOrder(-1);
+        bpa3.setActivo(true);
+        bpa3.setOperacion(BankOperationCode.BPAElectricidad);
+        this.listBPA.add(bpa3);
+        Operation bpa4 = new Operation();
+        bpa4.setTitulo("Telecomunicaciones");
+        bpa4.setSubtitulo("BPA");
+        bpa4.setImagen(R.drawable.ic_pago_tfa_bpa);
+        bpa4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.u4QMc0S0ZHo");
+        bpa4.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa4.setOrder(-1);
+        bpa4.setActivo(true);
+        bpa4.setOperacion(BankOperationCode.BPATelefono);
+        this.listBPA.add(bpa4);
+        Operation bpa5 = new Operation();
+        bpa5.setTitulo("ONAT");
+        bpa5.setSubtitulo("BPA");
+        bpa5.setImagen(R.drawable.ic_pago_onat_bpa);
+        bpa5.setFragment_name(BuildConfig.FLAVOR);
+        bpa5.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa5.setOrder(-1);
+        bpa5.setActivo(true);
+        bpa5.setOperacion(BankOperationCode.BPAONAT);
+        this.listBPA.add(bpa5);
+        Operation bpa6 = new Operation();
+        bpa6.setTitulo("Consultar Saldo");
+        bpa6.setSubtitulo("BPA");
+        bpa6.setImagen(R.drawable.ic_consulta_saldo_bpa);
+        bpa6.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.ix4mhKGJty");
+        bpa6.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa6.setOrder(-1);
+        bpa6.setActivo(true);
+        bpa6.setOperacion(BankOperationCode.BPAConsultarSaldo);
+        this.listBPA.add(bpa6);
+        Operation bpa7 = new Operation();
+        bpa7.setTitulo("Consultar Servicio");
+        bpa7.setSubtitulo("BPA");
+        bpa7.setImagen(R.drawable.ic_consultar_servicio_bpa);
+        bpa7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.xoZnbyoSLT");
+        bpa7.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa7.setOrder(-1);
+        bpa7.setActivo(true);
+        bpa7.setOperacion(BankOperationCode.BPAConsultarServicio);
+        this.listBPA.add(bpa7);
+        Operation bpa8 = new Operation();
+        bpa8.setTitulo("Últimas operaciones");
+        bpa8.setSubtitulo("BPA");
+        bpa8.setImagen(R.drawable.ic_consulta_utlimas_oper_bpa);
+        bpa8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.h3sd43nvje");
+        bpa8.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa8.setOrder(-1);
+        bpa8.setActivo(true);
+        bpa8.setOperacion(BankOperationCode.BPAUltimasoperaciones);
+        this.listBPA.add(bpa8);
+        Operation bpa9 = new Operation();
+        bpa9.setTitulo("Registrarse");
+        bpa9.setSubtitulo("BPA");
+        bpa9.setImagen(R.drawable.ic_registrarse_bpa);
+        bpa9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.IixhA1yamp");
+        bpa9.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa9.setOrder(5);
+        bpa9.setActivo(true);
+        bpa9.setOperacion(BankOperationCode.BPARegistrarse);
+        this.listBPA.add(bpa9);
+        Operation bpa10 = new Operation();
+        bpa10.setTitulo("Cambiar clave");
+        bpa10.setSubtitulo("BPA");
+        bpa10.setImagen(R.drawable.ic_cambio_pin_bpa);
+        bpa10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.PQmKwgxZd1");
+        bpa10.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa10.setOrder(-1);
+        bpa10.setActivo(true);
+        bpa10.setOperacion(BankOperationCode.BPACambiarclave);
+        this.listBPA.add(bpa10);
+        Operation bpa11 = new Operation();
+        bpa11.setTitulo("Desconectar");
+        bpa11.setSubtitulo("BPA");
+        bpa11.setImagen(R.drawable.ic_desconectarse_bpa);
+        bpa11.setFragment_name(BuildConfig.FLAVOR);
+        bpa11.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa11.setOrder(-1);
+        bpa11.setActivo(true);
+        bpa11.setOperacion(BankOperationCode.BPADesconectar);
+        this.listBPA.add(bpa11);
+        Operation bpa12 = new Operation();
+        bpa12.setTitulo("Recarga Móvil");
+        bpa12.setSubtitulo("BPA");
+        bpa12.setImagen(R.drawable.ic_recarga_saldo_movil_bpa);
+        bpa12.setFragment_name(BuildConfig.FLAVOR);
+        bpa12.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa12.setOrder(-1);
+        bpa12.setActivo(true);
+        bpa12.setOperacion(BankOperationCode.BPARecargaMovil);
+        this.listBPA.add(bpa12);
+        Operation bpa13 = new Operation();
+        bpa13.setTitulo("Cambio de límite");
+        bpa13.setSubtitulo("BPA");
+        bpa13.setImagen(R.drawable.ic_cambio_limites_bpa);
+        bpa13.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.qmcwKV1fzU");
+        bpa13.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa13.setOrder(-1);
+        bpa13.setActivo(true);
+        bpa13.setOperacion(BankOperationCode.BPACambioLimite);
+        this.listBPA.add(bpa13);
+        Operation bpa14 = new Operation();
+        bpa14.setTitulo("Consulta de límites");
+        bpa14.setSubtitulo("BPA");
+        bpa14.setImagen(R.drawable.ic_consulta_limites_bpa);
+        bpa14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.e8WK1Uajbq");
+        bpa14.setTipo_serivicio(r1sDOSqZ2z3);
+        bpa14.setOrder(-1);
+        bpa14.setActivo(true);
+        bpa14.setOperacion(BankOperationCode.BPAConsultaLimite);
+        this.listBPA.add(bpa14);
+        Operation pExternobpa = new Operation();
+        pExternobpa.setTitulo(context.getString(R.string.title_pago_externo));
+        pExternobpa.setSubtitulo(context.getString(R.string.sub_pago_externo));
+        pExternobpa.setImagen(R.drawable.ic_pago_linea_bpa);
+        pExternobpa.setFragment_name(BuildConfig.FLAVOR);
+        pExternobpa.setTipo_serivicio(r1sDOSqZ2z3);
+        pExternobpa.setOrder(-1);
+        pExternobpa.setActivo(true);
+        pExternobpa.setOperacion(BankOperationCode.BPAPagoExterno);
+        this.listBPA.add(pExternobpa);
+        Operation recargaNautaBPA = new Operation();
+        recargaNautaBPA.setTitulo(context.getString(R.string.title_recarga_nauta));
+        recargaNautaBPA.setSubtitulo(context.getString(R.string.sub_recarga_nauta));
+        recargaNautaBPA.setImagen(R.drawable.ic_pago_nauta_hogar_bpa);
+        recargaNautaBPA.setFragment_name(BuildConfig.FLAVOR);
+        recargaNautaBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        recargaNautaBPA.setOrder(-1);
+        recargaNautaBPA.setActivo(true);
+        recargaNautaBPA.setOperacion(BankOperationCode.BPARecargaNauta);
+        this.listBPA.add(recargaNautaBPA);
+        Operation giroBPA = new Operation();
+        giroBPA.setTitulo(context.getString(R.string.title_giro_postal));
+        giroBPA.setSubtitulo(context.getString(R.string.sub_giro_postal));
+        giroBPA.setImagen(R.drawable.ic_enviar_giro_bpa);
+        giroBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.o6kycf55Gw");
+        giroBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        giroBPA.setOrder(-1);
+        giroBPA.setActivo(true);
+        giroBPA.setOperacion(BankOperationCode.BPAGiroPostal);
+        this.listBPA.add(giroBPA);
+        Operation consultaGiroBPA = new Operation();
+        consultaGiroBPA.setTitulo(context.getString(R.string.title_consulta_giro));
+        consultaGiroBPA.setSubtitulo(context.getString(R.string.sub_consulta_giros));
+        consultaGiroBPA.setImagen(R.drawable.ic_consultar_giro_bpa);
+        consultaGiroBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.XvOK7VM4qL");
+        consultaGiroBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        consultaGiroBPA.setOrder(-1);
+        consultaGiroBPA.setActivo(true);
+        consultaGiroBPA.setOperacion(BankOperationCode.BPAConsultarGiroPostal);
+        this.listBPA.add(consultaGiroBPA);
+        Operation consultaIntegradaBPA = new Operation();
+        consultaIntegradaBPA.setTitulo(context.getString(R.string.title_service_bpa_consulta_integrada));
+        consultaIntegradaBPA.setSubtitulo(context.getString(R.string.sub_service_bpa_consulta_integrada));
+        consultaIntegradaBPA.setImagen(R.drawable.ic_consulta_todas_cuentas_bpa);
+        consultaIntegradaBPA.setFragment_name(BuildConfig.FLAVOR);
+        consultaIntegradaBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        consultaIntegradaBPA.setOrder(-1);
+        consultaIntegradaBPA.setActivo(true);
+        consultaIntegradaBPA.setOperacion(BankOperationCode.BPAConsultarTodasCuentas);
+        this.listBPA.add(consultaIntegradaBPA);
+        Operation amortizarBPA = new Operation();
+        amortizarBPA.setTitulo(context.getString(R.string.title_service_bpa_amortizar));
+        amortizarBPA.setSubtitulo(context.getString(R.string.sub_service_bpa_amortizar));
+        amortizarBPA.setImagen(R.drawable.ic_amortizar_credito_bpa);
+        amortizarBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.Dm6u4PA5eg");
+        amortizarBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        amortizarBPA.setOrder(-1);
+        amortizarBPA.setActivo(true);
+        amortizarBPA.setOperacion(BankOperationCode.BPAAmortizar);
+        this.listBPA.add(amortizarBPA);
+        Operation consultacreditoBPA = new Operation();
+        consultacreditoBPA.setTitulo(context.getString(R.string.title_service_bpa_consulta_credito));
+        consultacreditoBPA.setSubtitulo(context.getString(R.string.sub_service_consulta_credito));
+        consultacreditoBPA.setImagen(R.drawable.ic_consulta_credito_bpa);
+        consultacreditoBPA.setFragment_name(BuildConfig.FLAVOR);
+        consultacreditoBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        consultacreditoBPA.setOrder(-1);
+        consultacreditoBPA.setActivo(true);
+        consultacreditoBPA.setOperacion(BankOperationCode.BPAConsultaCredito);
+        this.listBPA.add(consultacreditoBPA);
+        Operation propiaBPA = new Operation();
+        propiaBPA.setTitulo(context.getString(R.string.hint_recarga_propia));
+        propiaBPA.setSubtitulo(context.getString(R.string.hint_subtitle_recarga_propia));
+        propiaBPA.setImagen(R.drawable.ic_recarga_tarjeta_propia_bpa);
+        propiaBPA.setFragment_name(BuildConfig.FLAVOR);
+        propiaBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        propiaBPA.setOrder(-1);
+        propiaBPA.setActivo(true);
+        propiaBPA.setOperacion(BankOperationCode.BPARecargaPropia);
+        this.listBPA.add(propiaBPA);
+        Operation bpaAgua = new Operation();
+        bpaAgua.setTitulo(context.getString(R.string.title_service_bpa_agua));
+        bpaAgua.setSubtitulo(context.getString(R.string.sub_service_bpa_agua));
+        bpaAgua.setImagen(R.drawable.ic_pago_factura_agua_bpa);
+        bpaAgua.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.zOs55UzH6z");
+        bpaAgua.setTipo_serivicio(r1sDOSqZ2z3);
+        bpaAgua.setOrder(-1);
+        bpaAgua.setActivo(true);
+        bpaAgua.setOperacion(BankOperationCode.BPAAgua);
+        this.listBPA.add(bpaAgua);
+        Operation bpaGas = new Operation();
+        bpaGas.setTitulo(context.getString(R.string.title_service_bpa_gas));
+        bpaGas.setSubtitulo(context.getString(R.string.sub_service_bpa_gas));
+        bpaGas.setImagen(R.drawable.ic_pago_factura_gas_bpa);
+        bpaGas.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.FgpBLXKm6t");
+        bpaGas.setTipo_serivicio(r1sDOSqZ2z3);
+        bpaGas.setOrder(-1);
+        bpaGas.setActivo(true);
+        bpaGas.setOperacion(BankOperationCode.BPAGas);
+        this.listBPA.add(bpaGas);
+        Operation recargaJClub = new Operation();
+        recargaJClub.setTitulo(context.getString(R.string.title_jclub));
+        recargaJClub.setSubtitulo(context.getString(R.string.sub_jclub));
+        recargaJClub.setImagen(R.drawable.ic_pago_joven_club_bpa);
+        recargaJClub.setFragment_name(BuildConfig.FLAVOR);
+        recargaJClub.setOperacion(BankOperationCode.BPAJClub);
+        recargaJClub.setTipo_serivicio(r1sDOSqZ2z3);
+        recargaJClub.setOrder(-1);
+        recargaJClub.setActivo(true);
+        this.listBPA.add(recargaJClub);
+        Operation recargaBolsaBPA = new Operation();
+        recargaBolsaBPA.setTitulo(context.getString(R.string.title_recarga_bolsa_cup));
+        recargaBolsaBPA.setSubtitulo(context.getString(R.string.subtitle_recarga_bolsa_cup));
+        recargaBolsaBPA.setImagen(R.drawable.ic_recargar_monedero_bpa);
+        recargaBolsaBPA.setFragment_name(BuildConfig.FLAVOR);
+        recargaBolsaBPA.setOperacion(BankOperationCode.BPARecargaBolsa);
+        recargaBolsaBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        recargaBolsaBPA.setOrder(-1);
+        recargaBolsaBPA.setActivo(true);
+        this.listBPA.add(recargaBolsaBPA);
+        Operation cubacelBPA = new Operation();
+        cubacelBPA.setTitulo(context.getString(R.string.head_paquetes_cubacel));
+        cubacelBPA.setSubtitulo(context.getString(R.string.sub_compra_paquetes));
+        cubacelBPA.setImagen(R.drawable.ic_compra_paquetes_bpa);
+        cubacelBPA.setFragment_name(BuildConfig.FLAVOR);
+        cubacelBPA.setOperacion(BankOperationCode.BPAPaquetesCubacel);
+        cubacelBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        cubacelBPA.setOrder(-1);
+        cubacelBPA.setActivo(true);
+        this.listBPA.add(cubacelBPA);
+        Operation ticketBPA = new Operation();
+        ticketBPA.setTitulo(context.getString(R.string.title_reserva_ticket));
+        ticketBPA.setSubtitulo(context.getString(R.string.subtitle_reserva_ticket));
+        ticketBPA.setImagen(R.drawable.ic_compra_miturno_bpa);
+        ticketBPA.setFragment_name(BuildConfig.FLAVOR);
+        ticketBPA.setOperacion(BankOperationCode.BPAReservasTicket);
+        ticketBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        ticketBPA.setOrder(-1);
+        ticketBPA.setActivo(true);
+        this.listBPA.add(ticketBPA);
+        Operation pcc = new Operation();
+        pcc.setTitulo(context.getString(R.string.title_organizacion_politica));
+        pcc.setSubtitulo(context.getString(R.string.subtitle_pcc));
+        pcc.setImagen(R.drawable.ic_pago_organizaciones_masa_bpa);
+        pcc.setFragment_name(BuildConfig.FLAVOR);
+        pcc.setOperacion(BankOperationCode.BPAPCC);
+        pcc.setTipo_serivicio(r1sDOSqZ2z3);
+        pcc.setOrder(-1);
+        pcc.setActivo(true);
+        this.listBPA.add(pcc);
+        Operation tfaBPA = new Operation();
+        tfaBPA.setTitulo(context.getString(R.string.title_recarga_tfa));
+        tfaBPA.setSubtitulo(context.getString(R.string.subtitle_recarga_tfa));
+        tfaBPA.setImagen(R.drawable.ic_pago_tfa_bpa);
+        tfaBPA.setFragment_name(BuildConfig.FLAVOR);
+        tfaBPA.setOperacion(BankOperationCode.BPARecargaTFA);
+        tfaBPA.setTipo_serivicio(r1sDOSqZ2z3);
+        tfaBPA.setOrder(-1);
+        tfaBPA.setActivo(true);
+        this.listBPA.add(tfaBPA);
+        Operation bandec1 = new Operation();
+        bandec1.setTitulo("Autenticarse");
+        bandec1.setSubtitulo("BANDEC");
+        bandec1.setImagen(R.drawable.ic_autenticacion_bandec);
+        bandec1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TGFziPh3KJ");
+        BankType r1sDOSqZ2z4 = BankType.BANDEC;
+        bandec1.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec1.setOrder(8);
+        bandec1.setActivo(true);
+        bandec1.setOperacion(BankOperationCode.BANAutenticar);
+        this.listBANDEC.add(bandec1);
+        Operation bandec2 = new Operation();
+        bandec2.setTitulo("Transferencia");
+        bandec2.setSubtitulo("BANDEC");
+        bandec2.setImagen(R.drawable.ic_transferencia_bandec);
+        bandec2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ZDkigMAIBm");
+        bandec2.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec2.setOrder(-1);
+        bandec2.setActivo(true);
+        bandec2.setOperacion(BankOperationCode.BANTransferencia);
+        this.listBANDEC.add(bandec2);
+        Operation bandec3 = new Operation();
+        bandec3.setTitulo("Electricidad");
+        bandec3.setSubtitulo("BANDEC");
+        bandec3.setImagen(R.drawable.ic_pago_factura_electricidad_bandec);
+        bandec3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.Q3Nvf439ab");
+        bandec3.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec3.setOrder(-1);
+        bandec3.setActivo(true);
+        bandec3.setOperacion(BankOperationCode.BANElectricidad);
+        this.listBANDEC.add(bandec3);
+        Operation bandec4 = new Operation();
+        bandec4.setTitulo("Telecomunicaciones");
+        bandec4.setSubtitulo("BANDEC");
+        bandec4.setImagen(R.drawable.ic_pago_factura_telefono_fijo_bandec);
+        bandec4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.iQte15zdZs");
+        bandec4.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec4.setOrder(-1);
+        bandec4.setActivo(true);
+        bandec4.setOperacion(BankOperationCode.BANTelefono);
+        this.listBANDEC.add(bandec4);
+        Operation bandec5 = new Operation();
+        bandec5.setTitulo("ONAT");
+        bandec5.setSubtitulo("BANDEC");
+        bandec5.setImagen(R.drawable.ic_pago_onat_bandec);
+        bandec5.setFragment_name(BuildConfig.FLAVOR);
+        bandec5.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec5.setOrder(-1);
+        bandec5.setActivo(true);
+        bandec5.setOperacion(BankOperationCode.BANONAT);
+        this.listBANDEC.add(bandec5);
+        Operation bandec6 = new Operation();
+        bandec6.setTitulo("Consultar Saldo");
+        bandec6.setSubtitulo("BANDEC");
+        bandec6.setImagen(R.drawable.ic_consulta_saldo_bandec);
+        bandec6.setFragment_name(BuildConfig.FLAVOR);
+        bandec6.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec6.setOrder(-1);
+        bandec6.setActivo(true);
+        bandec6.setOperacion(BankOperationCode.BANConsultarSaldo);
+        this.listBANDEC.add(bandec6);
+        Operation bandec7 = new Operation();
+        bandec7.setTitulo("Consultar Servicio");
+        bandec7.setSubtitulo("BANDEC");
+        bandec7.setImagen(R.drawable.ic_consultar_servicio_bandec);
+        bandec7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.idsoBKS8L3");
+        bandec7.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec7.setOrder(-1);
+        bandec7.setActivo(true);
+        bandec7.setOperacion(BankOperationCode.BANConsultarServicio);
+        this.listBANDEC.add(bandec7);
+        Operation bandec8 = new Operation();
+        bandec8.setTitulo("Últimas operaciones");
+        bandec8.setSubtitulo("BANDEC");
+        bandec8.setImagen(R.drawable.ic_consulta_utlimas_oper_bandec);
+        bandec8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.D0gaXBEFITec.gaJlF6dT3z");
+        bandec8.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec8.setOrder(-1);
+        bandec8.setActivo(true);
+        bandec8.setOperacion(BankOperationCode.BANUltimasoperaciones);
+        this.listBANDEC.add(bandec8);
+        Operation bandec9 = new Operation();
+        bandec9.setTitulo("Registrarse");
+        bandec9.setSubtitulo("BANDEC");
+        bandec9.setImagen(R.drawable.ic_registrarse_bandec);
+        bandec9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.wLHKkaC4Ha");
+        bandec9.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec9.setOrder(7);
+        bandec9.setActivo(true);
+        bandec9.setOperacion(BankOperationCode.BANRegistrarse);
+        this.listBANDEC.add(bandec9);
+        Operation bandec10 = new Operation();
+        bandec10.setTitulo("Cambiar clave");
+        bandec10.setSubtitulo("BANDEC");
+        bandec10.setImagen(R.drawable.ic_cambio_pin_bandec);
+        bandec10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.FtAKxvNjrD");
+        bandec10.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec10.setOrder(-1);
+        bandec10.setActivo(true);
+        bandec10.setOperacion(BankOperationCode.BANCambiarclave);
+        this.listBANDEC.add(bandec10);
+        Operation bandec11 = new Operation();
+        bandec11.setTitulo("Desconectar");
+        bandec11.setSubtitulo("BANDEC");
+        bandec11.setImagen(R.drawable.ic_desconectarse_bandec);
+        bandec11.setFragment_name(BuildConfig.FLAVOR);
+        bandec11.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec11.setOrder(-1);
+        bandec11.setActivo(true);
+        bandec11.setOperacion(BankOperationCode.BANDesconectar);
+        this.listBANDEC.add(bandec11);
+        Operation bandec12 = new Operation();
+        bandec12.setTitulo("Eliminar Registro");
+        bandec12.setSubtitulo("BANDEC");
+        bandec12.setImagen(R.drawable.ic_eliminar_registro_bandec);
+        bandec12.setFragment_name(BuildConfig.FLAVOR);
+        bandec12.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec12.setOrder(-1);
+        bandec12.setActivo(true);
+        bandec12.setOperacion(BankOperationCode.BANEliminarRegistro);
+        this.listBANDEC.add(bandec12);
+        Operation bandec13 = new Operation();
+        bandec13.setTitulo("Recarga Móvil");
+        bandec13.setSubtitulo("BANDEC");
+        bandec13.setImagen(R.drawable.ic_recarga_saldo_movil_bandec);
+        bandec13.setFragment_name(BuildConfig.FLAVOR);
+        bandec13.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec13.setOrder(-1);
+        bandec13.setActivo(true);
+        bandec13.setOperacion(BankOperationCode.BANRecargaMovil);
+        this.listBANDEC.add(bandec13);
+        Operation bandec14 = new Operation();
+        bandec14.setTitulo("Cambio de límite");
+        bandec14.setSubtitulo("BANDEC");
+        bandec14.setImagen(R.drawable.ic_cambio_limites_bandec);
+        bandec14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.nNSC8tRyptP.uWkWt7AEZ5");
+        bandec14.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec14.setOrder(-1);
+        bandec14.setActivo(true);
+        bandec14.setOperacion(BankOperationCode.BANCambioLimite);
+        this.listBANDEC.add(bandec14);
+        Operation bandec15 = new Operation();
+        bandec15.setTitulo("Consulta de límites");
+        bandec15.setSubtitulo("BANDEC");
+        bandec15.setImagen(R.drawable.ic_consulta_limites_bandec);
+        bandec15.setFragment_name(BuildConfig.FLAVOR);
+        bandec15.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec15.setOrder(-1);
+        bandec15.setActivo(true);
+        bandec15.setOperacion(BankOperationCode.BANConsultaLimite);
+        this.listBANDEC.add(bandec15);
+        Operation bandec16 = new Operation();
+        bandec16.setTitulo("Ultimos pagos realizados");
+        bandec16.setSubtitulo("BANDEC");
+        bandec16.setImagen(R.drawable.ic_consulta_credito_bandec);
+        bandec16.setFragment_name(BuildConfig.FLAVOR);
+        bandec16.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec16.setActivo(true);
+        bandec16.setOrder(-1);
+        bandec16.setOperacion(BankOperationCode.BANUltimosPagos);
+        this.listBANDEC.add(bandec16);
+        Operation bandec17 = new Operation();
+        bandec17.setTitulo("Cambio de cuenta");
+        bandec17.setSubtitulo("BANDEC");
+        bandec17.setImagen(R.drawable.ic_actualizar_cuenta_bandec);
+        bandec17.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.o9swVUfDl4q");
+        bandec17.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec17.setOrder(-1);
+        bandec17.setActivo(true);
+        bandec17.setOperacion(BankOperationCode.BANCambioCuenta);
+        this.listBANDEC.add(bandec17);
+        Operation bandec18 = new Operation();
+        bandec18.setTitulo("Amortizar Crédito");
+        bandec18.setSubtitulo("BANDEC");
+        bandec18.setImagen(R.drawable.ic_amortizar_credito_bandec);
+        bandec18.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.LZaBQezxPC");
+        bandec18.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec18.setOrder(-1);
+        bandec18.setActivo(true);
+        bandec18.setOperacion(BankOperationCode.BANAmortizar);
+        this.listBANDEC.add(bandec18);
+        Operation bandec19 = new Operation();
+        bandec19.setTitulo("Consultar Todas las Cuentas");
+        bandec19.setSubtitulo("BANDEC");
+        bandec19.setImagen(R.drawable.ic_consulta_todas_cuentas_bandec);
+        bandec19.setFragment_name(BuildConfig.FLAVOR);
+        bandec19.setTipo_serivicio(r1sDOSqZ2z4);
+        bandec19.setOrder(-1);
+        bandec19.setActivo(true);
+        bandec19.setOperacion(BankOperationCode.BANConsultarTodasCuentas);
+        this.listBANDEC.add(bandec19);
+        Operation pExternoBandec = new Operation();
+        pExternoBandec.setTitulo(context.getString(R.string.title_pago_externo));
+        pExternoBandec.setSubtitulo(context.getString(R.string.sub_pago_externo));
+        pExternoBandec.setImagen(R.drawable.ic_pago_linea_bandec);
+        pExternoBandec.setFragment_name(BuildConfig.FLAVOR);
+        pExternoBandec.setTipo_serivicio(r1sDOSqZ2z4);
+        pExternoBandec.setOrder(-1);
+        pExternoBandec.setActivo(true);
+        pExternoBandec.setOperacion(BankOperationCode.BANPagoExterno);
+        this.listBANDEC.add(pExternoBandec);
+        Operation recargaNautaBANDEC = new Operation();
+        recargaNautaBANDEC.setTitulo(context.getString(R.string.title_recarga_nauta));
+        recargaNautaBANDEC.setSubtitulo(context.getString(R.string.sub_recarga_nauta));
+        recargaNautaBANDEC.setImagen(R.drawable.ic_pago_nauta_hogar_bandec);
+        recargaNautaBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        recargaNautaBANDEC.setTipo_serivicio(r1sDOSqZ2z4);
+        recargaNautaBANDEC.setOrder(-1);
+        recargaNautaBANDEC.setActivo(true);
+        recargaNautaBANDEC.setOperacion(BankOperationCode.BANRecargaNauta);
+        this.listBANDEC.add(recargaNautaBANDEC);
+        Operation giroBandec = new Operation();
+        giroBandec.setTitulo(context.getString(R.string.title_giro_postal));
+        giroBandec.setSubtitulo(context.getString(R.string.sub_giro_postal));
+        giroBandec.setImagen(R.drawable.ic_enviar_giro_bandec);
+        giroBandec.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ASLdujtVtr");
+        giroBandec.setTipo_serivicio(r1sDOSqZ2z4);
+        giroBandec.setOrder(-1);
+        giroBandec.setActivo(true);
+        giroBandec.setOperacion(BankOperationCode.BANGiroPostal);
+        this.listBANDEC.add(giroBandec);
+        Operation conusltaGiroBandec = new Operation();
+        conusltaGiroBandec.setTitulo(context.getString(R.string.title_consulta_giro));
+        conusltaGiroBandec.setSubtitulo(context.getString(R.string.sub_consulta_giros));
+        conusltaGiroBandec.setImagen(R.drawable.ic_consultar_giro_bandec);
+        conusltaGiroBandec.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.gsthr0APCT");
+        conusltaGiroBandec.setTipo_serivicio(r1sDOSqZ2z4);
+        conusltaGiroBandec.setOrder(-1);
+        conusltaGiroBandec.setActivo(true);
+        conusltaGiroBandec.setOperacion(BankOperationCode.BANConsultarGiroPostal);
+        this.listBANDEC.add(conusltaGiroBandec);
+        Operation gas = new Operation();
+        gas.setTitulo(context.getString(R.string.title_service_metro_gas));
+        gas.setSubtitulo(context.getString(R.string.sub_service_metro_gas));
+        gas.setImagen(R.drawable.ic_pago_factura_gas_bandec);
+        gas.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.aiwIHVBe0c");
+        gas.setTipo_serivicio(r1sDOSqZ2z4);
+        gas.setOrder(-1);
+        gas.setActivo(true);
+        gas.setOperacion(BankOperationCode.BANGas);
+        this.listBANDEC.add(gas);
+        Operation propia = new Operation();
+        propia.setTitulo(context.getString(R.string.hint_recarga_propia));
+        propia.setSubtitulo(context.getString(R.string.hint_subtitle_recarga_propia));
+        propia.setImagen(R.drawable.ic_recarga_tarjeta_propia_bandec);
+        propia.setFragment_name(BuildConfig.FLAVOR);
+        propia.setTipo_serivicio(r1sDOSqZ2z4);
+        propia.setOrder(-1);
+        propia.setActivo(true);
+        propia.setOperacion(BankOperationCode.BANRecargaPropia);
+        this.listBANDEC.add(propia);
+        Operation bandecAGUA = new Operation();
+        bandecAGUA.setTitulo(context.getString(R.string.title_service_bpa_agua));
+        bandecAGUA.setSubtitulo(context.getString(R.string.sub_service_bpa_agua));
+        bandecAGUA.setImagen(R.drawable.ic_pago_factura_agua_bandec);
+        bandecAGUA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.T4RQ5wDJDt");
+        bandecAGUA.setTipo_serivicio(r1sDOSqZ2z4);
+        bandecAGUA.setOrder(-1);
+        bandecAGUA.setActivo(true);
+        bandecAGUA.setOperacion(BankOperationCode.BANAgua);
+        this.listBANDEC.add(bandecAGUA);
+        Operation recargaJClubBANDEC = new Operation();
+        recargaJClubBANDEC.setTitulo(context.getString(R.string.title_jclub));
+        recargaJClubBANDEC.setSubtitulo(context.getString(R.string.sub_jclub));
+        recargaJClubBANDEC.setImagen(R.drawable.ic_pago_joven_club_bandec);
+        recargaJClubBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        recargaJClubBANDEC.setOperacion(BankOperationCode.BANJClub);
+        recargaJClubBANDEC.setTipo_serivicio(r1sDOSqZ2z4);
+        recargaJClubBANDEC.setOrder(-1);
+        recargaJClubBANDEC.setActivo(true);
+        this.listBANDEC.add(recargaJClub);
+        Operation ofa = new Operation();
+        ofa.setTitulo(context.getString(R.string.tx_head_patrimonio2));
+        ofa.setSubtitulo(context.getString(R.string.tx_sub_patrimonio));
+        ofa.setImagen(R.drawable.ic_ofa_bandec);
+        ofa.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.SZARzeWeX5");
+        ofa.setOperacion(BankOperationCode.BANPatrimoniOfa);
+        ofa.setTipo_serivicio(r1sDOSqZ2z4);
+        ofa.setOrder(-1);
+        ofa.setActivo(true);
+        this.listBANDEC.add(ofa);
+        Operation recargaBolsaBANDEC = new Operation();
+        recargaBolsaBANDEC.setTitulo(context.getString(R.string.title_recarga_bolsa_cup));
+        recargaBolsaBANDEC.setSubtitulo(context.getString(R.string.subtitle_recarga_bolsa_cup));
+        recargaBolsaBANDEC.setImagen(R.drawable.ic_recargar_monedero_bandec);
+        recargaBolsaBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        recargaBolsaBANDEC.setOperacion(BankOperationCode.BANRecargaBolsa);
+        recargaBolsaBANDEC.setTipo_serivicio(r1sDOSqZ2z4);
+        recargaBolsaBANDEC.setOrder(-1);
+        recargaBolsaBANDEC.setActivo(true);
+        this.listBANDEC.add(recargaBolsaBANDEC);
+        Operation cubacelBANDEC = new Operation();
+        cubacelBANDEC.setTitulo(context.getString(R.string.head_paquetes_cubacel));
+        cubacelBANDEC.setSubtitulo(context.getString(R.string.sub_compra_paquetes));
+        cubacelBANDEC.setImagen(R.drawable.ic_compra_paquetes_bandec);
+        cubacelBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        cubacelBANDEC.setOperacion(BankOperationCode.BANPaquetesCubacel);
+        cubacelBANDEC.setTipo_serivicio(r1sDOSqZ2z4);
+        cubacelBANDEC.setOrder(-1);
+        cubacelBANDEC.setActivo(true);
+        this.listBANDEC.add(cubacelBANDEC);
+        Operation ticket = new Operation();
+        ticket.setTitulo(context.getString(R.string.title_reserva_ticket));
+        ticket.setSubtitulo(context.getString(R.string.subtitle_reserva_ticket));
+        ticket.setImagen(R.drawable.ic_compra_miturno_bandec);
+        ticket.setFragment_name(BuildConfig.FLAVOR);
+        ticket.setOperacion(BankOperationCode.BANReservasTicket);
+        ticket.setTipo_serivicio(r1sDOSqZ2z4);
+        ticket.setOrder(-1);
+        ticket.setActivo(true);
+        this.listBANDEC.add(ticket);
+        Operation pccBANDEC = new Operation();
+        pccBANDEC.setTitulo(context.getString(R.string.title_organizacion_politica));
+        pccBANDEC.setSubtitulo(context.getString(R.string.subtitle_pcc));
+        pccBANDEC.setImagen(R.drawable.ic_pago_organizaciones_masa_bandec);
+        pccBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        pccBANDEC.setOperacion(BankOperationCode.BANPCC);
+        pccBANDEC.setTipo_serivicio(r1sDOSqZ2z4);
+        pccBANDEC.setOrder(-1);
+        pccBANDEC.setActivo(true);
+        this.listBPA.add(pccBANDEC);
+        Operation tfaBANDEC = new Operation();
+        tfaBANDEC.setTitulo(context.getString(R.string.title_recarga_tfa));
+        tfaBANDEC.setSubtitulo(context.getString(R.string.subtitle_recarga_tfa));
+        tfaBANDEC.setImagen(R.drawable.ic_pago_tfa_bandec);
+        tfaBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        tfaBANDEC.setOperacion(BankOperationCode.BANRecargaTFA);
+        tfaBANDEC.setTipo_serivicio(r1sDOSqZ2z4);
+        tfaBANDEC.setOrder(-1);
+        tfaBANDEC.setActivo(true);
+        this.listBPA.add(tfaBANDEC);
+        Operation metro1 = new Operation();
+        metro1.setTitulo("Autenticarse");
+        metro1.setSubtitulo("Metropolitano");
+        metro1.setImagen(R.drawable.ic_autenticacion_metro);
+        metro1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.PAZK2sdsJ5");
+        BankType r1sDOSqZ2z5 = BankType.Metropolitano;
+        metro1.setTipo_serivicio(r1sDOSqZ2z5);
+        metro1.setOrder(4);
+        metro1.setActivo(true);
+        metro1.setOperacion(BankOperationCode.METROAutenticarse);
+        this.listMETRO.add(metro1);
+        Operation metro2 = new Operation();
+        metro2.setTitulo("Consultar Saldo");
+        metro2.setSubtitulo("Metropolitano");
+        metro2.setImagen(R.drawable.ic_consulta_saldo_metro);
+        metro2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.dVxDCMi9cK");
+        metro2.setTipo_serivicio(r1sDOSqZ2z5);
+        metro2.setOrder(-1);
+        metro2.setActivo(true);
+        metro2.setOperacion(BankOperationCode.METROConsultarSaldo);
+        this.listMETRO.add(metro2);
+        Operation metro3 = new Operation();
+        metro3.setTitulo("Consultar Servicio");
+        metro3.setSubtitulo("Metropolitano");
+        metro3.setImagen(R.drawable.ic_consultar_servicio_metro);
+        metro3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.hJhf3aumcr");
+        metro3.setTipo_serivicio(r1sDOSqZ2z5);
+        metro3.setOrder(-1);
+        metro3.setActivo(true);
+        metro3.setOperacion(BankOperationCode.METROConsultarServicio);
+        this.listMETRO.add(metro3);
+        Operation metro4 = new Operation();
+        metro4.setTitulo("Transferir Efectivo");
+        metro4.setSubtitulo("Metropolitano");
+        metro4.setImagen(R.drawable.ic_transferencia_metro);
+        metro4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.x6Wob3Sa98U");
+        metro4.setTipo_serivicio(r1sDOSqZ2z5);
+        metro4.setOrder(-1);
+        metro4.setActivo(true);
+        metro4.setOperacion(BankOperationCode.METROTransferirEfectivo);
+        this.listMETRO.add(metro4);
+        Operation metro5 = new Operation();
+        metro5.setTitulo("Telecomunicaciones");
+        metro5.setSubtitulo("Metropolitano");
+        metro5.setImagen(R.drawable.ic_pago_factura_telefono_fijo_metro);
+        metro5.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.pnl2Kga8j7");
+        metro5.setTipo_serivicio(r1sDOSqZ2z5);
+        metro5.setOrder(-1);
+        metro5.setActivo(true);
+        metro5.setOperacion(BankOperationCode.METROTelefono);
+        this.listMETRO.add(metro5);
+        Operation metro6 = new Operation();
+        metro6.setTitulo("Electricidad");
+        metro6.setSubtitulo("Metropolitano");
+        metro6.setImagen(R.drawable.ic_pago_factura_electricidad_metro);
+        metro6.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.PliSaYhOg0");
+        metro6.setTipo_serivicio(r1sDOSqZ2z5);
+        metro6.setOrder(-1);
+        metro6.setActivo(true);
+        metro6.setOperacion(BankOperationCode.METROElectricidad);
+        this.listMETRO.add(metro6);
+        Operation metro7 = new Operation();
+        metro7.setTitulo("Agua");
+        metro7.setSubtitulo("Metropolitano");
+        metro7.setImagen(R.drawable.ic_pago_factura_agua_metro);
+        metro7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.BoMBck6OXT");
+        metro7.setTipo_serivicio(r1sDOSqZ2z5);
+        metro7.setOrder(-1);
+        metro7.setActivo(true);
+        metro7.setOperacion(BankOperationCode.METROAgua);
+        this.listMETRO.add(metro7);
+        Operation metro8 = new Operation();
+        metro8.setTitulo("Impuestos");
+        metro8.setSubtitulo("Metropolitano");
+        metro8.setImagen(R.drawable.ic_pago_onat_metro);
+        metro8.setFragment_name(BuildConfig.FLAVOR);
+        metro8.setTipo_serivicio(r1sDOSqZ2z5);
+        metro8.setOrder(-1);
+        metro8.setActivo(true);
+        metro8.setOperacion(BankOperationCode.METROImpuestos);
+        this.listMETRO.add(metro8);
+        Operation metro9 = new Operation();
+        metro9.setTitulo("Últimas operaciones");
+        metro9.setSubtitulo("Metropolitano");
+        metro9.setImagen(R.drawable.ic_consulta_utlimas_oper_metro);
+        metro9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.GhhAuUBVrI");
+        metro9.setTipo_serivicio(r1sDOSqZ2z5);
+        metro9.setOrder(-1);
+        metro9.setActivo(true);
+        metro9.setOperacion(BankOperationCode.METROUltimasoperaciones);
+        this.listMETRO.add(metro9);
+        Operation metro10 = new Operation();
+        metro10.setTitulo("Registrarse");
+        metro10.setSubtitulo("Metropolitano");
+        metro10.setImagen(R.drawable.ic_registrarse_metro);
+        metro10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.RFBEnXW0Xr");
+        metro10.setTipo_serivicio(r1sDOSqZ2z5);
+        metro10.setOrder(3);
+        metro10.setActivo(true);
+        metro10.setOperacion(BankOperationCode.METRORegistrarse);
+        this.listMETRO.add(metro10);
+        Operation metro11 = new Operation();
+        metro11.setTitulo("Desconectar");
+        metro11.setSubtitulo("Metropolitano");
+        metro11.setImagen(R.drawable.ic_desconectarse_metro);
+        metro11.setFragment_name(BuildConfig.FLAVOR);
+        metro11.setTipo_serivicio(r1sDOSqZ2z5);
+        metro11.setOrder(-1);
+        metro11.setActivo(true);
+        metro11.setOperacion(BankOperationCode.METRODesconectar);
+        this.listMETRO.add(metro11);
+        Operation metro12 = new Operation();
+        metro12.setTitulo("Actualizar cuenta");
+        metro12.setSubtitulo("Metropolitano");
+        metro12.setImagen(R.drawable.ic_actualizar_cuenta_metro);
+        metro12.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.uurdBwh7ub");
+        metro12.setTipo_serivicio(r1sDOSqZ2z5);
+        metro12.setOrder(-1);
+        metro12.setActivo(true);
+        metro12.setOperacion(BankOperationCode.METROActualizarcuenta);
+        this.listMETRO.add(metro12);
+        Operation metro13 = new Operation();
+        metro13.setTitulo("Recarga Móvil");
+        metro13.setSubtitulo("Metropolitano");
+        metro13.setImagen(R.drawable.ic_recarga_saldo_movil_metro);
+        metro13.setFragment_name(BuildConfig.FLAVOR);
+        metro13.setTipo_serivicio(r1sDOSqZ2z5);
+        metro13.setOrder(-1);
+        metro13.setActivo(true);
+        metro13.setOperacion(BankOperationCode.METRORecargaMovil);
+        this.listMETRO.add(metro13);
+        Operation metro14 = new Operation();
+        metro14.setTitulo("Cambio de límite");
+        metro14.setSubtitulo("Metropolitano");
+        metro14.setImagen(R.drawable.ic_cambio_limites_metro);
+        metro14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.G8E5Fjf9l7Y1.xR6zA9CmCE");
+        metro14.setTipo_serivicio(r1sDOSqZ2z5);
+        metro14.setOrder(-1);
+        metro14.setActivo(true);
+        metro14.setOperacion(BankOperationCode.METROCambioLimite);
+        this.listMETRO.add(metro14);
+        Operation metro15 = new Operation();
+        metro15.setTitulo("Consulta de límites");
+        metro15.setSubtitulo("Metropolitano");
+        metro15.setImagen(R.drawable.ic_consulta_limites_metro);
+        metro15.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.gkzzwVYksz");
+        metro15.setTipo_serivicio(r1sDOSqZ2z5);
+        metro15.setOrder(-1);
+        metro15.setActivo(true);
+        metro15.setOperacion(BankOperationCode.METROConsultaLimite);
+        this.listMETRO.add(metro15);
+        Operation metro16 = new Operation();
+        metro16.setTitulo("Consultar Todas las Cuentas");
+        metro16.setSubtitulo("Metropolitano");
+        metro16.setImagen(R.drawable.ic_consulta_todas_cuentas_metro);
+        metro16.setFragment_name(BuildConfig.FLAVOR);
+        metro16.setTipo_serivicio(r1sDOSqZ2z5);
+        metro16.setOrder(-1);
+        metro16.setActivo(true);
+        metro16.setOperacion(BankOperationCode.METROConsultaTodasCuentas);
+        this.listMETRO.add(metro16);
+        Operation gasMetro = new Operation();
+        gasMetro.setTitulo(context.getString(R.string.title_service_metro_gas));
+        gasMetro.setSubtitulo(context.getString(R.string.sub_service_metro_gas));
+        gasMetro.setImagen(R.drawable.ic_pago_factura_gas_metro);
+        gasMetro.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.yiqT29TYTb");
+        gasMetro.setTipo_serivicio(r1sDOSqZ2z5);
+        gasMetro.setOrder(-1);
+        gasMetro.setActivo(true);
+        gasMetro.setOperacion(BankOperationCode.METROGas);
+        this.listMETRO.add(gasMetro);
+        Operation pExternoMetro = new Operation();
+        pExternoMetro.setTitulo(context.getString(R.string.title_pago_externo));
+        pExternoMetro.setSubtitulo(context.getString(R.string.sub_pago_externo));
+        pExternoMetro.setImagen(R.drawable.ic_pago_linea_metro);
+        pExternoMetro.setFragment_name(BuildConfig.FLAVOR);
+        pExternoMetro.setTipo_serivicio(r1sDOSqZ2z5);
+        pExternoMetro.setOrder(-1);
+        pExternoMetro.setActivo(true);
+        pExternoMetro.setOperacion(BankOperationCode.METROPagoExterno);
+        this.listMETRO.add(pExternoMetro);
+        Operation giroMetro = new Operation();
+        giroMetro.setTitulo(context.getString(R.string.title_giro_postal));
+        giroMetro.setSubtitulo(context.getString(R.string.sub_giro_postal));
+        giroMetro.setImagen(R.drawable.ic_enviar_giro_metro);
+        giroMetro.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.mhElzRz7zH");
+        giroMetro.setTipo_serivicio(r1sDOSqZ2z5);
+        giroMetro.setOrder(-1);
+        giroMetro.setActivo(true);
+        giroMetro.setOperacion(BankOperationCode.METROGiroPostal);
+        this.listMETRO.add(giroMetro);
+        Operation consultaGiroMetro = new Operation();
+        consultaGiroMetro.setTitulo(context.getString(R.string.title_consulta_giro));
+        consultaGiroMetro.setSubtitulo(context.getString(R.string.sub_consulta_giros));
+        consultaGiroMetro.setImagen(R.drawable.ic_consultar_giro_metro);
+        consultaGiroMetro.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.jyBbMyVMOV");
+        consultaGiroMetro.setTipo_serivicio(r1sDOSqZ2z5);
+        consultaGiroMetro.setOrder(-1);
+        consultaGiroMetro.setActivo(true);
+        consultaGiroMetro.setOperacion(BankOperationCode.METROConsultarGiroPostal);
+        this.listMETRO.add(consultaGiroMetro);
+        Operation recargaNauta = new Operation();
+        recargaNauta.setTitulo(context.getString(R.string.title_recarga_nauta));
+        recargaNauta.setSubtitulo(context.getString(R.string.sub_recarga_nauta));
+        recargaNauta.setImagen(R.drawable.ic_pago_nauta_hogar_metro);
+        recargaNauta.setFragment_name(BuildConfig.FLAVOR);
+        recargaNauta.setTipo_serivicio(r1sDOSqZ2z5);
+        recargaNauta.setOrder(-1);
+        recargaNauta.setActivo(true);
+        recargaNauta.setOperacion(BankOperationCode.METRORecargaNauta);
+        this.listMETRO.add(recargaNauta);
+        Operation reimprimirTarjeta = new Operation();
+        reimprimirTarjeta.setTitulo(context.getString(R.string.title_reimprimir_tarjeta));
+        reimprimirTarjeta.setSubtitulo(context.getString(R.string.sub_reimprimir_tarjeta));
+        reimprimirTarjeta.setImagen(R.drawable.ic_reimprimir_tarjeta_metro);
+        reimprimirTarjeta.setFragment_name(BuildConfig.FLAVOR);
+        reimprimirTarjeta.setTipo_serivicio(r1sDOSqZ2z5);
+        reimprimirTarjeta.setOrder(-1);
+        reimprimirTarjeta.setActivo(true);
+        reimprimirTarjeta.setOperacion(BankOperationCode.METROReimprimirTarjeta);
+        this.listMETRO.add(reimprimirTarjeta);
+        Operation localizarTransferencias = new Operation();
+        localizarTransferencias.setTitulo(context.getString(R.string.title_metro_localizar_transferencias));
+        localizarTransferencias.setSubtitulo(context.getString(R.string.sub_localizar_transferencias));
+        localizarTransferencias.setImagen(R.drawable.ic_localizar_transferencia_metro);
+        localizarTransferencias.setFragment_name(BuildConfig.FLAVOR);
+        localizarTransferencias.setTipo_serivicio(r1sDOSqZ2z5);
+        localizarTransferencias.setOrder(-1);
+        localizarTransferencias.setActivo(true);
+        localizarTransferencias.setOperacion(BankOperationCode.METROLocalizarTransferencia);
+        this.listMETRO.add(localizarTransferencias);
+        Operation propiaMetro = new Operation();
+        propiaMetro.setTitulo(context.getString(R.string.hint_recarga_propia));
+        propiaMetro.setSubtitulo(context.getString(R.string.hint_subtitle_recarga_propia));
+        propiaMetro.setImagen(R.drawable.ic_recarga_tarjeta_propia_metro);
+        propiaMetro.setFragment_name(BuildConfig.FLAVOR);
+        propiaMetro.setTipo_serivicio(r1sDOSqZ2z5);
+        propiaMetro.setOrder(-1);
+        propiaMetro.setActivo(true);
+        propiaMetro.setOperacion(BankOperationCode.METRORecargaPropia);
+        this.listMETRO.add(propiaMetro);
+        Operation recargaJClubMETRO = new Operation();
+        recargaJClubMETRO.setTitulo(context.getString(R.string.title_jclub));
+        recargaJClubMETRO.setSubtitulo(context.getString(R.string.sub_jclub));
+        recargaJClubMETRO.setImagen(R.drawable.ic_pago_joven_club_metro);
+        recargaJClubMETRO.setFragment_name(BuildConfig.FLAVOR);
+        recargaJClubMETRO.setOperacion(BankOperationCode.METROJClub);
+        recargaJClubMETRO.setTipo_serivicio(r1sDOSqZ2z5);
+        recargaJClubMETRO.setOrder(-1);
+        recargaJClubMETRO.setActivo(true);
+        this.listMETRO.add(recargaJClubMETRO);
+        Operation tipoCambio = new Operation();
+        tipoCambio.setTitulo(context.getString(R.string.title_tipo_cambio));
+        tipoCambio.setSubtitulo(context.getString(R.string.sub_tipo_cambio));
+        tipoCambio.setImagen(R.drawable.ic_tipo_cambio_metro);
+        tipoCambio.setFragment_name(BuildConfig.FLAVOR);
+        tipoCambio.setOperacion(BankOperationCode.METROTipoCambio);
+        tipoCambio.setTipo_serivicio(r1sDOSqZ2z5);
+        tipoCambio.setOrder(-1);
+        tipoCambio.setActivo(true);
+        this.listMETRO.add(tipoCambio);
+        Operation ofam = new Operation();
+        ofam.setTitulo(context.getString(R.string.tx_head_patrimonio2));
+        ofam.setSubtitulo(context.getString(R.string.tx_sub_patrimonio));
+        ofam.setImagen(R.drawable.ic_ofa_metro);
+        ofam.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.lQox6tgMlH");
+        ofam.setOperacion(BankOperationCode.METROPatrimoniOfa);
+        ofam.setOrder(-1);
+        ofam.setActivo(true);
+        ofam.setTipo_serivicio(r1sDOSqZ2z5);
+        this.listMETRO.add(ofam);
+        Operation recargaBolsaMETRO = new Operation();
+        recargaBolsaMETRO.setTitulo(context.getString(R.string.title_recarga_bolsa_cup));
+        recargaBolsaMETRO.setSubtitulo(context.getString(R.string.subtitle_recarga_bolsa_cup));
+        recargaBolsaMETRO.setImagen(R.drawable.ic_recargar_monedero_metro);
+        recargaBolsaMETRO.setFragment_name(BuildConfig.FLAVOR);
+        recargaBolsaMETRO.setOperacion(BankOperationCode.METRORecargaBolsa);
+        recargaBolsaMETRO.setTipo_serivicio(r1sDOSqZ2z5);
+        recargaBolsaMETRO.setOrder(-1);
+        recargaBolsaMETRO.setActivo(true);
+        this.listMETRO.add(recargaBolsaMETRO);
+        Operation paqCubacelMETRO = new Operation();
+        paqCubacelMETRO.setTitulo(context.getString(R.string.head_paquetes_cubacel));
+        paqCubacelMETRO.setSubtitulo(context.getString(R.string.sub_compra_paquetes));
+        paqCubacelMETRO.setImagen(R.drawable.ic_compra_paquetes_metro);
+        paqCubacelMETRO.setFragment_name(BuildConfig.FLAVOR);
+        paqCubacelMETRO.setOperacion(BankOperationCode.METROPaquetesCubacel);
+        paqCubacelMETRO.setTipo_serivicio(r1sDOSqZ2z5);
+        paqCubacelMETRO.setOrder(-1);
+        paqCubacelMETRO.setActivo(true);
+        this.listMETRO.add(paqCubacelMETRO);
+        Operation ticketMetro = new Operation();
+        ticketMetro.setTitulo(context.getString(R.string.title_reserva_ticket));
+        ticketMetro.setSubtitulo(context.getString(R.string.subtitle_reserva_ticket));
+        ticketMetro.setImagen(R.drawable.ic_compra_miturno_metro);
+        ticketMetro.setFragment_name(BuildConfig.FLAVOR);
+        ticketMetro.setOperacion(BankOperationCode.METROReservasTicket);
+        ticketMetro.setOrder(-1);
+        ticketMetro.setActivo(true);
+        ticketMetro.setTipo_serivicio(r1sDOSqZ2z5);
+        this.listMETRO.add(ticketMetro);
+        Operation pccMETRO = new Operation();
+        pccMETRO.setTitulo(context.getString(R.string.title_organizacion_politica));
+        pccMETRO.setSubtitulo(context.getString(R.string.subtitle_pcc));
+        pccMETRO.setImagen(R.drawable.ic_pago_organizaciones_masa_metro);
+        pccMETRO.setFragment_name(BuildConfig.FLAVOR);
+        pccMETRO.setOperacion(BankOperationCode.METROPCC);
+        pccMETRO.setOrder(-1);
+        pccMETRO.setActivo(true);
+        pccMETRO.setTipo_serivicio(r1sDOSqZ2z5);
+        this.listMETRO.add(pccMETRO);
+        Operation tfaMetro = new Operation();
+        tfaMetro.setTitulo(context.getString(R.string.title_recarga_tfa));
+        tfaMetro.setSubtitulo(context.getString(R.string.subtitle_recarga_tfa));
+        tfaMetro.setImagen(R.drawable.ic_pago_tfa_metro);
+        tfaMetro.setFragment_name(BuildConfig.FLAVOR);
+        tfaMetro.setOperacion(BankOperationCode.METRORecargaTFA);
+        tfaMetro.setOrder(-1);
+        tfaMetro.setActivo(true);
+        tfaMetro.setTipo_serivicio(r1sDOSqZ2z5);
+        this.listMETRO.add(tfaMetro);
+        Operation bolsa2 = new Operation();
+        bolsa2.setTitulo(context.getString(R.string.tx_registrarse));
+        bolsa2.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa2.setImagen(R.drawable.ic_registrarse_bolsa);
+        bolsa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.eUkRSfpCKs");
+        BankType r1sDOSqZ2z6 = BankType.MiTransfer;
+        bolsa2.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa2.setOrder(1);
+        bolsa2.setActivo(true);
+        bolsa2.setOperacion(BankOperationCode.BOLSARegistrarse);
+        this.listBolsa.add(bolsa2);
+        Operation bolsa1 = new Operation();
+        bolsa1.setTitulo(context.getString(R.string.tx_autenticarse));
+        bolsa1.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa1.setImagen(R.drawable.ic_autenticacion_bolsa);
+        bolsa1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qZS87tGogtP.R5fFZkKuVnr");
+        bolsa1.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa1.setOrder(2);
+        bolsa1.setActivo(true);
+        bolsa1.setOperacion(BankOperationCode.BOLSAAutenticarse);
+        this.listBolsa.add(bolsa1);
+        Operation bolsa3 = new Operation();
+        bolsa3.setTitulo(context.getString(R.string.tx_consultar_saldo));
+        bolsa3.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa3.setImagen(R.drawable.ic_consulta_saldo_bolsa);
+        bolsa3.setFragment_name(BuildConfig.FLAVOR);
+        bolsa3.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa3.setOrder(10);
+        bolsa3.setActivo(true);
+        bolsa3.setOperacion(BankOperationCode.BOLSAConsultarSaldo);
+        this.listBolsa.add(bolsa3);
+        Operation bolsa4 = new Operation();
+        bolsa4.setTitulo(context.getString(R.string.tx_ultimas_operaciones));
+        bolsa4.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa4.setImagen(R.drawable.ic_consulta_utlimas_oper_bolsa);
+        bolsa4.setFragment_name(BuildConfig.FLAVOR);
+        bolsa4.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa4.setOrder(10);
+        bolsa4.setActivo(true);
+        bolsa4.setOperacion(BankOperationCode.BOLSAUltimasOperaciones);
+        this.listBolsa.add(bolsa4);
+        Operation bolsa5 = new Operation();
+        bolsa5.setTitulo(context.getString(R.string.menu_title_transferencia_bolsa));
+        bolsa5.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa5.setImagen(R.drawable.ic_transferencia_bolsa);
+        bolsa5.setFragment_name(BuildConfig.FLAVOR);
+        bolsa5.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa5.setOrder(11);
+        bolsa5.setActivo(true);
+        bolsa5.setOperacion(BankOperationCode.BOLSATransferencia);
+        this.listBolsa.add(bolsa5);
+        Operation bolsa6 = new Operation();
+        bolsa6.setTitulo(context.getString(R.string.banco_telefono));
+        bolsa6.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa6.setImagen(R.drawable.ic_pago_factura_telefono_fijo_bolsa);
+        bolsa6.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.p5B8KozjvpQ");
+        bolsa6.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa6.setOrder(12);
+        bolsa6.setActivo(true);
+        bolsa6.setOperacion(BankOperationCode.BOLSATelefono);
+        this.listBolsa.add(bolsa6);
+        Operation bolsa7 = new Operation();
+        bolsa7.setTitulo(context.getString(R.string.menu_title_recarga_movil_bolsa));
+        bolsa7.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa7.setImagen(R.drawable.ic_recarga_saldo_movil_bolsa);
+        bolsa7.setFragment_name(BuildConfig.FLAVOR);
+        bolsa7.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa7.setOrder(13);
+        bolsa7.setActivo(true);
+        bolsa7.setOperacion(BankOperationCode.BOLSARecargaMovil);
+        this.listBolsa.add(bolsa7);
+        Operation bolsa8 = new Operation();
+        bolsa8.setTitulo(context.getString(R.string.title_recarga_nauta));
+        bolsa8.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa8.setImagen(R.drawable.ic_pago_nauta_hogar_bolsa);
+        bolsa8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.KtF0PRB8vS");
+        bolsa8.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa8.setOrder(14);
+        bolsa8.setActivo(true);
+        bolsa8.setOperacion(BankOperationCode.BOLSARecargaNauta);
+        this.listBolsa.add(bolsa8);
+        Operation bolsa9 = new Operation();
+        bolsa9.setTitulo(context.getString(R.string.hint_recarga_propia));
+        bolsa9.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa9.setImagen(R.drawable.ic_recarga_tarjeta_propia_bolsa);
+        bolsa9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.JrjJL8mtlI");
+        bolsa9.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa9.setOrder(15);
+        bolsa9.setActivo(true);
+        bolsa9.setOperacion(BankOperationCode.BOLSARecargaPropia);
+        this.listBolsa.add(bolsa9);
+        Operation bolsa10 = new Operation();
+        bolsa10.setTitulo(context.getString(R.string.title_pago_externo));
+        bolsa10.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa10.setImagen(R.drawable.ic_pago_linea_bolsa);
+        bolsa10.setFragment_name(BuildConfig.FLAVOR);
+        bolsa10.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa10.setOrder(16);
+        bolsa10.setActivo(true);
+        bolsa10.setOperacion(BankOperationCode.BOLSAPagoLinea);
+        this.listBolsa.add(bolsa10);
+        Operation bolsa11 = new Operation();
+        bolsa11.setTitulo(context.getString(R.string.menu_title_compra_paquete_mlc_bolsa));
+        bolsa11.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa11.setImagen(R.drawable.ic_paquetes_combinados_bolsa);
+        bolsa11.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.f3Ttlx30sMT");
+        bolsa11.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa11.setOrder(17);
+        bolsa11.setActivo(true);
+        bolsa11.setOperacion(BankOperationCode.BOLSACompraPaqueteMLC);
+        this.listBolsa.add(bolsa11);
+        Operation bolsa12 = new Operation();
+        bolsa12.setTitulo(context.getString(R.string.menu_title_compra_nauta_plus_bolsa));
+        bolsa12.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
+        bolsa12.setImagen(R.drawable.ic_pago_nauta_plus_bolsa);
+        bolsa12.setFragment_name(BuildConfig.FLAVOR);
+        bolsa12.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa12.setOrder(18);
+        bolsa12.setActivo(true);
+        bolsa12.setOperacion(BankOperationCode.BOLSARecargaNautaMLC);
+        this.listBolsa.add(bolsa12);
+        Operation bolsa13 = new Operation();
+        bolsa13.setTitulo(context.getString(R.string.tx_consultar_servicio_bolsa));
+        bolsa13.setSubtitulo(context.getString(R.string.tx_sub_consultar_servicio_bolsa));
+        bolsa13.setImagen(R.drawable.ic_consultar_servicio_bolsa);
+        bolsa13.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb");
+        bolsa13.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa13.setOrder(19);
+        bolsa13.setActivo(true);
+        bolsa13.setOperacion(BankOperationCode.BOLSAConsultaServicio);
+        this.listBolsa.add(bolsa13);
+        Operation bolsa14 = new Operation();
+        bolsa14.setTitulo(context.getString(R.string.banco_desconectar));
+        bolsa14.setSubtitulo(context.getString(R.string.banco_sub_desconectar));
+        bolsa14.setImagen(R.drawable.ic_desconectarse_bolsa);
+        bolsa14.setFragment_name(BuildConfig.FLAVOR);
+        bolsa14.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa14.setOrder(20);
+        bolsa14.setActivo(true);
+        bolsa14.setOperacion(BankOperationCode.BOLSADesconectar);
+        this.listBolsa.add(bolsa14);
+        Operation bolsa15 = new Operation();
+        bolsa15.setTitulo(context.getString(R.string.menu_tite_recarga_cup_ticket));
+        bolsa15.setSubtitulo(context.getString(R.string.menu_sub_recarga_cup_ticket));
+        bolsa15.setImagen(R.drawable.ic_recargar_monedero_cup_bolsa);
+        bolsa15.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.P8DtkaSW4dR");
+        bolsa15.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa15.setOrder(21);
+        bolsa15.setActivo(true);
+        bolsa15.setOperacion(BankOperationCode.BOLSARecargaCUPWalletTicket);
+        this.listBolsa.add(bolsa15);
+        Operation bolsa16 = new Operation();
+        bolsa16.setTitulo(context.getString(R.string.menu_tite_extraccion_efectivo_ticket));
+        bolsa16.setSubtitulo(context.getString(R.string.menu_sub_extraccion_efectivo_ticket));
+        bolsa16.setImagen(R.drawable.ic_extraer_efectivo_bolsa);
+        bolsa16.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.f9Reflqt3EZ");
+        bolsa16.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa16.setOrder(22);
+        bolsa16.setActivo(true);
+        bolsa16.setOperacion(BankOperationCode.BOLSAExtraccionWalletTicket);
+        this.listBolsa.add(bolsa16);
+        Operation bolsa17 = new Operation();
+        bolsa17.setTitulo(context.getString(R.string.menu_tite_transferir_bolsa_bancos));
+        bolsa17.setSubtitulo(context.getString(R.string.menu_sub_transferir_bolsa_bancos));
+        bolsa17.setImagen(R.drawable.ic_transferir_cuentas_banco_bolsa);
+        bolsa17.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.H0oV6Ot0bS");
+        bolsa17.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa17.setOrder(23);
+        bolsa17.setActivo(true);
+        bolsa17.setOperacion(BankOperationCode.BOLSATransferirBancos);
+        this.listBolsa.add(bolsa17);
+        Operation bolsa18 = new Operation();
+        bolsa18.setTitulo(context.getString(R.string.banco_electricidad));
+        bolsa18.setSubtitulo(context.getString(R.string.banco_sub_electricidad));
+        bolsa18.setImagen(R.drawable.ic_pago_factura_electricidad_bolsa);
+        bolsa18.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dwdZ5sHcFR");
+        bolsa18.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa18.setOrder(24);
+        bolsa18.setActivo(true);
+        bolsa18.setOperacion(BankOperationCode.BOLSAElectricidad);
+        this.listBolsa.add(bolsa18);
+        Operation bolsa19 = new Operation();
+        bolsa19.setTitulo(context.getString(R.string.title_pago_agua_hab));
+        bolsa19.setSubtitulo(context.getString(R.string.sub_service_bpa_agua));
+        bolsa19.setImagen(R.drawable.ic_pago_factura_agua_bolsa);
+        bolsa19.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.U1sIOmca96i");
+        bolsa19.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa19.setOrder(25);
+        bolsa19.setActivo(true);
+        bolsa19.setOperacion(BankOperationCode.BOLSAAgua);
+        this.listBolsa.add(bolsa19);
+        Operation bolsa20 = new Operation();
+        bolsa20.setTitulo(context.getString(R.string.title_service_metro_gas));
+        bolsa20.setSubtitulo(context.getString(R.string.sub_service_metro_gas));
+        bolsa20.setImagen(R.drawable.ic_pago_factura_gas_bolsa);
+        bolsa20.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.XCDkgbw8oZ");
+        bolsa20.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa20.setOrder(26);
+        bolsa20.setActivo(true);
+        bolsa20.setOperacion(BankOperationCode.BOLSAgas);
+        this.listBolsa.add(bolsa20);
+        Operation bolsa21 = new Operation();
+        bolsa21.setTitulo(context.getString(R.string.head_paquetes_cubacel));
+        bolsa21.setSubtitulo(context.getString(R.string.sub_compra_paquetes));
+        bolsa21.setImagen(R.drawable.ic_compra_paquetes_bolsa);
+        bolsa21.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW");
+        bolsa21.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa21.setOrder(27);
+        bolsa21.setActivo(true);
+        bolsa21.setOperacion(BankOperationCode.BOLSAPaquetesCubacel);
+        this.listBolsa.add(bolsa21);
+        Operation bolsa22 = new Operation();
+        bolsa22.setTitulo(context.getString(R.string.title_reservas_ofa));
+        bolsa22.setSubtitulo(context.getString(R.string.tx_sub_patrimonio_bolsa));
+        bolsa22.setImagen(R.drawable.ic_reserva_ofa_bolsa);
+        bolsa22.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dWLcK5oQoS");
+        bolsa22.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa22.setOrder(28);
+        bolsa22.setActivo(true);
+        bolsa22.setOperacion(BankOperationCode.BOLSAReservasOFA);
+        this.listBolsa.add(bolsa22);
+        Operation bolsa23 = new Operation();
+        bolsa23.setTitulo(context.getString(R.string.title_reserva_ticket));
+        bolsa23.setSubtitulo(context.getString(R.string.subtitle_reserva_ticket));
+        bolsa23.setImagen(R.drawable.ic_pago_miturno_bolsa);
+        bolsa23.setFragment_name(BuildConfig.FLAVOR);
+        bolsa23.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa23.setOrder(29);
+        bolsa23.setActivo(true);
+        bolsa23.setOperacion(BankOperationCode.BOLSAReservasTicket);
+        this.listBolsa.add(bolsa23);
+        Operation bolsa24 = new Operation();
+        bolsa24.setTitulo(context.getString(R.string.title_organizacion_politica));
+        bolsa24.setSubtitulo(context.getString(R.string.subtitle_pcc));
+        bolsa24.setImagen(R.drawable.ic_pago_organizaciones_masa_bolsa);
+        bolsa24.setFragment_name(BuildConfig.FLAVOR);
+        bolsa24.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa24.setOrder(30);
+        bolsa24.setActivo(true);
+        bolsa24.setOperacion(BankOperationCode.BOLSAPCC);
+        this.listBolsa.add(bolsa24);
+        Operation bolsa25 = new Operation();
+        bolsa25.setTitulo(context.getString(R.string.title_recarga_tfa));
+        bolsa25.setSubtitulo(context.getString(R.string.subtitle_recarga_tfa));
+        bolsa25.setImagen(R.drawable.ic_tfa_bolsa);
+        bolsa25.setFragment_name(BuildConfig.FLAVOR);
+        bolsa25.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa25.setOrder(30);
+        bolsa25.setActivo(true);
+        bolsa25.setOperacion(BankOperationCode.BOLSARecargaTFA);
+        this.listBolsa.add(bolsa25);
+        Operation bolsa26 = new Operation();
+        bolsa26.setTitulo(context.getString(R.string.tx_title_clasica));
+        bolsa26.setSubtitulo(context.getString(R.string.tx_subtitle_clasica));
+        bolsa26.setImagen(R.drawable.ic_asociar_cuenta_bolsa);
+        bolsa26.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.HTmIvOo9nb");
+        bolsa26.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa26.setOrder(31);
+        bolsa26.setActivo(true);
+        bolsa26.setOperacion(BankOperationCode.BOLSAAsociarCuenta);
+        this.listBolsa.add(bolsa26);
+        Operation bolsa27 = new Operation();
+        bolsa27.setTitulo(context.getString(R.string.tx_head_patrimonio2));
+        bolsa27.setSubtitulo(context.getString(R.string.tx_sub_patrimonio));
+        bolsa27.setImagen(R.drawable.ic_ofa_bolsa);
+        bolsa27.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.C6ZYln3x19W");
+        bolsa27.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa27.setOrder(32);
+        bolsa27.setActivo(true);
+        bolsa27.setOperacion(BankOperationCode.BOLSAAporteOFA);
+        this.listBolsa.add(bolsa27);
+        Operation bolsa28 = new Operation();
+        bolsa28.setTitulo(context.getString(R.string.title_consulta_miboleto));
+        bolsa28.setSubtitulo(context.getString(R.string.subtitle_consulta_miboleto));
+        bolsa28.setImagen(R.drawable.ic_consulta_miboleto_bolsa);
+        bolsa28.setFragment_name(BuildConfig.FLAVOR);
+        bolsa28.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa28.setOrder(33);
+        bolsa28.setActivo(true);
+        bolsa28.setOperacion(BankOperationCode.BOLSAConsultaMiBoleto);
+        this.listBolsa.add(bolsa28);
+        Operation bolsa29 = new Operation();
+        bolsa29.setTitulo(context.getString(R.string.title_compra_miboleto));
+        bolsa29.setSubtitulo(context.getString(R.string.subtitle_compra_miboleto));
+        bolsa29.setImagen(R.drawable.ic_miboleto_pago_bolsa);
+        bolsa29.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.TBaFnBLjEA");
+        bolsa29.setTipo_serivicio(r1sDOSqZ2z6);
+        bolsa29.setOrder(34);
+        bolsa29.setActivo(true);
+        bolsa29.setOperacion(BankOperationCode.BOLSACompraMiBoleto);
+        this.listBolsa.add(bolsa29);
+        Operation votomovil = new Operation();
+        votomovil.setTitulo(context.getString(R.string.msg_votomovil_etecsa));
+        votomovil.setSubtitulo(context.getString(R.string.msg_votomovil_descrip_etecsa));
+        votomovil.setImagen(R.drawable.ic_voto_movil);
+        votomovil.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.cdINOtQ3iN");
+        votomovil.setTipo_serivicio(r1sDOSqZ2z6);
+        votomovil.setOrder(35);
+        votomovil.setOperacion(BankOperationCode.BOLSAVotoMovil);
+        votomovil.setActivo(true);
+        this.listBolsa.add(votomovil);
+        Operation transferClasicaEmpresarial = new Operation();
+        transferClasicaEmpresarial.setTitulo(context.getString(R.string.tx_transferencia_clasica_empresa));
+        transferClasicaEmpresarial.setSubtitulo(context.getString(R.string.ly_title_transferencia_a_clasica_empresa));
+        transferClasicaEmpresarial.setImagen(R.drawable.ico_transfer_clasica);
+        transferClasicaEmpresarial.setFragment_name(BuildConfig.FLAVOR);
+        transferClasicaEmpresarial.setTipo_serivicio(r1sDOSqZ2z6);
+        transferClasicaEmpresarial.setOrder(-1);
+        transferClasicaEmpresarial.setOperacion(BankOperationCode.BOLSATransferenciaClasicaEmpresarial);
+        transferClasicaEmpresarial.setActivo(true);
+        this.listBolsa.add(transferClasicaEmpresarial);
+        Operation pagoExtClasicaEmpresarial = new Operation();
+        pagoExtClasicaEmpresarial.setTitulo(context.getString(R.string.title_pago_externo_empresarial));
+        pagoExtClasicaEmpresarial.setSubtitulo(context.getString(R.string.sub_pago_externo_empresarial));
+        pagoExtClasicaEmpresarial.setImagen(R.drawable.ic_pago_linea_empresarial);
+        pagoExtClasicaEmpresarial.setFragment_name(BuildConfig.FLAVOR);
+        pagoExtClasicaEmpresarial.setTipo_serivicio(r1sDOSqZ2z6);
+        pagoExtClasicaEmpresarial.setOrder(-1);
+        pagoExtClasicaEmpresarial.setOperacion(BankOperationCode.BOLSAPagoExternoClasicaEmpresarial);
+        pagoExtClasicaEmpresarial.setActivo(true);
+        this.listBolsa.add(pagoExtClasicaEmpresarial);
+        for (Operation itemAgente : this.listAgente) {
+            updateOperation(itemAgente);
         }
-        for (Operacion item : listGenerales) {
-            updateOperation(item);
+        for (Operation itemGenerales : this.listGenerales) {
+            updateOperation(itemGenerales);
         }
-        for (Operacion item : listBPA) {
-            updateOperation(item);
+        for (Operation itemBPA : this.listBPA) {
+            updateOperation(itemBPA);
         }
-        for (Operacion item : listBANDEC) {
-            updateOperation(item);
+        for (Operation itemBANDEC : this.listBANDEC) {
+            updateOperation(itemBANDEC);
         }
-        for (Operacion item : listMETRO) {
-            updateOperation(item);
+        for (Operation itemMETRO : this.listMETRO) {
+            updateOperation(itemMETRO);
         }
-        for (Operacion item : listBolsa) {
-            updateOperation(item);
+        for (Operation itemBolsa : this.listBolsa) {
+            updateOperation(itemBolsa);
         }
-
-        // Clean up deprecated operations
         try {
-            DatabaseHelper db = DatabaseHelper.getInstance();
-            db.deleteOperacion(db.getOperacion(BankOperationCode.AGPredeterminarTarjeta));
-            db.deleteOperacion(db.getOperacion(BankOperationCode.AGConsultarFactura));
-            db.deleteOperacion(db.getOperacion(BankOperationCode.AGPagarFactura));
-            db.deleteOperacion(db.getOperacion(BankOperationCode.AGUltimosPago));
-            db.deleteOperacion(db.getOperacion(BankOperationCode.AGRectificarPago));
-            db.deleteOperacion(db.getOperacion(BankOperationCode.VotoMovil));
+            Operation facturaTelefonica1 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGPredeterminarTarjeta);
+            DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica1);
+            Operation facturaTelefonica2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGConsultarFactura);
+            DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica2);
+            Operation facturaTelefonica3 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGPagarFactura);
+            DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica3);
+            Operation facturaTelefonica4 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGUltimosPago);
+            DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica4);
+            Operation facturaTelefonica5 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGRectificarPago);
+            DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica5);
+            Operation votomovil_general = DatabaseHelper.getInstance().getOperacion(BankOperationCode.VotoMovil);
+            DatabaseHelper.getInstance().deleteOperacion(votomovil_general);
         } catch (Exception e) {
-            // Silently ignore — these operations may not exist in the database
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Upsert logic: update existing operation or insert new one.
-    // If duplicates exist, delete all and re-insert.
-    // -------------------------------------------------------------------------
-
-    private void updateOperation(Operacion operacion) {
+    private void updateOperation(Operation operacion) {
         try {
-            DatabaseHelper db = DatabaseHelper.getInstance();
-            Operacion original = db.getOperacion(operacion.getOperacion());
+            Operation original = DatabaseHelper.getInstance().getOperacion(operacion.getOperacion());
             if (original != null) {
-                // Handle duplicate entries — delete all and re-insert
-                if (db.getCountOperacion(operacion.getOperacion()) > 1) {
-                    for (Operacion duplicate : db.getListOperacion(operacion.getOperacion())) {
-                        db.deleteOperacion(duplicate);
+                if (DatabaseHelper.getInstance().getCountOperacion(operacion.getOperacion()) > 1) {
+                    for (Operation uyh0pxs9m37in : DatabaseHelper.getInstance().getListOperacion(operacion.getOperacion())) {
+                        DatabaseHelper.getInstance().deleteOperacion(uyh0pxs9m37in);
                     }
-                    db.addOperacion(operacion);
+                    DatabaseHelper.getInstance().addOperacion(operacion);
                     return;
                 }
-                // Normal case — update mutable fields on the existing record
                 original.setFragment_name(operacion.getFragment_name());
                 original.setImagen(operacion.getImagen());
                 original.setTitulo(operacion.getTitulo());
                 original.setSubtitulo(operacion.getSubtitulo());
-                db.updateOperacion(original);
+                DatabaseHelper.getInstance().updateOperacion(original);
                 return;
             }
-            // New operation — insert
-            db.addOperacion(operacion);
+            DatabaseHelper.getInstance().addOperacion(operacion);
         } catch (Exception ex) {
-            // Recovery: delete corrupt entry and re-insert
             try {
-                DatabaseHelper db = DatabaseHelper.getInstance();
-                db.deleteOperacion(db.getOperacion(operacion.getOperacion()));
-                db.addOperacion(operacion);
+                DatabaseHelper.getInstance().deleteOperacion(DatabaseHelper.getInstance().getOperacion(operacion.getOperacion()));
+                DatabaseHelper.getInstance().addOperacion(operacion);
             } catch (Exception e) {
-                Log.e(TAG, ex.getMessage());
+                Log.e("OPERLOG", ex.getMessage());
             }
         }
     }
-
-    // =========================================================================
-    // fill_all: Fresh install — insert all operations directly to database.
-    // Also loads geographic (DPA) and tax (tributos) reference data.
-    // =========================================================================
 
     public void fill_all(Context context) {
         this.context = context;
@@ -988,1605 +1661,2179 @@ public class OperationMenuBuilder {
         fill_banco_bolsa();
     }
 
-    // -------------------------------------------------------------------------
-    // Helper: creates and directly inserts an operation to the database.
-    // -------------------------------------------------------------------------
-
-    private void addOpToDb(String titulo, String subtitulo, int imagen,
-                           String fragmentName, BankType tipo,
-                           int order, BankOperationCode operacion, boolean activo) {
-        DatabaseHelper.getInstance().addOperacion(
-                createOp(titulo, subtitulo, imagen, fragmentName, tipo, order, operacion, activo));
-    }
-
-    // -------------------------------------------------------------------------
-    // fill_generales: General ETECSA mobile service operations
-    // -------------------------------------------------------------------------
-
     public void fill_generales() {
-        BankType general = BankType.General;
-
-        addOpToDb("Consulta tu Saldo Prepago", "Marcando *222#",
-                R.drawable.ic_consultar_saldo_222, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.ConsultaSaldo222, true);
-
-        addOpToDb("Consulta tu Saldo Pospago", "Marcando *111#",
-                R.drawable.ic_consultar_saldo_111, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.ConsultaSaldo111, true);
-
-        addOpToDb("LLamar", "Realizar LLamada",
-                R.drawable.ic_llamar,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2",
-                general, -1, BankOperationCode.LLamada, true);
-
-        addOpToDb("Llamar con *99", "El destinatario paga",
-                R.drawable.ic_llamar_con_99,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2",
-                general, -1, BankOperationCode.Llamar99, true);
-
-        addOpToDb("Recarga tu Movil con Cupon", "Recargar movil con cupon de recarga ",
-                R.drawable.ic_recargar_saldo_movil,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.b0kkzvOCEu",
-                general, -1, BankOperationCode.RecargarMovilBono, true);
-
-        addOpToDb("Transferir tu Saldo", "Transferencia de saldo",
-                R.drawable.ic_transferir_saldo,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.C8l2t8799rL",
-                general, -1, BankOperationCode.TransferirSaldoMovil, true);
-
-        addOpToDb("Cambiar su clave de transferencia", "Cambio de clave",
-                R.drawable.ic_cambiar_clave_transferencia,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.E1lhoLKryWP",
-                general, -1, BankOperationCode.CambioClave, true);
-
-        addOpToDb(context.getString(R.string.title_consultar_estado_bono),
-                context.getString(R.string.subtitle_consultar_estado_bono),
-                R.drawable.ic_consultar_bono, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.ConsultarEstadoBono, true);
-
-        addOpToDb(context.getString(R.string.title_gestion_planes),
-                context.getString(R.string.subtitle_gestion_planes),
-                R.drawable.ic_recargar_con_bono, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.GestionPlanes, true);
-
-        addOpToDb(context.getString(R.string.title_consultar_plan_datos),
-                context.getString(R.string.subtitle_consultar_plan_datos),
-                R.drawable.ic_consultar_plan_datos, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.ConsultarPlanDatos, true);
-
-        addOpToDb(context.getString(R.string.title_consultar_plan_voz),
-                context.getString(R.string.subtitle_consultar_plan_voz),
-                R.drawable.ic_consultar_plan_voz, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.ConsultarPlanVoz, true);
-
-        addOpToDb(context.getString(R.string.consultar_plan_sms),
-                context.getString(R.string.subconsultar_plan_sms),
-                R.drawable.ic_consultar_plan_sms, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.ConsultarPlanSMS, true);
-
-        addOpToDb(context.getString(R.string.consultar_plan_amigos),
-                context.getString(R.string.subconsultar_plan_amigos),
-                R.drawable.ic_consultar_plan_amigo, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.ConsultarPlanAmigos, true);
-
-        addOpToDb(context.getString(R.string.title_operaciones_adelanta),
-                context.getString(R.string.detail_operaciones_adelanta),
-                R.drawable.ic_adelantar_saldo, BuildConfig.FLAVOR,
-                general, -1, BankOperationCode.AdelantaSaldo, true);
+        Operation consultaSaldoPrepago = new Operation();
+        consultaSaldoPrepago.setTitulo("Consulta tu Saldo Prepago");
+        consultaSaldoPrepago.setSubtitulo("Marcando *222#");
+        consultaSaldoPrepago.setImagen(R.drawable.ic_consultar_saldo_222);
+        consultaSaldoPrepago.setFragment_name(BuildConfig.FLAVOR);
+        BankType r1sDOSqZ2z = BankType.General;
+        consultaSaldoPrepago.setTipo_serivicio(r1sDOSqZ2z);
+        consultaSaldoPrepago.setOrder(-1);
+        consultaSaldoPrepago.setOperacion(BankOperationCode.ConsultaSaldo222);
+        consultaSaldoPrepago.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(consultaSaldoPrepago);
+        Operation consultaSaldoPospago = new Operation();
+        consultaSaldoPospago.setTitulo("Consulta tu Saldo Pospago");
+        consultaSaldoPospago.setSubtitulo("Marcando *111#");
+        consultaSaldoPospago.setImagen(R.drawable.ic_consultar_saldo_111);
+        consultaSaldoPospago.setFragment_name(BuildConfig.FLAVOR);
+        consultaSaldoPospago.setTipo_serivicio(r1sDOSqZ2z);
+        consultaSaldoPospago.setOrder(-1);
+        consultaSaldoPospago.setOperacion(BankOperationCode.ConsultaSaldo111);
+        consultaSaldoPospago.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(consultaSaldoPospago);
+        Operation realizarLlamada = new Operation();
+        realizarLlamada.setTitulo("LLamar");
+        realizarLlamada.setSubtitulo("Realizar LLamada");
+        realizarLlamada.setImagen(R.drawable.ic_llamar);
+        realizarLlamada.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2");
+        realizarLlamada.setTipo_serivicio(r1sDOSqZ2z);
+        realizarLlamada.setOrder(-1);
+        realizarLlamada.setOperacion(BankOperationCode.LLamada);
+        realizarLlamada.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(realizarLlamada);
+        Operation realizarLlamada99 = new Operation();
+        realizarLlamada99.setTitulo("Llamar con *99");
+        realizarLlamada99.setSubtitulo("El destinatario paga");
+        realizarLlamada99.setImagen(R.drawable.ic_llamar_con_99);
+        realizarLlamada99.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2");
+        realizarLlamada99.setTipo_serivicio(r1sDOSqZ2z);
+        realizarLlamada99.setOrder(-1);
+        realizarLlamada99.setOperacion(BankOperationCode.Llamar99);
+        realizarLlamada99.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(realizarLlamada99);
+        Operation recargarConBono = new Operation();
+        recargarConBono.setTitulo("Recarga tu Móvil con Cupón");
+        recargarConBono.setSubtitulo("Recargar móvil con cupón de recarga ");
+        recargarConBono.setImagen(R.drawable.ic_recargar_saldo_movil);
+        recargarConBono.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.b0kkzvOCEu");
+        recargarConBono.setTipo_serivicio(r1sDOSqZ2z);
+        recargarConBono.setOrder(-1);
+        recargarConBono.setOperacion(BankOperationCode.RecargarMovilBono);
+        recargarConBono.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(recargarConBono);
+        Operation transferirSaldo = new Operation();
+        transferirSaldo.setTitulo("Transferir tu Saldo");
+        transferirSaldo.setSubtitulo("Transferencia de saldo");
+        transferirSaldo.setImagen(R.drawable.ic_transferir_saldo);
+        transferirSaldo.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.C8l2t8799rL");
+        transferirSaldo.setTipo_serivicio(r1sDOSqZ2z);
+        transferirSaldo.setOrder(-1);
+        transferirSaldo.setOperacion(BankOperationCode.TransferirSaldoMovil);
+        transferirSaldo.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(transferirSaldo);
+        Operation cambioclavetransferirSaldo = new Operation();
+        cambioclavetransferirSaldo.setTitulo("Cambiar su clave de transferencia");
+        cambioclavetransferirSaldo.setSubtitulo("Cambio de clave");
+        cambioclavetransferirSaldo.setImagen(R.drawable.ic_cambiar_clave_transferencia);
+        cambioclavetransferirSaldo.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.E1lhoLKryWP");
+        cambioclavetransferirSaldo.setTipo_serivicio(r1sDOSqZ2z);
+        cambioclavetransferirSaldo.setOrder(-1);
+        cambioclavetransferirSaldo.setOperacion(BankOperationCode.CambioClave);
+        cambioclavetransferirSaldo.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(cambioclavetransferirSaldo);
+        Operation estadobono = new Operation();
+        estadobono.setTitulo(this.context.getString(R.string.title_consultar_estado_bono));
+        estadobono.setSubtitulo(this.context.getString(R.string.subtitle_consultar_estado_bono));
+        estadobono.setImagen(R.drawable.ic_consultar_bono);
+        estadobono.setFragment_name(BuildConfig.FLAVOR);
+        estadobono.setTipo_serivicio(r1sDOSqZ2z);
+        estadobono.setOrder(-1);
+        estadobono.setOperacion(BankOperationCode.ConsultarEstadoBono);
+        estadobono.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(estadobono);
+        Operation planes = new Operation();
+        planes.setTitulo(this.context.getString(R.string.title_gestion_planes));
+        planes.setSubtitulo(this.context.getString(R.string.subtitle_gestion_planes));
+        planes.setImagen(R.drawable.ic_recargar_con_bono);
+        planes.setFragment_name(BuildConfig.FLAVOR);
+        planes.setTipo_serivicio(r1sDOSqZ2z);
+        planes.setOrder(-1);
+        planes.setOperacion(BankOperationCode.GestionPlanes);
+        planes.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(planes);
+        Operation bolsa = new Operation();
+        bolsa.setTitulo(this.context.getString(R.string.title_consultar_plan_datos));
+        bolsa.setSubtitulo(this.context.getString(R.string.subtitle_consultar_plan_datos));
+        bolsa.setImagen(R.drawable.ic_consultar_plan_datos);
+        bolsa.setFragment_name(BuildConfig.FLAVOR);
+        bolsa.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa.setOrder(-1);
+        bolsa.setOperacion(BankOperationCode.ConsultarPlanDatos);
+        bolsa.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(bolsa);
+        Operation voz = new Operation();
+        voz.setTitulo(this.context.getString(R.string.title_consultar_plan_voz));
+        voz.setSubtitulo(this.context.getString(R.string.subtitle_consultar_plan_voz));
+        voz.setImagen(R.drawable.ic_consultar_plan_voz);
+        voz.setFragment_name(BuildConfig.FLAVOR);
+        voz.setTipo_serivicio(r1sDOSqZ2z);
+        voz.setOrder(-1);
+        voz.setOperacion(BankOperationCode.ConsultarPlanVoz);
+        voz.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(voz);
+        Operation sms = new Operation();
+        sms.setTitulo(this.context.getString(R.string.consultar_plan_sms));
+        sms.setSubtitulo(this.context.getString(R.string.subconsultar_plan_sms));
+        sms.setImagen(R.drawable.ic_consultar_plan_sms);
+        sms.setFragment_name(BuildConfig.FLAVOR);
+        sms.setTipo_serivicio(r1sDOSqZ2z);
+        sms.setOrder(-1);
+        sms.setOperacion(BankOperationCode.ConsultarPlanSMS);
+        sms.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(sms);
+        Operation amigos = new Operation();
+        amigos.setTitulo(this.context.getString(R.string.consultar_plan_amigos));
+        amigos.setSubtitulo(this.context.getString(R.string.subconsultar_plan_amigos));
+        amigos.setImagen(R.drawable.ic_consultar_plan_amigo);
+        amigos.setFragment_name(BuildConfig.FLAVOR);
+        amigos.setTipo_serivicio(r1sDOSqZ2z);
+        amigos.setOrder(-1);
+        amigos.setOperacion(BankOperationCode.ConsultarPlanAmigos);
+        amigos.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(amigos);
+        Operation adelantaSaldo = new Operation();
+        adelantaSaldo.setTitulo(this.context.getString(R.string.title_operaciones_adelanta));
+        adelantaSaldo.setSubtitulo(this.context.getString(R.string.detail_operaciones_adelanta));
+        adelantaSaldo.setImagen(R.drawable.ic_adelantar_saldo);
+        adelantaSaldo.setFragment_name(BuildConfig.FLAVOR);
+        adelantaSaldo.setTipo_serivicio(r1sDOSqZ2z);
+        adelantaSaldo.setOrder(-1);
+        adelantaSaldo.setOperacion(BankOperationCode.AdelantaSaldo);
+        adelantaSaldo.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(adelantaSaldo);
     }
-
-    // -------------------------------------------------------------------------
-    // fill_agente: ETECSA recharge agent operations.
-    // NOTE: Agent operations are inserted as inactive (activo=false) initially.
-    // The BOLSA agent operations (factura, recarga, nauta, propia) are active.
-    // -------------------------------------------------------------------------
 
     public void fill_agente() {
-        BankType etecsa = BankType.ETECSA;
-
-        // Traditional agent operations (inactive by default — activated on login)
-        addOpToDb("Autenticar", "Recarga Movil",
-                R.drawable.ic_autenticacion_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.cwVwMsOO60",
-                etecsa, -1, BankOperationCode.AGAutenticar, false);
-
-        addOpToDb("Consultar Saldo", "Recarga Movil",
-                R.drawable.ic_consultar_saldo_agente, BuildConfig.FLAVOR,
-                etecsa, -1, BankOperationCode.AGConsultarSaldo, false);
-
-        addOpToDb("Recargar", "Recarga Movil",
-                R.drawable.ic_recarga_movil_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.A9IFPpW4HW",
-                etecsa, -1, BankOperationCode.AGRecargar, false);
-
-        addOpToDb("Ultimas Recargas", "Recarga Movil",
-                R.drawable.ic_ultimas_recargas_agente, BuildConfig.FLAVOR,
-                etecsa, -1, BankOperationCode.AGUltimasRecargas, false);
-
-        addOpToDb("Cambiar clave", "Recarga Movil",
-                R.drawable.ic_cambio_pin_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.VqNI4JnvJD",
-                etecsa, -1, BankOperationCode.AGCambiarclave, false);
-
-        addOpToDb("Desconectar", "Recarga Movil",
-                R.drawable.ic_desconcetarse_agente, BuildConfig.FLAVOR,
-                etecsa, -1, BankOperationCode.AGDesconectar, false);
-
-        addOpToDb("Recargar", "Recarga Nauta",
-                R.drawable.ic_recarga_nauta_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.I1YePWjLywK9.NdeFyyhxF1",
-                etecsa, -1, BankOperationCode.AGRecargarNauta, false);
-
-        addOpToDb("Ultimas recargas", "Recarga Nauta",
-                R.drawable.ic_ultimas_recargas_ag, BuildConfig.FLAVOR,
-                etecsa, -1, BankOperationCode.AGConsultarNautaUlt, false);
-
-        // BOLSA agent operations (active)
-        addOpToDb(context.getString(R.string.banco_telefono),
-                context.getString(R.string.banco_sub_telefono),
-                R.drawable.ic_pagar_factura_telf_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.ee4tsHNQiS",
-                etecsa, -1, BankOperationCode.BOLSAAGFacturaTelefonica, true);
-
-        addOpToDb(context.getString(R.string.menu_title_recarga_movil_bolsa),
-                context.getString(R.string.menu_sub_recarga_movil_bolsa),
-                R.drawable.ic_recarga_movil_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.f03gMUuBeK",
-                etecsa, -1, BankOperationCode.BOLSAAGRecargaMovil, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.sub_recarga_nauta),
-                R.drawable.ic_recarga_nauta_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.yww1pS0VKU",
-                etecsa, -1, BankOperationCode.BOLSAAGRecargaNauta, true);
-
-        addOpToDb(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.hint_subtitle_recarga_propia),
-                R.drawable.ic_recarga_propia_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.BpgQdOQz0p",
-                etecsa, -1, BankOperationCode.BOLSAAGRecargaPropia, true);
-
-        addOpToDb(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_planes_agente,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW",
-                etecsa, -1, BankOperationCode.BOLSAPaquetesCubacel, true);
+        Operation recargaMovil1 = new Operation();
+        recargaMovil1.setTitulo("Autenticar");
+        recargaMovil1.setSubtitulo("Recarga Móvil");
+        recargaMovil1.setImagen(R.drawable.ic_autenticacion_agente);
+        recargaMovil1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.cwVwMsOO60");
+        BankType r1sDOSqZ2z = BankType.ETECSA;
+        recargaMovil1.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil1.setOrder(-1);
+        recargaMovil1.setOperacion(BankOperationCode.AGAutenticar);
+        recargaMovil1.setActivo(false);
+        DatabaseHelper.getInstance().addOperacion(recargaMovil1);
+        Operation recargaMovil2 = new Operation();
+        recargaMovil2.setTitulo("Consultar Saldo");
+        recargaMovil2.setSubtitulo("Recarga Móvil");
+        recargaMovil2.setImagen(R.drawable.ic_consultar_saldo_agente);
+        recargaMovil2.setFragment_name(BuildConfig.FLAVOR);
+        recargaMovil2.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil2.setOrder(-1);
+        recargaMovil2.setOperacion(BankOperationCode.AGConsultarSaldo);
+        recargaMovil2.setActivo(false);
+        DatabaseHelper.getInstance().addOperacion(recargaMovil2);
+        Operation recargaMovil3 = new Operation();
+        recargaMovil3.setTitulo("Recargar");
+        recargaMovil3.setSubtitulo("Recarga Móvil");
+        recargaMovil3.setImagen(R.drawable.ic_recarga_movil_agente);
+        recargaMovil3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.A9IFPpW4HW");
+        recargaMovil3.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil3.setOrder(-1);
+        recargaMovil3.setOperacion(BankOperationCode.AGRecargar);
+        recargaMovil3.setActivo(false);
+        DatabaseHelper.getInstance().addOperacion(recargaMovil3);
+        Operation recargaMovil4 = new Operation();
+        recargaMovil4.setTitulo("Últimas Recargas");
+        recargaMovil4.setSubtitulo("Recarga Móvil");
+        recargaMovil4.setImagen(R.drawable.ic_ultimas_recargas_agente);
+        recargaMovil4.setFragment_name(BuildConfig.FLAVOR);
+        recargaMovil4.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil4.setOrder(-1);
+        recargaMovil4.setOperacion(BankOperationCode.AGUltimasRecargas);
+        recargaMovil4.setActivo(false);
+        DatabaseHelper.getInstance().addOperacion(recargaMovil4);
+        Operation recargaMovil5 = new Operation();
+        recargaMovil5.setTitulo("Cambiar clave");
+        recargaMovil5.setSubtitulo("Recarga Móvil");
+        recargaMovil5.setImagen(R.drawable.ic_cambio_pin_agente);
+        recargaMovil5.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.VqNI4JnvJD");
+        recargaMovil5.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil5.setOrder(-1);
+        recargaMovil5.setOperacion(BankOperationCode.AGCambiarclave);
+        recargaMovil5.setActivo(false);
+        DatabaseHelper.getInstance().addOperacion(recargaMovil5);
+        Operation recargaMovil6 = new Operation();
+        recargaMovil6.setTitulo("Desconectar");
+        recargaMovil6.setSubtitulo("Recarga Móvil");
+        recargaMovil6.setImagen(R.drawable.ic_desconcetarse_agente);
+        recargaMovil6.setFragment_name(BuildConfig.FLAVOR);
+        recargaMovil6.setTipo_serivicio(r1sDOSqZ2z);
+        recargaMovil6.setOrder(-1);
+        recargaMovil6.setOperacion(BankOperationCode.AGDesconectar);
+        recargaMovil6.setActivo(false);
+        DatabaseHelper.getInstance().addOperacion(recargaMovil6);
+        Operation recargaNauta1 = new Operation();
+        recargaNauta1.setTitulo("Recargar");
+        recargaNauta1.setSubtitulo("Recarga Nauta");
+        recargaNauta1.setImagen(R.drawable.ic_recarga_nauta_agente);
+        recargaNauta1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.I1YePWjLywK9.NdeFyyhxF1");
+        recargaNauta1.setTipo_serivicio(r1sDOSqZ2z);
+        recargaNauta1.setOrder(-1);
+        recargaNauta1.setOperacion(BankOperationCode.AGRecargarNauta);
+        recargaNauta1.setActivo(false);
+        DatabaseHelper.getInstance().addOperacion(recargaNauta1);
+        Operation recargaNauta2 = new Operation();
+        recargaNauta2.setTitulo("Últimas recargas");
+        recargaNauta2.setSubtitulo("Recarga Nauta");
+        recargaNauta2.setImagen(R.drawable.ic_ultimas_recargas_ag);
+        recargaNauta2.setFragment_name(BuildConfig.FLAVOR);
+        recargaNauta2.setTipo_serivicio(r1sDOSqZ2z);
+        recargaNauta2.setOrder(-1);
+        recargaNauta2.setOperacion(BankOperationCode.AGConsultarNautaUlt);
+        recargaNauta2.setActivo(false);
+        DatabaseHelper.getInstance().addOperacion(recargaNauta2);
+        Operation ag1 = new Operation();
+        ag1.setTitulo(this.context.getString(R.string.banco_telefono));
+        ag1.setSubtitulo(this.context.getString(R.string.banco_sub_telefono));
+        ag1.setImagen(R.drawable.ic_pagar_factura_telf_agente);
+        ag1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.ee4tsHNQiS");
+        ag1.setTipo_serivicio(r1sDOSqZ2z);
+        ag1.setOrder(-1);
+        ag1.setOperacion(BankOperationCode.BOLSAAGFacturaTelefonica);
+        ag1.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(ag1);
+        Operation ag2 = new Operation();
+        ag2.setTitulo(this.context.getString(R.string.menu_title_recarga_movil_bolsa));
+        ag2.setSubtitulo(this.context.getString(R.string.menu_sub_recarga_movil_bolsa));
+        ag2.setImagen(R.drawable.ic_recarga_movil_agente);
+        ag2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.f03gMUuBeK");
+        ag2.setTipo_serivicio(r1sDOSqZ2z);
+        ag2.setOrder(-1);
+        ag2.setOperacion(BankOperationCode.BOLSAAGRecargaMovil);
+        ag2.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(ag2);
+        Operation ag3 = new Operation();
+        ag3.setTitulo(this.context.getString(R.string.title_recarga_nauta));
+        ag3.setSubtitulo(this.context.getString(R.string.sub_recarga_nauta));
+        ag3.setImagen(R.drawable.ic_recarga_nauta_agente);
+        ag3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.yww1pS0VKU");
+        ag3.setTipo_serivicio(r1sDOSqZ2z);
+        ag3.setOrder(-1);
+        ag3.setOperacion(BankOperationCode.BOLSAAGRecargaNauta);
+        ag3.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(ag3);
+        Operation ag4 = new Operation();
+        ag4.setTitulo(this.context.getString(R.string.hint_recarga_propia));
+        ag4.setSubtitulo(this.context.getString(R.string.hint_subtitle_recarga_propia));
+        ag4.setImagen(R.drawable.ic_recarga_propia_agente);
+        ag4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.BpgQdOQz0p");
+        ag4.setTipo_serivicio(r1sDOSqZ2z);
+        ag4.setOrder(-1);
+        ag4.setOperacion(BankOperationCode.BOLSAAGRecargaPropia);
+        ag4.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(ag4);
+        Operation cubacelAGT = new Operation();
+        cubacelAGT.setTitulo(this.context.getString(R.string.head_paquetes_cubacel));
+        cubacelAGT.setSubtitulo(this.context.getString(R.string.sub_compra_paquetes));
+        cubacelAGT.setImagen(R.drawable.ic_compra_planes_agente);
+        cubacelAGT.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW");
+        cubacelAGT.setOperacion(BankOperationCode.BOLSAPaquetesCubacel);
+        cubacelAGT.setTipo_serivicio(r1sDOSqZ2z);
+        cubacelAGT.setOrder(-1);
+        cubacelAGT.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(cubacelAGT);
     }
-
-    // -------------------------------------------------------------------------
-    // fill_banco_bpa: BPA bank operations (same structure as fillList BPA section).
-    // Identical operations to the fillList BPA block but inserted directly to DB.
-    // Order is slightly different: Registrarse comes after Autenticarse.
-    // -------------------------------------------------------------------------
 
     public void fill_banco_bpa() {
-        // Structurally identical to the BPA section of fillList().
-        // 30 operations: Autenticarse, Registrarse, Transferencia, Electricidad,
-        // Telecomunicaciones, ONAT, Consultar Saldo, Consultar Servicio,
-        // Ultimas operaciones, Cambiar clave, Desconectar, Recarga Movil,
-        // Cambio de limite, Consulta de limites, Pago Externo, Recarga Nauta,
-        // Giro Postal, Consultar Giro, Consulta Integrada, Amortizar,
-        // Consulta Credito, Recarga Propia, Agua, Gas, JClub, Recarga Bolsa,
-        // Paquetes Cubacel, Reserva Ticket, PCC, Recarga TFA
-        BankType bpaType = BankType.BPA;
-
-        addOpToDb("Autenticarse", "BPA", R.drawable.ic_autenticacion_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.lzGEfceoJu",
-                bpaType, -1, BankOperationCode.BPAAutenticarse, true);
-
-        addOpToDb("Registrarse", "BPA", R.drawable.ic_registrarse_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.IixhA1yamp",
-                bpaType, -1, BankOperationCode.BPARegistrarse, true);
-
-        addOpToDb("Transferencia", "BPA", R.drawable.ic_transferencia_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h",
-                bpaType, -1, BankOperationCode.BPATransferencia, true);
-
-        // ... 11 more core BPA banking operations (Electricidad through Consulta limites)
-        // with identical pattern: string title, "BPA" subtitle, bank-specific drawable,
-        // obfuscated fragment name, BPA type, order -1, BankOperationCode.BPA*, active
-
-        addOpToDb("Electricidad", "BPA", R.drawable.ic_pago_factura_electricidad_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.xSwGh0MTOg",
-                bpaType, -1, BankOperationCode.BPAElectricidad, true);
-
-        addOpToDb("Telecomunicaciones", "BPA", R.drawable.ic_pago_factura_telefono_fijo_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.u4QMc0S0ZHo",
-                bpaType, -1, BankOperationCode.BPATelefono, true);
-
-        addOpToDb("ONAT", "BPA", R.drawable.ic_pago_onat_bpa,
-                BuildConfig.FLAVOR, bpaType, -1, BankOperationCode.BPAONAT, true);
-
-        addOpToDb("Consultar Saldo", "BPA", R.drawable.ic_consulta_saldo_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.ix4mhKGJty",
-                bpaType, -1, BankOperationCode.BPAConsultarSaldo, true);
-
-        addOpToDb("Consultar Servicio", "BPA", R.drawable.ic_consultar_servicio_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.xoZnbyoSLT",
-                bpaType, -1, BankOperationCode.BPAConsultarServicio, true);
-
-        addOpToDb("Ultimas operaciones", "BPA", R.drawable.ic_consulta_utlimas_oper_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.h3sd43nvje",
-                bpaType, -1, BankOperationCode.BPAUltimasoperaciones, true);
-
-        addOpToDb("Cambiar clave", "BPA", R.drawable.ic_cambio_pin_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.PQmKwgxZd1",
-                bpaType, -1, BankOperationCode.BPACambiarclave, true);
-
-        addOpToDb("Desconectar", "BPA", R.drawable.ic_desconectarse_bpa,
-                BuildConfig.FLAVOR, bpaType, -1, BankOperationCode.BPADesconectar, true);
-
-        addOpToDb("Recarga Movil", "BPA", R.drawable.ic_recarga_saldo_movil_bpa,
-                BuildConfig.FLAVOR, bpaType, -1, BankOperationCode.BPARecargaMovil, true);
-
-        addOpToDb("Cambio de limite", "BPA", R.drawable.ic_cambio_limites_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.qmcwKV1fzU",
-                bpaType, -1, BankOperationCode.BPACambioLimite, true);
-
-        addOpToDb("Consulta de limites", "BPA", R.drawable.ic_consulta_limites_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.e8WK1Uajbq",
-                bpaType, -1, BankOperationCode.BPAConsultaLimite, true);
-
-        // ... 16 more BPA operations using string resources (Pago Externo through TFA)
-        addOpToDb(context.getString(R.string.title_pago_externo),
-                context.getString(R.string.sub_pago_externo),
-                R.drawable.ic_pago_linea_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPAPagoExterno, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.sub_recarga_nauta),
-                R.drawable.ic_pago_nauta_hogar_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPARecargaNauta, true);
-
-        addOpToDb(context.getString(R.string.title_giro_postal),
-                context.getString(R.string.sub_giro_postal),
-                R.drawable.ic_enviar_giro_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.o6kycf55Gw",
-                bpaType, -1, BankOperationCode.BPAGiroPostal, true);
-
-        addOpToDb(context.getString(R.string.title_consulta_giro),
-                context.getString(R.string.sub_consulta_giros),
-                R.drawable.ic_consultar_giro_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.XvOK7VM4qL",
-                bpaType, -1, BankOperationCode.BPAConsultarGiroPostal, true);
-
-        addOpToDb(context.getString(R.string.title_service_bpa_consulta_integrada),
-                context.getString(R.string.sub_service_bpa_consulta_integrada),
-                R.drawable.ic_consulta_todas_cuentas_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPAConsultarTodasCuentas, true);
-
-        addOpToDb(context.getString(R.string.title_service_bpa_amortizar),
-                context.getString(R.string.sub_service_bpa_amortizar),
-                R.drawable.ic_amortizar_credito_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.Dm6u4PA5eg",
-                bpaType, -1, BankOperationCode.BPAAmortizar, true);
-
-        addOpToDb(context.getString(R.string.title_service_bpa_consulta_credito),
-                context.getString(R.string.sub_service_consulta_credito),
-                R.drawable.ic_consulta_credito_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPAConsultaCredito, true);
-
-        addOpToDb(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.hint_subtitle_recarga_propia),
-                R.drawable.ic_recarga_tarjeta_propia_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPARecargaPropia, true);
-
-        addOpToDb(context.getString(R.string.title_service_bpa_agua),
-                context.getString(R.string.sub_service_bpa_agua),
-                R.drawable.ic_pago_factura_agua_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.zOs55UzH6z",
-                bpaType, -1, BankOperationCode.BPAAgua, true);
-
-        addOpToDb(context.getString(R.string.title_service_bpa_gas),
-                context.getString(R.string.sub_service_bpa_gas),
-                R.drawable.ic_pago_factura_gas_bpa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.FgpBLXKm6t",
-                bpaType, -1, BankOperationCode.BPAGas, true);
-
-        addOpToDb(context.getString(R.string.title_jclub), context.getString(R.string.sub_jclub),
-                R.drawable.ic_pago_joven_club_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPAJClub, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_bolsa_cup),
-                context.getString(R.string.subtitle_recarga_bolsa_cup),
-                R.drawable.ic_recargar_monedero_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPARecargaBolsa, true);
-
-        addOpToDb(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_paquetes_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPAPaquetesCubacel, true);
-
-        addOpToDb(context.getString(R.string.title_reserva_ticket),
-                context.getString(R.string.subtitle_reserva_ticket),
-                R.drawable.ic_compra_miturno_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPAReservasTicket, true);
-
-        addOpToDb(context.getString(R.string.title_organizacion_politica),
-                context.getString(R.string.subtitle_pcc),
-                R.drawable.ic_pago_organizaciones_masa_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPAPCC, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_tfa),
-                context.getString(R.string.subtitle_recarga_tfa),
-                R.drawable.ic_pago_tfa_bpa, BuildConfig.FLAVOR,
-                bpaType, -1, BankOperationCode.BPARecargaTFA, true);
+        Operation bpa1 = new Operation();
+        bpa1.setTitulo("Autenticarse");
+        bpa1.setSubtitulo("BPA");
+        bpa1.setImagen(R.drawable.ic_autenticacion_bpa);
+        bpa1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.lzGEfceoJu");
+        BankType r1sDOSqZ2z = BankType.BPA;
+        bpa1.setTipo_serivicio(r1sDOSqZ2z);
+        bpa1.setOrder(-1);
+        bpa1.setOperacion(BankOperationCode.BPAAutenticarse);
+        bpa1.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(bpa1);
+        Operation bpa9 = new Operation();
+        bpa9.setTitulo("Registrarse");
+        bpa9.setSubtitulo("BPA");
+        bpa9.setImagen(R.drawable.ic_registrarse_bpa);
+        bpa9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.IixhA1yamp");
+        bpa9.setTipo_serivicio(r1sDOSqZ2z);
+        bpa9.setOrder(-1);
+        bpa9.setActivo(true);
+        bpa9.setOperacion(BankOperationCode.BPARegistrarse);
+        DatabaseHelper.getInstance().addOperacion(bpa9);
+        Operation bpa2 = new Operation();
+        bpa2.setTitulo("Transferencia");
+        bpa2.setSubtitulo("BPA");
+        bpa2.setImagen(R.drawable.ic_transferencia_bpa);
+        bpa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h");
+        bpa2.setTipo_serivicio(r1sDOSqZ2z);
+        bpa2.setOrder(-1);
+        bpa2.setActivo(true);
+        bpa2.setOperacion(BankOperationCode.BPATransferencia);
+        DatabaseHelper.getInstance().addOperacion(bpa2);
+        Operation bpa3 = new Operation();
+        bpa3.setTitulo("Electricidad");
+        bpa3.setSubtitulo("BPA");
+        bpa3.setImagen(R.drawable.ic_pago_factura_electricidad_bpa);
+        bpa3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.xSwGh0MTOg");
+        bpa3.setTipo_serivicio(r1sDOSqZ2z);
+        bpa3.setOrder(-1);
+        bpa3.setActivo(true);
+        bpa3.setOperacion(BankOperationCode.BPAElectricidad);
+        DatabaseHelper.getInstance().addOperacion(bpa3);
+        Operation bpa4 = new Operation();
+        bpa4.setTitulo("Telecomunicaciones");
+        bpa4.setSubtitulo("BPA");
+        bpa4.setImagen(R.drawable.ic_pago_factura_telefono_fijo_bpa);
+        bpa4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.u4QMc0S0ZHo");
+        bpa4.setTipo_serivicio(r1sDOSqZ2z);
+        bpa4.setOrder(-1);
+        bpa4.setActivo(true);
+        bpa4.setOperacion(BankOperationCode.BPATelefono);
+        DatabaseHelper.getInstance().addOperacion(bpa4);
+        Operation bpa5 = new Operation();
+        bpa5.setTitulo("ONAT");
+        bpa5.setSubtitulo("BPA");
+        bpa5.setImagen(R.drawable.ic_pago_onat_bpa);
+        bpa5.setFragment_name(BuildConfig.FLAVOR);
+        bpa5.setTipo_serivicio(r1sDOSqZ2z);
+        bpa5.setOrder(-1);
+        bpa5.setActivo(true);
+        bpa5.setOperacion(BankOperationCode.BPAONAT);
+        DatabaseHelper.getInstance().addOperacion(bpa5);
+        Operation bpa6 = new Operation();
+        bpa6.setTitulo("Consultar Saldo");
+        bpa6.setSubtitulo("BPA");
+        bpa6.setImagen(R.drawable.ic_consulta_saldo_bpa);
+        bpa6.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.ix4mhKGJty");
+        bpa6.setTipo_serivicio(r1sDOSqZ2z);
+        bpa6.setOrder(-1);
+        bpa6.setActivo(true);
+        bpa6.setOperacion(BankOperationCode.BPAConsultarSaldo);
+        DatabaseHelper.getInstance().addOperacion(bpa6);
+        Operation bpa7 = new Operation();
+        bpa7.setTitulo("Consultar Servicio");
+        bpa7.setSubtitulo("BPA");
+        bpa7.setImagen(R.drawable.ic_consultar_servicio_bpa);
+        bpa7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.xoZnbyoSLT");
+        bpa7.setTipo_serivicio(r1sDOSqZ2z);
+        bpa7.setOrder(-1);
+        bpa7.setActivo(true);
+        bpa7.setOperacion(BankOperationCode.BPAConsultarServicio);
+        DatabaseHelper.getInstance().addOperacion(bpa7);
+        Operation bpa8 = new Operation();
+        bpa8.setTitulo("Últimas operaciones");
+        bpa8.setSubtitulo("BPA");
+        bpa8.setImagen(R.drawable.ic_consulta_utlimas_oper_bpa);
+        bpa8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.h3sd43nvje");
+        bpa8.setTipo_serivicio(r1sDOSqZ2z);
+        bpa8.setOrder(-1);
+        bpa8.setActivo(true);
+        bpa8.setOperacion(BankOperationCode.BPAUltimasoperaciones);
+        DatabaseHelper.getInstance().addOperacion(bpa8);
+        Operation bpa10 = new Operation();
+        bpa10.setTitulo("Cambiar clave");
+        bpa10.setSubtitulo("BPA");
+        bpa10.setImagen(R.drawable.ic_cambio_pin_bpa);
+        bpa10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.PQmKwgxZd1");
+        bpa10.setTipo_serivicio(r1sDOSqZ2z);
+        bpa10.setOrder(-1);
+        bpa10.setActivo(true);
+        bpa10.setOperacion(BankOperationCode.BPACambiarclave);
+        DatabaseHelper.getInstance().addOperacion(bpa10);
+        Operation bpa11 = new Operation();
+        bpa11.setTitulo("Desconectar");
+        bpa11.setSubtitulo("BPA");
+        bpa11.setImagen(R.drawable.ic_desconectarse_bpa);
+        bpa11.setFragment_name(BuildConfig.FLAVOR);
+        bpa11.setTipo_serivicio(r1sDOSqZ2z);
+        bpa11.setOrder(-1);
+        bpa11.setActivo(true);
+        bpa11.setOperacion(BankOperationCode.BPADesconectar);
+        DatabaseHelper.getInstance().addOperacion(bpa11);
+        Operation bpa12 = new Operation();
+        bpa12.setTitulo("Recarga Móvil");
+        bpa12.setSubtitulo("BPA");
+        bpa12.setImagen(R.drawable.ic_recarga_saldo_movil_bpa);
+        bpa12.setFragment_name(BuildConfig.FLAVOR);
+        bpa12.setTipo_serivicio(r1sDOSqZ2z);
+        bpa12.setOrder(-1);
+        bpa12.setActivo(true);
+        bpa12.setOperacion(BankOperationCode.BPARecargaMovil);
+        DatabaseHelper.getInstance().addOperacion(bpa12);
+        Operation bpa13 = new Operation();
+        bpa13.setTitulo("Cambio de límite");
+        bpa13.setSubtitulo("BPA");
+        bpa13.setImagen(R.drawable.ic_cambio_limites_bpa);
+        bpa13.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.qmcwKV1fzU");
+        bpa13.setTipo_serivicio(r1sDOSqZ2z);
+        bpa13.setOrder(-1);
+        bpa13.setActivo(true);
+        bpa13.setOperacion(BankOperationCode.BPACambioLimite);
+        DatabaseHelper.getInstance().addOperacion(bpa13);
+        Operation bpa14 = new Operation();
+        bpa14.setTitulo("Consulta de límites");
+        bpa14.setSubtitulo("BPA");
+        bpa14.setImagen(R.drawable.ic_consulta_limites_bpa);
+        bpa14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.e8WK1Uajbq");
+        bpa14.setTipo_serivicio(r1sDOSqZ2z);
+        bpa14.setOrder(-1);
+        bpa14.setActivo(true);
+        bpa14.setOperacion(BankOperationCode.BPAConsultaLimite);
+        DatabaseHelper.getInstance().addOperacion(bpa14);
+        Operation pExternobpa = new Operation();
+        pExternobpa.setTitulo(this.context.getString(R.string.title_pago_externo));
+        pExternobpa.setSubtitulo(this.context.getString(R.string.sub_pago_externo));
+        pExternobpa.setImagen(R.drawable.ic_pago_linea_bpa);
+        pExternobpa.setFragment_name(BuildConfig.FLAVOR);
+        pExternobpa.setTipo_serivicio(r1sDOSqZ2z);
+        pExternobpa.setOrder(-1);
+        pExternobpa.setActivo(true);
+        pExternobpa.setOperacion(BankOperationCode.BPAPagoExterno);
+        DatabaseHelper.getInstance().addOperacion(pExternobpa);
+        Operation recargaNautaBPA = new Operation();
+        recargaNautaBPA.setTitulo(this.context.getString(R.string.title_recarga_nauta));
+        recargaNautaBPA.setSubtitulo(this.context.getString(R.string.sub_recarga_nauta));
+        recargaNautaBPA.setImagen(R.drawable.ic_pago_nauta_hogar_bpa);
+        recargaNautaBPA.setFragment_name(BuildConfig.FLAVOR);
+        recargaNautaBPA.setTipo_serivicio(r1sDOSqZ2z);
+        recargaNautaBPA.setOrder(-1);
+        recargaNautaBPA.setActivo(true);
+        recargaNautaBPA.setOperacion(BankOperationCode.BPARecargaNauta);
+        DatabaseHelper.getInstance().addOperacion(recargaNautaBPA);
+        Operation giroBPA = new Operation();
+        giroBPA.setTitulo(this.context.getString(R.string.title_giro_postal));
+        giroBPA.setSubtitulo(this.context.getString(R.string.sub_giro_postal));
+        giroBPA.setImagen(R.drawable.ic_enviar_giro_bpa);
+        giroBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.o6kycf55Gw");
+        giroBPA.setTipo_serivicio(r1sDOSqZ2z);
+        giroBPA.setOrder(-1);
+        giroBPA.setActivo(true);
+        giroBPA.setOperacion(BankOperationCode.BPAGiroPostal);
+        DatabaseHelper.getInstance().addOperacion(giroBPA);
+        Operation consultaGiroBPA = new Operation();
+        consultaGiroBPA.setTitulo(this.context.getString(R.string.title_consulta_giro));
+        consultaGiroBPA.setSubtitulo(this.context.getString(R.string.sub_consulta_giros));
+        consultaGiroBPA.setImagen(R.drawable.ic_consultar_giro_bpa);
+        consultaGiroBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.XvOK7VM4qL");
+        consultaGiroBPA.setTipo_serivicio(r1sDOSqZ2z);
+        consultaGiroBPA.setOrder(-1);
+        consultaGiroBPA.setActivo(true);
+        consultaGiroBPA.setOperacion(BankOperationCode.BPAConsultarGiroPostal);
+        DatabaseHelper.getInstance().addOperacion(consultaGiroBPA);
+        Operation consultaIntegradaBPA = new Operation();
+        consultaIntegradaBPA.setTitulo(this.context.getString(R.string.title_service_bpa_consulta_integrada));
+        consultaIntegradaBPA.setSubtitulo(this.context.getString(R.string.sub_service_bpa_consulta_integrada));
+        consultaIntegradaBPA.setImagen(R.drawable.ic_consulta_todas_cuentas_bpa);
+        consultaIntegradaBPA.setFragment_name(BuildConfig.FLAVOR);
+        consultaIntegradaBPA.setTipo_serivicio(r1sDOSqZ2z);
+        consultaIntegradaBPA.setOrder(-1);
+        consultaIntegradaBPA.setActivo(true);
+        consultaIntegradaBPA.setOperacion(BankOperationCode.BPAConsultarTodasCuentas);
+        DatabaseHelper.getInstance().addOperacion(consultaIntegradaBPA);
+        Operation amortizarBPA = new Operation();
+        amortizarBPA.setTitulo(this.context.getString(R.string.title_service_bpa_amortizar));
+        amortizarBPA.setSubtitulo(this.context.getString(R.string.sub_service_bpa_amortizar));
+        amortizarBPA.setImagen(R.drawable.ic_amortizar_credito_bpa);
+        amortizarBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.Dm6u4PA5eg");
+        amortizarBPA.setTipo_serivicio(r1sDOSqZ2z);
+        amortizarBPA.setOrder(-1);
+        amortizarBPA.setActivo(true);
+        amortizarBPA.setOperacion(BankOperationCode.BPAAmortizar);
+        DatabaseHelper.getInstance().addOperacion(amortizarBPA);
+        Operation consultacreditoBPA = new Operation();
+        consultacreditoBPA.setTitulo(this.context.getString(R.string.title_service_bpa_consulta_credito));
+        consultacreditoBPA.setSubtitulo(this.context.getString(R.string.sub_service_consulta_credito));
+        consultacreditoBPA.setImagen(R.drawable.ic_consulta_credito_bpa);
+        consultacreditoBPA.setFragment_name(BuildConfig.FLAVOR);
+        consultacreditoBPA.setTipo_serivicio(r1sDOSqZ2z);
+        consultacreditoBPA.setOrder(-1);
+        consultacreditoBPA.setActivo(true);
+        consultacreditoBPA.setOperacion(BankOperationCode.BPAConsultaCredito);
+        DatabaseHelper.getInstance().addOperacion(consultacreditoBPA);
+        Operation propiaBPA = new Operation();
+        propiaBPA.setTitulo(this.context.getString(R.string.hint_recarga_propia));
+        propiaBPA.setSubtitulo(this.context.getString(R.string.hint_subtitle_recarga_propia));
+        propiaBPA.setImagen(R.drawable.ic_recarga_tarjeta_propia_bpa);
+        propiaBPA.setFragment_name(BuildConfig.FLAVOR);
+        propiaBPA.setTipo_serivicio(r1sDOSqZ2z);
+        propiaBPA.setOrder(-1);
+        propiaBPA.setActivo(true);
+        propiaBPA.setOperacion(BankOperationCode.BPARecargaPropia);
+        DatabaseHelper.getInstance().addOperacion(propiaBPA);
+        Operation bpaAgua = new Operation();
+        bpaAgua.setTitulo(this.context.getString(R.string.title_service_bpa_agua));
+        bpaAgua.setSubtitulo(this.context.getString(R.string.sub_service_bpa_agua));
+        bpaAgua.setImagen(R.drawable.ic_pago_factura_agua_bpa);
+        bpaAgua.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.zOs55UzH6z");
+        bpaAgua.setTipo_serivicio(r1sDOSqZ2z);
+        bpaAgua.setOrder(-1);
+        bpaAgua.setActivo(true);
+        bpaAgua.setOperacion(BankOperationCode.BPAAgua);
+        DatabaseHelper.getInstance().addOperacion(bpaAgua);
+        Operation bpaGas = new Operation();
+        bpaGas.setTitulo(this.context.getString(R.string.title_service_bpa_gas));
+        bpaGas.setSubtitulo(this.context.getString(R.string.sub_service_bpa_gas));
+        bpaGas.setImagen(R.drawable.ic_pago_factura_gas_bpa);
+        bpaGas.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.FgpBLXKm6t");
+        bpaGas.setTipo_serivicio(r1sDOSqZ2z);
+        bpaGas.setOrder(-1);
+        bpaGas.setActivo(true);
+        bpaGas.setOperacion(BankOperationCode.BPAGas);
+        DatabaseHelper.getInstance().addOperacion(bpaGas);
+        Operation recargaJClub = new Operation();
+        recargaJClub.setTitulo(this.context.getString(R.string.title_jclub));
+        recargaJClub.setSubtitulo(this.context.getString(R.string.sub_jclub));
+        recargaJClub.setImagen(R.drawable.ic_pago_joven_club_bpa);
+        recargaJClub.setFragment_name(BuildConfig.FLAVOR);
+        recargaJClub.setOperacion(BankOperationCode.BPAJClub);
+        recargaJClub.setTipo_serivicio(r1sDOSqZ2z);
+        recargaJClub.setOrder(-1);
+        recargaJClub.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(recargaJClub);
+        Operation recargaBolsaBPA = new Operation();
+        recargaBolsaBPA.setTitulo(this.context.getString(R.string.title_recarga_bolsa_cup));
+        recargaBolsaBPA.setSubtitulo(this.context.getString(R.string.subtitle_recarga_bolsa_cup));
+        recargaBolsaBPA.setImagen(R.drawable.ic_recargar_monedero_bpa);
+        recargaBolsaBPA.setFragment_name(BuildConfig.FLAVOR);
+        recargaBolsaBPA.setOperacion(BankOperationCode.BPARecargaBolsa);
+        recargaBolsaBPA.setTipo_serivicio(r1sDOSqZ2z);
+        recargaBolsaBPA.setOrder(-1);
+        recargaBolsaBPA.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(recargaBolsaBPA);
+        Operation cubacelBPA = new Operation();
+        cubacelBPA.setTitulo(this.context.getString(R.string.head_paquetes_cubacel));
+        cubacelBPA.setSubtitulo(this.context.getString(R.string.sub_compra_paquetes));
+        cubacelBPA.setImagen(R.drawable.ic_compra_paquetes_bpa);
+        cubacelBPA.setFragment_name(BuildConfig.FLAVOR);
+        cubacelBPA.setOperacion(BankOperationCode.BPAPaquetesCubacel);
+        cubacelBPA.setTipo_serivicio(r1sDOSqZ2z);
+        cubacelBPA.setOrder(-1);
+        cubacelBPA.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(cubacelBPA);
+        Operation ticketBPA = new Operation();
+        ticketBPA.setTitulo(this.context.getString(R.string.title_reserva_ticket));
+        ticketBPA.setSubtitulo(this.context.getString(R.string.subtitle_reserva_ticket));
+        ticketBPA.setImagen(R.drawable.ic_compra_miturno_bpa);
+        ticketBPA.setFragment_name(BuildConfig.FLAVOR);
+        ticketBPA.setOperacion(BankOperationCode.BPAReservasTicket);
+        ticketBPA.setOrder(-1);
+        ticketBPA.setActivo(true);
+        ticketBPA.setTipo_serivicio(r1sDOSqZ2z);
+        DatabaseHelper.getInstance().addOperacion(ticketBPA);
+        Operation pcc = new Operation();
+        pcc.setTitulo(this.context.getString(R.string.title_organizacion_politica));
+        pcc.setSubtitulo(this.context.getString(R.string.subtitle_pcc));
+        pcc.setImagen(R.drawable.ic_pago_organizaciones_masa_bpa);
+        pcc.setFragment_name(BuildConfig.FLAVOR);
+        pcc.setOperacion(BankOperationCode.BPAPCC);
+        pcc.setTipo_serivicio(r1sDOSqZ2z);
+        pcc.setOrder(-1);
+        pcc.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(pcc);
+        Operation tfaBPA = new Operation();
+        tfaBPA.setTitulo(this.context.getString(R.string.title_recarga_tfa));
+        tfaBPA.setSubtitulo(this.context.getString(R.string.subtitle_recarga_tfa));
+        tfaBPA.setImagen(R.drawable.ic_pago_tfa_bpa);
+        tfaBPA.setFragment_name(BuildConfig.FLAVOR);
+        tfaBPA.setOperacion(BankOperationCode.BPARecargaTFA);
+        tfaBPA.setTipo_serivicio(r1sDOSqZ2z);
+        tfaBPA.setOrder(-1);
+        tfaBPA.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(tfaBPA);
     }
-
-    // -------------------------------------------------------------------------
-    // fill_banco_bandec: BANDEC bank operations
-    // Same 30-operation pattern as BPA with BANDEC-specific drawables/fragments.
-    // Includes: Autenticarse, Registrarse, Transferencia, Electricidad,
-    // Telecomunicaciones, ONAT, Consultar Saldo, Consultar Servicio,
-    // Ultimas operaciones, Cambiar clave, Desconectar, Eliminar Registro,
-    // Recarga Movil, Cambio limite, Consulta limites, Ultimos pagos,
-    // Cambio cuenta, Amortizar, Consultar Todas Cuentas, Pago Externo,
-    // Recarga Nauta, Giro Postal, Consultar Giro, Gas, Recarga Propia,
-    // Agua, JClub, OFA/Patrimonio, Recarga Bolsa, Paquetes Cubacel,
-    // Reserva Ticket, PCC, Recarga TFA
-    // -------------------------------------------------------------------------
 
     public void fill_banco_bandec() {
-        BankType bandecType = BankType.BANDEC;
-
-        addOpToDb("Autenticarse", "BANDEC", R.drawable.ic_autenticacion_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TGFziPh3KJ",
-                bandecType, -1, BankOperationCode.BANAutenticar, true);
-
-        addOpToDb("Registrarse", "BANDEC", R.drawable.ic_registrarse_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.wLHKkaC4Ha",
-                bandecType, -1, BankOperationCode.BANRegistrarse, true);
-
-        addOpToDb("Transferencia", "BANDEC", R.drawable.ic_transferencia_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ZDkigMAIBm",
-                bandecType, -1, BankOperationCode.BANTransferencia, true);
-
-        addOpToDb("Electricidad", "BANDEC", R.drawable.ic_pago_factura_electricidad_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.Q3Nvf439ab",
-                bandecType, -1, BankOperationCode.BANElectricidad, true);
-
-        addOpToDb("Telecomunicaciones", "BANDEC", R.drawable.ic_pago_factura_telefono_fijo_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.iQte15zdZs",
-                bandecType, -1, BankOperationCode.BANTelefono, true);
-
-        addOpToDb("ONAT", "BANDEC", R.drawable.ic_pago_onat_bandec,
-                BuildConfig.FLAVOR, bandecType, -1, BankOperationCode.BANONAT, true);
-
-        addOpToDb("Consultar Saldo", "BANDEC", R.drawable.ic_consulta_saldo_bandec,
-                BuildConfig.FLAVOR, bandecType, -1, BankOperationCode.BANConsultarSaldo, true);
-
-        addOpToDb("Consultar Servicio", "BANDEC", R.drawable.ic_consultar_servicio_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.idsoBKS8L3",
-                bandecType, -1, BankOperationCode.BANConsultarServicio, true);
-
-        addOpToDb("Ultimas operaciones", "BANDEC", R.drawable.ic_consulta_utlimas_oper_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.D0gaXBEFITec.gaJlF6dT3z",
-                bandecType, -1, BankOperationCode.BANUltimasoperaciones, true);
-
-        addOpToDb("Cambiar clave", "BANDEC", R.drawable.ic_cambio_pin_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.FtAKxvNjrD",
-                bandecType, -1, BankOperationCode.BANCambiarclave, true);
-
-        addOpToDb("Desconectar", "BANDEC", R.drawable.ic_desconectarse_bandec,
-                BuildConfig.FLAVOR, bandecType, -1, BankOperationCode.BANDesconectar, true);
-
-        addOpToDb("Eliminar Registro", "BANDEC", R.drawable.ic_eliminar_registro_bandec,
-                BuildConfig.FLAVOR, bandecType, -1, BankOperationCode.BANEliminarRegistro, true);
-
-        addOpToDb("Recarga Movil", "BANDEC", R.drawable.ic_recarga_saldo_movil_bandec,
-                BuildConfig.FLAVOR, bandecType, -1, BankOperationCode.BANRecargaMovil, true);
-
-        addOpToDb("Cambio de limite", "BANDEC", R.drawable.ic_cambio_limites_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.nNSC8tRyptP.uWkWt7AEZ5",
-                bandecType, -1, BankOperationCode.BANCambioLimite, true);
-
-        addOpToDb("Consulta de limites", "BANDEC", R.drawable.ic_consulta_limites_bandec,
-                BuildConfig.FLAVOR, bandecType, -1, BankOperationCode.BANConsultaLimite, true);
-
-        addOpToDb("Ultimos pagos realizados", "BANDEC", R.drawable.ic_consulta_credito_bandec,
-                BuildConfig.FLAVOR, bandecType, -1, BankOperationCode.BANUltimosPagos, true);
-
-        addOpToDb("Cambio de cuenta", "BANDEC", R.drawable.ic_actualizar_cuenta_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.o9swVUfDl4q",
-                bandecType, -1, BankOperationCode.BANCambioCuenta, true);
-
-        addOpToDb("Amortizar Credito", "BANDEC", R.drawable.ic_amortizar_credito_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.LZaBQezxPC",
-                bandecType, -1, BankOperationCode.BANAmortizar, true);
-
-        addOpToDb("Consultar Todas las Cuentas", "BANDEC", R.drawable.ic_consulta_todas_cuentas_bandec,
-                BuildConfig.FLAVOR, bandecType, -1, BankOperationCode.BANConsultarTodasCuentas, true);
-
-        // ... remaining BANDEC operations using string resources
-        addOpToDb(context.getString(R.string.title_pago_externo),
-                context.getString(R.string.sub_pago_externo),
-                R.drawable.ic_pago_linea_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANPagoExterno, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.sub_recarga_nauta),
-                R.drawable.ic_pago_nauta_hogar_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANRecargaNauta, true);
-
-        addOpToDb(context.getString(R.string.title_giro_postal),
-                context.getString(R.string.sub_giro_postal),
-                R.drawable.ic_enviar_giro_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ASLdujtVtr",
-                bandecType, -1, BankOperationCode.BANGiroPostal, true);
-
-        addOpToDb(context.getString(R.string.title_consulta_giro),
-                context.getString(R.string.sub_consulta_giros),
-                R.drawable.ic_consultar_giro_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.gsthr0APCT",
-                bandecType, -1, BankOperationCode.BANConsultarGiroPostal, true);
-
-        addOpToDb(context.getString(R.string.title_service_metro_gas),
-                context.getString(R.string.sub_service_metro_gas),
-                R.drawable.ic_pago_factura_gas_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.aiwIHVBe0c",
-                bandecType, -1, BankOperationCode.BANGas, true);
-
-        addOpToDb(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.hint_subtitle_recarga_propia),
-                R.drawable.ic_recarga_tarjeta_propia_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANRecargaPropia, true);
-
-        addOpToDb(context.getString(R.string.title_service_bpa_agua),
-                context.getString(R.string.sub_service_bpa_agua),
-                R.drawable.ic_pago_factura_agua_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.T4RQ5wDJDt",
-                bandecType, -1, BankOperationCode.BANAgua, true);
-
-        addOpToDb(context.getString(R.string.title_jclub), context.getString(R.string.sub_jclub),
-                R.drawable.ic_pago_joven_club_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANJClub, true);
-
-        addOpToDb(context.getString(R.string.tx_head_patrimonio2),
-                context.getString(R.string.tx_sub_patrimonio),
-                R.drawable.ic_ofa_bandec,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.SZARzeWeX5",
-                bandecType, -1, BankOperationCode.BANPatrimoniOfa, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_bolsa_cup),
-                context.getString(R.string.subtitle_recarga_bolsa_cup),
-                R.drawable.ic_recargar_monedero_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANRecargaBolsa, true);
-
-        addOpToDb(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_paquetes_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANPaquetesCubacel, true);
-
-        addOpToDb(context.getString(R.string.title_reserva_ticket),
-                context.getString(R.string.subtitle_reserva_ticket),
-                R.drawable.ic_compra_miturno_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANReservasTicket, true);
-
-        addOpToDb(context.getString(R.string.title_organizacion_politica),
-                context.getString(R.string.subtitle_pcc),
-                R.drawable.ic_pago_organizaciones_masa_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANPCC, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_tfa),
-                context.getString(R.string.subtitle_recarga_tfa),
-                R.drawable.ic_pago_tfa_bandec, BuildConfig.FLAVOR,
-                bandecType, -1, BankOperationCode.BANRecargaTFA, true);
+        Operation bandec1 = new Operation();
+        bandec1.setTitulo("Autenticarse");
+        bandec1.setSubtitulo("BANDEC");
+        bandec1.setImagen(R.drawable.ic_autenticacion_bandec);
+        bandec1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TGFziPh3KJ");
+        BankType r1sDOSqZ2z = BankType.BANDEC;
+        bandec1.setTipo_serivicio(r1sDOSqZ2z);
+        bandec1.setOrder(-1);
+        bandec1.setActivo(true);
+        bandec1.setOperacion(BankOperationCode.BANAutenticar);
+        DatabaseHelper.getInstance().addOperacion(bandec1);
+        Operation bandec9 = new Operation();
+        bandec9.setTitulo("Registrarse");
+        bandec9.setSubtitulo("BANDEC");
+        bandec9.setImagen(R.drawable.ic_registrarse_bandec);
+        bandec9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.wLHKkaC4Ha");
+        bandec9.setTipo_serivicio(r1sDOSqZ2z);
+        bandec9.setOrder(-1);
+        bandec9.setActivo(true);
+        bandec9.setOperacion(BankOperationCode.BANRegistrarse);
+        DatabaseHelper.getInstance().addOperacion(bandec9);
+        Operation bandec2 = new Operation();
+        bandec2.setTitulo("Transferencia");
+        bandec2.setSubtitulo("BANDEC");
+        bandec2.setImagen(R.drawable.ic_transferencia_bandec);
+        bandec2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ZDkigMAIBm");
+        bandec2.setTipo_serivicio(r1sDOSqZ2z);
+        bandec2.setOrder(-1);
+        bandec2.setActivo(true);
+        bandec2.setOperacion(BankOperationCode.BANTransferencia);
+        DatabaseHelper.getInstance().addOperacion(bandec2);
+        Operation bandec3 = new Operation();
+        bandec3.setTitulo("Electricidad");
+        bandec3.setSubtitulo("BANDEC");
+        bandec3.setImagen(R.drawable.ic_pago_factura_electricidad_bandec);
+        bandec3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.Q3Nvf439ab");
+        bandec3.setTipo_serivicio(r1sDOSqZ2z);
+        bandec3.setOrder(-1);
+        bandec3.setActivo(true);
+        bandec3.setOperacion(BankOperationCode.BANElectricidad);
+        DatabaseHelper.getInstance().addOperacion(bandec3);
+        Operation bandec4 = new Operation();
+        bandec4.setTitulo("Telecomunicaciones");
+        bandec4.setSubtitulo("BANDEC");
+        bandec4.setImagen(R.drawable.ic_pago_factura_telefono_fijo_bandec);
+        bandec4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.iQte15zdZs");
+        bandec4.setTipo_serivicio(r1sDOSqZ2z);
+        bandec4.setOrder(-1);
+        bandec4.setActivo(true);
+        bandec4.setOperacion(BankOperationCode.BANTelefono);
+        DatabaseHelper.getInstance().addOperacion(bandec4);
+        Operation bandec5 = new Operation();
+        bandec5.setTitulo("ONAT");
+        bandec5.setSubtitulo("BANDEC");
+        bandec5.setImagen(R.drawable.ic_pago_onat_bandec);
+        bandec5.setFragment_name(BuildConfig.FLAVOR);
+        bandec5.setTipo_serivicio(r1sDOSqZ2z);
+        bandec5.setOrder(-1);
+        bandec5.setActivo(true);
+        bandec5.setOperacion(BankOperationCode.BANONAT);
+        DatabaseHelper.getInstance().addOperacion(bandec5);
+        Operation bandec6 = new Operation();
+        bandec6.setTitulo("Consultar Saldo");
+        bandec6.setSubtitulo("BANDEC");
+        bandec6.setImagen(R.drawable.ic_consulta_saldo_bandec);
+        bandec6.setFragment_name(BuildConfig.FLAVOR);
+        bandec6.setTipo_serivicio(r1sDOSqZ2z);
+        bandec6.setOrder(-1);
+        bandec6.setActivo(true);
+        bandec6.setOperacion(BankOperationCode.BANConsultarSaldo);
+        DatabaseHelper.getInstance().addOperacion(bandec6);
+        Operation bandec7 = new Operation();
+        bandec7.setTitulo("Consultar Servicio");
+        bandec7.setSubtitulo("BANDEC");
+        bandec7.setImagen(R.drawable.ic_consultar_servicio_bandec);
+        bandec7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.idsoBKS8L3");
+        bandec7.setTipo_serivicio(r1sDOSqZ2z);
+        bandec7.setOrder(-1);
+        bandec7.setActivo(true);
+        bandec7.setOperacion(BankOperationCode.BANConsultarServicio);
+        DatabaseHelper.getInstance().addOperacion(bandec7);
+        Operation bandec8 = new Operation();
+        bandec8.setTitulo("Últimas operaciones");
+        bandec8.setSubtitulo("BANDEC");
+        bandec8.setImagen(R.drawable.ic_consulta_utlimas_oper_bandec);
+        bandec8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.D0gaXBEFITec.gaJlF6dT3z");
+        bandec8.setTipo_serivicio(r1sDOSqZ2z);
+        bandec8.setOrder(-1);
+        bandec8.setActivo(true);
+        bandec8.setOperacion(BankOperationCode.BANUltimasoperaciones);
+        DatabaseHelper.getInstance().addOperacion(bandec8);
+        Operation bandec10 = new Operation();
+        bandec10.setTitulo("Cambiar clave");
+        bandec10.setSubtitulo("BANDEC");
+        bandec10.setImagen(R.drawable.ic_cambio_pin_bandec);
+        bandec10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.FtAKxvNjrD");
+        bandec10.setTipo_serivicio(r1sDOSqZ2z);
+        bandec10.setOrder(-1);
+        bandec10.setActivo(true);
+        bandec10.setOperacion(BankOperationCode.BANCambiarclave);
+        DatabaseHelper.getInstance().addOperacion(bandec10);
+        Operation bandec11 = new Operation();
+        bandec11.setTitulo("Desconectar");
+        bandec11.setSubtitulo("BANDEC");
+        bandec11.setImagen(R.drawable.ic_desconectarse_bandec);
+        bandec11.setFragment_name(BuildConfig.FLAVOR);
+        bandec11.setTipo_serivicio(r1sDOSqZ2z);
+        bandec11.setOrder(-1);
+        bandec11.setActivo(true);
+        bandec11.setOperacion(BankOperationCode.BANDesconectar);
+        DatabaseHelper.getInstance().addOperacion(bandec11);
+        Operation bandec12 = new Operation();
+        bandec12.setTitulo("Eliminar Registro");
+        bandec12.setSubtitulo("BANDEC");
+        bandec12.setImagen(R.drawable.ic_eliminar_registro_bandec);
+        bandec12.setFragment_name(BuildConfig.FLAVOR);
+        bandec12.setTipo_serivicio(r1sDOSqZ2z);
+        bandec12.setOrder(-1);
+        bandec12.setActivo(true);
+        bandec12.setOperacion(BankOperationCode.BANEliminarRegistro);
+        DatabaseHelper.getInstance().addOperacion(bandec12);
+        Operation bandec13 = new Operation();
+        bandec13.setTitulo("Recarga Móvil");
+        bandec13.setSubtitulo("BANDEC");
+        bandec13.setImagen(R.drawable.ic_recarga_saldo_movil_bandec);
+        bandec13.setFragment_name(BuildConfig.FLAVOR);
+        bandec13.setTipo_serivicio(r1sDOSqZ2z);
+        bandec13.setOrder(-1);
+        bandec13.setActivo(true);
+        bandec13.setOperacion(BankOperationCode.BANRecargaMovil);
+        DatabaseHelper.getInstance().addOperacion(bandec13);
+        Operation bandec14 = new Operation();
+        bandec14.setTitulo("Cambio de límite");
+        bandec14.setSubtitulo("BANDEC");
+        bandec14.setImagen(R.drawable.ic_cambio_limites_bandec);
+        bandec14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.nNSC8tRyptP.uWkWt7AEZ5");
+        bandec14.setTipo_serivicio(r1sDOSqZ2z);
+        bandec14.setOrder(-1);
+        bandec14.setActivo(true);
+        bandec14.setOperacion(BankOperationCode.BANCambioLimite);
+        DatabaseHelper.getInstance().addOperacion(bandec14);
+        Operation bandec15 = new Operation();
+        bandec15.setTitulo("Consulta de límites");
+        bandec15.setSubtitulo("BANDEC");
+        bandec15.setImagen(R.drawable.ic_consulta_limites_bandec);
+        bandec15.setFragment_name(BuildConfig.FLAVOR);
+        bandec15.setTipo_serivicio(r1sDOSqZ2z);
+        bandec15.setOrder(-1);
+        bandec15.setActivo(true);
+        bandec15.setOperacion(BankOperationCode.BANConsultaLimite);
+        DatabaseHelper.getInstance().addOperacion(bandec15);
+        Operation bandec16 = new Operation();
+        bandec16.setTitulo("Ultimos pagos realizados");
+        bandec16.setSubtitulo("BANDEC");
+        bandec16.setImagen(R.drawable.ic_consulta_credito_bandec);
+        bandec16.setFragment_name(BuildConfig.FLAVOR);
+        bandec16.setTipo_serivicio(r1sDOSqZ2z);
+        bandec16.setActivo(true);
+        bandec16.setOrder(-1);
+        bandec16.setOperacion(BankOperationCode.BANUltimosPagos);
+        DatabaseHelper.getInstance().addOperacion(bandec16);
+        Operation bandec17 = new Operation();
+        bandec17.setTitulo("Cambio de cuenta");
+        bandec17.setSubtitulo("BANDEC");
+        bandec17.setImagen(R.drawable.ic_actualizar_cuenta_bandec);
+        bandec17.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.o9swVUfDl4q");
+        bandec17.setTipo_serivicio(r1sDOSqZ2z);
+        bandec17.setOrder(-1);
+        bandec17.setActivo(true);
+        bandec17.setOperacion(BankOperationCode.BANCambioCuenta);
+        DatabaseHelper.getInstance().addOperacion(bandec17);
+        Operation bandec18 = new Operation();
+        bandec18.setTitulo("Amortizar Crédito");
+        bandec18.setSubtitulo("BANDEC");
+        bandec18.setImagen(R.drawable.ic_amortizar_credito_bandec);
+        bandec18.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.LZaBQezxPC");
+        bandec18.setTipo_serivicio(r1sDOSqZ2z);
+        bandec18.setOrder(-1);
+        bandec18.setActivo(true);
+        bandec18.setOperacion(BankOperationCode.BANAmortizar);
+        DatabaseHelper.getInstance().addOperacion(bandec18);
+        Operation bandec19 = new Operation();
+        bandec19.setTitulo("Consultar Todas las Cuentas");
+        bandec19.setSubtitulo("BANDEC");
+        bandec19.setImagen(R.drawable.ic_consulta_todas_cuentas_bandec);
+        bandec19.setFragment_name(BuildConfig.FLAVOR);
+        bandec19.setTipo_serivicio(r1sDOSqZ2z);
+        bandec19.setOrder(-1);
+        bandec19.setActivo(true);
+        bandec19.setOperacion(BankOperationCode.BANConsultarTodasCuentas);
+        DatabaseHelper.getInstance().addOperacion(bandec19);
+        Operation pExternoBandec = new Operation();
+        pExternoBandec.setTitulo(this.context.getString(R.string.title_pago_externo));
+        pExternoBandec.setSubtitulo(this.context.getString(R.string.sub_pago_externo));
+        pExternoBandec.setImagen(R.drawable.ic_pago_linea_bandec);
+        pExternoBandec.setFragment_name(BuildConfig.FLAVOR);
+        pExternoBandec.setTipo_serivicio(r1sDOSqZ2z);
+        pExternoBandec.setOrder(-1);
+        pExternoBandec.setActivo(true);
+        pExternoBandec.setOperacion(BankOperationCode.BANPagoExterno);
+        DatabaseHelper.getInstance().addOperacion(pExternoBandec);
+        Operation recargaNautaBANDEC = new Operation();
+        recargaNautaBANDEC.setTitulo(this.context.getString(R.string.title_recarga_nauta));
+        recargaNautaBANDEC.setSubtitulo(this.context.getString(R.string.sub_recarga_nauta));
+        recargaNautaBANDEC.setImagen(R.drawable.ic_pago_nauta_hogar_bandec);
+        recargaNautaBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        recargaNautaBANDEC.setTipo_serivicio(r1sDOSqZ2z);
+        recargaNautaBANDEC.setOrder(-1);
+        recargaNautaBANDEC.setActivo(true);
+        recargaNautaBANDEC.setOperacion(BankOperationCode.BANRecargaNauta);
+        DatabaseHelper.getInstance().addOperacion(recargaNautaBANDEC);
+        Operation giroBandec = new Operation();
+        giroBandec.setTitulo(this.context.getString(R.string.title_giro_postal));
+        giroBandec.setSubtitulo(this.context.getString(R.string.sub_giro_postal));
+        giroBandec.setImagen(R.drawable.ic_enviar_giro_bandec);
+        giroBandec.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ASLdujtVtr");
+        giroBandec.setTipo_serivicio(r1sDOSqZ2z);
+        giroBandec.setOrder(-1);
+        giroBandec.setActivo(true);
+        giroBandec.setOperacion(BankOperationCode.BANGiroPostal);
+        DatabaseHelper.getInstance().addOperacion(giroBandec);
+        Operation conusltaGiroBandec = new Operation();
+        conusltaGiroBandec.setTitulo(this.context.getString(R.string.title_consulta_giro));
+        conusltaGiroBandec.setSubtitulo(this.context.getString(R.string.sub_consulta_giros));
+        conusltaGiroBandec.setImagen(R.drawable.ic_consultar_giro_bandec);
+        conusltaGiroBandec.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.gsthr0APCT");
+        conusltaGiroBandec.setTipo_serivicio(r1sDOSqZ2z);
+        conusltaGiroBandec.setOrder(-1);
+        conusltaGiroBandec.setActivo(true);
+        conusltaGiroBandec.setOperacion(BankOperationCode.BANConsultarGiroPostal);
+        DatabaseHelper.getInstance().addOperacion(conusltaGiroBandec);
+        Operation gas = new Operation();
+        gas.setTitulo(this.context.getString(R.string.title_service_metro_gas));
+        gas.setSubtitulo(this.context.getString(R.string.sub_service_metro_gas));
+        gas.setImagen(R.drawable.ic_pago_factura_gas_bandec);
+        gas.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.aiwIHVBe0c");
+        gas.setTipo_serivicio(r1sDOSqZ2z);
+        gas.setOrder(-1);
+        gas.setActivo(true);
+        gas.setOperacion(BankOperationCode.BANGas);
+        DatabaseHelper.getInstance().addOperacion(gas);
+        Operation propia = new Operation();
+        propia.setTitulo(this.context.getString(R.string.hint_recarga_propia));
+        propia.setSubtitulo(this.context.getString(R.string.hint_subtitle_recarga_propia));
+        propia.setImagen(R.drawable.ic_recarga_tarjeta_propia_bandec);
+        propia.setFragment_name(BuildConfig.FLAVOR);
+        propia.setTipo_serivicio(r1sDOSqZ2z);
+        propia.setOrder(-1);
+        propia.setActivo(true);
+        propia.setOperacion(BankOperationCode.BANRecargaPropia);
+        DatabaseHelper.getInstance().addOperacion(propia);
+        Operation bandecAGUA = new Operation();
+        bandecAGUA.setTitulo(this.context.getString(R.string.title_service_bpa_agua));
+        bandecAGUA.setSubtitulo(this.context.getString(R.string.sub_service_bpa_agua));
+        bandecAGUA.setImagen(R.drawable.ic_pago_factura_agua_bandec);
+        bandecAGUA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.T4RQ5wDJDt");
+        bandecAGUA.setTipo_serivicio(r1sDOSqZ2z);
+        bandecAGUA.setOrder(-1);
+        bandecAGUA.setActivo(true);
+        bandecAGUA.setOperacion(BankOperationCode.BANAgua);
+        DatabaseHelper.getInstance().addOperacion(bandecAGUA);
+        Operation recargaJClub = new Operation();
+        recargaJClub.setTitulo(this.context.getString(R.string.title_jclub));
+        recargaJClub.setSubtitulo(this.context.getString(R.string.sub_jclub));
+        recargaJClub.setImagen(R.drawable.ic_pago_joven_club_bandec);
+        recargaJClub.setFragment_name(BuildConfig.FLAVOR);
+        recargaJClub.setOperacion(BankOperationCode.BANJClub);
+        recargaJClub.setTipo_serivicio(r1sDOSqZ2z);
+        recargaJClub.setOrder(-1);
+        recargaJClub.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(recargaJClub);
+        Operation ofa = new Operation();
+        ofa.setTitulo(this.context.getString(R.string.tx_head_patrimonio2));
+        ofa.setSubtitulo(this.context.getString(R.string.tx_sub_patrimonio));
+        ofa.setImagen(R.drawable.ic_ofa_bandec);
+        ofa.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.SZARzeWeX5");
+        ofa.setOperacion(BankOperationCode.BANPatrimoniOfa);
+        ofa.setTipo_serivicio(r1sDOSqZ2z);
+        ofa.setOrder(-1);
+        ofa.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(ofa);
+        Operation recargaBolsaBANDEC = new Operation();
+        recargaBolsaBANDEC.setTitulo(this.context.getString(R.string.title_recarga_bolsa_cup));
+        recargaBolsaBANDEC.setSubtitulo(this.context.getString(R.string.subtitle_recarga_bolsa_cup));
+        recargaBolsaBANDEC.setImagen(R.drawable.ic_recargar_monedero_bandec);
+        recargaBolsaBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        recargaBolsaBANDEC.setOperacion(BankOperationCode.BANRecargaBolsa);
+        recargaBolsaBANDEC.setTipo_serivicio(r1sDOSqZ2z);
+        recargaBolsaBANDEC.setOrder(-1);
+        recargaBolsaBANDEC.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(recargaBolsaBANDEC);
+        Operation cubacelBANDEC = new Operation();
+        cubacelBANDEC.setTitulo(this.context.getString(R.string.head_paquetes_cubacel));
+        cubacelBANDEC.setSubtitulo(this.context.getString(R.string.sub_compra_paquetes));
+        cubacelBANDEC.setImagen(R.drawable.ic_compra_paquetes_bandec);
+        cubacelBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        cubacelBANDEC.setOperacion(BankOperationCode.BANPaquetesCubacel);
+        cubacelBANDEC.setTipo_serivicio(r1sDOSqZ2z);
+        cubacelBANDEC.setOrder(-1);
+        cubacelBANDEC.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(cubacelBANDEC);
+        Operation ticket = new Operation();
+        ticket.setTitulo(this.context.getString(R.string.title_reserva_ticket));
+        ticket.setSubtitulo(this.context.getString(R.string.subtitle_reserva_ticket));
+        ticket.setImagen(R.drawable.ic_compra_miturno_bandec);
+        ticket.setFragment_name(BuildConfig.FLAVOR);
+        ticket.setOperacion(BankOperationCode.BANReservasTicket);
+        ticket.setTipo_serivicio(r1sDOSqZ2z);
+        ticket.setOrder(-1);
+        ticket.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(ticket);
+        Operation pccBANDEC = new Operation();
+        pccBANDEC.setTitulo(this.context.getString(R.string.title_organizacion_politica));
+        pccBANDEC.setSubtitulo(this.context.getString(R.string.subtitle_pcc));
+        pccBANDEC.setImagen(R.drawable.ic_pago_organizaciones_masa_bandec);
+        pccBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        pccBANDEC.setOperacion(BankOperationCode.BANPCC);
+        pccBANDEC.setTipo_serivicio(r1sDOSqZ2z);
+        pccBANDEC.setOrder(-1);
+        pccBANDEC.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(pccBANDEC);
+        Operation tfaBANDEC = new Operation();
+        tfaBANDEC.setTitulo(this.context.getString(R.string.title_recarga_tfa));
+        tfaBANDEC.setSubtitulo(this.context.getString(R.string.subtitle_recarga_tfa));
+        tfaBANDEC.setImagen(R.drawable.ic_pago_tfa_bandec);
+        tfaBANDEC.setFragment_name(BuildConfig.FLAVOR);
+        tfaBANDEC.setOperacion(BankOperationCode.BANRecargaTFA);
+        tfaBANDEC.setTipo_serivicio(r1sDOSqZ2z);
+        tfaBANDEC.setOrder(-1);
+        tfaBANDEC.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(tfaBANDEC);
     }
-
-    // -------------------------------------------------------------------------
-    // fill_banco_metro: Metropolitano bank operations
-    // 33 operations including Metro-specific: Actualizar cuenta, Reimprimir
-    // Tarjeta, Localizar Transferencia, Tipo de Cambio, OFA/Patrimonio
-    // -------------------------------------------------------------------------
 
     public void fill_banco_metro() {
-        BankType metroType = BankType.Metropolitano;
-
-        addOpToDb("Autenticarse", "Metropolitano", R.drawable.ic_autenticacion_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.PAZK2sdsJ5",
-                metroType, -1, BankOperationCode.METROAutenticarse, true);
-
-        addOpToDb("Registrarse", "Metropolitano", R.drawable.ic_registrarse_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.RFBEnXW0Xr",
-                metroType, -1, BankOperationCode.METRORegistrarse, true);
-
-        addOpToDb("Consultar Saldo", "Metropolitano", R.drawable.ic_consulta_saldo_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.dVxDCMi9cK",
-                metroType, -1, BankOperationCode.METROConsultarSaldo, true);
-
-        addOpToDb("Consultar Servicio", "Metropolitano", R.drawable.ic_consultar_servicio_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.hJhf3aumcr",
-                metroType, -1, BankOperationCode.METROConsultarServicio, true);
-
-        addOpToDb("Transferir Efectivo", "Metropolitano", R.drawable.ic_transferencia_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.x6Wob3Sa98U",
-                metroType, -1, BankOperationCode.METROTransferirEfectivo, true);
-
-        addOpToDb("Telecomunicaciones", "Metropolitano", R.drawable.ic_pago_factura_telefono_fijo_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.pnl2Kga8j7",
-                metroType, -1, BankOperationCode.METROTelefono, true);
-
-        addOpToDb("Electricidad", "Metropolitano", R.drawable.ic_pago_factura_electricidad_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.PliSaYhOg0",
-                metroType, -1, BankOperationCode.METROElectricidad, true);
-
-        addOpToDb("Agua", "Metropolitano", R.drawable.ic_pago_factura_agua_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.BoMBck6OXT",
-                metroType, -1, BankOperationCode.METROAgua, true);
-
-        addOpToDb("Impuestos", "Metropolitano", R.drawable.ic_pago_onat_metro,
-                BuildConfig.FLAVOR, metroType, -1, BankOperationCode.METROImpuestos, true);
-
-        addOpToDb("Ultimas operaciones", "Metropolitano", R.drawable.ic_consulta_utlimas_oper_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.GhhAuUBVrI",
-                metroType, -1, BankOperationCode.METROUltimasoperaciones, true);
-
-        addOpToDb("Desconectar", "Metropolitano", R.drawable.ic_desconectarse_metro,
-                BuildConfig.FLAVOR, metroType, -1, BankOperationCode.METRODesconectar, true);
-
-        addOpToDb("Actualizar cuenta", "Metropolitano", R.drawable.ic_actualizar_cuenta_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.uurdBwh7ub",
-                metroType, -1, BankOperationCode.METROActualizarcuenta, true);
-
-        addOpToDb("Recarga Movil", "Metropolitano", R.drawable.ic_recarga_saldo_movil_metro,
-                BuildConfig.FLAVOR, metroType, -1, BankOperationCode.METRORecargaMovil, true);
-
-        addOpToDb("Cambio de limite", "Metropolitano", R.drawable.ic_cambio_limites_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.G8E5Fjf9l7Y1.xR6zA9CmCE",
-                metroType, -1, BankOperationCode.METROCambioLimite, true);
-
-        addOpToDb("Consulta de limites", "Metropolitano", R.drawable.ic_consulta_limites_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.gkzzwVYksz",
-                metroType, -1, BankOperationCode.METROConsultaLimite, true);
-
-        addOpToDb("Consultar Todas las Cuentas", "Metropolitano", R.drawable.ic_consulta_todas_cuentas_metro,
-                BuildConfig.FLAVOR, metroType, -1, BankOperationCode.METROConsultaTodasCuentas, true);
-
-        // ... remaining Metro operations using string resources
-        addOpToDb(context.getString(R.string.title_service_metro_gas),
-                context.getString(R.string.sub_service_metro_gas),
-                R.drawable.ic_pago_factura_gas_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.yiqT29TYTb",
-                metroType, -1, BankOperationCode.METROGas, true);
-
-        addOpToDb(context.getString(R.string.title_pago_externo),
-                context.getString(R.string.sub_pago_externo),
-                R.drawable.ic_pago_linea_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METROPagoExterno, true);
-
-        addOpToDb(context.getString(R.string.title_giro_postal),
-                context.getString(R.string.sub_giro_postal),
-                R.drawable.ic_enviar_giro_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.mhElzRz7zH",
-                metroType, -1, BankOperationCode.METROGiroPostal, true);
-
-        addOpToDb(context.getString(R.string.title_consulta_giro),
-                context.getString(R.string.sub_consulta_giros),
-                R.drawable.ic_consultar_giro_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.jyBbMyVMOV",
-                metroType, -1, BankOperationCode.METROConsultarGiroPostal, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.sub_recarga_nauta),
-                R.drawable.ic_pago_nauta_hogar_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METRORecargaNauta, true);
-
-        addOpToDb(context.getString(R.string.title_reimprimir_tarjeta),
-                context.getString(R.string.sub_reimprimir_tarjeta),
-                R.drawable.ic_reimprimir_tarjeta_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METROReimprimirTarjeta, true);
-
-        addOpToDb(context.getString(R.string.title_metro_localizar_transferencias),
-                context.getString(R.string.sub_localizar_transferencias),
-                R.drawable.ic_localizar_transferencia_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METROLocalizarTransferencia, true);
-
-        addOpToDb(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.hint_subtitle_recarga_propia),
-                R.drawable.ic_recarga_tarjeta_propia_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METRORecargaPropia, true);
-
-        addOpToDb(context.getString(R.string.title_jclub), context.getString(R.string.sub_jclub),
-                R.drawable.ic_pago_joven_club_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METROJClub, true);
-
-        addOpToDb(context.getString(R.string.title_tipo_cambio),
-                context.getString(R.string.sub_tipo_cambio),
-                R.drawable.ic_tipo_cambio_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METROTipoCambio, true);
-
-        addOpToDb(context.getString(R.string.tx_head_patrimonio2),
-                context.getString(R.string.tx_sub_patrimonio),
-                R.drawable.ic_ofa_metro,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.lQox6tgMlH",
-                metroType, -1, BankOperationCode.METROPatrimoniOfa, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_bolsa_cup),
-                context.getString(R.string.subtitle_recarga_bolsa_cup),
-                R.drawable.ic_recargar_monedero_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METRORecargaBolsa, true);
-
-        addOpToDb(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_paquetes_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METROPaquetesCubacel, true);
-
-        addOpToDb(context.getString(R.string.title_reserva_ticket),
-                context.getString(R.string.subtitle_reserva_ticket),
-                R.drawable.ic_compra_miturno_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METROReservasTicket, true);
-
-        addOpToDb(context.getString(R.string.title_organizacion_politica),
-                context.getString(R.string.subtitle_pcc),
-                R.drawable.ic_pago_organizaciones_masa_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METROPCC, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_tfa),
-                context.getString(R.string.subtitle_recarga_tfa),
-                R.drawable.ic_pago_tfa_metro, BuildConfig.FLAVOR,
-                metroType, -1, BankOperationCode.METRORecargaTFA, true);
+        Operation metro1 = new Operation();
+        metro1.setTitulo("Autenticarse");
+        metro1.setSubtitulo("Metropolitano");
+        metro1.setImagen(R.drawable.ic_autenticacion_metro);
+        metro1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.PAZK2sdsJ5");
+        BankType r1sDOSqZ2z = BankType.Metropolitano;
+        metro1.setTipo_serivicio(r1sDOSqZ2z);
+        metro1.setOrder(-1);
+        metro1.setActivo(true);
+        metro1.setOperacion(BankOperationCode.METROAutenticarse);
+        DatabaseHelper.getInstance().addOperacion(metro1);
+        Operation metro10 = new Operation();
+        metro10.setTitulo("Registrarse");
+        metro10.setSubtitulo("Metropolitano");
+        metro10.setImagen(R.drawable.ic_registrarse_metro);
+        metro10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.RFBEnXW0Xr");
+        metro10.setTipo_serivicio(r1sDOSqZ2z);
+        metro10.setOrder(-1);
+        metro10.setActivo(true);
+        metro10.setOperacion(BankOperationCode.METRORegistrarse);
+        DatabaseHelper.getInstance().addOperacion(metro10);
+        Operation metro2 = new Operation();
+        metro2.setTitulo("Consultar Saldo");
+        metro2.setSubtitulo("Metropolitano");
+        metro2.setImagen(R.drawable.ic_consulta_saldo_metro);
+        metro2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.dVxDCMi9cK");
+        metro2.setTipo_serivicio(r1sDOSqZ2z);
+        metro2.setOrder(-1);
+        metro2.setActivo(true);
+        metro2.setOperacion(BankOperationCode.METROConsultarSaldo);
+        DatabaseHelper.getInstance().addOperacion(metro2);
+        Operation metro3 = new Operation();
+        metro3.setTitulo("Consultar Servicio");
+        metro3.setSubtitulo("Metropolitano");
+        metro3.setImagen(R.drawable.ic_consultar_servicio_metro);
+        metro3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.hJhf3aumcr");
+        metro3.setTipo_serivicio(r1sDOSqZ2z);
+        metro3.setOrder(-1);
+        metro3.setActivo(true);
+        metro3.setOperacion(BankOperationCode.METROConsultarServicio);
+        DatabaseHelper.getInstance().addOperacion(metro3);
+        Operation metro4 = new Operation();
+        metro4.setTitulo("Transferir Efectivo");
+        metro4.setSubtitulo("Metropolitano");
+        metro4.setImagen(R.drawable.ic_transferencia_metro);
+        metro4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.x6Wob3Sa98U");
+        metro4.setTipo_serivicio(r1sDOSqZ2z);
+        metro4.setOrder(-1);
+        metro4.setActivo(true);
+        metro4.setOperacion(BankOperationCode.METROTransferirEfectivo);
+        DatabaseHelper.getInstance().addOperacion(metro4);
+        Operation metro5 = new Operation();
+        metro5.setTitulo("Telecomunicaciones");
+        metro5.setSubtitulo("Metropolitano");
+        metro5.setImagen(R.drawable.ic_pago_factura_telefono_fijo_metro);
+        metro5.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.pnl2Kga8j7");
+        metro5.setTipo_serivicio(r1sDOSqZ2z);
+        metro5.setOrder(-1);
+        metro5.setActivo(true);
+        metro5.setOperacion(BankOperationCode.METROTelefono);
+        DatabaseHelper.getInstance().addOperacion(metro5);
+        Operation metro6 = new Operation();
+        metro6.setTitulo("Electricidad");
+        metro6.setSubtitulo("Metropolitano");
+        metro6.setImagen(R.drawable.ic_pago_factura_electricidad_metro);
+        metro6.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.PliSaYhOg0");
+        metro6.setTipo_serivicio(r1sDOSqZ2z);
+        metro6.setOrder(-1);
+        metro6.setActivo(true);
+        metro6.setOperacion(BankOperationCode.METROElectricidad);
+        DatabaseHelper.getInstance().addOperacion(metro6);
+        Operation metro7 = new Operation();
+        metro7.setTitulo("Agua");
+        metro7.setSubtitulo("Metropolitano");
+        metro7.setImagen(R.drawable.ic_pago_factura_agua_metro);
+        metro7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.BoMBck6OXT");
+        metro7.setTipo_serivicio(r1sDOSqZ2z);
+        metro7.setOrder(-1);
+        metro7.setActivo(true);
+        metro7.setOperacion(BankOperationCode.METROAgua);
+        DatabaseHelper.getInstance().addOperacion(metro7);
+        Operation metro8 = new Operation();
+        metro8.setTitulo("Impuestos");
+        metro8.setSubtitulo("Metropolitano");
+        metro8.setImagen(R.drawable.ic_pago_onat_metro);
+        metro8.setFragment_name(BuildConfig.FLAVOR);
+        metro8.setTipo_serivicio(r1sDOSqZ2z);
+        metro8.setOrder(-1);
+        metro8.setActivo(true);
+        metro8.setOperacion(BankOperationCode.METROImpuestos);
+        DatabaseHelper.getInstance().addOperacion(metro8);
+        Operation metro9 = new Operation();
+        metro9.setTitulo("Últimas operaciones");
+        metro9.setSubtitulo("Metropolitano");
+        metro9.setImagen(R.drawable.ic_consulta_utlimas_oper_metro);
+        metro9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.GhhAuUBVrI");
+        metro9.setTipo_serivicio(r1sDOSqZ2z);
+        metro9.setOrder(-1);
+        metro9.setActivo(true);
+        metro9.setOperacion(BankOperationCode.METROUltimasoperaciones);
+        DatabaseHelper.getInstance().addOperacion(metro9);
+        Operation metro11 = new Operation();
+        metro11.setTitulo("Desconectar");
+        metro11.setSubtitulo("Metropolitano");
+        metro11.setImagen(R.drawable.ic_desconectarse_metro);
+        metro11.setFragment_name(BuildConfig.FLAVOR);
+        metro11.setTipo_serivicio(r1sDOSqZ2z);
+        metro11.setOrder(-1);
+        metro11.setActivo(true);
+        metro11.setOperacion(BankOperationCode.METRODesconectar);
+        DatabaseHelper.getInstance().addOperacion(metro11);
+        Operation metro12 = new Operation();
+        metro12.setTitulo("Actualizar cuenta");
+        metro12.setSubtitulo("Metropolitano");
+        metro12.setImagen(R.drawable.ic_actualizar_cuenta_metro);
+        metro12.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.uurdBwh7ub");
+        metro12.setTipo_serivicio(r1sDOSqZ2z);
+        metro12.setOrder(-1);
+        metro12.setActivo(true);
+        metro12.setOperacion(BankOperationCode.METROActualizarcuenta);
+        DatabaseHelper.getInstance().addOperacion(metro12);
+        Operation metro13 = new Operation();
+        metro13.setTitulo("Recarga Móvil");
+        metro13.setSubtitulo("Metropolitano");
+        metro13.setImagen(R.drawable.ic_recarga_saldo_movil_metro);
+        metro13.setFragment_name(BuildConfig.FLAVOR);
+        metro13.setTipo_serivicio(r1sDOSqZ2z);
+        metro13.setOrder(-1);
+        metro13.setActivo(true);
+        metro13.setOperacion(BankOperationCode.METRORecargaMovil);
+        DatabaseHelper.getInstance().addOperacion(metro13);
+        Operation metro14 = new Operation();
+        metro14.setTitulo("Cambio de límite");
+        metro14.setSubtitulo("Metropolitano");
+        metro14.setImagen(R.drawable.ic_cambio_limites_metro);
+        metro14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.G8E5Fjf9l7Y1.xR6zA9CmCE");
+        metro14.setTipo_serivicio(r1sDOSqZ2z);
+        metro14.setOrder(-1);
+        metro14.setActivo(true);
+        metro14.setOperacion(BankOperationCode.METROCambioLimite);
+        DatabaseHelper.getInstance().addOperacion(metro14);
+        Operation metro15 = new Operation();
+        metro15.setTitulo("Consulta de límites");
+        metro15.setSubtitulo("Metropolitano");
+        metro15.setImagen(R.drawable.ic_consulta_limites_metro);
+        metro15.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.gkzzwVYksz");
+        metro15.setTipo_serivicio(r1sDOSqZ2z);
+        metro15.setOrder(-1);
+        metro15.setActivo(true);
+        metro15.setOperacion(BankOperationCode.METROConsultaLimite);
+        DatabaseHelper.getInstance().addOperacion(metro15);
+        Operation metro16 = new Operation();
+        metro16.setTitulo("Consultar Todas las Cuentas");
+        metro16.setSubtitulo("Metropolitano");
+        metro16.setImagen(R.drawable.ic_consulta_todas_cuentas_metro);
+        metro16.setFragment_name(BuildConfig.FLAVOR);
+        metro16.setTipo_serivicio(r1sDOSqZ2z);
+        metro16.setOrder(-1);
+        metro16.setActivo(true);
+        metro16.setOperacion(BankOperationCode.METROConsultaTodasCuentas);
+        DatabaseHelper.getInstance().addOperacion(metro16);
+        Operation gas = new Operation();
+        gas.setTitulo(this.context.getString(R.string.title_service_metro_gas));
+        gas.setSubtitulo(this.context.getString(R.string.sub_service_metro_gas));
+        gas.setImagen(R.drawable.ic_pago_factura_gas_metro);
+        gas.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.yiqT29TYTb");
+        gas.setTipo_serivicio(r1sDOSqZ2z);
+        gas.setOrder(-1);
+        gas.setActivo(true);
+        gas.setOperacion(BankOperationCode.METROGas);
+        DatabaseHelper.getInstance().addOperacion(gas);
+        Operation pExternoMetro = new Operation();
+        pExternoMetro.setTitulo(this.context.getString(R.string.title_pago_externo));
+        pExternoMetro.setSubtitulo(this.context.getString(R.string.sub_pago_externo));
+        pExternoMetro.setImagen(R.drawable.ic_pago_linea_metro);
+        pExternoMetro.setFragment_name(BuildConfig.FLAVOR);
+        pExternoMetro.setTipo_serivicio(r1sDOSqZ2z);
+        pExternoMetro.setOrder(-1);
+        pExternoMetro.setActivo(true);
+        pExternoMetro.setOperacion(BankOperationCode.METROPagoExterno);
+        DatabaseHelper.getInstance().addOperacion(pExternoMetro);
+        Operation giroMetro = new Operation();
+        giroMetro.setTitulo(this.context.getString(R.string.title_giro_postal));
+        giroMetro.setSubtitulo(this.context.getString(R.string.sub_giro_postal));
+        giroMetro.setImagen(R.drawable.ic_enviar_giro_metro);
+        giroMetro.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.mhElzRz7zH");
+        giroMetro.setTipo_serivicio(r1sDOSqZ2z);
+        giroMetro.setOrder(-1);
+        giroMetro.setActivo(true);
+        giroMetro.setOperacion(BankOperationCode.METROGiroPostal);
+        DatabaseHelper.getInstance().addOperacion(giroMetro);
+        Operation consultaGiroMetro = new Operation();
+        consultaGiroMetro.setTitulo(this.context.getString(R.string.title_consulta_giro));
+        consultaGiroMetro.setSubtitulo(this.context.getString(R.string.sub_consulta_giros));
+        consultaGiroMetro.setImagen(R.drawable.ic_consultar_giro_metro);
+        consultaGiroMetro.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.jyBbMyVMOV");
+        consultaGiroMetro.setTipo_serivicio(r1sDOSqZ2z);
+        consultaGiroMetro.setOrder(-1);
+        consultaGiroMetro.setActivo(true);
+        consultaGiroMetro.setOperacion(BankOperationCode.METROConsultarGiroPostal);
+        DatabaseHelper.getInstance().addOperacion(consultaGiroMetro);
+        Operation recargaNauta = new Operation();
+        recargaNauta.setTitulo(this.context.getString(R.string.title_recarga_nauta));
+        recargaNauta.setSubtitulo(this.context.getString(R.string.sub_recarga_nauta));
+        recargaNauta.setImagen(R.drawable.ic_pago_nauta_hogar_metro);
+        recargaNauta.setFragment_name(BuildConfig.FLAVOR);
+        recargaNauta.setTipo_serivicio(r1sDOSqZ2z);
+        recargaNauta.setOrder(-1);
+        recargaNauta.setActivo(true);
+        recargaNauta.setOperacion(BankOperationCode.METRORecargaNauta);
+        DatabaseHelper.getInstance().addOperacion(recargaNauta);
+        Operation reimprimirTarjeta = new Operation();
+        reimprimirTarjeta.setTitulo(this.context.getString(R.string.title_reimprimir_tarjeta));
+        reimprimirTarjeta.setSubtitulo(this.context.getString(R.string.sub_reimprimir_tarjeta));
+        reimprimirTarjeta.setImagen(R.drawable.ic_reimprimir_tarjeta_metro);
+        reimprimirTarjeta.setFragment_name(BuildConfig.FLAVOR);
+        reimprimirTarjeta.setTipo_serivicio(r1sDOSqZ2z);
+        reimprimirTarjeta.setOrder(-1);
+        reimprimirTarjeta.setActivo(true);
+        reimprimirTarjeta.setOperacion(BankOperationCode.METROReimprimirTarjeta);
+        DatabaseHelper.getInstance().addOperacion(reimprimirTarjeta);
+        Operation localizarTransferencias = new Operation();
+        localizarTransferencias.setTitulo(this.context.getString(R.string.title_metro_localizar_transferencias));
+        localizarTransferencias.setSubtitulo(this.context.getString(R.string.sub_localizar_transferencias));
+        localizarTransferencias.setImagen(R.drawable.ic_localizar_transferencia_metro);
+        localizarTransferencias.setFragment_name(BuildConfig.FLAVOR);
+        localizarTransferencias.setTipo_serivicio(r1sDOSqZ2z);
+        localizarTransferencias.setOrder(-1);
+        localizarTransferencias.setActivo(true);
+        localizarTransferencias.setOperacion(BankOperationCode.METROLocalizarTransferencia);
+        DatabaseHelper.getInstance().addOperacion(localizarTransferencias);
+        Operation propia = new Operation();
+        propia.setTitulo(this.context.getString(R.string.hint_recarga_propia));
+        propia.setSubtitulo(this.context.getString(R.string.hint_subtitle_recarga_propia));
+        propia.setImagen(R.drawable.ic_recarga_tarjeta_propia_metro);
+        propia.setFragment_name(BuildConfig.FLAVOR);
+        propia.setTipo_serivicio(r1sDOSqZ2z);
+        propia.setOrder(-1);
+        propia.setActivo(true);
+        propia.setOperacion(BankOperationCode.METRORecargaPropia);
+        DatabaseHelper.getInstance().addOperacion(propia);
+        Operation recargaJClub = new Operation();
+        recargaJClub.setTitulo(this.context.getString(R.string.title_jclub));
+        recargaJClub.setSubtitulo(this.context.getString(R.string.sub_jclub));
+        recargaJClub.setImagen(R.drawable.ic_pago_joven_club_metro);
+        recargaJClub.setFragment_name(BuildConfig.FLAVOR);
+        recargaJClub.setOperacion(BankOperationCode.METROJClub);
+        recargaJClub.setTipo_serivicio(r1sDOSqZ2z);
+        recargaJClub.setOrder(-1);
+        recargaJClub.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(recargaJClub);
+        Operation tipoCambio = new Operation();
+        tipoCambio.setTitulo(this.context.getString(R.string.title_tipo_cambio));
+        tipoCambio.setSubtitulo(this.context.getString(R.string.sub_tipo_cambio));
+        tipoCambio.setImagen(R.drawable.ic_tipo_cambio_metro);
+        tipoCambio.setFragment_name(BuildConfig.FLAVOR);
+        tipoCambio.setOperacion(BankOperationCode.METROTipoCambio);
+        tipoCambio.setTipo_serivicio(r1sDOSqZ2z);
+        tipoCambio.setOrder(-1);
+        tipoCambio.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(tipoCambio);
+        Operation ofa = new Operation();
+        ofa.setTitulo(this.context.getString(R.string.tx_head_patrimonio2));
+        ofa.setSubtitulo(this.context.getString(R.string.tx_sub_patrimonio));
+        ofa.setImagen(R.drawable.ic_ofa_metro);
+        ofa.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.lQox6tgMlH");
+        ofa.setOperacion(BankOperationCode.METROPatrimoniOfa);
+        ofa.setOrder(-1);
+        ofa.setActivo(true);
+        ofa.setTipo_serivicio(r1sDOSqZ2z);
+        DatabaseHelper.getInstance().addOperacion(ofa);
+        Operation recargaBolsaMETRO = new Operation();
+        recargaBolsaMETRO.setTitulo(this.context.getString(R.string.title_recarga_bolsa_cup));
+        recargaBolsaMETRO.setSubtitulo(this.context.getString(R.string.subtitle_recarga_bolsa_cup));
+        recargaBolsaMETRO.setImagen(R.drawable.ic_recargar_monedero_metro);
+        recargaBolsaMETRO.setFragment_name(BuildConfig.FLAVOR);
+        recargaBolsaMETRO.setOperacion(BankOperationCode.METRORecargaBolsa);
+        recargaBolsaMETRO.setTipo_serivicio(r1sDOSqZ2z);
+        recargaBolsaMETRO.setOrder(-1);
+        recargaBolsaMETRO.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(recargaBolsaMETRO);
+        Operation paqCubacelMETRO = new Operation();
+        paqCubacelMETRO.setTitulo(this.context.getString(R.string.head_paquetes_cubacel));
+        paqCubacelMETRO.setSubtitulo(this.context.getString(R.string.sub_compra_paquetes));
+        paqCubacelMETRO.setImagen(R.drawable.ic_compra_paquetes_metro);
+        paqCubacelMETRO.setFragment_name(BuildConfig.FLAVOR);
+        paqCubacelMETRO.setOperacion(BankOperationCode.METROPaquetesCubacel);
+        paqCubacelMETRO.setTipo_serivicio(r1sDOSqZ2z);
+        paqCubacelMETRO.setOrder(-1);
+        paqCubacelMETRO.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(paqCubacelMETRO);
+        Operation ticket = new Operation();
+        ticket.setTitulo(this.context.getString(R.string.title_reserva_ticket));
+        ticket.setSubtitulo(this.context.getString(R.string.subtitle_reserva_ticket));
+        ticket.setImagen(R.drawable.ic_compra_miturno_metro);
+        ticket.setFragment_name(BuildConfig.FLAVOR);
+        ticket.setOperacion(BankOperationCode.METROReservasTicket);
+        ticket.setOrder(-1);
+        ticket.setActivo(true);
+        ticket.setTipo_serivicio(r1sDOSqZ2z);
+        DatabaseHelper.getInstance().addOperacion(ticket);
+        Operation pccMETRO = new Operation();
+        pccMETRO.setTitulo(this.context.getString(R.string.title_organizacion_politica));
+        pccMETRO.setSubtitulo(this.context.getString(R.string.subtitle_pcc));
+        pccMETRO.setImagen(R.drawable.ic_pago_organizaciones_masa_metro);
+        pccMETRO.setFragment_name(BuildConfig.FLAVOR);
+        pccMETRO.setOperacion(BankOperationCode.METROPCC);
+        pccMETRO.setOrder(-1);
+        pccMETRO.setActivo(true);
+        pccMETRO.setTipo_serivicio(r1sDOSqZ2z);
+        DatabaseHelper.getInstance().addOperacion(pccMETRO);
+        Operation tfa = new Operation();
+        tfa.setTitulo(this.context.getString(R.string.title_recarga_tfa));
+        tfa.setSubtitulo(this.context.getString(R.string.subtitle_recarga_tfa));
+        tfa.setImagen(R.drawable.ic_pago_tfa_metro);
+        tfa.setFragment_name(BuildConfig.FLAVOR);
+        tfa.setOperacion(BankOperationCode.METRORecargaTFA);
+        tfa.setOrder(-1);
+        tfa.setActivo(true);
+        tfa.setTipo_serivicio(r1sDOSqZ2z);
+        DatabaseHelper.getInstance().addOperacion(tfa);
     }
-
-    // -------------------------------------------------------------------------
-    // fill_banco_bolsa: MiTransfer digital wallet operations (30 operations)
-    // Includes wallet-specific: Recarga CUP Ticket, Extraccion Efectivo,
-    // Transferir a Bancos, VotoMovil, Asociar Cuenta, MiBoleto,
-    // Transferencia Clasica Empresarial, Pago Externo Empresarial
-    // -------------------------------------------------------------------------
 
     public void fill_banco_bolsa() {
-        BankType bolsaType = BankType.MiTransfer;
-
-        addOpToDb(context.getString(R.string.tx_registrarse),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_registrarse_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.eUkRSfpCKs",
-                bolsaType, 1, BankOperationCode.BOLSARegistrarse, true);
-
-        addOpToDb(context.getString(R.string.tx_autenticarse),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_autenticacion_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qZS87tGogtP.R5fFZkKuVnr",
-                bolsaType, 2, BankOperationCode.BOLSAAutenticarse, true);
-
-        addOpToDb(context.getString(R.string.tx_consultar_saldo),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_consulta_saldo_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 10, BankOperationCode.BOLSAConsultarSaldo, true);
-
-        addOpToDb(context.getString(R.string.tx_ultimas_operaciones),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_consulta_utlimas_oper_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 10, BankOperationCode.BOLSAUltimasOperaciones, true);
-
-        addOpToDb(context.getString(R.string.menu_title_transferencia_bolsa),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_transferencia_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 11, BankOperationCode.BOLSATransferencia, true);
-
-        addOpToDb(context.getString(R.string.banco_telefono),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_pago_factura_telefono_fijo_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.p5B8KozjvpQ",
-                bolsaType, 12, BankOperationCode.BOLSATelefono, true);
-
-        addOpToDb(context.getString(R.string.menu_title_recarga_movil_bolsa),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_recarga_saldo_movil_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 13, BankOperationCode.BOLSARecargaMovil, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_nauta),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_pago_nauta_hogar_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.KtF0PRB8vS",
-                bolsaType, 14, BankOperationCode.BOLSARecargaNauta, true);
-
-        addOpToDb(context.getString(R.string.hint_recarga_propia),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_recarga_tarjeta_propia_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.JrjJL8mtlI",
-                bolsaType, 15, BankOperationCode.BOLSARecargaPropia, true);
-
-        addOpToDb(context.getString(R.string.title_pago_externo),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_pago_linea_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 16, BankOperationCode.BOLSAPagoLinea, true);
-
-        addOpToDb(context.getString(R.string.menu_title_compra_paquete_mlc_bolsa),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_paquetes_combinados_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.f3Ttlx30sMT",
-                bolsaType, 17, BankOperationCode.BOLSACompraPaqueteMLC, true);
-
-        addOpToDb(context.getString(R.string.menu_title_compra_nauta_plus_bolsa),
-                context.getString(R.string.tx_subtexto_bolsa),
-                R.drawable.ic_pago_nauta_plus_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 18, BankOperationCode.BOLSARecargaNautaMLC, true);
-
-        addOpToDb(context.getString(R.string.tx_consultar_servicio_bolsa),
-                context.getString(R.string.tx_sub_consultar_servicio_bolsa),
-                R.drawable.ic_consultar_servicio_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb",
-                bolsaType, 19, BankOperationCode.BOLSAConsultaServicio, true);
-
-        addOpToDb(context.getString(R.string.banco_desconectar),
-                context.getString(R.string.banco_sub_desconectar),
-                R.drawable.ic_desconectarse_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 20, BankOperationCode.BOLSADesconectar, true);
-
-        addOpToDb(context.getString(R.string.menu_tite_recarga_cup_ticket),
-                context.getString(R.string.menu_sub_recarga_cup_ticket),
-                R.drawable.ic_recargar_monedero_cup_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.P8DtkaSW4dR",
-                bolsaType, 21, BankOperationCode.BOLSARecargaCUPWalletTicket, true);
-
-        addOpToDb(context.getString(R.string.menu_tite_extraccion_efectivo_ticket),
-                context.getString(R.string.menu_sub_extraccion_efectivo_ticket),
-                R.drawable.ic_extraer_efectivo_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.f9Reflqt3EZ",
-                bolsaType, 22, BankOperationCode.BOLSAExtraccionWalletTicket, true);
-
-        addOpToDb(context.getString(R.string.menu_tite_transferir_bolsa_bancos),
-                context.getString(R.string.menu_sub_transferir_bolsa_bancos),
-                R.drawable.ic_transferir_cuentas_banco_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.H0oV6Ot0bS",
-                bolsaType, 23, BankOperationCode.BOLSATransferirBancos, true);
-
-        addOpToDb(context.getString(R.string.banco_electricidad),
-                context.getString(R.string.banco_sub_electricidad),
-                R.drawable.ic_pago_factura_electricidad_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dwdZ5sHcFR",
-                bolsaType, 24, BankOperationCode.BOLSAElectricidad, true);
-
-        addOpToDb(context.getString(R.string.title_pago_agua_hab),
-                context.getString(R.string.sub_service_bpa_agua),
-                R.drawable.ic_pago_factura_agua_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.U1sIOmca96i",
-                bolsaType, 25, BankOperationCode.BOLSAAgua, true);
-
-        addOpToDb(context.getString(R.string.title_service_metro_gas),
-                context.getString(R.string.sub_service_metro_gas),
-                R.drawable.ic_pago_factura_gas_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.XCDkgbw8oZ",
-                bolsaType, 26, BankOperationCode.BOLSAgas, true);
-
-        addOpToDb(context.getString(R.string.head_paquetes_cubacel),
-                context.getString(R.string.sub_compra_paquetes),
-                R.drawable.ic_compra_paquetes_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW",
-                bolsaType, 27, BankOperationCode.BOLSAPaquetesCubacel, true);
-
-        addOpToDb(context.getString(R.string.title_reservas_ofa),
-                context.getString(R.string.tx_sub_patrimonio_bolsa),
-                R.drawable.ic_reserva_ofa_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dWLcK5oQoS",
-                bolsaType, 28, BankOperationCode.BOLSAReservasOFA, true);
-
-        addOpToDb(context.getString(R.string.title_reserva_ticket),
-                context.getString(R.string.subtitle_reserva_ticket),
-                R.drawable.ic_pago_miturno_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 29, BankOperationCode.BOLSAReservasTicket, true);
-
-        addOpToDb(context.getString(R.string.title_organizacion_politica),
-                context.getString(R.string.subtitle_pcc),
-                R.drawable.ic_pago_organizaciones_masa_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 30, BankOperationCode.BOLSAPCC, true);
-
-        addOpToDb(context.getString(R.string.title_recarga_tfa),
-                context.getString(R.string.subtitle_recarga_tfa),
-                R.drawable.ic_tfa_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 30, BankOperationCode.BOLSARecargaTFA, true);
-
-        addOpToDb(context.getString(R.string.tx_title_clasica),
-                context.getString(R.string.tx_subtitle_clasica),
-                R.drawable.ic_asociar_cuenta_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.HTmIvOo9nb",
-                bolsaType, 31, BankOperationCode.BOLSAAsociarCuenta, true);
-
-        addOpToDb(context.getString(R.string.tx_head_patrimonio2),
-                context.getString(R.string.tx_sub_patrimonio),
-                R.drawable.ic_ofa_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.C6ZYln3x19W",
-                bolsaType, 32, BankOperationCode.BOLSAAporteOFA, true);
-
-        addOpToDb(context.getString(R.string.title_consulta_miboleto),
-                context.getString(R.string.subtitle_consulta_miboleto),
-                R.drawable.ic_consulta_miboleto_bolsa, BuildConfig.FLAVOR,
-                bolsaType, 33, BankOperationCode.BOLSAConsultaMiBoleto, true);
-
-        addOpToDb(context.getString(R.string.title_compra_miboleto),
-                context.getString(R.string.subtitle_compra_miboleto),
-                R.drawable.ic_miboleto_pago_bolsa,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.TBaFnBLjEA",
-                bolsaType, 34, BankOperationCode.BOLSACompraMiBoleto, true);
-
-        addOpToDb(context.getString(R.string.msg_votomovil_etecsa),
-                context.getString(R.string.msg_votomovil_descrip_etecsa),
-                R.drawable.ic_voto_movil,
-                "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.cdINOtQ3iN",
-                bolsaType, 35, BankOperationCode.BOLSAVotoMovil, true);
-
-        addOpToDb(context.getString(R.string.tx_transferencia_clasica_empresa),
-                context.getString(R.string.ly_title_transferencia_a_clasica_empresa),
-                R.drawable.ico_transfer_clasica, BuildConfig.FLAVOR,
-                bolsaType, -1, BankOperationCode.BOLSATransferenciaClasicaEmpresarial, true);
-
-        addOpToDb(context.getString(R.string.title_pago_externo_empresarial),
-                context.getString(R.string.sub_pago_externo_empresarial),
-                R.drawable.ic_pago_linea_empresarial, BuildConfig.FLAVOR,
-                bolsaType, -1, BankOperationCode.BOLSAPagoExternoClasicaEmpresarial, true);
+        Operation bolsa2 = new Operation();
+        bolsa2.setTitulo(this.context.getString(R.string.tx_registrarse));
+        bolsa2.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa2.setImagen(R.drawable.ic_registrarse_bolsa);
+        bolsa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.eUkRSfpCKs");
+        BankType r1sDOSqZ2z = BankType.MiTransfer;
+        bolsa2.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa2.setOrder(1);
+        bolsa2.setActivo(true);
+        bolsa2.setOperacion(BankOperationCode.BOLSARegistrarse);
+        DatabaseHelper.getInstance().addOperacion(bolsa2);
+        Operation bolsa1 = new Operation();
+        bolsa1.setTitulo(this.context.getString(R.string.tx_autenticarse));
+        bolsa1.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa1.setImagen(R.drawable.ic_autenticacion_bolsa);
+        bolsa1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qZS87tGogtP.R5fFZkKuVnr");
+        bolsa1.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa1.setOrder(2);
+        bolsa1.setActivo(true);
+        bolsa1.setOperacion(BankOperationCode.BOLSAAutenticarse);
+        DatabaseHelper.getInstance().addOperacion(bolsa1);
+        Operation bolsa3 = new Operation();
+        bolsa3.setTitulo(this.context.getString(R.string.tx_consultar_saldo));
+        bolsa3.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa3.setImagen(R.drawable.ic_consulta_saldo_bolsa);
+        bolsa3.setFragment_name(BuildConfig.FLAVOR);
+        bolsa3.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa3.setOrder(10);
+        bolsa3.setActivo(true);
+        bolsa3.setOperacion(BankOperationCode.BOLSAConsultarSaldo);
+        DatabaseHelper.getInstance().addOperacion(bolsa3);
+        Operation bolsa4 = new Operation();
+        bolsa4.setTitulo(this.context.getString(R.string.tx_ultimas_operaciones));
+        bolsa4.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa4.setImagen(R.drawable.ic_consulta_utlimas_oper_bolsa);
+        bolsa4.setFragment_name(BuildConfig.FLAVOR);
+        bolsa4.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa4.setOrder(10);
+        bolsa4.setActivo(true);
+        bolsa4.setOperacion(BankOperationCode.BOLSAUltimasOperaciones);
+        DatabaseHelper.getInstance().addOperacion(bolsa4);
+        Operation bolsa5 = new Operation();
+        bolsa5.setTitulo(this.context.getString(R.string.menu_title_transferencia_bolsa));
+        bolsa5.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa5.setImagen(R.drawable.ic_transferencia_bolsa);
+        bolsa5.setFragment_name(BuildConfig.FLAVOR);
+        bolsa5.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa5.setOrder(11);
+        bolsa5.setActivo(true);
+        bolsa5.setOperacion(BankOperationCode.BOLSATransferencia);
+        DatabaseHelper.getInstance().addOperacion(bolsa5);
+        Operation bolsa6 = new Operation();
+        bolsa6.setTitulo(this.context.getString(R.string.banco_telefono));
+        bolsa6.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa6.setImagen(R.drawable.ic_pago_factura_telefono_fijo_bolsa);
+        bolsa6.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.p5B8KozjvpQ");
+        bolsa6.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa6.setOrder(12);
+        bolsa6.setActivo(true);
+        bolsa6.setOperacion(BankOperationCode.BOLSATelefono);
+        DatabaseHelper.getInstance().addOperacion(bolsa6);
+        Operation bolsa7 = new Operation();
+        bolsa7.setTitulo(this.context.getString(R.string.menu_title_recarga_movil_bolsa));
+        bolsa7.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa7.setImagen(R.drawable.ic_recarga_saldo_movil_bolsa);
+        bolsa7.setFragment_name(BuildConfig.FLAVOR);
+        bolsa7.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa7.setOrder(13);
+        bolsa7.setActivo(true);
+        bolsa7.setOperacion(BankOperationCode.BOLSARecargaMovil);
+        DatabaseHelper.getInstance().addOperacion(bolsa7);
+        Operation bolsa8 = new Operation();
+        bolsa8.setTitulo(this.context.getString(R.string.title_recarga_nauta));
+        bolsa8.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa8.setImagen(R.drawable.ic_pago_nauta_hogar_bolsa);
+        bolsa8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.KtF0PRB8vS");
+        bolsa8.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa8.setOrder(14);
+        bolsa8.setActivo(true);
+        bolsa8.setOperacion(BankOperationCode.BOLSARecargaNauta);
+        DatabaseHelper.getInstance().addOperacion(bolsa8);
+        Operation bolsa9 = new Operation();
+        bolsa9.setTitulo(this.context.getString(R.string.hint_recarga_propia));
+        bolsa9.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa9.setImagen(R.drawable.ic_recarga_tarjeta_propia_bolsa);
+        bolsa9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.JrjJL8mtlI");
+        bolsa9.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa9.setOrder(15);
+        bolsa9.setActivo(true);
+        bolsa9.setOperacion(BankOperationCode.BOLSARecargaPropia);
+        DatabaseHelper.getInstance().addOperacion(bolsa9);
+        Operation bolsa10 = new Operation();
+        bolsa10.setTitulo(this.context.getString(R.string.title_pago_externo));
+        bolsa10.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa10.setImagen(R.drawable.ic_pago_linea_bolsa);
+        bolsa10.setFragment_name(BuildConfig.FLAVOR);
+        bolsa10.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa10.setOrder(16);
+        bolsa10.setActivo(true);
+        bolsa10.setOperacion(BankOperationCode.BOLSAPagoLinea);
+        DatabaseHelper.getInstance().addOperacion(bolsa10);
+        Operation bolsa11 = new Operation();
+        bolsa11.setTitulo(this.context.getString(R.string.menu_title_compra_paquete_mlc_bolsa));
+        bolsa11.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa11.setImagen(R.drawable.ic_paquetes_combinados_bolsa);
+        bolsa11.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.f3Ttlx30sMT");
+        bolsa11.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa11.setOrder(17);
+        bolsa11.setActivo(true);
+        bolsa11.setOperacion(BankOperationCode.BOLSACompraPaqueteMLC);
+        DatabaseHelper.getInstance().addOperacion(bolsa11);
+        Operation bolsa12 = new Operation();
+        bolsa12.setTitulo(this.context.getString(R.string.menu_title_compra_nauta_plus_bolsa));
+        bolsa12.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
+        bolsa12.setImagen(R.drawable.ic_pago_nauta_plus_bolsa);
+        bolsa12.setFragment_name(BuildConfig.FLAVOR);
+        bolsa12.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa12.setOrder(18);
+        bolsa12.setActivo(true);
+        bolsa12.setOperacion(BankOperationCode.BOLSARecargaNautaMLC);
+        DatabaseHelper.getInstance().addOperacion(bolsa12);
+        Operation bolsa13 = new Operation();
+        bolsa13.setTitulo(this.context.getString(R.string.tx_consultar_servicio_bolsa));
+        bolsa13.setSubtitulo(this.context.getString(R.string.tx_sub_consultar_servicio_bolsa));
+        bolsa13.setImagen(R.drawable.ic_consultar_servicio_bolsa);
+        bolsa13.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb");
+        bolsa13.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa13.setOrder(19);
+        bolsa13.setActivo(true);
+        bolsa13.setOperacion(BankOperationCode.BOLSAConsultaServicio);
+        DatabaseHelper.getInstance().addOperacion(bolsa13);
+        Operation bolsa14 = new Operation();
+        bolsa14.setTitulo(this.context.getString(R.string.banco_desconectar));
+        bolsa14.setSubtitulo(this.context.getString(R.string.banco_sub_desconectar));
+        bolsa14.setImagen(R.drawable.ic_desconectarse_bolsa);
+        bolsa14.setFragment_name(BuildConfig.FLAVOR);
+        bolsa14.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa14.setOrder(20);
+        bolsa14.setActivo(true);
+        bolsa14.setOperacion(BankOperationCode.BOLSADesconectar);
+        DatabaseHelper.getInstance().addOperacion(bolsa14);
+        Operation bolsa15 = new Operation();
+        bolsa15.setTitulo(this.context.getString(R.string.menu_tite_recarga_cup_ticket));
+        bolsa15.setSubtitulo(this.context.getString(R.string.menu_sub_recarga_cup_ticket));
+        bolsa15.setImagen(R.drawable.ic_recargar_monedero_cup_bolsa);
+        bolsa15.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.P8DtkaSW4dR");
+        bolsa15.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa15.setOrder(21);
+        bolsa15.setActivo(true);
+        bolsa15.setOperacion(BankOperationCode.BOLSARecargaCUPWalletTicket);
+        DatabaseHelper.getInstance().addOperacion(bolsa15);
+        Operation bolsa16 = new Operation();
+        bolsa16.setTitulo(this.context.getString(R.string.menu_tite_extraccion_efectivo_ticket));
+        bolsa16.setSubtitulo(this.context.getString(R.string.menu_sub_extraccion_efectivo_ticket));
+        bolsa16.setImagen(R.drawable.ic_extraer_efectivo_bolsa);
+        bolsa16.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.f9Reflqt3EZ");
+        bolsa16.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa16.setOrder(22);
+        bolsa16.setActivo(true);
+        bolsa16.setOperacion(BankOperationCode.BOLSAExtraccionWalletTicket);
+        DatabaseHelper.getInstance().addOperacion(bolsa16);
+        Operation bolsa17 = new Operation();
+        bolsa17.setTitulo(this.context.getString(R.string.menu_tite_transferir_bolsa_bancos));
+        bolsa17.setSubtitulo(this.context.getString(R.string.menu_sub_transferir_bolsa_bancos));
+        bolsa17.setImagen(R.drawable.ic_transferir_cuentas_banco_bolsa);
+        bolsa17.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.H0oV6Ot0bS");
+        bolsa17.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa17.setOrder(23);
+        bolsa17.setActivo(true);
+        bolsa17.setOperacion(BankOperationCode.BOLSATransferirBancos);
+        DatabaseHelper.getInstance().addOperacion(bolsa17);
+        Operation bolsa18 = new Operation();
+        bolsa18.setTitulo(this.context.getString(R.string.banco_electricidad));
+        bolsa18.setSubtitulo(this.context.getString(R.string.banco_sub_electricidad));
+        bolsa18.setImagen(R.drawable.ic_pago_factura_electricidad_bolsa);
+        bolsa18.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dwdZ5sHcFR");
+        bolsa18.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa18.setOrder(24);
+        bolsa18.setActivo(true);
+        bolsa18.setOperacion(BankOperationCode.BOLSAElectricidad);
+        DatabaseHelper.getInstance().addOperacion(bolsa18);
+        Operation bolsa19 = new Operation();
+        bolsa19.setTitulo(this.context.getString(R.string.title_pago_agua_hab));
+        bolsa19.setSubtitulo(this.context.getString(R.string.sub_service_bpa_agua));
+        bolsa19.setImagen(R.drawable.ic_pago_factura_agua_bolsa);
+        bolsa19.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.U1sIOmca96i");
+        bolsa19.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa19.setOrder(25);
+        bolsa19.setActivo(true);
+        bolsa19.setOperacion(BankOperationCode.BOLSAAgua);
+        DatabaseHelper.getInstance().addOperacion(bolsa19);
+        Operation bolsa20 = new Operation();
+        bolsa20.setTitulo(this.context.getString(R.string.title_service_metro_gas));
+        bolsa20.setSubtitulo(this.context.getString(R.string.sub_service_metro_gas));
+        bolsa20.setImagen(R.drawable.ic_pago_factura_gas_bolsa);
+        bolsa20.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.XCDkgbw8oZ");
+        bolsa20.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa20.setOrder(26);
+        bolsa20.setActivo(true);
+        bolsa20.setOperacion(BankOperationCode.BOLSAgas);
+        DatabaseHelper.getInstance().addOperacion(bolsa20);
+        Operation bolsa21 = new Operation();
+        bolsa21.setTitulo(this.context.getString(R.string.head_paquetes_cubacel));
+        bolsa21.setSubtitulo(this.context.getString(R.string.sub_compra_paquetes));
+        bolsa21.setImagen(R.drawable.ic_compra_paquetes_bolsa);
+        bolsa21.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW");
+        bolsa21.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa21.setOrder(27);
+        bolsa21.setActivo(true);
+        bolsa21.setOperacion(BankOperationCode.BOLSAPaquetesCubacel);
+        DatabaseHelper.getInstance().addOperacion(bolsa21);
+        Operation bolsa22 = new Operation();
+        bolsa22.setTitulo(this.context.getString(R.string.title_reservas_ofa));
+        bolsa22.setSubtitulo(this.context.getString(R.string.tx_sub_patrimonio_bolsa));
+        bolsa22.setImagen(R.drawable.ic_reserva_ofa_bolsa);
+        bolsa22.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dWLcK5oQoS");
+        bolsa22.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa22.setOrder(28);
+        bolsa22.setActivo(true);
+        bolsa22.setOperacion(BankOperationCode.BOLSAReservasOFA);
+        DatabaseHelper.getInstance().addOperacion(bolsa22);
+        Operation bolsa23 = new Operation();
+        bolsa23.setTitulo(this.context.getString(R.string.title_reserva_ticket));
+        bolsa23.setSubtitulo(this.context.getString(R.string.subtitle_reserva_ticket));
+        bolsa23.setImagen(R.drawable.ic_pago_miturno_bolsa);
+        bolsa23.setFragment_name(BuildConfig.FLAVOR);
+        bolsa23.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa23.setOrder(29);
+        bolsa23.setActivo(true);
+        bolsa23.setOperacion(BankOperationCode.BOLSAReservasTicket);
+        DatabaseHelper.getInstance().addOperacion(bolsa23);
+        Operation bolsa24 = new Operation();
+        bolsa24.setTitulo(this.context.getString(R.string.title_organizacion_politica));
+        bolsa24.setSubtitulo(this.context.getString(R.string.subtitle_pcc));
+        bolsa24.setImagen(R.drawable.ic_pago_organizaciones_masa_bolsa);
+        bolsa24.setFragment_name(BuildConfig.FLAVOR);
+        bolsa24.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa24.setOrder(30);
+        bolsa24.setActivo(true);
+        bolsa24.setOperacion(BankOperationCode.BOLSAPCC);
+        DatabaseHelper.getInstance().addOperacion(bolsa24);
+        Operation bolsa25 = new Operation();
+        bolsa25.setTitulo(this.context.getString(R.string.title_recarga_tfa));
+        bolsa25.setSubtitulo(this.context.getString(R.string.subtitle_recarga_tfa));
+        bolsa25.setImagen(R.drawable.ic_tfa_bolsa);
+        bolsa25.setFragment_name(BuildConfig.FLAVOR);
+        bolsa25.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa25.setOrder(30);
+        bolsa25.setActivo(true);
+        bolsa25.setOperacion(BankOperationCode.BOLSARecargaTFA);
+        DatabaseHelper.getInstance().addOperacion(bolsa25);
+        Operation bolsa26 = new Operation();
+        bolsa26.setTitulo(this.context.getString(R.string.tx_title_clasica));
+        bolsa26.setSubtitulo(this.context.getString(R.string.tx_subtitle_clasica));
+        bolsa26.setImagen(R.drawable.ic_asociar_cuenta_bolsa);
+        bolsa26.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.HTmIvOo9nb");
+        bolsa26.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa26.setOrder(31);
+        bolsa26.setActivo(true);
+        bolsa26.setOperacion(BankOperationCode.BOLSAAsociarCuenta);
+        DatabaseHelper.getInstance().addOperacion(bolsa26);
+        Operation bolsa27 = new Operation();
+        bolsa27.setTitulo(this.context.getString(R.string.tx_head_patrimonio2));
+        bolsa27.setSubtitulo(this.context.getString(R.string.tx_sub_patrimonio));
+        bolsa27.setImagen(R.drawable.ic_ofa_bolsa);
+        bolsa27.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.C6ZYln3x19W");
+        bolsa27.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa27.setOrder(32);
+        bolsa27.setActivo(true);
+        bolsa27.setOperacion(BankOperationCode.BOLSAAporteOFA);
+        DatabaseHelper.getInstance().addOperacion(bolsa27);
+        Operation bolsa28 = new Operation();
+        bolsa28.setTitulo(this.context.getString(R.string.title_consulta_miboleto));
+        bolsa28.setSubtitulo(this.context.getString(R.string.subtitle_consulta_miboleto));
+        bolsa28.setImagen(R.drawable.ic_consulta_miboleto_bolsa);
+        bolsa28.setFragment_name(BuildConfig.FLAVOR);
+        bolsa28.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa28.setOrder(33);
+        bolsa28.setActivo(true);
+        bolsa28.setOperacion(BankOperationCode.BOLSAConsultaMiBoleto);
+        DatabaseHelper.getInstance().addOperacion(bolsa28);
+        Operation bolsa29 = new Operation();
+        bolsa29.setTitulo(this.context.getString(R.string.title_compra_miboleto));
+        bolsa29.setSubtitulo(this.context.getString(R.string.subtitle_compra_miboleto));
+        bolsa29.setImagen(R.drawable.ic_miboleto_pago_bolsa);
+        bolsa29.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.TBaFnBLjEA");
+        bolsa29.setTipo_serivicio(r1sDOSqZ2z);
+        bolsa29.setOrder(34);
+        bolsa29.setActivo(true);
+        bolsa29.setOperacion(BankOperationCode.BOLSACompraMiBoleto);
+        DatabaseHelper.getInstance().addOperacion(bolsa29);
+        Operation votomovil = new Operation();
+        votomovil.setTitulo(this.context.getString(R.string.msg_votomovil_etecsa));
+        votomovil.setSubtitulo(this.context.getString(R.string.msg_votomovil_descrip_etecsa));
+        votomovil.setImagen(R.drawable.ic_voto_movil);
+        votomovil.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.cdINOtQ3iN");
+        votomovil.setTipo_serivicio(r1sDOSqZ2z);
+        votomovil.setOrder(35);
+        votomovil.setOperacion(BankOperationCode.BOLSAVotoMovil);
+        votomovil.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(votomovil);
+        Operation transferClasicaEmpresarial = new Operation();
+        transferClasicaEmpresarial.setTitulo(this.context.getString(R.string.tx_transferencia_clasica_empresa));
+        transferClasicaEmpresarial.setSubtitulo(this.context.getString(R.string.ly_title_transferencia_a_clasica_empresa));
+        transferClasicaEmpresarial.setImagen(R.drawable.ico_transfer_clasica);
+        transferClasicaEmpresarial.setFragment_name(BuildConfig.FLAVOR);
+        transferClasicaEmpresarial.setTipo_serivicio(r1sDOSqZ2z);
+        transferClasicaEmpresarial.setOrder(-1);
+        transferClasicaEmpresarial.setOperacion(BankOperationCode.BOLSATransferenciaClasicaEmpresarial);
+        transferClasicaEmpresarial.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(transferClasicaEmpresarial);
+        Operation pagoExtClasicaEmpresarial = new Operation();
+        pagoExtClasicaEmpresarial.setTitulo(this.context.getString(R.string.title_pago_externo_empresarial));
+        pagoExtClasicaEmpresarial.setSubtitulo(this.context.getString(R.string.sub_pago_externo_empresarial));
+        pagoExtClasicaEmpresarial.setImagen(R.drawable.ic_pago_linea_empresarial);
+        pagoExtClasicaEmpresarial.setFragment_name(BuildConfig.FLAVOR);
+        pagoExtClasicaEmpresarial.setTipo_serivicio(r1sDOSqZ2z);
+        pagoExtClasicaEmpresarial.setOrder(-1);
+        pagoExtClasicaEmpresarial.setOperacion(BankOperationCode.BOLSAPagoExternoClasicaEmpresarial);
+        pagoExtClasicaEmpresarial.setActivo(true);
+        DatabaseHelper.getInstance().addOperacion(pagoExtClasicaEmpresarial);
     }
 
-    // =========================================================================
-    // Update methods: patch icons and fragment references for version upgrades.
-    // These update existing DB records without recreating them.
-    // =========================================================================
-
-    /**
-     * Updates general ETECSA operations with new icons for a specific version.
-     * Changes icon drawables and some fragment references.
-     */
     public void update_generales(Context context, int version) {
         try {
             this.context = context;
-            DatabaseHelper db = DatabaseHelper.getInstance();
-
-            Operacion realizarLlamada = db.getOperacion(BankOperationCode.LLamada);
+            Operation realizarLlamada = DatabaseHelper.getInstance().getOperacion(BankOperationCode.LLamada);
             realizarLlamada.setImagen(R.drawable.call_phone_gris_color);
             realizarLlamada.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2");
             realizarLlamada.setActivo(true);
-            db.updateOperacion(realizarLlamada);
-
-            Operacion realizarLlamada99 = db.getOperacion(BankOperationCode.Llamar99);
+            DatabaseHelper.getInstance().updateOperacion(realizarLlamada);
+            Operation realizarLlamada99 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.Llamar99);
             realizarLlamada99.setImagen(R.drawable.call_phone_nine_color);
             realizarLlamada99.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2");
             realizarLlamada99.setTipo_serivicio(BankType.General);
             realizarLlamada99.setActivo(true);
-            db.updateOperacion(realizarLlamada99);
-
-            Operacion recargarConBono = db.getOperacion(BankOperationCode.RecargarMovilBono);
+            DatabaseHelper.getInstance().updateOperacion(realizarLlamada99);
+            Operation recargarConBono = DatabaseHelper.getInstance().getOperacion(BankOperationCode.RecargarMovilBono);
             recargarConBono.setImagen(R.drawable.ico_gestion_recarga_color);
             recargarConBono.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.b0kkzvOCEu");
-            db.updateOperacion(recargarConBono);
-
-            Operacion transferirSaldo = db.getOperacion(BankOperationCode.TransferirSaldoMovil);
+            DatabaseHelper.getInstance().updateOperacion(recargarConBono);
+            Operation transferirSaldo = DatabaseHelper.getInstance().getOperacion(BankOperationCode.TransferirSaldoMovil);
             transferirSaldo.setImagen(R.drawable.ico_gestion_tranferir_color);
             transferirSaldo.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.C8l2t8799rL");
-            db.updateOperacion(transferirSaldo);
-
-            Operacion cambioClave = db.getOperacion(BankOperationCode.CambioClave);
-            cambioClave.setImagen(R.drawable.ico_agent_predet_pin_color);
-            cambioClave.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.E1lhoLKryWP");
-            db.updateOperacion(cambioClave);
-
-            // Update icons for USSD-based operations
-            Operacion saldoPrepago = db.getOperacion(BankOperationCode.ConsultaSaldo222);
-            saldoPrepago.setImagen(R.drawable.ico_agent_consultar_factura_color);
-            db.updateOperacion(saldoPrepago);
-
-            Operacion saldoPospago = db.getOperacion(BankOperationCode.ConsultaSaldo111);
-            saldoPospago.setImagen(R.drawable.ico_agent_consultar_factura_color);
-            db.updateOperacion(saldoPospago);
-
-            Operacion estadoBono = db.getOperacion(BankOperationCode.ConsultarEstadoBono);
-            estadoBono.setImagen(R.drawable.consultar_estado_bono);
-            db.updateOperacion(estadoBono);
-
-            Operacion planes = db.getOperacion(BankOperationCode.GestionPlanes);
+            DatabaseHelper.getInstance().updateOperacion(transferirSaldo);
+            Operation cambioclavetransferirSaldo = DatabaseHelper.getInstance().getOperacion(BankOperationCode.CambioClave);
+            cambioclavetransferirSaldo.setImagen(R.drawable.ico_agent_predet_pin_color);
+            cambioclavetransferirSaldo.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.E1lhoLKryWP");
+            DatabaseHelper.getInstance().updateOperacion(cambioclavetransferirSaldo);
+            Operation consultaSaldoPrepago = DatabaseHelper.getInstance().getOperacion(BankOperationCode.ConsultaSaldo222);
+            consultaSaldoPrepago.setImagen(R.drawable.ico_agent_consultar_factura_color);
+            DatabaseHelper.getInstance().updateOperacion(consultaSaldoPrepago);
+            Operation consultaSaldoPospago = DatabaseHelper.getInstance().getOperacion(BankOperationCode.ConsultaSaldo111);
+            consultaSaldoPospago.setImagen(R.drawable.ico_agent_consultar_factura_color);
+            DatabaseHelper.getInstance().updateOperacion(consultaSaldoPospago);
+            Operation estadobono = DatabaseHelper.getInstance().getOperacion(BankOperationCode.ConsultarEstadoBono);
+            estadobono.setImagen(R.drawable.consultar_estado_bono);
+            DatabaseHelper.getInstance().updateOperacion(estadobono);
+            Operation planes = DatabaseHelper.getInstance().getOperacion(BankOperationCode.GestionPlanes);
             planes.setImagen(R.drawable.planes_menu_color);
-            db.updateOperacion(planes);
-
-            Operacion planDatos = db.getOperacion(BankOperationCode.ConsultarPlanDatos);
-            planDatos.setImagen(R.drawable.plan_datos_color);
-            db.updateOperacion(planDatos);
-
-            Operacion planVoz = db.getOperacion(BankOperationCode.ConsultarPlanVoz);
-            planVoz.setImagen(R.drawable.plan_voz_color_1);
-            db.updateOperacion(planVoz);
-
-            Operacion planSms = db.getOperacion(BankOperationCode.ConsultarPlanSMS);
-            planSms.setImagen(R.drawable.plan_sms_color);
-            db.updateOperacion(planSms);
-
-            Operacion planAmigos = db.getOperacion(BankOperationCode.ConsultarPlanAmigos);
-            planAmigos.setImagen(R.drawable.plan_amigos_color);
-            db.updateOperacion(planAmigos);
-
-            Operacion votoMovil = db.getOperacion(BankOperationCode.VotoMovil);
-            votoMovil.setImagen(R.drawable.etecsa_votomovil);
-            votoMovil.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.aQdU5kg0yGq.XRa1KuZNBW");
-            db.updateOperacion(votoMovil);
-
-            Operacion adelantaSaldo = db.getOperacion(BankOperationCode.AdelantaSaldo);
+            DatabaseHelper.getInstance().updateOperacion(planes);
+            Operation bolsa = DatabaseHelper.getInstance().getOperacion(BankOperationCode.ConsultarPlanDatos);
+            bolsa.setImagen(R.drawable.plan_datos_color);
+            DatabaseHelper.getInstance().updateOperacion(bolsa);
+            Operation voz = DatabaseHelper.getInstance().getOperacion(BankOperationCode.ConsultarPlanVoz);
+            voz.setImagen(R.drawable.plan_voz_color_1);
+            DatabaseHelper.getInstance().updateOperacion(voz);
+            Operation sms = DatabaseHelper.getInstance().getOperacion(BankOperationCode.ConsultarPlanSMS);
+            sms.setImagen(R.drawable.plan_sms_color);
+            DatabaseHelper.getInstance().updateOperacion(sms);
+            Operation amigos = DatabaseHelper.getInstance().getOperacion(BankOperationCode.ConsultarPlanAmigos);
+            amigos.setImagen(R.drawable.plan_amigos_color);
+            DatabaseHelper.getInstance().updateOperacion(amigos);
+            Operation votomovil = DatabaseHelper.getInstance().getOperacion(BankOperationCode.VotoMovil);
+            votomovil.setImagen(R.drawable.etecsa_votomovil);
+            votomovil.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.aQdU5kg0yGq.XRa1KuZNBW");
+            DatabaseHelper.getInstance().updateOperacion(votomovil);
+            Operation adelantaSaldo = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AdelantaSaldo);
             adelantaSaldo.setImagen(R.drawable.adelanta_saldo_etecsa);
             adelantaSaldo.setFragment_name(BuildConfig.FLAVOR);
             adelantaSaldo.setSubtitulo(context.getString(R.string.detail_operaciones_adelanta));
-            db.updateOperacion(adelantaSaldo);
+            DatabaseHelper.getInstance().updateOperacion(adelantaSaldo);
         } catch (Exception e) {
             Log.i("TRANSFEREXCEPTION", e.getMessage());
         }
     }
 
-    /**
-     * Updates BPA bank operation icons for a specific version.
-     * Replaces old-style icons with new banco_bpa_* drawables.
-     */
     public void update_bpa(int version) {
-        DatabaseHelper db = DatabaseHelper.getInstance();
-
-        // Each operation gets its updated icon and sometimes a corrected fragment name.
-        // Pattern: get operation by code, set new image, optionally set fragment, update.
-
-        Operacion bpa1 = db.getOperacion(BankOperationCode.BPAAutenticarse);
+        Operation bpa1 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAAutenticarse);
         bpa1.setImagen(R.drawable.banco_bpa_login);
         bpa1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.lzGEfceoJu");
         bpa1.setActivo(true);
-        db.updateOperacion(bpa1);
-
-        Operacion bpa2 = db.getOperacion(BankOperationCode.BPATransferencia);
+        DatabaseHelper.getInstance().updateOperacion(bpa1);
+        Operation bpa2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPATransferencia);
         bpa2.setImagen(R.drawable.banco_bpa_transferencia);
         bpa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h");
         bpa2.setActivo(true);
-        db.updateOperacion(bpa2);
-
-        // ... 24 more BPA icon updates following the same pattern.
-        // Notable: BPATelefono fragment points to Operaciones package (not DrR0lEVP3qk)
-
-        Operacion bpa3 = db.getOperacion(BankOperationCode.BPAElectricidad);
+        DatabaseHelper.getInstance().updateOperacion(bpa2);
+        Operation bpa3 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAElectricidad);
         bpa3.setImagen(R.drawable.banco_bpa_electricidad);
         bpa3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.xSwGh0MTOg");
         bpa3.setActivo(true);
-        db.updateOperacion(bpa3);
-
-        Operacion bpa4 = db.getOperacion(BankOperationCode.BPATelefono);
+        DatabaseHelper.getInstance().updateOperacion(bpa3);
+        Operation bpa4 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPATelefono);
         bpa4.setImagen(R.drawable.banco_bpa_telefono);
-        // NOTE: Different package path than fill methods — uses "Operaciones" instead of "DrR0lEVP3qk"
         bpa4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.Operaciones.u4QMc0S0ZHo");
         bpa4.setActivo(true);
-        db.updateOperacion(bpa4);
-
-        Operacion bpa5 = db.getOperacion(BankOperationCode.BPAONAT);
+        DatabaseHelper.getInstance().updateOperacion(bpa4);
+        Operation bpa5 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAONAT);
         bpa5.setImagen(R.drawable.banco_bpa_onat);
         bpa5.setFragment_name(BuildConfig.FLAVOR);
         bpa5.setActivo(true);
-        db.updateOperacion(bpa5);
-
-        Operacion bpa6 = db.getOperacion(BankOperationCode.BPAConsultarSaldo);
+        DatabaseHelper.getInstance().updateOperacion(bpa5);
+        Operation bpa6 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAConsultarSaldo);
         bpa6.setTitulo("Consultar Saldo");
         bpa6.setSubtitulo("BPA");
         bpa6.setImagen(R.drawable.banco_bpa_consultar);
         bpa6.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.ix4mhKGJty");
         bpa6.setActivo(true);
-        db.updateOperacion(bpa6);
-
-        Operacion bpa7 = db.getOperacion(BankOperationCode.BPAConsultarServicio);
+        DatabaseHelper.getInstance().updateOperacion(bpa6);
+        Operation bpa7 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAConsultarServicio);
         bpa7.setImagen(R.drawable.banco_bpa_cons_serv);
         bpa7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.xoZnbyoSLT");
         bpa7.setActivo(true);
-        db.updateOperacion(bpa7);
-
-        Operacion bpa8 = db.getOperacion(BankOperationCode.BPAUltimasoperaciones);
+        DatabaseHelper.getInstance().updateOperacion(bpa7);
+        Operation bpa8 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAUltimasoperaciones);
         bpa8.setImagen(R.drawable.banco_bpa_ultimas);
         bpa8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.h3sd43nvje");
         bpa8.setActivo(true);
-        db.updateOperacion(bpa8);
-
-        Operacion bpa9 = db.getOperacion(BankOperationCode.BPARegistrarse);
+        DatabaseHelper.getInstance().updateOperacion(bpa8);
+        Operation bpa9 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPARegistrarse);
         bpa9.setImagen(R.drawable.banco_bpa_registro);
         bpa9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.IixhA1yamp");
         bpa9.setActivo(true);
-        db.updateOperacion(bpa9);
-
-        Operacion bpa10 = db.getOperacion(BankOperationCode.BPACambiarclave);
+        DatabaseHelper.getInstance().updateOperacion(bpa9);
+        Operation bpa10 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPACambiarclave);
         bpa10.setImagen(R.drawable.banco_bpa_pin);
         bpa10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.PQmKwgxZd1");
         bpa10.setActivo(true);
-        db.updateOperacion(bpa10);
-
-        Operacion bpa11 = db.getOperacion(BankOperationCode.BPADesconectar);
+        DatabaseHelper.getInstance().updateOperacion(bpa10);
+        Operation bpa11 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPADesconectar);
         bpa11.setImagen(R.drawable.banco_bpa_salir);
         bpa11.setActivo(true);
-        db.updateOperacion(bpa11);
-
-        Operacion bpa12 = db.getOperacion(BankOperationCode.BPARecargaMovil);
+        DatabaseHelper.getInstance().updateOperacion(bpa11);
+        Operation bpa12 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPARecargaMovil);
         bpa12.setImagen(R.drawable.banco_bpa_recarga);
         bpa12.setFragment_name(BuildConfig.FLAVOR);
         bpa12.setActivo(true);
-        db.updateOperacion(bpa12);
-
-        Operacion recargaNautaBPA = db.getOperacion(BankOperationCode.BPARecargaNauta);
+        DatabaseHelper.getInstance().updateOperacion(bpa12);
+        Operation recargaNautaBPA = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPARecargaNauta);
         recargaNautaBPA.setImagen(R.drawable.banco_bpa_nauta);
-        db.updateOperacion(recargaNautaBPA);
-
-        Operacion bpa13 = db.getOperacion(BankOperationCode.BPACambioLimite);
+        DatabaseHelper.getInstance().updateOperacion(recargaNautaBPA);
+        Operation bpa13 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPACambioLimite);
         bpa13.setImagen(R.drawable.banco_bpa_cambio_limite);
         bpa13.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.qmcwKV1fzU");
         bpa13.setActivo(true);
-        db.updateOperacion(bpa13);
-
-        Operacion bpa14 = db.getOperacion(BankOperationCode.BPAConsultaLimite);
+        DatabaseHelper.getInstance().updateOperacion(bpa13);
+        Operation bpa14 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAConsultaLimite);
         bpa14.setImagen(R.drawable.banco_bpa_consulta_limite);
         bpa14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.GF0vcofd59d.e8WK1Uajbq");
         bpa14.setActivo(true);
-        db.updateOperacion(bpa14);
-
-        Operacion amortizarBPA = db.getOperacion(BankOperationCode.BPAAmortizar);
+        DatabaseHelper.getInstance().updateOperacion(bpa14);
+        Operation amortizarBPA = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAAmortizar);
         amortizarBPA.setImagen(R.drawable.banco_bpa_amortizar);
         amortizarBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.Dm6u4PA5eg");
         amortizarBPA.setActivo(true);
-        db.updateOperacion(amortizarBPA);
-
-        Operacion consultaCreditoBPA = db.getOperacion(BankOperationCode.BPAConsultaCredito);
-        consultaCreditoBPA.setImagen(R.drawable.banco_bpa_consulta_creditos);
-        consultaCreditoBPA.setFragment_name(BuildConfig.FLAVOR);
-        consultaCreditoBPA.setActivo(true);
-        db.updateOperacion(consultaCreditoBPA);
-
-        Operacion giroBPA = db.getOperacion(BankOperationCode.BPAGiroPostal);
+        DatabaseHelper.getInstance().updateOperacion(amortizarBPA);
+        Operation consultacreditoBPA = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAConsultaCredito);
+        consultacreditoBPA.setImagen(R.drawable.banco_bpa_consulta_creditos);
+        consultacreditoBPA.setFragment_name(BuildConfig.FLAVOR);
+        consultacreditoBPA.setActivo(true);
+        DatabaseHelper.getInstance().updateOperacion(consultacreditoBPA);
+        Operation giroBPA = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAGiroPostal);
         giroBPA.setImagen(R.drawable.banco_bpa_giro);
         giroBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.o6kycf55Gw");
         giroBPA.setActivo(true);
-        db.updateOperacion(giroBPA);
-
-        Operacion consultaGiroBPA = db.getOperacion(BankOperationCode.BPAConsultarGiroPostal);
+        DatabaseHelper.getInstance().updateOperacion(giroBPA);
+        Operation consultaGiroBPA = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAConsultarGiroPostal);
         consultaGiroBPA.setImagen(R.drawable.banco_bpa_consulta_giro);
         consultaGiroBPA.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.XvOK7VM4qL");
         consultaGiroBPA.setActivo(true);
-        db.updateOperacion(consultaGiroBPA);
-
-        Operacion consultaIntegradaBPA = db.getOperacion(BankOperationCode.BPAConsultarTodasCuentas);
+        DatabaseHelper.getInstance().updateOperacion(consultaGiroBPA);
+        Operation consultaIntegradaBPA = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAConsultarTodasCuentas);
         consultaIntegradaBPA.setImagen(R.drawable.banco_bpa_consulta_integrada);
         consultaIntegradaBPA.setFragment_name(BuildConfig.FLAVOR);
         consultaIntegradaBPA.setActivo(true);
-        db.updateOperacion(consultaIntegradaBPA);
-
-        Operacion pagoExternoBPA = db.getOperacion(BankOperationCode.BPAPagoExterno);
-        pagoExternoBPA.setImagen(R.drawable.banco_bpa_compra);
-        pagoExternoBPA.setFragment_name(BuildConfig.FLAVOR);
-        pagoExternoBPA.setActivo(true);
-        db.updateOperacion(pagoExternoBPA);
-
-        Operacion propiaBPA = db.getOperacion(BankOperationCode.BPARecargaPropia);
+        DatabaseHelper.getInstance().updateOperacion(consultaIntegradaBPA);
+        Operation pExternobpa = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAPagoExterno);
+        pExternobpa.setImagen(R.drawable.banco_bpa_compra);
+        pExternobpa.setFragment_name(BuildConfig.FLAVOR);
+        pExternobpa.setActivo(true);
+        DatabaseHelper.getInstance().updateOperacion(pExternobpa);
+        Operation propiaBPA = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPARecargaPropia);
         propiaBPA.setImagen(R.drawable.banco_bpa_recarga_propia);
         propiaBPA.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(propiaBPA);
-
-        Operacion bpaAgua = db.getOperacion(BankOperationCode.BPAAgua);
+        DatabaseHelper.getInstance().updateOperacion(propiaBPA);
+        Operation bpaAgua = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAAgua);
         bpaAgua.setImagen(R.drawable.banco_bpa_agua);
         bpaAgua.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.zOs55UzH6z");
-        db.updateOperacion(bpaAgua);
-
-        Operacion bpaGas = db.getOperacion(BankOperationCode.BPAGas);
+        DatabaseHelper.getInstance().updateOperacion(bpaAgua);
+        Operation bpaGas = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAGas);
         bpaGas.setImagen(R.drawable.banco_bpa_gas);
         bpaGas.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.FgpBLXKm6t");
-        db.updateOperacion(bpaGas);
-
-        Operacion bpaJClub = db.getOperacion(BankOperationCode.BPAJClub);
+        DatabaseHelper.getInstance().updateOperacion(bpaGas);
+        Operation bpaJClub = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAJClub);
         bpaJClub.setImagen(R.drawable.banco_bpa_jclub);
         bpaJClub.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(bpaJClub);
-
-        Operacion bpaTicket = db.getOperacion(BankOperationCode.BPAReservasTicket);
+        DatabaseHelper.getInstance().updateOperacion(bpaJClub);
+        Operation bpaTicket = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAReservasTicket);
         bpaTicket.setImagen(R.drawable.ico_ticket_reserva_bpa);
         bpaTicket.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(bpaTicket);
+        DatabaseHelper.getInstance().updateOperacion(bpaTicket);
     }
 
-    /**
-     * Updates BANDEC bank operation icons for a specific version.
-     * NOTE: Also updates BPAJClub at the end (appears to be intentional cross-bank update).
-     */
     public void update_bandec(int version) {
-        DatabaseHelper db = DatabaseHelper.getInstance();
-
-        // Same pattern as update_bpa: get by code, set new banco_bandec_* icon, update.
-        // 27 operations updated with new icons.
-        // Notable: BANUltimosPagos explicitly sets tipo_serivicio to BANDEC.
-        // Notable: BANRecargaPropia re-sets its operacion code.
-        // Notable: Last entry updates BPAJClub (cross-bank).
-
-        Operacion bandec1 = db.getOperacion(BankOperationCode.BANAutenticar);
+        Operation bandec1 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANAutenticar);
         bandec1.setImagen(R.drawable.banco_bandec_auth_login);
         bandec1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TGFziPh3KJ");
         bandec1.setActivo(true);
-        db.updateOperacion(bandec1);
-
-        Operacion bandec2 = db.getOperacion(BankOperationCode.BANTransferencia);
+        DatabaseHelper.getInstance().updateOperacion(bandec1);
+        Operation bandec2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANTransferencia);
         bandec2.setImagen(R.drawable.banco_bandec_transfer);
         bandec2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ZDkigMAIBm");
         bandec2.setActivo(true);
-        db.updateOperacion(bandec2);
-
-        Operacion bandec3 = db.getOperacion(BankOperationCode.BANElectricidad);
+        DatabaseHelper.getInstance().updateOperacion(bandec2);
+        Operation bandec3 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANElectricidad);
         bandec3.setImagen(R.drawable.banco_bandec_electric);
         bandec3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.Q3Nvf439ab");
         bandec3.setActivo(true);
-        db.updateOperacion(bandec3);
-
-        Operacion bandec4 = db.getOperacion(BankOperationCode.BANTelefono);
+        DatabaseHelper.getInstance().updateOperacion(bandec3);
+        Operation bandec4 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANTelefono);
         bandec4.setImagen(R.drawable.banco_bandec_telefono);
         bandec4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.iQte15zdZs");
         bandec4.setActivo(true);
-        db.updateOperacion(bandec4);
-
-        Operacion bandec5 = db.getOperacion(BankOperationCode.BANONAT);
+        DatabaseHelper.getInstance().updateOperacion(bandec4);
+        Operation bandec5 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANONAT);
         bandec5.setImagen(R.drawable.banco_bandec_onat);
         bandec5.setFragment_name(BuildConfig.FLAVOR);
         bandec5.setActivo(true);
-        db.updateOperacion(bandec5);
-
-        Operacion bandec6 = db.getOperacion(BankOperationCode.BANConsultarSaldo);
+        DatabaseHelper.getInstance().updateOperacion(bandec5);
+        Operation bandec6 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANConsultarSaldo);
         bandec6.setImagen(R.drawable.banco_bandec_consult_saldo);
         bandec6.setActivo(true);
-        db.updateOperacion(bandec6);
-
-        Operacion bandec7 = db.getOperacion(BankOperationCode.BANConsultarServicio);
+        DatabaseHelper.getInstance().updateOperacion(bandec6);
+        Operation bandec7 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANConsultarServicio);
         bandec7.setImagen(R.drawable.banco_bandec_consult_serv);
         bandec7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.idsoBKS8L3");
         bandec7.setActivo(true);
-        db.updateOperacion(bandec7);
-
-        Operacion bandec8 = db.getOperacion(BankOperationCode.BANUltimasoperaciones);
+        DatabaseHelper.getInstance().updateOperacion(bandec7);
+        Operation bandec8 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANUltimasoperaciones);
         bandec8.setImagen(R.drawable.banco_bandec_ult_oper);
         bandec8.setActivo(true);
-        db.updateOperacion(bandec8);
-
-        Operacion bandec9 = db.getOperacion(BankOperationCode.BANRegistrarse);
+        DatabaseHelper.getInstance().updateOperacion(bandec8);
+        Operation bandec9 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANRegistrarse);
         bandec9.setImagen(R.drawable.banco_bandec_register);
         bandec9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.wLHKkaC4Ha");
         bandec9.setActivo(true);
-        db.updateOperacion(bandec9);
-
-        Operacion bandec10 = db.getOperacion(BankOperationCode.BANCambiarclave);
+        DatabaseHelper.getInstance().updateOperacion(bandec9);
+        Operation bandec10 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANCambiarclave);
         bandec10.setImagen(R.drawable.banco_bandec_cambio_clave);
         bandec10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.FtAKxvNjrD");
         bandec10.setActivo(true);
-        db.updateOperacion(bandec10);
-
-        Operacion bandec11 = db.getOperacion(BankOperationCode.BANDesconectar);
+        DatabaseHelper.getInstance().updateOperacion(bandec10);
+        Operation bandec11 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANDesconectar);
         bandec11.setImagen(R.drawable.banco_bandec_salir);
         bandec11.setActivo(true);
-        db.updateOperacion(bandec11);
-
-        Operacion bandec12 = db.getOperacion(BankOperationCode.BANEliminarRegistro);
+        DatabaseHelper.getInstance().updateOperacion(bandec11);
+        Operation bandec12 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANEliminarRegistro);
         bandec12.setImagen(R.drawable.banco_bandec_eliminar_registro);
         bandec12.setActivo(true);
-        db.updateOperacion(bandec12);
-
-        Operacion bandec13 = db.getOperacion(BankOperationCode.BANRecargaMovil);
+        DatabaseHelper.getInstance().updateOperacion(bandec12);
+        Operation bandec13 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANRecargaMovil);
         bandec13.setImagen(R.drawable.banco_bandec_recarga2);
         bandec13.setFragment_name(BuildConfig.FLAVOR);
         bandec13.setActivo(true);
-        db.updateOperacion(bandec13);
-
-        Operacion bandec14 = db.getOperacion(BankOperationCode.BANCambioLimite);
+        DatabaseHelper.getInstance().updateOperacion(bandec13);
+        Operation bandec14 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANCambioLimite);
         bandec14.setImagen(R.drawable.banco_bandec_cambio_limite);
         bandec14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.nNSC8tRyptP.uWkWt7AEZ5");
         bandec14.setActivo(true);
-        db.updateOperacion(bandec14);
-
-        Operacion bandec15 = db.getOperacion(BankOperationCode.BANConsultaLimite);
+        DatabaseHelper.getInstance().updateOperacion(bandec14);
+        Operation bandec15 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANConsultaLimite);
         bandec15.setImagen(R.drawable.banco_bandec_consulta_limite);
         bandec15.setActivo(true);
-        db.updateOperacion(bandec15);
-
-        Operacion bandec16 = db.getOperacion(BankOperationCode.BANUltimosPagos);
+        DatabaseHelper.getInstance().updateOperacion(bandec15);
+        Operation bandec16 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANUltimosPagos);
         bandec16.setImagen(R.drawable.banco_bandec_ultimos_pagos);
         bandec16.setTipo_serivicio(BankType.BANDEC);
         bandec16.setActivo(true);
-        db.updateOperacion(bandec16);
-
-        Operacion bandec17 = db.getOperacion(BankOperationCode.BANCambioCuenta);
+        DatabaseHelper.getInstance().updateOperacion(bandec16);
+        Operation bandec17 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANCambioCuenta);
         bandec17.setImagen(R.drawable.banco_bandec_cambio_cuenta);
         bandec17.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.o9swVUfDl4q");
         bandec17.setActivo(true);
-        db.updateOperacion(bandec17);
-
-        Operacion bandec18 = db.getOperacion(BankOperationCode.BANAmortizar);
+        DatabaseHelper.getInstance().updateOperacion(bandec17);
+        Operation bandec18 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANAmortizar);
         bandec18.setImagen(R.drawable.banco_bandec_amortizar_credito);
         bandec18.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.LZaBQezxPC");
         bandec18.setActivo(true);
-        db.updateOperacion(bandec18);
-
-        Operacion bandec19 = db.getOperacion(BankOperationCode.BANConsultarTodasCuentas);
+        DatabaseHelper.getInstance().updateOperacion(bandec18);
+        Operation bandec19 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANConsultarTodasCuentas);
         bandec19.setImagen(R.drawable.banco_bandec_consultar_todas_cuentas);
         bandec19.setActivo(true);
-        db.updateOperacion(bandec19);
-
-        Operacion recargaNautaBANDEC = db.getOperacion(BankOperationCode.BANRecargaNauta);
+        DatabaseHelper.getInstance().updateOperacion(bandec19);
+        Operation recargaNautaBANDEC = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANRecargaNauta);
         recargaNautaBANDEC.setImagen(R.drawable.banco_bandec_nauta);
-        db.updateOperacion(recargaNautaBANDEC);
-
-        Operacion giroBandec = db.getOperacion(BankOperationCode.BANGiroPostal);
+        DatabaseHelper.getInstance().updateOperacion(recargaNautaBANDEC);
+        Operation giroBandec = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANGiroPostal);
         giroBandec.setImagen(R.drawable.banco_bandec_giro);
         giroBandec.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.ASLdujtVtr");
         giroBandec.setActivo(true);
-        db.updateOperacion(giroBandec);
-
-        Operacion consultaGiroBandec = db.getOperacion(BankOperationCode.BANConsultarGiroPostal);
-        consultaGiroBandec.setImagen(R.drawable.banco_bandec_giro);
-        consultaGiroBandec.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.gsthr0APCT");
-        consultaGiroBandec.setActivo(true);
-        db.updateOperacion(consultaGiroBandec);
-
-        Operacion pagoExternoBandec = db.getOperacion(BankOperationCode.BANPagoExterno);
-        pagoExternoBandec.setImagen(R.drawable.banco_bandec_compra);
-        pagoExternoBandec.setFragment_name(BuildConfig.FLAVOR);
-        pagoExternoBandec.setActivo(true);
-        db.updateOperacion(pagoExternoBandec);
-
-        Operacion gas = db.getOperacion(BankOperationCode.BANGas);
-        gas.setTitulo(context.getString(R.string.title_service_metro_gas));
-        gas.setSubtitulo(context.getString(R.string.sub_service_metro_gas));
+        DatabaseHelper.getInstance().updateOperacion(giroBandec);
+        Operation conusltaGiroBandec = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANConsultarGiroPostal);
+        conusltaGiroBandec.setImagen(R.drawable.banco_bandec_giro);
+        conusltaGiroBandec.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.gsthr0APCT");
+        conusltaGiroBandec.setActivo(true);
+        DatabaseHelper.getInstance().updateOperacion(conusltaGiroBandec);
+        Operation pExternoBandec = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANPagoExterno);
+        pExternoBandec.setImagen(R.drawable.banco_bandec_compra);
+        pExternoBandec.setFragment_name(BuildConfig.FLAVOR);
+        pExternoBandec.setActivo(true);
+        DatabaseHelper.getInstance().updateOperacion(pExternoBandec);
+        Operation gas = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANGas);
+        gas.setTitulo(this.context.getString(R.string.title_service_metro_gas));
+        gas.setSubtitulo(this.context.getString(R.string.sub_service_metro_gas));
         gas.setImagen(R.drawable.banco_bandec_gas);
         gas.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.aiwIHVBe0c");
-        db.updateOperacion(gas);
-
-        Operacion propia = db.getOperacion(BankOperationCode.BANRecargaPropia);
+        DatabaseHelper.getInstance().updateOperacion(gas);
+        DatabaseHelper unyp8vqthy = DatabaseHelper.getInstance();
+        BankOperationCode fdonIAFI9w = BankOperationCode.BANRecargaPropia;
+        Operation propia = unyp8vqthy.getOperacion(fdonIAFI9w);
         propia.setImagen(R.drawable.banco_bandec_recarga_propia);
         propia.setFragment_name(BuildConfig.FLAVOR);
         propia.setActivo(true);
-        propia.setOperacion(BankOperationCode.BANRecargaPropia);
-        db.updateOperacion(propia);
-
-        Operacion bandecAgua = db.getOperacion(BankOperationCode.BANAgua);
+        propia.setOperacion(fdonIAFI9w);
+        DatabaseHelper.getInstance().updateOperacion(propia);
+        Operation bandecAgua = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANAgua);
         bandecAgua.setImagen(R.drawable.banco_bandec_agua);
         bandecAgua.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.uWXPvgMX2Iw.T4RQ5wDJDt");
-        db.updateOperacion(bandecAgua);
-
-        // Cross-bank: also update BPA JClub icon in this method
-        Operacion recargaJClubBPA = db.getOperacion(BankOperationCode.BPAJClub);
+        DatabaseHelper.getInstance().updateOperacion(bandecAgua);
+        Operation recargaJClubBPA = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAJClub);
         recargaJClubBPA.setImagen(R.drawable.banco_bpa_jclub);
         recargaJClubBPA.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(recargaJClubBPA);
+        DatabaseHelper.getInstance().updateOperacion(recargaJClubBPA);
     }
 
-    /**
-     * Updates Metropolitano bank operation icons for a specific version.
-     */
     public void update_metro(int version) {
-        DatabaseHelper db = DatabaseHelper.getInstance();
-
-        // Same pattern: get by code, set banco_metro_* icon, update.
-        // Notable: METROCambioLimite and METROConsultaTodasCuentas re-set their operacion codes.
-
-        Operacion metro1 = db.getOperacion(BankOperationCode.METROAutenticarse);
+        Operation metro1 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROAutenticarse);
         metro1.setImagen(R.drawable.banco_metro_autenticar);
         metro1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.PAZK2sdsJ5");
         metro1.setActivo(true);
-        db.updateOperacion(metro1);
-
-        Operacion metro2 = db.getOperacion(BankOperationCode.METROConsultarSaldo);
+        DatabaseHelper.getInstance().updateOperacion(metro1);
+        Operation metro2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROConsultarSaldo);
         metro2.setImagen(R.drawable.banco_metro_consultar);
         metro2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.dVxDCMi9cK");
         metro2.setActivo(true);
-        db.updateOperacion(metro2);
-
-        Operacion metro3 = db.getOperacion(BankOperationCode.METROConsultarServicio);
+        DatabaseHelper.getInstance().updateOperacion(metro2);
+        Operation metro3 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROConsultarServicio);
         metro3.setImagen(R.drawable.banco_metro_telebanca);
         metro3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.hJhf3aumcr");
         metro3.setActivo(true);
-        db.updateOperacion(metro3);
-
-        Operacion metro4 = db.getOperacion(BankOperationCode.METROTransferirEfectivo);
+        DatabaseHelper.getInstance().updateOperacion(metro3);
+        Operation metro4 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROTransferirEfectivo);
         metro4.setImagen(R.drawable.banco_metro_transferir);
         metro4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.x6Wob3Sa98U");
         metro4.setActivo(true);
-        db.updateOperacion(metro4);
-
-        Operacion metro5 = db.getOperacion(BankOperationCode.METROTelefono);
+        DatabaseHelper.getInstance().updateOperacion(metro4);
+        Operation metro5 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROTelefono);
         metro5.setImagen(R.drawable.banco_metro_telefono);
         metro5.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.pnl2Kga8j7");
         metro5.setActivo(true);
-        db.updateOperacion(metro5);
-
-        Operacion metro6 = db.getOperacion(BankOperationCode.METROElectricidad);
+        DatabaseHelper.getInstance().updateOperacion(metro5);
+        Operation metro6 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROElectricidad);
         metro6.setImagen(R.drawable.banco_metro_pelectrica);
         metro6.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.PliSaYhOg0");
         metro6.setActivo(true);
-        db.updateOperacion(metro6);
-
-        Operacion metro7 = db.getOperacion(BankOperationCode.METROAgua);
+        DatabaseHelper.getInstance().updateOperacion(metro6);
+        Operation metro7 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROAgua);
         metro7.setImagen(R.drawable.banco_metro_pagua);
         metro7.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.BoMBck6OXT");
         metro7.setActivo(true);
-        db.updateOperacion(metro7);
-
-        Operacion metro8 = db.getOperacion(BankOperationCode.METROImpuestos);
+        DatabaseHelper.getInstance().updateOperacion(metro7);
+        Operation metro8 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROImpuestos);
         metro8.setImagen(R.drawable.banco_metro_onat);
         metro8.setActivo(true);
-        db.updateOperacion(metro8);
-
-        Operacion metro9 = db.getOperacion(BankOperationCode.METROUltimasoperaciones);
+        DatabaseHelper.getInstance().updateOperacion(metro8);
+        Operation metro9 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROUltimasoperaciones);
         metro9.setImagen(R.drawable.banco_metro_uoperaciones);
         metro9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.GhhAuUBVrI");
         metro9.setActivo(true);
-        db.updateOperacion(metro9);
-
-        Operacion metro10 = db.getOperacion(BankOperationCode.METRORegistrarse);
+        DatabaseHelper.getInstance().updateOperacion(metro9);
+        Operation metro10 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METRORegistrarse);
         metro10.setImagen(R.drawable.banco_metro_registro);
         metro10.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.RFBEnXW0Xr");
         metro10.setActivo(true);
-        db.updateOperacion(metro10);
-
-        Operacion metro11 = db.getOperacion(BankOperationCode.METRODesconectar);
+        DatabaseHelper.getInstance().updateOperacion(metro10);
+        Operation metro11 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METRODesconectar);
         metro11.setImagen(R.drawable.banco_metro_cerrar);
         metro11.setActivo(true);
-        db.updateOperacion(metro11);
-
-        Operacion metro12 = db.getOperacion(BankOperationCode.METROActualizarcuenta);
+        DatabaseHelper.getInstance().updateOperacion(metro11);
+        Operation metro12 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROActualizarcuenta);
         metro12.setImagen(R.drawable.banco_metro_actualizar);
         metro12.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.uurdBwh7ub");
         metro12.setActivo(true);
-        db.updateOperacion(metro12);
-
-        Operacion metro13 = db.getOperacion(BankOperationCode.METRORecargaMovil);
+        DatabaseHelper.getInstance().updateOperacion(metro12);
+        Operation metro13 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METRORecargaMovil);
         metro13.setImagen(R.drawable.banco_metro_recarga);
         metro13.setFragment_name(BuildConfig.FLAVOR);
         metro13.setActivo(true);
-        db.updateOperacion(metro13);
-
-        Operacion metro14 = db.getOperacion(BankOperationCode.METROCambioLimite);
+        DatabaseHelper.getInstance().updateOperacion(metro13);
+        DatabaseHelper unyp8vqthy = DatabaseHelper.getInstance();
+        BankOperationCode fdonIAFI9w = BankOperationCode.METROCambioLimite;
+        Operation metro14 = unyp8vqthy.getOperacion(fdonIAFI9w);
         metro14.setImagen(R.drawable.banco_metro_cambio_limite);
         metro14.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.G8E5Fjf9l7Y1.xR6zA9CmCE");
         metro14.setActivo(true);
-        metro14.setOperacion(BankOperationCode.METROCambioLimite);
-        db.updateOperacion(metro14);
-
-        Operacion metro16 = db.getOperacion(BankOperationCode.METROConsultaTodasCuentas);
+        metro14.setOperacion(fdonIAFI9w);
+        DatabaseHelper.getInstance().updateOperacion(metro14);
+        DatabaseHelper unyp8vqthy2 = DatabaseHelper.getInstance();
+        BankOperationCode fdonIAFI9w2 = BankOperationCode.METROConsultaTodasCuentas;
+        Operation metro16 = unyp8vqthy2.getOperacion(fdonIAFI9w2);
         metro16.setImagen(R.drawable.banco_metro_consultar_todas_cuentas);
         metro16.setFragment_name(BuildConfig.FLAVOR);
         metro16.setActivo(true);
-        metro16.setOperacion(BankOperationCode.METROConsultaTodasCuentas);
-        db.updateOperacion(metro16);
-
-        Operacion metro15 = db.getOperacion(BankOperationCode.METROConsultaLimite);
+        metro16.setOperacion(fdonIAFI9w2);
+        DatabaseHelper.getInstance().updateOperacion(metro16);
+        DatabaseHelper unyp8vqthy3 = DatabaseHelper.getInstance();
+        BankOperationCode fdonIAFI9w3 = BankOperationCode.METROConsultaLimite;
+        Operation metro15 = unyp8vqthy3.getOperacion(fdonIAFI9w3);
         metro15.setImagen(R.drawable.banco_metro_consulta_limite);
         metro15.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.Aj11H1nzNkW.gkzzwVYksz");
         metro15.setActivo(true);
-        metro15.setOperacion(BankOperationCode.METROConsultaLimite);
-        db.updateOperacion(metro15);
-
-        Operacion recargaNauta = db.getOperacion(BankOperationCode.METRORecargaNauta);
+        metro15.setOperacion(fdonIAFI9w3);
+        DatabaseHelper.getInstance().updateOperacion(metro15);
+        Operation recargaNauta = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METRORecargaNauta);
         recargaNauta.setImagen(R.drawable.banco_metro_nauta);
-        db.updateOperacion(recargaNauta);
-
-        Operacion giroMetro = db.getOperacion(BankOperationCode.METROGiroPostal);
+        DatabaseHelper.getInstance().updateOperacion(recargaNauta);
+        Operation giroMetro = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROGiroPostal);
         giroMetro.setImagen(R.drawable.banco_metro_giro);
         giroMetro.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.mhElzRz7zH");
         giroMetro.setActivo(true);
-        db.updateOperacion(giroMetro);
-
-        Operacion consultaGiroMetro = db.getOperacion(BankOperationCode.METROConsultarGiroPostal);
+        DatabaseHelper.getInstance().updateOperacion(giroMetro);
+        Operation consultaGiroMetro = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROConsultarGiroPostal);
         consultaGiroMetro.setImagen(R.drawable.banco_metro_consulta_giro);
         consultaGiroMetro.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.jyBbMyVMOV");
         consultaGiroMetro.setActivo(true);
-        db.updateOperacion(consultaGiroMetro);
-
-        Operacion reimprimirTarjeta = db.getOperacion(BankOperationCode.METROReimprimirTarjeta);
+        DatabaseHelper.getInstance().updateOperacion(consultaGiroMetro);
+        Operation reimprimirTarjeta = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROReimprimirTarjeta);
         reimprimirTarjeta.setImagen(R.drawable.banco_metro_reimprimir);
         reimprimirTarjeta.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(reimprimirTarjeta);
-
-        Operacion localizarTransferencias = db.getOperacion(BankOperationCode.METROLocalizarTransferencia);
+        DatabaseHelper.getInstance().updateOperacion(reimprimirTarjeta);
+        Operation localizarTransferencias = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROLocalizarTransferencia);
         localizarTransferencias.setImagen(R.drawable.banco_metro_localizar);
         localizarTransferencias.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(localizarTransferencias);
-
-        Operacion pagoExternoMetro = db.getOperacion(BankOperationCode.METROPagoExterno);
-        pagoExternoMetro.setImagen(R.drawable.banco_metro_compra);
-        db.updateOperacion(pagoExternoMetro);
-
-        Operacion propia = db.getOperacion(BankOperationCode.METRORecargaPropia);
+        DatabaseHelper.getInstance().updateOperacion(localizarTransferencias);
+        Operation pExternoMetro = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROPagoExterno);
+        pExternoMetro.setImagen(R.drawable.banco_metro_compra);
+        DatabaseHelper.getInstance().updateOperacion(pExternoMetro);
+        Operation propia = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METRORecargaPropia);
         propia.setImagen(R.drawable.banco_metrore_carga_propia);
         propia.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(propia);
-
-        Operacion recargaJClub = db.getOperacion(BankOperationCode.METROJClub);
+        DatabaseHelper.getInstance().updateOperacion(propia);
+        Operation recargaJClub = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROJClub);
         recargaJClub.setImagen(R.drawable.banco_metro_jclub);
         recargaJClub.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(recargaJClub);
-
-        Operacion tipoCambio = db.getOperacion(BankOperationCode.METROTipoCambio);
+        DatabaseHelper.getInstance().updateOperacion(recargaJClub);
+        Operation tipoCambio = DatabaseHelper.getInstance().getOperacion(BankOperationCode.METROTipoCambio);
         tipoCambio.setImagen(R.drawable.banco_metro_tipo_cambio);
         tipoCambio.setFragment_name(BuildConfig.FLAVOR);
-        db.updateOperacion(tipoCambio);
+        DatabaseHelper.getInstance().updateOperacion(tipoCambio);
     }
 
-    /**
-     * Updates agent operations: removes deprecated operations and refreshes icons.
-     * Deprecated operations: AGPredeterminarTarjeta, AGConsultarFactura,
-     * AGPagarFactura, AGUltimosPago, AGRectificarPago.
-     */
     public void update_agente() {
-        DatabaseHelper db = DatabaseHelper.getInstance();
-
-        // Delete deprecated agent operations
-        db.deleteOperacion(db.getOperacion(BankOperationCode.AGPredeterminarTarjeta));
-        db.deleteOperacion(db.getOperacion(BankOperationCode.AGConsultarFactura));
-        db.deleteOperacion(db.getOperacion(BankOperationCode.AGPagarFactura));
-        db.deleteOperacion(db.getOperacion(BankOperationCode.AGUltimosPago));
-        db.deleteOperacion(db.getOperacion(BankOperationCode.AGRectificarPago));
-
-        // Update traditional agent operation icons (all set to inactive)
-        Operacion recargaMovil1 = db.getOperacion(BankOperationCode.AGAutenticar);
+        Operation facturaTelefonica1 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGPredeterminarTarjeta);
+        DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica1);
+        Operation facturaTelefonica2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGConsultarFactura);
+        DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica2);
+        Operation facturaTelefonica3 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGPagarFactura);
+        DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica3);
+        Operation facturaTelefonica4 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGUltimosPago);
+        DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica4);
+        Operation facturaTelefonica5 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGRectificarPago);
+        DatabaseHelper.getInstance().deleteOperacion(facturaTelefonica5);
+        Operation recargaMovil1 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGAutenticar);
         recargaMovil1.setImagen(R.drawable.ico_agente_autenticar_color);
         recargaMovil1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.cwVwMsOO60");
         recargaMovil1.setActivo(false);
-        db.updateOperacion(recargaMovil1);
-
-        Operacion recargaMovil2 = db.getOperacion(BankOperationCode.AGConsultarSaldo);
+        DatabaseHelper.getInstance().updateOperacion(recargaMovil1);
+        Operation recargaMovil2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGConsultarSaldo);
         recargaMovil2.setImagen(R.drawable.ico_agente_consultar_color);
         recargaMovil2.setActivo(false);
-        db.updateOperacion(recargaMovil2);
-
-        Operacion recargaMovil3 = db.getOperacion(BankOperationCode.AGRecargar);
+        DatabaseHelper.getInstance().updateOperacion(recargaMovil2);
+        Operation recargaMovil3 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGRecargar);
         recargaMovil3.setImagen(R.drawable.ico_agent_recargar_color);
         recargaMovil3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.A9IFPpW4HW");
         recargaMovil3.setActivo(false);
-        db.updateOperacion(recargaMovil3);
-
-        Operacion recargaMovil4 = db.getOperacion(BankOperationCode.AGUltimasRecargas);
+        DatabaseHelper.getInstance().updateOperacion(recargaMovil3);
+        Operation recargaMovil4 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGUltimasRecargas);
         recargaMovil4.setImagen(R.drawable.ico_agente_ultimas_color);
         recargaMovil4.setActivo(false);
-        db.updateOperacion(recargaMovil4);
-
-        Operacion recargaMovil5 = db.getOperacion(BankOperationCode.AGCambiarclave);
+        DatabaseHelper.getInstance().updateOperacion(recargaMovil4);
+        Operation recargaMovil5 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGCambiarclave);
         recargaMovil5.setImagen(R.drawable.ico_agent_predet_pin_color);
         recargaMovil5.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.VqNI4JnvJD");
         recargaMovil5.setActivo(false);
-        db.updateOperacion(recargaMovil5);
-
-        Operacion recargaMovil6 = db.getOperacion(BankOperationCode.AGDesconectar);
+        DatabaseHelper.getInstance().updateOperacion(recargaMovil5);
+        Operation recargaMovil6 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGDesconectar);
         recargaMovil6.setImagen(R.drawable.ico_agente_desc_color);
         recargaMovil6.setActivo(false);
-        db.updateOperacion(recargaMovil6);
-
-        Operacion recargaNauta1 = db.getOperacion(BankOperationCode.AGRecargarNauta);
+        DatabaseHelper.getInstance().updateOperacion(recargaMovil6);
+        Operation recargaNauta1 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGRecargarNauta);
         recargaNauta1.setImagen(R.drawable.ico_agente_nauta_color);
         recargaNauta1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.I1YePWjLywK9.NdeFyyhxF1");
         recargaNauta1.setActivo(false);
-        db.updateOperacion(recargaNauta1);
-
-        Operacion recargaNauta2 = db.getOperacion(BankOperationCode.AGConsultarNautaUlt);
+        DatabaseHelper.getInstance().updateOperacion(recargaNauta1);
+        Operation recargaNauta2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.AGConsultarNautaUlt);
         recargaNauta2.setImagen(R.drawable.ico_agente_ultimas_color);
         recargaNauta2.setActivo(false);
-        db.updateOperacion(recargaNauta2);
-
-        // Update BOLSA agent operations (with null checks — may not exist)
+        DatabaseHelper.getInstance().updateOperacion(recargaNauta2);
         try {
-            Operacion ag1 = db.getOperacion(BankOperationCode.BOLSAAGFacturaTelefonica);
+            Operation ag1 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BOLSAAGFacturaTelefonica);
             if (ag1 != null) {
                 ag1.setImagen(R.drawable.bolsa_ag_factura_telefonica);
                 ag1.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.ee4tsHNQiS");
                 ag1.setActivo(false);
-                db.updateOperacion(ag1);
+                DatabaseHelper.getInstance().updateOperacion(ag1);
             }
-
-            Operacion ag2 = db.getOperacion(BankOperationCode.BOLSAAGRecargaMovil);
+            Operation ag2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BOLSAAGRecargaMovil);
             if (ag2 != null) {
                 ag2.setImagen(R.drawable.bolsa_ag_recarga_movil);
                 ag2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.f03gMUuBeK");
                 ag2.setActivo(false);
-                db.updateOperacion(ag2);
+                DatabaseHelper.getInstance().updateOperacion(ag2);
             }
-
-            Operacion ag3 = db.getOperacion(BankOperationCode.BOLSAAGRecargaNauta);
+            Operation ag3 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BOLSAAGRecargaNauta);
             if (ag3 != null) {
                 ag3.setImagen(R.drawable.bolsa_ag_recarga_nauta);
                 ag3.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.yww1pS0VKU");
                 ag3.setActivo(false);
-                db.updateOperacion(ag3);
+                DatabaseHelper.getInstance().updateOperacion(ag3);
             }
-
-            Operacion ag4 = db.getOperacion(BankOperationCode.BOLSAAGRecargaPropia);
+            Operation ag4 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BOLSAAGRecargaPropia);
             if (ag4 != null) {
                 ag4.setImagen(R.drawable.bolsa_ag_recarga_propia);
                 ag4.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.BpgQdOQz0p");
                 ag4.setActivo(false);
-                db.updateOperacion(ag4);
+                DatabaseHelper.getInstance().updateOperacion(ag4);
             }
         } catch (Exception e) {
-            // Silently ignore — BOLSA agent operations may not exist
         }
     }
 
-    // =========================================================================
-    // Reference data loaders: populate geographic and tax lookup tables
-    // from JSON assets bundled in the APK.
-    // =========================================================================
-
-    /**
-     * Loads province (Provincia) data from dpa.json asset into the database.
-     * JSON structure: {"Prov": [{"Prov": "01", "Nombre": "...", "Abreviatura": "..."}]}
-     */
     public void fill_provincias(Context context) {
         try {
-            String json = loadJSONFromAsset("dpa.json", context);
-            JSONObject root = new JSONObject(json);
-            JSONArray provinces = root.getJSONArray("Prov");
-            for (int i = 0; i < provinces.length(); i++) {
+            String jsonLocation = loadJSONFromAsset("dpa.json", context);
+            JSONObject jsonobject = new JSONObject(jsonLocation);
+            JSONArray jarray = jsonobject.getJSONArray("Prov");
+            for (int i = 0; i < jarray.length(); i++) {
                 try {
-                    JSONObject obj = provinces.getJSONObject(i);
-                    Provincia p = new Provincia();
-                    p.setCod_provincia(obj.getString("Prov"));
-                    p.setNombre(obj.getString("Nombre"));
-                    p.setAbreviatura(obj.getString("Abreviatura"));
+                    JSONObject jb = (JSONObject) jarray.get(i);
+                    String cod = jb.getString("Prov");
+                    String nombre = jb.getString("Nombre");
+                    String abreviatura = jb.getString("Abreviatura");
+                    Province p = new Province();
+                    p.setCod_provincia(cod);
+                    p.setNombre(nombre);
+                    p.setAbreviatura(abreviatura);
                     DatabaseHelper.getInstance().addProvincia(p);
                 } catch (Exception e) {
-                    // Skip malformed entries
                 }
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (JSONException e2) {
+            e2.printStackTrace();
         }
     }
 
-    /**
-     * Loads municipality (Municipio) data from dpa.json asset into the database.
-     * JSON structure: {"Mun": [{"Mun": "01", "Prov": "01", "Nombre": "...", "Abreviatura": "..."}]}
-     */
     public void fill_municipios(Context context) {
         try {
-            String json = loadJSONFromAsset("dpa.json", context);
-            JSONObject root = new JSONObject(json);
-            JSONArray municipalities = root.getJSONArray("Mun");
-            for (int i = 0; i < municipalities.length(); i++) {
+            String jsonLocation = loadJSONFromAsset("dpa.json", context);
+            JSONObject jsonobject = new JSONObject(jsonLocation);
+            JSONArray jarray = jsonobject.getJSONArray("Mun");
+            for (int i = 0; i < jarray.length(); i++) {
                 try {
-                    JSONObject obj = municipalities.getJSONObject(i);
-                    Municipio m = new Municipio();
-                    m.setCod_municipio(obj.getString("Mun"));
-                    m.setCod_provincia(obj.getString("Prov"));
-                    m.setNombre(obj.getString("Nombre"));
-                    m.setAbreviatura(obj.getString("Abreviatura"));
-                    DatabaseHelper.getInstance().addMunicipio(m);
+                    JSONObject jb = (JSONObject) jarray.get(i);
+                    String cod_municipio = jb.getString("Mun");
+                    String cod_provincia = jb.getString("Prov");
+                    String nombre = jb.getString("Nombre");
+                    String abreviatura = jb.getString("Abreviatura");
+                    Municipality p = new Municipality();
+                    p.setCodMunicipio(cod_municipio);
+                    p.setCodProvincia(cod_provincia);
+                    p.setNombre(nombre);
+                    p.setAbreviatura(abreviatura);
+                    DatabaseHelper.getInstance().addMunicipio(p);
                 } catch (Exception e) {
-                    // Skip malformed entries
                 }
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (JSONException e2) {
+            e2.printStackTrace();
         }
     }
 
-    /**
-     * Loads tax code (Tributo) data from tributos.json asset into the database.
-     * Used by ONAT (tax authority) payment operations.
-     * JSON structure: {"tributos": [{"Codigo": "...", "Nombre": "...",
-     *   "Abreviatura": "...", "TipoPersona": "...", "Moneda": "...", "Tipo": "..."}]}
-     */
     public void fill_tributos(Context context) {
         try {
-            String json = loadJSONFromAsset("tributos.json", context);
-            JSONObject root = new JSONObject(json);
-            JSONArray tributos = root.getJSONArray("tributos");
-            for (int i = 0; i < tributos.length(); i++) {
+            String jsonLocation = loadJSONFromAsset("tributos.json", context);
+            JSONObject jsonobject = new JSONObject(jsonLocation);
+            JSONArray jarray = jsonobject.getJSONArray("tributos");
+            for (int i = 0; i < jarray.length(); i++) {
                 try {
-                    JSONObject obj = tributos.getJSONObject(i);
-                    Tributo t = new Tributo();
-                    t.setCod_tributo(obj.getString("Codigo"));
-                    t.setNombre(obj.getString("Nombre"));
-                    t.setAbreviatura(obj.getString("Abreviatura"));
-                    t.setTipo(obj.getString("Tipo"));
-                    t.setTipoPersona(obj.getString("TipoPersona"));
-                    t.setMoneda(obj.getString("Moneda"));
-                    DatabaseHelper.getInstance().addTributo(t);
+                    JSONObject jb = (JSONObject) jarray.get(i);
+                    String cod = jb.getString("Codigo");
+                    String nombre = jb.getString("Nombre");
+                    String abreviatura = jb.getString("Abreviatura");
+                    String tipoPersona = jb.getString("TipoPersona");
+                    String moneda = jb.getString("Moneda");
+                    String tipo = jb.getString("Tipo");
+                    TaxRecord p = new TaxRecord();
+                    p.setCod_tributo(cod);
+                    p.setNombre(nombre);
+                    p.setAbreviatura(abreviatura);
+                    p.setTipo(tipo);
+                    p.setTipoPersona(tipoPersona);
+                    p.setMoneda(moneda);
+                    DatabaseHelper.getInstance().addTributo(p);
                 } catch (Exception e) {
-                    // Skip malformed entries
                 }
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (JSONException e2) {
+            e2.printStackTrace();
         }
     }
 
-    /**
-     * Reads a JSON file from the app's assets directory.
-     *
-     * @param nameJson the asset filename (e.g., "dpa.json", "tributos.json")
-     * @param context  Android context for asset access
-     * @return the file contents as a UTF-8 string, or null on error
-     */
     public String loadJSONFromAsset(String nameJson, Context context) {
         try {
             InputStream is = context.getAssets().open(nameJson);
@@ -2594,7 +3841,8 @@ public class OperationMenuBuilder {
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            return new String(buffer, "UTF-8");
+            String json = new String(buffer, "UTF-8");
+            return json;
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;

@@ -2,6 +2,11 @@
 
 ## 2026-10-28 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Resolved duplicate `OperationMenuBuilder` reconstructions: removed the banking draft with omitted method bodies and restored the complete original menu logic in the data package, preserving database caller APIs and original fragment strings.
+- Restored `Operation.operacion` to the original enum type and reconstructed the missing `TaxRecord` entity with its original metadata quirks. Added/corrected verified menu, tax entity, and operation enum mappings.
+- Added `make test-reconstruction`: JVM compilation and 85 original-versus-clean method/scenario comparisons with dependency substitutes, plus enum order and inventory tests. Full Android build, real SQLite/asset behavior, and navigation remain unverified.
+- Regenerated the inventory: 70 originals with multiple candidates and 25 mapping incidences remain; updated reconstruction tasks and handoff.
+
 - Resumed reconstruction from the local Claude session, project memories, and repository handoff.
 - Added a reproducible source-to-clean inventory and `make inventory`; changed `make stats` to report exact links and inconsistencies without a completion percentage or a misleading unmapped-package list.
 - Recorded 71 original paths with multiple candidates and 28 explicit mapping incidences; added reconstruction review tasks and documented `OperationMenuBuilder` integration differences.

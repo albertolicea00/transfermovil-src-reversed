@@ -3,6 +3,7 @@ package cu.etecsa.transfermovil.data.entity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import cu.etecsa.transfermovil.core.enums.BankType;
+import cu.etecsa.transfermovil.banking.BankOperationCode;
 
 /**
  * @original_apk_version 1.260416
@@ -25,9 +26,7 @@ public class Operation {
 
     /** Bank operation code enum. obfuscated: FdonIAFI9w (BankOperationCode, 332 values) */
     @DatabaseField
-    private String operacion;
-    // Original type: BankOperationCode (obfuscated: FdonIAFI9w)
-    // Stored as String because the enum has 332 values and is not yet reconstructed.
+    private BankOperationCode operacion;
 
     @DatabaseField
     private boolean activo;
@@ -59,11 +58,11 @@ public class Operation {
         this.id = id;
     }
 
-    public String getOperacion() {
+    public BankOperationCode getOperacion() {
         return this.operacion;
     }
 
-    public void setOperacion(String operacion) {
+    public void setOperacion(BankOperationCode operacion) {
         this.operacion = operacion;
     }
 

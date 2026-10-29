@@ -71,7 +71,12 @@
       "role": "Banking auth: validateAuth() checks AOperKey table, 30-min session timeout",
       "confidence": "high"
     },
-    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FdonIAFI9w": {
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.nljtDl5MIf": {
+      "clean": "cu.etecsa.transfermovil.data.OperationMenuBuilder",
+      "role": "Operation menu installation/upgrades, duplicate repair, geographic and tax asset loaders; compared with JADX in 85 JVM method/scenario pairs",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w": {
       "clean": "cu.etecsa.transfermovil.banking.BankOperationCode",
       "role": "Enum: 332 operations across 5 banks (Metropolitano, BFI, BANDEC, BPA, Wallet)",
       "confidence": "high"
@@ -282,7 +287,7 @@
       "confidence": "high"
     },
     "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Tributo": {
-      "clean": "cu.etecsa.transfermovil.data.entity.TaxEntry",
+      "clean": "cu.etecsa.transfermovil.data.entity.TaxRecord",
       "role": "ORMLite entity: tax/tribute entry. BUG: getMetadata() says 'Nauta' not 'Tributo'",
       "confidence": "high"
     },
