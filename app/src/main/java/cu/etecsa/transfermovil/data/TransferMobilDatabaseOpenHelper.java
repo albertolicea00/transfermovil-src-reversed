@@ -13,7 +13,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import cu.etecsa.transfermovil.core.GlobalState;
 import cu.etecsa.transfermovil.core.enums.BankType;
-import cu.etecsa.transfermovil.crypto.UssdCipher;
+import cu.etecsa.transfermovil.config.ActivationCodeValidator;
 import cu.etecsa.transfermovil.data.entity.*;
 import java.io.*;
 import java.nio.channels.FileChannel;
@@ -325,7 +325,7 @@ public class TransferMobilDatabaseOpenHelper extends OrmLiteSqliteOpenHelper {
                 }
                 UpdateBuilder<AgentAccount, Integer> updateBuilderAgente = this.agentServiceListDao.updateBuilder();
                 try {
-                    UssdCipher ac = new UssdCipher();
+                    ActivationCodeValidator ac = new ActivationCodeValidator();
                     String code = ac.en_version(1, version, telefono);
                     updateBuilderAgente.updateColumnValue("code", code);
                     updateBuilderAgente.update();

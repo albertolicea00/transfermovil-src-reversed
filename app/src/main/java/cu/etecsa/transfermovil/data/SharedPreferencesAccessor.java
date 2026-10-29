@@ -3,16 +3,16 @@ package cu.etecsa.transfermovil.data;
 import android.content.Context;
 import cu.etecsa.transfermovil.base.BaseMainActivity;
 import cu.etecsa.transfermovil.data.entity.AppConfig;
-import cu.etecsa.transfermovil.data.entity.AgentService;
-import cu.etecsa.transfermovil.data.entity.BankService;
-import cu.etecsa.transfermovil.data.entity.MiBoletoService;
+import cu.etecsa.transfermovil.data.entity.AgentAccount;
+import cu.etecsa.transfermovil.data.entity.BankAccount;
+import cu.etecsa.transfermovil.data.entity.TicketServiceAccount;
 import java.util.List;
 
 /**
  * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.Fr52O1uSYF
  * @fingerprint Extends BaseMainActivity. Accessor for phone, version, agent/bank/boleto codes
- *              stored in AppConfig/AgentService/BancoService/MiBoletoService tables.
+ *              stored in AppConfig/AgentAccount/BancoService/TicketServiceAccount tables.
  */
 public class SharedPreferencesAccessor extends BaseMainActivity {
 
@@ -74,7 +74,7 @@ public class SharedPreferencesAccessor extends BaseMainActivity {
 
     public String getCodigoAgente() {
         DatabaseHelper.init(getBaseContext());
-        List<AgentService> agentConfigList = DatabaseHelper.getInstance().getAllAgentServiceLists();
+        List<AgentAccount> agentConfigList = DatabaseHelper.getInstance().getAllAgentServiceLists();
         if (agentConfigList.size() <= 0) {
             return "";
         }
@@ -83,7 +83,7 @@ public class SharedPreferencesAccessor extends BaseMainActivity {
 
     public String getCodigoAgente(Context ct) {
         DatabaseHelper.init(ct);
-        List<AgentService> agentConfigList = DatabaseHelper.getInstance().getAllAgentServiceLists();
+        List<AgentAccount> agentConfigList = DatabaseHelper.getInstance().getAllAgentServiceLists();
         if (agentConfigList.size() <= 0) {
             return "";
         }
@@ -92,13 +92,13 @@ public class SharedPreferencesAccessor extends BaseMainActivity {
 
     public void setCodigoAgente(String code) {
         DatabaseHelper.init(getBaseContext());
-        List<AgentService> agentList = DatabaseHelper.getInstance().getAllAgentServiceLists();
+        List<AgentAccount> agentList = DatabaseHelper.getInstance().getAllAgentServiceLists();
         if (agentList.size() > 0) {
-            AgentService app = agentList.get(0);
+            AgentAccount app = agentList.get(0);
             app.setCode(code);
             DatabaseHelper.getInstance().updateAgentService(app);
         } else {
-            AgentService app = new AgentService();
+            AgentAccount app = new AgentAccount();
             app.setCode(code);
             DatabaseHelper.getInstance().addAgentService(app);
         }
@@ -106,7 +106,7 @@ public class SharedPreferencesAccessor extends BaseMainActivity {
 
     public String getCodigoMiBoleto() {
         DatabaseHelper.init(getBaseContext());
-        List<MiBoletoService> list = DatabaseHelper.getInstance().getAllMiBoletoServiceLists();
+        List<TicketServiceAccount> list = DatabaseHelper.getInstance().getAllMiBoletoServiceLists();
         if (list.size() <= 0) {
             return "";
         }
@@ -115,13 +115,13 @@ public class SharedPreferencesAccessor extends BaseMainActivity {
 
     public void setCodigoMiBoleto(String code) {
         DatabaseHelper.init(getBaseContext());
-        List<MiBoletoService> list = DatabaseHelper.getInstance().getAllMiBoletoServiceLists();
+        List<TicketServiceAccount> list = DatabaseHelper.getInstance().getAllMiBoletoServiceLists();
         if (list.size() > 0) {
-            MiBoletoService app = list.get(0);
+            TicketServiceAccount app = list.get(0);
             app.setCode(code);
             DatabaseHelper.getInstance().updateMiBoletoService(app);
         } else {
-            MiBoletoService app = new MiBoletoService();
+            TicketServiceAccount app = new TicketServiceAccount();
             app.setCode(code);
             DatabaseHelper.getInstance().addMiBoletoService(app);
         }
@@ -129,7 +129,7 @@ public class SharedPreferencesAccessor extends BaseMainActivity {
 
     public String getCodigoBanco() {
         DatabaseHelper.init(getBaseContext());
-        List<BankService> bankConfigList = DatabaseHelper.getInstance().getAllBancoServiceLists();
+        List<BankAccount> bankConfigList = DatabaseHelper.getInstance().getAllBancoServiceLists();
         if (bankConfigList.size() <= 0) {
             return "";
         }
@@ -138,13 +138,13 @@ public class SharedPreferencesAccessor extends BaseMainActivity {
 
     public void setCodigoBanco(String code) {
         DatabaseHelper.init(getBaseContext());
-        List<BankService> bList = DatabaseHelper.getInstance().getAllBancoServiceLists();
+        List<BankAccount> bList = DatabaseHelper.getInstance().getAllBancoServiceLists();
         if (bList.size() > 0) {
-            BankService app = bList.get(0);
+            BankAccount app = bList.get(0);
             app.setCode(code);
             DatabaseHelper.getInstance().updateBancoService(app);
         } else {
-            BankService bank = new BankService();
+            BankAccount bank = new BankAccount();
             bank.setCode(code);
             DatabaseHelper.getInstance().addBancoService(bank);
         }

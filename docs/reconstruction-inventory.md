@@ -31,13 +31,21 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 352 | 372 | 70 |
-| Main app package | 596 | 220 | 306 | 70 |
+| All `src/` | 794 | 347 | 378 | 69 |
+| Main app package | 596 | 215 | 312 | 69 |
 
-There are 512 clean files and 73 explicit class mappings. All clean files have
+There are 516 clean files and 77 explicit class mappings. All clean files have
 an annotation resolving to an original Java path. The explicit mapping file has
-7 incidences: 6 absent clean targets and 1 absent original path. No class
-annotation conflicts remain. These counts do not establish a completion percentage.
+4 incidences, all absent clean targets. No class annotation conflicts or absent
+original paths remain. These counts do not establish a completion percentage.
+
+The accessibility service, callback registry/interface, enabled-service checker,
+and SMS receiver are reconstructed. JVM tests compare 240 accessibility event
+scenarios, five enablement scenarios, and receiver behavior with original classes
+under a fake Android API. The activation validator duplicate was consolidated
+under `config/ActivationCodeValidator`; its original algorithm matches in 3,272
+normal/error input comparisons. The JADX test oracle restores only a missing
+catch-variable declaration needed to compile the original validator.
 
 The stale paths for the base activity, USSD dispatcher, SMS sender and SMS parser
 now point to their actual files in `l08fNVC4KOKK/`; the SMS parser target and login

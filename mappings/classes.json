@@ -41,11 +41,6 @@
       "role": "ORMLite entity storing agent code and phone",
       "confidence": "high"
     },
-    "cu.etecsa.cubacel.tr.tm.O7xyZJJBFWg": {
-      "clean": "cu.etecsa.transfermovil.service.UssdAccessibilityService",
-      "role": "AccessibilityService capturing USSD dialog responses from com.android.phone",
-      "confidence": "high"
-    },
     "cu.etecsa.cubacel.tr.tm.X9ZiE8XZNKy": {
       "clean": "cu.etecsa.transfermovil.receiver.SmsReceiver",
       "role": "BroadcastReceiver for SMS (stub/no-op, real handling elsewhere)",
@@ -370,6 +365,31 @@
       "clean": "cu.etecsa.transfermovil.data.qr.QrTicketData",
       "role": "POJO: QR MiBoleto ticket data with pipe-delimited detail parser",
       "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.Jayac1C1XVL.ZJDahAOo71x.O7xyZJJBFWg": {
+      "clean": "cu.etecsa.transfermovil.service.UssdAccessibilityService",
+      "role": "AccessibilityService capturing USSD dialog responses from com.android.phone",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.Jayac1C1XVL.ZJDahAOo71x.Ax4arraYwv": {
+      "clean": "cu.etecsa.transfermovil.service.UssdCallbackRegistry",
+      "role": "Singleton registry for the USSD response callback",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.Jayac1C1XVL.ZJDahAOo71x.TVYvUziTDv": {
+      "clean": "cu.etecsa.transfermovil.service.UssdResponseCallback",
+      "role": "USSD response notification interface",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.Jayac1C1XVL.ZJDahAOo71x.w9YDCnqpz8I": {
+      "clean": "cu.etecsa.transfermovil.service.AccessibilityServiceChecker",
+      "role": "Checks package and class identity in enabled accessibility services",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.F0VSiFomrqH.hY5P1xQ5h8": {
+      "clean": "cu.etecsa.transfermovil.config.ActivationCodeValidator",
+      "role": "Agent activation code verification via phone rotation and digit differences; not USSD encryption",
+      "confidence": "high"
     }
   },
   "fields": {
@@ -390,21 +410,55 @@
       }
     },
     "cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.BancoService": {
-      "pmetro": { "clean": "pinMetropolitano", "role": "Metropolitano bank PIN (plaintext)" },
-      "pbpa": { "clean": "pinBpa", "role": "BPA bank PIN (plaintext)" },
-      "pbandec": { "clean": "pinBandec", "role": "BANDEC bank PIN (plaintext)" }
+      "pmetro": {
+        "clean": "pinMetropolitano",
+        "role": "Metropolitano bank PIN (plaintext)"
+      },
+      "pbpa": {
+        "clean": "pinBpa",
+        "role": "BPA bank PIN (plaintext)"
+      },
+      "pbandec": {
+        "clean": "pinBandec",
+        "role": "BANDEC bank PIN (plaintext)"
+      }
     },
     "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0": {
-      "encryptionKey": { "clean": "HARDCODED_AES_KEY", "value": "ABCDEFGHIJKLMNOP", "role": "AES/CBC key for scheme 3 (trivially extractable)" },
-      "HEX": { "clean": "HEX_CHARS", "role": "Hex alphabet for encoding" }
+      "encryptionKey": {
+        "clean": "HARDCODED_AES_KEY",
+        "value": "ABCDEFGHIJKLMNOP",
+        "role": "AES/CBC key for scheme 3 (trivially extractable)"
+      },
+      "HEX": {
+        "clean": "HEX_CHARS",
+        "role": "Hex alphabet for encoding"
+      }
     },
     "cu.etecsa.tm.ecommerce.qHBfDCWv13G.UhA7J2923N": {
-      "SESSION_SHARE_DATA": { "clean": "PREFS_NAME", "role": "SharedPreferences file name" },
-      "ACCESS_TOKEN": { "clean": "KEY_ACCESS_TOKEN", "role": "Bearer auth token (plaintext)" },
-      "CSRF_TOKEN": { "clean": "KEY_CSRF_TOKEN", "role": "XSRF token (plaintext)" },
-      "API_URL": { "clean": "KEY_API_URL", "role": "Dynamic e-commerce base URL" },
-      "USER_ROL": { "clean": "KEY_USER_ROL", "role": "User role string (privilege escalation risk)" },
-      "GRANTS": { "clean": "KEY_GRANTS", "role": "Pipe-delimited permission grant IDs" }
+      "SESSION_SHARE_DATA": {
+        "clean": "PREFS_NAME",
+        "role": "SharedPreferences file name"
+      },
+      "ACCESS_TOKEN": {
+        "clean": "KEY_ACCESS_TOKEN",
+        "role": "Bearer auth token (plaintext)"
+      },
+      "CSRF_TOKEN": {
+        "clean": "KEY_CSRF_TOKEN",
+        "role": "XSRF token (plaintext)"
+      },
+      "API_URL": {
+        "clean": "KEY_API_URL",
+        "role": "Dynamic e-commerce base URL"
+      },
+      "USER_ROL": {
+        "clean": "KEY_USER_ROL",
+        "role": "User role string (privilege escalation risk)"
+      },
+      "GRANTS": {
+        "clean": "KEY_GRANTS",
+        "role": "Pipe-delimited permission grant IDs"
+      }
     }
   },
   "enums": {

@@ -110,7 +110,7 @@ The accessibility service (`l08fNVC4KOKK...O7xyZJJBFWg`) extends `AccessibilityS
 3. Phone app shows USSD response dialog → `onAccessibilityEvent` fires
 4. Service checks `shouldListen == true` AND `eventType == 0x20`
 5. Extracts event text via `getText()`
-6. Text matching chain (all case-insensitive):
+6. Text matching chain (the `USSD` check is case-sensitive; the others lowercase the text):
    - Contains `"USSD"` → `performGlobalAction(GLOBAL_ACTION_BACK)` + `respondToUssd()`
    - Contains `"si"` → BACK + `respondToUssd()` + callback `onUssdReceived()`
    - Contains `"ok"` → BACK + `respondToUssd()` + callback `onUssdReceived()`
@@ -118,6 +118,14 @@ The accessibility service (`l08fNVC4KOKK...O7xyZJJBFWg`) extends `AccessibilityS
 7. `respondToUssd()` searches for button labeled `"ACEPTAR"` and clicks it (`ACTION_CLICK`)
 8. Callback via singleton `Ax4arraYwv.getInstance().getCallback()` → `TVYvUziTDv.onUssdReceived()`
 9. App broadcasts `STOP_LISTENING` when done
+
+The service and its callback/checker helpers now have complete clean counterparts
+under `app/src/main/java/cu/etecsa/transfermovil/service/`. The exact original
+service path is `l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.Jayac1C1XVL.ZJDahAOo71x.O7xyZJJBFWg`.
+`make test-reconstruction` compares 240 event/control scenarios and five service
+enablement scenarios against the original Java, using a simulated Android API.
+The same harness checks the SMS receiver entry point and alert behavior. These
+checks do not enable accessibility, dial USSD, or send SMS on a device.
 
 **Key classes:**
 

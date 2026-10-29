@@ -3,10 +3,10 @@ package cu.etecsa.transfermovil.config;
 /**
  * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.F0VSiFomrqH.hY5P1xQ5h8
- * @fingerprint Validates agent activation codes using phone number rotation + version XOR.
+ * @fingerprint Validates agent activation codes using phone number rotation + per-digit differences.
  *              Algorithm: first digit of code is rotation index; phone number is rotated
- *              left by that amount; each digit of (random + version_number) is XOR'd
- *              (absolute difference) with corresponding digit of rotated phone.
+ *              left by that amount; each digit of (random + version_number) is compared
+ *              by absolute difference with the corresponding rotated phone digit.
  *              Result must appear in the submitted code.
  */
 public class ActivationCodeValidator {
