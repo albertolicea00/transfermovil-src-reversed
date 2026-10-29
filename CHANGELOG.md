@@ -2,6 +2,9 @@
 
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Restored full source bodies for all 56 clean e-commerce model, domain, and geographic classes: original fields, constructors/defaults, inheritance, interfaces, accessors and nested DTOs. Corrected incomplete pagination filters, numeric payment/refund source IDs, missing profile/payment/QR fields and a substituted nested user type.
+- Expanded JVM parity checks to 73 original/clean class pairs including nested classes and dependencies. Added actual Gson 2.9.1 JSON-tree comparisons using a local jar (optional via `TRANSFERMOVIL_GSON_JAR` elsewhere), covering defaults and setter mutations. Preserved original Gson member keys and the QR getter's fixed version behavior.
+
 - Reconstructed `OwnCard`, `MobilePhone`, and `LandlinePhone` with original table/field metadata and corrected own-card, bank, agent, and MiBoleto DAO type identities.
 - Restored numeric two-factor login codes and request marker interfaces; reconstructed the missing API response wrapper and permission/error enums with original grant IDs.
 - Added JVM comparisons of 14 original/reconstructed model pairs, including schemas, defaults, metadata, enum IDs/order, and getters/setters. Mapping incidences decreased to 8; seven missing original-to-clean links were filled.

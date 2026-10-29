@@ -4,10 +4,18 @@ import cu.etecsa.transfermovil.ecommerce.domain.entity.Permission;
 import cu.etecsa.transfermovil.ecommerce.model.BaseApiResult;
 import java.util.List;
 
-/** @obfuscated_class cu.etecsa.tm.ecommerce.UE0rwmdgIVT.XiLHuwQSoCT.ToUwD5xX9T */
+/**
+ * @obfuscated_class cu.etecsa.tm.ecommerce.UE0rwmdgIVT.XiLHuwQSoCT.ToUwD5xX9T
+ * @original_apk_version 1.260416
+ */
 public class PermissionListResponse extends BaseApiResult {
     public List<Permission> listPermisos;
 
-    public List<Permission> getListPermisos() { return listPermisos; }
-    public void setListPermisos(List<Permission> listPermisos) { this.listPermisos = listPermisos; }
+    public List<Permission> getListPermisos() {
+        return this.listPermisos;
+    }
+
+    public void setListPermisos(List<Permission> listPermisos) {
+        this.listPermisos = listPermisos;
+    }
 }

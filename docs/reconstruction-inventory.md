@@ -47,10 +47,19 @@ the two-factor login request's `factor` has been restored from String to int,
 matching the original. Added the missing request marker, API response wrapper,
 permission/error enums, and own-card/mobile/landline entities. The own-card DAO
 now uses `OwnCard`, distinct from the MiBoleto service registration entity.
-JVM tests compare 14 original and clean model pairs: reflected fields and
-annotations, defaults, metadata, enum order/permission IDs, getters, and setters.
-Runtime annotations and JSONObject are substitutes; actual Gson serialization
-and SQLite persistence are not exercised by those comparisons.
+The complete 56-class e-commerce model/domain/geographic tree now follows the
+original bodies, including inheritance, nested classes, constructors/defaults,
+and accessors. Earlier drafts dropped filters/DTO fields, changed numeric types,
+and replaced a nested user model with a different class.
+
+JVM tests compare 73 original and clean model pairs (including nested classes and
+dependencies): reflected fields and annotations, defaults, metadata, enum
+order/permission IDs, getters, and setter mutations. A second run uses actual
+Gson to compare JSON trees at defaults and after mutations. It uses the local
+Gson 2.9.1 jar when available; set `TRANSFERMOVIL_GSON_JAR` elsewhere. The wire
+test is explicitly skipped when the jar is absent, while schema tests still run.
+JSONObject and database annotations remain substitutes, so this does not test
+SQLite persistence, real JSON-object internals, or Android UI/network flows.
 
 ### README task progress
 
