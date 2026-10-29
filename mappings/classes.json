@@ -21,7 +21,7 @@
       "role": "Agent (business) mode main activity with drawer menu",
       "confidence": "high"
     },
-    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.rDEl7rW1aN": {
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN": {
       "clean": "cu.etecsa.transfermovil.base.BaseMainActivity",
       "role": "Base activity for both Agent/General, contains USSD dispatch, encryption, SMS handling",
       "confidence": "high"
@@ -51,18 +51,18 @@
       "role": "BroadcastReceiver for SMS (stub/no-op, real handling elsewhere)",
       "confidence": "high"
     },
-    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.FBsQzP3Zfj": {
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj": {
       "clean": "cu.etecsa.transfermovil.ussd.UssdDispatcher",
       "role": "USSD code construction and dispatch (8898 lines, 12 actionCallUSSD overloads)",
       "confidence": "high"
     },
-    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.HzjedYqYeh": {
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.HzjedYqYeh": {
       "clean": "cu.etecsa.transfermovil.sms.SmsSender",
       "role": "Outgoing SMS via SmsManager (send_sms method)",
       "confidence": "high"
     },
-    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.g0xM9kQCsqu": {
-      "clean": "cu.etecsa.transfermovil.sms.SmsResponseParser",
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.g0xM9kQCsqu": {
+      "clean": "cu.etecsa.transfermovil.sms.SmsParser",
       "role": "SMS response parser (13840 lines, 32 service types, PAGOxMOVIL gateway)",
       "confidence": "high"
     },
@@ -92,12 +92,12 @@
       "confidence": "high"
     },
     "cu.etecsa.tm.ecommerce.UE0rwmdgIVT.AfjNivq1ga0.XMAvvl35Dj": {
-      "clean": "cu.etecsa.transfermovil.ecommerce.model.LoginRequest",
+      "clean": "cu.etecsa.transfermovil.ecommerce.model.request.LoginRequest",
       "role": "Login request body: email + password",
       "confidence": "high"
     },
     "cu.etecsa.tm.ecommerce.UE0rwmdgIVT.AfjNivq1ga0.L9hiDpmAir": {
-      "clean": "cu.etecsa.transfermovil.ecommerce.model.TwoFactorLoginRequest",
+      "clean": "cu.etecsa.transfermovil.ecommerce.model.request.TwoFactorLoginRequest",
       "role": "2FA login request body: email + password + factor",
       "confidence": "high"
     },
@@ -373,7 +373,7 @@
     }
   },
   "fields": {
-    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.rDEl7rW1aN": {
+    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN": {
       "cv": {
         "clean": "ENCRYPTION_KEY",
         "value": "708091521823824654864548452244",

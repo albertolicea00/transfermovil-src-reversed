@@ -20,7 +20,7 @@
 #   make stats
 #   make search Q="ACCESS_TOKEN"
 
-.PHONY: help decompile verify stats inventory test-reconstruction search search-smali search-all clean-src
+.PHONY: help decompile verify stats inventory progress test-reconstruction search search-smali search-all clean-src
 
 # Default APK path
 APK ?= .workspace/bin/cu.etecsa.cubacel.tr.tm-v162.apk
@@ -46,6 +46,10 @@ stats: ## Show reconstruction links and inconsistencies (not completion percenta
 
 inventory: ## Save exact source-to-clean review queue in .workspace/
 	@bash scripts/mapping-stats.sh --output .workspace/reconstruction-inventory.json
+	@python3 scripts/update-progress.py
+
+progress: ## Refresh README bar from completed TODO tasks
+	@python3 scripts/update-progress.py
 
 test-reconstruction: ## Check inventory and compare menus with JADX (Python 3 + JDK)
 	@PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/tests -v

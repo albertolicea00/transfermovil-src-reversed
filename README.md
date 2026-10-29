@@ -6,8 +6,10 @@
 ![Target SDK](https://img.shields.io/badge/Target%20SDK-33-green?style=flat-square)
 ![Last Update](https://img.shields.io/badge/Last%20Update-October%202026-lightgrey?style=flat-square)
 
-<!-- 50 blocks (each block █ = 2%) (░ empty blocks) --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░] 47%</code></span>
+<!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
+<span style="white-space: nowrap;"><code>[█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░] 50%</code></span>
+
+**Task-list progress: 65/130 completed; 65 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -40,7 +42,7 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 | iOS port research | Planned | Feasibility, platform limits, and feature parity remain TODOs. |
 | Build and behavioral validation | Pending | The reconstructed Java tree has not been compiled or verified as a working app. |
 
-See the [task list](TODO.md) and the current [session handoff](.workspace/handoff.md) for specific remaining work. No overall completion percentage has been verified.
+See the [task list](TODO.md) and the current [session handoff](.workspace/handoff.md) for specific remaining work. The bar above tracks completed checklist items; full reconstruction and Android behavior remain unverified.
 
 ## Documentation
 

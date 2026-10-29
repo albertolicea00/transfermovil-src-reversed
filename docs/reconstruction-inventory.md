@@ -24,7 +24,7 @@ clean file's annotation (`annotation_conflict`). These are individual incidences
 one mapping may have more than one. Resolve them against source before editing
 the authoritative mapping file.
 
-## 2026-10-28 snapshot
+## 2026-10-29 snapshot
 
 Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
@@ -36,8 +36,25 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 There are 504 clean files and 73 explicit class mappings. All clean files have
 an annotation resolving to an original Java path. The explicit mapping file has
-25 incidences: 17 absent clean targets, 5 absent original paths, and 3 annotation
-conflicts. These counts do not establish a completion percentage.
+15 incidences: 14 absent clean targets and 1 absent original path. No class
+annotation conflicts remain. These counts do not establish a completion percentage.
+
+The stale paths for the base activity, USSD dispatcher, SMS sender and SMS parser
+now point to their actual files in `l08fNVC4KOKK/`; the SMS parser target and login
+request packages match existing clean declarations. These are verified identity
+links, not verification of all methods in those reconstructions. In particular,
+the two-factor login request's `factor` is currently a String in clean code but
+an int in the original; correcting that behavior remains pending.
+
+### README task progress
+
+`make progress` updates the preserved 50-block README bar from the top-level
+checkboxes in TODO.md. `make inventory` also refreshes it. The percentage is
+`floor(100 * completed / total)` and filled blocks are
+`floor(50 * completed / total)`. Tasks have equal weight; the number can decrease
+when scope grows. This checklist metric is separate from reconstruction fidelity
+and from the source-link counts above. Run
+`python3 scripts/update-progress.py --check` to detect an outdated bar.
 
 ### Operation menu reconstruction
 

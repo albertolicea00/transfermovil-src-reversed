@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Updated the README progress bar to 50% (65 of 130 TODO tasks), with an explicit task-count definition rather than an unsupported reconstruction percentage. Added `make progress`, refresh on `make inventory`, and stale-progress checking via `scripts/update-progress.py --check`.
+- Corrected stale original paths for the base activity, USSD dispatcher, SMS sender/parser and base activity field mappings; corrected the existing SMS parser and login request target names. Mapping incidences decreased from 25 to 15; these link fixes do not establish behavioral fidelity.
+- Added progress tests for completed work, expanding scope, rounding, repeatability, and missing inputs; updated reconstruction notes and handoff.
+
 ## 2026-10-28 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Resolved duplicate `OperationMenuBuilder` reconstructions: removed the banking draft with omitted method bodies and restored the complete original menu logic in the data package, preserving database caller APIs and original fragment strings.
