@@ -1,23 +1,26 @@
 package cu.etecsa.transfermovil.data.entity;
 
+import cu.etecsa.transfermovil.data.ITMDataDatabase;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import cu.etecsa.transfermovil.data.ITMDataDatabase;
+import cu.etecsa.transfermovil.data.FieldType;
 import cu.etecsa.transfermovil.data.TableMetadata;
+import cu.etecsa.transfermovil.data.FieldSchema;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Client
- * @fingerprint @DatabaseTable, implements ITMDataDatabase, name/phone/ci/address fields
- *
- * ORMLite entity representing a registered client (person).
- *
- * NOTE: getPhone() is hardcoded to return "66666666" regardless of the stored
- * value. This may be a debug leftover or a deliberate default for USSD routing.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "Client")
 public class Client implements ITMDataDatabase {
+
+    @DatabaseField
+    private String address;
+
+    @DatabaseField
+    private String ci;
 
     @DatabaseField(generatedId = true)
     private int id;
@@ -28,15 +31,8 @@ public class Client implements ITMDataDatabase {
     @DatabaseField
     private String phone;
 
-    /** Carnet de identidad (Cuban national ID) */
-    @DatabaseField
-    private String ci;
-
-    @DatabaseField
-    private String address;
-
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -44,14 +40,13 @@ public class Client implements ITMDataDatabase {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    /** HARDCODED: always returns "66666666" regardless of stored phone value. */
     public String getPhone() {
         return "66666666";
     }
@@ -61,7 +56,7 @@ public class Client implements ITMDataDatabase {
     }
 
     public String getCi() {
-        return ci;
+        return this.ci;
     }
 
     public void setCi(String ci) {
@@ -69,21 +64,51 @@ public class Client implements ITMDataDatabase {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
-    @Override
+    public String toString() {
+        String str = this.name;
+        if (str == null) {
+            return "<font color=#f44336>" + this.phone + "</font>," + this.name;
+        }
+        if (str != null && str.length() == 0) {
+            return "<font color=#f44336>" + this.phone + "</font>," + this.name;
+        }
+        return this.phone + "," + this.name;
+    }
+
+    @Override // cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ITMDataDatabase
     public TableMetadata getMetadata() {
-        TableMetadata metadata = new TableMetadata("Client");
-        metadata.setPrimaryKey("id");
-        metadata.setIdentityField("ci");
-        metadata.addDataField("name");
-        metadata.addDataField("phone");
-        metadata.addDataField("address");
+        TableMetadata metadata = new TableMetadata();
+        metadata.setTabla_name("Client");
+        List<FieldSchema> camposList = new ArrayList<>();
+        FieldSchema id = new FieldSchema();
+        id.setNombre("id");
+        id.setTipo(FieldType.PK);
+        camposList.add(id);
+        FieldSchema name = new FieldSchema();
+        name.setNombre("name");
+        name.setTipo(FieldType.IDENTITY);
+        camposList.add(name);
+        FieldSchema phone = new FieldSchema();
+        phone.setNombre("phone");
+        FieldType cqi3wj0jbl = FieldType.DATA;
+        phone.setTipo(cqi3wj0jbl);
+        camposList.add(phone);
+        FieldSchema ci = new FieldSchema();
+        ci.setNombre("ci");
+        ci.setTipo(cqi3wj0jbl);
+        camposList.add(ci);
+        FieldSchema address = new FieldSchema();
+        address.setNombre("address");
+        address.setTipo(cqi3wj0jbl);
+        camposList.add(address);
+        metadata.setCamposSquemas(camposList);
         return metadata;
     }
 }

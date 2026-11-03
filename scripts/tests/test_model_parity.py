@@ -83,6 +83,30 @@ def ecommerce_models():
 PAIRS = list(dict(PAIRS + ecommerce_models()).items())
 
 
+def database_models():
+    known = {}
+    for path in (CLEAN / "cu/etecsa/transfermovil").rglob("*.java"):
+        text = path.read_text()
+        tag = re.search(r"@obfuscated_class\s+([\w.]+)", text)
+        package = re.search(r"^package ([\w.]+);", text, re.MULTILINE)
+        if tag and package:
+            known[tag[1]] = (path, package[1] + "." + path.stem)
+    selected = {original for original, (path, _) in known.items() if "/data/entity/" in str(path)}
+    for original in list(selected):
+        raw = (ROOT / "src" / Path(*original.split(".")).with_suffix(".java")).read_text()
+        for dependency in re.findall(r"^import (cu\.[\w.]+);", raw, re.MULTILINE):
+            if dependency.endswith(".rDEl7rW1aN"):
+                continue  # Encryption calls are modeled by an explicit facade fixture.
+            if dependency not in known:
+                raise AssertionError(f"Unmapped entity dependency: {dependency}")
+            selected.add(dependency)
+    return [(original, known[original][1].removeprefix("cu.etecsa.transfermovil."))
+            for original in sorted(selected)]
+
+
+PAIRS = list(dict(PAIRS + database_models()).items())
+
+
 @unittest.skipUnless(shutil.which("javac") and shutil.which("java"), "JDK required")
 class ModelParityTest(unittest.TestCase):
     def test_schemas_and_accessors(self):
@@ -107,12 +131,30 @@ class ModelParityTest(unittest.TestCase):
             for original, relative in PAIRS:
                 raw_path = Path(*original.split(".")).with_suffix(".java")
                 clean_path = Path("cu/etecsa/transfermovil", *relative.split(".")).with_suffix(".java")
-                write(str(raw_path), (ROOT / "src" / raw_path).read_text())
+                raw_text = (ROOT / "src" / raw_path).read_text()
+                if original.endswith(".CompraPlanesCubacel"):
+                    # JADX duplicates three declarations; the smali has four
+                    # distinct fields and constructor self-assignments only.
+                    seen = set()
+
+                    def declaration(match):
+                        name = match[1]
+                        if name in seen:
+                            return ""
+                        seen.add(name)
+                        return match[0]
+
+                    raw_text = re.sub(r"@DatabaseField(?:\([^\n]*\))?\n    private \w+ (\w+)[^;\n]*;", declaration, raw_text)
+                write(str(raw_path), raw_text)
                 write(str(clean_path), (CLEAN / clean_path).read_text())
             write("com/j256/ormlite/field/DatabaseField.java", """
 package com.j256.ormlite.field;
 @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
-public @interface DatabaseField { boolean generatedId() default false; boolean id() default false; }
+public @interface DatabaseField {
+    boolean generatedId() default false; boolean id() default false;
+    boolean unique() default false; boolean canBeNull() default true;
+    String columnName() default ""; String defaultValue() default "";
+}
 """)
             write("com/j256/ormlite/table/DatabaseTable.java", """
 package com.j256.ormlite.table;
@@ -126,6 +168,12 @@ public @interface SerializedName { String value(); }
 """)
             if gson_jar:
                 (root / "com/google/gson/annotations/SerializedName.java").unlink()
+            for package, name in (
+                ("cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK", "rDEl7rW1aN"),
+                ("cu.etecsa.transfermovil.base", "BaseMainActivity"),
+            ):
+                write(package.replace(".", "/") + "/" + name + ".java",
+                      "package " + package + "; public class " + name + " { " + CIPHER_FIXTURE + " }")
             write("org/json/JSONObject.java", """
 package org.json;
 public class JSONObject { public String toString() { return "json-fixture"; } }
@@ -194,7 +242,8 @@ public class ModelCheck {
             DatabaseField db=f.getAnnotation(DatabaseField.class);
             SerializedName json=f.getAnnotation(SerializedName.class);
             fields.put(f.getName(),type(f.getType())+":"+Modifier.toString(f.getModifiers())
-                +":"+(db==null?"none":db.id()+":"+db.generatedId())+":"+(json==null?"none":json.value()));
+                +":"+(db==null?"none":db.id()+":"+db.generatedId()+":"+db.unique()+":"+db.canBeNull()+":"+db.columnName()+":"+db.defaultValue())
+                +":"+(json==null?"none":json.value()));
         }
         List<String> interfaces=new ArrayList<>();
         for(Class<?> i:c.getInterfaces()) interfaces.add(type(i));
@@ -205,8 +254,11 @@ public class ModelCheck {
             for(Class<?> p:m.getParameterTypes()) args.add(type(p));
             methods.add(m.getName()+args+":"+type(m.getReturnType()));
         }
+        String table=db==null?"none":db.tableName().isEmpty()?c.getSimpleName():db.tableName();
+        if(db==null) for(Field f:c.getDeclaredFields())
+            if(f.getAnnotation(DatabaseField.class)!=null) { table=c.getSimpleName(); break; }
         return fields+":"+interfaces+":"+(c.getSuperclass()==null?"none":type(c.getSuperclass()))
-            +":"+(db==null?"none":db.tableName().isEmpty()?c.getSimpleName():db.tableName())+":"+methods;
+            +":"+table+":"+methods;
     }
     static Object create(Class<?> c) throws Exception {
         if(c.isMemberClass() && !Modifier.isStatic(c.getModifiers()))
@@ -214,11 +266,13 @@ public class ModelCheck {
         return c.getConstructor().newInstance();
     }
     static Object sample(Class<?> c, int number) throws Exception {
-        if(c==String.class) return new String[]{"", "ñá*|@", "123456"}[number];
-        if(c==int.class) return new int[]{-1,0,Integer.MAX_VALUE}[number];
-        if(c==float.class) return new float[]{-1.5f,0f,12345.75f}[number];
-        if(c==double.class) return new double[]{-1.5,0,12345.75}[number];
-        if(c==long.class) return new long[]{-1,0,Long.MAX_VALUE}[number];
+        if(number==5 && !c.isPrimitive()) return null;
+        if(c==String.class) return new String[]{"", "ñá*|@", "123456", "CUP", "COMPRA", "unused"}[number];
+        if(c==int.class || c==Integer.class) return new int[]{-1,0,Integer.MAX_VALUE}[number%3];
+        if(c==float.class || c==Float.class) return new float[]{-1.5f,0f,12345.75f}[number%3];
+        if(c==double.class || c==Double.class) return new double[]{-1.5,0,12345.75}[number%3];
+        if(c==long.class || c==Long.class) return new long[]{-1,0,Long.MAX_VALUE}[number%3];
+        if(c==Boolean.class) return number!=0;
         if(c==boolean.class) return number!=0;
         if(c.isEnum()) return c.getEnumConstants()[number%c.getEnumConstants().length];
         if(c==List.class) return new ArrayList<>();
@@ -240,7 +294,8 @@ public class ModelCheck {
         Map<String,String> result=new TreeMap<>();
         for(Method m:instance.getClass().getDeclaredMethods())
             if(Modifier.isPublic(m.getModifiers()) && m.getParameterCount()==0 && !m.isSynthetic())
-                result.put(m.getName(),snapshot(m.invoke(instance)));
+                try { result.put(m.getName(),snapshot(m.invoke(instance))); }
+                catch(InvocationTargetException e) { result.put(m.getName(),"throws:"+e.getCause().getClass().getName()); }
         return result.toString();
     }
     public static void main(String[] args) throws Exception {
@@ -279,8 +334,13 @@ public class ModelCheck {
                 Class<?> param=method.getParameterTypes()[0];
                 Class<?> target=param.isPrimitive()?param:Class.forName(type(param));
                 Method setter=clean.getMethod(method.getName(),target);
-                for(int n=0;n<3;n++) {
-                    method.invoke(a,sample(param,n)); setter.invoke(b,sample(target,n));
+                for(int n=0;n<6;n++) {
+                    String rawError=null,cleanError=null;
+                    try { method.invoke(a,sample(param,n)); }
+                    catch(InvocationTargetException e) { rawError=e.getCause().getClass().getName()+":"+e.getCause().getMessage(); }
+                    try { setter.invoke(b,sample(target,n)); }
+                    catch(InvocationTargetException e) { cleanError=e.getCause().getClass().getName()+":"+e.getCause().getMessage(); }
+                    equal(rawError,cleanError,pair[0]+" setter failure "+method.getName());
                     equal(snapshot(a),snapshot(b),pair[0]+" "+method.getName());
                     wire(a,b,pair[0]+" "+method.getName());
                     equal(getters(a),getters(b),pair[0]+" getters after "+method.getName());
@@ -290,4 +350,11 @@ public class ModelCheck {
         System.out.println("Compared "+expanded.size()+" model pairs");
     }
 }
+"""
+
+# Tests delegate account encryption through a deterministic marker. Actual AES
+# behavior is checked separately; these fixtures verify entity delegation only.
+CIPHER_FIXTURE = r"""
+    public String encryption(String value) { return value==null?"":"encoded:"+value; }
+    public String decryption(String value) { return value!=null && value.startsWith("encoded:")?value.substring(8):""; }
 """

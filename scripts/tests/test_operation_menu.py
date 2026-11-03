@@ -27,8 +27,6 @@ def reference_source():
              "Provincia": "Province", "Tributo": "TaxRecord"}
     tokens = r'"(?:\\.|[^"\\])*"|/\*[\s\S]*?\*/|//[^\n]*|\b\w+\b'
     text = re.sub(tokens, lambda m: names.get(m[0], m[0]), text)
-    text = text.replace("p.setCod_municipio(cod_municipio)", "p.setCodMunicipio(cod_municipio)")
-    text = text.replace("p.setCod_provincia(cod_provincia)", "p.setCodProvincia(cod_provincia)")
     return (f"package {PACKAGE}.data;\nimport {PACKAGE}.R;\n"
             f"import {PACKAGE}.data.entity.*;\nimport {PACKAGE}.banking.BankOperationCode;\n"
             f"import {PACKAGE}.core.enums.BankType;\n" + text)
@@ -209,7 +207,7 @@ public class DatabaseHelper {
         events.add("province:"+p.getCod_provincia()+":"+p.getNombre()+":"+p.getAbreviatura());
     }
     public void addMunicipio(Municipality p) {
-        events.add("municipality:"+p.getCodMunicipio()+":"+p.getCodProvincia()+":"+p.getNombre()+":"+p.getAbreviatura());
+        events.add("municipality:"+p.getCod_municipio()+":"+p.getCod_provincia()+":"+p.getNombre()+":"+p.getAbreviatura());
     }
     public void addTributo(TaxRecord p) {
         events.add("tax:"+p.getCod_tributo()+":"+p.getNombre()+":"+p.getAbreviatura()+":"+p.getTipo()+":"+p.getTipoPersona()+":"+p.getMoneda());

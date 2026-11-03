@@ -28,6 +28,8 @@
 - [x] Consolidate duplicate activation validators and compare the canonical algorithm against original source for normal/error inputs.
 - [x] Restore auth validation/session metadata and all operation enum values; compare expiry boundaries and DAO errors with the original.
 - [x] Consolidate duplicate character/text encoders and callback interfaces; verify dictionary/marker behavior and callback contracts.
+- [x] Restore all 28 database entity source bodies, including field constraints, metadata, constructors and accessors; preserve the original default table names for renamed entities and compare schemas/defaults/accessors/JSON.
+- [x] Restore the base activity's AES encryption/decryption delegation and compare its original JCE behavior.
 - [ ] Review the remaining 63 original paths with multiple reconstruction candidates.
 - [ ] Resolve the remaining 4 mapping incidences reported in the 2026-10-29 inventory against source evidence.
 - [ ] Review the remaining 26 interrupted banking UI drafts (pagers/tabs/BPA/BFI/Metropolitano/wallet); replace incomplete behavior only when supported by source.

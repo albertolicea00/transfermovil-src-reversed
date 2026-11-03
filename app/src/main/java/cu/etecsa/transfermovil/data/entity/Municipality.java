@@ -4,49 +4,37 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Municipio
- * @fingerprint @DatabaseTable, String id PK, cod_municipio/nombre/abreviatura/cod_provincia
- *
- * ORMLite entity for Cuban municipality lookup data.
- * Pre-populated reference table linking municipality codes to provinces.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "Municipio")
 public class Municipality {
 
+    @DatabaseField
+    public String abreviatura;
+
+    @DatabaseField
+    public String cod_municipio;
+
+    @DatabaseField
+    public String cod_provincia;
+
     @DatabaseField(id = true)
-    private String id;
+    public String id;
 
     @DatabaseField
-    private String cod_municipio;
+    public String nombre;
 
-    @DatabaseField
-    private String nombre;
-
-    @DatabaseField
-    private String abreviatura;
-
-    @DatabaseField
-    private String cod_provincia;
-
-    public String getId() {
-        return id;
+    public String getCod_municipio() {
+        return this.cod_municipio;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCodMunicipio() {
-        return cod_municipio;
-    }
-
-    public void setCodMunicipio(String cod_municipio) {
+    public void setCod_municipio(String cod_municipio) {
         this.cod_municipio = cod_municipio;
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -54,18 +42,30 @@ public class Municipality {
     }
 
     public String getAbreviatura() {
-        return abreviatura;
+        return this.abreviatura;
     }
 
     public void setAbreviatura(String abreviatura) {
         this.abreviatura = abreviatura;
     }
 
-    public String getCodProvincia() {
-        return cod_provincia;
+    public String getCod_provincia() {
+        return this.cod_provincia;
     }
 
-    public void setCodProvincia(String cod_provincia) {
+    public void setCod_provincia(String cod_provincia) {
         this.cod_provincia = cod_provincia;
+    }
+
+    public String toString() {
+        return this.cod_municipio + " - " + this.abreviatura;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

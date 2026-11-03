@@ -5,30 +5,26 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TMonedasWallet
- * @fingerprint @DatabaseTable, String id PK (generatedId=false), descripcion, currency, allowTransfer
- *
- * ORMLite entity for wallet currency entries. Each row represents a currency
- * the wallet can hold, with a flag indicating whether transfers are allowed.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "TMonedasWallet")
 public class WalletCurrency {
-
-    @DatabaseField(generatedId = false, id = true)
-    private String id;
-
-    @DatabaseField
-    private String descripcion;
-
-    @DatabaseField
-    private String currency;
 
     @DatabaseField
     private int allowTransfer;
 
     @DatabaseField
+    private String currency;
+
+    @DatabaseField
+    private String descripcion;
+
+    @DatabaseField
     private Date fecha;
+
+    @DatabaseField(generatedId = false, id = true)
+    private String id;
 
     public String getId() {
         return this.id;

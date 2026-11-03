@@ -2,6 +2,8 @@
 
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Restored the original source bodies for all 28 database entities, including ORMLite constraints, constructors, metadata, accessors and JSON-visible fields; preserved `MCBank` and `MiBoletoService` table identities after semantic renaming. Compared model schemas/defaults/accessors and Gson payloads, and checked the base activity's AES delegation against JCE helpers.
+- Updated README task progress from the checklist after expanding completed reconstruction work; it is now 73/138 (52%). Four mapping issues remain and all 63 multiply-candidate source paths are still explicitly queued for review.
 - Replaced the throwing auth validator placeholder with the original typed state machine, including clearing and updating expired sessions; removed the alternative draft that omitted those writes. Restored AuthSession schema metadata and 20 missing operation enum constants (46 total).
 - Compared 517 auth operation/state cases with a fixed test clock, including the exact 30-minute boundary, invalid dates and DAO errors. Expanded model/contract comparisons to 78 class pairs.
 - Consolidated duplicate text/dictionary encoders and refresh/account/offer callback interfaces. Verified all dictionary entries and digit/unsupported/null/Unicode encoding behavior against the original. Duplicate-candidate originals decreased to 63.

@@ -4,44 +4,39 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AgentService
- * @fingerprint @DatabaseTable, fields: code, phone (no bank PINs)
- *
- * ORMLite entity for business agent accounts. Stores the agent's activation
- * code and associated phone number. Used when the app is in Agent mode
- * (activated via getCodigoAgente + check_code_activation).
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "AgentService")
 public class AgentAccount {
+
+    @DatabaseField
+    private String code;
 
     @DatabaseField(generatedId = true)
     private int id;
 
     @DatabaseField
-    private String code;
-
-    @DatabaseField
     private String phone;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public void setCode(String code) {
         this.code = code;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {

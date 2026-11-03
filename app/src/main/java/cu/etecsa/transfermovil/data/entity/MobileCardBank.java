@@ -1,71 +1,70 @@
 package cu.etecsa.transfermovil.data.entity;
 
+import cu.etecsa.transfermovil.data.ITMDataDatabase;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import cu.etecsa.transfermovil.data.ITMDataDatabase;
+import cu.etecsa.transfermovil.data.FieldType;
 import cu.etecsa.transfermovil.data.TableMetadata;
+import cu.etecsa.transfermovil.data.FieldSchema;
+import cu.etecsa.transfermovil.core.enums.BankType;
+import cu.etecsa.transfermovil.core.enums.Currency;
+import cu.etecsa.transfermovil.base.BaseMainActivity;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank
- * @fingerprint ITMDataDatabase, encrypted cuenta field, alias/agencia/tipo_moneda/movil_notificar
- *
- * ORMLite entity for mobile card bank accounts. Uses the same AES/ECB
- * encryption scheme as BankAccountCard for the cuenta field.
- *
- * NOTE: The decompiled source may be missing the @DatabaseTable annotation
- * (possible decompiler artifact), but the class is persisted via ORMLite.
- *
- * SECURITY: Same weak AES/ECB encryption as BankAccountCard with
- * hardcoded key "708091521823824654864548452244".
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "MCBank")
 public class MobileCardBank implements ITMDataDatabase {
 
-    @DatabaseField(generatedId = true)
-    private int id;
-
-    /** Bank account number — ENCRYPTED with AES/ECB (weak) */
     @DatabaseField
-    private String cuenta;
+    private BankType agencia;
 
     @DatabaseField
     private String alias;
 
-    /** Bank type enum (obfuscated: R1sDOSqZ2z) */
     @DatabaseField
-    private BankType agencia;
+    private String cuenta;
 
-    /** Currency type enum (obfuscated: qTDVwLFEjE) */
-    @DatabaseField
-    private Currency tipo_moneda;
+    @DatabaseField(generatedId = true)
+    private int id;
 
     @DatabaseField
     private String movil_notificar;
 
+    @DatabaseField
+    private Currency tipo_moneda;
+
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    /** Returns the account number after AES/ECB decryption. */
-    public String getCuenta() {
-        // In original: BaseMainActivity.decryption(this.cuenta, cv)
-        return cuenta;
+    public Currency getTipo_moneda() {
+        return this.tipo_moneda;
     }
 
-    /** Encrypts and stores the account number using AES/ECB. */
+    public void setTipo_moneda(Currency tipo_moneda) {
+        this.tipo_moneda = tipo_moneda;
+    }
+
+    public String getCuenta() {
+        BaseMainActivity baseActivity = new BaseMainActivity();
+        return baseActivity.decryption(this.cuenta);
+    }
+
     public void setCuenta(String cuenta) {
-        // In original: BaseMainActivity.encryption(cuenta, cv)
-        this.cuenta = cuenta;
+        BaseMainActivity baseActivity = new BaseMainActivity();
+        this.cuenta = baseActivity.encryption(cuenta);
     }
 
     public String getAlias() {
-        return alias;
+        return this.alias;
     }
 
     public void setAlias(String alias) {
@@ -73,38 +72,58 @@ public class MobileCardBank implements ITMDataDatabase {
     }
 
     public BankType getAgencia() {
-        return agencia;
+        return this.agencia;
     }
 
     public void setAgencia(BankType agencia) {
         this.agencia = agencia;
     }
 
-    public Currency getTipoMoneda() {
-        return tipo_moneda;
+    public String getMovil_notificar() {
+        return this.movil_notificar;
     }
 
-    public void setTipoMoneda(Currency tipo_moneda) {
-        this.tipo_moneda = tipo_moneda;
-    }
-
-    public String getMovilNotificar() {
-        return movil_notificar;
-    }
-
-    public void setMovilNotificar(String movil_notificar) {
+    public void setMovil_notificar(String movil_notificar) {
         this.movil_notificar = movil_notificar;
     }
 
-    @Override
+    public String toString() {
+        BaseMainActivity baseActivity = new BaseMainActivity();
+        String textCuenta = baseActivity.decryption(this.cuenta);
+        return this.alias.toUpperCase() + " - " + textCuenta.substring(12);
+    }
+
+    @Override // cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ITMDataDatabase
     public TableMetadata getMetadata() {
-        TableMetadata metadata = new TableMetadata("MCBank");
-        metadata.setPrimaryKey("id");
-        metadata.addDataField("cuenta");
-        metadata.addDataField("alias");
-        metadata.addDataField("agencia");
-        metadata.addDataField("tipo_moneda");
-        metadata.addDataField("movil_notificar");
+        TableMetadata metadata = new TableMetadata();
+        metadata.setTabla_name("MCBank");
+        List<FieldSchema> camposList = new ArrayList<>();
+        FieldSchema id = new FieldSchema();
+        id.setNombre("id");
+        id.setTipo(FieldType.PK);
+        camposList.add(id);
+        FieldSchema tipoMoneda = new FieldSchema();
+        tipoMoneda.setNombre("tipo_moneda");
+        FieldType cqi3wj0jbl = FieldType.DATA;
+        tipoMoneda.setTipo(cqi3wj0jbl);
+        camposList.add(tipoMoneda);
+        FieldSchema cuenta = new FieldSchema();
+        cuenta.setNombre("cuenta");
+        cuenta.setTipo(FieldType.IDENTITY);
+        camposList.add(cuenta);
+        FieldSchema alias = new FieldSchema();
+        alias.setNombre("alias");
+        alias.setTipo(cqi3wj0jbl);
+        camposList.add(alias);
+        FieldSchema agencia = new FieldSchema();
+        agencia.setNombre("agencia");
+        agencia.setTipo(cqi3wj0jbl);
+        camposList.add(agencia);
+        FieldSchema movil = new FieldSchema();
+        movil.setNombre("movil_notificar");
+        movil.setTipo(cqi3wj0jbl);
+        camposList.add(movil);
+        metadata.setCamposSquemas(camposList);
         return metadata;
     }
 }

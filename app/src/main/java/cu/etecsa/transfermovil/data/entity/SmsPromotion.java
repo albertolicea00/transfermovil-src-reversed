@@ -6,16 +6,23 @@ import cu.etecsa.transfermovil.core.enums.BankType;
 import java.util.Date;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.PromoSMS
- * @fingerprint @DatabaseTable, mensaje, fecha_inicio/fin, tipo_promo (BankType), habilitado
- *
- * ORMLite entity for SMS-based promotional messages. Each row defines a
- * promotion with a validity window, associated icon, bank type, and
- * enabled/disabled state.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "PromoSMS")
 public class SmsPromotion {
+
+    @DatabaseField
+    private Date fecha_fin;
+
+    @DatabaseField
+    private Date fecha_inicio;
+
+    @DatabaseField
+    private boolean habilitado;
+
+    @DatabaseField
+    private int icono_asociado;
 
     @DatabaseField(generatedId = true)
     private int id;
@@ -24,20 +31,7 @@ public class SmsPromotion {
     private String mensaje;
 
     @DatabaseField
-    private Date fecha_inicio;
-
-    @DatabaseField
-    private Date fecha_fin;
-
-    /** obfuscated: R1sDOSqZ2z */
-    @DatabaseField
     private BankType tipo_promo;
-
-    @DatabaseField
-    private int icono_asociado;
-
-    @DatabaseField
-    private boolean habilitado;
 
     public int getId() {
         return this.id;

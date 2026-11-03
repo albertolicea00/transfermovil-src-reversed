@@ -2,61 +2,42 @@ package cu.etecsa.transfermovil.data.entity;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import cu.etecsa.transfermovil.core.enums.BankType;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
+import cu.etecsa.transfermovil.core.enums.BankType;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Operacion
- * @fingerprint @DatabaseTable, operacion (BankOperationCode), activo, titulo, fragment_name, order, tipo_servicio (BankType)
- *
- * ORMLite entity representing a banking operation menu item. Each row maps
- * an operation code to its UI presentation (title, subtitle, icon resource,
- * fragment class name) and activation state.
- *
- * NOTE: The getter/setter for tipo_servicio has a typo in the original
- * decompiled source: getTipo_serivicio() (missing 'c' in servicio).
- * Preserved here for binary compatibility.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "Operacion")
 public class Operation {
-
-    @DatabaseField(generatedId = true)
-    private int id;
-
-    /** Bank operation code enum. obfuscated: FdonIAFI9w (BankOperationCode, 332 values) */
-    @DatabaseField
-    private BankOperationCode operacion;
 
     @DatabaseField
     private boolean activo;
 
     @DatabaseField
-    private String titulo;
+    private String fragment_name;
 
-    @DatabaseField
-    private String subtitulo;
+    @DatabaseField(generatedId = true)
+    private int id;
 
     @DatabaseField
     private int imagen;
 
     @DatabaseField
-    private String fragment_name;
+    private BankOperationCode operacion;
 
     @DatabaseField
     private int order;
 
-    /** obfuscated: R1sDOSqZ2z */
+    @DatabaseField
+    private String subtitulo;
+
     @DatabaseField
     private BankType tipo_servicio;
 
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    @DatabaseField
+    private String titulo;
 
     public BankOperationCode getOperacion() {
         return this.operacion;
@@ -72,6 +53,14 @@ public class Operation {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -114,17 +103,10 @@ public class Operation {
         this.order = order;
     }
 
-    /**
-     * NOTE: Typo preserved from original decompiled source — "serivicio" instead
-     * of "servicio". The original getter name is getTipo_serivicio().
-     */
     public BankType getTipo_serivicio() {
         return this.tipo_servicio;
     }
 
-    /**
-     * NOTE: Typo preserved from original — "serivicio" instead of "servicio".
-     */
     public void setTipo_serivicio(BankType tipo_serivicio) {
         this.tipo_servicio = tipo_serivicio;
     }

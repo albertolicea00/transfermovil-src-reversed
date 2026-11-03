@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import cu.etecsa.transfermovil.crypto.CryptoProvider;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -275,9 +276,8 @@ public class BaseMainActivity extends AppCompatActivity {
      */
     public String encryption(String strNormalText) {
         try {
-            // SecretKey k = CryptoProvider.generateKey(cv);
-            // return CryptoProvider.encryptMsg(strNormalText, k);
-            return "";
+            SecretKey key = CryptoProvider.generateKey(cv);
+            return CryptoProvider.encryptMsg(strNormalText, key);
         } catch (Exception ex) {
             Log.d("ERROR", ex.getMessage());
             return "";
@@ -286,10 +286,10 @@ public class BaseMainActivity extends AppCompatActivity {
 
     public String decryption(String strEncryptedText) {
         try {
-            // SecretKey k = CryptoProvider.generateKey(cv);
-            // return CryptoProvider.decryptMsg(strEncryptedText, k);
-            return "";
+            SecretKey key = CryptoProvider.generateKey(cv);
+            return CryptoProvider.decryptMsg(strEncryptedText, key);
         } catch (Exception e) {
+            e.printStackTrace();
             return "";
         }
     }

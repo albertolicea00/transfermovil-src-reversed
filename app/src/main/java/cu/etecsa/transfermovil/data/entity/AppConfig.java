@@ -1,69 +1,118 @@
 package cu.etecsa.transfermovil.data.entity;
 
+import com.github.paolorotolo.appintro.BuildConfig;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import java.util.Date;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AppConfig
- * @fingerprint @DatabaseTable, codigo/imei/phone/feature-flags/mensajeInicio fields
- *
- * Singleton-style app configuration persisted in TransferMDB.sqlite.
- * Stores device identity, access code, feature flags, and UI messages.
- *
- * SECURITY: IMEI stored as plaintext. Combined with debuggable=true and
- * allowBackup=true, device fingerprint extraction is trivial.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "AppConfig")
 public class AppConfig {
 
-    @DatabaseField(generatedId = true)
-    private int id;
+    @DatabaseField
+    private boolean activada;
 
-    /** Access/activation code */
     @DatabaseField
     private String codigo;
 
-    /** Device IMEI — STORED IN PLAINTEXT */
+    @DatabaseField
+    private int evaluacion;
+
+    @DatabaseField
+    private Date fechaHoraAuthBank;
+
+    @DatabaseField
+    private Date fechaUltimasExperiencias;
+
+    @DatabaseField
+    private Date fechaUltimasPromos;
+
+    @DatabaseField(generatedId = true)
+    private int id;
+
     @DatabaseField
     private String imei;
+
+    @DatabaseField
+    private String number;
 
     @DatabaseField
     private String phone;
 
     @DatabaseField
-    private String code_bank;
+    private String code_bank = BuildConfig.FLAVOR;
 
-    /** Feature flag: partial USSD activation */
     @DatabaseField
-    private boolean activarussdparcial;
+    private boolean noMostrarEncuesta = false;
 
-    /** Feature flag: ticket module enabled */
     @DatabaseField
-    private boolean activarmodulomiboleto;
+    private boolean mensajeInicio = true;
 
-    /** Feature flag: improved QR scanning */
     @DatabaseField
-    private boolean activarMejoraQR;
+    private boolean activarussdparcial = false;
 
-    /** Feature flag: package purchasing */
     @DatabaseField
-    private boolean comprapaquetes;
+    private boolean activarmodulomiboleto = false;
 
-    /** Startup message displayed to user */
     @DatabaseField
-    private String mensajeInicio;
+    private boolean activarMejoraQR = false;
 
-    /** Whether to suppress the survey prompt */
     @DatabaseField
-    private boolean noMostrarEncuesta;
+    private int comprapaquetes = 0;
 
-    /** Last update date (as string) */
-    @DatabaseField
-    private String fechaAct;
+    public boolean isActivarMejoraQR() {
+        return this.activarMejoraQR;
+    }
+
+    public void setActivarMejoraQR(boolean activarMejoraQR) {
+        this.activarMejoraQR = activarMejoraQR;
+    }
+
+    public boolean isActivarussdparcial() {
+        return this.activarussdparcial;
+    }
+
+    public boolean isActivarmodulomiboleto() {
+        return this.activarmodulomiboleto;
+    }
+
+    public int getComprapaquetes() {
+        return this.comprapaquetes;
+    }
+
+    public void setActivarussdparcial(boolean activarussdparcial) {
+        this.activarussdparcial = activarussdparcial;
+    }
+
+    public void setActivarModuloMiboleto(boolean activarmodulomiboleto) {
+        this.activarmodulomiboleto = activarmodulomiboleto;
+    }
+
+    public void setComprapaquetes(int comprapaquetes) {
+        this.comprapaquetes = comprapaquetes;
+    }
+
+    public boolean isMensajeInicio() {
+        return this.mensajeInicio;
+    }
+
+    public void setMensajeInicio(boolean mensajeInicio) {
+        this.mensajeInicio = mensajeInicio;
+    }
+
+    public Date getFechaUltimasPromos() {
+        return this.fechaUltimasPromos;
+    }
+
+    public void setFechaUltimasPromos(Date fechaUltimasPromos) {
+        this.fechaUltimasPromos = fechaUltimasPromos;
+    }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -71,90 +120,82 @@ public class AppConfig {
     }
 
     public String getCodigo() {
-        return codigo;
+        return this.codigo;
     }
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
+    public String getNumber() {
+        return this.number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public String getImei() {
-        return imei;
+        return this.imei;
     }
 
     public void setImei(String imei) {
         this.imei = imei;
     }
 
+    public boolean isActivada() {
+        return this.activada;
+    }
+
+    public void setActivada(boolean activada) {
+        this.activada = activada;
+    }
+
+    public String getCode_bank() {
+        return this.code_bank;
+    }
+
+    public void setCode_bank(String number_bank) {
+        this.code_bank = number_bank;
+    }
+
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getCodeBank() {
-        return code_bank;
+    public Date getFechaHoraAuthBank() {
+        return this.fechaHoraAuthBank;
     }
 
-    public void setCodeBank(String code_bank) {
-        this.code_bank = code_bank;
+    public void setFechaHoraAuthBank(Date fechaHoraAuthBank) {
+        this.fechaHoraAuthBank = fechaHoraAuthBank;
     }
 
-    public boolean isActivarUssdParcial() {
-        return activarussdparcial;
+    public Date getFechaUltimasExperiencias() {
+        return this.fechaUltimasExperiencias;
     }
 
-    public void setActivarUssdParcial(boolean activarussdparcial) {
-        this.activarussdparcial = activarussdparcial;
+    public void setFechaUltimasExperiencias(Date fechaUltimasExperiencias) {
+        this.fechaUltimasExperiencias = fechaUltimasExperiencias;
     }
 
-    public boolean isActivarModuloMiBoleto() {
-        return activarmodulomiboleto;
+    public int getEvaluacion() {
+        return this.evaluacion;
     }
 
-    public void setActivarModuloMiBoleto(boolean activarmodulomiboleto) {
-        this.activarmodulomiboleto = activarmodulomiboleto;
-    }
-
-    public boolean isActivarMejoraQR() {
-        return activarMejoraQR;
-    }
-
-    public void setActivarMejoraQR(boolean activarMejoraQR) {
-        this.activarMejoraQR = activarMejoraQR;
-    }
-
-    public boolean isCompraPaquetes() {
-        return comprapaquetes;
-    }
-
-    public void setCompraPaquetes(boolean comprapaquetes) {
-        this.comprapaquetes = comprapaquetes;
-    }
-
-    public String getMensajeInicio() {
-        return mensajeInicio;
-    }
-
-    public void setMensajeInicio(String mensajeInicio) {
-        this.mensajeInicio = mensajeInicio;
+    public void setEvaluacion(int evaluacion) {
+        this.evaluacion = evaluacion;
     }
 
     public boolean isNoMostrarEncuesta() {
-        return noMostrarEncuesta;
+        return this.noMostrarEncuesta;
     }
 
     public void setNoMostrarEncuesta(boolean noMostrarEncuesta) {
         this.noMostrarEncuesta = noMostrarEncuesta;
-    }
-
-    public String getFechaAct() {
-        return fechaAct;
-    }
-
-    public void setFechaAct(String fechaAct) {
-        this.fechaAct = fechaAct;
     }
 }

@@ -4,44 +4,32 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.BancoService
- * @fingerprint @DatabaseTable, fields: code, phone, pmetro, pbpa, pbandec
- *
- * ORMLite entity persisted in TransferMDB.sqlite. Stores the user's bank
- * service association: which banks are linked, the phone number used for
- * USSD operations, and the PIN for each bank.
- *
- * SECURITY: All three bank PINs stored as plaintext strings. Combined with
- * debuggable=true and allowBackup=true, full credential extraction is
- * trivial via adb backup.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "BancoService")
 public class BankAccount {
+
+    @DatabaseField
+    private String code;
 
     @DatabaseField(generatedId = true)
     private int id;
 
     @DatabaseField
-    private String code;
+    private String pbandec;
+
+    @DatabaseField
+    private String pbpa;
 
     @DatabaseField
     private String phone;
 
-    /** Metropolitano bank PIN — STORED IN PLAINTEXT */
     @DatabaseField
     private String pmetro;
 
-    /** BPA bank PIN — STORED IN PLAINTEXT */
-    @DatabaseField
-    private String pbpa;
-
-    /** BANDEC bank PIN — STORED IN PLAINTEXT */
-    @DatabaseField
-    private String pbandec;
-
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -49,7 +37,7 @@ public class BankAccount {
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public void setCode(String code) {
@@ -57,34 +45,34 @@ public class BankAccount {
     }
 
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getPinMetropolitano() {
-        return pmetro;
+    public String getPmetro() {
+        return this.pmetro;
     }
 
-    public void setPinMetropolitano(String pin) {
-        this.pmetro = pin;
+    public void setPmetro(String pmetro) {
+        this.pmetro = pmetro;
     }
 
-    public String getPinBpa() {
-        return pbpa;
+    public String getPbpa() {
+        return this.pbpa;
     }
 
-    public void setPinBpa(String pin) {
-        this.pbpa = pin;
+    public void setPbpa(String pbpa) {
+        this.pbpa = pbpa;
     }
 
-    public String getPinBandec() {
-        return pbandec;
+    public String getPbandec() {
+        return this.pbandec;
     }
 
-    public void setPinBandec(String pin) {
-        this.pbandec = pin;
+    public void setPbandec(String pbandec) {
+        this.pbandec = pbandec;
     }
 }

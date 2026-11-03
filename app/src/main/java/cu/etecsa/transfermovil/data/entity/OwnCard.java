@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.data.entity;
 
+import cu.etecsa.transfermovil.data.ITMDataDatabase;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import cu.etecsa.transfermovil.data.FieldType;
@@ -8,7 +9,6 @@ import cu.etecsa.transfermovil.data.FieldSchema;
 import cu.etecsa.transfermovil.core.enums.Currency;
 import java.util.ArrayList;
 import java.util.List;
-import cu.etecsa.transfermovil.data.ITMDataDatabase;
 
 /**
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TarjetaPropia
@@ -89,8 +89,8 @@ public class OwnCard implements ITMDataDatabase {
         camposList.add(idCliente);
         FieldSchema tipoMoneda = new FieldSchema();
         tipoMoneda.setNombre("tipo_moneda");
-        FieldType dataType = FieldType.DATA;
-        tipoMoneda.setTipo(dataType);
+        FieldType cqi3wj0jbl = FieldType.DATA;
+        tipoMoneda.setTipo(cqi3wj0jbl);
         camposList.add(tipoMoneda);
         FieldSchema serie = new FieldSchema();
         serie.setNombre("serie");
@@ -98,7 +98,7 @@ public class OwnCard implements ITMDataDatabase {
         camposList.add(serie);
         FieldSchema descripcion = new FieldSchema();
         descripcion.setNombre("descripcion");
-        descripcion.setTipo(dataType);
+        descripcion.setTipo(cqi3wj0jbl);
         camposList.add(descripcion);
         metadata.setCamposSquemas(camposList);
         return metadata;

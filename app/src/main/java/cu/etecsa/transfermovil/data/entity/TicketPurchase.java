@@ -2,164 +2,117 @@ package cu.etecsa.transfermovil.data.entity;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
 import java.util.Date;
 
 /**
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CompraBoleto
- * @fingerprint @DatabaseTable, token(unique)/idOferta/importe/moneda/fechaCompra/estado fields
- *
- * ORMLite entity for ticket/voucher purchases ("Mi Boleto" module).
- * Tracks offer details, transaction IDs, expiration, and consumption state.
+ * @original_apk_version 1.260416
  */
 @DatabaseTable(tableName = "CompraBoleto")
 public class TicketPurchase {
 
-    @DatabaseField(generatedId = true)
-    private int id;
+    @DatabaseField(columnName = "alias")
+    private String alias;
 
-    @DatabaseField(unique = true)
-    private String token;
+    @DatabaseField(columnName = "ci_beneficiario")
+    private String ci;
 
-    @DatabaseField
-    private String idOferta;
-
-    @DatabaseField
-    private double importe;
-
-    @DatabaseField
-    private String moneda;
-
-    @DatabaseField
-    private Date fechaCompra;
-
-    @DatabaseField
-    private Date fechaVencimiento;
-
-    @DatabaseField
-    private int estado;
+    @DatabaseField(columnName = "consumido")
+    private boolean consumido;
 
     @DatabaseField
     private String datos;
 
     @DatabaseField
-    private String alias;
-
-    /** Carnet de identidad of the purchaser */
-    @DatabaseField
-    private String ci;
+    private boolean deleted;
 
     @DatabaseField
-    private int tipoCompra;
+    private String estado;
 
-    @DatabaseField
+    @DatabaseField(columnName = "fecha_actualizacion")
+    private Date fechaActualizacion;
+
+    @DatabaseField(canBeNull = false, columnName = "fecha_compra")
+    private Date fechaCompra;
+
+    @DatabaseField(columnName = "fecha_inicial")
+    private Date fechaInicial;
+
+    @DatabaseField(columnName = "fecha_vencimiento")
+    private Date fechaVencimiento;
+
+    @DatabaseField(columnName = "id", generatedId = true)
+    private int id;
+
+    @DatabaseField(canBeNull = false, columnName = "id_oferta")
+    private String idOferta;
+
+    @DatabaseField(columnName = "id_transaccion")
     private String idTransaccion;
 
-    @DatabaseField
+    @DatabaseField(columnName = "id_transferencia")
     private String idTransferencia;
 
-    @DatabaseField
-    private boolean consumido;
+    @DatabaseField(canBeNull = false)
+    private double importe;
+
+    @DatabaseField(canBeNull = false)
+    private String moneda;
+
+    @DatabaseField(columnName = "tipo_compra")
+    private String tipoCompra;
+
+    @DatabaseField(canBeNull = false, unique = true)
+    private String token;
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getToken() {
-        return token;
+    public String getTipoCompra() {
+        return this.tipoCompra;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getIdOferta() {
-        return idOferta;
-    }
-
-    public void setIdOferta(String idOferta) {
-        this.idOferta = idOferta;
-    }
-
-    public double getImporte() {
-        return importe;
-    }
-
-    public void setImporte(double importe) {
-        this.importe = importe;
-    }
-
-    public String getMoneda() {
-        return moneda;
-    }
-
-    public void setMoneda(String moneda) {
-        this.moneda = moneda;
-    }
-
-    public Date getFechaCompra() {
-        return fechaCompra;
-    }
-
-    public void setFechaCompra(Date fechaCompra) {
-        this.fechaCompra = fechaCompra;
-    }
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-
-    public String getDatos() {
-        return datos;
-    }
-
-    public void setDatos(String datos) {
-        this.datos = datos;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
+    public void setTipoCompra(String tipoCompra) {
+        this.tipoCompra = tipoCompra;
     }
 
     public String getCi() {
-        return ci;
+        return this.ci;
     }
 
     public void setCi(String ci) {
         this.ci = ci;
     }
 
-    public int getTipoCompra() {
-        return tipoCompra;
+    public String getIdOferta() {
+        return this.idOferta;
     }
 
-    public void setTipoCompra(int tipoCompra) {
-        this.tipoCompra = tipoCompra;
+    public void setIdOferta(String idOferta) {
+        if (idOferta == null || idOferta.isEmpty()) {
+            throw new IllegalArgumentException("El ID de la oferta no puede ser nulo o vacío");
+        }
+        this.idOferta = idOferta;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
+
+    public void setToken(String token) {
+        if (token == null || token.isEmpty()) {
+            throw new IllegalArgumentException("El token no puede ser nulo o vacío");
+        }
+        this.token = token;
     }
 
     public String getIdTransaccion() {
-        return idTransaccion;
+        return this.idTransaccion;
     }
 
     public void setIdTransaccion(String idTransaccion) {
@@ -167,15 +120,93 @@ public class TicketPurchase {
     }
 
     public String getIdTransferencia() {
-        return idTransferencia;
+        return this.idTransferencia;
     }
 
     public void setIdTransferencia(String idTransferencia) {
         this.idTransferencia = idTransferencia;
     }
 
+    public String getAlias() {
+        return this.alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public double getPrecio() {
+        return this.importe;
+    }
+
+    public void setPrecio(double precio) {
+        if (precio < 0.0d) {
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
+        this.importe = precio;
+    }
+
+    public String getMoneda() {
+        return this.moneda;
+    }
+
+    public void setMoneda(String moneda) {
+        if (moneda == null || moneda.isEmpty()) {
+            throw new IllegalArgumentException("La moneda no puede ser nula o vacía");
+        }
+        this.moneda = moneda;
+    }
+
+    public Date getFechaCompra() {
+        return this.fechaCompra;
+    }
+
+    public void setFechaCompra(Date fechaCompra) {
+        this.fechaCompra = fechaCompra;
+    }
+
+    public Date getFechaVencimiento() {
+        return this.fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public String getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getDatos() {
+        return this.datos;
+    }
+
+    public void setDatos(String datos) {
+        this.datos = datos;
+    }
+
+    public Date getFechaActualizacion() {
+        return this.fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Date getFechaInicial() {
+        return this.fechaInicial;
+    }
+
+    public void setFechaInicial(Date fechaInicial) {
+        this.fechaInicial = fechaInicial;
+    }
+
     public boolean isConsumido() {
-        return consumido;
+        return this.consumido;
     }
 
     public void setConsumido(boolean consumido) {

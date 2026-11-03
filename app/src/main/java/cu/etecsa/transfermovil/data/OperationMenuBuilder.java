@@ -3791,8 +3791,8 @@ public class OperationMenuBuilder {
                     String nombre = jb.getString("Nombre");
                     String abreviatura = jb.getString("Abreviatura");
                     Municipality p = new Municipality();
-                    p.setCodMunicipio(cod_municipio);
-                    p.setCodProvincia(cod_provincia);
+                    p.setCod_municipio(cod_municipio);
+                    p.setCod_provincia(cod_provincia);
                     p.setNombre(nombre);
                     p.setAbreviatura(abreviatura);
                     DatabaseHelper.getInstance().addMunicipio(p);

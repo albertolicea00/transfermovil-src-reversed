@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.data.entity;
 
+import cu.etecsa.transfermovil.data.ITMDataDatabase;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import cu.etecsa.transfermovil.data.FieldType;
@@ -7,13 +8,8 @@ import cu.etecsa.transfermovil.data.TableMetadata;
 import cu.etecsa.transfermovil.data.FieldSchema;
 import java.util.ArrayList;
 import java.util.List;
-import cu.etecsa.transfermovil.data.ITMDataDatabase;
 
 /**
- * Tax reference row, including original import/export metadata quirks.
- * The metadata names its table "Nauta" and repeats "nombre" for the tipo field;
- * these values are preserved from the APK rather than corrected speculatively.
- *
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Tributo
  * @original_apk_version 1.260416
  */
@@ -101,24 +97,24 @@ public class TaxRecord implements ITMDataDatabase {
         camposList.add(cod_tributo);
         FieldSchema nombre = new FieldSchema();
         nombre.setNombre("nombre");
-        FieldType dataType = FieldType.DATA;
-        nombre.setTipo(dataType);
+        FieldType cqi3wj0jbl = FieldType.DATA;
+        nombre.setTipo(cqi3wj0jbl);
         camposList.add(nombre);
         FieldSchema abreviatura = new FieldSchema();
         abreviatura.setNombre("abreviatura");
-        abreviatura.setTipo(dataType);
+        abreviatura.setTipo(cqi3wj0jbl);
         camposList.add(abreviatura);
         FieldSchema moneda = new FieldSchema();
         moneda.setNombre("moneda");
-        moneda.setTipo(dataType);
+        moneda.setTipo(cqi3wj0jbl);
         camposList.add(moneda);
         FieldSchema tipo = new FieldSchema();
         tipo.setNombre("nombre");
-        tipo.setTipo(dataType);
+        tipo.setTipo(cqi3wj0jbl);
         camposList.add(tipo);
         FieldSchema tipoPersona = new FieldSchema();
         tipoPersona.setNombre("tipoPersona");
-        tipoPersona.setTipo(dataType);
+        tipoPersona.setTipo(cqi3wj0jbl);
         camposList.add(tipoPersona);
         metadata.setCamposSquemas(camposList);
         return metadata;

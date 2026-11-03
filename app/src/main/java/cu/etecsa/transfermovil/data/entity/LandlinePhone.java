@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.data.entity;
 
+import cu.etecsa.transfermovil.data.ITMDataDatabase;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import cu.etecsa.transfermovil.data.FieldType;
@@ -7,7 +8,6 @@ import cu.etecsa.transfermovil.data.TableMetadata;
 import cu.etecsa.transfermovil.data.FieldSchema;
 import java.util.ArrayList;
 import java.util.List;
-import cu.etecsa.transfermovil.data.ITMDataDatabase;
 
 /**
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TelfFijo

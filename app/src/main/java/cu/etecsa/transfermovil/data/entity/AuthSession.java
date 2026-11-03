@@ -1,7 +1,6 @@
 package cu.etecsa.transfermovil.data.entity;
 
 import cu.etecsa.transfermovil.data.ITMDataDatabase;
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import cu.etecsa.transfermovil.data.FieldType;
@@ -77,12 +76,12 @@ public class AuthSession implements ITMDataDatabase {
         camposList.add(id);
         FieldSchema data = new FieldSchema();
         data.setNombre("operacion");
-        FieldType dataType = FieldType.DATA;
-        data.setTipo(dataType);
+        FieldType cqi3wj0jbl = FieldType.DATA;
+        data.setTipo(cqi3wj0jbl);
         camposList.add(data);
         FieldSchema pin = new FieldSchema();
         pin.setNombre("pin");
-        pin.setTipo(dataType);
+        pin.setTipo(cqi3wj0jbl);
         camposList.add(pin);
         metadata.setCamposSquemas(camposList);
         return metadata;
