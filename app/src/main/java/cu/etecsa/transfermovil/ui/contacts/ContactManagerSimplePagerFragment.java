@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
+import cu.etecsa.transfermovil.banking.ui.MobileListFragment;
 
 /**
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.wTZi6Zeikv
@@ -19,7 +20,7 @@ public class ContactManagerSimplePagerFragment extends Fragment {
 
     public ClientListFragment clientesFragment = new ClientListFragment();
     public PinListFragment tarjetasFragment = new PinListFragment();
-    public MobilePhoneListFragment movilesFragment = new MobilePhoneListFragment();
+    public MobileListFragment movilesFragment = new MobileListFragment();
     public LandlinePhoneListFragment fijosFragment = new LandlinePhoneListFragment();
     public NautaAccountListFragment nautasFragment = new NautaAccountListFragment();
     public InvoiceListFragment facturasFragments = new InvoiceListFragment();

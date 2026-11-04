@@ -12,6 +12,7 @@
 - Documented the reversible USSD parameter transform and the default access code; README progress now includes this recovered behavior.
 - Consolidated the duplicate `fDxylqSabM` candidates: retained the complete administrative keypad, removed the empty activation-pad draft, and reconstructed its direct three-digit access-code editor destination from `U4uiCgRvr6`. Added both source mappings; multiple-candidate paths decreased from 63 to 62.
 - Consolidated `OQcONjDATJ` to its complete 11-tab agent data-management pager and removed an unused duplicate that returned `null`; multiple-candidate paths decreased to 61.
+- Removed the null-returning alternate annotation for `ENqS9qPLC9` and reused the canonical banking mobile-list class in the general-mode contact pager. This resolves the link collision only; the mobile-list behavior is still an incomplete reconstruction.
 
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

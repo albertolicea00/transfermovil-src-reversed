@@ -21,6 +21,11 @@
       "role": "Agent data-management pager with 11 tabs; includes client, account, service, ticket and MiBoleto lists",
       "confidence": "high"
     },
+    "cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.ENqS9qPLC9": {
+      "clean": "cu.etecsa.transfermovil.banking.ui.MobileListFragment",
+      "role": "Mobile phone list with client filter, CRUD navigation and multi-select deletion",
+      "confidence": "high"
+    },
     "cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.U4uiCgRvr6": {
       "clean": "cu.etecsa.transfermovil.config.AccessCodeSettingsFragment",
       "role": "Validates and updates the three-digit USSD access code in AppConfig",
