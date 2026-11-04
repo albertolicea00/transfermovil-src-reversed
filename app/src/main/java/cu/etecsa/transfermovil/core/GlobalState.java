@@ -3,7 +3,9 @@ package cu.etecsa.transfermovil.core;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import cu.etecsa.transfermovil.config.ActivationCodeValidator;
 import cu.etecsa.transfermovil.core.enums.AccountSelection;
+import cu.etecsa.transfermovil.data.SharedPreferencesAccessor;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -89,15 +91,23 @@ public class GlobalState {
      */
     public static boolean isAGTelecom(Context context) {
         try {
-            // Fr52O1uSYF msap = new Fr52O1uSYF(); // SharedPreferencesAccessor
-            // String codigo_activacion = msap.getCodigoAgente(context);
-            // if (codigo_activacion == null) return false;
-            // hY5P1xQ5h8 ac = new hY5P1xQ5h8(); // ActivationCodeValidator
-            // if (codigo_activacion.contains("-1") || codigo_activacion.isEmpty()) return false;
-            // String version = msap.getVersion(context);
-            // String phone = msap.getPhone(context);
-            // return ac.check_code_activation(codigo_activacion, version, phone);
-            return false;
+            SharedPreferencesAccessor preferences = new SharedPreferencesAccessor();
+            try {
+                if (preferences.getCodigoAgente(context) == null) {
+                    return false;
+                }
+                ActivationCodeValidator validator = new ActivationCodeValidator();
+                String activationCode = preferences.getCodigoAgente(context);
+                if (activationCode.contains("-1") || activationCode.isEmpty()) {
+                    return false;
+                }
+                String version = preferences.getVersion(context);
+                String phone = preferences.getPhone(context);
+                return validator.check_code_activation(activationCode, version, phone);
+            } catch (Exception ex) {
+                Log.e("TM_SPLASH", "Exception generalVsAgentVersion: " + ex.getMessage());
+                return false;
+            }
         } catch (Exception e) {
             return false;
         }

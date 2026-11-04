@@ -27,6 +27,7 @@
 - [x] Reconstruct the USSD accessibility service/callback/checker and SMS receiver; compare event/control flow against original classes under simulated Android.
 - [x] Consolidate duplicate activation validators and compare the canonical algorithm against original source for normal/error inputs.
 - [x] Restore auth validation/session metadata and all operation enum values; compare expiry boundaries and DAO errors with the original.
+- [x] Restore `GlobalState.isAGTelecom()` from smali and compare valid, invalid, missing, and DAO-error behavior against the original activation flow.
 - [x] Consolidate duplicate character/text encoders and callback interfaces; verify dictionary/marker behavior and callback contracts.
 - [x] Reconstruct the launcher splash router, including its three-second delay and agent-code-based mode selection.
 - [x] Restore all 28 database entity source bodies, including field constraints, metadata, constructors and accessors; preserve the original default table names for renamed entities and compare schemas/defaults/accessors/JSON.

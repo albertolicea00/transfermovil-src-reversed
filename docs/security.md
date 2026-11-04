@@ -12,6 +12,10 @@ Source: `cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0` (smali)
 | `android:allowBackup` | `true` | Local backup exposes app data via `adb backup` |
 | `android:usesCleartextTraffic` | `true` | HTTP allowed — traffic sniffable |
 
+## Agent Activation Check
+
+`GlobalState.isAGTelecom(context)` loads the stored agent activation code, app version, and phone number, then passes them to `ActivationCodeValidator`. The check is a deterministic digit-difference calculation; it selects the local agent mode but does not establish remote identity. Missing, empty, `-1`-containing codes and accessor or validator errors all return `false`.
+
 ## CryptoProvider Inner Class
 
 Registers Apache Harmony `SHA1PRNG` as security provider ("Crypto", v1.0). Used by `getRawKey()` for deterministic key generation from seed — not a real CSPRNG use, just ensures cross-device reproducibility of derived keys.
