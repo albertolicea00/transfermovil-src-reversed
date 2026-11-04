@@ -18,6 +18,7 @@
 - Resolved the remaining 34 duplicate source annotations by removing unreferenced, field-only `Agent*`/generic fragments; retained the corresponding `Wallet*` source candidate based on its annotation and declared fields. The inventory now has no multiple-candidate paths. Wallet fragments still vary in completeness and are not runtime-verified; this is source identity cleanup, not feature completion.
 - Marked the source-collision review complete and refreshed README inventory counts; the task bar changes only for the completed review item.
 - Documented the source-backed Bulevar launch path in both app modes, offline retry state, startup URL/currency initialization, and no-token versus token routing; Android runtime behavior remains unverified.
+- Mapped both mode drawers to their exact fragment/activity destinations, recorded the differing wallet targets and permission requests, and flagged raw-only destinations. Android navigation remains unverified.
 
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

@@ -141,5 +141,5 @@ There are 449 clean Java files and 86 explicit class mappings. Three mapping
 incidences remain, all mappings to absent clean activities (`AgentMainActivity`,
 `GeneralMainActivity`, and e-commerce `LoginActivity`). A single source candidate
 is an identity link only; it does not certify complete methods, UI behavior, or a
-working Android build. The task bar is 85/146 and remains separate from these
+working Android build. The task bar is 86/146 and remains separate from these
 source-link counts.

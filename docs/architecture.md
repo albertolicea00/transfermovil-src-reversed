@@ -179,6 +179,43 @@ Inicio (Home)
 
 **Interpretation:** The app has two operational modes — "Agent" (for payment agents/businesses that process transactions on behalf of others) and "General" (end-user). Bancos, Comercio, and Estadisticas sections start hidden and are likely server-enabled or conditionally shown based on user type / authentication state.
 
+### Drawer destination mapping
+
+The following assignments come directly from the `NavigationView` listeners in
+`IHVTCBmiLV` (Agent) and `S9ycHcoxAzy` (General). Obfuscated destinations without
+a clean class are identified as raw-source-only; drawer visibility is controlled
+separately by menu setup and runtime state.
+
+| Menu item | Agent destination | General destination |
+|:---|:---|:---|
+| `inicio` | `cYyrKJVQ6G` (`OperationsGridFragment`) | `cYyrKJVQ6G` (`OperationsGridFragment`) |
+| `agentes` | `wRqLBJvNq6` (raw source only) | — |
+| `generales` | `s88cBrrDEaR` (raw source only; requests `READ_CONTACTS`) | — |
+| `llamadas` | — | `FNRzUmC7E5` (raw source only; requests `READ_CONTACTS`) |
+| `operaciones` | — | `LALCrDPvhM` (raw source only) |
+| `servicios` | — | `BktkqFBOIQ` (raw source only) |
+| `tel_utiles` | — | `s9lZwtvq9Dl` (raw source only) |
+| `nauta` | — | `KyQXczCdrr` (raw source only) |
+| `gestion` | `OQcONjDATJ` (`DataManagementAgentPagerFragment`; requests `READ_EXTERNAL_STORAGE`) | `wTZi6Zeikv` (`DataManagementGeneralPagerFragment`; requests `READ_EXTERNAL_STORAGE`) |
+| `resumidas` | `mYaQ7jnA3Y` (raw source only; argument `newEstaditica="1"`) | same |
+| `detalladas` | `postcP0gVS` (raw source only) | `LxRjrwTADB` (raw source only) |
+| `setting` | `UoWmGAF016` (raw source only) | same |
+| `help` | `pNvP5NiOcI` (`PlaceholderFragment`) | — |
+| `bpa` | `Pg7MuGKEAe` (`BpaTabHostFragment`) | same |
+| `metro` | `BIc10fn03P` (`MetroTabHostFragment`) | same |
+| `bandec` | `z5XKGtUeX8` (`BandecTabHostFragment`) | same |
+| `bfi` | `HBFPOv3Hig` (`BfiTabHostFragment`) | same |
+| `cuentas` | `KeTIEVSfVo` (raw source only) | same |
+| `bulevar` | Launches e-commerce activity `a7Y4bbw8Os` | same |
+| `bolsa_etecsa` | `gCD4Z8F6ml` (`BankingPagerFragment`) | `ofOuyCSKWI` (`WalletPagerFragment`) |
+| `vendedor_miboleto` | `wfroNBIJF7` (raw source only) | same |
+
+Selecting a drawer item first closes the drawer, unchecks current items, and
+clears the fragment manager; most fragment destinations are then added to the
+back stack. Home is replaced without adding a back-stack entry. The clean
+destination names above are source-link labels only; incomplete fragment bodies
+and Android navigation behavior still need separate verification.
+
 ## Key Operations (from string resources)
 
 | String ID | Label (es) | Category |

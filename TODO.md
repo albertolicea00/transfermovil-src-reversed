@@ -47,7 +47,7 @@
 - [x] Map manifest components (activities, services, receivers, providers)
 - [x] Identify two app modes: Agent and General
 - [x] Trace launch activity → main screen flow
-- [ ] Map fragment-to-screen assignments for each drawer menu item
+- [x] Map Agent and General drawer menu items to their raw fragment/activity destinations; identify destinations without clean classes.
 - [x] Identify how agent vs general mode is selected and persisted
 - [x] Document the splash/intro flow (first-run vs returning user)
 - [x] Map the `generalVsAgentVersion` logic
