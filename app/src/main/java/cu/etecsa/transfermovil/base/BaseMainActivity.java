@@ -217,46 +217,75 @@ public class BaseMainActivity extends AppCompatActivity {
     // --- USSD Parameter Encoding ---
 
     /**
-     * Two-stage USSD parameter encoding:
-     * 1. Splits input by '*', separates numeric vs non-numeric parts
-     * 2. Numeric parts: encoded via UssdCipherOrchestrator (substitution + XOR)
-     * 3. Non-numeric parts (Nauta accounts): encoded via NautaCodeEncoder
-     * 4. Reassembled with 2-digit length prefixes per segment
-     *
-     * @param cadena Raw USSD parameter string (e.g., "12345*nauta@email*6789")
-     * @return Encoded string with length prefixes and cipher output
+     * Encodes numeric USSD fields and interleaves dictionary-encoded Nauta fields.
+     * Numeric packets start with a random two-digit seed; each field carries its
+     * original two-digit length. Mixed packets keep the original field order.
      */
     public String code(String cadena) {
         String[] splitCode = cadena.split("\\*");
-        int[] lenght_original_list = new int[splitCode.length];
+        int[] originalLengths = new int[splitCode.length];
         boolean is_item_old_version = false;
-
         for (int i = 0; i < splitCode.length; i++) {
             if (esEntero(splitCode[i])) {
-                lenght_original_list[i] = splitCode[i].length();
+                originalLengths[i] = splitCode[i].length();
             } else {
-                lenght_original_list[i] = 0;
+                originalLengths[i] = 0;
                 is_item_old_version = true;
             }
         }
 
-        List<String> codeSplit = Arrays.asList(splitCode);
-        List<String> code_nauta = new ArrayList<>();
-        List<String> code_numbers = new ArrayList<>();
-        List<String> code_Salida = new ArrayList<>();
-
-        if (!is_item_old_version) {
-            // All numeric: encode via UssdCipherOrchestrator
-            // Tz34gww2TFwrsuT8ukpL cd = new Tz34gww2TFwrsuT8ukpL(code_version, crude_code);
-            // code_Salida = cd.aSHV52SplNh3HfZBSmJe(codeSplit);
-        } else {
-            // Mixed: separate numeric/non-numeric, encode each with appropriate cipher
-            // Numeric → UssdCipherOrchestrator, Non-numeric → NautaCodeEncoder (kR22DOzTiB)
+        List<String> numericFields = new ArrayList<>();
+        List<String> nautaFields = new ArrayList<>();
+        if (is_item_old_version) {
+            for (int i = 0; i < splitCode.length; i++) {
+                if (originalLengths[i] == 0) {
+                    nautaFields.add(splitCode[i]);
+                } else {
+                    numericFields.add(splitCode[i]);
+                }
+            }
         }
 
-        // Reassemble with 2-digit length prefixes
-        // Format: {random_seed}{len1}{encoded1}*{len2}{encoded2}*...
-        return ""; // placeholder
+        List<String> numericOutput = new UssdCipherOrchestrator(code_version, crude_code)
+                .encode(is_item_old_version ? numericFields : Arrays.asList(splitCode));
+        String seed = numericOutput.get(0);
+        if (seed.length() == 1) {
+            seed = "0" + seed;
+        }
+
+        List<String> encodedFields = new ArrayList<>();
+        if (is_item_old_version) {
+            List<String> encodedNauta = new NautaCodeEncoder().getCodes(nautaFields);
+            int numericIndex = 1;
+            int nautaIndex = 0;
+            for (int originalLength : originalLengths) {
+                if (originalLength == 0) {
+                    encodedFields.add(encodedNauta.get(nautaIndex++));
+                } else {
+                    encodedFields.add(numericOutput.get(numericIndex++));
+                }
+            }
+        } else {
+            encodedFields.addAll(numericOutput.subList(1, numericOutput.size()));
+        }
+
+        StringBuilder encoded = new StringBuilder();
+        if (is_item_old_version && numericFields.isEmpty()) {
+            encoded.append("00");
+        } else {
+            encoded.append(seed);
+        }
+        for (int i = 0; i < encodedFields.size(); i++) {
+            if (i > 0 && (is_item_old_version || i > 1)) {
+                encoded.append('*');
+            }
+            String length = String.valueOf(originalLengths[i]);
+            if (length.length() == 1) {
+                encoded.append('0');
+            }
+            encoded.append(length).append(encodedFields.get(i));
+        }
+        return encoded.toString();
     }
 
     public boolean esEntero(String cad) {

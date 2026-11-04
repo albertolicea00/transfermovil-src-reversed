@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class DigitSubstituter {
 
-    private int seed;
-    private final List<Integer> substitutionList;
+    int seed;
+    final List<Integer> substitutionList;
     private final int[] singleDigitMap = new int[10];
     private String result = "";
 

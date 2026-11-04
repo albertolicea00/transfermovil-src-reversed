@@ -27,7 +27,7 @@ USSD codes sent via `ACTION_CALL` intent with `tel:` URI. Confirmed from smali a
 tel:*{codeAcceso}*{codeService}#{encoded}
 ```
 
-- `codeAcceso` — access code from `AppConfig.getCodigo()` (ORMLite entity via `unYp8VQThY` singleton), falls back to string resource `0x7f100078`
+- `codeAcceso` — access code from `AppConfig.getCodigo()` (ORMLite entity via `unYp8VQThY` singleton); the resource fallback/default `codigoAcceso` (`0x7f100078`) is `444`
 - `codeService` — operation-specific code
 - URI-encoded `#` terminator
 
@@ -38,8 +38,8 @@ tel:*{codeAcceso}*{codeService}#{encoded}
 | Method | Behavior |
 |:---|:---|
 | `actionCallUSSDBack(ctx, codeService, codeToSend, msg, viewGroup, fm)` | Standard: confirm dialog → dial → auto-back |
-| `actionCallUSSDBack(simSlot, ctx, ...)` | Dual-SIM: specifies SIM slot |
-| `actionCallUSSDBack(simSlot, ctx, ..., activity)` | With Activity reference for result |
+| `actionCallUSSDBack(bankCode, ctx, ...)` | Persists the bank code and authentication timestamp, then dials |
+| `actionCallUSSDBack(bankCode, ctx, ..., activity)` | Also refreshes the matching main activity's menu |
 | `actionCallUSSDBack454(ctx, ...)` | Variant for specific operation (454) |
 | `actionCallUSSDBackAsocClasica(ctx, ..., observer)` | With observer callback (association) |
 | `actionCallUSSDBackHttp(ctx, ..., SpannableString)` | HTTP-style styled message |
@@ -216,6 +216,19 @@ Full USSD code format per packet:
 
 **Declared constant:** `MAX_FALLAS_USSD` = 3; source search found no use of this field, so it does not implement retries.
 
+### Numeric Parameter Encoding
+
+`BaseMainActivity.code()` (original `rDEl7rW1aN.code()`) uses a random integer from 0 through 99 as a two-digit prefix. `crude_code` is parsed into 128 byte values: each successive 8-bit chunk starts at an offset selected by cycling through the digits of `code_version` (`372653282298718711`).
+
+Each numeric field is transformed in two steps:
+
+1. Pairs of digits index the byte table; each result is formatted as two digits. For an odd-length field, the last digit uses a ten-entry map drawn from table values below 10.
+2. The substituted decimal value is XORed as a `long` with a decimal key string made by cycling through table values beginning at the random seed, then truncating the key string to the substituted value's length.
+
+Fields containing non-digits use `NautaCodeEncoder.getCodes()` and the character dictionary. Mixed inputs keep numeric and Nauta fields in their original order. The output includes a two-digit original-length prefix for every field; the legacy all-numeric format joins the first two length/value pairs without `*`, while mixed fields use `*` separators. A nonnumeric-only input uses `00` in place of the random seed. Unknown Nauta characters stringify as `null` in `getCodes()`; this behavior is preserved from source.
+
+This is deterministic-obfuscation with a random per-call seed, not authenticated encryption: the version, lookup table, substitution, and XOR operations are all present in the client. The current clean reconstruction is compared against the original for numeric, odd/even length, mixed, and Nauta cases with a fixed test seed.
+
 ### USSD Failure and Timeout Behavior
 
 The app has two distinct request paths, and neither schedules an app-level timeout:
@@ -349,5 +362,5 @@ Also has `readSmsInbox(ContentResolver)` returning `ArrayList<rIgmgP6JXL>` — r
 3. **SMS format:** What is the structure of outgoing and incoming SMS for banking operations?
 4. ~~**Error handling:** How does the app handle USSD timeouts, malformed responses, or accessibility service unavailability?~~ — **Answered:** no app-level timeout; API failures and response parsing differ by path, and the accessibility path can wait without a timeout callback.
 5. ~~**SIM selection:** Is there explicit dual-SIM handling, or does it rely on the system default?~~ — **Answered:** no explicit subscription selection found; requests use the default telephony service or a `tel:` call intent.
-6. **Code encoder details:** What does `Tz34gww2TFwrsuT8ukpL.aSHV52SplNh3HfZBSmJe()` actually compute from the binary lookup table?
-7. **AppConfig access code:** What is the default access code (string resource `0x7f100078`)?
+6. ~~**Code encoder details:** What does `Tz34gww2TFwrsuT8ukpL.aSHV52SplNh3HfZBSmJe()` actually compute from the binary lookup table?~~ — **Answered:** it seeds the per-field substitution/XOR encoder with an integer 0–99 and returns the seed followed by encoded numeric fields; see [Numeric Parameter Encoding](#numeric-parameter-encoding).
+7. ~~**AppConfig access code:** What is the default access code (string resource `0x7f100078`)?~~ — **Answered:** `codigoAcceso` is `444`; the database helper uses it when creating or upgrading `AppConfig`.

@@ -7,6 +7,9 @@
 - The existing 16-test reconstruction suite and README progress check pass; the suite does not compile the Android activity or provide a Splash-specific runtime comparison.
 - Restored the smali-backed `GlobalState.isAGTelecom()` activation check instead of the unconditional false placeholder. Compared 31 generated-code, missing/invalid-code, phone/version mismatch, and accessor-error cases against the original validator and method.
 - Documented both USSD request paths' failure handling, the unused three-failure counter, accessibility-service gaps, and lack of an app-level timeout. Source review also found no explicit SIM/subscription selection in the inspected USSD/SMS paths; TODO now records both findings.
+- Corrected the dispatcher overload documentation: its `String banco` argument stores the bank code and authentication timestamp, not a SIM slot. Recorded the `codigoAcceso` default (`444`) and its database initialization/update use.
+- Restored `BaseMainActivity.code()` from JADX source: seed/table construction, digit-pair substitution, cyclic XOR, mixed Nauta character mapping, field-length prefixes, and legacy separators. Compared 49 numeric/mixed inputs against the original with a deterministic test seed; made `DigitSubstituter`'s two package-consumed fields package-private so `XorCipherStep` compiles. Full reconstruction suite: 18 tests pass.
+- Documented the reversible USSD parameter transform and the default access code; README progress now includes this recovered behavior.
 
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
