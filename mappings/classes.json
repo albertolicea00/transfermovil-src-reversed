@@ -11,6 +11,16 @@
       "role": "Launcher/splash screen, routes to Agent or General mode",
       "confidence": "high"
     },
+    "cu.etecsa.cubacel.tr.tm.F0VSiFomrqH.fDxylqSabM": {
+      "clean": "cu.etecsa.transfermovil.crypto.AdminCodeEntryFragment",
+      "role": "Administrative keypad; validates a hashed code before opening access-code settings",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.U4uiCgRvr6": {
+      "clean": "cu.etecsa.transfermovil.config.AccessCodeSettingsFragment",
+      "role": "Validates and updates the three-digit USSD access code in AppConfig",
+      "confidence": "high"
+    },
     "cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy": {
       "clean": "cu.etecsa.transfermovil.ui.GeneralMainActivity",
       "role": "General (end-user) mode main activity with drawer menu",

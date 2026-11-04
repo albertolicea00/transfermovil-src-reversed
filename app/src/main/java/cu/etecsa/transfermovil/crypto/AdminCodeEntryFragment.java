@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import cu.etecsa.transfermovil.R;
+import cu.etecsa.transfermovil.config.AccessCodeSettingsFragment;
+import cu.etecsa.transfermovil.data.entity.Client;
 import cu.etecsa.transfermovil.util.Sha256Util;
 
 /**
@@ -74,8 +76,7 @@ public class AdminCodeEntryFragment extends Fragment {
                         || code1.equals(code14) || code1.equals(universal)) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    // U4uiCgRvr6 → settings/admin fragment from oEpx7i6I9Bq package
-                    ft.replace(R.id.containerView, new Fragment()).addToBackStack(null).commit();
+                    ft.replace(R.id.containerView, new AccessCodeSettingsFragment()).addToBackStack(null).commit();
                 } else {
                     Toast.makeText(container.getContext(), "Codigo Invalido", Toast.LENGTH_LONG).show();
                 }
