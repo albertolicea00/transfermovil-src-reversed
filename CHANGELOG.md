@@ -15,6 +15,7 @@
 - Removed the null-returning alternate annotation for `ENqS9qPLC9` and reused the canonical banking mobile-list class in the general-mode contact pager. This resolves the link collision only; the mobile-list behavior is still an incomplete reconstruction.
 - Removed the unused null-returning `wTZi6Zeikv` contact-pager draft. The retained banking pager matches the original eight-tab general-mode implementation; the deleted draft claimed ten tabs and returned `null`. No production references targeted the draft.
 - Removed the remaining unreferenced `ui/contacts` drafts: 25 duplicate declarations for source classes already represented under `banking/ui`. Twenty-four were null-returning stubs and one contained fields/comments only. No code imported this package; candidates retained in `banking/ui` remain incomplete where noted, so this only removes false duplicate links.
+- Resolved the remaining 34 duplicate source annotations by removing unreferenced, field-only `Agent*`/generic fragments; retained the corresponding `Wallet*` source candidate based on its annotation and declared fields. The inventory now has no multiple-candidate paths. Wallet fragments still vary in completeness and are not runtime-verified; this is source identity cleanup, not feature completion.
 
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
