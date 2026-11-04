@@ -79,6 +79,8 @@ Based on class hierarchy analysis, string references, and named classes:
 | `nNLWm3R1aPI.wComYkZMDc` | Custom-themed activity | Config change handling |
 | `FileChooserActivity` | File picker (3rd party) | `ar.com.daidalos.afiledialog` library |
 
+`prPzLeyxKk` is reconstructed as `ui/SplashActivity.java`; its mode check uses the mapped `SharedPreferencesAccessor` and `ActivationCodeValidator`. The General and Agent destinations remain original manifest component names while their clean activity reconstructions are pending.
+
 **E-commerce activities:**
 
 | Obfuscated Name | Evidence |

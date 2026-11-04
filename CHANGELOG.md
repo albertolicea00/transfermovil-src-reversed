@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-04 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Reconstructed the launcher `SplashActivity`: original 3-second delay, agent activation validation, fallback to General mode, launch error handling, splash menu and resource links. The target Agent and General activities remain original component names pending their own reconstructions.
+- Inventory now links `prPzLeyxKk` to a clean class; mapping issues fell from four to three. The app-wide Android build and navigation are still unverified.
+- The existing 16-test reconstruction suite and README progress check pass; the suite does not compile the Android activity or provide a Splash-specific runtime comparison.
+
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Restored the original source bodies for all 28 database entities, including ORMLite constraints, constructors, metadata, accessors and JSON-visible fields; preserved `MCBank` and `MiBoletoService` table identities after semantic renaming. Compared model schemas/defaults/accessors and Gson payloads, and checked the base activity's AES delegation against JCE helpers.
