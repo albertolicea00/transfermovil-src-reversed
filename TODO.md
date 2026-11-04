@@ -31,10 +31,11 @@
 - [x] Consolidate duplicate character/text encoders and callback interfaces; verify dictionary/marker behavior and callback contracts.
 - [x] Reconstruct the launcher splash router, including its three-second delay and agent-code-based mode selection.
 - [x] Consolidate the administrative keypad collision and restore its AppConfig access-code editor destination.
+- [x] Remove the unused null-returning alternate `OQcONjDATJ` pager and map the complete 11-tab agent data-management pager.
 - [x] Restore all 28 database entity source bodies, including field constraints, metadata, constructors and accessors; preserve the original default table names for renamed entities and compare schemas/defaults/accessors/JSON.
 - [x] Restore the base activity's AES encryption/decryption delegation and compare its original JCE behavior.
 - [x] Restore `BaseMainActivity.code()` numeric/mixed USSD encoding, document the reversible transformation, and compare output with the original under a fixed seed.
-- [ ] Review the remaining 62 original paths with multiple reconstruction candidates.
+- [ ] Review the remaining 61 original paths with multiple reconstruction candidates.
 - [ ] Resolve the remaining 3 mapping incidences reported in the 2026-11-04 inventory against source evidence.
 - [ ] Review the remaining 26 interrupted banking UI drafts (pagers/tabs/BPA/BFI/Metropolitano/wallet); replace incomplete behavior only when supported by source.
 - [ ] Review the remaining 215 main-package source files without exact reconstruction links; distinguish generated code from application logic.

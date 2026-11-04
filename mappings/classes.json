@@ -16,6 +16,11 @@
       "role": "Administrative keypad; validates a hashed code before opening access-code settings",
       "confidence": "high"
     },
+    "cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.OQcONjDATJ": {
+      "clean": "cu.etecsa.transfermovil.banking.ui.DataManagementAgentPagerFragment",
+      "role": "Agent data-management pager with 11 tabs; includes client, account, service, ticket and MiBoleto lists",
+      "confidence": "high"
+    },
     "cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.U4uiCgRvr6": {
       "clean": "cu.etecsa.transfermovil.config.AccessCodeSettingsFragment",
       "role": "Validates and updates the three-digit USSD access code in AppConfig",
