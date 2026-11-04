@@ -51,7 +51,7 @@
 - [x] Identify how agent vs general mode is selected and persisted
 - [x] Document the splash/intro flow (first-run vs returning user)
 - [x] Map the `generalVsAgentVersion` logic
-- [ ] Document the e-commerce module activation path
+- [x] Document the e-commerce Bulevar entry from both mode drawers and startup routing by token state.
 
 ## USSD / Telephony
 
