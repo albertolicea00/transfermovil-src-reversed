@@ -126,3 +126,20 @@ APK names; a future runnable app needs coordinated navigation mapping.
 Review duplicate candidates and mapping conflicts first, then compare methods
 against JADX and smali where decompilation is incomplete. Record verified
 equivalences in `classes.json` only after that review.
+
+## 2026-11-04 snapshot
+
+Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
+`b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
+
+| Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
+| --- | ---: | ---: | ---: | ---: |
+| All `src/` | 794 | 345 | 449 | 0 |
+| Main app package | 596 | 215 | 381 | 0 |
+
+There are 449 clean Java files and 86 explicit class mappings. Three mapping
+incidences remain, all mappings to absent clean activities (`AgentMainActivity`,
+`GeneralMainActivity`, and e-commerce `LoginActivity`). A single source candidate
+is an identity link only; it does not certify complete methods, UI behavior, or a
+working Android build. The task bar is 84/146 and remains separate from these
+source-link counts.

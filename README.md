@@ -7,9 +7,9 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-October%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[████████████████████████████░░░░░░░░░░░░░░░░░░░░░░] 56%</code></span>
+<span style="white-space: nowrap;"><code>[████████████████████████████░░░░░░░░░░░░░░░░░░░░░░] 57%</code></span>
 
-**Task-list progress: 83/146 completed; 63 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 84/146 completed; 62 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -37,7 +37,7 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 | Area | Status | Current state |
 | :--- | :--- | :--- |
 | APK identification and extraction | Complete for the current APK | Metadata, manifest, resources, JADX Java, and smali are available. |
-| Clean Java reconstruction | In progress | 510 files exist; some are partial, contain stubs, or duplicate an original class. |
+| Clean Java reconstruction | In progress | 449 files exist; some are partial or contain stubs. The source-link inventory currently has no duplicate candidates. |
 | Protocol and feature analysis | In progress | Topic documents contain findings; the complete USSD code catalog remains a TODO. |
 | iOS port research | Planned | Feasibility, platform limits, and feature parity remain TODOs. |
 | Build and behavioral validation | Pending | The reconstructed Java tree has not been compiled or verified as a working app. |
@@ -114,12 +114,12 @@ Repository inventory for the current target (2026-10-17):
 | Item | Count | Location |
 | :--- | ---: | :--- |
 | Decompiled Java files | 794 | `src/` (including 596 in the main app package) |
-| Clean Java reconstruction files | 504 | `app/src/main/java/` |
+| Clean Java reconstruction files | 449 | `app/src/main/java/` |
 | Local smali files | 3,439 | `smali/` (ignored by Git) |
 | Extracted resource files | 35 | `app/res/` |
 | Extracted asset files | 32 | `app/assets/` |
 | Topic documents | 11 | `docs/` |
-| Class mappings | 72 | `mappings/classes.json` |
+| Class mappings | 86 | `mappings/classes.json` |
 | Analysis scripts | 4 | `scripts/` |
 
 *These are file and mapping counts, not a measure of reconstruction completeness; some clean classes are partial or duplicate the same original class.*
