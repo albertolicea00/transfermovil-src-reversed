@@ -214,7 +214,20 @@ Full USSD code format per packet:
 | ≥ 26 (Android 8+) | `MX9gh9mLxd` (UssdHelper) | `TelephonyManager.sendUssdRequest()` with callback listener |
 | < 26 | Accessibility service | `START_LISTENING` broadcast → `sendDataUSSD(0)` → accessibility reads response → `onUssdReceived()` → sends next packet |
 
-**Constants:** `MAX_FALLAS_USSD` = 3 (max retries per failure)
+**Declared constant:** `MAX_FALLAS_USSD` = 3; source search found no use of this field, so it does not implement retries.
+
+### USSD Failure and Timeout Behavior
+
+The app has two distinct request paths, and neither schedules an app-level timeout:
+
+- On Android 8+ (`MX9gh9mLxd`), `TelephonyManager.sendUssdRequest()` reports failures through `onReceiveUssdResponseFailed`. The multipart sender forwards the platform `failureCode` to `onUssdError`, emits a failed progress result with code `3`, closes its progress UI, and returns to the previous fragment. A successful response advances only when its text contains the exact substring `siendo procesada,`; any other response is treated as a part failure and stops the sequence. No retry is attempted in that callback.
+- The pre-Android-8 accessibility path (`pAzq93vIl3`) advances only after the registered callback receives an accessibility event. Missing `CALL_PHONE` permission returns without dispatching the call. If the accessibility service is unavailable, automatic sending shows a permission toast and stops. No timer detects a response that never arrives.
+- `MAX_FALLAS_USSD` is initialized to `3`, but the reconstructed source has no reads of this field and does not implement three retries. The callback helper `WV9lIl58Oa` logs a platform failure but does not notify its caller; its success callback sends the optional next request regardless of response text.
+- `O7xyZJJBFWg` listens while `shouldListen` is true and handles `TYPE_WINDOW_STATE_CHANGED` events from `com.android.phone` only when text contains `USSD`, `si`, `ok`, or `aceptar`. Other text or no event receives no app-level error or timeout callback.
+
+### SIM Routing
+
+No explicit SIM/subscription selection was found in the inspected source. The newer helpers obtain the default `TelephonyManager` with `getSystemService("phone")`; the older paths start `ACTION_CALL` with a `tel:` URI. Searches found no `SubscriptionManager`, subscription-specific manager, or phone-account selection call in the tracked app source. SIM routing is therefore left to Android, carrier, and device default behavior; the app provides no SIM picker in these paths.
 
 ### USSD Code Number Mapping (Hypothesis)
 
@@ -307,7 +320,7 @@ Also has `readSmsInbox(ContentResolver)` returning `ArrayList<rIgmgP6JXL>` — r
 
 ## SIM Selection
 
-`READ_PHONE_STATE` permission enables SIM detection. On dual-SIM devices, the app likely allows selecting which SIM to use for USSD/SMS operations. Requires decompiled code to confirm SIM selection UI and logic.
+`READ_PHONE_STATE` is declared, but no SIM-selection UI or subscription-specific USSD/SMS calls were found in the inspected app sources; see [SIM Routing](#sim-routing).
 
 ## Key Class Map
 
@@ -334,7 +347,7 @@ Also has `readSmsInbox(ContentResolver)` returning `ArrayList<rIgmgP6JXL>` — r
 1. ~~USSD code parameter format~~ — **Answered:** encoded via `code()` with binary lookup table
 2. ~~Response parsing~~ — **Answered:** accessibility service matches text for "USSD"/"si"/"ok"/"aceptar"
 3. **SMS format:** What is the structure of outgoing and incoming SMS for banking operations?
-4. **Error handling:** How does the app handle USSD timeouts, malformed responses, or accessibility service unavailability?
-5. **SIM selection:** Is there explicit dual-SIM handling, or does it rely on the system default?
+4. ~~**Error handling:** How does the app handle USSD timeouts, malformed responses, or accessibility service unavailability?~~ — **Answered:** no app-level timeout; API failures and response parsing differ by path, and the accessibility path can wait without a timeout callback.
+5. ~~**SIM selection:** Is there explicit dual-SIM handling, or does it rely on the system default?~~ — **Answered:** no explicit subscription selection found; requests use the default telephony service or a `tel:` call intent.
 6. **Code encoder details:** What does `Tz34gww2TFwrsuT8ukpL.aSHV52SplNh3HfZBSmJe()` actually compute from the binary lookup table?
 7. **AppConfig access code:** What is the default access code (string resource `0x7f100078`)?

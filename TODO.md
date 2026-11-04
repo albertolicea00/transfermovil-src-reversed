@@ -59,8 +59,8 @@
 - [x] Decompile accessibility service response parsing logic
 - [x] Map USSD code → operation mapping (*444=BANDEC, *222=main, 100+ service codes)
 - [x] Document multi-step USSD flows (sendNextUssd / nextUssdCode)
-- [ ] Trace SIM selection logic for dual-SIM devices
-- [ ] Document USSD error handling and timeout behavior
+- [x] Check dual-SIM routing in telephony source; document absence of explicit subscription selection in the inspected paths.
+- [x] Document USSD API failures, response parsing, accessibility-service failure, and the absence of an app-level timeout/retry.
 - [x] Map USSD code format: `*{access}*{service}#` via actionCallUSSD
 
 ## SMS

@@ -6,6 +6,7 @@
 - Inventory now links `prPzLeyxKk` to a clean class; mapping issues fell from four to three. The app-wide Android build and navigation are still unverified.
 - The existing 16-test reconstruction suite and README progress check pass; the suite does not compile the Android activity or provide a Splash-specific runtime comparison.
 - Restored the smali-backed `GlobalState.isAGTelecom()` activation check instead of the unconditional false placeholder. Compared 31 generated-code, missing/invalid-code, phone/version mismatch, and accessor-error cases against the original validator and method.
+- Documented both USSD request paths' failure handling, the unused three-failure counter, accessibility-service gaps, and lack of an app-level timeout. Source review also found no explicit SIM/subscription selection in the inspected USSD/SMS paths; TODO now records both findings.
 
 ## 2026-10-29 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
