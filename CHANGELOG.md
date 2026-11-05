@@ -2,6 +2,7 @@
 
 ## 2026-11-05 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Traced additional fixed-telephone and ONAT stamp/tax dispatches from raw JADX source: selectors `42` and `43`, payload order, full-payment sentinel, and the ONAT partial-packet field-order difference. Added a literal-selector inventory count; the catalog remains incomplete.
 - Reconstructed the launcher `SplashActivity`: original 3-second delay, agent activation validation, fallback to General mode, launch error handling, splash menu and resource links. Agent and General activity bodies are now migrated into clean targets below.
 - Inventory now links `prPzLeyxKk` to a clean class; mapping issues fell from four to three. The app-wide Android build and navigation are still unverified.
 - The existing 16-test reconstruction suite and README progress check pass; the suite does not compile the Android activity or provide a Splash-specific runtime comparison.

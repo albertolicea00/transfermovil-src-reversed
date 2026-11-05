@@ -47,6 +47,9 @@ selectors represent different user-visible operations.
 | Metropolitano | Modify payment priority | `tel:*<access>*27*E(<priority-code>*<account>)*<version>%23` | Transform selected priority code and account. | `MetroModificarPrelacionFragment.submitForm`; dispatcher | Confirmed |
 | Metropolitano | Reprint card | `tel:*<access>*74*E(<currency>*<account>*<commission-account>*<municipality>*<branch>)*<version>%23` | Read municipality and branch codes from selected entities, then transform the ordered payload. | `MetroReimprimirTarjetaFragment.submitForm`; dispatcher | Confirmed |
 | General | Transfer to bank account | `tel:*<access>*45*E(<account>*<amount>*<recipient-phone-or-00000000>)*<version>%23` | Validates a 16-digit destination account, amount, and optional 8-digit phone; uses `00000000` when phone is blank. | `TransferFragment.submitForm`; dispatcher | Confirmed |
+| Banking / Wallet | Pay fixed telephone bill | `tel:*<access>*42*E(<invoice>*<amount-or-0>*<currency>)*<version>%23` | For partial payment, sends the entered amount; for full payment, sends literal `0`. The currency field comes from the selected payment currency, separate from the invoice's detected CUP/CUC label. | `AckAnySXkn.submitForm`; variants `l2i2DeDgof.submitForm`, `p5B8KozjvpQ.submitForm`, `pxpQ3hcmYF.submitForm` | Confirmed |
+| ONAT | Buy stamp (personal or company) | `tel:*<access>*43*E(2*<DPA>*<NIT>*<tax-code>*<MM/YYYY>*<amount>*<entity>*<currency>*<account>)*<version>%23` | Selector `43` has multiple ONAT payload variants. The stamp form builds the sequence shown; partial USSD uses gateway `110` and rearranges tax-code/NIT in the packet payload. | `TGMSi5UDp7.submitForm`; `FBsQzP3Zfj.actionCallUSSDBack` | Confirmed |
+| ONAT | Pay tax | `tel:*<access>*43*E(<source-built-tax-payload>)*<version>%23` | A separate tax-payment screen also uses selector `43`; its payload is constructed from selected tax, period and taxpayer fields. The precise field order varies by screen and must be catalogued per variant. | `ROgpLrCtHa.submitForm` | Confirmed selector; payload variant needs further review |
 | Mi Turno | Reserve appointment | `tel:*<access>*102*E(<bank>*<service>*<branch-DPA>*<identity>*<phone-or-0>*<currency>*<account>)*<version>%23` | Fields are assembled in this order; when partial USSD is enabled, packet helper uses gateway `110`, operation `102`. | `WalletTicketPurchaseFragment.submitForm`; dispatcher | Confirmed |
 | Mi Turno | Change reservation date | `tel:*<access>*105*E(<bank>*<service>*<identity>*<date>)*<version>%23` | Date is passed after identity number. | `WalletTicketDateFragment.submitForm`; dispatcher | Confirmed |
 | Mi Turno | Cancel reservation | `tel:*<access>*106*E(<bank>*<service>*<identity>)*<version>%23` | Requires selected service and identity number. | `WalletTicketReservationFragment.submitForm`; dispatcher | Confirmed |
@@ -59,6 +62,12 @@ Here `E(x)` is the existing `rDEl7rW1aN.code(x)` transformation, `<access>` and
 `Uri.encode("#")`. The ordinary dispatcher asks for confirmation and starts
 `ACTION_CALL`. This table describes source behavior only and does not dial any
 code or include live credentials.
+
+A static source scan finds 91 distinct numeric literal service selectors in
+single-line `actionCallUSSDBack(...)` invocations under `src/`. The selector
+count is not a count of user-visible operations: several operations share a
+selector, and other call sites use dynamic selectors or different dispatch
+overloads. The inventory is therefore still incomplete.
 
 ## Entry format
 
