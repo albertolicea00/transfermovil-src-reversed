@@ -28,6 +28,9 @@ selectors represent different user-visible operations.
 
 | Service / bank | User action | Dial string template | Construction algorithm | Source evidence | Confidence |
 | --- | --- | --- | --- | --- | --- |
+| General menu | Query card balance | `tel:*444*46%23` | A confirmation dialog dispatches the literal code directly; no account payload, AppConfig access code, app version, or SMS path is used by this branch. | `FBsQzP3Zfj.getAlertDialogBuilder`, case 13 | Confirmed |
+| Banking | Query all registered account balances | `tel:*<access>*58%23` | A confirmation dialog dispatches selector `58` through the configured access-code overload without a payload/version. | `FBsQzP3Zfj.showDialogTodasCuentas`; `rDEl7rW1aN.actionCallUSSD(String)` | Confirmed |
+| Agent mobile-recharge module | Query stock balance | `tel:*<access>*11*2%23` | The stock-balance confirmation calls the one-argument direct-dial overload with literal `11*2`. | `g1bQ0lLj6na.showDialogConsultaSaldo`; `rDEl7rW1aN.actionCallUSSD(String)` | Confirmed |
 | BFI | Query balance | `tel:*<access>*46*E(<currency>*<account>)*<version>%23` | Select currency and account; transform the complete payload through `rDEl7rW1aN.code()`. Partial path uses packet gateway `110`, operation `46`, version `05`. | `BfiConsultarSaldoFragment.submitForm`; `FBsQzP3Zfj.actionCallUSSDBack` | Confirmed |
 | BFI | Query limits | `tel:*<access>*62*E(<currency>*<account>)*<version>%23` | Same account payload and transform; partial path uses `110`, `62`, `05`. | `BfiConsultarLimiteFragment.submitForm`; dispatcher | Confirmed |
 | BFI | Query latest operations | `tel:*<access>*48*E(<currency>*<account>)*<version>%23` | Same account payload and transform; partial path uses `110`, `48`, `05`. | `BfiConsultarUltimasOperacionesFragment.submitForm`; dispatcher | Confirmed |
