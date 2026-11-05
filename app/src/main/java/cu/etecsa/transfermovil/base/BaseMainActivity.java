@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import cu.etecsa.transfermovil.crypto.CryptoProvider;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AppConfig;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -166,7 +168,15 @@ public class BaseMainActivity extends AppCompatActivity {
                                 String mensaje_dialog, final ViewGroup group) {
         String cadena = "tel:*" + codeAcc + "*" + codeService + "*" + codeToSend + Uri.encode("#");
         final Uri number = Uri.parse(cadena);
-        // Show confirm dialog → startActivity(new Intent(ACTION_CALL, number))
+        new androidx.appcompat.app.AlertDialog.Builder(group.getContext())
+                .setTitle(R.string.confirm)
+                .setMessage(Html.fromHtml(mensaje_dialog))
+                .setPositiveButton("Confirmar", (dialog, id) -> {
+                    startActivity(new Intent("android.intent.action.CALL", number));
+                    clearForm(group);
+                })
+                .setNegativeButton("Cancelar", (dialog, id) -> dialog.cancel())
+                .show();
     }
 
     /**
@@ -175,16 +185,28 @@ public class BaseMainActivity extends AppCompatActivity {
     public void actionCallUSSD(String codeToSend, String mensaje_dialog, final ViewGroup group) {
         String cadena = "tel:*" + codeToSend + Uri.encode("#");
         final Uri number = Uri.parse(cadena);
-        // Confirm dialog → ACTION_CALL
+        new androidx.appcompat.app.AlertDialog.Builder(group.getContext())
+                .setTitle(R.string.confirm)
+                .setMessage(Html.fromHtml(mensaje_dialog))
+                .setPositiveButton("Confirmar", (dialog, id) -> {
+                    startActivity(new Intent("android.intent.action.CALL", number));
+                    clearForm(group);
+                })
+                .setNegativeButton("Cancelar", (dialog, id) -> dialog.cancel())
+                .show();
     }
 
     /**
      * USSD with access code from DB: tel:*{codeAcceso}*{codeService}#
      */
     public void actionCallUSSD(String codeService) {
-        // Reads access code from AppConfig table
-        // Falls back to R.string.codigoAcceso
-        // Fires ACTION_CALL directly (no confirmation)
+        unYp8VQThY.init(getBaseContext());
+        List<AppConfig> appConfigList = unYp8VQThY.getInstance().getAllAppConfigLists();
+        String codeAccess = appConfigList.size() > 0
+                ? appConfigList.get(0).getCodigo() : getString(R.string.codigoAcceso);
+        String cadena = "tel:*" + codeAccess + "*" + codeService + Uri.encode("#");
+        Log.d("code", cadena);
+        startActivity(new Intent("android.intent.action.CALL", Uri.parse(cadena)));
     }
 
     /**
@@ -192,9 +214,16 @@ public class BaseMainActivity extends AppCompatActivity {
      * Uses code() method for USSD parameter encoding.
      */
     public void actionCallUSSD(String codeService, String codeToSend) {
-        // Reads codeAcceso + version from AppConfig
-        // Encodes codeToSend via code() method
-        // Fires ACTION_CALL directly
+        unYp8VQThY.init(getBaseContext());
+        List<AppConfig> appConfigList = unYp8VQThY.getInstance().getAllAppConfigLists();
+        String codeAccess = appConfigList.size() > 0
+                ? appConfigList.get(0).getCodigo() : getString(R.string.codigoAcceso);
+        String version = appConfigList.size() > 0
+                ? appConfigList.get(0).getNumber() : getString(R.string.version_transfermovil);
+        String cadena = "tel:*" + codeAccess + "*" + codeService + "*" + code(codeToSend)
+                + "*" + version + Uri.encode("#");
+        Log.d("code", cadena);
+        startActivity(new Intent("android.intent.action.CALL", Uri.parse(cadena)));
     }
 
     /**
@@ -202,7 +231,27 @@ public class BaseMainActivity extends AppCompatActivity {
      */
     public void actionCallUSSD(String codeService, String codeToSend,
                                 String mensaje_dialog, final ViewGroup group) {
-        // Same as above but shows confirmation dialog first
+        unYp8VQThY.init(getBaseContext());
+        List<AppConfig> appConfigList = unYp8VQThY.getInstance().getAllAppConfigLists();
+        String codeAccess = appConfigList.size() > 0
+                ? appConfigList.get(0).getCodigo() : getString(R.string.codigoAcceso);
+        String version = appConfigList.size() > 0
+                ? appConfigList.get(0).getNumber() : getString(R.string.version_transfermovil);
+        String cadena = "tel:*" + codeAccess + "*" + codeService + "*" + code(codeToSend)
+                + "*" + version + Uri.encode("#");
+        final Uri number = Uri.parse(cadena);
+        new androidx.appcompat.app.AlertDialog.Builder(group.getContext())
+                .setTitle(R.string.confirm)
+                .setMessage(Html.fromHtml(mensaje_dialog))
+                .setPositiveButton("Confirmar", (dialog, id) -> {
+                    try {
+                        startActivity(new Intent("android.intent.action.CALL", number));
+                    } catch (Exception ignored) {
+                    }
+                    clearForm(group);
+                })
+                .setNegativeButton("Cancelar", (dialog, id) -> dialog.cancel())
+                .show();
     }
 
     /**
@@ -211,7 +260,22 @@ public class BaseMainActivity extends AppCompatActivity {
     public void actionCallUSSDCodeAccess(String codeAccess, String codeService,
                                           String codeToSend, String mensaje_dialog,
                                           final ViewGroup group) {
-        // Uses provided codeAccess instead of DB lookup
+        unYp8VQThY.init(getBaseContext());
+        List<AppConfig> appConfigList = unYp8VQThY.getInstance().getAllAppConfigLists();
+        String version = appConfigList.size() > 0
+                ? appConfigList.get(0).getNumber() : getString(R.string.version_transfermovil);
+        String cadena = "tel:*" + codeAccess + "*" + codeService + "*" + code(codeToSend)
+                + "*" + version + Uri.encode("#");
+        final Uri number = Uri.parse(cadena);
+        new androidx.appcompat.app.AlertDialog.Builder(group.getContext())
+                .setTitle(R.string.confirm)
+                .setMessage(Html.fromHtml(mensaje_dialog))
+                .setPositiveButton("Confirmar", (dialog, id) -> {
+                    startActivity(new Intent("android.intent.action.CALL", number));
+                    clearForm(group);
+                })
+                .setNegativeButton("Cancelar", (dialog, id) -> dialog.cancel())
+                .show();
     }
 
     // --- USSD Parameter Encoding ---
