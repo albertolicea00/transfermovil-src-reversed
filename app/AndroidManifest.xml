@@ -33,14 +33,14 @@
             </intent-filter>
             <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility_service_config"/>
         </service>
-        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.IHVTCBmiLV" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="cu.etecsa.transfermovil.ui.AgentMainActivity" android:screenOrientation="portrait"/>
         <activity android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.prPzLeyxKk">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy" android:screenOrientation="portrait">
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.transfermovil.ui.GeneralMainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -68,6 +68,7 @@
         <activity android:name="cu.etecsa.tm.ecommerce.yzjeVbN3sq"/>
         <activity android:label="@string/title_activity_main" android:name="cu.etecsa.tm.ecommerce.mBdwa3RRkn" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
         <activity android:name="cu.etecsa.tm.ecommerce.a7Y4bbw8Os" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
+        <activity android:name="cu.etecsa.transfermovil.ecommerce.LoginActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
         <activity android:label="@string/app_name" android:name="cu.etecsa.tm.ecommerce.bAogvejtBb" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
         <activity android:name="cu.etecsa.tm.ecommerce.H9l22AIYKkA" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
         <activity android:name="cu.etecsa.tm.ecommerce.C1b1PWKeZSE" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>

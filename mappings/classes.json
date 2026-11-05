@@ -153,8 +153,8 @@
     },
     "cu.etecsa.tm.ecommerce.a7Y4bbw8Os": {
       "clean": "cu.etecsa.transfermovil.ecommerce.LoginActivity",
-      "role": "E-commerce login activity — session expired dialog redirects here",
-      "confidence": "medium"
+      "role": "E-commerce startup: checks connectivity and token, then routes to credential login or authenticated home",
+      "confidence": "high"
     },
     "cu.etecsa.tm.ecommerce.Dyporpu9vbM.tQvDIr4mUHh.zDPt4FP8OC": {
       "clean": "cu.etecsa.transfermovil.ecommerce.ApiResponse",

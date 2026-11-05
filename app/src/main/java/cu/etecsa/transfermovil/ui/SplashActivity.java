@@ -15,14 +15,15 @@ import cu.etecsa.transfermovil.data.SharedPreferencesAccessor;
 
 /**
  * Launch screen and mode router reconstructed from the v1.260416 JADX source.
+ * Routes to clean manifest aliases whose superclass keeps the original mode activity behavior.
  * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.prPzLeyxKk
  */
 public class SplashActivity extends Activity {
 
     private static final int SPLASH_TIME_OUT = 3000;
-    private static final String AGENT_ACTIVITY = "cu.etecsa.cubacel.tr.tm.IHVTCBmiLV";
-    private static final String GENERAL_ACTIVITY = "cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy";
+    private static final String AGENT_ACTIVITY = "cu.etecsa.transfermovil.ui.AgentMainActivity";
+    private static final String GENERAL_ACTIVITY = "cu.etecsa.transfermovil.ui.GeneralMainActivity";
 
     private boolean block = false;
     public SharedPreferencesAccessor msap;

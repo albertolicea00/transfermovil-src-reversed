@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,18 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class OperationsGridFragment extends Fragment implements DragStartListener {
     private ItemTouchHelper itemTouchHelper;
-
-    public OperationsGridAdapter.OnItemClickListener onItemClickListener =
-        new OperationsGridAdapter.OnItemClickListener() {
-            public Bundle b = new Bundle();
-
-            @Override
-            public void onItemClick(View view, int position) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction();
-                Toast.makeText(getActivity(), "Position " + position, Toast.LENGTH_SHORT).show();
-            }
-        };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,7 +38,6 @@ public class OperationsGridFragment extends Fragment implements DragStartListene
         ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(adapter);
         this.itemTouchHelper = new ItemTouchHelper(callback);
         this.itemTouchHelper.attachToRecyclerView(recyclerView);
-        adapter.setOnItemClickListener(this.onItemClickListener);
     }
 
     @Override
