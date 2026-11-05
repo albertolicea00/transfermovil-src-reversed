@@ -9,52 +9,74 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
-import cu.etecsa.transfermovil.R;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.ME2IdEhApc;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.bnsLemXoui;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.dLMLrixv4f;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.vhcWzIxxMH;
+import cu.etecsa.cubacel.tr.tm.R;
 
-/**
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.wmNoZ7GzBg
- * 4-tab pager for BFI enterprise: Sesión, Consultas, Operaciones, Configuración.
- * Child fragments from P2MO7cFkntPD.SXVyD7BX7KJ subpackage.
- * Differs from BfiOperationTabsFragment in Operaciones tab (uses dLMLrixv4f instead of opFvbCxlRn).
- */
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.wmNoZ7GzBg */
 public class BfiEnterpriseOperationTabsFragment extends Fragment {
-
     public static int int_items = 4;
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View x = inflater.inflate(R.layout.g4ybhpqvlytaoa, (ViewGroup) null);
         tabLayout = (TabLayout) x.findViewById(R.id.tabs);
-        viewPager = (ViewPager) x.findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
-        tabLayout.post(() -> tabLayout.setupWithViewPager(viewPager));
+        ViewPager viewPager2 = (ViewPager) x.findViewById(R.id.viewpager);
+        viewPager = viewPager2;
+        viewPager2.setAdapter(new MyAdapter(getChildFragmentManager()));
+        tabLayout.post(new Runnable() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.wmNoZ7GzBg.1
+            @Override // java.lang.Runnable
+            public void run() {
+                BfiEnterpriseOperationTabsFragment.tabLayout.setupWithViewPager(BfiEnterpriseOperationTabsFragment.viewPager);
+            }
+        });
         return x;
     }
 
     public class MyAdapter extends FragmentPagerAdapter {
-        public MyAdapter(FragmentManager fm) { super(fm); }
-
-        @Override
-        public Fragment getItem(int position) {
-            // P2MO7cFkntPD.SXVyD7BX7KJ subpackage fragments:
-            // 0: vhcWzIxxMH (Sesión), 1: ME2IdEhApc (Consultas),
-            // 2: dLMLrixv4f (Operaciones — enterprise variant), 3: bnsLemXoui (Configuración)
-            return null; // stub
+        public MyAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        @Override
-        public int getCount() { return int_items; }
+        @Override // androidx.fragment.app.FragmentPagerAdapter
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new vhcWzIxxMH();
+                case 1:
+                    return new ME2IdEhApc();
+                case 2:
+                    return new dLMLrixv4f();
+                case 3:
+                    return new bnsLemXoui();
+                default:
+                    return null;
+            }
+        }
 
-        @Override
+        @Override // androidx.viewpager.widget.PagerAdapter
+        public int getCount() {
+            return BfiEnterpriseOperationTabsFragment.int_items;
+        }
+
+        @Override // androidx.viewpager.widget.PagerAdapter
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case 0: return "Sesión";
-                case 1: return "Consultas";
-                case 2: return "Operaciones";
-                case 3: return "Configuración";
-                default: return null;
+                case 0:
+                    return "Sesión";
+                case 1:
+                    return "Consultas";
+                case 2:
+                    return "Operaciones";
+                case 3:
+                    return "Configuración";
+                default:
+                    return null;
             }
         }
     }

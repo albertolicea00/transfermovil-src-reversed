@@ -8,107 +8,100 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import com.google.android.material.textfield.TextInputLayout;
+import cu.etecsa.transfermovil.banking.ui.bfi.BaseTwoAccountFragment;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TipoPrelacion;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Fragment for modifying payment prelation order at the Metropolitano/BFI bank.
- * Extends QGQCqILT4b (base banking fragment with account selector).
- * User selects a TipoPrelacion (prelation type) and a source account.
- * Sends USSD code "27" with payload "{prelationCode}*{cuentaOrigen}".
- * Confirmation: "¿Desea realizar la modificación de la prelación de pago?"
- *
- * @original_apk_version 1.260416
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.hqlegRdVXsu.wJLggUmg0M
- * @fingerprint Metro/BFI payment prelation modification fragment (USSD 27)
- */
-public class MetroModificarPrelacionFragment /* extends QGQCqILT4b */ {
-
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.hqlegRdVXsu.wJLggUmg0M */
+public class MetroModificarPrelacionFragment extends BaseTwoAccountFragment {
     private Button btnAceptar;
     public TextInputLayout lyPrelacion;
-    // public TipoPrelacion prelacion;
-    // public ArrayAdapter<TipoPrelacion> prelacionArrayAdapter;
-    // public List<TipoPrelacion> prelacionList;
-    // private jN13TOyLMX spPrelacion;  // CustomAutoCompleteTextView
+    public TipoPrelacion prelacion;
+    public ArrayAdapter<TipoPrelacion> prelacionArrayAdapter;
+    public List<TipoPrelacion> prelacionList;
+    private jN13TOyLMX spPrelacion;
     public TextView toolbar_title;
     public String tipoServicio = "0";
+    public jN13TOyLMX.OnItemClickListener spPrelacionOnClickListener = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.hqlegRdVXsu.wJLggUmg0M.2
+        @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
+        public void onItemClick(View view, int position) {
+            wJLggUmg0M wjlggumg0m = MetroModificarPrelacionFragment.this;
+            wjlggumg0m.prelacion = wjlggumg0m.prelacionArrayAdapter.getItem(position);
+        }
+    };
 
-    // Inherited from QGQCqILT4b:
-    // public View rootView;
-    // public Context context;
-    // public String cuentaOrigen;
-
-    /* --- Prelation item click listener --- */
-    // Sets selected prelacion from adapter
-
-    // @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflates layout: R.layout.qsm2zf232m3bm
-        // rootView = inflater.inflate(R.layout.qsm2zf232m3bm, container, false);
-        // context = container.getContext();
-
-        // lyPrelacion = rootView.findViewById(R.id.lyPrelacion);
-        // spPrelacion = rootView.findViewById(R.id.spPrelacion);
-
-        // initComponentesCuentas(rootView, BankType.BFI);
-        // loadPrelacion();
-
-        // btnAceptar = rootView.findViewById(R.id.btn_aceptar);
-        // btnAceptar.setOnClickListener(view -> submitForm());
-
-        return null; // stub
+        this.rootView = inflater.inflate(R.layout.qsm2zf232m3bm, container, false);
+        this.context = container.getContext();
+        this.lyPrelacion = (TextInputLayout) this.rootView.findViewById(R.id.lyPrelacion);
+        this.spPrelacion = (jN13TOyLMX) this.rootView.findViewById(R.id.spPrelacion);
+        initComponentesCuentas(this.rootView, R1sDOSqZ2z.BFI);
+        loadPrelacion();
+        Button button = (Button) this.rootView.findViewById(R.id.btn_aceptar);
+        this.btnAceptar = button;
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.hqlegRdVXsu.wJLggUmg0M.1
+            @Override // android.view.View.OnClickListener
+            public void onClick(View view) {
+                MetroModificarPrelacionFragment.this.submitForm();
+            }
+        });
+        return this.rootView;
     }
 
-    /**
-     * Validates prelation selection and account selection.
-     * Builds USSD payload: "{prelation.getCode()}*{cuentaOrigen}"
-     * Sends USSD code "27" with confirmation
-     * "¿Desea realizar la modificación de la prelación de pago?"
-     */
-    // @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b
     public void submitForm() {
-        // super.submitForm();
-        // if (!validatePrelacion() || !validateSelectionAccounts()) return;
-        // nuevoDatos();
-
-        // String cadena = prelacion.getCode() + "*" + cuentaOrigen;
-        // ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmView);
-        // FBsQzP3Zfj.actionCallUSSDBack(context, "27", cadena,
-        //         "¿Desea realizar la modificación de la prelación de pago?",
-        //         group, getFragmentManager());
+        super.submitForm();
+        if (!validatePrelacion() || !validateSelectionAccounts()) {
+            return;
+        }
+        nuevoDatos();
+        String cadena = this.prelacion.getCode() + "*" + this.cuentaOrigen;
+        ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
+        FBsQzP3Zfj.actionCallUSSDBack(this.context, "27", cadena, "¿Desea realizar la modificación de la prelación de pago?", group, getFragmentManager());
     }
 
-    // @Override
-    public void nuevoDatos() { /* no-op override */ }
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b
+    public void nuevoDatos() {
+    }
 
-    /**
-     * Loads prelation types from JSON via V9s8rJIDplX (JsonFilesManager).
-     * Populates spPrelacion adapter with TipoPrelacion items.
-     */
     private boolean loadPrelacion() {
-        // prelacionList = new ArrayList<>();
-        // V9s8rJIDplX jsonFilesManager = new V9s8rJIDplX();
-        // List<TipoPrelacion> list = jsonFilesManager.loadDataPrelacion(context);
-        // if (list == null || list.isEmpty()) return false;
-        // prelacionArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line);
-        // for (TipoPrelacion t : list) {
-        //     prelacionArrayAdapter.add(t);
-        //     prelacionList.add(t);
-        // }
-        // spPrelacion.setAdapter(prelacionArrayAdapter);
-        // spPrelacion.setOnItemClickListener(spPrelacionOnClickListener);
-        return false; // stub
+        try {
+            this.prelacionList = new ArrayList();
+            V9s8rJIDplX jsonFilesManager = new V9s8rJIDplX();
+            List<TipoPrelacion> list = jsonFilesManager.loadDataPrelacion(this.context);
+            if (list == null || list.size() <= 0) {
+                return false;
+            }
+            this.prelacionArrayAdapter = new ArrayAdapter<>(this.context, android.R.layout.simple_dropdown_item_1line);
+            for (TipoPrelacion uyh0pxs9m37in : list) {
+                this.prelacionArrayAdapter.add(uyh0pxs9m37in);
+                this.prelacionList.add(uyh0pxs9m37in);
+            }
+            this.prelacionArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.spPrelacion.setAdapter(this.prelacionArrayAdapter);
+            this.spPrelacion.setOnItemClickListener(this.spPrelacionOnClickListener);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    /** Validates that a prelation option is selected. Error: "Seleccione la opción" */
     private boolean validatePrelacion() {
-        // lyPrelacion.setErrorEnabled(false);
-        // if (spPrelacion.getText().toString().trim().isEmpty() || prelacion == null) {
-        //     lyPrelacion.setError("Seleccione la opción");
-        //     requestFocus(spPrelacion);
-        //     return false;
-        // }
-        // lyPrelacion.setErrorEnabled(false);
-        return true; // stub
+        this.lyPrelacion.setErrorEnabled(false);
+        if (this.spPrelacion.getText().toString().trim().isEmpty() || this.prelacion == null) {
+            this.lyPrelacion.setError("Seleccione la opción");
+            requestFocus(this.spPrelacion);
+            return false;
+        }
+        this.lyPrelacion.setErrorEnabled(false);
+        return true;
     }
 }

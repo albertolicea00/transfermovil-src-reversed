@@ -6,54 +6,50 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.*;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
+/* JADX INFO: loaded from: classes.dex */
 /**
- * BFI bank payment priority (prelacion de pago) query fragment.
- *
- * <p>Allows the user to query the payment priority order on their BFI account
- * via USSD code "28". Extends the two-account base fragment (QGQCqILT4b).
- * Unlike other BFI query fragments, this one does NOT support partial USSD
- * and sends only the account number as payload.
- *
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.stRd4NiI1J
- * @fingerprint BFI payment priority query fragment, USSD code 28
+ * @original_apk_version 1.260416
  */
-public class BfiConsultarPrelacionPagoFragment extends BaseTwoAccountFragment /* QGQCqILT4b */ {
-
+public class BfiConsultarPrelacionPagoFragment extends BaseTwoAccountFragment {
     private Button btnAceptar;
-
-    /** Service type selector, default "0" */
     public String tipoServicio = "0";
-
     public TextView toolbar_title;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflates layout: R.layout.tux1gay012zgb
-        // Initializes account components for BankType.BFI
-        // Wires accept button to submitForm()
-        return null; // stub
+        this.rootView = inflater.inflate(R.layout.tux1gay012zgb, container, false);
+        this.context = container.getContext();
+        initComponentesCuentas(this.rootView, R1sDOSqZ2z.BFI);
+        Button button = (Button) this.rootView.findViewById(R.id.btn_aceptar);
+        this.btnAceptar = button;
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.BfiConsultarPrelacionPagoFragment.1
+            @Override // android.view.View.OnClickListener
+            public void onClick(View view) {
+                BfiConsultarPrelacionPagoFragment.this.submitForm();
+            }
+        });
+        return this.rootView;
     }
 
-    /**
-     * Validates account selection, then sends USSD request.
-     *
-     * <p>USSD payload: "{cuentaOrigen}" (account number only, no currency prefix)
-     * <p>Direct USSD code: "28" (no partial USSD support)
-     * <p>Confirmation: "Desea realizar la consulta de la prelacion de pago?"
-     */
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b
     public void submitForm() {
         super.submitForm();
-        // if (!validateSelectionAccounts()) return;
-        // nuevoDatos();
-        // String cadena = cuentaOrigen;
-        // USSD code "28", confirmation "Desea realizar la consulta de la prelacion de pago?"
+        if (!validateSelectionAccounts()) {
+            return;
+        }
+        nuevoDatos();
+        String cadena = this.cuentaOrigen;
+        ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
+        FBsQzP3Zfj.actionCallUSSDBack(this.context, "28", cadena, "¿Desea realizar la consulta de la prelación de pago?", group, getFragmentManager());
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b
     public void nuevoDatos() {
-        // No-op override
     }
 }

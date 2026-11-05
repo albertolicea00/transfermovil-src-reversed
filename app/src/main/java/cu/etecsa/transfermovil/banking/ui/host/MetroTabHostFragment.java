@@ -11,51 +11,62 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
-import cu.etecsa.transfermovil.R;
+import cu.etecsa.cubacel.tr.tm.R;
 
-/**
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.BIc10fn03P
- * Single-tab host showing Metropolitano bank logo. Inner content: MetroOperationTabsFragment.
- */
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.BIc10fn03P */
 public class MetroTabHostFragment extends Fragment {
-
     public static int int_items = 1;
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View x = inflater.inflate(R.layout.ngtrfxybeehkb, (ViewGroup) null);
         tabLayout = (TabLayout) x.findViewById(R.id.tabs);
-        viewPager = (ViewPager) x.findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
-        tabLayout.post(() -> {
-            try {
-                tabLayout.setupWithViewPager(viewPager);
-                tabLayout.setBackgroundColor(getResources().getColor(R.color.bancoMetro));
-                Context ct = getContext();
-                TextView tabTwo = (TextView) LayoutInflater.from(ct).inflate(R.layout.qk38evge3cdbu, (ViewGroup) null);
-                tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_banco_metro, 0, 0);
-                tabLayout.getTabAt(0).setCustomView(tabTwo);
-            } catch (Exception e) {
+        ViewPager viewPager2 = (ViewPager) x.findViewById(R.id.viewpager);
+        viewPager = viewPager2;
+        viewPager2.setAdapter(new MyAdapter(getChildFragmentManager()));
+        tabLayout.post(new Runnable() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.BIc10fn03P.1
+            @Override // java.lang.Runnable
+            public void run() {
+                try {
+                    MetroTabHostFragment.tabLayout.setupWithViewPager(MetroTabHostFragment.viewPager);
+                    MetroTabHostFragment.tabLayout.setBackgroundColor(BIc10fn03P.this.getResources().getColor(R.color.bancoMetro));
+                    Context ct = BIc10fn03P.this.getContext();
+                    TextView tabTwo = (TextView) LayoutInflater.from(ct).inflate(R.layout.qk38evge3cdbu, (ViewGroup) null);
+                    tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_banco_metro, 0, 0);
+                    MetroTabHostFragment.tabLayout.getTabAt(0).setCustomView(tabTwo);
+                } catch (Exception e) {
+                }
             }
         });
         return x;
     }
 
     public class MyAdapter extends FragmentPagerAdapter {
-        public MyAdapter(FragmentManager fm) { super(fm); }
-
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0) return new MetroOperationTabsFragment();
-            return null;
+        public MyAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        @Override
-        public int getCount() { return int_items; }
+        @Override // androidx.fragment.app.FragmentPagerAdapter
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new MetroOperationTabsFragment();
+                default:
+                    return null;
+            }
+        }
 
-        @Override
-        public CharSequence getPageTitle(int position) { return null; }
+        @Override // androidx.viewpager.widget.PagerAdapter
+        public int getCount() {
+            return MetroTabHostFragment.int_items;
+        }
+
+        @Override // androidx.viewpager.widget.PagerAdapter
+        public CharSequence getPageTitle(int position) {
+            return null;
+        }
     }
 }

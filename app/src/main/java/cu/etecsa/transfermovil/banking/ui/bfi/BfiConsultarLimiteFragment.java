@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.banking.ui.bfi;
 
+import cu.etecsa.cubacel.tr.tm.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,85 +12,156 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
+import com.github.paolorotolo.appintro.BuildConfig;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.jceCwl8l2R;
+import java.util.List;
 
+/* JADX INFO: loaded from: classes.dex */
 /**
- * BFI bank account limits inquiry fragment.
- *
- * <p>Allows the user to query the limits on their BFI bank accounts via USSD code "62".
- * Uses the same account selection pattern (saved accounts, new account, or by currency)
- * as other BFI query fragments.
- *
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.leZyk029xo
- * @fingerprint BFI account limits query fragment, USSD code 62
+ * @original_apk_version 1.260416
  */
-public class BfiConsultarLimiteFragment extends BaseBankingFragment /* Agg55uYctq */ {
-
+public class BfiConsultarLimiteFragment extends BaseBankingFragment {
     private Button btnAceptar;
     public TextView toolbar_title;
-
-    /** Service type selector, default "0" */
     public String tipoServicio = "0";
+    public jN13TOyLMX.OnItemClickListener spClickMoneda = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.BfiConsultarLimiteFragment.2
+        @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
+        public void onItemClick(View view, int position) {
+            switch (position) {
+                case 0:
+                    if (BfiConsultarLimiteFragment.this.cargarMisCuentas()) {
+                        BfiConsultarLimiteFragment.this.monedaTarjeta = 0;
+                        BfiConsultarLimiteFragment.this.seleccionCuenta = jceCwl8l2R.MIS_CUENTAS;
+                        BfiConsultarLimiteFragment.this.inputLayoutMisCuentas.setVisibility(0);
+                        BfiConsultarLimiteFragment.this.inputLayoutCuentaWrite.setVisibility(8);
+                    } else {
+                        showDialogNoTieneCuentas();
+                    }
+                    break;
+                case 1:
+                    BfiConsultarLimiteFragment.this.monedaTarjeta = 0;
+                    BfiConsultarLimiteFragment.this.seleccionCuenta = jceCwl8l2R.NUEVA_CUENTA;
+                    BfiConsultarLimiteFragment.this.inputLayoutMisCuentas.setVisibility(8);
+                    BfiConsultarLimiteFragment.this.inputLayoutCuentaWrite.setVisibility(0);
+                    BfiConsultarLimiteFragment.this.mcBankArrayAdapter = null;
+                    BfiConsultarLimiteFragment.this.spinnerMisCuentas.setText(BuildConfig.FLAVOR);
+                    BfiConsultarLimiteFragment.this.miCuentaSeleccion = BuildConfig.FLAVOR;
+                    break;
+                default:
+                    BfiConsultarLimiteFragment.this.seleccionCuenta = jceCwl8l2R.MONEDA;
+                    BfiConsultarLimiteFragment.this.monedaTarjeta = position + 1;
+                    BfiConsultarLimiteFragment.this.inputLayoutMisCuentas.setVisibility(8);
+                    BfiConsultarLimiteFragment.this.inputLayoutCuentaWrite.setVisibility(8);
+                    BfiConsultarLimiteFragment.this.mcBankArrayAdapter = null;
+                    BfiConsultarLimiteFragment.this.spinnerMisCuentas.setText(BuildConfig.FLAVOR);
+                    BfiConsultarLimiteFragment.this.miCuentaSeleccion = BuildConfig.FLAVOR;
+                    break;
+            }
+        }
 
-    /**
-     * Listener for the currency/account type spinner.
-     * Same pattern as BfiConsultarSaldoFragment.
-     */
-    public OnItemClickListener spClickMoneda;
+        public void showDialogNoTieneCuentas() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(BfiConsultarLimiteFragment.this.context);
+            builder.setTitle(BfiConsultarLimiteFragment.this.context.getString(R.string.tx_hint_aviso));
+            builder.setMessage(BfiConsultarLimiteFragment.this.context.getString(R.string.err_no_tiene_cuentas));
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.BfiConsultarLimiteFragment.2.1
+                @Override // android.content.DialogInterface.OnClickListener
+                public void onClick(DialogInterface dialog, int id) {
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    };
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflates layout: R.layout.jozkrainwpt1o
-        // Sets toolbar title from R.string.title_tx_consulta_limite
-        // Initializes account components for BankType.BFI
-        // Sets up currency spinner with R.array.accounts
-        // Wires accept button to submitForm()
-        return null; // stub
+        this.rootView = inflater.inflate(R.layout.jozkrainwpt1o, container, false);
+        Context context = container.getContext();
+        this.context = context;
+        this.manager = new pAzq93vIl3(context, this);
+        unYp8VQThY.init(this.context);
+        TextView textView = (TextView) this.rootView.findViewById(R.id.toolbar_title);
+        this.toolbar_title = textView;
+        textView.setText(getString(R.string.title_tx_consulta_limite));
+        initComponentesCuentas(this.rootView, R1sDOSqZ2z.BFI);
+        ArrayAdapter<CharSequence> arrayAdapterCreateFromResource = ArrayAdapter.createFromResource(this.context, R.array.accounts, android.R.layout.simple_list_item_1);
+        this.adapterTipoMoneda = arrayAdapterCreateFromResource;
+        arrayAdapterCreateFromResource.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.spinnerTipoMoneda.setAdapter(this.adapterTipoMoneda);
+        this.spinnerTipoMoneda.setOnItemClickListener(this.spClickMoneda);
+        Button button = (Button) this.rootView.findViewById(R.id.btn_aceptar);
+        this.btnAceptar = button;
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.BfiConsultarLimiteFragment.1
+            @Override // android.view.View.OnClickListener
+            public void onClick(View view) {
+                BfiConsultarLimiteFragment.this.submitForm();
+            }
+        });
+        return this.rootView;
     }
 
-    /**
-     * Validates account selection, then sends USSD request.
-     *
-     * <p>USSD payload: "{monedaTarjeta}*{cuentaOrigen}"
-     * <ul>
-     *   <li>Direct USSD code: "62"</li>
-     *   <li>Partial USSD: prefix "110", code "62", sub "05"</li>
-     * </ul>
-     * Confirmation: "Desea consultar los limites de sus cuentas bancarias?"
-     */
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.BaseBankingFragment
     public void submitForm() {
         super.submitForm();
-        // if (!validateSelectionAccounts()) return;
-        // nuevoDatos();
-        // String cadena = monedaTarjeta + "*" + cuentaOrigen;
-        // USSD code "62", confirmation "Desea consultar los limites de sus cuentas bancarias?"
-        // Partial USSD: prefix "110", code "62", sub "05"
+        if (!validateSelectionAccounts()) {
+            return;
+        }
+        nuevoDatos();
+        String cadena = this.monedaTarjeta + "*" + this.cuentaOrigen;
+        ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
+        if (!this.isPartialUSSD) {
+            FBsQzP3Zfj.actionCallUSSDBack(this.context, "62", cadena, "¿Desea consultar los límites de sus cuentas bancarias?", group, getFragmentManager());
+        } else {
+            this.manager.principalEnviarUSSD(this.context, "110", "62", "05", this.MAX_PARAMETERS_PQUETE, cadena, "¿Desea consultar los límites de sus cuentas bancarias?", group, getFragmentManager());
+        }
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.BaseBankingFragment
     public void nuevoDatos() {
-        // No-op override
     }
 
-    /**
-     * Loads saved BFI accounts from the database for the current bank entity.
-     *
-     * @return true if accounts were loaded, false if none found
-     */
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.BaseBankingFragment
     public boolean cargarMisCuentas() {
-        // Queries MCBank entries by agency from DatabaseHelper
-        return false; // stub
+        try {
+            List<MCBank> list = unYp8VQThY.getInstance().getMCBankByAgency(this.bancoEntity);
+            if (list == null || list.size() <= 0) {
+                return false;
+            }
+            this.mcBankArrayAdapter = new ArrayAdapter<>(this.context, android.R.layout.simple_dropdown_item_1line);
+            for (MCBank uyh0pxs9m37in : list) {
+                this.mcBankArrayAdapter.add(uyh0pxs9m37in);
+            }
+            this.mcBankArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.spinnerMisCuentas.setAdapter(this.mcBankArrayAdapter);
+            this.spinnerMisCuentas.setOnItemClickListener(this.spClickMisCuentas);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3.UssdResponseObserver
     public void onUssdResponseReceived(String response) {
-        // No-op
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3.UssdResponseObserver
     public void onCloseAndBack() {
-        // Pops fragment back stack; falls back to onBackPressed()
+        try {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.popBackStack();
+        } catch (Exception e) {
+            try {
+                getActivity().onBackPressed();
+            } catch (Exception e2) {
+            }
+        }
     }
 }

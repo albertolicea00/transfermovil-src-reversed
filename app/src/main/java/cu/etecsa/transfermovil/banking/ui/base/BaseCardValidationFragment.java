@@ -3,7 +3,8 @@ package cu.etecsa.transfermovil.banking.ui.base;
 import androidx.fragment.app.Fragment;
 
 /**
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.EV9Tu0zIL4
+ * Historical incomplete draft. Use `banking/ui/bfi/BankingAccountValidatorFragment`
+ * for the smali-backed implementation; this class is not source-linked.
  *
  * Abstract base fragment providing card/account number validation.
  * Determines bank agency and card type (PAN vs ESTANDARIZADA) from
@@ -15,7 +16,7 @@ import androidx.fragment.app.Fragment;
  *   Special prefixes:
  *     "976003" -> MiTransfer, "976004" -> CLASICAEMP
  *   ESTANDARIZADA (2-digit prefix):
- *     "12" -> BPA, "06" -> BANDEC, "05" -> BFI, "03" -> BFI
+ *     "12" -> BPA, "06" -> BANDEC, "05" -> Metropolitano, "03" -> BFI
  *
  * Dependencies:
  *   - AgencyEntity enum (R1sDOSqZ2z)

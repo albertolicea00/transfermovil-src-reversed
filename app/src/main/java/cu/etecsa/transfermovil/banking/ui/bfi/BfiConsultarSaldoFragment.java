@@ -11,89 +11,156 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
+import com.github.paolorotolo.appintro.BuildConfig;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.jceCwl8l2R;
+import java.util.List;
 
+/* JADX INFO: loaded from: classes.dex */
 /**
- * BFI bank balance inquiry fragment.
- *
- * <p>Allows the user to check their BFI account balance via USSD code "46".
- * The user selects an account type (saved accounts, new account, or by currency)
- * and submits the query. Confirmation prompt: "Desea consultar el saldo de su cuenta?"
- *
- * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.Mg7YIILN4B
- * @fingerprint BFI balance inquiry fragment, USSD code 46
+ * @original_apk_version 1.260416
  */
-public class BfiConsultarSaldoFragment extends BaseBankingFragment /* Agg55uYctq */ {
-
+public class BfiConsultarSaldoFragment extends BaseBankingFragment {
     private Button btnAceptar;
     public TextView toolbar_title;
-
-    /** Service type selector, default "0" */
     public String tipoServicio = "0";
+    public jN13TOyLMX.OnItemClickListener spClickMoneda = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.BfiConsultarSaldoFragment.2
+        @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
+        public void onItemClick(View view, int position) {
+            switch (position) {
+                case 0:
+                    if (BfiConsultarSaldoFragment.this.cargarMisCuentas()) {
+                        BfiConsultarSaldoFragment.this.monedaTarjeta = 0;
+                        BfiConsultarSaldoFragment.this.seleccionCuenta = jceCwl8l2R.MIS_CUENTAS;
+                        BfiConsultarSaldoFragment.this.inputLayoutMisCuentas.setVisibility(0);
+                        BfiConsultarSaldoFragment.this.inputLayoutCuentaWrite.setVisibility(8);
+                    } else {
+                        showDialogNoTieneCuentas();
+                    }
+                    break;
+                case 1:
+                    BfiConsultarSaldoFragment.this.monedaTarjeta = 0;
+                    BfiConsultarSaldoFragment.this.seleccionCuenta = jceCwl8l2R.NUEVA_CUENTA;
+                    BfiConsultarSaldoFragment.this.inputLayoutMisCuentas.setVisibility(8);
+                    BfiConsultarSaldoFragment.this.inputLayoutCuentaWrite.setVisibility(0);
+                    BfiConsultarSaldoFragment.this.mcBankArrayAdapter = null;
+                    BfiConsultarSaldoFragment.this.spinnerMisCuentas.setText(BuildConfig.FLAVOR);
+                    BfiConsultarSaldoFragment.this.miCuentaSeleccion = BuildConfig.FLAVOR;
+                    break;
+                default:
+                    BfiConsultarSaldoFragment.this.seleccionCuenta = jceCwl8l2R.MONEDA;
+                    BfiConsultarSaldoFragment.this.monedaTarjeta = position + 1;
+                    BfiConsultarSaldoFragment.this.inputLayoutMisCuentas.setVisibility(8);
+                    BfiConsultarSaldoFragment.this.inputLayoutCuentaWrite.setVisibility(8);
+                    BfiConsultarSaldoFragment.this.mcBankArrayAdapter = null;
+                    BfiConsultarSaldoFragment.this.spinnerMisCuentas.setText(BuildConfig.FLAVOR);
+                    BfiConsultarSaldoFragment.this.miCuentaSeleccion = BuildConfig.FLAVOR;
+                    break;
+            }
+        }
 
-    /**
-     * Listener for the currency/account type spinner.
-     * Position 0 = "Mis Cuentas" (saved accounts),
-     * Position 1 = "Nueva Cuenta" (manual entry),
-     * Default  = currency selection (position + 1).
-     */
-    public OnItemClickListener spClickMoneda;
+        public void showDialogNoTieneCuentas() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(BfiConsultarSaldoFragment.this.context);
+            builder.setTitle(BfiConsultarSaldoFragment.this.context.getString(R.string.tx_hint_aviso));
+            builder.setMessage(BfiConsultarSaldoFragment.this.context.getString(R.string.err_no_tiene_cuentas));
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.BfiConsultarSaldoFragment.2.1
+                @Override // android.content.DialogInterface.OnClickListener
+                public void onClick(DialogInterface dialog, int id) {
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    };
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflates layout: R.layout.jozkrainwpt1o
-        // Sets toolbar title to "Consultar Saldo"
-        // Initializes account components for BankType.BFI
-        // Sets up currency spinner with R.array.accounts
-        // Wires accept button to submitForm()
-        return null; // stub
+        this.rootView = inflater.inflate(R.layout.jozkrainwpt1o, container, false);
+        Context context = container.getContext();
+        this.context = context;
+        this.manager = new pAzq93vIl3(context, this);
+        unYp8VQThY.init(this.context);
+        TextView textView = (TextView) this.rootView.findViewById(R.id.toolbar_title);
+        this.toolbar_title = textView;
+        textView.setText("Consultar Saldo");
+        initComponentesCuentas(this.rootView, R1sDOSqZ2z.BFI);
+        Button button = (Button) this.rootView.findViewById(R.id.btn_aceptar);
+        this.btnAceptar = button;
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.iKwHmDs0tyq.BfiConsultarSaldoFragment.1
+            @Override // android.view.View.OnClickListener
+            public void onClick(View view) {
+                BfiConsultarSaldoFragment.this.submitForm();
+            }
+        });
+        ArrayAdapter<CharSequence> arrayAdapterCreateFromResource = ArrayAdapter.createFromResource(this.context, R.array.accounts, android.R.layout.simple_list_item_1);
+        this.adapterTipoMoneda = arrayAdapterCreateFromResource;
+        arrayAdapterCreateFromResource.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.spinnerTipoMoneda.setAdapter(this.adapterTipoMoneda);
+        this.spinnerTipoMoneda.setOnItemClickListener(this.spClickMoneda);
+        return this.rootView;
     }
 
-    /**
-     * Validates account selection, then sends USSD request.
-     *
-     * <p>USSD payload: "{monedaTarjeta}*{cuentaOrigen}"
-     * <ul>
-     *   <li>Direct USSD code: "46"</li>
-     *   <li>Partial USSD: prefix "110", code "46", sub "05"</li>
-     * </ul>
-     * Confirmation: "Desea consultar el saldo de su cuenta?"
-     */
-    @Override
+    @Override // cu.etecsa.transfermovil.banking.ui.bfi.BaseBankingFragment
     public void submitForm() {
         super.submitForm();
-        // if (!validateSelectionAccounts()) return;
-        // nuevoDatos();
-        // String cadena = monedaTarjeta + "*" + cuentaOrigen;
-        // USSD code "46", confirmation "Desea consultar el saldo de su cuenta?"
-        // Partial USSD: prefix "110", code "46", sub "05"
+        if (!validateSelectionAccounts()) {
+            return;
+        }
+        nuevoDatos();
+        String cadena = this.monedaTarjeta + "*" + this.cuentaOrigen;
+        ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
+        if (!this.isPartialUSSD) {
+            FBsQzP3Zfj.actionCallUSSDBack(this.context, "46", cadena, "¿Desea consultar el saldo de su cuenta?", group, getFragmentManager());
+        } else {
+            this.manager.principalEnviarUSSD(this.context, "110", "46", "05", this.MAX_PARAMETERS_PQUETE, cadena, "¿Desea consultar el saldo de su cuenta?", group, getFragmentManager());
+        }
     }
 
-    @Override
+    @Override // cu.etecsa.transfermovil.banking.ui.bfi.BaseBankingFragment
     public void nuevoDatos() {
-        // No-op override
     }
 
-    /**
-     * Loads saved BFI accounts from the database for the current bank entity.
-     * Populates the "Mis Cuentas" spinner if accounts exist.
-     *
-     * @return true if accounts were loaded, false if none found
-     */
-    @Override
+    @Override // cu.etecsa.transfermovil.banking.ui.bfi.BaseBankingFragment
     public boolean cargarMisCuentas() {
-        // Queries MCBank entries by agency from DatabaseHelper
-        // Returns false if list is null or empty
-        return false; // stub
+        try {
+            List<MCBank> list = unYp8VQThY.getInstance().getMCBankByAgency(this.bancoEntity);
+            if (list == null || list.size() <= 0) {
+                return false;
+            }
+            this.mcBankArrayAdapter = new ArrayAdapter<>(this.context, android.R.layout.simple_dropdown_item_1line);
+            for (MCBank uyh0pxs9m37in : list) {
+                this.mcBankArrayAdapter.add(uyh0pxs9m37in);
+            }
+            this.mcBankArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.spinnerMisCuentas.setAdapter(this.mcBankArrayAdapter);
+            this.spinnerMisCuentas.setOnItemClickListener(this.spClickMisCuentas);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3.UssdResponseObserver
     public void onUssdResponseReceived(String response) {
-        // No-op - response handled by base class
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3.UssdResponseObserver
     public void onCloseAndBack() {
-        // Pops fragment back stack; falls back to onBackPressed()
+        try {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.popBackStack();
+        } catch (Exception e) {
+            try {
+                getActivity().onBackPressed();
+            } catch (Exception e2) {
+            }
+        }
     }
 }

@@ -14,9 +14,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import cu.etecsa.transfermovil.base.BaseMainActivity;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
 import cu.etecsa.transfermovil.stats.OperationItem;
 import cu.etecsa.transfermovil.stats.OperationListAdapter;
+import cu.etecsa.transfermovil.ui.fragment.BalanceQueryFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,13 +66,23 @@ public class GeneralBankingTabFragment extends Fragment {
                         GeneralBankingTabFragment.this.showDialogConsultaSaldo();
                         break;
                     case BOLSAUltimasOperaciones:
-                        // → dI2tctjNbR (agent operation fragment)
+                        ft.replace(R.id.containerView,
+                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dI2tctjNbR())
+                                .addToBackStack(null).commit();
                         break;
                     case BOLSAConsultaServicio:
-                        // Check isAGTelecom → phone bill or dialog
+                        if (cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ.isAGTelecom(this.context)) {
+                            GeneralBankingTabFragment.this.showAGConsulta();
+                        } else {
+                            ft.replace(R.id.containerView,
+                                    new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb())
+                                    .addToBackStack(null).commit();
+                        }
                         break;
                     case BOLSAEstadoCuenta:
-                        // → qAMfdm9Kls (agent wallet recharge)
+                        ft.replace(R.id.containerView,
+                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.qAMfdm9Kls())
+                                .addToBackStack(null).commit();
                         break;
                     case BOLSAConsultaReservaOFA:
                         GeneralBankingTabFragment.this.showDialogReservaOFA();
@@ -178,9 +190,11 @@ public class GeneralBankingTabFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == 1) {
-                    // Navigate to GvNasrezHU (transfer fragment)
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.beginTransaction().replace(R.id.containerView, new BalanceQueryFragment())
+                            .addToBackStack(null).commit();
                 } else {
-                    // USSD 46: query wallet balance
+                    ((BaseMainActivity) getActivity()).actionCallUSSD("46");
                 }
                 dialogInterface.dismiss();
             }
@@ -201,9 +215,12 @@ public class GeneralBankingTabFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == 0) {
-                    // USSD 103: general ticket query
+                    ((BaseMainActivity) getActivity()).actionCallUSSD("103");
                 } else {
-                    // Navigate to x12rSjPY6pZ (per-ticket query fragment)
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.containerView,
+                                    new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.x12rSjPY6pZ())
+                            .addToBackStack(null).commit();
                 }
                 dialogInterface.dismiss();
             }
@@ -223,7 +240,14 @@ public class GeneralBankingTabFragment extends Fragment {
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Navigate to dYBdUyjb1D with BankType.MiTransfer + option (i+1)
+                Bundle args = new Bundle();
+                args.putSerializable("R1sDOSqZ2z", cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z.MiTransfer);
+                args.putSerializable("Opcion", Integer.valueOf(i + 1));
+                cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dYBdUyjb1D fragment =
+                        new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dYBdUyjb1D();
+                fragment.setArguments(args);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.containerView, fragment).addToBackStack(null).commit();
                 dialogInterface.dismiss();
             }
         });
@@ -245,14 +269,23 @@ public class GeneralBankingTabFragment extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i) {
                     case 0: // USSD 117: query offers
+                        ((BaseMainActivity) getActivity()).actionCallUSSD("117");
                         break;
                     case 1: // → i9I9XZGnR3 (MiBoleto last ops)
+                        navigateToMiBoletoFragment(
+                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.i9I9XZGnR3());
                         break;
                     case 2: // → OXpoe3K2m1 (ticket query)
+                        navigateToMiBoletoFragment(
+                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.OXpoe3K2m1());
                         break;
                     case 3: // → w7mHpmOa4EP (ticket status)
+                        navigateToMiBoletoFragment(
+                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.w7mHpmOa4EP());
                         break;
                     case 4: // → hjX8MS8xO9 (update ticket key)
+                        navigateToMiBoletoFragment(
+                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.hjX8MS8xO9());
                         break;
                 }
                 dialogInterface.dismiss();
@@ -267,6 +300,41 @@ public class GeneralBankingTabFragment extends Fragment {
     }
 
     void goToConsultaSindicato() {
-        // Navigate to SlZq2dCM9i with BankType.MiTransfer + OperationType.ConsultarPagosSindicato
+        Bundle args = new Bundle();
+        args.putSerializable("R1sDOSqZ2z", cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z.MiTransfer);
+        args.putSerializable("Nl0yptXmjQ", cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ.ConsultarPagosSindicato);
+        cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.sJ0peDJzVjo.SlZq2dCM9i fragment =
+                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.sJ0peDJzVjo.SlZq2dCM9i();
+        fragment.setArguments(args);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerView, fragment).addToBackStack(null).commit();
+    }
+
+    private void showAGConsulta() {
+        CharSequence[] items = {
+                this.context.getString(R.string.tx_modal_head_consulat_ag_op1),
+                this.context.getString(R.string.tx_modal_head_consulat_ag_op2)
+        };
+        new AlertDialog.Builder(this.context)
+                .setTitle(R.string.tx_modal_head_consulat_ag)
+                .setSingleChoiceItems(items, -1, (dialog, index) -> {
+                    Fragment destination = index == 0
+                            ? new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.HFzgpLELho()
+                            : new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb();
+                    Bundle args = new Bundle();
+                    args.putSerializable("R1sDOSqZ2z",
+                            cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z.MiTransfer);
+                    destination.setArguments(args);
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.containerView, destination).addToBackStack(null).commit();
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Salir", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private void navigateToMiBoletoFragment(Fragment fragment) {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.containerView, fragment).addToBackStack(null).commit();
     }
 }
