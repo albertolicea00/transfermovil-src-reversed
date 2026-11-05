@@ -105,7 +105,7 @@
 - [x] Document authentication flow (30-min session via AOperKey table)
 - [ ] Trace balance inquiry flow (banco_saldo → USSD/SMS)
 - [ ] Trace transfer flow (banco_transferencia → code construction)
-- [ ] Trace PIN change flow (banco_cambiar_clave)
+- [x] Trace PIN change flow (banco_cambiar_clave), including selector-69 new-only, old/new, prefixed old/new, and length-validation variants.
 - [ ] Document per-bank differences (BPA, BANDEC, Metropolitano, BFI)
 - [ ] Map account registration flow (banco_registro)
 - [x] Document electricity payment flow (banco_electricidad), including observed bank/wallet payload and partial-packet variants.
