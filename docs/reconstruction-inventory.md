@@ -143,3 +143,45 @@ incidences remain, all mappings to absent clean activities (`AgentMainActivity`,
 is an identity link only; it does not certify complete methods, UI behavior, or a
 working Android build. The task bar is 86/146 and remains separate from these
 source-link counts.
+
+## 2026-11-05 snapshot
+
+Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
+`b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
+
+| Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
+| --- | ---: | ---: | ---: | ---: |
+| All `src/` | 794 | 339 | 455 | 0 |
+| Main app package | 596 | 208 | 388 | 0 |
+
+### Main-package unlinked source distribution
+
+The 208 unlinked main-package files group as follows. This is a package-path
+count from the generated inventory; it does not yet classify each class as
+generated code, Android glue, or application behavior.
+
+| Original package segment | Unlinked files |
+| --- | ---: |
+| `B0jOLrWx09th` | 135 |
+| `l08fNVC4KOKK` | 19 |
+| `B21UyndcVvF` | 16 |
+| `ZNRpoHwtLXM` | 13 |
+| `us8tbD58ow4` | 11 |
+| `oEpx7i6I9Bq` | 10 |
+| `h4VIMAs7y2v` | 2 |
+| `BuildConfig`, `R` | 2 |
+
+There are 457 clean Java files and 86 explicit class mappings. All explicit
+class mappings resolve to clean files; two utility/draft classes remain
+intentionally unannotated: the old incomplete card-validation draft and the
+new QR bank-code adapter. The Agent, General, and e-commerce login activities
+contain bodies migrated from JADX, with imports adapted to retained raw-module
+classes. BFI account screens now use clean shared bases, while five bank tab
+hosts/pagers and nineteen primary BFI/Metropolitano/BPA operations have
+source-backed routing. Twenty-three additional Metro classes now contain their
+original source bodies, sixteen BPA screens, ten list/edit screens, and
+thirty-three Wallet screens were restored from JADX; eight card-rendering
+methods missing from JADX were recovered from archived smali. These screens
+retain raw service, model, or child-fragment dependencies.
+Source links do not establish that screens compile or run; the inventory
+progress bar remains separate from source-link coverage.

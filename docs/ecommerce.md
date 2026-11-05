@@ -37,7 +37,8 @@ Content type: `application/json` via Gson serialization.
 
 Both main activities (`IHVTCBmiLV` for agent mode and `S9ycHcoxAzy` for general
 mode) handle the drawer item `R.id.bulevar` by starting the e-commerce activity
-`a7Y4bbw8Os`. The login activity sets the Bulevar layout, configures its progress
+`a7Y4bbw8Os`. The clean Agent/General activities route that item to the migrated
+`LoginActivity` equivalent. The login activity sets the Bulevar layout, configures its progress
 indicator and retry button, then invokes its startup presenter. If connectivity
 is absent, it hides the progress views, shows the retry button, and displays a
 Spanish connection dialog. With connectivity, it calls `iniApp()`.
@@ -49,9 +50,9 @@ token gives `LOGINOK` and starts `hd5jZHAGaN` (the authenticated home activity).
 The `NOCSRF` and `ERROR` results do not start a destination. The agent operation
 menu builder can also expose a `Bulevar de Transfermóvil` operation when its
 bank-code condition passes, but the drawer route above is the direct launch path
-for both app modes. These are raw-source observations; the clean `LoginActivity`
-and both clean main activities remain absent, and this path has no Android
-runtime verification.
+for both app modes. The clean `LoginActivity` and clean Agent/General activity
+classes now contain reconstructed bodies, though their imports still depend on
+the retained JADX module classes. This path has no Android runtime verification.
 
 ### Login Request (`XMAvvl35Dj`)
 ```json

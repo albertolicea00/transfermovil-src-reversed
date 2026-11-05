@@ -79,7 +79,7 @@ Based on class hierarchy analysis, string references, and named classes:
 | `nNLWm3R1aPI.wComYkZMDc` | Custom-themed activity | Config change handling |
 | `FileChooserActivity` | File picker (3rd party) | `ar.com.daidalos.afiledialog` library |
 
-`prPzLeyxKk` is reconstructed as `ui/SplashActivity.java`; its mode check uses the mapped `SharedPreferencesAccessor` and `ActivationCodeValidator`. The General and Agent destinations remain original manifest component names while their clean activity reconstructions are pending.
+`prPzLeyxKk` is reconstructed as `ui/SplashActivity.java`; its mode check uses the mapped `SharedPreferencesAccessor` and `ActivationCodeValidator`. The manifest and splash now target `ui/AgentMainActivity` and `ui/GeneralMainActivity`. Their activity bodies were migrated from JADX and package-local self references were adapted; operations continue to depend on retained raw services, entities, fragments, and layouts.
 
 **E-commerce activities:**
 
@@ -110,6 +110,11 @@ Based on class hierarchy analysis, string references, and named classes:
 |:---|:---|:---|
 | `X9ZiE8XZNKy` | **SMS receiver** | `android.provider.Telephony.SMS_RECEIVED`, requires `BROADCAST_SMS` permission, exported |
 | `AlarmManagerSchedulerBroadcastReceiver` | Google transport alarm | Not exported |
+
+The manifest also requests `RECEIVE_BOOT_COMPLETED`, but does not register a
+boot receiver. The decompiled `j3hWDMEUucX` class is an empty
+`BroadcastReceiver`; its `onReceive()` is a no-op, so it has no boot behavior in
+this APK manifest.
 
 ### Content Providers
 
@@ -179,6 +184,11 @@ Inicio (Home)
 
 **Interpretation:** The app has two operational modes — "Agent" (for payment agents/businesses that process transactions on behalf of others) and "General" (end-user). Bancos, Comercio, and Estadisticas sections start hidden and are likely server-enabled or conditionally shown based on user type / authentication state.
 
+The clean bank host and operation pager wrappers preserve the source navigation for
+BANDEC, BFI, BFI enterprise, BPA, and Metropolitano. The pager wrappers instantiate
+their original raw child fragments, so this migration restores routing while child
+screen behavior remains at its own reconstruction status; it has not been compiled.
+
 ### Drawer destination mapping
 
 The following assignments come directly from the `NavigationView` listeners in
@@ -215,6 +225,13 @@ clears the fragment manager; most fragment destinations are then added to the
 back stack. Home is replaced without adding a back-stack entry. The clean
 destination names above are source-link labels only; incomplete fragment bodies
 and Android navigation behavior still need separate verification.
+
+The shared home destination `cYyrKJVQ6G` now has its operation adapter restored in
+`app/src/main/java/cu/etecsa/transfermovil/ui/home/OperationsGridAdapter.java`.
+It loads active and inactive operation rows, persists drag order, supports adding
+and removing tiles, and delegates operation IDs to the original `FBsQzP3Zfj`
+dispatcher. That preserves its fragment destinations and special dialog actions.
+The dispatcher and resource IDs have not been exercised in a built Android app.
 
 ## Key Operations (from string resources)
 

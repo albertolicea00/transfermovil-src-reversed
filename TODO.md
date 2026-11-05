@@ -30,16 +30,36 @@
 - [x] Restore `GlobalState.isAGTelecom()` from smali and compare valid, invalid, missing, and DAO-error behavior against the original activation flow.
 - [x] Consolidate duplicate character/text encoders and callback interfaces; verify dictionary/marker behavior and callback contracts.
 - [x] Reconstruct the launcher splash router, including its three-second delay and agent-code-based mode selection.
+- [x] Add clean Agent and General activity targets to the manifest and splash route while preserving their original inherited behavior.
 - [x] Consolidate the administrative keypad collision and restore its AppConfig access-code editor destination.
 - [x] Remove the unused null-returning alternate `OQcONjDATJ` pager and map the complete 11-tab agent data-management pager.
 - [x] Remove the null-returning alternate `ENqS9qPLC9` mobile list candidate and point the general-mode pager to its canonical source mapping.
 - [x] Restore all 28 database entity source bodies, including field constraints, metadata, constructors and accessors; preserve the original default table names for renamed entities and compare schemas/defaults/accessors/JSON.
 - [x] Restore the base activity's AES encryption/decryption delegation and compare its original JCE behavior.
+- [x] Restore the shared BFI account-entry base and balance-query screen, including saved-account loading, account/currency selection, validation, and direct/partial USSD dispatch.
+- [x] Restore the second BFI account form base plus limit, latest-operations, and payment-priority screens from their JADX sources.
+- [x] Recover the two BFI `mostrarTarjeta()` methods that JADX emitted as throwing stubs; verify card-type and image behavior from smali.
+- [x] Recover the Metropolitano coordinate and Cubacel-plan card-rendering methods from smali and restore both screens.
+- [x] Replace 16 empty BPA class shells with their source bodies from JADX.
+- [x] Restore four BPA screens with truncated `mostrarTarjeta()` methods using archived smali behavior.
+- [x] Restore ten short banking list/edit screens whose original bodies were available in JADX.
+- [x] Replace 33 empty Wallet Java shells with their original JADX bodies and clean shared account bases where available.
+- [x] Restore the five bank operation tab pagers and their original fragment routing from JADX.
+- [x] Restore the five bank logo tab hosts and connect them to the clean operation pagers.
+- [x] Restore the four interrupted Metropolitano operation screens and migrate their shared commission-account base.
+- [x] Document eight source-confirmed BFI/Metropolitano USSD operations and their dispatcher template.
+- [x] Recover the shared BFI bank/card/currency validator from smali and remove its raw base-class dependency.
+- [x] Restore QR transfer saved-account retrieval and persistence through the original encrypted bank-code accessor.
+- [x] Restore Metro gas payment and PIN change screens plus the BPA balance/limits query from JADX.
+- [x] Restore BPA card-balance and latest-operations query screens from JADX.
+- [x] Restore six additional Metropolitano query, payment, and limit-change screens from JADX.
+- [x] Replace 21 empty Metropolitano class shells with their original source bodies.
 - [x] Restore `BaseMainActivity.code()` numeric/mixed USSD encoding, document the reversible transformation, and compare output with the original under a fixed seed.
 - [x] Review all 60 original paths with multiple reconstruction candidates; remove unreferenced duplicate drafts and retain one source candidate per path. Remaining classes can still be incomplete and require behavioral reconstruction.
-- [ ] Resolve the remaining 3 mapping incidences reported in the 2026-11-04 inventory against source evidence.
-- [ ] Review the remaining 26 interrupted banking UI drafts (pagers/tabs/BPA/BFI/Metropolitano/wallet); replace incomplete behavior only when supported by source.
-- [ ] Review the remaining 215 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [x] Resolve all three missing clean activity mapping targets with source-backed Agent, General, and Bulevar login implementations.
+- [x] Restore the Bulevar login startup screen: offline retry, progress state, startup presenter result handling, and token-based route to login/home.
+- [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
+- [ ] Review the remaining 208 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
 
 ## Architecture & Navigation
@@ -48,6 +68,7 @@
 - [x] Identify two app modes: Agent and General
 - [x] Trace launch activity → main screen flow
 - [x] Map Agent and General drawer menu items to their raw fragment/activity destinations; identify destinations without clean classes.
+- [x] Restore the home operations grid adapter: database loading, saved ordering, add/remove actions, and original dispatcher routing for fragment and dialog operations.
 - [x] Identify how agent vs general mode is selected and persisted
 - [x] Document the splash/intro flow (first-run vs returning user)
 - [x] Map the `generalVsAgentVersion` logic
@@ -73,8 +94,8 @@
 - [x] Decompile SMS receiver — stub/no-op, real handling elsewhere
 - [x] Document outgoing SMS format (HzjedYqYeh.send_sms via SmsManager)
 - [x] Document SMS response parsing (g0xM9kQCsqu, 32 service types, PAGOxMOVIL sender)
-- [ ] Map "Servicios SMS" menu operations
-- [ ] Identify SMS-based operations vs USSD-based operations
+- [x] Map General-mode "Servicios SMS" menu operations to their recipient, message body, and confirmation flow.
+- [x] Identify SMS-based operations vs USSD-based operations
 
 ## Banking
 
@@ -99,8 +120,8 @@
 - [ ] Decompile MiTransfer wallet flows
 - [ ] Document wallet authentication (frmAuthBolsa)
 - [ ] Trace wallet balance and operations
-- [ ] Document MiBoleto QR feature (hidden in menu)
-- [ ] Decompile MiBoletoService
+- [x] Document MiBoleto QR feature (hidden in menu)
+- [x] Decompile MiBoletoService
 
 ## Agent Operations
 
@@ -188,11 +209,11 @@
 
 ## Miscellaneous
 
-- [ ] Document barcode/QR scanning usage (ML Kit integration)
-- [ ] Map contact lookup for transfers (READ_CONTACTS)
-- [ ] Document the "Teléfonos Útiles" (useful phone numbers) section
-- [ ] Document Voto Móvil (canales_votomovil.json) feature
-- [ ] Document Mi Turno appointment system
-- [ ] Map the ciudades patrimoniales (heritage cities) feature
-- [ ] Document transit fine articles (art_inc_transito.json)
-- [ ] Trace RECEIVE_BOOT_COMPLETED receiver behavior
+- [x] Document barcode/QR scanning usage (ML Kit integration)
+- [x] Map contact lookup for transfers (READ_CONTACTS)
+- [x] Document the "Teléfonos Útiles" (useful phone numbers) section
+- [x] Document Voto Móvil (canales_votomovil.json) feature
+- [x] Document Mi Turno appointment system
+- [x] Map the ciudades patrimoniales (heritage cities) feature
+- [x] Document transit fine articles (art_inc_transito.json)
+- [x] Trace RECEIVE_BOOT_COMPLETED receiver behavior: permission declared, no boot receiver registered, raw receiver class is a no-op.

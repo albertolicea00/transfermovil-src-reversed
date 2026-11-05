@@ -2,6 +2,98 @@
 
 Analysis of USSD and SMS handling in Transfermóvil v1.260416.
 
+## QR and barcode scanning
+
+The shared scanner is `OJ3XxacXOT`. It accepts camera input and images selected
+from the gallery, and dispatches the decoded text back to the operation form as
+the `QRData` argument. Operation and bank arguments determine the destination:
+bank transfer forms, business transfers, external payments, coupon top-up,
+Voto Móvil, and Caja Extra are among the mapped routes. A generated QR helper
+(`ZUoEY89WdA`) also creates and transforms QR bitmaps; that is separate from
+scanning.
+
+Scanning has two implementations selected by the `activarMejoraQR` setting:
+the newer camera path uses CameraX with ML Kit, with ZXing as a fallback when
+decoding a gallery image; the legacy path uses `ZXingScannerView`. Both decode
+QR codes. The form which launches the scanner requests camera permission. The
+gallery path requests media/read access as needed and accepts `image/*`.
+Operation-specific forms remain responsible for interpreting `QRData`; a
+successful decode does not itself authorize or submit a payment.
+
+### MiBoleto QR tickets
+
+The MiBoleto management list refreshes offers from SMS received today, shows
+stored ticket purchases, and can mark selected purchases consumed. For a ticket
+QR, the app decrypts the stored token using the transaction ID and transfer ID
+as salt, splits the result into token and PIN, then creates a QR JSON object
+with token, PIN, identity number, and optional detail records. If the ticket
+contains payable attractions, the user selects one detail for the QR; entries
+whose stored value is `0` are omitted. If none remain, the base ticket QR is
+shown. This documents the client generation path; server validation of QR
+redemption is outside the source examined here.
+
+## Mi Turno appointments
+
+The Wallet exposes four appointment operations. All dispatch through the
+confirmation-gated USSD helper; the operation data begins with a bank code and
+uses the selected service/identity fields:
+
+| Operation | USSD selector | Data fields passed by the form |
+|:---|:---:|:---|
+| Reserve appointment | `102` | bank, service, branch DPA, identity number, optional confirmation phone, currency, source account |
+| Change reservation date | `105` | bank, service type, identity number, selected date |
+| Cancel reservation | `106` | bank, service type, identity number |
+| Query reservation | `107` | bank, identity number |
+
+The reservation form loads province/municipality/branch choices and service
+catalogs from packaged JSON, and supports selecting a stored or manually
+entered account. It warns that a reservation charges a commission and can
+optionally submit a notification phone. Help text says the user will receive
+an SMS the day before the appointment. The change-date screen limits its date
+picker to approximately six months ahead. QR scanning can prefill the identity
+number from a decoded identity-card QR; users still review and confirm the
+USSD operation.
+
+Packaged catalog files include `provinciasMiTurno.json`, separate gas and
+`Gas Balita` province lists, `provincias_servicios_bancos_miturno.json`, and
+`sucursales_miturno_servicios.json`. These are static client lookup data; the
+appointment submission and reservation state are handled by the USSD service.
+
+## OFA Ciudades Patrimoniales
+
+The MiTransfer wallet's OFA screen (`dWLcK5oQoS`) lets a user choose one of the
+five locally listed heritage cities, then a reservation/activity loaded from
+the matching city code. It collects identity number, customer type, quantity,
+date, currency/price, wallet type, and optionally a contact phone; it computes
+the total as unit price times quantity and can include a “send balance” flag.
+The price for national or foreign customers is selected from the reservation
+record. The date picker starts at today and ends six months ahead, except for
+three named HabanaBusTour/shuttle offerings that use the alternate date mode.
+
+After field validation, the app displays a confirmation containing the chosen
+reservation, date, and total, plus a link to the OFA terms page. It sends
+selector `8` with the fields in their assembled order, through the packetized
+USSD path when partial USSD is enabled or the regular confirmation-gated USSD
+dispatcher otherwise. Static assets include `ciudadPatrimonial.json` (5 city
+records), `reservasOFA.json` (21 reservation records), and supporting
+obligation/zone catalogs. These files describe client-side choices; the app
+does not establish that every listed reservation is currently available.
+
+## Traffic fines
+
+Bank traffic-fine payment forms use selector `97`. The form validates the fine
+identifier, article/inciso (or accepts manually entered article data in edit
+mode), province/municipality, date, and source account, then requests
+confirmation before sending. Its payload order is fine ID, fixed `0000`,
+article, inciso, municipality code, province code, fixed `1`, fine date,
+currency, and account. Partial-USSD mode uses the shared packet sender.
+
+The client-side `art_inc_transito.json` lookup contains 95 article records and
+430 inciso records. Each inciso includes its article number, description,
+inciso number, and a `peligrosidad` value; selecting an article filters this
+data into the inciso list. The catalog populates the form and does not replace
+server-side fine verification.
+
 ## Permissions
 
 | Permission | Purpose |
@@ -254,6 +346,88 @@ The numbers after `*222*` may map to operations via alphanumeric phone keypad en
 This is speculative — requires code-level confirmation.
 
 ## SMS Mechanism
+
+### SMS vs USSD operation classification
+
+A static scan of the tracked JADX Java sources found two UI call sites for the
+shared outbound `send_sms()` helper:
+
+| Flow | Destination | Transport |
+|:---|:---|:---|
+| General “Servicios SMS” menu | `2266` with `OFERTA`, `TARIFA`, `PLANES`, or `AMIGOS` | SMS, after confirmation |
+| Voto Móvil | `2899` or `3099` with the user-entered/QR-prefilled text | SMS, after confirmation |
+
+The useful-number menu uses `ACTION_CALL` to telephone numbers, not SMS.
+Banking and wallet forms inspected in this tree use the USSD dispatcher, which
+constructs `tel:` requests; their SMS role is mainly receiving and parsing the
+service responses. This classification is based on source call sites and does
+not claim that no remote or dynamically loaded code can add other paths.
+
+### Contact lookup for transfers
+
+The General account-transfer form requests `READ_CONTACTS` when needed, opens
+the Android contact picker, and queries the selected contact's phone rows for
+`data2 = 2`. It removes spaces and a leading `+`, removes one leading `0`, and
+strips the `53` country prefix from 10-digit numbers beginning `535` or `536`.
+Before dispatch, the form accepts an empty optional recipient phone or exactly
+eight digits. Contact import only fills that recipient-phone field; the user
+still supplies the 16-digit destination account and amount and confirms USSD
+selector `45`.
+
+### Voto Móvil
+
+The General-mode sender form (`XRa1KuZNBW`) offers the channel sender numbers
+`2899` and `3099` (labels come from `array_voto`). The user enters a message
+and confirms before `HzjedYqYeh.send_sms()` sends it; the shared SMS helper then
+uses direct `SmsManager` delivery when permission is granted or opens the SMS
+app otherwise.
+
+The QR scanner is launched with operation `VotoMovil`. The form recognizes a
+`QRData` value identifying `VOTOMOVIL`, uses it to select a sender and
+prepopulate the message, then still requires the user to submit and confirm.
+The scanner-side parser expects JSON with `type: "VOTOMOVIL"` and a `data`
+object containing `canalId` and `texto`; it matches the channel name against
+the channel list. The older form-side parser also accepts the legacy
+comma-separated payload after the `VOTOMOVIL` prefix, so the accepted shape
+depends on which QR route supplies the argument.
+
+`app/assets/canales_votomovil.json` defines 20 channels: free-coded entries
+`L1`–`L10` (IDs 1–10, `esDePago: 0`) and paid-coded entries `P21`–`P30`
+(IDs 21–30, `esDePago: 1`). This flag is catalog metadata; the inspected form
+does not itself charge or validate payment.
+
+### Useful phone numbers
+
+The General drawer's `tel_utiles` destination (`s9lZwtvq9Dl`) renders five
+rows. Selecting one immediately launches `ACTION_CALL` to the listed number:
+
+| Row | Number | Service label |
+|:---|:---:|:---|
+| 1 | `104` | Ambulance |
+| 2 | `105` | Fire service |
+| 3 | `106` | PNR / police |
+| 4 | `107` | Maritime rescue |
+| 5 | `103` | Anti-drug service |
+
+No confirmation dialog appears in this fragment's click handler; the device
+must permit the call intent.
+
+### General-mode “Servicios SMS” menu
+
+The General drawer routes `servicios` to `BktkqFBOIQ`. Its four rows ask for
+confirmation, then call `HzjedYqYeh.send_sms("2266", body, context)`:
+
+| Menu row | SMS body | Confirmation prompt |
+| --- | --- | --- |
+| Ofertas ETECSA | `OFERTA` | Resource `msg_confirm_send_sms_ofertas` |
+| Tarifas | `TARIFA` | Resource `msg_confirm_send_sms_tarifas` |
+| Oferta Planes | `PLANES` | Offers for Nauta, SMS, and voice plans |
+| Ofertas Amigos | `AMIGOS` | Offers for Plan Amigos |
+
+These four drawer actions are SMS-based, not USSD. The menu does not send until
+the user confirms; actual sending follows the shared `send_sms` permission and
+fallback behavior documented below. This is a mapping of this menu only, not a
+classification of every app operation.
 
 ### Sending (`HzjedYqYeh.send_sms`)
 
