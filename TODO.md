@@ -108,7 +108,7 @@
 - [ ] Trace PIN change flow (banco_cambiar_clave)
 - [ ] Document per-bank differences (BPA, BANDEC, Metropolitano, BFI)
 - [ ] Map account registration flow (banco_registro)
-- [ ] Document electricity payment flow (banco_electricidad)
+- [x] Document electricity payment flow (banco_electricidad), including observed bank/wallet payload and partial-packet variants.
 - [ ] Document traffic fine payment (banco_multa)
 - [ ] Document ONAT tax payment (banco_onat)
 - [x] Record source-confirmed fixed telephone and ONAT stamp USSD payload variants (selectors 42 and 43) in the [USSD catalog](docs/ussd-code-catalog.md); other ONAT and telephone variants remain under review.
