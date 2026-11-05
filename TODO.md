@@ -114,7 +114,7 @@
 - [x] Record source-confirmed fixed telephone and ONAT stamp USSD payload variants (selectors 42 and 43) in the [USSD catalog](docs/ussd-code-catalog.md); other ONAT and telephone variants remain under review.
 - [x] Record both ONAT tax payload builders for selector 43, including field order and default sentinel values, in the [USSD catalog](docs/ussd-code-catalog.md).
 - [ ] Trace transaction limits query (banco_sub_consulta_limites)
-- [ ] Document session management (banco_desconectar, OP_Close_Session)
+- [x] Document session-management dispatches for `banco_desconectar` and `OP_Close_Session`, including direct dialing and the limits of source-only evidence.
 
 ## MiTransfer (Wallet)
 
