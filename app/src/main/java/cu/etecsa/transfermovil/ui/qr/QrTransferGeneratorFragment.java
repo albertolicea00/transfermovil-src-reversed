@@ -19,7 +19,9 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.transfermovil.R;
 import cu.etecsa.transfermovil.data.DatabaseHelper;
-import cu.etecsa.transfermovil.core.BankType;
+import cu.etecsa.transfermovil.data.BankCodeAccessor;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
+import cu.etecsa.transfermovil.core.enums.BankType;
 import cu.etecsa.transfermovil.core.OperationType;
 
 /**
@@ -110,9 +112,8 @@ public class QrTransferGeneratorFragment extends Fragment {
     public void QRGenAutoTransferencia() {
         try {
             DatabaseHelper.init(this.context);
-            // rDEl7rW1aN → BankCodeAccessor: gets saved QR bank code per BankType
-            // bs.getqrcodeBk(agencia) retrieves stored 16-digit account for this bank
-            String code = ""; // TODO: BankCodeAccessor.getqrcodeBk(this.agencia)
+            unYp8VQThY.init(this.context);
+            String code = BankCodeAccessor.getQrCode(this.agencia);
             if (!code.isEmpty()) {
                 String movil = DatabaseHelper.getInstance().getAllAppConfigLists().get(0).getPhone();
                 String cadena = this.HEADER_TRANSFER + "," + code + "," + movil + ",";
@@ -140,8 +141,8 @@ public class QrTransferGeneratorFragment extends Fragment {
                 return true;
             }
             DatabaseHelper.init(this.context);
-            // TODO: BankCodeAccessor.setqrcodeBk(this.agencia, code)
-            return true;
+            unYp8VQThY.init(this.context);
+            return BankCodeAccessor.setQrCode(this.agencia, code);
         } catch (Exception e) {
             return false;
         }
