@@ -18,6 +18,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiConsultarLimiteFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiConsultarSaldoFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiConsultarUltimasOperacionesFragment;
+import cu.etecsa.transfermovil.banking.ui.bfi.BfiAccountStatementFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +34,8 @@ public class BfiConsultationsMenuFragment extends Fragment {
             if (operation == FdonIAFI9w.BFIConsultarSaldo) destination = new BfiConsultarSaldoFragment();
             else if (operation == FdonIAFI9w.BFIUltimasoperaciones) destination = new BfiConsultarUltimasOperacionesFragment();
             else if (operation == FdonIAFI9w.BFIConsultaLimite) destination = new BfiConsultarLimiteFragment();
-            else if (operation == FdonIAFI9w.BFIEstadoCuentas) {
-                destination = new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.EE2asIZ0vyr.MIya98FZRz();
-            } else return;
+            else if (operation == FdonIAFI9w.BFIEstadoCuentas) destination = new BfiAccountStatementFragment();
+            else return;
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.containerView, destination).addToBackStack(null).commit();
         }

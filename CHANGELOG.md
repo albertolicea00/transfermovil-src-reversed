@@ -5,7 +5,8 @@
 - Replaced the BFI configuration tab's raw security menu with a clean menu that preserves its two source-backed options and navigation.
 - Migrated BFI registration and PIN-change forms into clean classes. Preserved selector `49` with `05*<current-PIN>*<new-PIN>*<identity>` and partial-USSD marker `05`, plus selector `69` with `05*<current-PIN>*<new-PIN>`.
 - Replaced the BFI session tab's raw menu and PIN prompt with clean classes. The PIN form uses access code `05`, selector `40`, and `05*<PIN>`; session close retains the local config reset and confirmed selector `70` dispatch.
-- Replaced the BFI consultations menu with a clean menu and connected balance, latest-operations, and limits to their clean screens. The state-of-accounts action still routes to its raw fragment.
+- Replaced the BFI consultations menu with a clean menu and connected its balance, latest-operations, limits, and account-statement actions to clean screens.
+- Migrated the BFI account-statement form, preserving email validation, date pickers limited to the past six months, account selection, and selector `26` payload order `email*start-date*end-date*account`.
 - Compared Wallet PIN authentication against JADX and documented selector `40`, access code `04`, the four-digit validation, and `04*<PIN>` payload in the USSD catalog.
 - Traced MiTransfer saved-account balance queries: selector `46`, payload `1*<account>*<wallet-type>`, and partial-USSD route `110/46/08` with a four-parameter limit.
 - Traced MiTransfer latest-operations selector `48`: saved-account and currency options, agency markers `08`/`04`, and the shared four-parameter partial-USSD route.
