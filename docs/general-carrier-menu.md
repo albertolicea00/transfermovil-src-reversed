@@ -8,7 +8,7 @@
 | Consulta tu Saldo Pospago | `ConsultaSaldo111` | Direct confirmation for `*111` |
 | Llamar | `LLamada` | `GMFMyKMnO2` call form |
 | Llamar con *99 | `Llamar99` | Same `GMFMyKMnO2` call form, separate operation mode |
-| Recarga tu Móvil con Cupón | `RecargarMovilBono` | `b0kkzvOCEu` |
+| Recarga tu Móvil con Cupón | `RecargarMovilBono` | [`b0kkzvOCEu`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/ivq3YYEGPZM/kE6CyiKsVrS/b0kkzvOCEu.java): accepts a non-empty voucher code and sends the code as `662*<voucher>` through the selected General/Agent activity dispatcher. |
 | Transferir tu Saldo | `TransferirSaldoMovil` | `C8l2t8799rL` |
 | Cambiar su clave de transferencia | `CambioClave` | `E1lhoLKryWP` |
 | Consultar estado del bono | `ConsultarEstadoBono` | Dialog/direct dispatcher branch |
@@ -20,6 +20,10 @@
 | Adelanta saldo | `AdelantaSaldo` | Dialog/direct dispatcher branch |
 
 All entries are marked active and initially use order `-1`; `updateOperation()` reconciles them with the local operation database. This is the seed menu, not necessarily the final visible ordering: saved order, active state, and duplicate cleanup can change what is displayed. Forms and exact USSD payloads remain under their own source-tracing tasks.
+
+## Voucher recharge details
+
+The form can launch the QR scanner with `Nl0yptXmjQ.Recarga_Cupon` and service `ETECSA`. Returned `QRData` is copied when all characters are digits; otherwise the form strips every non-digit character before filling the voucher field. Manual and scanned input share the same non-empty-only validation. The confirmation text includes the entered value, and selector `662` is dispatched through the Agent activity when an agent record exists and is active, otherwise through the General activity. This establishes local construction and routing, not carrier acceptance or voucher format requirements.
 
 ## Sources
 
