@@ -28,6 +28,15 @@ selectors represent different user-visible operations.
 
 | Service / bank | User action | Dial string template | Construction algorithm | Source evidence | Confidence |
 | --- | --- | --- | --- | --- | --- |
+| General mode | Query prepaid balance | `tel:*222%23` | The carrier-services menu opens a confirmation dialog and dispatches the literal `*222` through the direct-code helper. | `nljtDl5MIf` (`ConsultaSaldo222`); `FBsQzP3Zfj.getDialogOperation`, case 3 | Confirmed |
+| General mode | Query postpaid balance | `tel:*111%23` | The carrier-services menu opens a confirmation dialog and dispatches the literal `*111` through the direct-code helper. | `nljtDl5MIf` (`ConsultaSaldo111`); `FBsQzP3Zfj.getDialogOperation`, case 4 | Confirmed |
+| General mode | Query bonus status | `tel:*222*266%23` | Confirmation dialog dispatches this literal carrier code. | `nljtDl5MIf` (`ConsultarEstadoBono`); `FBsQzP3Zfj.getDialogOperation`, case 19 | Confirmed |
+| General mode | Manage plans | `tel:*133%23` | Confirmation dialog dispatches this literal carrier code. | `nljtDl5MIf` (`GestionPlanes`); `FBsQzP3Zfj.getDialogOperation`, case 20 | Confirmed |
+| General mode | Query data plan | `tel:*222*328%23` | Confirmation dialog dispatches this literal carrier code. | `nljtDl5MIf` (`ConsultarPlanDatos`); `FBsQzP3Zfj.getDialogOperation`, case 21 | Confirmed |
+| General mode | Query voice plan | `tel:*222*869%23` | Confirmation dialog dispatches this literal carrier code. | `nljtDl5MIf` (`ConsultarPlanVoz`); `FBsQzP3Zfj.getDialogOperation`, case 22 | Confirmed |
+| General mode | Query SMS plan | `tel:*222*767%23` | Confirmation dialog dispatches this literal carrier code. | `nljtDl5MIf` (`ConsultarPlanSMS`); `FBsQzP3Zfj.getDialogOperation`, case 23 | Confirmed |
+| General mode | Query Amigos plan | `tel:*222*264%23` | Confirmation dialog dispatches this literal carrier code. | `nljtDl5MIf` (`ConsultarPlanAmigos`); `FBsQzP3Zfj.getDialogOperation`, case 24 | Confirmed |
+| General mode | Request advance balance | `tel:*234*3%23` | Confirmation dialog dispatches this literal carrier code. | `nljtDl5MIf` (`AdelantaSaldo`); `FBsQzP3Zfj.getDialogOperation`, case 31 | Confirmed |
 | General menu | Query card balance | `tel:*444*46%23` | A confirmation dialog dispatches the literal code directly; no account payload, AppConfig access code, app version, or SMS path is used by this branch. | `FBsQzP3Zfj.getAlertDialogBuilder`, case 13 | Confirmed |
 | Banking | Query all registered account balances | `tel:*<access>*58%23` | A confirmation dialog dispatches selector `58` through the configured access-code overload without a payload/version. | `FBsQzP3Zfj.showDialogTodasCuentas`; `rDEl7rW1aN.actionCallUSSD(String)` | Confirmed |
 | Agent mobile-recharge module | Query stock balance | `tel:*<access>*11*2%23` | The stock-balance confirmation calls the one-argument direct-dial overload with literal `11*2`. | `g1bQ0lLj6na.showDialogConsultaSaldo`; `rDEl7rW1aN.actionCallUSSD(String)` | Confirmed |

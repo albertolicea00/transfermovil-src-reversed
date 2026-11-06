@@ -22,6 +22,7 @@
 - Traced General-mode ordinary and `*99` calling: shared form modes, eight-character validation, contact-number normalization, and direct `ACTION_CALL` URI construction.
 - Traced General-mode mobile balance transfer: selector `234`, option `1`, recipient/PIN/amount field order, local validation limits, and Agent/General dispatcher selection.
 - Traced the General-mode transfer-key change route: selector `234`, option `2`, payload order, and source-visible missing equality check/repeated-field length validation gap.
+- Added nine source-confirmed General-mode carrier codes to the USSD catalog: prepaid/postpaid balances, bonus status, plan management, four plan queries, and advance balance; all are literal confirmation-dialog calls.
 
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.

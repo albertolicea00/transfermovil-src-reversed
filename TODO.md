@@ -152,6 +152,7 @@
 - [x] Document source-confirmed agent registration, SMS activation-code retrieval, local validation, `AgentService` persistence, and `getCodeAgent()` behavior.
 - [x] Trace Agent services menu: authentication, stock, recharge, latest-recharge branches, PIN change, and disconnect; record selector/payload and source-visible validation behavior.
 - [x] Inventory General-mode carrier-service operations, fragment destinations, and saved-operation reconciliation; confirm direct `*222` and `*111` routes.
+- [x] Trace direct General-mode carrier queries for bonus, plan management, data/voice/SMS/Amigos plans, and advance balance; add literal codes and source branches to the USSD catalog.
 - [ ] Trace the remaining General-mode carrier-service form/dialog payloads and runtime destinations.
 - [x] Trace and document Agent Resumen/Detalle routes, local `RecordSMS` data, chart/detail filters, and a likely summary-loader iterator defect.
 
