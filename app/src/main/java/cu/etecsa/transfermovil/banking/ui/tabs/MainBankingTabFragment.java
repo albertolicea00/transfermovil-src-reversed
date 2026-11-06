@@ -14,9 +14,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
 import cu.etecsa.transfermovil.stats.OperationItem;
 import cu.etecsa.transfermovil.stats.OperationListAdapter;
+import cu.etecsa.transfermovil.ui.fragment.WalletRechargeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ import java.util.List;
  *   BOLSARecargaNautaMLC → dialog: nauta plus sin/con cuenta
  *   BOLSARecargaFWA → dialog: 4G FWA recharge vs query
  *   BOLSACompraPaqueteFWA → q55ExEc6x2l (FWA package purchase)
- *   BOLSARecargaCUPWalletTicket → P8DtkaSW4dR (CUP wallet ticket recharge)
+ *   BOLSARecargaCUPWalletTicket → WalletRechargeFragment (CUP wallet ticket recharge)
  *   BOLSAExtraccionWalletTicket → f9Reflqt3EZ (cash extraction from ticket)
  *   BOLSATransferirBancos → H0oV6Ot0bS (transfer to bank accounts)
  *   BOLSAElectricidad → dwdZ5sHcFR (electricity payment)
@@ -111,7 +113,7 @@ public class MainBankingTabFragment extends Fragment {
                         // → q55ExEc6x2l
                         break;
                     case BOLSARecargaCUPWalletTicket:
-                        // → P8DtkaSW4dR
+                        ft.replace(R.id.containerView, new WalletRechargeFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSAExtraccionWalletTicket:
                         // → f9Reflqt3EZ

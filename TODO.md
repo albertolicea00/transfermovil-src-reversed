@@ -137,7 +137,7 @@
 - [x] Identify MiTransfer in drawer menu and string resources
 - [x] Source-trace the MiTransfer CUP ticket form: amount validation, selector 17, full/partial dispatch, and callback behavior.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
-- [ ] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
+- [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
 - [x] Trace MiTransfer saved-account balance query and partial-USSD packet route; record the construction in the USSD catalog.
 - [x] Trace MiTransfer latest-operations selector, currency/account variants, and partial-USSD agency markers; record the construction in the USSD catalog.
