@@ -211,7 +211,7 @@
 - [x] Document what data is persisted locally
 - [x] Trace the CodigoAcceso (access code) table usage
 - [x] Map SharedPreferences usage across the app
-- [ ] Document Nauta account storage (nautaListDao, nautaCuentas)
+- [x] Document Nauta account storage (nautaListDao, nautaCuentas)
 
 ## Nauta Integration
 

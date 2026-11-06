@@ -85,6 +85,16 @@ Analysis of SQLite database, SharedPreferences, and data persistence in Transfer
 |:---|:---|:---|
 | `PromoSMS` | id, mensaje, fecha_inicio, fecha_fin, habilitado, icono_asociado, tipo_promo | Promotional SMS with date ranges |
 
+## Saved Nauta Accounts
+
+`Nauta` is backed by the ORMLite `nautaListDao` and stores a generated `id`, account username (`cuenta`), account type (`tipo_cuenta`), and local profile reference (`id_client`). The metadata describes `id_client` as a foreign key to `Client.id`; the observed DAO methods do not show database-enforced cascade behavior.
+
+The Nauta account management screens create and update rows through `addNauta` and `updateNauta`, and remove rows through `deleteNauta`. `getAllNautaLists` orders accounts by username; other queries filter by profile ID, username, or username plus account type. The UI uses `id_client == 0` for an unassigned account, while a named client row stores that client's ID. One “without name” query filters for the string value `"0"` on this integer field; that is the literal source query, not a verified equivalence across SQLite/ORM versions.
+
+`tipo_cuenta` values `1` and `2` map in the recharge UI to the suffixes `@nauta.com.cu` and `@nauta.co.cu`. The stored `cuenta` is only the username, without the domain. For duplicate usernames with both account types, the recharge form asks the user to choose the type; its duplicate check for saving a newly used account is keyed by username and type. These rows are local convenience data, not server credentials.
+
+The DAO wrapper catches `SQLException`; list queries generally return `null` on failure, while insert/update wrappers return no status and delete reports a boolean. Callers often assume query results are non-null, so database failures may surface later as UI exceptions.
+
 ## Migration Logic (onUpgrade)
 
 - Uses `createTableIfNotExists` for 17 tables added after original schema
