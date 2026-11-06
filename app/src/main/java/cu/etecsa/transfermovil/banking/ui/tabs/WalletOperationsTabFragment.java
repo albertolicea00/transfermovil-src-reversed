@@ -15,10 +15,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
+import cu.etecsa.transfermovil.base.BaseMainActivity;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletPinEntryFragment;
 import cu.etecsa.transfermovil.stats.OperationItem;
 import cu.etecsa.transfermovil.stats.OperationListAdapter;
-import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,8 +106,7 @@ public class WalletOperationsTabFragment extends Fragment {
         builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                UssdDispatcher.closeSessionBank(getActivity());
-                // Routes through agent code check to determine activity cast
+                ((BaseMainActivity) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -114,7 +114,8 @@ public class WalletOperationsTabFragment extends Fragment {
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        UssdDispatcher.closeSessionBank(getActivity());
+        // Source clears the local bank configuration before presenting the dialog.
+        FBsQzP3Zfj.closeSessionBank(getActivity());
         AlertDialog alert = builder.create();
         alert.show();
     }

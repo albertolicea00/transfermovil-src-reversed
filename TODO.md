@@ -136,6 +136,7 @@
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
 - [x] Trace MiTransfer saved-account balance query and partial-USSD packet route; record the construction in the USSD catalog.
 - [x] Trace MiTransfer latest-operations selector, currency/account variants, and partial-USSD agency markers; record the construction in the USSD catalog.
+- [x] Compare MiTransfer session-close menu with `H0kVHR7zuu`; restore selector `70` on confirmation and source-backed local configuration reset behavior.
 - [x] Migrate the MiTransfer latest-operations fragment into clean Java and route the General Banking menu to it.
 - [x] Document MiBoleto QR feature (hidden in menu)
 - [x] Decompile MiBoletoService
