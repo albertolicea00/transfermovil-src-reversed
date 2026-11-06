@@ -29,6 +29,7 @@
 - Reconstructed `WalletTransferFragment` from `LjOlaYSSMH` and wired the MiTransfer option in the wallet transfer dialog; preserved selector `45`, six-field payload, contact selection, validation, and partial marker `04`. The classic-transfer option still routes to its raw source pending migration.
 - Reconstructed `WalletWithdrawFragment` from `f9Reflqt3EZ` and connected `BOLSAExtraccionWalletTicket`; preserved selector `95`, CUP/USD entity lists, conditional province/municipality selection, payload construction, and partial marker `04`.
 - Reconstructed `BankTransferBfiFragment` from `l3GXbXAyUW` and replaced the “Clásica” dialog's raw destination with the clean form; preserved selector `45`, classic-card checks, optional account/PIN prefixes, contact handling, and agency marker `08` partial dispatch.
+- Reconstructed the distinct bank-to-wallet transfer as `WalletBankTransferFragment` from `H0oV6Ot0bS` and connected `BOLSATransferirBancos`; preserved selector `16`, agency/currency payloads, and the `04` partial route.
 
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.
