@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.transfermovil.base.BaseMainActivity;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletLatestOperationsFragment;
 import cu.etecsa.transfermovil.stats.OperationItem;
 import cu.etecsa.transfermovil.stats.OperationListAdapter;
 import cu.etecsa.transfermovil.ui.fragment.BalanceQueryFragment;
@@ -66,8 +67,7 @@ public class GeneralBankingTabFragment extends Fragment {
                         GeneralBankingTabFragment.this.showDialogConsultaSaldo();
                         break;
                     case BOLSAUltimasOperaciones:
-                        ft.replace(R.id.containerView,
-                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dI2tctjNbR())
+                        ft.replace(R.id.containerView, new WalletLatestOperationsFragment())
                                 .addToBackStack(null).commit();
                         break;
                     case BOLSAConsultaServicio:
