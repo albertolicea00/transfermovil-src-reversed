@@ -9,7 +9,7 @@
 | Llamar | `LLamada` | [`GMFMyKMnO2`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/ivq3YYEGPZM/AjGJz9tVLXv/GMFMyKMnO2.java) in mode `1`; launches `ACTION_CALL` to `tel:<8-digit-number>` |
 | Llamar con *99 | `Llamar99` | Same form in mode `2`; launches `ACTION_CALL` to `tel:*99<8-digit-number>` |
 | Recarga tu Móvil con Cupón | `RecargarMovilBono` | [`b0kkzvOCEu`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/ivq3YYEGPZM/kE6CyiKsVrS/b0kkzvOCEu.java): accepts a non-empty voucher code and sends the code as `662*<voucher>` through the selected General/Agent activity dispatcher. |
-| Transferir tu Saldo | `TransferirSaldoMovil` | `C8l2t8799rL` |
+| Transferir tu Saldo | `TransferirSaldoMovil` | [`C8l2t8799rL`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/ivq3YYEGPZM/kE6CyiKsVrS/C8l2t8799rL.java): selector `234`, option `1`, payload `<phone>*<PIN>*<amount>` |
 | Cambiar su clave de transferencia | `CambioClave` | `E1lhoLKryWP` |
 | Consultar estado del bono | `ConsultarEstadoBono` | Dialog/direct dispatcher branch |
 | Gestión de planes | `GestionPlanes` | Dialog/direct dispatcher branch |
@@ -28,6 +28,10 @@ The form can launch the QR scanner with `Nl0yptXmjQ.Recarga_Cupon` and service `
 ## Call forms
 
 `FNRzUmC7E5` sets operation mode `1` for the ordinary call and `2` for the `*99` call. Both require exactly eight trimmed characters and can pick a contact. Contact normalization strips spaces, removes one leading `+` or `0`, and removes a leading `53` only for 10-character values beginning with `535` or `536`. The call button places the `ACTION_CALL` request directly; this path does not use the USSD helper. The source does not show local digit-only validation for manually entered numbers.
+
+## Mobile balance transfer
+
+`C8l2t8799rL` requires an eight-character recipient, a four-character PIN, and a non-empty amount without a period. It does not check that the amount contains only digits or is positive. After confirmation it calls the active Agent/General dispatcher with selector `234`, leading option `1`, and payload `<recipient>*<PIN>*<amount>`. Contact picking uses the same normalization rules as the call form. The source confirms only the constructed request and local checks.
 
 ## Sources
 

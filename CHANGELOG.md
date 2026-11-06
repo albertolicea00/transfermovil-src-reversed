@@ -20,6 +20,7 @@
 - Inventoried all 14 General-mode carrier-service seed operations, their fragment destinations, enum routes, and saved-operation reconciliation; confirmed the direct `*222`/`*111` balance branches and left remaining form payloads for focused tracing.
 - Traced General-mode coupon recharge: selector `662`, non-empty voucher validation, QR scan category, non-digit stripping for scanned data, and Agent/General activity routing.
 - Traced General-mode ordinary and `*99` calling: shared form modes, eight-character validation, contact-number normalization, and direct `ACTION_CALL` URI construction.
+- Traced General-mode mobile balance transfer: selector `234`, option `1`, recipient/PIN/amount field order, local validation limits, and Agent/General dispatcher selection.
 
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.
