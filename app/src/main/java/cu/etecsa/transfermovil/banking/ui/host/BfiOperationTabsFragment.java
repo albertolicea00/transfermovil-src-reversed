@@ -8,12 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import cu.etecsa.transfermovil.banking.ui.tabs.BfiSessionMenuFragment;
 import cu.etecsa.transfermovil.banking.ui.tabs.BfiSecurityMenuFragment;
 import com.google.android.material.tabs.TabLayout;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.ME2IdEhApc;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.bnsLemXoui;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.opFvbCxlRn;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.vhcWzIxxMH;
 import cu.etecsa.cubacel.tr.tm.R;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -48,7 +47,7 @@ public class BfiOperationTabsFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new vhcWzIxxMH();
+                    return new BfiSessionMenuFragment();
                 case 1:
                     return new ME2IdEhApc();
                 case 2:

@@ -59,6 +59,7 @@
 - [x] Resolve all three missing clean activity mapping targets with source-backed Agent, General, and Bulevar login implementations.
 - [x] Restore the Bulevar login startup screen: offline retry, progress state, startup presenter result handling, and token-based route to login/home.
 - [x] Replace the raw BFI security-menu page with a clean menu and migrate its registration and change-PIN forms, preserving source-confirmed validation and USSD payloads.
+- [x] Replace the raw BFI session tab with a clean menu and PIN-authentication screen; preserve the local session reset and confirmed selector-70 action.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
 - [ ] Review the remaining 208 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
