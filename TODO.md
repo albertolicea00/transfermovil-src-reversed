@@ -142,6 +142,7 @@
 - [x] Reconstruct the classic-card transfer form from `l3GXbXAyUW` and connect the “Clásica” dialog choice; preserve selector 45, card/PIN branches, validation, and partial-USSD behavior.
 - [x] Reconstruct the bank-to-wallet transfer form from `H0oV6Ot0bS` and connect `BOLSATransferirBancos`; preserve selector 16, local agency data, validation, and partial-USSD behavior.
 - [x] Reconstruct the MiTransfer electricity form from `dwdZ5sHcFR` and connect `BOLSAElectricidad`; preserve selector 41, CUP invoice payload, local invoice persistence, and partial-USSD behavior.
+- [x] Reconstruct the MiTransfer water form from `U1sIOmca96i`, reuse the mapped clean shared account base, and connect `BOLSAAgua`; preserve region selectors 19/21 and saved invoice handling.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.

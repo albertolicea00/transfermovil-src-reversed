@@ -27,6 +27,7 @@ import cu.etecsa.transfermovil.ui.fragment.WalletWithdrawFragment;
 import cu.etecsa.transfermovil.ui.fragment.BankTransferBfiFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletWaterPaymentFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ import java.util.List;
  *   BOLSAExtraccionWalletTicket → f9Reflqt3EZ (cash extraction from ticket)
  *   BOLSATransferirBancos → WalletBankTransferFragment (transfer to bank accounts)
  *   BOLSAElectricidad → dwdZ5sHcFR (electricity payment)
- *   BOLSAAgua → U1sIOmca96i (water payment)
+ *   BOLSAAgua → WalletWaterPaymentFragment
  *   BOLSAgas → XCDkgbw8oZ (gas payment)
  *   BOLSAPaquetesCubacel → WyYHxgzYyW (Cubacel packages)
  *   BOLSAPCC → xb7DiohJuX (political org payment)
@@ -138,7 +139,7 @@ public class MainBankingTabFragment extends Fragment {
                         ft.replace(R.id.containerView, new WalletElectricityPaymentFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSAAgua:
-                        // → U1sIOmca96i
+                        ft.replace(R.id.containerView, new WalletWaterPaymentFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSAgas:
                         // → XCDkgbw8oZ

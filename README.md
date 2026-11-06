@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[█████████████████████████████████████████░░░░░░░░░] 83%</code></span>
 
-**Task-list progress: 167/200 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 168/201 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -61,6 +61,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [MiTransfer classic transfer](docs/wallet-classic-transfer.md) | Classic-card destination validation, optional origin/PIN, selector-45 payload, and packet route. |
 | [MiTransfer bank transfer](docs/wallet-bank-transfer.md) | Selector-16 transfer from bank accounts, agency list, currency checks, and partial-USSD route. |
 | [MiTransfer electricity payment](docs/wallet-electricity-payment.md) | Selector-41 invoice payment, local invoice persistence, and partial-USSD route. |
+| [MiTransfer water payment](docs/wallet-water-payment.md) | Region/payment-type branches, selectors 19/21, saved invoice persistence, and partial-USSD behavior. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |
