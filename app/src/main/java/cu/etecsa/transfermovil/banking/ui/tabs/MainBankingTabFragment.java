@@ -36,6 +36,12 @@ import cu.etecsa.transfermovil.ui.fragment.TfaRechargeFragment;
 import cu.etecsa.transfermovil.ui.fragment.CreditPaymentFragment;
 import cu.etecsa.transfermovil.ui.fragment.OfaReservationFragment;
 import cu.etecsa.transfermovil.ui.fragment.OfaContributionFragment;
+import cu.etecsa.transfermovil.ui.fragment.TicketReservationCreateFragment;
+import cu.etecsa.transfermovil.ui.fragment.TicketReservationDateChangeFragment;
+import cu.etecsa.transfermovil.ui.fragment.TicketReservationCancelFragment;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Provincia;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalCadeca;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
 import cu.etecsa.transfermovil.core.enums.AccountType;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
@@ -177,6 +183,16 @@ public class MainBankingTabFragment extends Fragment {
                                 .addToBackStack(null).commit();
                         break;
                     case BOLSAReservasTicket:
+                        U6ucOCBccJ.pmoneda = 0;
+                        U6ucOCBccJ.pEntidad = "";
+                        U6ucOCBccJ.pProvincia = new Provincia();
+                        U6ucOCBccJ.pSucursal = "";
+                        U6ucOCBccJ.pSucursalCadeca = new SucursalCadeca();
+                        U6ucOCBccJ.ptipoServicio = 0;
+                        U6ucOCBccJ.pdata = "";
+                        U6ucOCBccJ.pIsEnviar = false;
+                        U6ucOCBccJ.pTextoSpMisCuentas = "";
+                        U6ucOCBccJ.pcuenta = "";
                         MainBankingTabFragment.this.showDialogReservasTicket();
                         break;
                     case BOLSARecargaTFA:
@@ -329,7 +345,17 @@ public class MainBankingTabFragment extends Fragment {
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // 0 → XnVSHGPTkK, 1 → QVPgkl8ZGC, 2 → Wwc5crW71D
+                Fragment fragment;
+                if (i == 0) {
+                    fragment = new TicketReservationCreateFragment();
+                } else if (i == 1) {
+                    fragment = new TicketReservationCancelFragment();
+                } else {
+                    fragment = new TicketReservationDateChangeFragment();
+                }
+                MainBankingTabFragment.this.getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.containerView, fragment)
+                        .addToBackStack(null).commit();
                 dialogInterface.dismiss();
             }
         });
