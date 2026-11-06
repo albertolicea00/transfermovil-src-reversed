@@ -108,6 +108,7 @@
 - [x] Trace PIN change flow (banco_cambiar_clave), including selector-69 new-only, old/new, prefixed old/new, and length-validation variants.
 - [ ] Document per-bank differences (BPA, BANDEC, Metropolitano, BFI)
 - [x] Map account registration flow (banco_registro) across BPA, BANDEC, Metropolitano, BFI and MiTransfer, including each selector-49 payload and partial-USSD agency marker.
+- [x] Remove the unreferenced Metro PIN-change draft whose layout IDs and USSD dispatch were placeholders; its source fingerprint belongs to the BFI `BFICambioPin` menu, while the actual Metro PIN screen remains `MetroChangePinFragment`.
 - [x] Document electricity payment flow (banco_electricidad), including observed bank/wallet payload and partial-packet variants.
 - [ ] Document traffic fine payment (banco_multa)
 - [ ] Document ONAT tax payment (banco_onat)
