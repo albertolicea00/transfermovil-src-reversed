@@ -65,6 +65,7 @@
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
 - [x] Reconstruct the BFI USSD account base from Agg55uYctq by reusing clean account selection/card behavior and restoring observer callbacks and the four-parameter packet limit.
 - [ ] Migrate BFI transfer and external-payment forms onto the clean BFI account base, including QR/contact behavior.
+- [x] Migrate the BFI enterprise-transfer form from `f1IveoSASW` onto `BfiUssdAccountFragment` and connect the three transfer modes to it.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
 - [ ] Review the remaining 208 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.

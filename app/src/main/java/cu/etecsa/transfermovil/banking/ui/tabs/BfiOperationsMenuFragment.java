@@ -16,6 +16,7 @@ import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
 import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
+import cu.etecsa.transfermovil.banking.ui.bfi.BfiEnterpriseTransferFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class BfiOperationsMenuFragment extends Fragment {
             Fragment destination;
             Bundle args = new Bundle();
             if (transfer) {
-                cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.EE2asIZ0vyr.f1IveoSASW fragment = new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.EE2asIZ0vyr.f1IveoSASW();
+                BfiEnterpriseTransferFragment fragment = new BfiEnterpriseTransferFragment();
                 args.putSerializable("TransferType", Integer.valueOf(which)); destination = fragment;
             } else {
                 cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.VW6IL66KC6M.Eqj43O0pUx fragment = new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.VW6IL66KC6M.Eqj43O0pUx();
