@@ -2,6 +2,7 @@
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Traced Nauta Hogar switch behavior and shared account/amount/mobile validation; clarified international/national account labels and selector `84` versus debt selector `86` in the Nauta flow notes.
 - Documented Nauta account persistence, profile assignment, type/domain mapping, DAO query behavior, and the observed null/error-handling limits in `docs/storage.md`.
 - Restored and routed the General MiTransfer Nauta form from `KtF0PRB8vS`; documented selectors `59`, `84`, and `86`, their payload branches, partial-USSD settings, and source quirks.
 - Added a source-backed comparison of BPA, BANDEC, Metropolitano, and BFI registration, query, transfer, and PIN distinctions, with explicit limits where the current source review is incomplete. Linked it from README and completed the corresponding TODO item.

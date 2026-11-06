@@ -4,7 +4,11 @@
 
 The General MiTransfer menu routes `BOLSARecargaNauta` to `NautaUserFragment`, reconstructed from the raw JADX class `KtF0PRB8vS`. This is the general Wallet menu form; the bank-specific `WalletNautaRechargeFragment` (`PqTzgaEYF6`) is a separate flow and uses bank agency markers.
 
-The screen accepts a Nauta account, account type, amount, optional recipient mobile, and a bolsa choice. It also has Nauta Hogar switches for a home-internet top-up and for paying outstanding debt.
+The screen accepts a Nauta account, account type, amount, optional recipient mobile, and a bolsa choice. The account-type labels are “Navegación Internacional” (`1`, `@nauta.com.cu`) and “Navegación Nacional” (`2`, `@nauta.co.cu`). It also has Nauta Hogar switches for a home-internet top-up and for paying outstanding debt.
+
+The first Nauta Hogar switch reveals the debt-payment switch and clears its checked state whenever the first switch changes. With Nauta Hogar enabled, the second switch selects between selector `84` (top-up) and selector `86` (outstanding-debt payment); with it disabled, the form uses regular selector `59`. Thus the second switch cannot remain selected when the user leaves Nauta Hogar mode.
+
+All three branches share the same field validation: username is required, may not contain spaces or `@`, and is limited to 20 characters; account type is required; amount must parse as a float and be at least 1; optional recipient mobile must be eight digits beginning with `5` or `6`; and the bolsa choice is required. The source does not show a Nauta Hogar-specific validation branch.
 
 ## USSD requests
 
