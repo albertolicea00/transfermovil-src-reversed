@@ -5,6 +5,7 @@
 - Replaced the BFI configuration tab's raw security menu with a clean menu that preserves its two source-backed options and navigation.
 - Migrated BFI registration and PIN-change forms into clean classes. Preserved selector `49` with `05*<current-PIN>*<new-PIN>*<identity>` and partial-USSD marker `05`, plus selector `69` with `05*<current-PIN>*<new-PIN>`.
 - Compared Wallet PIN authentication against JADX and documented selector `40`, access code `04`, the four-digit validation, and `04*<PIN>` payload in the USSD catalog.
+- Traced MiTransfer saved-account balance queries: selector `46`, payload `1*<account>*<wallet-type>`, and partial-USSD route `110/46/08` with a four-parameter limit. Kept the separate latest-operations route pending.
 - Updated the reconstruction checklist. Android compilation and runtime navigation remain unverified.
 
 ## 2026-11-05 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
