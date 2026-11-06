@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[███████████████████████████████████████████░░░░░░░] 86%</code></span>
 
-**Task-list progress: 182/210 completed; 28 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 183/211 completed; 28 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -70,7 +70,9 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [MiTransfer 4G/FWA](docs/wallet-fwa.md) | Selector-20 balance recharge and selector-18 USD gigabyte offer request. |
 | [MiTransfer Cubacel packages](docs/cubacel-package-purchase.md) | Local/JSON plan catalog and selector-6 CUP/USD package request. |
 | [MiTransfer TFA recharge](docs/wallet-tfa-recharge.md) | Selector-108 CUP recharge with partial-USSD routing. |
+
 | [MiTransfer organization payment](docs/wallet-political-organization-payment.md) | PCC/UJC selector-7 payment and the source-only selector-122 branch. |
+| [MiTransfer OFA reservation](docs/wallet-ofa-reservation.md) | Selector-8 reservation payload, fare calculation, and regular/partial dispatch. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |

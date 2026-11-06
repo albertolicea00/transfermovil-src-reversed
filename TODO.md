@@ -151,6 +151,7 @@
 - [x] Reconstruct and route MiTransfer Cubacel package purchase from `WyYHxgzYyW`; document the JSON/database catalog and selector-6 request.
 - [x] Reconstruct and route MiTransfer TFA recharge from `b7zSZMAX7cN`; preserve selector 108, CUP payload, and partial-USSD route.
 - [x] Reconstruct and route MiTransfer organization payment from `xb7DiohJuX`; document selectors 7/122, form validation, and source/resource mismatch.
+- [x] Reconstruct and route MiTransfer OFA reservation from `dWLcK5oQoS`; replace the mislabeled CADECA stub and preserve selector 8.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
