@@ -122,7 +122,7 @@
 
 - [x] Identify MiTransfer in drawer menu and string resources
 - [ ] Decompile MiTransfer wallet flows
-- [ ] Document wallet authentication (frmAuthBolsa)
+- [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
 - [ ] Trace wallet balance and operations
 - [x] Document MiBoleto QR feature (hidden in menu)
 - [x] Decompile MiBoletoService
