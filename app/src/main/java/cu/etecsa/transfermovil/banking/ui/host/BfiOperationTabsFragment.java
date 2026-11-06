@@ -9,10 +9,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import cu.etecsa.transfermovil.banking.ui.tabs.BfiConsultationsMenuFragment;
+import cu.etecsa.transfermovil.banking.ui.tabs.BfiOperationsMenuFragment;
 import cu.etecsa.transfermovil.banking.ui.tabs.BfiSessionMenuFragment;
 import cu.etecsa.transfermovil.banking.ui.tabs.BfiSecurityMenuFragment;
 import com.google.android.material.tabs.TabLayout;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.opFvbCxlRn;
 import cu.etecsa.cubacel.tr.tm.R;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -51,7 +51,7 @@ public class BfiOperationTabsFragment extends Fragment {
                 case 1:
                     return new BfiConsultationsMenuFragment();
                 case 2:
-                    return new opFvbCxlRn();
+                    return new BfiOperationsMenuFragment();
                 case 3:
                     return new BfiSecurityMenuFragment();
                 default:

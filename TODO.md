@@ -63,6 +63,7 @@
 - [x] Replace the raw BFI consultations menu and route its actions to clean balance, latest-operations, limit, and account-statement fragments.
 - [x] Migrate the BFI account-statement form with date-range, email, and charge-account validation plus selector-26 dispatch.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
+- [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
 - [ ] Review the remaining 208 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
 

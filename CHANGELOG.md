@@ -2,6 +2,8 @@
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Replaced the raw BFI operations menu with a clean menu for transfer and external payment, preserving both three-mode dialogs and their existing source-backed raw form destinations.
+
 - Replaced the BFI configuration tab's raw security menu with a clean menu that preserves its two source-backed options and navigation.
 - Migrated BFI registration and PIN-change forms into clean classes. Preserved selector `49` with `05*<current-PIN>*<new-PIN>*<identity>` and partial-USSD marker `05`, plus selector `69` with `05*<current-PIN>*<new-PIN>`.
 - Replaced the BFI session tab's raw menu and PIN prompt with clean classes. The PIN form uses access code `05`, selector `40`, and `05*<PIN>`; session close retains the local config reset and confirmed selector `70` dispatch.
