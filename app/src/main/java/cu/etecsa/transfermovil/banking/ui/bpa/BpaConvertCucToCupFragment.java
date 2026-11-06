@@ -11,7 +11,7 @@ import android.widget.TextView;
 import cu.etecsa.transfermovil.banking.BankOperationBaseFragment2;
 import cu.etecsa.transfermovil.banking.BankType;
 import cu.etecsa.transfermovil.data.DatabaseHelper;
-import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 
 /**
  * BPA fragment for converting a CUC account to CUP.
@@ -63,7 +63,7 @@ public class BpaConvertCucToCupFragment extends BankOperationBaseFragment2 {
         String msg = "¿Desea cambiar su cuenta " + cuentaOrigen + " en CUC a CUP?";
         String cadena = cuentaOrigen;
         ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmView);
-        UssdDispatcher.actionCallUSSDBack(context, "87", cadena, msg, group, getFragmentManager());
+        FBsQzP3Zfj.actionCallUSSDBack(context, "87", cadena, msg, group, getFragmentManager());
     }
 
     @Override

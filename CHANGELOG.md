@@ -13,6 +13,7 @@
 - Repaired BPA account/session menu dispatch: use the source-backed agent-code lookup and activity interfaces, restore local session reset through `FBsQzP3Zfj`, and remove unresolved clean dispatcher/activity placeholders.
 - Compared `WalletLatestOperationsFragment` with `dI2tctjNbR`; the form preserves selector `48`, payload order `1*<selected-value>*<wallet-type>`, and the `08` saved-account / `04` wallet routes.
 - Compared BFI balance, limit, and latest-operation forms with raw `Mg7YIILN4B`, `leZyk029xo`, and `Np5pMRuX6q`; executable methods match, including selectors `46`/`62`/`48` and partial marker `05`.
+- Replaced seven calls to a nonexistent static `UssdDispatcher.actionCallUSSDBack` with source-backed `FBsQzP3Zfj` overloads across BPA account forms and MiTransfer PIN authentication.
 - Documented agent selector-`80` activation, `PAGOxMOVIL` SMS extraction, the local code-validation algorithm, first-row `AgentService` persistence/lookup, and source-confirmed menu routes.
 - Traced Agent Resumen/Detalle statistics from the navigation menus through monthly charts and per-module records; documented local SMS data, detail filters/account masking, and a likely unverified iterator-exhaustion defect in summary loading.
 

@@ -21,7 +21,7 @@ import cu.etecsa.transfermovil.data.entity.Provincia;
 import cu.etecsa.transfermovil.data.entity.SucursalBancaria;
 import cu.etecsa.transfermovil.data.json.JsonFilesManager;
 import cu.etecsa.transfermovil.ui.widget.MaterialSpinner;
-import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.transfermovil.banking.BankType;
 
 /**
@@ -137,7 +137,7 @@ public class BpaUsdAccountOpenFragment extends Fragment {
         String codigoMunicipio = provincia.getCod_provincia() + municipio.getCod_municipio();
         String sucursalSeleccionada = sucursal.getCodigoSucursal();
         ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmRegistroBanco);
-        UssdDispatcher.actionCallUSSDBack(context, "76", sucursalSeleccionada,
+        FBsQzP3Zfj.actionCallUSSDBack(context, "76", sucursalSeleccionada,
                 "¿Desea realizar la apertura de cuenta en USD con respaldo en MLC?",
                 group, getFragmentManager());
     }

@@ -13,7 +13,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import cu.etecsa.transfermovil.banking.BankOperationBaseFragment;
 import cu.etecsa.transfermovil.banking.BankType;
-import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 
 /**
  * BPA fragment for temporarily modifying ATM/POS transaction limits.
@@ -86,7 +86,7 @@ public class BpaModifyLimitsFragment extends BankOperationBaseFragment {
                 atm, pos, total);
         String cadena = atm + "*" + pos + "*" + total + "*" + monedaTarjeta + "*" + cuentaOrigen;
         ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmLimiteBanco);
-        UssdDispatcher.actionCallUSSDBack(context, "61", cadena, msg, group, getFragmentManager());
+        FBsQzP3Zfj.actionCallUSSDBack(context, "61", cadena, msg, group, getFragmentManager());
     }
 
     @Override

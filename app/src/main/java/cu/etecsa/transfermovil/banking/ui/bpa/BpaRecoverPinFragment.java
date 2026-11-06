@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import cu.etecsa.transfermovil.banking.BankOperationBaseFragment;
 import cu.etecsa.transfermovil.banking.BankType;
 import cu.etecsa.transfermovil.data.DatabaseHelper;
-import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.transfermovil.ussd.UssdFormManager;
 
 /**
@@ -68,7 +68,7 @@ public class BpaRecoverPinFragment extends BankOperationBaseFragment {
         String cadena = monedaTarjeta + "*" + cuentaOrigen;
         ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmView);
         if (!isPartialUSSD) {
-            UssdDispatcher.actionCallUSSDBack(context, "83", cadena,
+            FBsQzP3Zfj.actionCallUSSDBack(context, "83", cadena,
                     "¿Confirme que desea recuperar el pin de la tarjeta magnética?",
                     group, getFragmentManager());
         } else {

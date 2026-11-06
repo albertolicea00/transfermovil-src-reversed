@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import cu.etecsa.transfermovil.banking.BankOperationBaseFragment;
 import cu.etecsa.transfermovil.banking.BankType;
 import cu.etecsa.transfermovil.data.DatabaseHelper;
-import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.transfermovil.ussd.UssdFormManager;
 
 /**
@@ -67,7 +67,7 @@ public class BpaReprintCardFragment extends BankOperationBaseFragment {
         String cadena = monedaTarjeta + "*" + cuentaOrigen;
         ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmView);
         if (!isPartialUSSD) {
-            UssdDispatcher.actionCallUSSDBack(context, "74", cadena,
+            FBsQzP3Zfj.actionCallUSSDBack(context, "74", cadena,
                     "¿Desea reimprimir su tarjeta?",
                     group, getFragmentManager());
         } else {
