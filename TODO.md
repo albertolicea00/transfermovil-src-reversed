@@ -118,7 +118,7 @@
 - [x] Map account registration flow (banco_registro) across BPA, BANDEC, Metropolitano, BFI and MiTransfer, including each selector-49 payload and partial-USSD agency marker.
 - [x] Remove the unreferenced Metro PIN-change draft whose layout IDs and USSD dispatch were placeholders; its source fingerprint belongs to the BFI `BFICambioPin` menu, while the actual Metro PIN screen remains `MetroChangePinFragment`.
 - [x] Document electricity payment flow (banco_electricidad), including observed bank/wallet payload and partial-packet variants.
-- [ ] Document traffic fine payment (banco_multa)
+- [x] Document general and traffic fine payment flows (`banco_multa`), selectors `96` and `97`, source-backed payload order, validation scope, and dispatcher behavior.
 - [ ] Document ONAT tax payment (banco_onat)
 - [x] Record source-confirmed fixed telephone and ONAT stamp USSD payload variants (selectors 42 and 43) in the [USSD catalog](docs/ussd-code-catalog.md); other ONAT and telephone variants remain under review.
 - [x] Record both ONAT tax payload builders for selector 43, including field order and default sentinel values, in the [USSD catalog](docs/ussd-code-catalog.md).
