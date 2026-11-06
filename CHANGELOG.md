@@ -16,6 +16,7 @@
 - Replaced seven calls to a nonexistent static `UssdDispatcher.actionCallUSSDBack` with source-backed `FBsQzP3Zfj` overloads across BPA account forms and MiTransfer PIN authentication.
 - Documented agent selector-`80` activation, `PAGOxMOVIL` SMS extraction, the local code-validation algorithm, first-row `AgentService` persistence/lookup, and source-confirmed menu routes.
 - Traced Agent Resumen/Detalle statistics from the navigation menus through monthly charts and per-module records; documented local SMS data, detail filters/account masking, and a likely unverified iterator-exhaustion defect in summary loading.
+- Traced all six Agent drawer actions, mobile-recharge local number persistence and selector-12 payload, latest-recharge branches, and selector-11 PIN-change payload; recorded a source-visible repeated-PIN validation issue and split the remaining General-mode menu review into its own TODO.
 
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.

@@ -150,7 +150,8 @@
 - [x] Identify AgentService and agent-specific UI
 - [x] Decompile AgentService — ORMLite entity (code, phone), no logic
 - [x] Document source-confirmed agent registration, SMS activation-code retrieval, local validation, `AgentService` persistence, and `getCodeAgent()` behavior.
-- [ ] Trace agent-specific services and generales menus
+- [x] Trace Agent services menu: authentication, stock, recharge, latest-recharge branches, PIN change, and disconnect; record selector/payload and source-visible validation behavior.
+- [ ] Trace the General-mode carrier-services menu (`listGenerales`) and its operation destinations/payloads.
 - [x] Trace and document Agent Resumen/Detalle routes, local `RecordSMS` data, chart/detail filters, and a likely summary-loader iterator defect.
 
 ## E-Commerce / Bulevar

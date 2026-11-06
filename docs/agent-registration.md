@@ -16,7 +16,9 @@ On a local match, the screen stores the entered code and phone through `Fr52O1uS
 
 ## Agent menu routes observed
 
-The source menu `g1bQ0lLj6na` exposes authentication, stock balance, mobile recharge, latest recharges, PIN change, and disconnect. Confirmed direct selectors include `11*2` for stock balance, `11*4` for latest recharge history, and `11*6` for disconnect. The mobile-recharge form sends selector `12` with `<phone>*<amount>`. Authentication uses selector `11` with `1*<four-digit-PIN>`. Full service details and statistics screens are tracked separately in TODO.
+The source menu `g1bQ0lLj6na` exposes authentication, stock balance, mobile recharge, latest recharges, PIN change, and disconnect. Confirmed direct selectors include `11*2` for stock balance, `11*4` for all latest recharges, and `11*6` for disconnect. The “by mobile” latest-recharges choice opens `yzFfgPWLpL`. The mobile-recharge form `A9IFPpW4HW` requires an eight-character number and a non-empty amount, stores a previously unseen number in `TeflMovil`, refreshes the drawer, then sends selector `12` with `<phone>*<amount>`. Authentication uses selector `11` with `1*<four-digit-PIN>`.
+
+The PIN-change form `VqNI4JnvJD` sends selector `11` with payload `3*<new-PIN>*3*<new-PIN>` after confirmation; it checks the new and repeated PIN values match. Its repeated-PIN length condition mistakenly checks the new-PIN field a second time. Since the following equality check compares the raw strings, this misplaced check does not by itself let a differently sized confirmation pass; it is still an apparent validation-code defect worth correcting only with intended product behavior confirmed. Length checks trim whitespace, while equality does not. The general drawer’s `nljtDl5MIf.listGenerales` is a separate carrier-services menu and remains under review.
 
 ## Raw source references
 
@@ -25,3 +27,4 @@ The source menu `g1bQ0lLj6na` exposes authentication, stock balance, mobile rech
 - [`rDEl7rW1aN.java`](../src/cu/etecsa/cubacel/tr/tm/l08fNVC4KOKK/rDEl7rW1aN.java): SMS retrieval helper and first-row `getCodeAgent()`.
 - [`hY5P1xQ5h8.java`](../src/cu/etecsa/cubacel/tr/tm/F0VSiFomrqH/hY5P1xQ5h8.java): activation-code algorithm.
 - [`AgentService.java`](../src/cu/etecsa/cubacel/tr/tm/ZNRpoHwtLXM/MZUDJuUoMJL/AgentService.java) and [`Fr52O1uSYF.java`](../src/cu/etecsa/cubacel/tr/tm/ZNRpoHwtLXM/Fr52O1uSYF.java): persistence.
+- [`g1bQ0lLj6na.java`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/MqnAp2jnnon/Tpv6wiFh8L6/g1bQ0lLj6na.java), [`A9IFPpW4HW.java`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/MqnAp2jnnon/Tpv6wiFh8L6/A9IFPpW4HW.java), and [`VqNI4JnvJD.java`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/MqnAp2jnnon/Tpv6wiFh8L6/VqNI4JnvJD.java): Agent drawer routes, mobile recharge, and PIN change.
