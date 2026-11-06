@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[█████████████████████████████████████████░░░░░░░░░] 82%</code></span>
 
-**Task-list progress: 157/190 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 158/191 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -53,6 +53,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [Fine payments](docs/traffic-fines.md) | General and traffic fine forms, selector 96/97 payloads, validation, and confirmation dispatch. |
 | [ONAT tax payments](docs/onat-tax-payments.md) | Selector 43 tax form variants, field defaults, partial-USSD routing, and source limits. |
 | [Agent registration](docs/agent-registration.md) | Agent activation request, SMS code retrieval, local validation algorithm, persistence, and confirmed menu selectors. |
+| [General carrier services](docs/general-carrier-menu.md) | General-mode mobile-service menu inventory, fragment destinations, and operation database behavior. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |
