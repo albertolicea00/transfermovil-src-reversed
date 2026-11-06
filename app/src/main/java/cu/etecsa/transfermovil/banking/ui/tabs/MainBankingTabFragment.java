@@ -27,6 +27,7 @@ import cu.etecsa.transfermovil.ui.fragment.WalletWithdrawFragment;
 import cu.etecsa.transfermovil.ui.fragment.BankTransferBfiFragment;
 import cu.etecsa.transfermovil.ui.fragment.NautaUserFragment;
 import cu.etecsa.transfermovil.ui.fragment.NautaPlusRechargeFragment;
+import cu.etecsa.transfermovil.ui.fragment.OwnCardPaymentFragment;
 import cu.etecsa.transfermovil.core.enums.AccountType;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
@@ -113,7 +114,8 @@ public class MainBankingTabFragment extends Fragment {
                         ft.replace(R.id.containerView, new NautaUserFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSARecargaPropia:
-                        // → JrjJL8mtlI
+                        ft.replace(R.id.containerView, new OwnCardPaymentFragment())
+                                .addToBackStack(null).commit();
                         break;
                     case BOLSAPagoLinea:
                         // → s9CT6pjRyD with xf94v3SFEM
