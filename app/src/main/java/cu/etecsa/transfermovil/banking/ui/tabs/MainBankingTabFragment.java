@@ -24,6 +24,7 @@ import cu.etecsa.transfermovil.stats.OperationListAdapter;
 import cu.etecsa.transfermovil.ui.fragment.WalletRechargeFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletTopupFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletTransferFragment;
+import cu.etecsa.transfermovil.ui.fragment.WalletWithdrawFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,7 +127,7 @@ public class MainBankingTabFragment extends Fragment {
                         ft.replace(R.id.containerView, new WalletRechargeFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSAExtraccionWalletTicket:
-                        // → f9Reflqt3EZ
+                        ft.replace(R.id.containerView, new WalletWithdrawFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSATransferirBancos:
                         // → H0oV6Ot0bS

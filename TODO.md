@@ -138,6 +138,7 @@
 - [x] Source-trace the MiTransfer CUP ticket form: amount validation, selector 17, full/partial dispatch, and callback behavior.
 - [x] Reconstruct and connect the MiTransfer mobile recharge form from `zzyNbaqs1U`, preserving CUP menu routing, CUP/USD selectors, contact normalization, and payload construction.
 - [x] Reconstruct the MiTransfer mobile-to-mobile transfer form from `LjOlaYSSMH` and route the wallet transfer dialog's MiTransfer choice to it; preserve selector 45 and partial-USSD behavior.
+- [x] Reconstruct the MiTransfer cash-ticket withdrawal form from `f9Reflqt3EZ` and connect its menu route; preserve selector 95, currency/entity selection, optional location fields, and partial-USSD behavior.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
