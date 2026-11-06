@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.l3GXbXAyUW;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.qTDVwLFEjE;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
@@ -22,6 +23,7 @@ import cu.etecsa.transfermovil.stats.OperationItem;
 import cu.etecsa.transfermovil.stats.OperationListAdapter;
 import cu.etecsa.transfermovil.ui.fragment.WalletRechargeFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletTopupFragment;
+import cu.etecsa.transfermovil.ui.fragment.WalletTransferFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -242,6 +244,10 @@ public class MainBankingTabFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // 0 → LjOlaYSSMH (MiTransfer), 1 → l3GXbXAyUW (Clásica)
+                FragmentManager fragmentManager = MainBankingTabFragment.this.getActivity().getSupportFragmentManager();
+                Fragment fragment = i == 0 ? new WalletTransferFragment() : new l3GXbXAyUW();
+                fragmentManager.beginTransaction().replace(R.id.containerView, fragment)
+                        .addToBackStack(null).commit();
                 dialogInterface.dismiss();
             }
         });
