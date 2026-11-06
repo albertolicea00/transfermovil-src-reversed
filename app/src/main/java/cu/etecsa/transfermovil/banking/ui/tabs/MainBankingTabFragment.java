@@ -26,6 +26,8 @@ import cu.etecsa.transfermovil.ui.fragment.WalletTransferFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletWithdrawFragment;
 import cu.etecsa.transfermovil.ui.fragment.BankTransferBfiFragment;
 import cu.etecsa.transfermovil.ui.fragment.NautaUserFragment;
+import cu.etecsa.transfermovil.ui.fragment.NautaPlusRechargeFragment;
+import cu.etecsa.transfermovil.core.enums.AccountType;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletWaterPaymentFragment;
@@ -268,7 +270,14 @@ public class MainBankingTabFragment extends Fragment {
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // → HZgbT8IXPf with AccountType SIN_CUENTA/CON_CUENTA
+                NautaPlusRechargeFragment fragment = new NautaPlusRechargeFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("OpcionNautaPlus",
+                        i == 0 ? AccountType.SIN_CUENTA : AccountType.CON_CUENTA);
+                fragment.setArguments(args);
+                MainBankingTabFragment.this.getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.containerView, fragment)
+                        .addToBackStack(null).commit();
                 dialogInterface.dismiss();
             }
         });

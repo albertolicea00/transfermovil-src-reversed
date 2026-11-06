@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[██████████████████████████████████████████░░░░░░░░] 85%</code></span>
 
-**Task-list progress: 172/202 completed; 30 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 173/202 completed; 29 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -64,6 +64,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [MiTransfer water payment](docs/wallet-water-payment.md) | Region/payment-type branches, selectors 19/21, saved invoice persistence, and partial-USSD behavior. |
 | [MiTransfer gas payment](docs/wallet-gas-payment.md) | Selector-67 invoice payment, saved gas account persistence, and partial-USSD route. |
 | [MiTransfer Nauta recharge](docs/wallet-nauta-recharge.md) | General Wallet selectors 59/84/86 for Nauta and Nauta Hogar, including partial-USSD routing. |
+| [MiTransfer Nauta Plus](docs/wallet-nauta-plus.md) | Selector-34 purchase form for saved-account and beneficiary-mobile modes. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |

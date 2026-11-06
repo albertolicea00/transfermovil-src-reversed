@@ -219,7 +219,7 @@
 - [x] Decompile Nauta top-up flow (recargaNauta)
 - [ ] Document Nauta account types and management
 - [x] Trace Nauta Hogar (home internet) flow
-- [ ] Document Nauta Plus feature
+- [x] Document Nauta Plus feature
 
 ## Cubacel Mobile
 
