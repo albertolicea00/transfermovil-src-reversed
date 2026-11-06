@@ -124,7 +124,8 @@
 - [ ] Decompile MiTransfer wallet flows
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
 - [x] Trace MiTransfer saved-account balance query and partial-USSD packet route; record the construction in the USSD catalog.
-- [ ] Trace MiTransfer latest-operations query and its source routing.
+- [x] Trace MiTransfer latest-operations selector, currency/account variants, and partial-USSD agency markers; record the construction in the USSD catalog.
+- [ ] Migrate the MiTransfer latest-operations fragment from raw source into clean Java.
 - [x] Document MiBoleto QR feature (hidden in menu)
 - [x] Decompile MiBoletoService
 
