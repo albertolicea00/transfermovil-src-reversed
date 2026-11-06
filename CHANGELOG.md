@@ -2,6 +2,7 @@
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Replaced the generic invoice stub with the fixed-phone payment form from `p5B8KozjvpQ`, connected `BOLSATelefono`, and documented selector `42`, saved account behavior, and partial-USSD routing.
 - Restored MiTransfer ticket reservation create/cancel/date-change screens from `XnVSHGPTkK`, `QVPgkl8ZGC`, and `Wwc5crW71D`; wired all dialog choices and the source-backed shared-state reset.
 - Restored the MiTransfer OFA contribution form from `C6ZYln3x19W`, connected `BOLSAAporteOFA`, and documented obligation loading and selector-94 CUP/partial payload.
 - Replaced the unused CADECA-named stub with the OFA reservation form from `dWLcK5oQoS`, connected `BOLSAReservasOFA`, and documented selector-8 fields and HTTP/partial dispatch.

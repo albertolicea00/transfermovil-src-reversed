@@ -7,9 +7,9 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-November%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[███████████████████████████████████████████░░░░░░░] 86%</code></span>
+<span style="white-space: nowrap;"><code>[███████████████████████████████████████████░░░░░░░] 87%</code></span>
 
-**Task-list progress: 187/215 completed; 28 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 188/216 completed; 28 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -75,6 +75,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [MiTransfer OFA reservation](docs/wallet-ofa-reservation.md) | Selector-8 reservation payload, fare calculation, and regular/partial dispatch. |
 | [MiTransfer OFA contribution](docs/wallet-ofa-contribution.md) | Selector-94 obligation payment with period picker and CUP routing. |
 | [MiTransfer ticket reservations](docs/wallet-ticket-reservations.md) | Create/cancel/date-change actions with selectors 102/106/105 and state reset. |
+| [MiTransfer fixed-phone payment](docs/wallet-fixed-phone-payment.md) | Selector-42 total/manual bill payment, saved account, and partial routing. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |

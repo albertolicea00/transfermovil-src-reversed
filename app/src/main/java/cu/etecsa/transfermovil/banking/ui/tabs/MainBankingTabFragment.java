@@ -39,6 +39,7 @@ import cu.etecsa.transfermovil.ui.fragment.OfaContributionFragment;
 import cu.etecsa.transfermovil.ui.fragment.TicketReservationCreateFragment;
 import cu.etecsa.transfermovil.ui.fragment.TicketReservationDateChangeFragment;
 import cu.etecsa.transfermovil.ui.fragment.TicketReservationCancelFragment;
+import cu.etecsa.transfermovil.ui.fragment.FixedPhoneBillPaymentFragment;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Provincia;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalCadeca;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
@@ -114,7 +115,8 @@ public class MainBankingTabFragment extends Fragment {
                         MainBankingTabFragment.this.showDialogTransferencia();
                         break;
                     case BOLSATelefono:
-                        // → p5B8KozjvpQ
+                        ft.replace(R.id.containerView, new FixedPhoneBillPaymentFragment())
+                                .addToBackStack(null).commit();
                         break;
                     case BOLSARecargaMovil:
                         Bundle walletTopupArgs = new Bundle();
