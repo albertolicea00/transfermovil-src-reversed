@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Replaced the BFI configuration tab's raw security menu with a clean menu that preserves its two source-backed options and navigation.
+- Migrated BFI registration and PIN-change forms into clean classes. Preserved selector `49` with `05*<current-PIN>*<new-PIN>*<identity>` and partial-USSD marker `05`, plus selector `69` with `05*<current-PIN>*<new-PIN>`.
+- Updated the reconstruction checklist. Android compilation and runtime navigation remain unverified.
+
 ## 2026-11-05 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Traced additional fixed-telephone and ONAT stamp/tax dispatches from raw JADX source: selectors `42` and `43`, payload order, full-payment sentinel, and the ONAT partial-packet field-order difference. Added a literal-selector inventory count; the catalog remains incomplete.
