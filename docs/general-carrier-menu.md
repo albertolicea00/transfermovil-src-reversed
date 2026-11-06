@@ -6,8 +6,8 @@
 |---|---|---|
 | Consulta tu Saldo Prepago | `ConsultaSaldo222` | Direct confirmation for `*222` |
 | Consulta tu Saldo Pospago | `ConsultaSaldo111` | Direct confirmation for `*111` |
-| Llamar | `LLamada` | `GMFMyKMnO2` call form |
-| Llamar con *99 | `Llamar99` | Same `GMFMyKMnO2` call form, separate operation mode |
+| Llamar | `LLamada` | [`GMFMyKMnO2`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/ivq3YYEGPZM/AjGJz9tVLXv/GMFMyKMnO2.java) in mode `1`; launches `ACTION_CALL` to `tel:<8-digit-number>` |
+| Llamar con *99 | `Llamar99` | Same form in mode `2`; launches `ACTION_CALL` to `tel:*99<8-digit-number>` |
 | Recarga tu Móvil con Cupón | `RecargarMovilBono` | [`b0kkzvOCEu`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/ivq3YYEGPZM/kE6CyiKsVrS/b0kkzvOCEu.java): accepts a non-empty voucher code and sends the code as `662*<voucher>` through the selected General/Agent activity dispatcher. |
 | Transferir tu Saldo | `TransferirSaldoMovil` | `C8l2t8799rL` |
 | Cambiar su clave de transferencia | `CambioClave` | `E1lhoLKryWP` |
@@ -24,6 +24,10 @@ All entries are marked active and initially use order `-1`; `updateOperation()` 
 ## Voucher recharge details
 
 The form can launch the QR scanner with `Nl0yptXmjQ.Recarga_Cupon` and service `ETECSA`. Returned `QRData` is copied when all characters are digits; otherwise the form strips every non-digit character before filling the voucher field. Manual and scanned input share the same non-empty-only validation. The confirmation text includes the entered value, and selector `662` is dispatched through the Agent activity when an agent record exists and is active, otherwise through the General activity. This establishes local construction and routing, not carrier acceptance or voucher format requirements.
+
+## Call forms
+
+`FNRzUmC7E5` sets operation mode `1` for the ordinary call and `2` for the `*99` call. Both require exactly eight trimmed characters and can pick a contact. Contact normalization strips spaces, removes one leading `+` or `0`, and removes a leading `53` only for 10-character values beginning with `535` or `536`. The call button places the `ACTION_CALL` request directly; this path does not use the USSD helper. The source does not show local digit-only validation for manually entered numbers.
 
 ## Sources
 
