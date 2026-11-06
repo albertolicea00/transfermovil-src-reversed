@@ -11,6 +11,7 @@
 - Compared the clean ONAT RC05/NIT form with `ROgpLrCtHa`; the executable form body matches after mapping its source base to the clean banking base, including regular and partial selector-43 dispatch.
 - Fixed MiTransfer session close: the clean menu now dispatches selector `70` on positive confirmation and resets its local bank configuration through the source-backed helper before opening the dialog; removed the nonexistent dispatcher call.
 - Repaired BPA account/session menu dispatch: use the source-backed agent-code lookup and activity interfaces, restore local session reset through `FBsQzP3Zfj`, and remove unresolved clean dispatcher/activity placeholders.
+- Compared `WalletLatestOperationsFragment` with `dI2tctjNbR`; the form preserves selector `48`, payload order `1*<selected-value>*<wallet-type>`, and the `08` saved-account / `04` wallet routes.
 
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.
