@@ -114,7 +114,7 @@
 - [x] Trace balance inquiry routes from bank/menu screens to USSD, including account-specific selector `46`, all-account selector `58`, direct `*444*46`, and Agent stock `11*2`; no SMS dispatch is used by these traced flows.
 - [x] Trace bank transfer flow (banco_transferencia → selector `45`), including short bank forms and extended origin/PIN/phone/message/balance payload construction.
 - [x] Trace PIN change flow (banco_cambiar_clave), including selector-69 new-only, old/new, prefixed old/new, and length-validation variants.
-- [ ] Document per-bank differences (BPA, BANDEC, Metropolitano, BFI)
+- [x] Document source-confirmed per-bank differences (BPA, BANDEC, Metropolitano, BFI); unknown coverage remains explicitly marked.
 - [x] Map account registration flow (banco_registro) across BPA, BANDEC, Metropolitano, BFI and MiTransfer, including each selector-49 payload and partial-USSD agency marker.
 - [x] Remove the unreferenced Metro PIN-change draft whose layout IDs and USSD dispatch were placeholders; its source fingerprint belongs to the BFI `BFICambioPin` menu, while the actual Metro PIN screen remains `MetroChangePinFragment`.
 - [x] Document electricity payment flow (banco_electricidad), including observed bank/wallet payload and partial-packet variants.

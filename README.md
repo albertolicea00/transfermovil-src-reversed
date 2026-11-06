@@ -7,9 +7,9 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-November%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[███████████████████████████████████████░░░░░░░░░░░] 78%</code></span>
+<span style="white-space: nowrap;"><code>[███████████████████████████████████████░░░░░░░░░░░] 79%</code></span>
 
-**Task-list progress: 142/180 completed; 38 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 143/180 completed; 37 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -49,6 +49,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | Document | Contents |
 | :--- | :--- |
 | [Target metadata](docs/target-metadata.md) | APK identity, version, SDK levels, and SHA-256 extraction. |
+| [Banking differences](docs/banking-bank-differences.md) | Source-backed comparison of BPA, BANDEC, Metropolitano, and BFI flows. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |
 | [USSD code catalog TODO](docs/ussd-code-catalog.md) | Planned inventory of executed codes, their purposes, and construction algorithms. |

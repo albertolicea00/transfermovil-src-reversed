@@ -1,0 +1,19 @@
+# Banking differences by bank
+
+This comparison summarizes only behaviors traced to form builders and menu dispatches in the current JADX reconstruction. It is not a complete feature matrix for each bank. USSD payload values shown below are transformed by the shared `rDEl7rW1aN.code()` path where the form calls it; the catalog records the corresponding dial templates.
+
+| Bank | Confirmed distinctions | Source-backed examples |
+| --- | --- | --- |
+| BPA | Account registration carries agency marker `01`, full name plus both surnames, and identity number. Account queries use currency then account; latest operations additionally prepend service type. Transfer form has a short payload with destination, amount, currency, and optional recipient phone. | `IixhA1yamp.submitForm`; `BpaBalanceQueryFragment.submitForm`; `BpaLastOperationsFragment.submitForm`; `BpaTransferFragment.submitForm` |
+| BANDEC | Registration carries marker `02` and uses account, name, and identity fields without the two surname fields present in the BPA and Metro forms. A BANDEC-labeled PIN-change form requires five digits, unlike the observed four-digit forms. | `wLHKkaC4Ha.submitForm`; `Cmok7CcIR9.submitForm` (selector-69 inventory) |
+| Metropolitano | Registration carries marker `03` and includes both surnames. Its traced screens include account-limit queries, service-type operation queries, gas/water payments, temporary-limit changes, payment-priority changes, card reprint, and transfers. The account-limit partial packet uses marker `03`; other operations can use different markers, so the marker is operation-specific. | `RFBEnXW0Xr.submitForm`; `gkzzwVYksz.submitForm`; `MetroBalanceQueryFragment.submitForm`; `MetroGasPaymentFragment.submitForm`; `MetroServiceQueryFragment.submitForm`; `MetroModificarLimitesFragment.submitForm`; `MetroReimprimirTarjetaFragment.submitForm` |
+| BFI | Registration uses marker `05` and requires current PIN, new PIN, and identity. Account query forms commonly send currency then account; the restored operations include balance, latest operations, limits, payment priority, and account statement. The account statement payload orders email, start date, end date, and account. | `umjSGajOy3.submitForm`; `BfiConsultarSaldoFragment.submitForm`; `BfiConsultarUltimasOperacionesFragment.submitForm`; `BfiConsultarLimiteFragment.submitForm`; `BfiAccountStatementFragment.submitForm` |
+
+## Shared behavior and limits
+
+- The four bank registration forms use selector `49`; partial-USSD agency markers align with bank codes `01` (BPA), `02` (BANDEC), `03` (Metropolitano), and `05` (BFI). MiTransfer uses `08` and is outside this comparison.
+- Selector `62` is not one uniform inquiry: the general banking menu can send only currency ID `1` or `2`, while BPA, Metropolitano, and BFI account forms send currency plus selected account. The source catalog currently confirms BPA/BFI account-form partial markers `01`/`05` and Metro marker `03`.
+- Selector `45` has both a short BPA/Metropolitano form and a separate extended banking form with origin-account, PIN/agency, and optional message/flags. The available comparison does not establish that every bank exposes every transfer variant.
+- The remaining source inventory includes unreconstructed classes and partially reconstructed screens. Absence from this table means “not yet traced,” not “unsupported by the app or bank.”
+
+For payload templates and dispatcher details, see the [USSD code catalog](ussd-code-catalog.md), especially registration, selector `45`, selector `62`, and selector `69` entries.
