@@ -12,6 +12,7 @@
 - Fixed MiTransfer session close: the clean menu now dispatches selector `70` on positive confirmation and resets its local bank configuration through the source-backed helper before opening the dialog; removed the nonexistent dispatcher call.
 - Repaired BPA account/session menu dispatch: use the source-backed agent-code lookup and activity interfaces, restore local session reset through `FBsQzP3Zfj`, and remove unresolved clean dispatcher/activity placeholders.
 - Compared `WalletLatestOperationsFragment` with `dI2tctjNbR`; the form preserves selector `48`, payload order `1*<selected-value>*<wallet-type>`, and the `08` saved-account / `04` wallet routes.
+- Compared BFI balance, limit, and latest-operation forms with raw `Mg7YIILN4B`, `leZyk029xo`, and `Np5pMRuX6q`; executable methods match, including selectors `46`/`62`/`48` and partial marker `05`.
 
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.
