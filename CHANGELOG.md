@@ -32,6 +32,7 @@
 - Reconstructed the distinct bank-to-wallet transfer as `WalletBankTransferFragment` from `H0oV6Ot0bS` and connected `BOLSATransferirBancos`; preserved selector `16`, agency/currency payloads, and the `04` partial route.
 - Reconstructed `WalletElectricityPaymentFragment` from `dwdZ5sHcFR` and connected `BOLSAElectricidad`; preserved selector `41`, CUP invoice payload, saved-invoice insertion/menu refresh, and partial marker `04`.
 - Reconstructed `WalletWaterPaymentFragment` from `U1sIOmca96i` on `BfiUssdAccountFragment` and connected `BOLSAAgua`; preserved Havana/Varadero selectors `19`/`21`, invoice persistence, and partial marker `04`, while documenting source-visible validation quirks.
+- Reconstructed `WalletGasPaymentFragment` from `XCDkgbw8oZ` and connected `BOLSAgas`; preserved selector `67`, 12-character invoice validation, type-3 invoice persistence, and partial marker `04`.
 
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.

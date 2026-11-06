@@ -28,6 +28,7 @@ import cu.etecsa.transfermovil.ui.fragment.BankTransferBfiFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletWaterPaymentFragment;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletGasPaymentFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,7 +143,7 @@ public class MainBankingTabFragment extends Fragment {
                         ft.replace(R.id.containerView, new WalletWaterPaymentFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSAgas:
-                        // → XCDkgbw8oZ
+                        ft.replace(R.id.containerView, new WalletGasPaymentFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSAPaquetesCubacel:
                         // → WyYHxgzYyW
