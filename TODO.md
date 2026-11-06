@@ -114,7 +114,7 @@
 - [ ] Document ONAT tax payment (banco_onat)
 - [x] Record source-confirmed fixed telephone and ONAT stamp USSD payload variants (selectors 42 and 43) in the [USSD catalog](docs/ussd-code-catalog.md); other ONAT and telephone variants remain under review.
 - [x] Record both ONAT tax payload builders for selector 43, including field order and default sentinel values, in the [USSD catalog](docs/ussd-code-catalog.md).
-- [ ] Trace transaction limits query (banco_sub_consulta_limites)
+- [x] Trace transaction-limits queries from bank menus and account forms: direct CUP/CUC selectors `62*1/2`, plus account payloads and partial-USSD agency markers `01`, `03`, and `05`.
 - [x] Document session-management dispatches for `banco_desconectar` and `OP_Close_Session`, including direct dialing and the limits of source-only evidence.
 
 ## MiTransfer (Wallet)
