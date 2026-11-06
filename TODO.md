@@ -158,6 +158,7 @@
 - [x] Reconstruct and connect MiTransfer ticket reservation date change from `Wwc5crW71D`; preserve selector 105 and correct the mislabeled query stub.
 - [x] Reconstruct and route MiTransfer fixed-phone bill payment from `p5B8KozjvpQ`; replace the generic invoice stub and preserve selector 42.
 - [x] Reconstruct and route MiTransfer Pago en Línea from `s9CT6pjRyD`; preserve QR mode arguments, shared-state reset, and selector-30/31 branches.
+- [x] Restore MiTransfer enterprise transfer/external-payment dialog routing and pass `TransferType`, `PayType`, and `CLASICAEMP` arguments.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.

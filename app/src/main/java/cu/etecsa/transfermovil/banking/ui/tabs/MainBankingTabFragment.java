@@ -45,6 +45,8 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalCadeca;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
 import cu.etecsa.transfermovil.ui.fragment.QrDynamicPaymentFragment;
+import cu.etecsa.transfermovil.banking.ui.bfi.BfiEnterpriseTransferFragment;
+import cu.etecsa.transfermovil.banking.ui.bfi.BfiExternalPaymentFragment;
 import cu.etecsa.transfermovil.core.enums.AccountType;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
@@ -381,7 +383,15 @@ public class MainBankingTabFragment extends Fragment {
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // → Z3kYdPwq6K2 with TransferType i
+                U6ucOCBccJ.pmoneda = 0;
+                U6ucOCBccJ.pdata = "";
+                Bundle args = new Bundle();
+                args.putSerializable("TransferType", Integer.valueOf(i));
+                BfiEnterpriseTransferFragment fragment = new BfiEnterpriseTransferFragment();
+                fragment.setArguments(args);
+                MainBankingTabFragment.this.getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.containerView, fragment)
+                        .addToBackStack(null).commit();
                 dialogInterface.dismiss();
             }
         });
@@ -396,7 +406,16 @@ public class MainBankingTabFragment extends Fragment {
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // → Eqj43O0pUx with PayType i, BankType CLASICAEMP
+                U6ucOCBccJ.pmoneda = 0;
+                U6ucOCBccJ.pdata = "";
+                Bundle args = new Bundle();
+                args.putSerializable("PayType", Integer.valueOf(i));
+                args.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.CLASICAEMP);
+                BfiExternalPaymentFragment fragment = new BfiExternalPaymentFragment();
+                fragment.setArguments(args);
+                MainBankingTabFragment.this.getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.containerView, fragment)
+                        .addToBackStack(null).commit();
                 dialogInterface.dismiss();
             }
         });
