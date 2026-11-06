@@ -43,6 +43,8 @@ import cu.etecsa.transfermovil.ui.fragment.FixedPhoneBillPaymentFragment;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Provincia;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalCadeca;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
+import cu.etecsa.transfermovil.ui.fragment.QrDynamicPaymentFragment;
 import cu.etecsa.transfermovil.core.enums.AccountType;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
@@ -134,7 +136,14 @@ public class MainBankingTabFragment extends Fragment {
                                 .addToBackStack(null).commit();
                         break;
                     case BOLSAPagoLinea:
-                        // → s9CT6pjRyD with xf94v3SFEM
+                        U6ucOCBccJ.pmoneda = 0;
+                        U6ucOCBccJ.pdata = "";
+                        Bundle onlinePaymentArgs = new Bundle();
+                        onlinePaymentArgs.putSerializable("Nl0yptXmjQ", Nl0yptXmjQ.xf94v3SFEM);
+                        onlinePaymentArgs.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.MiTransfer);
+                        QrDynamicPaymentFragment onlinePayment = new QrDynamicPaymentFragment();
+                        onlinePayment.setArguments(onlinePaymentArgs);
+                        ft.replace(R.id.containerView, onlinePayment).addToBackStack(null).commit();
                         break;
                     case BOLSACompraPaqueteMLC:
                         ft.replace(R.id.containerView, new WalletExtraPackageFragment())
