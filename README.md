@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[█████████████████████████████████████████░░░░░░░░░] 83%</code></span>
 
-**Task-list progress: 164/197 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 165/198 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -58,6 +58,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [MiTransfer mobile recharge](docs/wallet-mobile-recharge.md) | CUP/USD wallet top-up form, contact normalization, and selector/payload mapping. |
 | [MiTransfer mobile transfer](docs/wallet-mobile-transfer.md) | Selector-45 mobile transfer, amount/account validation, wallet type, optional flags, and partial-USSD route. |
 | [MiTransfer cash withdrawal](docs/wallet-cash-withdrawal.md) | Selector-95 cash ticket, currency-specific entities, optional province/municipality, and partial-USSD dispatch. |
+| [MiTransfer classic transfer](docs/wallet-classic-transfer.md) | Classic-card destination validation, optional origin/PIN, selector-45 payload, and packet route. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |

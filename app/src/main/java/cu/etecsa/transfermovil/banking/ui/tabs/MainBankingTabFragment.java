@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.l3GXbXAyUW;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.qTDVwLFEjE;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
@@ -25,6 +24,7 @@ import cu.etecsa.transfermovil.ui.fragment.WalletRechargeFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletTopupFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletTransferFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletWithdrawFragment;
+import cu.etecsa.transfermovil.ui.fragment.BankTransferBfiFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +63,7 @@ import java.util.List;
  *   BOLSAVotoMovil → cdINOtQ3iN (mobile voting)
  *
  * Dialogs:
- *   showDialogTransferencia() — MiTransfer vs Clásica → LjOlaYSSMH / l3GXbXAyUW
+ *   showDialogTransferencia() — MiTransfer vs Clásica → WalletTransferFragment / BankTransferBfiFragment
  *   showDialogNautaPlus() — sin/con cuenta → HZgbT8IXPf with AccountType
  *   showDialog4G() — FWA recharge vs query → wbFn8tBw8W / q55ExEc6x2l
  *   showDialogReservasTicket() — reserve/delete/change → XnVSHGPTkK/QVPgkl8ZGC/Wwc5crW71D
@@ -244,9 +244,9 @@ public class MainBankingTabFragment extends Fragment {
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // 0 → LjOlaYSSMH (MiTransfer), 1 → l3GXbXAyUW (Clásica)
+                // 0 → MiTransfer, 1 → Clásica
                 FragmentManager fragmentManager = MainBankingTabFragment.this.getActivity().getSupportFragmentManager();
-                Fragment fragment = i == 0 ? new WalletTransferFragment() : new l3GXbXAyUW();
+                Fragment fragment = i == 0 ? new WalletTransferFragment() : new BankTransferBfiFragment();
                 fragmentManager.beginTransaction().replace(R.id.containerView, fragment)
                         .addToBackStack(null).commit();
                 dialogInterface.dismiss();
