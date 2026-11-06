@@ -62,6 +62,7 @@
 - [x] Replace the raw BFI session tab with a clean menu and PIN-authentication screen; preserve the local session reset and confirmed selector-70 action.
 - [x] Replace the raw BFI consultations menu and route its actions to clean balance, latest-operations, limit, and account-statement fragments.
 - [x] Migrate the BFI account-statement form with date-range, email, and charge-account validation plus selector-26 dispatch.
+- [x] Compare the BFI account-statement form with JADX; confirm the migrated validations and selector-26 payload match the source.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
 - [x] Reconstruct the BFI USSD account base from Agg55uYctq by reusing clean account selection/card behavior and restoring observer callbacks and the four-parameter packet limit.
 - [x] Migrate the BFI payment form and the QR/contact base it needs onto clean Java; preserve both selector-31/selector-30 payment branches.
