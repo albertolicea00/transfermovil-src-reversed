@@ -183,7 +183,7 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
         this.txDescripcion = (AutoCompleteTextView) this.rootView.findViewById(R.id.input_descripcion);
         this.lyLayoutDescripcion.setVisibility(8);
         this.lyStImporte.setVisibility(8);
-        ((LgiFGRpiEl) this).tipomoneda = getResources().getStringArray(R.array.currency);
+        ((BfiQrAccountFragment) this).tipomoneda = getResources().getStringArray(R.array.currency);
         this.inputLayoutTipoMonedaImporte = (TextInputLayout) this.rootView.findViewById(R.id.input__layout_tipo_moneda);
         this.spinnerTipoMonedaImporte = (jN13TOyLMX) this.rootView.findViewById(R.id.spinnerMonedaTransaccion);
         this.inputLayoutCategoria = (TextInputLayout) this.rootView.findViewById(R.id.input_layout_categoria);

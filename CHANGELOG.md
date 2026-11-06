@@ -5,6 +5,7 @@
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.
 - Migrated `LgiFGRpiEl` to the clean BFI QR/contact account base and `Eqj43O0pUx` to `BfiExternalPaymentFragment`; routed external-payment modes to the new form and retained its selector-31/selector-30 branches.
+- Removed a residual raw `LgiFGRpiEl` cast from the migrated external-payment form. Clarified that `scripts/tests/test_update_progress.py` tests only README progress calculations; it does not validate Android or banking behavior.
 
 - Replaced the raw BFI operations menu with a clean menu for transfer and external payment, preserving both three-mode dialogs and their existing source-backed raw form destinations.
 
