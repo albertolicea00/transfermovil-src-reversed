@@ -2,6 +2,8 @@
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
+
 - Replaced the raw BFI operations menu with a clean menu for transfer and external payment, preserving both three-mode dialogs and their existing source-backed raw form destinations.
 
 - Replaced the BFI configuration tab's raw security menu with a clean menu that preserves its two source-backed options and navigation.
