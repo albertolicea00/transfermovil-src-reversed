@@ -25,6 +25,7 @@ import cu.etecsa.transfermovil.ui.fragment.WalletTopupFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletTransferFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletWithdrawFragment;
 import cu.etecsa.transfermovil.ui.fragment.BankTransferBfiFragment;
+import cu.etecsa.transfermovil.ui.fragment.NautaUserFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletWaterPaymentFragment;
@@ -42,7 +43,7 @@ import java.util.List;
  *   BOLSATransferencia → dialog: MiTransfer vs Clásica
  *   BOLSATelefono → p5B8KozjvpQ (phone bill payment)
  *   BOLSARecargaMovil → WalletTopupFragment with CUP currency
- *   BOLSARecargaNauta → KtF0PRB8vS (nauta recharge)
+ *   BOLSARecargaNauta → NautaUserFragment (nauta recharge)
  *   BOLSARecargaPropia → JrjJL8mtlI (own card recharge)
  *   BOLSAPagoLinea → s9CT6pjRyD with OperationType.xf94v3SFEM
  *   BOLSACompraPaqueteMLC → f3Ttlx30sMT (MLC package purchase)
@@ -107,7 +108,7 @@ public class MainBankingTabFragment extends Fragment {
                         ft.replace(R.id.containerView, walletTopup).addToBackStack(null).commit();
                         break;
                     case BOLSARecargaNauta:
-                        // → KtF0PRB8vS
+                        ft.replace(R.id.containerView, new NautaUserFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSARecargaPropia:
                         // → JrjJL8mtlI

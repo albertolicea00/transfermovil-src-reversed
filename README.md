@@ -7,9 +7,9 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-November%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[█████████████████████████████████████████░░░░░░░░░] 83%</code></span>
+<span style="white-space: nowrap;"><code>[██████████████████████████████████████████░░░░░░░░] 84%</code></span>
 
-**Task-list progress: 169/202 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 170/202 completed; 32 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -63,6 +63,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [MiTransfer electricity payment](docs/wallet-electricity-payment.md) | Selector-41 invoice payment, local invoice persistence, and partial-USSD route. |
 | [MiTransfer water payment](docs/wallet-water-payment.md) | Region/payment-type branches, selectors 19/21, saved invoice persistence, and partial-USSD behavior. |
 | [MiTransfer gas payment](docs/wallet-gas-payment.md) | Selector-67 invoice payment, saved gas account persistence, and partial-USSD route. |
+| [MiTransfer Nauta recharge](docs/wallet-nauta-recharge.md) | General Wallet selectors 59/84/86 for Nauta and Nauta Hogar, including partial-USSD routing. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |

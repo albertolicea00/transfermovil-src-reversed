@@ -216,7 +216,7 @@
 ## Nauta Integration
 
 - [x] Identify Nauta features (recarga, accounts, export, Nauta Hogar)
-- [ ] Decompile Nauta top-up flow (recargaNauta)
+- [x] Decompile Nauta top-up flow (recargaNauta)
 - [ ] Document Nauta account types and management
 - [ ] Trace Nauta Hogar (home internet) flow
 - [ ] Document Nauta Plus feature

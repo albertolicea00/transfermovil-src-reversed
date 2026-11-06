@@ -2,6 +2,7 @@
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Restored and routed the General MiTransfer Nauta form from `KtF0PRB8vS`; documented selectors `59`, `84`, and `86`, their payload branches, partial-USSD settings, and source quirks.
 - Added a source-backed comparison of BPA, BANDEC, Metropolitano, and BFI registration, query, transfer, and PIN distinctions, with explicit limits where the current source review is incomplete. Linked it from README and completed the corresponding TODO item.
 - Documented general and traffic fine flows (selectors `96` and `97`) from raw and clean sources; corrected the catalog's unsupported claim that the traffic-fine screen can use partial-USSD packets.
 - Documented the ONAT selector-`43` RC05/NIT and monthly/annual/declared-amount builders, including ordered fields, defaults, and the distinct partial-USSD path. Linked the details from README and the USSD catalog.
