@@ -15,6 +15,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
+import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +29,7 @@ import java.util.List;
  * <p>Presents two operations: "Autenticarse" (authenticate/login) and
  * "Desconectar" (disconnect/close session). The authenticate option
  * navigates to the auth fragment; disconnect shows a confirmation dialog
- * that dispatches USSD code "70" and calls
- * {@code UssdDispatcher.closeSessionBank()}.</p>
+ * that dispatches USSD code "70" after the local bank configuration is reset.</p>
  *
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.p97uirGL7T
  * @original_apk_version 1.260416
@@ -113,7 +116,7 @@ public class BpaSessionMenuFragment extends Fragment {
 
     /**
      * Shows confirmation dialog for closing the bank session.
-     * Calls {@code UssdDispatcher.closeSessionBank()} before showing the dialog,
+     * Resets local bank configuration before showing the dialog,
      * then dispatches USSD code "70" if user confirms.
      */
     private void showDialogCerrarSession() {
@@ -124,7 +127,7 @@ public class BpaSessionMenuFragment extends Fragment {
             dispatchUssd("70");
         });
         builder.setNegativeButton("No", (dialog, id) -> { /* dismissed */ });
-        UssdDispatcher.closeSessionBank(getActivity());
+        FBsQzP3Zfj.closeSessionBank(getActivity());
         builder.create().show();
     }
 
@@ -136,11 +139,15 @@ public class BpaSessionMenuFragment extends Fragment {
      * @param code the USSD operation code
      */
     private void dispatchUssd(String code) {
-        BaseMainActivity bs = new BaseMainActivity();
-        if (bs.getCodeAgent() != null && !bs.getCodeAgent().getCode().contains("-1")) {
-            ((BankingActivity) getActivity()).actionCallUSSD(code);
-        } else {
-            ((MainBankingActivity) getActivity()).actionCallUSSD(code);
+        rDEl7rW1aN dispatcher = new rDEl7rW1aN();
+        if (dispatcher.getCodeAgent() != null) {
+            if (dispatcher.getCodeAgent().getCode().contains("-1")) {
+                ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code);
+            } else {
+                ((IHVTCBmiLV) getActivity()).actionCallUSSD(code);
+            }
+            return;
         }
+        ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code);
     }
 }

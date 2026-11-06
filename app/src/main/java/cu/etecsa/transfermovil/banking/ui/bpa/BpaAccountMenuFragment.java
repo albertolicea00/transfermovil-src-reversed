@@ -15,6 +15,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
+import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -233,7 +237,7 @@ public class BpaAccountMenuFragment extends Fragment {
     /**
      * Shows confirmation dialog for closing the bank session.
      * Sends USSD code "70" to disconnect.
-     * Also calls {@code UssdDispatcher.closeSessionBank()} before showing dialog.
+     * Resets local bank configuration before showing the confirmation.
      */
     private void showDialogCerrarSession() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -243,7 +247,7 @@ public class BpaAccountMenuFragment extends Fragment {
             dispatchUssd("70");
         });
         builder.setNegativeButton("No", (dialog, id) -> { /* dismissed */ });
-        UssdDispatcher.closeSessionBank(getActivity());
+        FBsQzP3Zfj.closeSessionBank(getActivity());
         builder.create().show();
     }
 
@@ -377,12 +381,16 @@ public class BpaAccountMenuFragment extends Fragment {
      * @param code the USSD operation code
      */
     private void dispatchUssd(String code) {
-        BaseMainActivity bs = new BaseMainActivity();
-        if (bs.getCodeAgent() != null && !bs.getCodeAgent().getCode().contains("-1")) {
-            ((BankingActivity) getActivity()).actionCallUSSD(code);
-        } else {
-            ((MainBankingActivity) getActivity()).actionCallUSSD(code);
+        rDEl7rW1aN dispatcher = new rDEl7rW1aN();
+        if (dispatcher.getCodeAgent() != null) {
+            if (dispatcher.getCodeAgent().getCode().contains("-1")) {
+                ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code);
+            } else {
+                ((IHVTCBmiLV) getActivity()).actionCallUSSD(code);
+            }
+            return;
         }
+        ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code);
     }
 
     /**
@@ -392,11 +400,15 @@ public class BpaAccountMenuFragment extends Fragment {
      * @param param additional parameter (e.g., currency selection)
      */
     private void dispatchUssd(String code, String param) {
-        BaseMainActivity bs = new BaseMainActivity();
-        if (bs.getCodeAgent() != null && !bs.getCodeAgent().getCode().contains("-1")) {
-            ((BankingActivity) getActivity()).actionCallUSSD(code, param);
-        } else {
-            ((MainBankingActivity) getActivity()).actionCallUSSD(code, param);
+        rDEl7rW1aN dispatcher = new rDEl7rW1aN();
+        if (dispatcher.getCodeAgent() != null) {
+            if (dispatcher.getCodeAgent().getCode().contains("-1")) {
+                ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code, param);
+            } else {
+                ((IHVTCBmiLV) getActivity()).actionCallUSSD(code, param);
+            }
+            return;
         }
+        ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code, param);
     }
 }
