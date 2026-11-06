@@ -146,6 +146,8 @@
 - [x] Reconstruct the MiTransfer gas form from `XCDkgbw8oZ` and connect `BOLSAgas`; preserve selector 67, account validation/persistence, and partial-USSD behavior.
 - [x] Reconstruct the MiTransfer own-card recharge form from `JrjJL8mtlI` and connect `BOLSARecargaPropia`; preserve selector 77, CUP payload, saved series, and partial-USSD behavior.
 - [x] Reconstruct the MiTransfer Extra USD package form from `f3Ttlx30sMT`, replace the misnamed unused stub, and connect `BOLSACompraPaqueteMLC`; preserve selector 33 and contact normalization.
+- [x] Reconstruct and route MiTransfer 4G balance recharge from `wbFn8tBw8W`; preserve selector 20 and USD payload.
+- [x] Reconstruct and route MiTransfer 4G package purchase from `q55ExEc6x2l`; preserve selector 18 and offer-request payload.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.

@@ -29,6 +29,8 @@ import cu.etecsa.transfermovil.ui.fragment.NautaUserFragment;
 import cu.etecsa.transfermovil.ui.fragment.NautaPlusRechargeFragment;
 import cu.etecsa.transfermovil.ui.fragment.OwnCardPaymentFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletExtraPackageFragment;
+import cu.etecsa.transfermovil.ui.fragment.FwaBalanceRechargeFragment;
+import cu.etecsa.transfermovil.ui.fragment.FwaDataPackagePurchaseFragment;
 import cu.etecsa.transfermovil.core.enums.AccountType;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
@@ -132,7 +134,8 @@ public class MainBankingTabFragment extends Fragment {
                         MainBankingTabFragment.this.showDialog4G();
                         break;
                     case BOLSACompraPaqueteFWA:
-                        // → q55ExEc6x2l
+                        ft.replace(R.id.containerView, new FwaDataPackagePurchaseFragment())
+                                .addToBackStack(null).commit();
                         break;
                     case BOLSARecargaCUPWalletTicket:
                         ft.replace(R.id.containerView, new WalletRechargeFragment()).addToBackStack(null).commit();
@@ -296,7 +299,12 @@ public class MainBankingTabFragment extends Fragment {
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // 0 → wbFn8tBw8W (FWA recharge), 1 → q55ExEc6x2l (FWA query)
+                Fragment fragment = i == 0
+                        ? new FwaBalanceRechargeFragment()
+                        : new FwaDataPackagePurchaseFragment();
+                MainBankingTabFragment.this.getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.containerView, fragment)
+                        .addToBackStack(null).commit();
                 dialogInterface.dismiss();
             }
         });
