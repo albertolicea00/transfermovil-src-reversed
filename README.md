@@ -7,9 +7,9 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-November%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[█████████████████████████████████████░░░░░░░░░░░░░] 74%</code></span>
+<span style="white-space: nowrap;"><code>[█████████████████████████████████████░░░░░░░░░░░░░] 75%</code></span>
 
-**Task-list progress: 126/169 completed; 43 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 127/169 completed; 42 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 

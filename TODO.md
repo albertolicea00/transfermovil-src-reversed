@@ -104,7 +104,7 @@
 - [x] Decompile BancoService — ORMLite entity, stores bank PINs plaintext
 - [x] Document authentication flow (30-min session via AOperKey table)
 - [x] Trace balance inquiry routes from bank/menu screens to USSD, including account-specific selector `46`, all-account selector `58`, direct `*444*46`, and Agent stock `11*2`; no SMS dispatch is used by these traced flows.
-- [ ] Trace transfer flow (banco_transferencia → code construction)
+- [x] Trace bank transfer flow (banco_transferencia → selector `45`), including short bank forms and extended origin/PIN/phone/message/balance payload construction.
 - [x] Trace PIN change flow (banco_cambiar_clave), including selector-69 new-only, old/new, prefixed old/new, and length-validation variants.
 - [ ] Document per-bank differences (BPA, BANDEC, Metropolitano, BFI)
 - [ ] Map account registration flow (banco_registro)
