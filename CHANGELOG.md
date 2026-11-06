@@ -2,6 +2,7 @@
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Restored and routed the MiTransfer TFA selector-108 recharge from `b7zSZMAX7cN`; documented CUP-only UI selection, amount/account validation, and partial-USSD dispatch.
 - Restored MiTransfer Cubacel package selection from `WyYHxgzYyW`, connected `BOLSAPaquetesCubacel`, and documented its local/JSON catalog refresh and selector-6 CUP/USD payload.
 - Replaced two misnamed FWA stubs with `wbFn8tBw8W`/`q55ExEc6x2l` source migrations, connected the recharge and gigabyte purchase routes, and documented selector `20`/`18` payloads plus the mislabeled “consulta” menu text.
 - Replaced the unused, misnamed mobile-transfer stub with the source-backed Extra USD package form from `f3Ttlx30sMT`; connected `BOLSACompraPaqueteMLC` and documented selector `33` and contact-number normalization.

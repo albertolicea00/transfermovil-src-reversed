@@ -32,6 +32,7 @@ import cu.etecsa.transfermovil.ui.fragment.WalletExtraPackageFragment;
 import cu.etecsa.transfermovil.ui.fragment.FwaBalanceRechargeFragment;
 import cu.etecsa.transfermovil.ui.fragment.FwaDataPackagePurchaseFragment;
 import cu.etecsa.transfermovil.ui.fragment.CubacelPackagePurchaseFragment;
+import cu.etecsa.transfermovil.ui.fragment.TfaRechargeFragment;
 import cu.etecsa.transfermovil.core.enums.AccountType;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletBankTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletElectricityPaymentFragment;
@@ -173,7 +174,8 @@ public class MainBankingTabFragment extends Fragment {
                         MainBankingTabFragment.this.showDialogReservasTicket();
                         break;
                     case BOLSARecargaTFA:
-                        // → b7zSZMAX7cN
+                        ft.replace(R.id.containerView, new TfaRechargeFragment())
+                                .addToBackStack(null).commit();
                         break;
                     case BOLSATransferenciaClasicaEmpresarial:
                         MainBankingTabFragment.this.showDialogTransferenciaEmpresarial();
