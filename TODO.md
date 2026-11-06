@@ -148,7 +148,7 @@
 
 - [x] Identify AgentService and agent-specific UI
 - [x] Decompile AgentService — ORMLite entity (code, phone), no logic
-- [ ] Document agent registration and code retrieval (getCodeAgent)
+- [x] Document source-confirmed agent registration, SMS activation-code retrieval, local validation, `AgentService` persistence, and `getCodeAgent()` behavior.
 - [ ] Trace agent-specific services and generales menus
 - [ ] Document estadisticas (Resumen/Detalle de Operaciones) for agents
 
