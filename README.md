@@ -7,9 +7,9 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-November%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[█████████████████████████████████████████░░░░░░░░░] 82%</code></span>
+<span style="white-space: nowrap;"><code>[█████████████████████████████████████████░░░░░░░░░] 83%</code></span>
 
-**Task-list progress: 161/194 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 162/195 completed; 33 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -54,7 +54,8 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [ONAT tax payments](docs/onat-tax-payments.md) | Selector 43 tax form variants, field defaults, partial-USSD routing, and source limits. |
 | [Agent registration](docs/agent-registration.md) | Agent activation request, SMS code retrieval, local validation algorithm, persistence, and confirmed menu selectors. |
 | [General carrier services](docs/general-carrier-menu.md) | General-mode mobile-service menu inventory, fragment destinations, and operation database behavior. |
-| [MiTransfer CUP ticket recharge](docs/wallet-ticket-recharge.md) | Raw selector-17 ticket form, partial-USSD routing, and current clean reconstruction gap. |
+| [MiTransfer CUP ticket recharge](docs/wallet-ticket-recharge.md) | Clean selector-17 ticket form, partial-USSD routing, and source comparison. |
+| [MiTransfer mobile recharge](docs/wallet-mobile-recharge.md) | CUP/USD wallet top-up form, contact normalization, and selector/payload mapping. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |

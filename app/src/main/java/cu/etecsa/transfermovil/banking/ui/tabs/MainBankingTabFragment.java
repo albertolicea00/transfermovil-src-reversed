@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.qTDVwLFEjE;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
 import cu.etecsa.transfermovil.stats.OperationItem;
 import cu.etecsa.transfermovil.stats.OperationListAdapter;
 import cu.etecsa.transfermovil.ui.fragment.WalletRechargeFragment;
+import cu.etecsa.transfermovil.ui.fragment.WalletTopupFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +34,7 @@ import java.util.List;
  * 26 operation codes handled:
  *   BOLSATransferencia → dialog: MiTransfer vs Clásica
  *   BOLSATelefono → p5B8KozjvpQ (phone bill payment)
- *   BOLSARecargaMovil → zzyNbaqs1U with CUP currency
+ *   BOLSARecargaMovil → WalletTopupFragment with CUP currency
  *   BOLSARecargaNauta → KtF0PRB8vS (nauta recharge)
  *   BOLSARecargaPropia → JrjJL8mtlI (own card recharge)
  *   BOLSAPagoLinea → s9CT6pjRyD with OperationType.xf94v3SFEM
@@ -89,7 +92,12 @@ public class MainBankingTabFragment extends Fragment {
                         // → p5B8KozjvpQ
                         break;
                     case BOLSARecargaMovil:
-                        // → zzyNbaqs1U with CUP
+                        Bundle walletTopupArgs = new Bundle();
+                        walletTopupArgs.putSerializable("TipoBolsa", qTDVwLFEjE.CUP);
+                        walletTopupArgs.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.MiTransfer);
+                        WalletTopupFragment walletTopup = new WalletTopupFragment();
+                        walletTopup.setArguments(walletTopupArgs);
+                        ft.replace(R.id.containerView, walletTopup).addToBackStack(null).commit();
                         break;
                     case BOLSARecargaNauta:
                         // → KtF0PRB8vS

@@ -25,6 +25,7 @@
 - Added nine source-confirmed General-mode carrier codes to the USSD catalog: prepaid/postpaid balances, bonus status, plan management, four plan queries, and advance balance; all are literal confirmation-dialog calls.
 - Traced the MiTransfer CUP deposit-ticket form: amount validation, selector `17`, payload `<amount>*CUP`, partial gateway `110`/agency `04` route, and empty response callback; identified the clean form stub and missing banking-tab route.
 - Reconstructed `WalletRechargeFragment` from `P8DtkaSW4dR` and connected `BOLSARecargaCUPWalletTicket` in the clean banking tab; preserved selector-17 full/partial USSD dispatch, amount validation, and close/back behavior. Updated the source-trace note to reflect the implementation.
+- Reconstructed `WalletTopupFragment` from `zzyNbaqs1U` and connected the MiTransfer mobile-recharge menu to its source-confirmed CUP route; documented CUP/USD selectors, `phone*amount*0*type` payload, contact normalization, and the dormant USD selection dialog.
 
 - Added `BfiUssdAccountFragment`, reusing the clean two-account selector/card renderer and restoring Agg55uYctq's USSD observer contract and four-parameter packet limit. Transfer and external-payment forms remain pending migration.
 - Migrated `f1IveoSASW` into `BfiEnterpriseTransferFragment` on the clean BFI account base and routed its three `TransferType` choices to the migrated form; retained its selector-104 and partial-USSD logic.
