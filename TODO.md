@@ -66,6 +66,7 @@
 - [x] Reconstruct the BFI USSD account base from Agg55uYctq by reusing clean account selection/card behavior and restoring observer callbacks and the four-parameter packet limit.
 - [x] Migrate the BFI payment form and the QR/contact base it needs onto clean Java; preserve both selector-31/selector-30 payment branches.
 - [x] Migrate the BFI enterprise-transfer form from `f1IveoSASW` onto `BfiUssdAccountFragment` and connect the three transfer modes to it.
+- [x] Compare migrated BFI transfer/payment form bodies with JADX; confirm payload branches and selectors `104`, `31`, and `30` while noting clean shared-base callback delegation.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
 - [ ] Review the remaining 208 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
