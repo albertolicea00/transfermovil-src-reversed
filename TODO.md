@@ -123,6 +123,7 @@
 - [x] Document electricity payment flow (banco_electricidad), including observed bank/wallet payload and partial-packet variants.
 - [x] Document general and traffic fine payment flows (`banco_multa`), selectors `96` and `97`, source-backed payload order, validation scope, and dispatcher behavior.
 - [x] Document ONAT tax payment (`banco_onat`): RC05/NIT and partial-payment variants under selector `43`, defaults, and source-confirmed partial-USSD routing.
+- [x] Compare migrated ONAT RC05/NIT form with raw `ROgpLrCtHa`; confirm selector-43 payload builders and agency packet routing match.
 - [x] Record source-confirmed fixed telephone and ONAT stamp USSD payload variants (selectors 42 and 43) in the [USSD catalog](docs/ussd-code-catalog.md); other ONAT and telephone variants remain under review.
 - [x] Record both ONAT tax payload builders for selector 43, including field order and default sentinel values, in the [USSD catalog](docs/ussd-code-catalog.md).
 - [x] Trace transaction-limits queries from bank menus and account forms: direct CUP/CUC selectors `62*1/2`, plus account payloads and partial-USSD agency markers `01`, `03`, and `05`.
