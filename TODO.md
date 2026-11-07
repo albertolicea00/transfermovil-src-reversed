@@ -66,6 +66,26 @@
 - [x] Repair BPA account/session menu dispatch to use the source agent-code helper and existing activity interfaces; replace unresolved close-session dispatcher calls.
 - [x] Replace seven invalid static `UssdDispatcher.actionCallUSSDBack` calls in BPA and MiTransfer forms with the matching source `FBsQzP3Zfj` overloads.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `banking/ui/DataManagementAgentPagerFragment.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `banking/ui/DataManagementGeneralPagerFragment.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `crypto/CryptoProvider.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `data/DatabaseHelper.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/ApiClient.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/SessionManager.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/FuelSmsImportTask.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsImportTask.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsParser.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsSender.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/AboutFragment.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/EcommerceMenuFragment.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/qr/QrCodeGenerator.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `update/UpdateApiClient.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ussd/UssdDispatcher.java`.
+- [ ] Recover source behavior or document evidence-based limits for the placeholder in `util/Sha256Util.java`.
+- [ ] Rebuild the clean MiBoleto ticket base from `L4aAENEGbqv` and move status, key-update, and latest-operations screens off the raw base.
+- [ ] Reconcile `QrPaymentFragment` (`b6FtEHgm1B`, 637 source lines) with the migrated QR payment screen; restore its distinct behavior or remove it only after proving it is a duplicate.
+- [ ] Restore or retire the public-service payment draft mapped to `udysei7zCr`; compare it with the clean PCC flow and preserve any distinct selector or validation behavior.
+- [ ] Recover the source-truncated `WalletBankTransferFragment.mostrarTarjeta()` implementation from smali and document its card-type rendering branches.
 - [x] Reconstruct the BFI USSD account base from Agg55uYctq by reusing clean account selection/card behavior and restoring observer callbacks and the four-parameter packet limit.
 - [x] Migrate the BFI payment form and the QR/contact base it needs onto clean Java; preserve both selector-31/selector-30 payment branches.
 - [x] Migrate the BFI enterprise-transfer form from `f1IveoSASW` onto `BfiUssdAccountFragment` and connect the three transfer modes to it.
@@ -74,6 +94,8 @@
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
 - [ ] Review the remaining 208 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [ ] Inventory the 208 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
+- [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
 
 ## Architecture & Navigation
@@ -132,6 +154,62 @@
 - [x] Trace transaction-limits queries from bank menus and account forms: direct CUP/CUC selectors `62*1/2`, plus account payloads and partial-USSD agency markers `01`, `03`, and `05`.
 - [x] Document session-management dispatches for `banco_desconectar` and `OP_Close_Session`, including direct dialing and the limits of source-only evidence.
 
+### Empty banking fragment drafts
+
+- [ ] Trace source and callers for `banking/ui/metro/MetroTransferFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/BandecAccountConversionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/BandecBranchLookupFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/BandecChangeLimitFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/BandecDisconnectFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/account/BandecFixedTermCloseFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/account/BandecFixedTermOpenFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/account/BandecReprintFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/auth/BandecAuthenticateFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/auth/BandecBalanceQueryFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/auth/BandecOperationRouterFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/auth/BandecRegistrationFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecCardRenewalFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecCommerceIdFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecExternalPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecPinDigitalFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecRechargeFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecBillingPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecElectricityFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecFinePaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecGasPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecInvoiceListFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecInvoiceSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecLoanAmortizationFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecNautaRechargeFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecPublicServicePaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecTransferFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecUtilityPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecWireTransferFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/AccountSwitchFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/AuthenticateFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/BandecMenuFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/BankAuthMenuFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/BankOperationBaseFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/BranchSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/CardInfoQueryFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/ChangeLimitFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/ChangePasswordFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/ChangePinFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/CoordinateAuthFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/DisconnectFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/ElectricityPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/FinePaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/GasPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/InvoiceSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/InvoiceTypeSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/LoanAmortizationFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/PublicServicePaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/RegisterFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/SecurityMenuFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/UtilityBillPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/WireTransferFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [ ] Trace source and callers for `ui/fragment/banking/common/WireTransferQueryFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+
 ## MiTransfer (Wallet)
 
 - [x] Identify MiTransfer in drawer menu and string resources
@@ -170,6 +248,7 @@
 - [x] Reconstruct and route MiTransfer Voto Móvil from `cdINOtQ3iN`; preserve selector 215, encoded 454 dispatch, and channel validation.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
+- [ ] Replace the remaining raw General-mode destinations `k5fNqiPSlwb`, `qAMfdm9Kls`, `SlZq2dCM9i`, and `HFzgpLELho` with source-matched clean screens or document why they stay raw.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
 - [x] Trace MiTransfer saved-account balance query and partial-USSD packet route; record the construction in the USSD catalog.

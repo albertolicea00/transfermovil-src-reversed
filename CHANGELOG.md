@@ -13,6 +13,9 @@
 - Restored the OFA visit-query form from `dYBdUyjb1D`, replaced its mislabeled settings stub, and connected the General-mode query dialog with its two modes and selector `9` payload.
 - Restored enterprise transfer and external-payment dialog actions, passing `TransferType`/`PayType` and the `CLASICAEMP` agency argument while resetting shared state.
 - Corrected the MiTransfer enterprise-transfer destination to the source-mapped `Z3kYdPwq6K2` form: selector `220` with partial marker `08`; kept BFI enterprise banking selector `104` in its separate route.
+- Expanded the TODO backlog: enumerated all 53 empty banking fragments and 16 remaining application-layer placeholders by file, split the four raw General-mode screens into separate tasks, and retained seven recent completions without hiding them in parent items.
+- Rebuilt the shared MiBoleto ticket form base as `MiBoletoTicketBaseFragment`; status, key-update, and latest-operations screens now inherit it, and the empty `TicketBaseFragment` shell was removed.
+- Routed General-mode union-payment lookup from raw `SlZq2dCM9i` to `WalletSyndicateQueryFragment`; its MiTransfer agency argument selects the same selector-121 payload branch.
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
