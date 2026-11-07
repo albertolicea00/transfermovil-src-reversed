@@ -10,6 +10,7 @@
 - Restored MiBoleto integrated ticket query from `OXpoe3K2m1`, connected its General-mode menu route, and preserved date/email validation, encoded email, and selector `112` full/partial dispatch.
 - Restored MiTurno reservation lookup from `x12rSjPY6pZ`, connected the General ticket-query choice to the clean screen, and preserved CI QR prefill/scanning, help, and selector `107`.
 - Removed five unreferenced banking fragment shells after confirming each obfuscated source already has a canonical clean implementation for gas, electricity, latest operations, bank-to-wallet transfer, or water payment.
+- Restored the OFA visit-query form from `dYBdUyjb1D`, replaced its mislabeled settings stub, and connected the General-mode query dialog with its two modes and selector `9` payload.
 - Restored enterprise transfer and external-payment dialog actions, passing `TransferType`/`PayType` and the `CLASICAEMP` agency argument while resetting shared state.
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`

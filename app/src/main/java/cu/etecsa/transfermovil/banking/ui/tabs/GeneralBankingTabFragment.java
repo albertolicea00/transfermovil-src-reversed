@@ -242,8 +242,8 @@ public class GeneralBankingTabFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putSerializable("R1sDOSqZ2z", cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z.MiTransfer);
                 args.putSerializable("Opcion", Integer.valueOf(i + 1));
-                cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dYBdUyjb1D fragment =
-                        new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dYBdUyjb1D();
+                cu.etecsa.transfermovil.ui.fragment.OfaVisitQueryFragment fragment =
+                        new cu.etecsa.transfermovil.ui.fragment.OfaVisitQueryFragment();
                 fragment.setArguments(args);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.containerView, fragment).addToBackStack(null).commit();
