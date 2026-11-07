@@ -1,8 +1,12 @@
 # Changelog
 
+## 2026-11-07 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Restored MiTransfer MiBoleto purchase from `TBaFnBLjEA`, connected its menu route and booking-state reset, and documented selector `118` with regular/partial dispatch.
+- Restored enterprise transfer and external-payment dialog actions, passing `TransferType`/`PayType` and the `CLASICAEMP` agency argument while resetting shared state.
+
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
-- Restored enterprise transfer and external-payment dialog actions, passing `TransferType`/`PayType` and the `CLASICAEMP` agency argument while resetting shared state.
 - Restored the MiTransfer Pago en Línea QR form from `s9CT6pjRyD`, connected the mode/agency bundle and source state reset, and documented static/dynamic selector branches `31`/`30`.
 - Replaced the generic invoice stub with the fixed-phone payment form from `p5B8KozjvpQ`, connected `BOLSATelefono`, and documented selector `42`, saved account behavior, and partial-USSD routing.
 - Restored MiTransfer ticket reservation create/cancel/date-change screens from `XnVSHGPTkK`, `QVPgkl8ZGC`, and `Wwc5crW71D`; wired all dialog choices and the source-backed shared-state reset.

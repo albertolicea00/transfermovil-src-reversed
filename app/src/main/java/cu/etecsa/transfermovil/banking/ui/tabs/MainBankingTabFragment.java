@@ -44,7 +44,9 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Provincia;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalCadeca;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.As6QBoLoQJ;
 import cu.etecsa.transfermovil.ui.fragment.QrDynamicPaymentFragment;
+import cu.etecsa.transfermovil.ui.fragment.MiBoletoPurchaseFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiEnterpriseTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiExternalPaymentFragment;
 import cu.etecsa.transfermovil.core.enums.AccountType;
@@ -219,7 +221,15 @@ public class MainBankingTabFragment extends Fragment {
                         MainBankingTabFragment.this.showDialogPagoExternoEmpresarial();
                         break;
                     case BOLSACompraMiBoleto:
-                        // → TBaFnBLjEA with reset state
+                        As6QBoLoQJ.ci = "";
+                        As6QBoLoQJ.fecha = "";
+                        As6QBoLoQJ.fechaInicio = "";
+                        As6QBoLoQJ.cantidad = "";
+                        As6QBoLoQJ.monto = "";
+                        As6QBoLoQJ.phone = "";
+                        As6QBoLoQJ.moneda = "";
+                        ft.replace(R.id.containerView, new MiBoletoPurchaseFragment())
+                                .addToBackStack(null).commit();
                         break;
                     case BOLSAVotoMovil:
                         // → cdINOtQ3iN

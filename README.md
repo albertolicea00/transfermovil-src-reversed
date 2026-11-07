@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[███████████████████████████████████████████░░░░░░░] 87%</code></span>
 
-**Task-list progress: 190/218 completed; 28 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 191/219 completed; 28 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 ## Overview
 
@@ -78,6 +78,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [MiTransfer fixed-phone payment](docs/wallet-fixed-phone-payment.md) | Selector-42 total/manual bill payment, saved account, and partial routing. |
 | [MiTransfer Pago en Línea](docs/wallet-qr-dynamic-payment.md) | QR payment form with static/dynamic selectors 31/30 and origin-account branches. |
 | [MiTransfer enterprise operations](docs/wallet-enterprise-routes.md) | Enterprise transfer/payment dialog routing and typed arguments. |
+| [MiTransfer MiBoleto purchase](docs/wallet-miboleto-purchase.md) | Selector-118 offer purchase and shared booking state reset. |
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |
