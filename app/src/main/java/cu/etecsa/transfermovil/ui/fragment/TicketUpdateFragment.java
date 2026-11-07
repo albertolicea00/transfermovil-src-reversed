@@ -1,29 +1,46 @@
 package cu.etecsa.transfermovil.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.fragment.app.Fragment;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.L4aAENEGbqv;
 
-/**
- * @original_apk_version 1.260416
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.hjX8MS8xO9
- * @fingerprint Banking operation fragment (66 lines). Extends L4aAENEGbqv.
- *              Contains form validation, USSD code dispatch via UssdDispatcher.
- */
-public class TicketUpdateFragment extends Fragment {
+/** MiBoleto key update, reconstructed from {@code hjX8MS8xO9}. */
+public class TicketUpdateFragment extends L4aAENEGbqv {
 
-    public Context context;
+    public Button btnAceptar;
     public View rootView;
+    public TextView titleToolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.context = container.getContext();
-        // Original: inflates layout, sets up form fields, bank account spinners,
-        // USSD dispatch via FBsQzP3Zfj (UssdDispatcher)
-        // See obfuscated source for full implementation
-        return null;
+        rootView = inflater.inflate(R.layout.yxq8vb0em2gox, container, false);
+        context = container.getContext();
+        titleToolbar = (TextView) rootView.findViewById(R.id.titleToolbar);
+        titleToolbar.setText(R.string.consulta_actualizar_boleto);
+        btnAceptar = (Button) rootView.findViewById(R.id.btnAceptar);
+        btnAceptar.setOnClickListener(view -> submitForm());
+        loadComponents(rootView);
+        return rootView;
+    }
+
+    private void submitForm() {
+        if (!validateSerie()) {
+            return;
+        }
+        try {
+            String serie = txSerie.getText().toString().trim();
+            String prompt = "¿Desea actualizar la clave del boleto con número de serie: " + serie + " ? ";
+            ViewGroup form = (ViewGroup) rootView.findViewById(R.id.frmBanco);
+            FBsQzP3Zfj.actionCallUSSDBack(context, "115", serie, prompt, form, getFragmentManager());
+        } catch (Exception error) {
+            Toast.makeText(context, "Error intentelo de nuevo", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -285,7 +285,7 @@ public class GeneralBankingTabFragment extends Fragment {
                         break;
                     case 4: // → hjX8MS8xO9 (update ticket key)
                         navigateToMiBoletoFragment(
-                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.hjX8MS8xO9());
+                                new cu.etecsa.transfermovil.ui.fragment.TicketUpdateFragment());
                         break;
                 }
                 dialogInterface.dismiss();
