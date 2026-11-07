@@ -47,6 +47,7 @@ import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.As6QBoLoQJ;
 import cu.etecsa.transfermovil.ui.fragment.QrDynamicPaymentFragment;
 import cu.etecsa.transfermovil.ui.fragment.MiBoletoPurchaseFragment;
+import cu.etecsa.transfermovil.ui.fragment.MobileVotingFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiEnterpriseTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiExternalPaymentFragment;
 import cu.etecsa.transfermovil.core.enums.AccountType;
@@ -232,7 +233,8 @@ public class MainBankingTabFragment extends Fragment {
                                 .addToBackStack(null).commit();
                         break;
                     case BOLSAVotoMovil:
-                        // → cdINOtQ3iN
+                        ft.replace(R.id.containerView, new MobileVotingFragment())
+                                .addToBackStack(null).commit();
                         break;
                     default:
                         Toast.makeText(MainBankingTabFragment.this.context, operacion.toString(), Toast.LENGTH_LONG).show();

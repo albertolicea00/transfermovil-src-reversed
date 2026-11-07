@@ -2,6 +2,7 @@
 
 ## 2026-11-07 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Restored the MiTransfer Voto Móvil form from `cdINOtQ3iN`, connected the menu, and documented selector `215`, wallet validation, and the encoded `454` call path in telephony notes.
 - Restored MiTransfer MiBoleto purchase from `TBaFnBLjEA`, connected its menu route and booking-state reset, and documented selector `118` with regular/partial dispatch.
 - Restored enterprise transfer and external-payment dialog actions, passing `TransferType`/`PayType` and the `CLASICAEMP` agency argument while resetting shared state.
 

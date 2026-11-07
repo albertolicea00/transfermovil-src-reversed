@@ -396,6 +396,15 @@ depends on which QR route supplies the argument.
 (IDs 21–30, `esDePago: 1`). This flag is catalog metadata; the inspected form
 does not itself charge or validate payment.
 
+The MiTransfer `BOLSAVotoMovil` destination (`cdINOtQ3iN`) is a separate
+channel-and-wallet form. It validates a required 1–12 character text made only
+of letters/digits, with no spaces or special characters, then sends
+`<channel-id>*<text>*<wallet-type>` under service selector `215`. It uses
+`actionCallUSSDBack454`: the helper transforms the payload with `rDEl7rW1aN`
+and asks for confirmation before dialing the `*454*...#` request. This flow
+has no partial-USSD branch in the inspected form. Paid-channel selection also
+requires a wallet marker; the source UI route now opens this migrated form.
+
 ### Useful phone numbers
 
 The General drawer's `tel_utiles` destination (`s9lZwtvq9Dl`) renders five
