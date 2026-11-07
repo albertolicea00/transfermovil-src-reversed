@@ -399,7 +399,8 @@ public class MainBankingTabFragment extends Fragment {
                 U6ucOCBccJ.pdata = "";
                 Bundle args = new Bundle();
                 args.putSerializable("TransferType", Integer.valueOf(i));
-                BfiEnterpriseTransferFragment fragment = new BfiEnterpriseTransferFragment();
+                cu.etecsa.transfermovil.ui.fragment.BfiTransferFragment fragment =
+                        new cu.etecsa.transfermovil.ui.fragment.BfiTransferFragment();
                 fragment.setArguments(args);
                 MainBankingTabFragment.this.getActivity().getSupportFragmentManager()
                         .beginTransaction().replace(R.id.containerView, fragment)

@@ -158,7 +158,7 @@
 - [x] Reconstruct and connect MiTransfer ticket reservation date change from `Wwc5crW71D`; preserve selector 105 and correct the mislabeled query stub.
 - [x] Reconstruct and route MiTransfer fixed-phone bill payment from `p5B8KozjvpQ`; replace the generic invoice stub and preserve selector 42.
 - [x] Reconstruct and route MiTransfer Pago en Línea from `s9CT6pjRyD`; preserve QR mode arguments, shared-state reset, and selector-30/31 branches.
-- [x] Restore MiTransfer enterprise transfer/external-payment dialog routing and pass `TransferType`, `PayType`, and `CLASICAEMP` arguments.
+- [x] Restore MiTransfer enterprise transfer from `Z3kYdPwq6K2` with selector 220, and route external-payment choices with `PayType`/`CLASICAEMP`; preserve `TransferType` and shared-state reset.
 - [x] Reconstruct and route MiTransfer MiBoleto purchase from `TBaFnBLjEA`; preserve selector 118, currency mapping, and shared booking reset.
 - [x] Restore the MiBoleto ticket-status screen from `w7mHpmOa4EP`, route the General MiBoleto menu to the clean screen, and preserve saved-series selection and selector 114 dispatch.
 - [x] Restore MiBoleto key update from `hjX8MS8xO9`, route the General MiBoleto menu to the clean screen, and preserve saved-series validation and selector 115 dispatch.
