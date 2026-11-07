@@ -218,8 +218,7 @@ public class GeneralBankingTabFragment extends Fragment {
                     ((BaseMainActivity) getActivity()).actionCallUSSD("103");
                 } else {
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.containerView,
-                                    new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.x12rSjPY6pZ())
+                            .replace(R.id.containerView, new cu.etecsa.transfermovil.ui.fragment.TicketReservationViewFragment())
                             .addToBackStack(null).commit();
                 }
                 dialogInterface.dismiss();

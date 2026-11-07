@@ -8,6 +8,7 @@
 - Restored the MiBoleto key-update form from `hjX8MS8xO9`, connected its General-mode menu route, and preserved saved-ticket series selection, ten-character validation, and selector `115`.
 - Restored MiBoleto latest operations from `i9I9XZGnR3`, connected its General-mode menu route, and preserved optional email encoding plus selector `113` full/partial dispatch.
 - Restored MiBoleto integrated ticket query from `OXpoe3K2m1`, connected its General-mode menu route, and preserved date/email validation, encoded email, and selector `112` full/partial dispatch.
+- Restored MiTurno reservation lookup from `x12rSjPY6pZ`, connected the General ticket-query choice to the clean screen, and preserved CI QR prefill/scanning, help, and selector `107`.
 - Restored enterprise transfer and external-payment dialog actions, passing `TransferType`/`PayType` and the `CLASICAEMP` agency argument while resetting shared state.
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
