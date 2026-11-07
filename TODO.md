@@ -82,7 +82,7 @@
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `update/UpdateApiClient.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ussd/UssdDispatcher.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `util/Sha256Util.java`.
-- [ ] Rebuild the clean MiBoleto ticket base from `L4aAENEGbqv` and move status, key-update, and latest-operations screens off the raw base.
+- [x] Rebuild the clean MiBoleto ticket base from `L4aAENEGbqv`, move status/key-update/latest-operations screens off the raw base, and remove the empty base placeholder.
 - [ ] Reconcile `QrPaymentFragment` (`b6FtEHgm1B`, 637 source lines) with the migrated QR payment screen; restore its distinct behavior or remove it only after proving it is a duplicate.
 - [ ] Restore or retire the public-service payment draft mapped to `udysei7zCr`; compare it with the clean PCC flow and preserve any distinct selector or validation behavior.
 - [ ] Recover the source-truncated `WalletBankTransferFragment.mostrarTarjeta()` implementation from smali and document its card-type rendering branches.
@@ -248,7 +248,10 @@
 - [x] Reconstruct and route MiTransfer Voto Móvil from `cdINOtQ3iN`; preserve selector 215, encoded 454 dispatch, and channel validation.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
-- [ ] Replace the remaining raw General-mode destinations `k5fNqiPSlwb`, `qAMfdm9Kls`, `SlZq2dCM9i`, and `HFzgpLELho` with source-matched clean screens or document why they stay raw.
+- [ ] Migrate General service-debt query `k5fNqiPSlwb`; preserve its service-specific invoice validation and selector-47 full/partial branches.
+- [ ] Migrate General account-statement query `qAMfdm9Kls`; preserve date/currency/email validation and selector-26 full/partial branches.
+- [x] Migrate General union-payment query `SlZq2dCM9i` by routing to its clean equivalent; preserve QR CI prefill, agency mapping, and selector 121.
+- [ ] Migrate General telephone-invoice query `HFzgpLELho`; preserve phone-number validation, operation arguments, and selector-47 dispatch.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
 - [x] Trace MiTransfer saved-account balance query and partial-USSD packet route; record the construction in the USSD catalog.

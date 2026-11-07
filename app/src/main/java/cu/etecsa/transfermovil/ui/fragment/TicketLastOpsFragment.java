@@ -21,13 +21,12 @@ import androidx.fragment.app.FragmentManager;
 import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.L4aAENEGbqv;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 
 /* JADX INFO: loaded from: classes.dex */
-public class TicketLastOpsFragment extends L4aAENEGbqv implements pAzq93vIl3.UssdResponseObserver {
+public class TicketLastOpsFragment extends MiBoletoTicketBaseFragment implements pAzq93vIl3.UssdResponseObserver {
     public ImageView btHelp;
     public Button btnAceptar;
     public CheckBox checkBox;

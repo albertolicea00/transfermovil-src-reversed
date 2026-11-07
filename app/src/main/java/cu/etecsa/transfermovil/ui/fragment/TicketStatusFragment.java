@@ -9,10 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.L4aAENEGbqv;
 
 /** MiBoleto status lookup, reconstructed from {@code w7mHpmOa4EP}. */
-public class TicketStatusFragment extends L4aAENEGbqv {
+public class TicketStatusFragment extends MiBoletoTicketBaseFragment {
 
     public Button btnAceptar;
     public View rootView;
