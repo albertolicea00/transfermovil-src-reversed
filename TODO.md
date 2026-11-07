@@ -163,6 +163,7 @@
 - [x] Restore the MiBoleto ticket-status screen from `w7mHpmOa4EP`, route the General MiBoleto menu to the clean screen, and preserve saved-series selection and selector 114 dispatch.
 - [x] Restore MiBoleto key update from `hjX8MS8xO9`, route the General MiBoleto menu to the clean screen, and preserve saved-series validation and selector 115 dispatch.
 - [x] Restore MiBoleto latest operations from `i9I9XZGnR3`, route the General menu to the clean screen, and preserve optional email encoding and selector 113 full/partial dispatch.
+- [x] Restore MiBoleto integrated ticket query from `OXpoe3K2m1`, route the General menu to the clean screen, and preserve date/email validation and selector 112 full/partial dispatch.
 - [x] Reconstruct and route MiTransfer Voto Móvil from `cdINOtQ3iN`; preserve selector 215, encoded 454 dispatch, and channel validation.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
