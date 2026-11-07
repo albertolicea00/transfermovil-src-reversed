@@ -165,6 +165,7 @@
 - [x] Restore MiBoleto latest operations from `i9I9XZGnR3`, route the General menu to the clean screen, and preserve optional email encoding and selector 113 full/partial dispatch.
 - [x] Restore MiBoleto integrated ticket query from `OXpoe3K2m1`, route the General menu to the clean screen, and preserve date/email validation and selector 112 full/partial dispatch.
 - [x] Restore the MiTurno reservation lookup from `x12rSjPY6pZ`, route the General ticket-query choice to the clean screen, and preserve CI input, QR prefill/scan, and selector 107.
+- [x] Remove five unreferenced banking draft shells whose source classes now have canonical clean implementations: gas, electricity, wallet latest operations, bank-to-wallet transfer, and water payment.
 - [x] Reconstruct and route MiTransfer Voto Móvil from `cdINOtQ3iN`; preserve selector 215, encoded 454 dispatch, and channel validation.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
