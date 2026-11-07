@@ -273,7 +273,7 @@ public class GeneralBankingTabFragment extends Fragment {
                         break;
                     case 1: // → i9I9XZGnR3 (MiBoleto last ops)
                         navigateToMiBoletoFragment(
-                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.i9I9XZGnR3());
+                                new cu.etecsa.transfermovil.ui.fragment.TicketLastOpsFragment());
                         break;
                     case 2: // → OXpoe3K2m1 (ticket query)
                         navigateToMiBoletoFragment(

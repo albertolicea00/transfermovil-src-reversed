@@ -6,6 +6,7 @@
 - Restored MiTransfer MiBoleto purchase from `TBaFnBLjEA`, connected its menu route and booking-state reset, and documented selector `118` with regular/partial dispatch.
 - Restored the MiBoleto status form from `w7mHpmOa4EP`, connected its General-mode menu route, and preserved saved-ticket series selection, ten-character validation, and selector `114`.
 - Restored the MiBoleto key-update form from `hjX8MS8xO9`, connected its General-mode menu route, and preserved saved-ticket series selection, ten-character validation, and selector `115`.
+- Restored MiBoleto latest operations from `i9I9XZGnR3`, connected its General-mode menu route, and preserved optional email encoding plus selector `113` full/partial dispatch.
 - Restored enterprise transfer and external-payment dialog actions, passing `TransferType`/`PayType` and the `CLASICAEMP` agency argument while resetting shared state.
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
