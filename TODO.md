@@ -121,6 +121,7 @@
 - [x] Record MiTransfer selector-17 CUP cash-deposit ticket request, amount validation, and partial packet marker in the USSD catalog.
 - [x] Record MiTransfer selector-18 FWA data-package offer request, account validation, and fixed USD payload in the USSD catalog.
 - [x] Record MiTransfer selector-20 FWA balance-recharge payload, validation, and dispatcher path in the USSD catalog.
+- [x] Record MiTransfer and bank water-payment selector-19/21 variants, selector-51 regional path, and partial-packet markers in the USSD catalog.
 - [x] Document USSD send mechanism (tel: intent + CALL_PHONE)
 - [x] Document accessibility service USSD response capture
 - [x] List discovered USSD codes (*222*, *100*, *111, *133, *234)
