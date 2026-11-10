@@ -197,6 +197,21 @@ public class ApiClient {
         }
     }
 
+    /** Load the signed-in profile through the source-backed current-user route. */
+    public ApiResponse getCurrentProfile(String bearerToken) {
+        return postAuthenticated("/api/user/current", null, bearerToken);
+    }
+
+    /** Update profile fields; callers convert a nonempty photo path before posting. */
+    public ApiResponse updateProfile(Object request, String bearerToken) {
+        return postAuthenticated("/api/profile/update", request, bearerToken);
+    }
+
+    /** Change the signed-in user's password. */
+    public ApiResponse changeProfilePassword(Object request, String bearerToken) {
+        return postAuthenticated("/api/profile/password", request, bearerToken);
+    }
+
     /**
      * Converts a profile image path to the PNG data URI sent by the raw client.
      * Glide decodes it at half the source dimensions before PNG compression.
