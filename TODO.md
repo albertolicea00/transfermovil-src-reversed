@@ -303,7 +303,7 @@
 - [x] Restore the `EcommerceActivity` host layout, initial menu, toolbar, splash menu, and back/quit flow from `QqWqw83vJf`.
 - [ ] Migrate the source multipart image endpoints and image conversion/normalization methods from `y6NQQxH0NI` into a clean API/media client.
 - [ ] Reconcile `UhA7J2923N` message/log, typed error, unauthenticated-session, and enum permission behavior with the clean e-commerce session flow.
-- [ ] Map business/merchant registration flow
+- [x] Map the Bulevar business-profile create/update/delete workflow and its `GESTIONAR_NEGOCIO` permission gate ([e-commerce notes](docs/ecommerce.md#business-management-flow)); no separate merchant onboarding flow was found.
 - [ ] Trace payment processing flow (/api/payment/store)
 - [x] Document refund form validation, request fields, endpoint, and response handling ([e-commerce notes](docs/ecommerce.md#refunds)).
 - [ ] Map child user / sub-account permissions

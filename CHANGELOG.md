@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Documented Bulevar business-profile CRUD, the permission gate, request fields, and confirmed endpoints; distinguished it from merchant onboarding.
 - Documented e-commerce refund validation, serialized request fields, endpoint response handling, and the missing positive-amount bound.
 - Traced payment-source activation and deactivation from confirmation dialog through request payload, endpoint, and response handling.
 - Traced General-mode bonus recharge, mobile-balance transfer, and recharge-key change forms; recorded USSD payload order and the repeated-key validation defect.

@@ -140,6 +140,10 @@ does not by itself establish parity with `checkUserPermission(enum)`.
 | `/api/business/deleteBusiness` | Delete business |
 | `/api/business/gethashtag` | Get business hashtag |
 
+### Business management flow
+
+The Bulevar account screen (`RjBvMOuknd`) opens `nCeySAq4vz` to create, rename, or delete a business. The dialog hides create/update/delete controls unless the session has `GESTIONAR_NEGOCIO`; create and update require a nonblank description and show a confirmation before returning their action and data to the screen. Create/update requests contain `descriptionBusiness`; delete sends `id`. The presenter calls `/api/business/storeBusiness`, `/api/business/updateBusiness`, or `/api/business/deleteBusiness`, then refreshes the list after success. This is business-profile CRUD from the client UI, not a separate merchant onboarding/KYC flow. Evidence: `RjBvMOuknd`, `nCeySAq4vz`, `WpYPbPBxxh`, and `tgXzViKJOK`.
+
 ### Payments
 | Endpoint | Purpose |
 |:---|:---|
