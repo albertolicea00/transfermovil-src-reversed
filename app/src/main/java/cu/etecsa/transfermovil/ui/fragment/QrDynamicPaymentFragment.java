@@ -44,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.b6FtEHgm1B */
 public class QrDynamicPaymentFragment extends LgiFGRpiEl {
     public ArrayAdapter<CharSequence> adapterTipoBolsa;
     private List<TMonedasWallet> lisMonedas;

@@ -10,10 +10,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.ME2IdEhApc;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.bnsLemXoui;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.dLMLrixv4f;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SXVyD7BX7KJ.vhcWzIxxMH;
 import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.transfermovil.banking.ui.tabs.BfiSecurityMenuFragment;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.wmNoZ7GzBg */
@@ -53,7 +53,7 @@ public class BfiEnterpriseOperationTabsFragment extends Fragment {
                 case 2:
                     return new dLMLrixv4f();
                 case 3:
-                    return new bnsLemXoui();
+                    return new BfiSecurityMenuFragment();
                 default:
                     return null;
             }

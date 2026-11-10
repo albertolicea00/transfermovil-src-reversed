@@ -66,8 +66,8 @@
 - [x] Repair BPA account/session menu dispatch to use the source agent-code helper and existing activity interfaces; replace unresolved close-session dispatcher calls.
 - [x] Replace seven invalid static `UssdDispatcher.actionCallUSSDBack` calls in BPA and MiTransfer forms with the matching source `FBsQzP3Zfj` overloads.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `banking/ui/DataManagementAgentPagerFragment.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `banking/ui/DataManagementGeneralPagerFragment.java`.
+- [x] Reconcile the agent data-management pager with source `OQcONjDATJ`; preserve its 11 ordered tabs, titles, child screens, and adapter behavior.
+- [x] Reconcile the General data-management pager with source `wTZi6Zeikv`; preserve its eight ordered tabs, titles, contact permission request, and fixed-tab setup.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `crypto/CryptoProvider.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `data/DatabaseHelper.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/ApiClient.java`.
@@ -78,14 +78,14 @@
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsSender.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/AboutFragment.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/EcommerceMenuFragment.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/qr/QrCodeGenerator.java`.
+- [x] Reconcile `ui/qr/QrCodeGenerator.java` with source `ZUoEY89WdA`; retain all QR generation, image-processing, and decoding entry points under clean method names.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `update/UpdateApiClient.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ussd/UssdDispatcher.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `util/Sha256Util.java`.
 - [x] Rebuild the clean MiBoleto ticket base from `L4aAENEGbqv`, move status/key-update/latest-operations screens off the raw base, and remove the empty base placeholder.
-- [ ] Reconcile `QrPaymentFragment` (`b6FtEHgm1B`, 637 source lines) with the migrated QR payment screen; restore its distinct behavior or remove it only after proving it is a duplicate.
-- [ ] Restore or retire the public-service payment draft mapped to `udysei7zCr`; compare it with the clean PCC flow and preserve any distinct selector or validation behavior.
-- [ ] Recover the source-truncated `WalletBankTransferFragment.mostrarTarjeta()` implementation from smali and document its card-type rendering branches.
+- [x] Reconcile `b6FtEHgm1B` against `QrDynamicPaymentFragment`: same base, layout, QR parsing/menu flow and selectors `31`/`30`; retain the richer clean screen with wallet currencies and stricter amount checks, and remove the null-returning duplicate shell.
+- [x] Migrate public-service/PCC draft `udysei7zCr` into clean `PublicServicePaymentFragment`; retain its CUP-only bolsa selector, contact-confirmation flow, validation, and selector `7` full/partial (`04`) USSD payload.
+- [x] Recover `WalletBankTransferFragment.mostrarTarjeta()` bank-logo branches from sibling source and shared validator evidence; document PAN/standard prefixes and drawable behavior.
 - [x] Reconstruct the BFI USSD account base from Agg55uYctq by reusing clean account selection/card behavior and restoring observer callbacks and the four-parameter packet limit.
 - [x] Migrate the BFI payment form and the QR/contact base it needs onto clean Java; preserve both selector-31/selector-30 payment branches.
 - [x] Migrate the BFI enterprise-transfer form from `f1IveoSASW` onto `BfiUssdAccountFragment` and connect the three transfer modes to it.
@@ -156,58 +156,62 @@
 
 ### Empty banking fragment drafts
 
-- [ ] Trace source and callers for `banking/ui/metro/MetroTransferFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/BandecAccountConversionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/BandecBranchLookupFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/BandecChangeLimitFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/BandecDisconnectFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/account/BandecFixedTermCloseFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/account/BandecFixedTermOpenFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/account/BandecReprintFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/auth/BandecAuthenticateFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/auth/BandecBalanceQueryFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/auth/BandecOperationRouterFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/auth/BandecRegistrationFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecCardRenewalFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecCommerceIdFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecExternalPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecPinDigitalFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/operations/BandecRechargeFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecBillingPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecElectricityFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecFinePaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecGasPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecInvoiceListFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecInvoiceSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecLoanAmortizationFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecNautaRechargeFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecPublicServicePaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecTransferFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecUtilityPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/bandec/payment/BandecWireTransferFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/AccountSwitchFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/AuthenticateFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/BandecMenuFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/BankAuthMenuFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/BankOperationBaseFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/BranchSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/CardInfoQueryFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/ChangeLimitFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/ChangePasswordFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/ChangePinFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/CoordinateAuthFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/DisconnectFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/ElectricityPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/FinePaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/GasPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [x] Remove the unreferenced `MetroTransferFragment` shell after confirming it had no callers; its `F2leFVNWrdy` mapping was incorrect (that source is BFI account association).
+- [x] Migrate the source-backed BFI associate-account form `F2leFVNWrdy` into `BfiAssociateAccountFragment`; preserve selector `60`, random coordinate prompt, 16-digit account validation, confirmation, and card logos.
+- [x] Replace the BFI enterprise Settings tab's raw `bnsLemXoui` menu with clean `BfiSecurityMenuFragment`; preserve its two displayed actions (registration and change PIN). The `BFIAsociarCuenta` callback exists in source but is not added by `initData()`, so keep its mapped form out of the visible menu.
+- [x] Remove the unused `BandecAccountConversionFragment` shell: source `Xh70Rdjfpc` implements selector `87`, but `X7obECfkKf.initData()` never adds `BANConvertirCuenta`; the handler case has no visible menu item or clean callers.
+- [x] Remove the unused `BandecBranchLookupFragment` shell: its `KsDQL9cTTl` mapping is actually the USD-with-MLC account-opening form (selector `76`), invoked from BANDEC Configuración; branch lookup is not its behavior.
+- [x] Route BANDEC `BANCambioLimite` from the settings menu to source-backed `BandecChangeLimitFragment`; preserve selector `61`, ATM/POS/total validation, and partial-USSD behavior.
+- [x] Remove the unused `BandecDisconnectFragment` shell: its `g9VybPHHUE` mapping is actually delete-registration (selector `68`); BANDEC disconnect is a confirmation dialog in source `rvxiiV3tYu`, now exposed by `BandecSessionMenuFragment`.
+- [x] Route `BANCierrePlazoFijo` to source-backed `BandecFixedTermCloseFragment`; preserve selector `82`.
+- [x] Route `BANPlazoFijo` to source-backed `BandecFixedTermOpenFragment`; preserve selector `81`, term choices, currency, and source-account data.
+- [x] Route `BANCambioMensualidad` to source-backed `BandecMonthlyPaymentChangeFragment`; preserve the source selector `25` form.
+- [x] Correct the `BandecReprintFragment` mapping: `m0X6Kxdhmv` changes loan monthly payment (selector `25`), not card reprint; route that operation as `BandecMonthlyPaymentChangeFragment` and connect actual `BANReimpresion` to `BandecCardReprintFragment` (selector `74`).
+- [x] Correct the mislabeled `BandecAuthenticateFragment` draft: source `rvxiiV3tYu` is the three-action BANDEC Sesión menu. Route the tab through `BandecSessionMenuFragment` and preserve authentication, disconnect, and card selection destinations.
+- [x] Correct the mislabeled `BandecBalanceQueryFragment` draft: source `R7PmVxXLJZC` is the 14-item BANDEC Consultas menu. Route the tab through `BandecQueriesMenuFragment` and preserve the source-backed menu destinations; individual query forms remain separate tasks.
+- [x] Migrate the BANDEC operation router from `bLlRBTTLue`; preserve all 26 source menu entries and original destinations, while routing `BANTransferencia` to the clean transfer form.
+- [x] Correct the mislabeled `BandecRegistrationFragment` draft: source `X7obECfkKf` is the nine-action BANDEC Configuración menu. Route the tab through `BandecSettingsMenuFragment` and preserve registration and the other settings destinations.
+- [x] Remove the mislabeled `BandecCardRenewalFragment` shell: its `gaJlF6dT3z` source is BANDEC latest-operations query (selector `48`), routed by `R7PmVxXLJZC` under `BANUltimasoperaciones`; the clean shell had no callers.
+- [x] Remove the mislabeled `BandecCommerceIdFragment` shell: its `ikSs6fqL5Q` source is BANDEC account-limit consultation (selector `62`), mapped from `R7PmVxXLJZC` as `BANConsultaLimite`; the shell has no callers.
+- [x] Remove the mislabeled `BandecExternalPaymentFragment` shell: its `ZF74c8UCRU` source is BANDEC recent-payments query (selector `63`, `BANUltimosPagos`), not external payment; no clean caller uses the shell.
+- [x] Route BANDEC `BANPinDigital` from the settings menu to source-backed `BandecPinDigitalFragment`; preserve selector `79`, account checks, and coordinate challenge behavior.
+- [x] Replace the mislabeled `BandecRechargeFragment` draft with `BandecPaymentStatusFragment`; route `BANEstadoPagoExterno` from Consultas to source `XKpe29TPn0`, preserving payment-reference/account validation and selector `89`.
+- [x] Remove the unused `BandecBillingPaymentFragment` shell: its `D6YZ7ruA6K` source is a legacy mobile top-up form with no callers; the active BANDEC `BANRecargaMovil` route opens `SjZHfPJPwX` with selectors `54`/`88`.
+- [x] Trace `Q3Nvf439ab` and route BANDEC electricity to `BandecElectricityFragment`; preserve the source-backed saved-invoice form, selector `41`, account lengths, and partial-USSD dispatch. A clean-room form rewrite remains future work.
+- [x] Correct the mislabeled `BandecFinePaymentFragment` draft to `BandecOfaPaymentFragment`; route `BANPatrimoniOfa` to source `SZARzeWeX5` and preserve its obligation form and selector `94`.
+- [x] Route `BANGas` in the clean BANDEC operation router to source-backed `BandecGasPaymentFragment`; preserve saved gas-account selection, source form behavior, and the original gas dispatch.
+- [x] Remove the duplicate `BandecInvoiceListFragment` shell: it incorrectly reused `Q3Nvf439ab`, whose source form is the electricity payment screen and whose only menu metadata routes to electricity.
+- [x] Migrate `g7yG4Frdxy` into `BandecInvoiceSelectionFragment` and connect the contracted-services pay action; preserve saved invoice choices, service type, validation, selector `52`, and full/partial dispatch.
+- [x] Route `BANAmortizar` to source-backed `BandecLoanAmortizationFragment`; preserve account/name/monthly-payment/amount validation and selector `55` full/partial dispatch.
+- [x] Remove the duplicate `BandecNautaRechargeFragment` shell: its `ZDkigMAIBm` mapping is the menu-routed BANDEC transfer form, now represented by `BandecTransferFragment`; no BANDEC Nauta route targets this shell.
+- [x] Remove the unused `BandecPublicServicePaymentFragment` shell: its `t7in6psmmaQ` source is only constructed by private RC05/NIT helpers in `bLlRBTTLue` and `FBsQzP3Zfj`, neither called; active `BANONAT` uses the RC04/NIT/stamp chooser with `ROgpLrCtHa`/`TGMSi5UDp7`.
+- [x] Correct the BANDEC transfer mapping and migrate the menu-routed `ZDkigMAIBm` form into `BandecTransferFragment`; retain selector `45`, regular/PIN/partial packet paths, source and destination account choices, and recovered card logos. `Lxfm3mPhrA` is an unreferenced duplicate.
+- [x] Connect `BANTransferencia` through the clean BANDEC router while preserving the remaining source menu destinations.
+- [x] Trace `T4RQ5wDJDt` and route BANDEC water payment to `BandecUtilityPaymentFragment`; preserve region/payment selectors, amount validation, and dispatch selectors `19`, `51`, and `21`. A clean-room form rewrite remains future work.
+- [x] Correct the wire-transfer draft to `BandecPostalOrderFragment`; route `BANGiroPostal` to source `ASLdujtVtr` and preserve identity fields, giro reason, and selector `64` full/partial dispatch.
+- [x] Route BANDEC `BANCambioCuenta` from the clean session menu to source-backed `AccountSwitchFragment`; preserve selector `60` and card/coordinate validation.
+- [x] Route BANDEC `BANAutenticar` from the clean session menu to source-backed `AuthenticateFragment`; preserve password validation and source dispatch `02`/`40`.
+- [x] Migrate the BANDEC contracted-services menu from `Kgii4NH4Ce` and connect its tab; preserve the four add/query/pay/delete actions and original destinations.
+- [x] Remove the unused common `BankAuthMenuFragment` shell: `KmgeIVr5RG` has no source or clean callers and its item callback is empty; active bank flows are routed by their bank-specific menus.
+- [x] Remove the misidentified `BankOperationBaseFragment` shell: its `p3NpwYhcUs3` mapping is an enum (`Agregar`, `Pago`, `Eliminar`, `Consulta`), not a Fragment; the enum is retained and used by the BANDEC contracted-services routes.
+- [x] Remove the unused `BranchSelectionFragment` shell: its stale `vVF87n7MnK` mapping is the BANDEC card-reprint form, now represented by `BandecCardReprintFragment` and connected from Configuración; the common shell had no callers.
+- [x] Route BANDEC `BANInfoTarjeta` from Consultas to source-backed `BandecCardInfoQueryFragment`; preserve 16-digit account validation and selector `78`, and remove the stale common shell.
+- [x] Remove the unused common `ChangeLimitFragment` shell: `SIxHnoWicq` has no callers; the reachable BANDEC limits action uses `uWkWt7AEZ5`, already routed as `BandecChangeLimitFragment` (selector `61`).
+- [x] Correct the `ChangePasswordFragment` draft to `MultibancaPinChangeFragment`; route `BANCambioPinMultibanca` through the clean settings menu and preserve source validation and selector `75`.
+- [x] Route BANDEC `BANCambiarclave` through clean `ChangePinFragment`; preserve access-key validation and selector `69`.
+- [x] Remove the duplicate `CoordinateAuthFragment` shell: its stale `RYCvQK4nkF` mapping is BANDEC digital-PIN change, already routed through `BandecPinDigitalFragment` (selector `79`).
+- [x] Remove the mislabeled `DisconnectFragment` shell: `sxbhjZQZxo` deletes BANDEC registration with selector `68`; actual disconnect is a confirmation action in the BANDEC session menu.
+- [x] Remove the unused common `ElectricityPaymentFragment` shell: source `D38ae2xieeM` has no callers; reachable electricity routes use bank-specific reconstructed screens.
+- [x] Remove the unused common `FinePaymentFragment` shell: source `CiYPvcQWEO` has no callers; no clean menu route targets it.
+- [x] Remove the unused common `GasPaymentFragment` shell: source `sT2WhSOo3S` has no callers; reachable gas routes use bank-specific reconstructed screens.
 - [ ] Trace source and callers for `ui/fragment/banking/common/InvoiceSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/InvoiceTypeSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/LoanAmortizationFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/PublicServicePaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [x] Migrate `q9DNC6bnexm` into `InvoiceTypeSelectionFragment` and route BANDEC contracted-service add/query/delete actions to it; preserve saved-invoice handling, operation arguments, confirmations, and selector `52` behavior.
+- [x] Remove the unused common `LoanAmortizationFragment` shell: source `kAazEwDasT` has no callers; the reachable BANDEC loan route uses its bank-specific screen.
+- [x] Remove the unused common `PublicServicePaymentFragment` shell: source `CA73VZ4FAR` has no callers; live public-service routes use their specific clean screens.
 - [ ] Trace source and callers for `ui/fragment/banking/common/RegisterFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/SecurityMenuFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/UtilityBillPaymentFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
-- [ ] Trace source and callers for `ui/fragment/banking/common/WireTransferFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [x] Remove the unused common `SecurityMenuFragment` shell: `eRe5PTC1On` has no source or clean callers; the live BPA/BFI/BANDEC security routes use their bank-specific menus.
+- [x] Remove the unused common `UtilityBillPaymentFragment` shell: source `hvC0UGR2L0` has no callers; live BANDEC water uses `BandecUtilityPaymentFragment`.
+- [x] Remove the unused common `WireTransferFragment` shell: source `fvzO0qRHbu` has no callers; BANDEC postal order uses `BandecPostalOrderFragment`.
 - [ ] Trace source and callers for `ui/fragment/banking/common/WireTransferQueryFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
 
 ## MiTransfer (Wallet)
@@ -248,10 +252,10 @@
 - [x] Reconstruct and route MiTransfer Voto Móvil from `cdINOtQ3iN`; preserve selector 215, encoded 454 dispatch, and channel validation.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
 - [ ] Decompile and migrate remaining MiTransfer wallet flows.
-- [ ] Migrate General service-debt query `k5fNqiPSlwb`; preserve its service-specific invoice validation and selector-47 full/partial branches.
-- [ ] Migrate General account-statement query `qAMfdm9Kls`; preserve date/currency/email validation and selector-26 full/partial branches.
+- [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and tolerate agency-only arguments without invoice-prefill access.
+- [x] Migrate General account-statement query `qAMfdm9Kls`; preserve six-month date pickers, CUP/USD, email validation/encoding, and selector-26 full/partial branches.
 - [x] Migrate General union-payment query `SlZq2dCM9i` by routing to its clean equivalent; preserve QR CI prefill, agency mapping, and selector 121.
-- [ ] Migrate General telephone-invoice query `HFzgpLELho`; preserve phone-number validation, operation arguments, and selector-47 dispatch.
+- [x] Migrate General telephone-invoice query `HFzgpLELho`; preserve phone-number validation, operation arguments, saved-number insertion/menu refresh, and selector-47 dispatch.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
 - [x] Trace MiTransfer saved-account balance query and partial-USSD packet route; record the construction in the USSD catalog.

@@ -1,5 +1,63 @@
 # Changelog
 
+## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Removed the unreferenced common `BranchSelectionFragment` shell after tracing its stale `vVF87n7MnK` mapping to BANDEC card reprint, already routed through `BandecCardReprintFragment` from Configuración.
+- Removed the unused common `BankAuthMenuFragment` and `SecurityMenuFragment` shells after confirming neither legacy menu has callers; the bank-specific security menus remain the active routes, and `KmgeIVr5RG` has an empty item callback.
+- Removed two stale common shells: `CoordinateAuthFragment` duplicated the routed BANDEC digital-PIN source `RYCvQK4nkF` (selector `79`), while `DisconnectFragment` actually mapped to registration deletion `sxbhjZQZxo` (selector `68`); disconnect remains in the session-menu confirmation.
+- Removed the misidentified `BankOperationBaseFragment` shell: mapped source `p3NpwYhcUs3` is the contracted-services operation enum, not a base fragment; clean BANDEC routes continue to use the enum values.
+- Removed seven unreachable common banking shells for electricity, fines, gas, loan amortization, public services, utility bills, and wire transfers; their source fingerprints have no callers, while reachable BANDEC operations already use bank-specific clean adapters.
+- Routed BANDEC `BANInfoTarjeta` to `BandecCardInfoQueryFragment`, preserving the source's 16-digit account validation and selector `78`; removed the obsolete common placeholder.
+- Removed the unused common limit-change shell mapped to caller-free `SIxHnoWicq`; the reachable BANDEC limits action remains routed through `BandecChangeLimitFragment` from `uWkWt7AEZ5`.
+- Connected BANDEC access-key and Multibanca PIN changes to clean source-backed forms; corrected the stale `ChangePasswordFragment` mapping and preserved selectors `69`/`75`.
+- Connected BANDEC `BANAutenticar` to source-backed `AuthenticateFragment` in the clean session menu; preserved password validation and dispatch `02`/`40`.
+- Connected BANDEC session-menu `BANCambioCuenta` to source-backed `AccountSwitchFragment`; retained selector `60`, account/card checks, and original authenticate/disconnect actions.
+- Removed the unused BANDEC public-service shell after tracing `t7in6psmmaQ` to private RC05/NIT helpers with no callers; live `BANONAT` uses the RC04/NIT/stamp chooser and opens `ROgpLrCtHa` or `TGMSi5UDp7`.
+- Connected BANDEC fixed-term open/close (`81`/`82`), loan amortization (`55`), card reprint (`74`), and monthly-payment change (`25`) to source-backed clean adapters; corrected the stale reprint mapping to monthly-payment change.
+- Corrected BANDEC giro postal routing to `BandecPostalOrderFragment`; preserved source `ASLdujtVtr`, identity fields, giro reason, and selector `64` dispatch.
+- Connected BANDEC `BANGas` to source-backed `BandecGasPaymentFragment` in the clean operations router, preserving the saved-account and gas-payment form.
+- Removed the unused BANDEC billing placeholder mapped to legacy `D6YZ7ruA6K`; the active `BANRecargaMovil` route uses `SjZHfPJPwX` (selectors `54`/`88`).
+- Corrected the BANDEC fine-payment draft to the actual patrimonio/ONAT obligation form (`SZARzeWeX5`); the clean router now connects `BANPatrimoniOfa` to `BandecOfaPaymentFragment` (selector `94`).
+- Corrected the mislabeled BANDEC recharge draft to `BandecPaymentStatusFragment` and routed the Consultas `BANEstadoPagoExterno` action to source `XKpe29TPn0` (selector `89`).
+- Connected BANDEC Configuración limit-change and digital-PIN actions to source-backed clean routes; retained selectors `61` and `79` and delegated the other seven actions to their original source destinations.
+- Removed the unused `BandecExternalPaymentFragment` shell after confirming `ZF74c8UCRU` is the recent-payments query (`BANUltimosPagos`, selector `63`), not external payment.
+- Removed the unused `BandecCommerceIdFragment` placeholder after tracing `ikSs6fqL5Q` to BANDEC account-limit consultation (selector `62`, `BANConsultaLimite`).
+- Removed duplicate `BandecNautaRechargeFragment` placeholder: its `ZDkigMAIBm` mapping is the active BANDEC transfer form already reconstructed as `BandecTransferFragment`.
+- Removed the unused `BandecCardRenewalFragment` placeholder after confirming its `gaJlF6dT3z` source is the BANDEC latest-operations query (selector `48`) under `BANUltimasoperaciones`.
+- Removed the unused BANDEC account-conversion shell: although `Xh70Rdjfpc` implements selector `87` and the settings handler has a case for `BANConvertirCuenta`, the source menu never adds that operation to its visible rows.
+- Removed two unused BANDEC draft shells after tracing their mismatched mappings: `KsDQL9cTTl` opens a USD account with MLC backing (selector `76`), while `g9VybPHHUE` deletes registration (selector `68`); disconnect remains the source session-menu confirmation.
+- Removed the duplicate `BandecInvoiceListFragment` shell after confirming its `Q3Nvf439ab` mapping is the active BANDEC electricity payment form.
+- Corrected BANDEC session/settings draft mappings: `rvxiiV3tYu` is the three-action Sesión menu and `X7obECfkKf` is the nine-action Configuración menu; connected them through clean named routes.
+- Corrected the BANDEC `R7PmVxXLJZC` mapping from a balance-query placeholder to the 14-item Consultas menu; the Consultas tab now uses `BandecQueriesMenuFragment`.
+- Corrected BANDEC electricity/water mappings and routed the clean operation router to source-backed `BandecElectricityFragment` (`Q3Nvf439ab`, selector `41`) and `BandecUtilityPaymentFragment` (`T4RQ5wDJDt`, selectors `19`/`51`/`21`).
+- Migrated invoice management form `q9DNC6bnexm` into `InvoiceTypeSelectionFragment`; routed the BANDEC add/query/delete actions to it while keeping payment on its separate form.
+- Migrated contracted-services payment form `g7yG4Frdxy` into `BandecInvoiceSelectionFragment` and routed the menu's pay action to it; preserved invoice selector, service type, validation, selector `52`, and partial dispatch.
+- Migrated the BANDEC contracted-services menu `Kgii4NH4Ce` and connected it to the service tab; kept the four add/query/pay/delete actions and their original destination arguments.
+- Migrated the 26-entry BANDEC operation router from `bLlRBTTLue`, connected it to the clean operation pager, and routed `BANTransferencia` to `BandecTransferFragment` while keeping the remaining source destinations intact.
+- Migrated the menu-routed BANDEC transfer form `ZDkigMAIBm` into `BandecTransferFragment`; preserved selector `45`, PIN/partial dispatch, account source modes, contact/message options, and bank logos. The mapped `Lxfm3mPhrA` class has no callers and is a duplicate candidate.
+
+- Routed the BFI enterprise Settings tab through clean `BfiSecurityMenuFragment`; source `bnsLemXoui.initData()` exposes only registration and PIN change, while its associate-account callback is not reachable from the displayed list.
+- Migrated BFI account association `F2leFVNWrdy` into `BfiAssociateAccountFragment`; preserved random matrix coordinates, selector `60`, account validation/confirmation, and source-backed card-logo branches.
+
+- Corrected a source-map error: `F2leFVNWrdy` is BFI account association (`BFIAsociarCuenta`, selector `60`), not Metro transfer; removed the unreferenced Metro placeholder and added the actual BFI migration to TODO.
+
+- Reconciled agent and General data-management pagers against `OQcONjDATJ` and `wTZi6Zeikv`; verified all 11/8 tab destinations, titles, and General contact permission setup.
+
+- Reconciled the QR image utility with `ZUoEY89WdA`; verified its 23 public/private static operation names map to the clean generator, including GIF, logo, dithering, rotation, resizing, and decoding paths.
+
+- Recovered the Wallet transfer card-logo renderer using shared card-validation branches; documented PAN/standard bank prefixes and icon selection in `docs/domain-model.md`.
+
+- Reconciled raw QR screen `b6FtEHgm1B` with `QrDynamicPaymentFragment`: both share layout, menu, QR parsing, and selectors `31`/`30`; removed the null-returning duplicate shell and documented the clean implementation mapping.
+
+- Migrated the MiTransfer public-service/PCC draft `udysei7zCr` into clean `PublicServicePaymentFragment`; preserved CUP bolsa choice, contact-confirmation payload, salary validation, and selector `7` full/partial (`04`) calls.
+
+- Expanded the TODO backlog: enumerated all 53 empty banking fragments and 16 remaining application-layer placeholders by file, split the four raw General-mode screens into separate tasks, and retained seven recent completions without hiding them in parent items.
+- Rebuilt the shared MiBoleto ticket form base as `MiBoletoTicketBaseFragment`; status, key-update, and latest-operations screens now inherit it, and the empty `TicketBaseFragment` shell was removed.
+- Routed General-mode union-payment lookup from raw `SlZq2dCM9i` to `WalletSyndicateQueryFragment`; its MiTransfer agency argument selects the same selector-121 payload branch.
+- Migrated General telephone-invoice query `HFzgpLELho` into `GeneralPhoneInvoiceQueryFragment` and connected the dialog route; preserved eight-digit validation, saved-number insertion/menu refresh, and selector `47`.
+- Migrated General MiTransfer account-statement query `qAMfdm9Kls` into `GeneralWalletStatementFragment` and connected the dialog route; preserved six-month date bounds, currency selection, email validation/encoding, and selector `26` full/partial dispatch.
+- Migrated General service-debt query `k5fNqiPSlwb` into `GeneralServiceDebtQueryFragment` and connected both General-menu routes; preserved five service types, saved-invoice selection, service-specific validation, and selector `47` full/partial dispatch. Agency-only dialog arguments no longer trigger invalid invoice-prefill access.
+
 ## 2026-11-07 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Restored the MiTransfer Voto Móvil form from `cdINOtQ3iN`, connected the menu, and documented selector `215`, wallet validation, and the encoded `454` call path in telephony notes.
@@ -13,9 +71,6 @@
 - Restored the OFA visit-query form from `dYBdUyjb1D`, replaced its mislabeled settings stub, and connected the General-mode query dialog with its two modes and selector `9` payload.
 - Restored enterprise transfer and external-payment dialog actions, passing `TransferType`/`PayType` and the `CLASICAEMP` agency argument while resetting shared state.
 - Corrected the MiTransfer enterprise-transfer destination to the source-mapped `Z3kYdPwq6K2` form: selector `220` with partial marker `08`; kept BFI enterprise banking selector `104` in its separate route.
-- Expanded the TODO backlog: enumerated all 53 empty banking fragments and 16 remaining application-layer placeholders by file, split the four raw General-mode screens into separate tasks, and retained seven recent completions without hiding them in parent items.
-- Rebuilt the shared MiBoleto ticket form base as `MiBoletoTicketBaseFragment`; status, key-update, and latest-operations screens now inherit it, and the empty `TicketBaseFragment` shell was removed.
-- Routed General-mode union-payment lookup from raw `SlZq2dCM9i` to `WalletSyndicateQueryFragment`; its MiTransfer agency argument selects the same selector-121 payload branch.
 
 ## 2026-11-06 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

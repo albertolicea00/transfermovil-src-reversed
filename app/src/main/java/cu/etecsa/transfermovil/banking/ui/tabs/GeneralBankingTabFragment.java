@@ -32,7 +32,7 @@ import java.util.List;
  *   BOLSAConsultarSaldo → dialog: wallet balance / classic balance (USSD 46)
  *   BOLSAUltimasOperaciones → QM5YzxsQFRH.dI2tctjNbR (agent operation fragment)
  *   BOLSAConsultaServicio → agent check: phone bill fragment or dialog
- *   BOLSAEstadoCuenta → agent wallet recharge fragment (qAMfdm9Kls)
+ *   BOLSAEstadoCuenta → General MiTransfer account-statement form (selector 26)
  *   BOLSAConsultaReservaOFA → dialog: OFA reservation query type
  *   BOLSAConsultaTicket → dialog: ticket query (USSD 103) or per-ticket lookup
  *   BOLSAConsultaMiBoleto → dialog: 5 MiBoleto sub-options
@@ -75,13 +75,13 @@ public class GeneralBankingTabFragment extends Fragment {
                             GeneralBankingTabFragment.this.showAGConsulta();
                         } else {
                             ft.replace(R.id.containerView,
-                                    new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb())
+                                    new cu.etecsa.transfermovil.ui.fragment.GeneralServiceDebtQueryFragment())
                                     .addToBackStack(null).commit();
                         }
                         break;
                     case BOLSAEstadoCuenta:
                         ft.replace(R.id.containerView,
-                                new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.qAMfdm9Kls())
+                                new cu.etecsa.transfermovil.ui.fragment.GeneralWalletStatementFragment())
                                 .addToBackStack(null).commit();
                         break;
                     case BOLSAConsultaReservaOFA:
@@ -318,8 +318,8 @@ public class GeneralBankingTabFragment extends Fragment {
                 .setTitle(R.string.tx_modal_head_consulat_ag)
                 .setSingleChoiceItems(items, -1, (dialog, index) -> {
                     Fragment destination = index == 0
-                            ? new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.HFzgpLELho()
-                            : new cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb();
+                            ? new cu.etecsa.transfermovil.ui.fragment.GeneralPhoneInvoiceQueryFragment()
+                            : new cu.etecsa.transfermovil.ui.fragment.GeneralServiceDebtQueryFragment();
                     Bundle args = new Bundle();
                     args.putSerializable("R1sDOSqZ2z",
                             cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z.MiTransfer);

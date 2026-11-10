@@ -9,11 +9,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.Kgii4NH4Ce;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TJzyszIDKqc.R7PmVxXLJZC;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TJzyszIDKqc.X7obECfkKf;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TJzyszIDKqc.bLlRBTTLue;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TJzyszIDKqc.rvxiiV3tYu;
+import cu.etecsa.transfermovil.ui.fragment.banking.common.BandecMenuFragment;
+import cu.etecsa.transfermovil.ui.fragment.banking.bandec.auth.BandecOperationRouterFragment;
+import cu.etecsa.transfermovil.ui.fragment.banking.bandec.auth.BandecQueriesMenuFragment;
+import cu.etecsa.transfermovil.ui.fragment.banking.bandec.auth.BandecSettingsMenuFragment;
+import cu.etecsa.transfermovil.ui.fragment.banking.bandec.auth.BandecSessionMenuFragment;
 import cu.etecsa.cubacel.tr.tm.R;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -48,15 +48,15 @@ public class BandecOperationTabsFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new rvxiiV3tYu();
+                    return new BandecSessionMenuFragment();
                 case 1:
-                    return new R7PmVxXLJZC();
+                    return new BandecQueriesMenuFragment();
                 case 2:
-                    return new bLlRBTTLue();
+                    return new BandecOperationRouterFragment();
                 case 3:
-                    return new Kgii4NH4Ce();
+                    return new BandecMenuFragment();
                 case 4:
-                    return new X7obECfkKf();
+                    return new BandecSettingsMenuFragment();
                 default:
                     return null;
             }

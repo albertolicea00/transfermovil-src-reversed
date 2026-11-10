@@ -184,3 +184,7 @@ Each bank/module replicates the same operation set with its own prefix:
 3. **IMEI stored**: `AppConfig.imei` — device fingerprint
 4. **No encryption layer visible** between entity fields and SQLite storage (ORMLite writes fields directly)
 5. Combined with `allowBackup=true` + `debuggable=true` → trivial data extraction via ADB
+
+## Wallet Transfer Card Logos
+
+`WalletBankTransferFragment.mostrarTarjeta()` renders the right-side bank icon from the destination account. PANs beginning with `92` use characters 5–6: `12` selects BPA, `06` BANDEC, and `95` Metropolitano. Other account numbers use the first two characters: `12` BPA, `06` BANDEC, and `05` Metropolitano. Unknown prefixes clear the icon; malformed PAN substrings are ignored, matching the surrounding source method’s exception handling. The three drawables are loaded and scaled during view setup.
