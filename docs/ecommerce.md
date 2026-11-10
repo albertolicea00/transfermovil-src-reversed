@@ -178,6 +178,8 @@ The business-account screen opens `p0cxg0PRR2` to toggle a payment source's stat
 | `/api/childusers/grants` | Get permissions |
 | `/api/childusers/update/grants` | Update permissions |
 
+The child-user detail flow loads profile data with `/api/user/get` and requests the user's grants. `BpB71R2rG8.getPermisoChildTodos` combines the grants available to the signed-in account with the child's current grants by `codigo`, marking current entries enabled. In `GB0CGE0H88`, the operator can change each grant and the user status; the save action submits the blocked/status value through `/api/user/banned`, then sends `user_id` plus the enabled grant-code array to `/api/childusers/update/grants`. The request model serializes those exact names (`user_id`, `grants`). The detail screen hides editing when the session has neither `GESTIONAR_USUARIOS` nor `GESTIONAR_USUARIOS_HIJOS`; the login grant enum assigns those codes `602` and `801` (view codes are `601` and `800`). Evidence: `xoBMVddCFw`, `GB0CGE0H88`, `OkZVobY9IO`, `BpB71R2rG8`, and `e26lZ6zHsTP`. The server's authorization rules and the meaning of every backend grant are outside the static client evidence.
+
 ### Roles
 | Endpoint | Purpose |
 |:---|:---|

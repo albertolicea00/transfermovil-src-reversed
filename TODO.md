@@ -306,7 +306,7 @@
 - [x] Map the Bulevar business-profile create/update/delete workflow and its `GESTIONAR_NEGOCIO` permission gate ([e-commerce notes](docs/ecommerce.md#business-management-flow)); no separate merchant onboarding flow was found.
 - [ ] Trace payment processing flow (/api/payment/store)
 - [x] Document refund form validation, request fields, endpoint, and response handling ([e-commerce notes](docs/ecommerce.md#refunds)).
-- [ ] Map child user / sub-account permissions
+- [x] Map child-user permission loading, selectable grant codes, status/update sequence, and UI permission gates ([e-commerce notes](docs/ecommerce.md#child-users)).
 - [x] Document payment-source activation/deactivation confirmation, request payload, endpoint selection, and response handling ([e-commerce notes](docs/ecommerce.md#payment-sources)).
 
 ## Networking & TLS
