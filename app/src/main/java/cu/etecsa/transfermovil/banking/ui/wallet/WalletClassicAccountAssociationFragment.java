@@ -85,7 +85,7 @@ public class WalletClassicAccountAssociationFragment extends Fragment
         return rootView;
     }
 
-    public void submitForm() {
+    private void submitForm() {
         if (!validateAccount() || !validateAuthorization() || !validateTerminal()) return;
         cuenta = inputCuenta.getText().toString().trim();
         String authorization = inputAutorizo.getText().toString().trim();

@@ -4,7 +4,7 @@
 
 - Traced `WalletEnrollmentFragment.validateEmail()` to its lone unused declaration; the source selector-49 submit path does not validate email.
 - Restored public visibility for the Wallet latest-operations form submitter and compared full/partial selector-48 dispatch against `dI2tctjNbR`.
-- Restored public visibility for classic Wallet account-association `submitForm()` and compared its selector-111 validations/payload with `HTmIvOo9nb`.
+- Corrected classic Wallet account-association `submitForm()` back to private after checking the full JADX declaration; selector-111 validations and payload match `HTmIvOo9nb`.
 - Restored public visibility for Wallet PIN-entry `submitForm()` to match `R5fFZkKuVnr`; selector-40 behavior is unchanged.
 - Compared BFI change-PIN validation against JADX; confirmed four-digit checks, repeat-match validation, error-clearing behavior, and selector-69 `05*old*new` payload.
 - Compared BFI external-payment, QR-account-base, and enterprise-transfer method signatures against their annotated JADX sources; all signatures are present on both sides.
