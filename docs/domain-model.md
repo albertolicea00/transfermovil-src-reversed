@@ -188,3 +188,5 @@ Each bank/module replicates the same operation set with its own prefix:
 ## Wallet Transfer Card Logos
 
 `WalletBankTransferFragment.mostrarTarjeta()` renders the right-side bank icon and selects the first loaded transfer agency whose code contains the inferred bank index. PANs beginning with `92` use characters 5–6: `12` selects BPA, `06` BANDEC, and `95` Metropolitano. Other account numbers use the first two characters: `12` BPA, `06` BANDEC, and `05` Metropolitano. The agency indices are `1`, `2`, and `3` respectively. Unknown prefixes clear the icon and still run the source's agency search with index `0`; malformed PAN substrings are ignored through exception handling. The three drawables are loaded and scaled during view setup. This matches the archived smali for `H0oV6Ot0bS.mostrarTarjeta`.
+
+The Metro coordinate-transfer card helper `OqcjrfuV9V.mostrarTarjeta` uses the same `92`/standard prefixes and BPA/BANDEC/Metropolitano drawable mapping, but only updates the icon; archived smali confirms it does not infer or select an agency.

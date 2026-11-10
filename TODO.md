@@ -66,6 +66,7 @@
 - [x] Repair BPA account/session menu dispatch to use the source agent-code helper and existing activity interfaces; replace unresolved close-session dispatcher calls.
 - [x] Replace seven invalid static `UssdDispatcher.actionCallUSSDBack` calls in BPA and MiTransfer forms with the matching source `FBsQzP3Zfj` overloads.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
+- [x] Compare Wallet bank-transfer and Metro coordinate-transfer card-prefix helpers with archived smali; restore the bank-transfer agency inference and confirm Metro only updates the logo.
 - [x] Compare `BfiAssociateAccountFragment` with source `F2leFVNWrdy`; account formatting/length, foreign-bank confirmation, random coordinate challenge, and selector `60` payload match.
 - [x] Reconcile the agent data-management pager with source `OQcONjDATJ`; preserve its 11 ordered tabs, titles, child screens, and adapter behavior.
 - [x] Reconcile the General data-management pager with source `wTZi6Zeikv`; preserve its eight ordered tabs, titles, contact permission request, and fixed-tab setup.
