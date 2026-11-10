@@ -13,6 +13,7 @@
 - Added exact source annotations to seven Wallet/FWA forms and regenerated the source-link inventory.
 - Corrected shared PAN currency parsing to read source characters 3–4, separate from the bank code at characters 5–6.
 - Confirmed the clean FWA package-purchase form preserves source contact permission gating, validation, selector-18 payload, and offer-confirmation text.
+- Confirmed the clean FWA balance-recharge form preserves source account/amount/bundle validation and selector-20 payload order.
 - Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Added a provisional iOS screen/feature scope and a gated, read-only USSD feasibility proof-of-concept.
 - Restored the reachable e-commerce profile PNG/base64 conversion helper and closed source-call audits for unused multipart and EXIF image utilities.
