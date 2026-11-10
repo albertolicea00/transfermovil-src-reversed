@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.EE2asIZ0vyr.f1IveoSASW */
 public class BfiEnterpriseTransferFragment extends BfiUssdAccountFragment {
     public static final int PICK_CONTACT_REQUEST = 1;
     public AccessibilityManager accessibilityManager;

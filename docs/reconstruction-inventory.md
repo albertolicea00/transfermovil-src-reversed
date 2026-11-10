@@ -193,24 +193,24 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 373 | 421 | 0 |
-| Main app package | 596 | 242 | 354 | 0 |
+| All `src/` | 794 | 369 | 425 | 0 |
+| Main app package | 596 | 238 | 358 | 0 |
 
 Generated with `python3 scripts/reconstruction-inventory.py` from the current
 `src/`, clean Java tree, and `mappings/classes.json`. The live inventory reports
 449 clean Java files, 85 mapping entries, no mapping issues or duplicate
-candidates, and 28 clean files without source annotations. Duplicate candidates
+candidates, and 24 clean files without source annotations. Duplicate candidates
 were resolved by reusing shared BFI authentication/registration screens and
 removing false source tags from derived helpers. The unused `UssdDispatcher`
 Activity mapping was removed because the active source is a static helper
 called directly by the app. These are exact-link counts only and do not
 establish behavioral completeness.
 
-The 242 unlinked main-package sources group by first package segment as follows:
+The 238 unlinked main-package sources group by first package segment as follows:
 
 | Original package segment | Unlinked files |
 | --- | ---: |
-| `B0jOLrWx09th` | 168 |
+| `B0jOLrWx09th` | 164 |
 | `l08fNVC4KOKK` | 20 |
 | `B21UyndcVvF` | 16 |
 | `ZNRpoHwtLXM` | 13 |
