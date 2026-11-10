@@ -6,6 +6,7 @@
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.
+- Added the MiTransfer selector-20 FWA balance-recharge payload, validation, and standard dispatch route to the catalog.
 - Refreshed reconstruction inventory: 264 unmapped main-package files remain, with current package-segment counts recorded.
 - Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Added a provisional iOS screen/feature scope and a gated, read-only USSD feasibility proof-of-concept.
