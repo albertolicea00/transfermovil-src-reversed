@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Audited `BfiAssociateAccountFragment` against `F2leFVNWrdy`; confirmed matching card formatting, account validation, foreign-bank warning/confirmation, coordinate challenge, and selector `60` payload.
 - Removed the unreferenced common `BranchSelectionFragment` shell after tracing its stale `vVF87n7MnK` mapping to BANDEC card reprint, already routed through `BandecCardReprintFragment` from Configuración.
 - Removed the unused common `BankAuthMenuFragment` and `SecurityMenuFragment` shells after confirming neither legacy menu has callers; the bank-specific security menus remain the active routes, and `KmgeIVr5RG` has an empty item callback.
 - Removed two stale common shells: `CoordinateAuthFragment` duplicated the routed BANDEC digital-PIN source `RYCvQK4nkF` (selector `79`), while `DisconnectFragment` actually mapped to registration deletion `sxbhjZQZxo` (selector `68`); disconnect remains in the session-menu confirmation.

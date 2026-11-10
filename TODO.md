@@ -66,6 +66,7 @@
 - [x] Repair BPA account/session menu dispatch to use the source agent-code helper and existing activity interfaces; replace unresolved close-session dispatcher calls.
 - [x] Replace seven invalid static `UssdDispatcher.actionCallUSSDBack` calls in BPA and MiTransfer forms with the matching source `FBsQzP3Zfj` overloads.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
+- [x] Compare `BfiAssociateAccountFragment` with source `F2leFVNWrdy`; account formatting/length, foreign-bank confirmation, random coordinate challenge, and selector `60` payload match.
 - [x] Reconcile the agent data-management pager with source `OQcONjDATJ`; preserve its 11 ordered tabs, titles, child screens, and adapter behavior.
 - [x] Reconcile the General data-management pager with source `wTZi6Zeikv`; preserve its eight ordered tabs, titles, contact permission request, and fixed-tab setup.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `crypto/CryptoProvider.java`.
