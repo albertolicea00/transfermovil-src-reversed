@@ -307,7 +307,7 @@
 - [ ] Trace payment processing flow (/api/payment/store)
 - [ ] Document refund flow (/api/refunds/store)
 - [ ] Map child user / sub-account permissions
-- [ ] Document payment source management (activar/desactivar)
+- [x] Document payment-source activation/deactivation confirmation, request payload, endpoint selection, and response handling ([e-commerce notes](docs/ecommerce.md#payment-sources)).
 
 ## Networking & TLS
 

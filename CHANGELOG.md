@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Traced payment-source activation and deactivation from confirmation dialog through request payload, endpoint, and response handling.
 - Traced General-mode bonus recharge, mobile-balance transfer, and recharge-key change forms; recorded USSD payload order and the repeated-key validation defect.
 - Traced the self-update HTTP download and APK installer handoff, noting missing integrity verification and the lack of a located caller.
 - Documented app-wide cleartext policy and the source-confirmed HTTP self-update host; noted that host-specific runtime behavior is not established.

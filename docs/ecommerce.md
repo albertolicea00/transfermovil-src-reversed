@@ -163,6 +163,8 @@ does not by itself establish parity with `checkUserPermission(enum)`.
 | `/api/source/activarSource` | Activate source |
 | `/api/source/desactivarSource` | Deactivate source |
 
+The business-account screen opens `p0cxg0PRR2` to toggle a payment source's state and asks for confirmation before returning `estado` plus the source value. Presenter `HLAV6HkYgi` passes that boolean and source to `N4F6dxO3TC.estadoCuenta`; `true` posts a request containing `source` to `/api/source/activarSource`, and `false` posts to `/api/source/desactivarSource`. On HTTP 200 the use case expects JSON `code` containing `Ok`; the screen refreshes its account list on success. This establishes the client request and response handling, not server-side effects. The clean source manager currently has request/model scaffolding but no migrated screen workflow.
+
 ### Child Users
 | Endpoint | Purpose |
 |:---|:---|
