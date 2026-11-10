@@ -101,6 +101,7 @@
 - [x] Compare `BankingAccountValidatorFragment` with archived `EV9Tu0zIL4`; correct the PAN currency slice to source characters 3–4 and record the bank/currency offsets.
 - [x] Reconstruct `BankAccountEditFragment` from `oaEWezaNAI`, recover its card-prefix icon method from archived smali, and route account-list, BANDEC, BFI, and Wallet entry points to the clean screen.
 - [x] Compare `BfiChangePinFragment` with `KvpkEH7lRr`; restore the source short-old-PIN message, raw equality comparison, and error-field clearing behavior.
+- [x] Compare `BfiRegistrationFragment` with `umjSGajOy3`; confirm selector-49 payload, partial marker, field errors, and new-PIN-versus-current-PIN rule.
 - [x] Compare `FwaDataPackagePurchaseFragment` with `q55ExEc6x2l`; confirm contact permission gating, validation, selector-18 payload, and offer-confirmation text match.
 - [x] Compare `FwaBalanceRechargeFragment` with `wbFn8tBw8W`; confirm account/amount/bundle validation and selector-20 payload order match.
 - [x] Restore the Wallet CUP recharge `btHelp` dialog and source help text omitted from the clean `P8DtkaSW4dR` screen.
