@@ -64,6 +64,7 @@ public final class ChildUserPresenter {
                 Object mapped = response;
                 if (operation == Operation.LIST) mapped = mapList(response);
                 else if (operation == Operation.DETAIL) mapped = mapDetail(response);
+                else mapped = mapMutation(response);
                 callback.onResult(operation, mapped);
             }
         }.execute();
@@ -128,5 +129,22 @@ public final class ChildUserPresenter {
         result.setUser(detail);
         result.setOK(true);
         return result;
+    }
+
+    private static ApiResponse mapMutation(ApiResponse raw) {
+        if (raw == null) {
+            ApiResponse failure = new ApiResponse();
+            failure.setError(true);
+            failure.setCodigoHTTP(500);
+            failure.setMenssaje("Request failed");
+            return failure;
+        }
+        boolean success = !raw.isError() && raw.getCodigoHTTP() == 200
+                && raw.getJsonObject() != null
+                && raw.getJsonObject().optString("code").contains("Ok");
+        raw.setError(!success);
+        if (!success && (raw.getMenssaje() == null || raw.getMenssaje().isEmpty()))
+            raw.setMenssaje("Unable to complete child-user operation");
+        return raw;
     }
 }

@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Matched child-user mutation success to HTTP 200 plus the source response code marker `Ok`.
 - Added clean profile API routes and a `ProfilePresenter` for source-backed profile fetch, update, password change, and photo conversion; documented the remaining catalog/UI and child-user gaps.
 - Added source-confirmed child-user create/update API adapters and nested-photo preparation helper.
 - Added the remaining source-confirmed child-user list, detail, delete, and status API adapters.
