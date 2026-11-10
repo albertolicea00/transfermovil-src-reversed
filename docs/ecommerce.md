@@ -154,6 +154,8 @@ does not by itself establish parity with `checkUserPermission(enum)`.
 | `/api/refunds/store` | Process refund |
 | `/api/refunds/analisis` | Refund analysis |
 
+In the payment list, choosing a purchase opens `isiTmFZ2lx` with the original payment details. The refund form requires a nonempty amount that parses as a float and is no greater than the purchase amount, plus a nonempty description. It then posts a `FhtwnBtOAx` request to `/api/refunds/store`; JSON fields are `pago` (original `payment_code`, `external_code`, and integer `source`), `amont` (spelling as serialized), and `description`. The client does not enforce a positive minimum amount. A successful HTTP 200 response is treated as success when `code` contains `Ok`; optional `refund` text is shown to the user. Other codes map through the refund error catalog. Evidence: `nz5e9USlvI`, `isiTmFZ2lx`, `FhtwnBtOAx`, `eLrApWcG9O`, and `z5jDbHBKvX`. Server acceptance and transaction effects are not verified.
+
 ### Payment Sources
 | Endpoint | Purpose |
 |:---|:---|

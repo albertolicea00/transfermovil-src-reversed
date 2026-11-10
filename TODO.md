@@ -305,7 +305,7 @@
 - [ ] Reconcile `UhA7J2923N` message/log, typed error, unauthenticated-session, and enum permission behavior with the clean e-commerce session flow.
 - [ ] Map business/merchant registration flow
 - [ ] Trace payment processing flow (/api/payment/store)
-- [ ] Document refund flow (/api/refunds/store)
+- [x] Document refund form validation, request fields, endpoint, and response handling ([e-commerce notes](docs/ecommerce.md#refunds)).
 - [ ] Map child user / sub-account permissions
 - [x] Document payment-source activation/deactivation confirmation, request payload, endpoint selection, and response handling ([e-commerce notes](docs/ecommerce.md#payment-sources)).
 
