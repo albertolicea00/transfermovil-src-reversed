@@ -346,6 +346,7 @@
 - [x] Add clean profile API routes and `ProfilePresenter` for current profile, profile update, and password change; convert a selected photo before update.
 - [x] Migrate child-user create/update request paths to a clean presenter that prepares a nonempty photo before dispatch.
 - [ ] Connect child-user presenter results to clean UI callbacks; geographic catalog resolution remains incomplete.
+- [x] Give `ChildUserPresenter` distinct typed list, detail, and mutation callback methods.
 - [x] Map child-user list payload `dt.rows` into the clean `ChildUserListResponse` fields from source.
 - [x] Map child-user detail payload `user` into its clean response model, retaining source JSON for province/municipality catalog resolution.
 - [x] Require HTTP 200 plus response `code` containing `Ok` for child-user mutation success, matching the source parser.

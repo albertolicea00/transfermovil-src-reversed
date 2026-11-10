@@ -17,7 +17,9 @@ public final class ChildUserPresenter {
     public enum Operation { LIST, DETAIL, CREATE, UPDATE, DELETE, STATUS }
     public interface Callback {
         void onProgressVisibility(int visibility);
-        void onResult(Operation operation, Object response);
+        void onListResult(ChildUserListResponse response);
+        void onDetailResult(UserWithRolesResponse response);
+        void onMutationResult(Operation operation, ApiResponse response);
     }
 
     private final Context context;
@@ -61,11 +63,9 @@ public final class ChildUserPresenter {
             }
             @Override protected void onPostExecute(ApiResponse response) {
                 callback.onProgressVisibility(4);
-                Object mapped = response;
-                if (operation == Operation.LIST) mapped = mapList(response);
-                else if (operation == Operation.DETAIL) mapped = mapDetail(response);
-                else mapped = mapMutation(response);
-                callback.onResult(operation, mapped);
+                if (operation == Operation.LIST) callback.onListResult(mapList(response));
+                else if (operation == Operation.DETAIL) callback.onDetailResult(mapDetail(response));
+                else callback.onMutationResult(operation, mapMutation(response));
             }
         }.execute();
     }
