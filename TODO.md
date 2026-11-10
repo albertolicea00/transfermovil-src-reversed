@@ -104,8 +104,8 @@
 - [x] Compare BFI balance, limit, and latest-operation forms with JADX; confirm selectors `46`, `62`, and `48`, their payload construction, and partial-USSD marker `05`.
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
-- [ ] Review the remaining 216 main-package source files without exact reconstruction links; distinguish generated code from application logic.
-- [ ] Inventory the 216 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
+- [ ] Review the remaining 215 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [ ] Inventory the 215 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
 - [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
@@ -275,6 +275,7 @@
 - [x] Identify MiTransfer in drawer menu and string resources
 - [x] Source-trace the MiTransfer CUP ticket form: amount validation, selector 17, full/partial dispatch, and callback behavior.
 - [x] Reconstruct and connect the MiTransfer mobile recharge form from `zzyNbaqs1U`, preserving CUP menu routing, CUP/USD selectors, contact normalization, and payload construction.
+- [x] Link `WalletTopupFragment` to `zzyNbaqs1U` after normalized full-body comparison; refresh exact-source inventory counts.
 - [x] Reconstruct the MiTransfer mobile-to-mobile transfer form from `LjOlaYSSMH` and route the wallet transfer dialog's MiTransfer choice to it; preserve selector 45 and partial-USSD behavior.
 - [x] Reconstruct the MiTransfer cash-ticket withdrawal form from `f9Reflqt3EZ` and connect its menu route; preserve selector 95, currency/entity selection, optional location fields, and partial-USSD behavior.
 - [x] Reconstruct the classic-card transfer form from `l3GXbXAyUW` and connect the “Clásica” dialog choice; preserve selector 45, card/PIN branches, validation, and partial-USSD behavior.

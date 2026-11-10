@@ -193,24 +193,24 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 347 | 447 | 0 |
-| Main app package | 596 | 216 | 380 | 0 |
+| All `src/` | 794 | 346 | 448 | 0 |
+| Main app package | 596 | 215 | 381 | 0 |
 
 Generated with `python3 scripts/reconstruction-inventory.py` from the current
 `src/`, clean Java tree, and `mappings/classes.json`. The live inventory reports
-456 clean Java files, 85 mapping entries, no mapping issues or duplicate
-candidates, and 9 clean files without source annotations. Duplicate candidates
+458 clean Java files, 86 mapping entries, no mapping issues or duplicate
+candidates, and 10 clean files without source annotations. Duplicate candidates
 were resolved by reusing shared BFI authentication/registration screens and
 removing false source tags from derived helpers. The unused `UssdDispatcher`
 Activity mapping was removed because the active source is a static helper
 called directly by the app. These are exact-link counts only and do not
 establish behavioral completeness.
 
-The 216 unlinked main-package sources group by first package segment as follows:
+The 215 unlinked main-package sources group by first package segment as follows:
 
 | Original package segment | Unlinked files |
 | --- | ---: |
-| `B0jOLrWx09th` | 142 |
+| `B0jOLrWx09th` | 141 |
 | `l08fNVC4KOKK` | 20 |
 | `B21UyndcVvF` | 16 |
 | `ZNRpoHwtLXM` | 13 |
@@ -227,20 +227,23 @@ payment, reducing it to 227, linked the BFI QR/contact base, reducing it to
 226, linked the MiTransfer Nauta household form, reducing it to 225, and linked
 four Wallet tab forms, reducing it to 221, linked General Wallet enterprise
 transfer, reducing it to 220, linked Wallet cash withdrawal, reducing it to
-219, and linked three General query screens, reducing it to 216.
+219, and linked three General query screens, reducing it to 216. `WalletTopupFragment`
+then exact-matched `zzyNbaqs1U` after normalized full-body comparison, reducing
+the live main-package count to 215.
 
-The current nine clean files without source annotations are:
+The current ten clean files without source annotations are:
 
 | Clean file | Review status |
 | --- | --- |
 | `banking/ui/base/BaseCardValidationFragment.java` | Shared helper; exact original identity still needs review. |
 | `banking/ui/bfi/BfiUssdAccountFragment.java` | Shared helper; exact original identity still needs review. |
 | `data/BankCodeAccessor.java` | Small adapter; exact original identity still needs review. |
+| `ecommerce/ChildUserPresenter.java` | Presenter adapter; no exact outer source class link. |
+| `ecommerce/ProfilePresenter.java` | Presenter adapter; no exact outer source class link. |
 | `ui/fragment/CreditPaymentFragment.java` | Screen body has no verified original-class link. |
 | `ui/fragment/NautaPlusRechargeFragment.java` | Screen body has no verified original-class link. |
 | `ui/fragment/OwnCardPaymentFragment.java` | Screen body has no verified original-class link. |
 | `ui/fragment/TicketReservationViewFragment.java` | Screen body has no verified original-class link. |
-| `ui/fragment/WalletTopupFragment.java` | Screen body has no verified original-class link. |
 | `ui/fragment/WalletTransferFragment.java` | Screen body has no verified original-class link. |
 
 The six screen files mention nested listener class paths in JADX comments,
