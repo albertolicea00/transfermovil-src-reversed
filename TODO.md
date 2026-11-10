@@ -118,6 +118,7 @@
 - [ ] Migrate the active `FBsQzP3Zfj` action overloads and operation routing into a clean USSD dispatch/navigation component.
 
 - [ ] Complete the dedicated [USSD code catalog](docs/ussd-code-catalog.md): every executed code, purpose, construction algorithm, and source evidence.
+- [x] Record MiTransfer selector-17 CUP cash-deposit ticket request, amount validation, and partial packet marker in the USSD catalog.
 - [x] Document USSD send mechanism (tel: intent + CALL_PHONE)
 - [x] Document accessibility service USSD response capture
 - [x] List discovered USSD codes (*222*, *100*, *111, *133, *234)
