@@ -17,3 +17,10 @@ clean inheritance adapter. QR parsing, contact selection, confirmation-phone
 state, and auxiliary QR data handling are the same. `BfiUssdAccountFragment`
 is a clean shared callback/packet-state adapter; it does not claim a separate
 one-to-one source class.
+
+The Wallet Boleto configuration tab's association dialog routes “Clásica” to
+`HTmIvOo9nb`, which stores the account under `MiTransfer`, and “Clásica
+empresarial” to `l2FaHPPBDa`, which stores it under `CLASICAEMP`. The delete
+registration choices route to `Nju5UJgFce` (wallet registration) and
+`m44wUnA8d5` (saved classic/enterprise account); PIN change routes to
+`Cmok7CcIR9`. Their clean counterparts now back the tab actions.

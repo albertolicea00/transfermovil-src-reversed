@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.transfermovil.banking.BankOperationCode;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletClassicAccountAssociationFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletChangePinFragment;
-import cu.etecsa.transfermovil.banking.ui.wallet.WalletEmailRegistrationFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletQrPaymentFragment;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletEnrollmentFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletRegistrationFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletAccountSelectorFragment;
-import cu.etecsa.transfermovil.banking.ui.wallet.WalletTransferFragment;
 import cu.etecsa.transfermovil.stats.OperationItem;
 import cu.etecsa.transfermovil.stats.OperationListAdapter;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import java.util.List;
  * register, change PIN, delete registration, associate classic account.
  *
  * Routes:
- *   BOLSARegistrarse → WalletEmailRegistrationFragment
+ *   BOLSARegistrarse → WalletEnrollmentFragment
  *   BOLSACambioPin → WalletChangePinFragment
  *   BOLSAEliminarRegistro → dialog: wallet delete / classic delete
  *   BOLSAAsociarCuenta → dialog: classic / enterprise classic
@@ -57,7 +57,7 @@ public class WalletBoletoTabFragment extends Fragment {
             if (operacion != null) {
                 switch (operacion) {
                     case BOLSARegistrarse:
-                        ft.replace(R.id.containerView, new WalletEmailRegistrationFragment()).addToBackStack(null).commit();
+                        ft.replace(R.id.containerView, new WalletEnrollmentFragment()).addToBackStack(null).commit();
                         break;
                     case BOLSACambioPin:
                         ft.replace(R.id.containerView, new WalletChangePinFragment()).addToBackStack(null).commit();
@@ -168,10 +168,10 @@ public class WalletBoletoTabFragment extends Fragment {
                 FragmentTransaction ft = fm.beginTransaction();
                 switch (i) {
                     case 0:
-                        ft.replace(R.id.containerView, new WalletQrPaymentFragment()).addToBackStack(null).commit();
+                        ft.replace(R.id.containerView, new WalletClassicAccountAssociationFragment()).addToBackStack(null).commit();
                         break;
                     case 1:
-                        ft.replace(R.id.containerView, new WalletTransferFragment()).addToBackStack(null).commit();
+                        ft.replace(R.id.containerView, new WalletQrPaymentFragment()).addToBackStack(null).commit();
                         break;
                 }
                 dialogInterface.dismiss();
