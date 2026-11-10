@@ -1,12 +1,16 @@
 package cu.etecsa.transfermovil.ui.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputLayout;
@@ -21,13 +25,21 @@ public class WalletRechargeFragment extends Fragment implements pAzq93vIl3.UssdR
     public Context context;
     public View rootView;
     public pAzq93vIl3 manager;
+    private Activity activity;
     private Button btnAceptar;
+    private AppCompatImageView btHelp;
     private TextInputLayout lyMonto;
     private AutoCompleteTextView txMonto;
     private boolean pagoTotal;
     private boolean isPartialUSSD;
     private boolean isDirectScan;
     private final int maxParametersPerPacket = 4;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.activity = getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +51,23 @@ public class WalletRechargeFragment extends Fragment implements pAzq93vIl3.UssdR
         this.lyMonto.setHint(getString(R.string.monto_moneda_en_cuc));
         this.btnAceptar = (Button) rootView.findViewById(R.id.btn_aceptar);
         this.btnAceptar.setOnClickListener(view -> submitForm());
+        this.btHelp = (AppCompatImageView) rootView.findViewById(R.id.btHelp);
+        this.btHelp.setOnClickListener(view -> mensajeAyuda(
+                "Ayuda", this.context.getString(R.string.tx_help_recargar_wallet_cup)));
         return rootView;
+    }
+
+    private void mensajeAyuda(String title, String message) {
+        this.activity.runOnUiThread(() -> new AlertDialog.Builder(getContext())
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show());
     }
 
     private void submitForm() {
