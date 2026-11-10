@@ -69,7 +69,7 @@
 - [x] Compare `BfiAssociateAccountFragment` with source `F2leFVNWrdy`; account formatting/length, foreign-bank confirmation, random coordinate challenge, and selector `60` payload match.
 - [x] Reconcile the agent data-management pager with source `OQcONjDATJ`; preserve its 11 ordered tabs, titles, child screens, and adapter behavior.
 - [x] Reconcile the General data-management pager with source `wTZi6Zeikv`; preserve its eight ordered tabs, titles, contact permission request, and fixed-tab setup.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `crypto/CryptoProvider.java`.
+- [x] Audit `crypto/CryptoProvider.java` against `V5FFEZ0Qrr0`; document its implemented scheme coverage, renamed API, raw call sites, and static-audit limit in [security notes](docs/security.md).
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `data/DatabaseHelper.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/ApiClient.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/SessionManager.java`.

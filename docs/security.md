@@ -20,6 +20,8 @@ Source: `cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0` (smali)
 
 Registers Apache Harmony `SHA1PRNG` as security provider ("Crypto", v1.0). Used by `getRawKey()` for deterministic key generation from seed — not a real CSPRNG use, just ensures cross-device reproducibility of derived keys.
 
+The clean `crypto/CryptoProvider` is an implemented reconstruction linked to raw `V5FFEZ0Qrr0`, not an empty placeholder. Its renamed API covers seed-based AES, SecretKey AES/ECB, hardcoded and caller-key AES/CBC, card-data decryption, wallet encryption, SHA-256, and hex/Base64 helpers. The raw class remains in use by BFI QR and wallet/ticket screens for source-named methods such as `cH`, `shKey`, `toHex`, and `decryptMonedasWallet`; not every raw helper is a clean `CryptoProvider` call. No runtime parity claim is made for provider-specific edge cases because this audit was static.
+
 ## Encryption Schemes
 
 ### 1. Basic AES/ECB (seed-based)
