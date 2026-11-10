@@ -3,6 +3,8 @@ package cu.etecsa.transfermovil.sms;
 import android.content.ContentResolver;
 import android.os.AsyncTask;
 import android.util.Log;
+import cu.etecsa.transfermovil.data.DatabaseHelper;
+import cu.etecsa.transfermovil.data.entity.SmsRecord;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,18 +45,18 @@ public class SmsImportTask extends AsyncTask<Void, Integer, Boolean> {
             if (sms == null) {
                 return false;
             }
-            // g0xM9kQCsqu parseSMS = new g0xM9kQCsqu(); // SmsParser
+            SmsParser parser = new SmsParser();
             for (int i = 0; i < sms.size(); i++) {
-                // RecordSMS recordSMS = parseSMS.parse(sms.get(i));
-                // if (recordSMS != null) {
-                //     recordSMS.setFecha(sms.get(i).getDate());
-                //     List c_list = DatabaseHelper.getInstance()
-                //         .getRecordSMSwithIDTransactionByType(
-                //             recordSMS.getIdTransaccion(), recordSMS.getTipo_servicio());
-                //     if (c_list == null || c_list.size() == 0) {
-                //         DatabaseHelper.getInstance().addRecordSMS(recordSMS);
-                //     }
-                // }
+                SmsRecord record = parser.parse(sms.get(i));
+                if (record != null) {
+                    record.setFecha(sms.get(i).getDate());
+                    List<SmsRecord> existing = DatabaseHelper.getInstance()
+                            .getRecordSMSwithIDTransactionByType(
+                                    record.getIdTransaccion(), record.getTipo_servicio());
+                    if (existing == null || existing.isEmpty()) {
+                        DatabaseHelper.getInstance().addRecordSMS(record);
+                    }
+                }
             }
             return true;
         } catch (Exception ex) {

@@ -11,6 +11,7 @@
 - Reconciled the outstanding main-package source count to the live exact-link inventory after the BANDEC query links.
 - Restored SMS extraction of phone, version, and agent/bank/Bulevar/MiBoleto activation codes from `g0xM9kQCsqu`.
 - Restored SMS Cubacel plan-catalog persistence with the clean `CubacelPlan` entity.
+- Restored the main PAGOxMOVIL SMS routing parser and inbox import deduplication by transaction ID and service type.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.

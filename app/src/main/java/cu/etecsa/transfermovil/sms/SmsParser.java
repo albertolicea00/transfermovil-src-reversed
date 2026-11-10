@@ -19,6 +19,8 @@ import cu.etecsa.transfermovil.data.entity.SmsRecord;
 import cu.etecsa.transfermovil.data.entity.TransportTicket;
 import cu.etecsa.transfermovil.data.entity.WalletCurrency;
 import cu.etecsa.transfermovil.data.entity.CubacelPlan;
+import cu.etecsa.transfermovil.data.entity.SmsPromotion;
+import cu.etecsa.transfermovil.core.enums.BankType;
 import cu.etecsa.transfermovil.core.enums.AgentSource;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0;
 
@@ -90,7 +92,697 @@ public class SmsParser {
      * @param sms_properties SMS with body, date, address
      * @return RecordSMS entity ready for DB insertion, or null if unparseable
      */
-    // public RecordSMS parse(SmsMessage sms_properties) { ... }
+    /** Parses transaction, promotion, service, and plan-update SMS records. */
+    public SmsRecord parse(SmsMessage sms_properties) {
+        CharSequence charSequence;
+        CharSequence charSequence2;
+        CharSequence charSequence3;
+        CharSequence charSequence4;
+        CharSequence charSequence5;
+        String CONS_DATOS;
+        String cadena;
+        SmsRecord record = new SmsRecord();
+        try {
+            String sms = sms_properties.getBody();
+            if (sms.contains("INFORMACION:")) {
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date today = new Date();
+                Date diaPromo = new Date();
+                try {
+                    today = formatter.parse(formatter.format(today));
+                    diaPromo = formatter.parse(formatter.format(sms_properties.getDate()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (today.equals(diaPromo)) {
+                    String[] smsPromo = sms.split("INFORMACION:");
+                    String sms2 = smsPromo[0];
+                    String promo = smsPromo[1].trim();
+                    SmsPromotion smsSearch = DatabaseHelper.getInstance().getPromoSMS(promo);
+                    if (smsSearch == null) {
+                        SmsPromotion promoSMS = new SmsPromotion();
+                        promoSMS.setMensaje(promo);
+                        promoSMS.setHabilitado(true);
+                        Date dayNow = new Date();
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(dayNow);
+                        c.add(5, 1);
+                        Date datePlusNow = c.getTime();
+                        promoSMS.setFecha_inicio(dayNow);
+                        promoSMS.setFecha_fin(datePlusNow);
+                        if (!promo.contains("Banco")) {
+                            promoSMS.setTipo_promo(BankType.ETECSA);
+                            promoSMS.setIcono_asociado(R.drawable.etecsa_logo);
+                        } else if (promo.contains("Popular de Ahorros") || promo.contains("Popular de Ahorro")) {
+                            promoSMS.setTipo_promo(BankType.BPA);
+                            promoSMS.setIcono_asociado(R.drawable.banco_bpa_ico);
+                        } else if (promo.contains("Bandec")) {
+                            promoSMS.setTipo_promo(BankType.BANDEC);
+                            promoSMS.setIcono_asociado(R.drawable.banco_bandec_ico);
+                        } else if (promo.contains("Metropolitano")) {
+                            promoSMS.setTipo_promo(BankType.Metropolitano);
+                            promoSMS.setIcono_asociado(R.drawable.banco_metro_ico);
+                        }
+                        DatabaseHelper.getInstance().addPromoSMS(promoSMS);
+                    }
+                    sms = sms2;
+                }
+            }
+            if (!sms.contains("Bolsa") && !sms.contains("Monedero") && (!sms.contains("Banco") || (!sms.contains("El pago") && !sms.contains("La Transferencia") && !sms.contains("La recarga se") && !sms.contains("La amortizacion de credito") && !sms.contains("Id Transaccion:") && !sms.contains("Giro Postal") && !sms.contains("Id Compra:") && !sms.contains("PIN de combustible") && !sms.contains("caja extra") && !sms.contains("turno")))) {
+                if (sms.contains("ETECSA")) {
+                    return parseAgentesTelecomWallet(sms);
+                }
+                if (sms.contains("La recarga se realizo con exito.")) {
+                    String[] msg_separate = sms.split(" ");
+                    record.setMonto(msg_separate[9]);
+                    record.setMoneda(msg_separate[10].substring(0, 3));
+                    record.setCuenta(msg_separate[16].substring(0, msg_separate[16].length() - 1));
+                    record.setIdTransaccion(msg_separate[19].substring(0, msg_separate[19].length() - 1));
+                    record.setServicio("Recarga Móvil");
+                    record.setTipo_servicio(AgentSource.Agentes);
+                    record.setMostrar(true);
+                    return record;
+                }
+                if (sms.contains("La recarga se realizo con exito,") && sms.contains("con bono adicional")) {
+                    String[] msg_separate2 = sms.split(" ");
+                    record.setMonto(msg_separate2[12]);
+                    record.setMoneda(msg_separate2[13].substring(0, 3));
+                    record.setCuenta(msg_separate2[19].substring(0, msg_separate2[19].length() - 1));
+                    record.setIdTransaccion(msg_separate2[22].substring(0, msg_separate2[22].length() - 1));
+                    record.setServicio("Recarga Móvil");
+                    record.setTipo_servicio(AgentSource.Agentes);
+                    record.setMostrar(true);
+                    return record;
+                }
+                if (sms.contains("El pago de la factura del telefono") && sms.contains("esta siendo procesado")) {
+                    String[] msg_separate3 = sms.split(" ");
+                    record.setMonto(msg_separate3[12]);
+                    msg_separate3[13].split(".");
+                    record.setMoneda(msg_separate3[13].substring(0, 3));
+                    record.setCuenta(msg_separate3[7]);
+                    record.setIdTransaccion(msg_separate3[20].substring(0, msg_separate3[20].length() - 1));
+                    record.setServicio("Pago Factura");
+                    record.setTipo_servicio(AgentSource.Agentes);
+                    record.setMostrar(true);
+                    return record;
+                }
+                if (sms.contains("El pago de la factura del telefono") && sms.contains("fue exitoso")) {
+                    String[] msg_separate4 = sms.split(" ");
+                    record.setMonto(msg_separate4[11]);
+                    record.setMoneda(msg_separate4[12].substring(0, 3));
+                    record.setCuenta(msg_separate4[7]);
+                    record.setIdTransaccion(msg_separate4[19].substring(0, msg_separate4[19].length() - 1));
+                    record.setServicio("Pago Factura");
+                    record.setTipo_servicio(AgentSource.Agentes);
+                    record.setMostrar(true);
+                    return record;
+                }
+                if (sms.contains("La cuenta") && sms.contains("ha sido recargada")) {
+                    String[] msg_separate5 = sms.split(" ");
+                    record.setIdTransaccion(msg_separate5[12]);
+                    record.setCuenta(msg_separate5[3]);
+                    record.setMonto(msg_separate5[8]);
+                    record.setMoneda(msg_separate5[9].substring(0, 3));
+                    record.setServicio("Recarga Nauta");
+                    record.setTipo_servicio(AgentSource.Agentes);
+                    record.setMostrar(true);
+                    return record;
+                }
+                if (sms.contains("Actualizacion de los planes.")) {
+                    try {
+                        String CONS_DATOS2 = "Codigo;Descripcion;version";
+                        String cadena2 = sms;
+                        int intIndex = cadena2.indexOf("Codigo;Descripcion;version");
+                        int proximoElemento = "Codigo;Descripcion;version".length() + intIndex;
+                        String cadenaRestante = cadena2.substring(proximoElemento).replace("\n", BuildConfig.FLAVOR).trim();
+                        String[] elementos = cadenaRestante.split("\\|");
+                        CubacelPlan listActual = DatabaseHelper.getInstance().getAllPaquetesLists().get(0);
+                        if (sms_properties.getDate().after(listActual.getFecha())) {
+                            boolean borrar = DatabaseHelper.getInstance().deleteAllPaquetes();
+                            if (borrar) {
+                                int length = elementos.length;
+                                int i = 0;
+                                while (i < length) {
+                                    String uyh0pxs9m37in = elementos[i];
+                                    if (uyh0pxs9m37in == null || uyh0pxs9m37in.trim().length() <= 0) {
+                                        CONS_DATOS = CONS_DATOS2;
+                                        cadena = cadena2;
+                                    } else {
+                                        CONS_DATOS = CONS_DATOS2;
+                                        String[] itemList = uyh0pxs9m37in.trim().split(";");
+                                        if (itemList != null) {
+                                            cadena = cadena2;
+                                            if (itemList.length == 3) {
+                                                String codigo = itemList[0].trim();
+                                                String descripcion = itemList[1].trim();
+                                                String version = itemList[2].trim();
+                                                procesarPlan(codigo, descripcion, version, sms_properties.getDate());
+                                            }
+                                        } else {
+                                            cadena = cadena2;
+                                        }
+                                    }
+                                    i++;
+                                    CONS_DATOS2 = CONS_DATOS;
+                                    cadena2 = cadena;
+                                    intIndex = intIndex;
+                                }
+                            }
+                        }
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
+                    }
+                    return record;
+                }
+                return null;
+                return null;
+            }
+            if (!sms.contains("Id Compra:")) {
+                if (sms.contains("Popular de Ahorros")) {
+                    record.setTipo_servicio(AgentSource.BancoBPA);
+                    sms = sms.substring("Banco Popular de Ahorros:  ".length());
+                } else if (sms.contains("Popular de Ahorro")) {
+                    record.setTipo_servicio(AgentSource.BancoBPA);
+                    sms = sms.substring("Banco Popular de Ahorro:  ".length());
+                } else if (sms.contains("Bandec")) {
+                    record.setTipo_servicio(AgentSource.BancoBANDEC);
+                    sms = sms.substring("Banco Bandec:  ".length());
+                } else if (sms.contains("Metropolitano")) {
+                    record.setTipo_servicio(AgentSource.BancoMetro);
+                    sms = sms.substring("Banco Metropolitano:  ".length());
+                } else if (sms.contains("Bolsa Mi Transfer")) {
+                    record.setTipo_servicio(AgentSource.BolsaEtecsa);
+                    sms = sms.substring("Bolsa Mi Transfer:  ".length());
+                } else if (sms.contains("Monedero Mi Transfer")) {
+                    record.setTipo_servicio(AgentSource.BolsaEtecsa);
+                    sms = sms.substring("Monedero Mi Transfer:  ".length());
+                }
+            }
+            String[] msg_separate6 = sms.split(" ");
+            if (sms.contains("El pago parcial de la factura telefonica fue completado")) {
+                try {
+                    record.setCuenta(msg_separate6[13]);
+                    record.setMonto(msg_separate6[17]);
+                    record.setMoneda(msg_separate6[18].substring(0, 3));
+                    record.setIdTransaccion(msg_separate6[22]);
+                    record.setServicio("Pago Teléfono(P)");
+                    record.setMostrar(true);
+                } catch (Exception e3) {
+                    e = e3;
+                }
+            }
+            if (sms.contains("El pago de la factura del agua fue completado.")) {
+                record.setCuenta(msg_separate6[13]);
+                record.setMonto(msg_separate6[17]);
+                record.setMoneda(msg_separate6[18].substring(0, 3));
+                record.setIdTransaccion(msg_separate6[22]);
+                record.setServicio("Pago Agua");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La Transferencia fue completada.") && record.getTipo_servicio() != AgentSource.BolsaEtecsa) {
+                String transaccionBanco = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String CONS_NO_TRANSACCION_BANCO = getElement("Beneficiario:", sms);
+                String idSerie = CONS_NO_TRANSACCION_BANCO.replace(".", BuildConfig.FLAVOR);
+                String importe = getElement("Monto:", sms);
+                String valor = "Monto: " + importe;
+                String moneda = getElement(valor, sms).substring(0, 3);
+                record.setCuenta(idSerie.substring(0, 6) + "XXXXXX" + idSerie.substring(12, 16));
+                record.setMonto(importe);
+                record.setMoneda(moneda);
+                record.setIdTransaccion(transaccionBanco);
+                record.setServicio("Transferencia");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La Transferencia fue completada.") && record.getTipo_servicio() == AgentSource.BolsaEtecsa) {
+                String transaccionBanco2 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie2 = getElement("Beneficiario:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe2 = getElement("Monto:", sms);
+                String valor2 = "Monto: " + importe2;
+                String moneda2 = getElement(valor2, sms).substring(0, 3);
+                record.setCuenta(idSerie2);
+                record.setMonto(importe2);
+                record.setMoneda(moneda2);
+                record.setIdTransaccion(transaccionBanco2);
+                record.setServicio("Transferencia");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La recarga se realizo con exito.")) {
+                String transaccionBanco3 = getElement("Id transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie3 = getElement("Telefono:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe3 = getElement("Saldo acreditado:", sms);
+                String valor3 = "Saldo acreditado: " + importe3;
+                String moneda3 = getElement(valor3, sms).substring(0, 3);
+                record.setCuenta(idSerie3);
+                record.setMonto(importe3);
+                record.setMoneda(moneda3);
+                record.setIdTransaccion(transaccionBanco3);
+                record.setServicio("Recarga de Saldo Móvil");
+                record.setMostrar(true);
+            } else if (sms.contains("La recarga se realizo con exito,") && sms.contains("con bono adicional")) {
+                String transaccionBanco4 = getElement("Id transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie4 = getElement("Telefono:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe4 = getElement("Saldo acreditado:", sms);
+                String valor4 = "Saldo acreditado: " + importe4;
+                String moneda4 = getElement(valor4, sms).substring(0, 3);
+                record.setCuenta(idSerie4);
+                record.setMonto(importe4);
+                record.setMoneda(moneda4);
+                record.setIdTransaccion(transaccionBanco4);
+                record.setServicio("Recarga de Saldo Móvil");
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago de la factura del Gas fue completado.")) {
+                String transaccionBanco5 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie5 = getElement("Nro. Factura Pagada:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe5 = getElement("Importe Pagado:", sms);
+                String valor5 = "Importe Pagado: " + importe5;
+                String CONS_IMPORTE = getElement(valor5, sms);
+                String moneda5 = CONS_IMPORTE.substring(0, 3);
+                record.setCuenta(idSerie5);
+                record.setMonto(importe5);
+                record.setMoneda(moneda5);
+                record.setIdTransaccion(transaccionBanco5);
+                record.setServicio("Pago Gas");
+                record.setMostrar(true);
+            }
+            if (!sms.contains("Pago completado.") || !sms.contains("Id Compra:")) {
+                charSequence = r10;
+                charSequence2 = r5;
+                charSequence3 = r6;
+                charSequence4 = r8;
+                charSequence5 = r7;
+            } else {
+                charSequence5 = "Popular de Ahorro";
+                if (sms.contains(charSequence5)) {
+                    record.setTipo_servicio(AgentSource.BancoBPA);
+                    charSequence = "Monedero Mi Transfer";
+                    charSequence2 = "Metropolitano";
+                    charSequence3 = "Bandec";
+                    charSequence4 = "Popular de Ahorros";
+                } else {
+                    charSequence4 = r8;
+                    if (sms.contains(charSequence4)) {
+                        record.setTipo_servicio(AgentSource.BancoBPA);
+                        charSequence = r10;
+                        charSequence2 = r5;
+                        charSequence3 = r6;
+                    } else {
+                        charSequence3 = r6;
+                        if (sms.contains(charSequence3)) {
+                            record.setTipo_servicio(AgentSource.BancoBANDEC);
+                            charSequence = r10;
+                            charSequence2 = r5;
+                        } else {
+                            charSequence2 = r5;
+                            if (sms.contains(charSequence2)) {
+                                record.setTipo_servicio(AgentSource.BancoMetro);
+                                charSequence = r10;
+                            } else if (sms.contains(charSequence)) {
+                                charSequence = r10;
+                                record.setTipo_servicio(AgentSource.BolsaEtecsa);
+                            }
+                        }
+                    }
+                }
+                charSequence = r10;
+                String transaccion = getElement("No. Transaccion:", sms);
+                String idcompra = getElement("Id Compra:", sms);
+                String importe6 = getElement("Importe: ", sms);
+                String valor6 = "Importe: " + importe6;
+                String moneda6 = getElement(valor6, sms);
+                record.setCuenta(idcompra);
+                record.setMonto(importe6);
+                record.setMoneda(moneda6);
+                record.setIdTransaccion(transaccion);
+                record.setServicio("Compra en linea");
+                record.setMostrar(true);
+            }
+            if (sms.contains("se realizo con exito.") && sms.contains("recarga de la tarjeta propia")) {
+                if (sms.contains(charSequence5) || sms.contains(charSequence4)) {
+                    record.setTipo_servicio(AgentSource.BancoBPA);
+                } else if (sms.contains(charSequence3)) {
+                    record.setTipo_servicio(AgentSource.BancoBANDEC);
+                } else if (sms.contains(charSequence2)) {
+                    record.setTipo_servicio(AgentSource.BancoMetro);
+                } else if (sms.contains(charSequence)) {
+                    record.setTipo_servicio(AgentSource.BolsaEtecsa);
+                }
+                String transaccion2 = getElement("Id Transaccion:", sms);
+                String idcompra2 = getElement("Nro. Serie Tarjeta :", sms);
+                String importe7 = getElement("Importe Recargado :", sms);
+                String valor7 = "Importe Recargado :" + importe7;
+                String moneda7 = getElement(valor7, sms).substring(0, 3);
+                record.setCuenta(idcompra2);
+                record.setMonto(importe7);
+                record.setMoneda(moneda7);
+                record.setIdTransaccion(transaccion2);
+                record.setServicio("Recarga Propia");
+                record.setMostrar(true);
+            }
+            if (sms.contains("caja extra") && sms.contains("Pago completado: ")) {
+                if (sms.contains(charSequence5) || sms.contains(charSequence4)) {
+                    record.setTipo_servicio(AgentSource.BancoBPA);
+                } else if (sms.contains(charSequence3)) {
+                    record.setTipo_servicio(AgentSource.BancoBANDEC);
+                } else if (sms.contains(charSequence2)) {
+                    record.setTipo_servicio(AgentSource.BancoMetro);
+                } else if (sms.contains("Bolsa Mi Transfer") || sms.contains(charSequence)) {
+                    record.setTipo_servicio(AgentSource.BolsaEtecsa);
+                }
+                String transaccion3 = getElement("No. Transaccion:", sms);
+                String idcompra3 = getElement("Id Negocio:", sms);
+                String importe8 = getElement("Importe pagado: ", sms);
+                String valor8 = "Importe pagado: " + importe8;
+                String moneda8 = getElement(valor8, sms);
+                record.setCuenta(idcompra3);
+                record.setMonto(importe8);
+                record.setMoneda(moneda8);
+                record.setIdTransaccion(transaccion3);
+                record.setServicio("Caja Extra");
+                record.setMostrar(true);
+            }
+            if (sms.contains("Giro Postal fue completado.")) {
+                record.setCuenta(msg_separate6[34]);
+                record.setMonto(msg_separate6[50]);
+                record.setMoneda(msg_separate6[51].substring(0, 3));
+                record.setIdTransaccion(msg_separate6[56]);
+                record.setServicio("Giro postal");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La cuenta Nauta Hogar:") && sms.contains("ha sido pagada con")) {
+                String transaccion4 = getElement("Id Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra4 = getElement("Nauta Hogar:", sms);
+                String importe9 = getElement("pagada con", sms);
+                String valor9 = "pagada con " + importe9;
+                String moneda9 = getElement(valor9, sms).substring(0, 3);
+                record.setCuenta(idcompra4);
+                record.setMonto(importe9);
+                record.setMoneda(moneda9);
+                record.setIdTransaccion(transaccion4);
+                record.setServicio("Nauta Hogar");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La cuenta :") && sms.contains("ha sido recargada con")) {
+                String transaccionBanco6 = getElement("Id Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie6 = getElement("La cuenta :", sms).replace(".", BuildConfig.FLAVOR);
+                String importe10 = getElement("ha sido recargada con", sms);
+                String valor10 = "ha sido recargada con " + importe10;
+                String moneda10 = getElement(valor10, sms).substring(0, 3);
+                record.setCuenta(idSerie6);
+                record.setMonto(importe10);
+                record.setMoneda(moneda10);
+                record.setIdTransaccion(transaccionBanco6);
+                record.setServicio("Recarga nauta banco");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La cuenta de Joven Club del usuario:") && sms.contains("ha sido recargada")) {
+                String transaccion5 = getElement("Id Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra5 = getElement("Joven Club del usuario:", sms);
+                String importe11 = getElement("ha sido recargada con", sms);
+                String valor11 = "ha sido recargada con " + importe11;
+                String moneda11 = getElement(valor11, sms).substring(0, 3);
+                record.setCuenta(idcompra5);
+                record.setMonto(importe11);
+                record.setMoneda(moneda11);
+                record.setIdTransaccion(transaccion5);
+                record.setServicio("Joven Club");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La amortizacion") && sms.contains("fue completada")) {
+                String transaccion6 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra6 = "No. " + transaccion6;
+                String importe12 = getElement("Monto Pagado:", sms);
+                String valor12 = "Monto Pagado: " + importe12;
+                String moneda12 = getElement(valor12, sms).substring(0, 3);
+                record.setCuenta(idcompra6);
+                record.setMonto(importe12);
+                record.setMoneda(moneda12);
+                record.setIdTransaccion(transaccion6);
+                record.setServicio("Amortizar");
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago de la ONAT fue completado") && sms.contains("RC05:")) {
+                String transaccion7 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra7 = getElement("RC05:", sms);
+                String importe13 = getElement("Monto Pagado:", sms);
+                String rc04 = getElement("RC04:", sms);
+                String valor13 = "Monto Pagado: " + importe13;
+                String CONS_ID_COMPRA = getElement(valor13, sms);
+                String moneda13 = CONS_ID_COMPRA.substring(0, 3);
+                record.setCuenta("RC05: " + idcompra7);
+                record.setMonto(importe13);
+                record.setMoneda(moneda13);
+                record.setIdTransaccion(transaccion7 + " RC04:" + rc04);
+                record.setServicio("Pago ONAT");
+                record.setMostrar(true);
+            } else if (sms.contains("El pago de la ONAT fue completado") && sms.contains("NIT:")) {
+                String transaccion8 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra8 = getElement("NIT:", sms);
+                String importe14 = getElement("Monto Pagado:", sms);
+                String parrafo = getElement("PARRAFO:", sms);
+                String valor14 = "Monto Pagado: " + importe14;
+                String CONS_ID_COMPRA2 = getElement(valor14, sms);
+                String moneda14 = CONS_ID_COMPRA2.substring(0, 3);
+                record.setCuenta("NIT:" + idcompra8);
+                record.setMonto(importe14);
+                record.setMoneda(moneda14);
+                record.setIdTransaccion(transaccion8 + " PR:" + parrafo);
+                record.setServicio("Pago ONAT");
+                record.setMostrar(true);
+            } else if (sms.contains("El pago de la ONAT fue completado")) {
+                record.setCuenta(msg_separate6[12]);
+                record.setMonto(msg_separate6[16]);
+                record.setMoneda(msg_separate6[17].substring(0, 3));
+                record.setIdTransaccion(msg_separate6[21]);
+                record.setServicio("Pago ONAT");
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago de la multa fue completado.")) {
+                String transaccion9 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra9 = getElement("Nro. Multa:", sms);
+                String importe15 = getElement("Monto Pagado:", sms);
+                String valor15 = "Monto Pagado: " + importe15;
+                String moneda15 = getElement(valor15, sms).substring(0, 3);
+                record.setCuenta(idcompra9);
+                record.setMonto(importe15);
+                record.setMoneda(moneda15);
+                record.setIdTransaccion(transaccion9);
+                record.setServicio("Pago de Multa");
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago de la factura telefonica fue completado") && sms.contains("Importe Factura:")) {
+                String transaccion10 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra10 = getElement("Nro. Factura Pagada:", sms);
+                String importe16 = getElement("Monto Pagado:", sms);
+                String valor16 = "Monto Pagado: " + importe16;
+                String moneda16 = getElement(valor16, sms).substring(0, 3);
+                record.setCuenta(idcompra10);
+                record.setMonto(importe16);
+                record.setMoneda(moneda16);
+                record.setIdTransaccion(transaccion10);
+                record.setServicio("Pago Teléfono(T)");
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago de la factura telefonica fue completado") && sms.contains("Importe Factura:")) {
+                String transaccion11 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra11 = getElement("Nro. Factura Pagada:", sms);
+                String importe17 = getElement("Importe Factura:", sms);
+                String valor17 = "Importe Factura: " + importe17;
+                String moneda17 = getElement(valor17, sms).substring(0, 3);
+                record.setCuenta(idcompra11);
+                record.setMonto(importe17);
+                record.setMoneda(moneda17);
+                record.setIdTransaccion(transaccion11);
+                record.setServicio("Pago Teléfono(T)");
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago de la factura telefonica fue completado") && sms.contains("Monto Pagado:")) {
+                String transaccion12 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra12 = getElement("Nro. Factura Pagada:", sms);
+                String importe18 = getElement("Monto Pagado:", sms);
+                String valor18 = "Monto Pagado: " + importe18;
+                String moneda18 = getElement(valor18, sms).substring(0, 3);
+                record.setCuenta(idcompra12);
+                record.setMonto(importe18);
+                record.setMoneda(moneda18);
+                record.setIdTransaccion(transaccion12);
+                record.setServicio("Pago Teléfono(T)");
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago de la factura de electricidad fue completado")) {
+                String transaccion13 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra13 = getElement("Nro. Factura Pagada:", sms);
+                String importe19 = getElement("Importe Pagado:", sms);
+                String valor19 = "Importe Pagado: " + importe19;
+                String moneda19 = getElement(valor19, sms).substring(0, 3);
+                record.setCuenta(idcompra13);
+                record.setMonto(importe19);
+                record.setMoneda(moneda19);
+                record.setIdTransaccion(transaccion13);
+                record.setServicio("Pago Electricidad");
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago del aporte a patrimonio fue completado.")) {
+                String transaccion14 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR).replace(",", BuildConfig.FLAVOR);
+                String idcompra14 = getElement("Nro. Contribuyente:", sms).replace(",", BuildConfig.FLAVOR);
+                String importe20 = getElement("Monto Pagado:", sms);
+                String valor20 = "Monto Pagado: " + importe20;
+                String moneda20 = getElement(valor20, sms).substring(0, 3);
+                record.setCuenta(idcompra14);
+                record.setMonto(importe20);
+                record.setMoneda(moneda20);
+                record.setIdTransaccion(transaccion14);
+                record.setServicio("Aporte Patrimonio");
+                record.setMostrar(true);
+            }
+            if (sms.contains("pago del cupon de combustible fue completado.")) {
+                getElement("ID TM:", sms).replace(".", BuildConfig.FLAVOR);
+                String transaccionBanco7 = getElement("No. Transaccion :", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie7 = getElement("No. Serie:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe21 = getElement("Importe pagado:", sms);
+                String valor21 = "Importe pagado: " + importe21;
+                String CONS_NO_TRANSACCION_TM = getElement(valor21, sms);
+                String moneda21 = CONS_NO_TRANSACCION_TM.substring(0, 3);
+                getElement("Datos del cupon:", sms);
+                record.setCuenta(idSerie7);
+                record.setMonto(importe21);
+                record.setMoneda(moneda21);
+                record.setIdTransaccion(transaccionBanco7);
+                record.setServicio("Combustible");
+                record.setMostrar(true);
+            }
+            if (sms.contains("pago del impuesto sobre el documento (sello del timbre) fue completado.")) {
+                String transaccionBanco8 = getElement("Nro. Transaccion Banco:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie8 = getElement(" IdSello:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe22 = getElement("Importe Pagado:", sms);
+                String valor22 = "Importe Pagado: " + importe22;
+                String moneda22 = getElement(valor22, sms).substring(0, 3);
+                record.setCuenta(idSerie8);
+                record.setMonto(importe22);
+                record.setMoneda(moneda22);
+                record.setIdTransaccion(transaccionBanco8);
+                record.setServicio("Sello de Timbre");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La recarga de la cuenta CUP se realizo con exito")) {
+                String transaccionBanco9 = getElement("Id Monedero:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie9 = getElement("cuenta recargada:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe23 = getElement("Importe Recargado:", sms);
+                String valor23 = "Importe Recargado: " + importe23;
+                String moneda23 = getElement(valor23, sms).substring(0, 3);
+                record.setCuenta(idSerie9);
+                record.setMonto(importe23);
+                record.setMoneda(moneda23);
+                record.setIdTransaccion(transaccionBanco9);
+                record.setServicio("Recarga CUP Monedero");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La recarga de la cuenta CUP se realizo con exito")) {
+                String transaccionBanco10 = getElement("Id Monedero:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie10 = getElement("monedero recargada:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe24 = getElement("Importe Recargado:", sms);
+                String valor24 = "Importe Recargado: " + importe24;
+                String moneda24 = getElement(valor24, sms).substring(0, 3);
+                record.setCuenta(idSerie10);
+                record.setMonto(importe24);
+                record.setMoneda(moneda24);
+                record.setIdTransaccion(transaccionBanco10);
+                record.setServicio("Recarga CUP Monedero");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La compra del Paquete MLC para el numero") && sms.contains("se realizo con exito.")) {
+                String transaccionBanco11 = getElement("Id transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie11 = getElement("Paquete comprado:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe25 = getElement("Saldo Descontado:", sms);
+                String valor25 = "Saldo Descontado: " + importe25;
+                String moneda25 = getElement(valor25, sms).substring(0, 3);
+                record.setCuenta(idSerie11);
+                record.setMonto(importe25);
+                record.setMoneda(moneda25);
+                record.setIdTransaccion(transaccionBanco11);
+                record.setServicio("Paquete MLC");
+                record.setMostrar(true);
+            }
+            if (sms.contains("Ha comprado con") && sms.contains("para su uso la oferta Nauta Plus.")) {
+                String transaccionBanco12 = getElement("Id Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie12 = getElement("el producto", sms).replace(".", BuildConfig.FLAVOR);
+                String importe26 = getElement("Ha comprado con", sms);
+                String valor26 = "Ha comprado con " + importe26;
+                String moneda26 = getElement(valor26, sms).substring(0, 3);
+                record.setCuenta("producto " + idSerie12);
+                record.setMonto(importe26);
+                record.setMoneda(moneda26);
+                record.setIdTransaccion(transaccionBanco12);
+                record.setServicio("Recarga Nauta MLC");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La recarga del numero de servicio") && sms.contains("se realizo con exito.")) {
+                String transaccionBanco13 = getElement("Id Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie13 = getElement("Nauta Hogar 4G", sms).replace(".", BuildConfig.FLAVOR);
+                String importe27 = getElement("Importe Pagado:", sms);
+                String valor27 = "Importe Pagado: " + importe27;
+                String moneda27 = getElement(valor27, sms).substring(0, 3);
+                record.setCuenta(idSerie13);
+                record.setMonto(importe27);
+                record.setMoneda(moneda27);
+                record.setIdTransaccion(transaccionBanco13);
+                record.setServicio("Recarga Nauta Hogar 4G");
+                record.setMostrar(true);
+            }
+            if (sms.contains("La compra del Paquete para el numero de servicio Nauta Hogar 4G") && sms.contains("se realizo con exito.")) {
+                String transaccionBanco14 = getElement("Id transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie14 = getElement("Nauta Hogar 4G", sms).replace(".", BuildConfig.FLAVOR);
+                String importe28 = getElement("Costo del paquete:", sms);
+                String valor28 = "Costo del paquete: " + importe28;
+                String moneda28 = getElement(valor28, sms).substring(0, 3);
+                record.setCuenta(idSerie14);
+                record.setMonto(importe28);
+                record.setMoneda(moneda28);
+                record.setIdTransaccion(transaccionBanco14);
+                record.setServicio("Gigas Nauta Hogar 4G");
+                record.setMostrar(true);
+            }
+            try {
+                if (sms.contains("Visita:") && sms.contains("La compra fue completada.")) {
+                    String transaccionBanco15 = getElement("Transaccion de Banco:", sms).replace(".", BuildConfig.FLAVOR);
+                    String idSerie15 = getElement("Nro. de Reserva:", sms).replace(".", BuildConfig.FLAVOR);
+                    String importe29 = getElement("Importe Pagado:", sms);
+                    String valor29 = "Importe Pagado: " + importe29;
+                    String moneda29 = getElement(valor29, sms).substring(0, 3);
+                    record.setCuenta(idSerie15);
+                    record.setMonto(importe29);
+                    record.setMoneda(moneda29);
+                    record.setIdTransaccion(transaccionBanco15);
+                    record.setServicio("Visitas-Recorridos");
+                    record.setMostrar(true);
+                }
+            } catch (Exception e4) {
+            }
+            try {
+                if (sms.contains("La solicitud de Turno") && sms.contains("fue completada.")) {
+                    String transaccionBanco16 = getElement("Nro. Transaccion de Banco:", sms).replace(".", BuildConfig.FLAVOR);
+                    String idSerie16 = getElement("Carnet de Identidad:", sms).replace(".", BuildConfig.FLAVOR);
+                    String importe30 = getElement("Comision Pagada:", sms);
+                    String valor30 = "Comision Pagada: " + importe30;
+                    String moneda30 = getElement(valor30, sms).substring(0, 3);
+                    record.setCuenta(idSerie16);
+                    record.setMonto(importe30);
+                    record.setMoneda(moneda30);
+                    record.setIdTransaccion(transaccionBanco16);
+                    record.setServicio("Mi Turno");
+                    record.setMostrar(true);
+                }
+            } catch (Exception e5) {
+            }
+            if (sms.contains("La actualizacion de las cuentas virtuales fue completada.")) {
+                parseMonedasWallet(sms);
+                return record;
+            }
+            return record;
+        } catch (Exception e6) {
+            return null;
+        }
+    }
 
     // --- Wallet parsing (lines 753–815) ---
 
