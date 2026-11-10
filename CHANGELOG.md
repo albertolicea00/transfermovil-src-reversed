@@ -24,6 +24,7 @@
 - Compared `Sha256Util` with `UkO3Y6TcHD`; confirmed UTF-8 SHA-256, lowercase hex padding, and null-on-error parity.
 - Removed the unused `UssdDispatcher` Activity shell and false mapping to static helper `FBsQzP3Zfj`; documented the remaining clean dispatch migration.
 - Compared `UpdateApiClient` with `dST9RIJkDp`; documented matching GET behavior, raw-only error logging, and the remaining full update-flow trace.
+- Linked the existing Nauta account-type and saved-account management evidence to its pending TODO item.
 - Removed the unreferenced common `BranchSelectionFragment` shell after tracing its stale `vVF87n7MnK` mapping to BANDEC card reprint, already routed through `BandecCardReprintFragment` from Configuración.
 - Removed the unused common `BankAuthMenuFragment` and `SecurityMenuFragment` shells after confirming neither legacy menu has callers; the bank-specific security menus remain the active routes, and `KmgeIVr5RG` has an empty item callback.
 - Removed two stale common shells: `CoordinateAuthFragment` duplicated the routed BANDEC digital-PIN source `RYCvQK4nkF` (selector `79`), while `DisconnectFragment` actually mapped to registration deletion `sxbhjZQZxo` (selector `68`); disconnect remains in the session-menu confirmation.

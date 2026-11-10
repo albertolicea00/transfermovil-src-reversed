@@ -347,7 +347,7 @@
 
 - [x] Identify Nauta features (recarga, accounts, export, Nauta Hogar)
 - [x] Decompile Nauta top-up flow (recargaNauta)
-- [ ] Document Nauta account types and management
+- [x] Document Nauta account types and management, including the `@nauta.com.cu`/`@nauta.co.cu` suffixes and saved-account CRUD behavior in [recharge notes](docs/wallet-nauta-recharge.md) and [storage notes](docs/storage.md).
 - [x] Trace Nauta Hogar (home internet) flow
 - [x] Document Nauta Plus feature
 
