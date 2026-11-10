@@ -51,6 +51,8 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                     transaction.replace(R.id.containerView, new BandecAccountStatementFragment()).addToBackStack(null).commit();
                 } else if (operation == FdonIAFI9w.BANConsultarTodasCuentas) {
                     showAllAccountsConfirmation();
+                } else if (operation == FdonIAFI9w.BANConsultarSaldo) {
+                    showQueryConfirmation("¿Desea consultar el saldo de su tarjeta? ", "46");
                 } else if (operation == FdonIAFI9w.BANConsultaMulta) {
                     showFineQueryTypeDialog();
                 } else if (operation == FdonIAFI9w.BANConsultaTicket) {
@@ -101,18 +103,22 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
     }
 
     private void showAllAccountsConfirmation() {
+        showQueryConfirmation("¿Desea consultar el importe de todas sus cuentas? ", "58");
+    }
+
+    private void showQueryConfirmation(String message, final String selector) {
         new AlertDialog.Builder(getContext())
                 .setTitle("Seleccione")
-                .setMessage("¿Desea consultar el importe de todas sus cuentas? ")
+                .setMessage(message)
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         rDEl7rW1aN bankingSession = new rDEl7rW1aN();
                         if (bankingSession.getCodeAgent() != null
                                 && !bankingSession.getCodeAgent().getCode().contains("-1")) {
-                            ((IHVTCBmiLV) getActivity()).actionCallUSSD("58");
+                            ((IHVTCBmiLV) getActivity()).actionCallUSSD(selector);
                         } else {
-                            ((S9ycHcoxAzy) getActivity()).actionCallUSSD("58");
+                            ((S9ycHcoxAzy) getActivity()).actionCallUSSD(selector);
                         }
                     }
                 })
