@@ -21,6 +21,7 @@
 - Compared `SmsSender` with `HzjedYqYeh`; documented matching send/inbox behavior and the cursor-close limitation inherited from source.
 - Audited the SMS parser/import tasks; documented that parsing, storage, and fuel progress callbacks remain omitted from the clean implementations.
 - Restored the About layout, Bulevar management/statistics menu, and e-commerce host shell from their source fragments/activity.
+- Compared `Sha256Util` with `UkO3Y6TcHD`; confirmed UTF-8 SHA-256, lowercase hex padding, and null-on-error parity.
 - Removed the unreferenced common `BranchSelectionFragment` shell after tracing its stale `vVF87n7MnK` mapping to BANDEC card reprint, already routed through `BandecCardReprintFragment` from Configuración.
 - Removed the unused common `BankAuthMenuFragment` and `SecurityMenuFragment` shells after confirming neither legacy menu has callers; the bank-specific security menus remain the active routes, and `KmgeIVr5RG` has an empty item callback.
 - Removed two stale common shells: `CoordinateAuthFragment` duplicated the routed BANDEC digital-PIN source `RYCvQK4nkF` (selector `79`), while `DisconnectFragment` actually mapped to registration deletion `sxbhjZQZxo` (selector `68`); disconnect remains in the session-menu confirmation.

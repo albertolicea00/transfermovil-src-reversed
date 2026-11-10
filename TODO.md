@@ -80,7 +80,7 @@
 - [x] Reconcile `ui/qr/QrCodeGenerator.java` with source `ZUoEY89WdA`; retain all QR generation, image-processing, and decoding entry points under clean method names.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `update/UpdateApiClient.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ussd/UssdDispatcher.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `util/Sha256Util.java`.
+- [x] Compare `util/Sha256Util.java` with `UkO3Y6TcHD`; confirm UTF-8 SHA-256, lowercase hex padding, and null-on-error behavior match.
 - [x] Rebuild the clean MiBoleto ticket base from `L4aAENEGbqv`, move status/key-update/latest-operations screens off the raw base, and remove the empty base placeholder.
 - [x] Reconcile `b6FtEHgm1B` against `QrDynamicPaymentFragment`: same base, layout, QR parsing/menu flow and selectors `31`/`30`; retain the richer clean screen with wallet currencies and stricter amount checks, and remove the null-returning duplicate shell.
 - [x] Migrate public-service/PCC draft `udysei7zCr` into clean `PublicServicePaymentFragment`; retain its CUP-only bolsa selector, contact-confirmation flow, validation, and selector `7` full/partial (`04`) USSD payload.
