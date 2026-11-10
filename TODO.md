@@ -97,7 +97,7 @@
 - [ ] Review the remaining 265 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Inventory the 265 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
 - [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
-- [ ] Resolve the remaining multiple-candidate link (`Agg55uYctq`) by confirming canonical implementations or correcting duplicate annotations.
+- [x] Resolve the duplicate `Agg55uYctq` candidate: keep `BaseBankingFragment` as the source-backed reconstruction and remove the false source annotation from derived helper `BfiUssdAccountFragment`.
 - [x] Share the single `SvY0xjeNSz` PIN-auth implementation between BFI and Metro menus; route Metro to `BfiPinAuthFragment` and remove its duplicate screen copy.
 - [x] Share the single `umjSGajOy3` registration implementation between BFI and Metro menus; route Metro to `BfiRegistrationFragment` and remove its duplicate screen copy.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.

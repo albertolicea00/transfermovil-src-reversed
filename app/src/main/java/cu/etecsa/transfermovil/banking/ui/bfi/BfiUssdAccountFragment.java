@@ -5,9 +5,8 @@ import androidx.fragment.app.FragmentManager;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 
 /**
- * Shared BFI form base. Account selection and card rendering come from the
- * reconstructed two-account base; USSD callbacks match Agg55uYctq.
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.Agg55uYctq
+ * Shared BFI helper for two-account forms. It adds callback and packet state
+ * to the clean account base; it is not a one-to-one APK source class.
  */
 public abstract class BfiUssdAccountFragment extends BaseTwoAccountFragment
         implements pAzq93vIl3.UssdResponseObserver {
