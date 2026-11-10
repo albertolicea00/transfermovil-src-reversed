@@ -24,6 +24,7 @@ import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.wbFn8tBw8W */
 public class FwaBalanceRechargeFragment extends Fragment {
     public static final int PICK_CONTACT_REQUEST = 1;
     public ArrayAdapter<CharSequence> adapterTipoBolsa;

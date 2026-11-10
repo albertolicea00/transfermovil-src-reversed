@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.U1sIOmca96i */
 public class WalletWaterPaymentFragment extends BfiUssdAccountFragment {
     public ArrayAdapter<CharSequence> adapterRegionPago;
     public ArrayAdapter<CharSequence> adapterTipoBolsa;

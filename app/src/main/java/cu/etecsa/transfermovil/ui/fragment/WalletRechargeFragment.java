@@ -15,6 +15,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.P8DtkaSW4dR */
 public class WalletRechargeFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
 
     public Context context;

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.XCDkgbw8oZ */
 public class WalletGasPaymentFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
     public ArrayAdapter<CharSequence> adapterTipoBolsa;
     private ArrayAdapter<CharSequence> adapterTipoPago;

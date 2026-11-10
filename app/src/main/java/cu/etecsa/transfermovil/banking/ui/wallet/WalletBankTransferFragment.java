@@ -55,6 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.H0oV6Ot0bS */
 public class WalletBankTransferFragment extends EV9Tu0zIL4 implements pAzq93vIl3.UssdResponseObserver {
     public static final int PICK_CONTACT_REQUEST = 1;
     public ArrayAdapter<CharSequence> adapterTipoBolsa;
