@@ -228,6 +228,24 @@ payment, reducing it to 227, linked the BFI QR/contact base, reducing it to
 four Wallet tab forms, reducing it to 221, linked General Wallet enterprise
 transfer, reducing it to 220, linked Wallet cash withdrawal, reducing it to
 219, and linked three General query screens, reducing it to 216.
+
+The current nine clean files without source annotations are:
+
+| Clean file | Review status |
+| --- | --- |
+| `banking/ui/base/BaseCardValidationFragment.java` | Shared helper; exact original identity still needs review. |
+| `banking/ui/bfi/BfiUssdAccountFragment.java` | Shared helper; exact original identity still needs review. |
+| `data/BankCodeAccessor.java` | Small adapter; exact original identity still needs review. |
+| `ui/fragment/CreditPaymentFragment.java` | Screen body has no verified original-class link. |
+| `ui/fragment/NautaPlusRechargeFragment.java` | Screen body has no verified original-class link. |
+| `ui/fragment/OwnCardPaymentFragment.java` | Screen body has no verified original-class link. |
+| `ui/fragment/TicketReservationViewFragment.java` | Screen body has no verified original-class link. |
+| `ui/fragment/WalletTopupFragment.java` | Screen body has no verified original-class link. |
+| `ui/fragment/WalletTransferFragment.java` | Screen body has no verified original-class link. |
+
+The six screen files mention nested listener class paths in JADX comments,
+but those paths alone do not identify the enclosing implementation class;
+they remain unlinked until the outer source body is located and compared.
 This refresh establishes the current package distribution only. It does not
 classify the obfuscated classes as generated code, Android glue, or application
 behavior; that source-by-source review and exact-link cleanup remain open.
