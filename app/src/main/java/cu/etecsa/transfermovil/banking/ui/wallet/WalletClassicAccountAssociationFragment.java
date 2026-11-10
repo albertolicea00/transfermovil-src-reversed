@@ -201,7 +201,7 @@ public class WalletClassicAccountAssociationFragment extends Fragment
 
     private String formatAccount(String account) {
         StringBuilder formatted = new StringBuilder();
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < account.length(); i++) {
             formatted.append(account.charAt(i));
             if ((formatted.length() + 1) % 5 == 0 && formatted.toString().split("-").length <= 3) {
                 formatted.append('-');
