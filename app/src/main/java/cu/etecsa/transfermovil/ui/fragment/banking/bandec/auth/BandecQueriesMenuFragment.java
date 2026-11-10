@@ -15,6 +15,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecPaymentStatusFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecCardInfoQueryFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecInvoiceQueryFragment;
@@ -23,6 +24,7 @@ import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecLates
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecAccountLimitQueryFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecRecentPaymentsFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecAccountStatementFragment;
+import cu.etecsa.transfermovil.ui.fragment.wallet.WalletTicketQueryFragment;
 
 /**
  * BANDEC Consultas menu with clean routes for source-backed query forms.
@@ -49,6 +51,8 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                     showAllAccountsConfirmation();
                 } else if (operation == FdonIAFI9w.BANConsultaMulta) {
                     showFineQueryTypeDialog();
+                } else if (operation == FdonIAFI9w.BANConsultaTicket) {
+                    showTicketQueryTypeDialog();
                 } else if (operation == FdonIAFI9w.BANUltimasoperaciones) {
                     FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
@@ -135,4 +139,42 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                 })
                 .show();
     }
+
+    private void showTicketQueryTypeDialog() {
+        CharSequence[] queryTypes = getResources().getStringArray(R.array.array_bolsa_consulta_ticket);
+        new AlertDialog.Builder(getContext())
+                .setTitle("Seleccione el tipo de consulta: ")
+                .setSingleChoiceItems(queryTypes, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                            rDEl7rW1aN bankingSession = new rDEl7rW1aN();
+                            if (bankingSession.getCodeAgent() == null
+                                    || bankingSession.getCodeAgent().getCode().contains("-1")) {
+                                ((S9ycHcoxAzy) getActivity()).actionCallUSSD("103");
+                            } else {
+                                ((IHVTCBmiLV) getActivity()).actionCallUSSD("103");
+                            }
+                        } else {
+                            FragmentManager manager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction transaction = manager.beginTransaction();
+                            Bundle arguments = new Bundle();
+                            arguments.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.BANDEC);
+                            WalletTicketQueryFragment fragment = new WalletTicketQueryFragment();
+                            fragment.setArguments(arguments);
+                            transaction.replace(R.id.containerView, fragment)
+                                    .addToBackStack(null).commit();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
 }

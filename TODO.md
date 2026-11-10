@@ -205,6 +205,7 @@
 - [x] Route BANDEC `BANEstadoCuentas` to source-backed `BandecAccountStatementFragment`; preserve email/date/account validation and selector `26`.
 - [x] Route BANDEC `BANConsultarTodasCuentas` through an explicit Sí/No confirmation and preserve source agent-aware selector `58` dispatch.
 - [x] Route BANDEC `BANConsultaMulta` through a clean fine-type chooser and source-linked adapter; preserve the Metropolitano agency argument for both fine types.
+- [x] Route BANDEC `BANConsultaTicket` through its original two-choice dialog; preserve the agent-aware `103` call and BANDEC reservation lookup (`107`).
 - [x] Remove the unused common `ChangeLimitFragment` shell: `SIxHnoWicq` has no callers; the reachable BANDEC limits action uses `uWkWt7AEZ5`, already routed as `BandecChangeLimitFragment` (selector `61`).
 - [x] Correct the `ChangePasswordFragment` draft to `MultibancaPinChangeFragment`; route `BANCambioPinMultibanca` through the clean settings menu and preserve source validation and selector `75`.
 - [x] Route BANDEC `BANCambiarclave` through clean `ChangePinFragment`; preserve access-key validation and selector `69`.

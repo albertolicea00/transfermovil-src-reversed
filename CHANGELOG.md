@@ -10,6 +10,7 @@
 - Routed BANDEC `BANEstadoCuentas` to `BandecAccountStatementFragment`, preserving the source email/date/account checks and selector `26`.
 - Routed BANDEC `BANConsultarTodasCuentas` through a clean confirmation and preserved agent-aware selector `58` dispatch.
 - Routed BANDEC fine consultation through a clean type chooser and source-linked form adapter, preserving the Contravension/Transito arguments and Metropolitano agency.
+- Routed BANDEC ticket consultation through the source-backed two-choice dialog, preserving agent-aware selector `103` and the BANDEC reservation lookup form.
 - Removed the unreferenced common `BranchSelectionFragment` shell after tracing its stale `vVF87n7MnK` mapping to BANDEC card reprint, already routed through `BandecCardReprintFragment` from Configuración.
 - Removed the unused common `BankAuthMenuFragment` and `SecurityMenuFragment` shells after confirming neither legacy menu has callers; the bank-specific security menus remain the active routes, and `KmgeIVr5RG` has an empty item callback.
 - Removed two stale common shells: `CoordinateAuthFragment` duplicated the routed BANDEC digital-PIN source `RYCvQK4nkF` (selector `79`), while `DisconnectFragment` actually mapped to registration deletion `sxbhjZQZxo` (selector `68`); disconnect remains in the session-menu confirmation.
