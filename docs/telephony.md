@@ -2,6 +2,14 @@
 
 Analysis of USSD and SMS handling in Transfermóvil v1.260416.
 
+The clean `sms/SmsSender` is a source-linked implementation of
+`HzjedYqYeh`: it preserves `SmsManager.sendTextMessage`, the `SENDTO` fallback
+when `SEND_SMS` is missing, the success/failure toast behavior, and inbox
+filtering by exact sender `PAGOxMOVIL`. The source and clean version both return
+before closing the cursor when the body column is absent or the inbox is empty;
+they also assume the query returns a non-null cursor. This parity note does not
+cover runtime permission or provider behavior.
+
 ## QR and barcode scanning
 
 The shared scanner is `OJ3XxacXOT`. It accepts camera input and images selected

@@ -76,7 +76,7 @@
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/FuelSmsImportTask.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsImportTask.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsParser.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsSender.java`.
+- [x] Compare `sms/SmsSender.java` with `HzjedYqYeh`; document matching send/fallback/inbox behavior and the source cursor early-return limitation in [telephony notes](docs/telephony.md).
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/AboutFragment.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/EcommerceMenuFragment.java`.
 - [x] Reconcile `ui/qr/QrCodeGenerator.java` with source `ZUoEY89WdA`; retain all QR generation, image-processing, and decoding entry points under clean method names.
