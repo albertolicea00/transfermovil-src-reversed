@@ -3,6 +3,7 @@
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Added clean profile API routes and a `ProfilePresenter` for source-backed profile fetch, update, password change, and photo conversion; documented the remaining catalog/UI and child-user gaps.
+- Added source-confirmed child-user create/update API adapters and nested-photo preparation helper.
 - Listed the nine clean files without source annotations in the inventory and clarified that listener references alone do not prove the enclosing screen's source identity.
 - Restored Wallet bank-transfer agency inference from destination-card prefixes using archived smali evidence.
 - Linked the BANDEC account-limit, latest-operations, and recent-payments screens to their exact JADX source classes; refreshed the reconstruction inventory.

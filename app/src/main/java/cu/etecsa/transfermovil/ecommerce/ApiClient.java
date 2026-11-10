@@ -212,6 +212,23 @@ public class ApiClient {
         return postAuthenticated("/api/profile/password", request, bearerToken);
     }
 
+    /** Create a child user through the source-confirmed user store endpoint. */
+    public ApiResponse createChildUser(Object request, String bearerToken) {
+        return postAuthenticated("/api/user/store", request, bearerToken);
+    }
+
+    /** Update a child user through the source-confirmed user update endpoint. */
+    public ApiResponse updateChildUser(Object request, String bearerToken) {
+        return postAuthenticated("/api/user/update", request, bearerToken);
+    }
+
+    /** Convert a selected child-user photo in place before create/update. */
+    public void prepareChildUserPhoto(cu.etecsa.transfermovil.ecommerce.model.request.ChildUserCreateRequest request) {
+        if (request == null || request.getUser() == null) return;
+        String photo = request.getUser().getPhoto();
+        if (photo != null && !photo.isEmpty()) request.getUser().setPhoto(convertImageToSend(photo));
+    }
+
     /**
      * Converts a profile image path to the PNG data URI sent by the raw client.
      * Glide decodes it at half the source dimensions before PNG compression.

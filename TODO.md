@@ -345,6 +345,7 @@
 - [x] Restore the `EcommerceActivity` host layout, initial menu, toolbar, splash menu, and back/quit flow from `QqWqw83vJf`.
 - [x] Add clean profile API routes and `ProfilePresenter` for current profile, profile update, and password change; convert a selected photo before update.
 - [ ] Migrate child-user presenter photo request paths for create/update; the clean conversion helper and profile flow are restored.
+- [x] Add clean child-user create/update API adapters for source-confirmed endpoints and nested-photo preparation.
 - [x] Audit callers for `processPUTImage`/`processPOSTImage`; no Java callers or endpoint paths were found, so the multipart overloads remain unported and their boundary behavior unverified.
 - [x] Audit `normalizeImageForUri`, EXIF rotation, and bitmap-to-URI writer callers; none were found in the checked Java tree, so these paths remain unported.
 - [x] Restore `ApiClient.convertImageToSend` PNG/base64 conversion from `y6NQQxH0NI`, including half-size Glide decoding and quality-50 PNG output.
