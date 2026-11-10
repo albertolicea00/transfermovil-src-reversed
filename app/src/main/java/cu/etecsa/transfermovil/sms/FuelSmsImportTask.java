@@ -58,10 +58,10 @@ public class FuelSmsImportTask extends AsyncTask<Void, Integer, Boolean> {
             if (sms == null) {
                 return false;
             }
-            // g0xM9kQCsqu parseSMS = new g0xM9kQCsqu();
-            // for (int i = 0; i < sms.size(); i++) {
-            //     parseSMS.parseCombustible(sms.get(i));
-            // }
+            SmsParser parser = new SmsParser();
+            for (int i = 0; i < sms.size(); i++) {
+                parser.parseCombustible(sms.get(i));
+            }
             return true;
         } catch (Exception ex) {
             Log.d("Ex", ex.getMessage());

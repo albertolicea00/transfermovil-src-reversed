@@ -13,21 +13,22 @@ cover runtime permission or provider behavior.
 ## SMS import pipeline coverage
 
 The raw `g0xM9kQCsqu` parser is about 1,830 lines. The clean `sms/SmsParser`
-currently contains getters, regex helpers, and a date parser, while its
-transaction, wallet, fuel, ticket-offer, purchase-confirmation, and app-data
-parsers remain comments. Consequently, the clean `SmsImportTask` only reads
-the inbox: its parse, deduplication, and database insertion body is commented
-out. Raw `HPuMiTypoW` parses each message and inserts records not already
-present by transaction ID and service type.
+contains getters, regex/date helpers, and the fuel coupon parser. Fuel parsing
+preserves coupon confirmations, status/token updates, coupon-list updates, and
+ticket persistence through the clean `TransportTicket` entity.
+`FuelSmsImportTask` invokes that parser for each inbox message, matching
+`XYfkGsUkKH`.
 
-The clean `FuelSmsImportTask` similarly reads the inbox but its parser loop
-remains commented out. Its UI callback contract now matches raw
-`XYfkGsUkKH`/`Ti8eM28U2E`: visibility `0` in `onPreExecute`, visibility `4`
-in `onPostExecute`, followed by `onCuentasResult(true, 1, "ok")` regardless of
-the background result. The two-argument constructor also matches the raw task
-call used by the ticket screen. Fuel parsing is still blocked on reconstructing
-`SmsParser.parseCombustible`; inbox-read success alone does not mean records
-were imported.
+The general `SmsImportTask` still only reads the inbox: transaction parsing,
+deduplication, and insertion remain commented out because the main `parse`
+method has not yet been reconstructed. Raw `HPuMiTypoW` inserts records not
+already present by transaction ID and service type. The fuel task's UI callback
+contract matches raw `XYfkGsUkKH`/`Ti8eM28U2E`: visibility `0` in
+`onPreExecute`, visibility `4` in `onPostExecute`, followed by
+`onCuentasResult(true, 1, "ok")` regardless of the background result. The
+two-argument constructor also matches the raw task call used by the ticket
+screen. Inbox-read success does not indicate that a message contained a valid
+fuel record; unsupported messages can yield an empty record or null.
 
 ## QR and barcode scanning
 
