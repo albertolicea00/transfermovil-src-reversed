@@ -193,11 +193,11 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 396 | 396 | 2 |
-| Main app package | 596 | 265 | 329 | 2 |
+| All `src/` | 794 | 396 | 397 | 1 |
+| Main app package | 596 | 265 | 330 | 1 |
 
-The live inventory reports 449 clean Java files, 86 mapping entries, no mapping
-issues, and 49 clean files without source annotations. The remaining two
-multiple-candidate sources are `Agg55uYctq` and `umjSGajOy3`; their canonical
-implementations or duplicate annotations still need review. These are exact-link
-counts only and do not establish behavioral completeness.
+The live inventory reports 448 clean Java files, 86 mapping entries, no mapping
+issues, and 49 clean files without source annotations. The remaining
+multiple-candidate source is `Agg55uYctq`; its canonical implementations or
+duplicate annotations still need review. These are exact-link counts only and
+do not establish behavioral completeness.

@@ -16,6 +16,7 @@ import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
 import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.lkLP9buUCl;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiPinAuthFragment;
+import cu.etecsa.transfermovil.banking.ui.bfi.BfiRegistrationFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class MetroNavigationFragment extends Fragment {
             FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
             switch (position) {
                 case 0:
-                    mFragmentTransaction.replace(R.id.containerView, new umjSGajOy3()).addToBackStack(null).commit();
+                    mFragmentTransaction.replace(R.id.containerView, new BfiRegistrationFragment()).addToBackStack(null).commit();
                     break;
                 case 1:
                     mFragmentTransaction.replace(R.id.containerView, new BfiPinAuthFragment()).addToBackStack(null).commit();
