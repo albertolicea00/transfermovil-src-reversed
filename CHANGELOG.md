@@ -4,6 +4,7 @@
 
 - Audited `BfiAssociateAccountFragment` against `F2leFVNWrdy`; confirmed matching card formatting, account validation, foreign-bank warning/confirmation, coordinate challenge, and selector `60` payload.
 - Removed a duplicate empty BANDEC limit-change shell and updated the source-link backlog from the current exact inventory; three other duplicate-candidate links remain queued for review.
+- Routed Metro authentication to shared `BfiPinAuthFragment` after confirming both screens matched source `SvY0xjeNSz`; removed the duplicate Metro copy and source-link collision.
 - Removed the unreferenced common `BranchSelectionFragment` shell after tracing its stale `vVF87n7MnK` mapping to BANDEC card reprint, already routed through `BandecCardReprintFragment` from Configuración.
 - Removed the unused common `BankAuthMenuFragment` and `SecurityMenuFragment` shells after confirming neither legacy menu has callers; the bank-specific security menus remain the active routes, and `KmgeIVr5RG` has an empty item callback.
 - Removed two stale common shells: `CoordinateAuthFragment` duplicated the routed BANDEC digital-PIN source `RYCvQK4nkF` (selector `79`), while `DisconnectFragment` actually mapped to registration deletion `sxbhjZQZxo` (selector `68`); disconnect remains in the session-menu confirmation.

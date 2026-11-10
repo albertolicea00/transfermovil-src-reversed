@@ -97,7 +97,8 @@
 - [ ] Review the remaining 265 main-package source files without exact reconstruction links; distinguish generated code from application logic.
 - [ ] Inventory the 265 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
 - [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
-- [ ] Resolve the three remaining multiple-candidate links (`Agg55uYctq`, `SvY0xjeNSz`, `umjSGajOy3`) by confirming canonical implementations or correcting duplicate annotations.
+- [ ] Resolve the two remaining multiple-candidate links (`Agg55uYctq`, `umjSGajOy3`) by confirming canonical implementations or correcting duplicate annotations.
+- [x] Share the single `SvY0xjeNSz` PIN-auth implementation between BFI and Metro menus; route Metro to `BfiPinAuthFragment` and remove its duplicate screen copy.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
 
 ## Architecture & Navigation
