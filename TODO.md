@@ -203,6 +203,7 @@
 - [x] Remove the duplicate empty `ui/fragment/banking/bandec/BandecChangeLimitFragment` shell; the active operation route uses `operations/BandecChangeLimitFragment` backed by `uWkWt7AEZ5` (selector `61`).
 - [x] Expose clean BANDEC Consultas routes for latest operations (`48`), account limits (`62`), and recent payments (`63`) using correctly named source adapters.
 - [x] Route BANDEC `BANEstadoCuentas` to source-backed `BandecAccountStatementFragment`; preserve email/date/account validation and selector `26`.
+- [x] Route BANDEC `BANConsultarTodasCuentas` through an explicit Sí/No confirmation and preserve source agent-aware selector `58` dispatch.
 - [x] Remove the unused common `ChangeLimitFragment` shell: `SIxHnoWicq` has no callers; the reachable BANDEC limits action uses `uWkWt7AEZ5`, already routed as `BandecChangeLimitFragment` (selector `61`).
 - [x] Correct the `ChangePasswordFragment` draft to `MultibancaPinChangeFragment`; route `BANCambioPinMultibanca` through the clean settings menu and preserve source validation and selector `75`.
 - [x] Route BANDEC `BANCambiarclave` through clean `ChangePinFragment`; preserve access-key validation and selector `69`.
