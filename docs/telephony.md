@@ -299,6 +299,8 @@ The general-mode **Seguridad** menu in `LALCrDPvhM` exposes “Consultar estado 
 The same menu routes “Gestión de planes” separately to `*133#`, and data, voice, SMS, and Amigos plan queries to `*222*328#`, `*222*869#`, `*222*767#`, and `*222*264#`. They should not be conflated with the bonus-status query.
 
 The menu's first recarga action opens `b0kkzvOCEu`, which requires a nonblank bonus key, allows scanning a QR code tagged as `Recarga_Cupon` for ETECSA, then dispatches `662*<key>` through the activity's USSD handler with a confirmation message. Static code establishes the client-side key validation and request construction only; it does not reveal the carrier's bonus accounting, eligibility, or response semantics. Source evidence: `LALCrDPvhM`, `b0kkzvOCEu`, and `ICmtk949Og`.
+
+The other actions in the same three-row bonus/recharge menu (`ICmtk949Og`) are balance transfer and recharge-key change. `C8l2t8799rL` validates an 8-character phone, a 4-character PIN, and a nonempty integer amount, then confirms and dispatches `<phone>*<PIN>*<amount>` with `*234*1`. `E1lhoLKryWP` dispatches `<new-key>*<repeated-key>` with `*234*2`; it intends to require four characters in each field, but both length checks read the new-key field, leaving the repeated field's length unchecked. Neither form persists the values in the inspected code. The source-confirmed templates and branch references are in the [USSD catalog](ussd-code-catalog.md#confirmed-banking-entries-initial-subset).
 | `*222*328` | Data/invoice operation |
 | `*222*767` | Service operation |
 | `*222*869` | Service operation |
