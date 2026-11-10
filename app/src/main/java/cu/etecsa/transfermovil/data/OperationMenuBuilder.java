@@ -1518,7 +1518,7 @@ public class OperationMenuBuilder {
         bolsa26.setTitulo(context.getString(R.string.tx_title_clasica));
         bolsa26.setSubtitulo(context.getString(R.string.tx_subtitle_clasica));
         bolsa26.setImagen(R.drawable.ic_asociar_cuenta_bolsa);
-        bolsa26.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.HTmIvOo9nb");
+        bolsa26.setFragment_name("cu.etecsa.transfermovil.banking.ui.wallet.WalletClassicAccountAssociationFragment");
         bolsa26.setTipo_serivicio(r1sDOSqZ2z6);
         bolsa26.setOrder(31);
         bolsa26.setActivo(true);
@@ -3157,7 +3157,7 @@ public class OperationMenuBuilder {
         bolsa26.setTitulo(this.context.getString(R.string.tx_title_clasica));
         bolsa26.setSubtitulo(this.context.getString(R.string.tx_subtitle_clasica));
         bolsa26.setImagen(R.drawable.ic_asociar_cuenta_bolsa);
-        bolsa26.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.HTmIvOo9nb");
+        bolsa26.setFragment_name("cu.etecsa.transfermovil.banking.ui.wallet.WalletClassicAccountAssociationFragment");
         bolsa26.setTipo_serivicio(r1sDOSqZ2z);
         bolsa26.setOrder(31);
         bolsa26.setActivo(true);

@@ -96,8 +96,8 @@
 - [x] Compare BFI balance, limit, and latest-operation forms with JADX; confirm selectors `46`, `62`, and `48`, their payload construction, and partial-USSD marker `05`.
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
-- [ ] Review the remaining 229 main-package source files without exact reconstruction links; distinguish generated code from application logic.
-- [ ] Inventory the 229 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
+- [ ] Review the remaining 228 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [ ] Inventory the 228 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
 - [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
@@ -300,7 +300,8 @@
 - [x] Reconstruct and route MiTransfer Voto Móvil from `cdINOtQ3iN`; preserve selector 215, encoded 454 dispatch, and channel validation.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
 - [x] Migrate MiTransfer enrollment (`eUkRSfpCKs`) to clean Java and route selector 49, including partial-USSD dispatch.
-- [ ] Migrate remaining MiTransfer wallet registration and classic-account association flows (`KtF0PRB8vS`, `HTmIvOo9nb`, and related routes).
+- [x] Migrate classic-account association (`HTmIvOo9nb`) to clean Java and preserve selector 111, POS-field validation, and saved-account callback.
+- [ ] Migrate remaining MiTransfer wallet package-registration and Nauta payment flows (`eUkRSfpCKs`, `KtF0PRB8vS`, and related routes).
 - [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and tolerate agency-only arguments without invoice-prefill access.
 - [x] Migrate General account-statement query `qAMfdm9Kls`; preserve six-month date pickers, CUP/USD, email validation/encoding, and selector-26 full/partial branches.
 - [x] Migrate General union-payment query `SlZq2dCM9i` by routing to its clean equivalent; preserve QR CI prefill, agency mapping, and selector 121.
