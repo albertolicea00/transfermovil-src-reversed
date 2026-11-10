@@ -668,8 +668,14 @@ public class WalletBankTransferFragment extends EV9Tu0zIL4 implements pAzq93vIl3
                 default: tarjetaDrawable = null; break;
             }
             inputField.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, tarjetaDrawable, null);
+            for (Empresa candidate : this.agenciasList) {
+                if (candidate.getCode().contains(String.valueOf(tipoBanco))) {
+                    this.agencia = candidate;
+                    break;
+                }
+            }
         } catch (Exception ignored) {
-            // Match the original method: malformed and incomplete values are ignored.
+            // Raw implementation ignores malformed values and unavailable agency data.
         }
     }
 

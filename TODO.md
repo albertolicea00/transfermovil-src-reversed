@@ -84,7 +84,7 @@
 - [x] Rebuild the clean MiBoleto ticket base from `L4aAENEGbqv`, move status/key-update/latest-operations screens off the raw base, and remove the empty base placeholder.
 - [x] Reconcile `b6FtEHgm1B` against `QrDynamicPaymentFragment`: same base, layout, QR parsing/menu flow and selectors `31`/`30`; retain the richer clean screen with wallet currencies and stricter amount checks, and remove the null-returning duplicate shell.
 - [x] Migrate public-service/PCC draft `udysei7zCr` into clean `PublicServicePaymentFragment`; retain its CUP-only bolsa selector, contact-confirmation flow, validation, and selector `7` full/partial (`04`) USSD payload.
-- [x] Recover `WalletBankTransferFragment.mostrarTarjeta()` bank-logo branches from sibling source and shared validator evidence; document PAN/standard prefixes and drawable behavior.
+- [x] Recover `WalletBankTransferFragment.mostrarTarjeta()` from archived smali; match PAN/standard prefixes, drawables, and first matching transfer-agency selection.
 - [x] Reconstruct the BFI USSD account base from Agg55uYctq by reusing clean account selection/card behavior and restoring observer callbacks and the four-parameter packet limit.
 - [x] Migrate the BFI payment form and the QR/contact base it needs onto clean Java; preserve both selector-31/selector-30 payment branches.
 - [x] Migrate the BFI enterprise-transfer form from `f1IveoSASW` onto `BfiUssdAccountFragment` and connect the three transfer modes to it.
