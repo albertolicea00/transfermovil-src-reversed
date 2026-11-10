@@ -101,6 +101,7 @@
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
 - [x] Link fourteen source-confirmed MiBoleto, ticket reservation, OFA, TFA, Cubacel-package, fixed-phone, and Voto Móvil screens; regenerate the exact-link inventory.
 - [x] Link `BfiEnterpriseTransferFragment`, `BankTransferBfiFragment`, `MiBoletoPurchaseFragment`, and `WalletExtraPackageFragment` to their source-confirmed classes; refresh the inventory.
+- [x] Link the BANDEC limit, latest-operations, and recent-payments wrapper screens to their exact source classes; refresh the inventory.
 - [x] Migrate the BANDEC enrollment form body from `wLHKkaC4Ha` into `BandecRegistrationFragment`, restore card icons from smali, and link the source exactly.
 - [x] Migrate the BANDEC card-status query from `HgJHxigegS` into `BandecCardInfoQueryFragment`, restore its card-icon method from smali, and link the source exactly.
 - [x] Compare `BankingAccountValidatorFragment` with archived `EV9Tu0zIL4`; correct the PAN currency slice to source characters 3–4 and record the bank/currency offsets.
