@@ -32,6 +32,8 @@
 - Refreshed reconstruction inventory after linking four Wallet configuration forms; 221 main-package sources remain unlinked.
 - Linked and compared General Wallet enterprise transfer with `Z3kYdPwq6K2`; confirmed selector `220`, agency `08`, validations, and dispatcher variants.
 - Refreshed source inventory after linking General Wallet enterprise transfer; 220 main-package sources remain unlinked.
+- Linked `WalletWithdrawFragment` to its identical `f9Reflqt3EZ` source body and confirmed the Wallet menu route for selector 95.
+- Refreshed reconstruction inventory after linking Wallet cash withdrawal; 219 main-package sources remain unlinked.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.

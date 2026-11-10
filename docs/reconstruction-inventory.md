@@ -193,24 +193,24 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 351 | 443 | 0 |
-| Main app package | 596 | 220 | 376 | 0 |
+| All `src/` | 794 | 350 | 444 | 0 |
+| Main app package | 596 | 219 | 377 | 0 |
 
 Generated with `python3 scripts/reconstruction-inventory.py` from the current
 `src/`, clean Java tree, and `mappings/classes.json`. The live inventory reports
 456 clean Java files, 85 mapping entries, no mapping issues or duplicate
-candidates, and 13 clean files without source annotations. Duplicate candidates
+candidates, and 12 clean files without source annotations. Duplicate candidates
 were resolved by reusing shared BFI authentication/registration screens and
 removing false source tags from derived helpers. The unused `UssdDispatcher`
 Activity mapping was removed because the active source is a static helper
 called directly by the app. These are exact-link counts only and do not
 establish behavioral completeness.
 
-The 220 unlinked main-package sources group by first package segment as follows:
+The 219 unlinked main-package sources group by first package segment as follows:
 
 | Original package segment | Unlinked files |
 | --- | ---: |
-| `B0jOLrWx09th` | 146 |
+| `B0jOLrWx09th` | 145 |
 | `l08fNVC4KOKK` | 20 |
 | `B21UyndcVvF` | 16 |
 | `ZNRpoHwtLXM` | 13 |
@@ -225,8 +225,9 @@ their exact source classes, reducing main-package unlinked sources from 236 to
 linked classic-account association, reducing it to 228, linked BFI external
 payment, reducing it to 227, linked the BFI QR/contact base, reducing it to
 226, linked the MiTransfer Nauta household form, reducing it to 225, and linked
-four Wallet tab forms, reducing it to 221, and linked General Wallet enterprise
-transfer, reducing it to 220.
+four Wallet tab forms, reducing it to 221, linked General Wallet enterprise
+transfer, reducing it to 220, and linked Wallet cash withdrawal, reducing it
+to 219.
 This refresh establishes the current package distribution only. It does not
 classify the obfuscated classes as generated code, Android glue, or application
 behavior; that source-by-source review and exact-link cleanup remain open.

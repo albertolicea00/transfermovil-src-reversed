@@ -1,6 +1,6 @@
 # MiTransfer cash withdrawal ticket
 
-The clean [`WalletWithdrawFragment`](../app/src/main/java/cu/etecsa/transfermovil/ui/fragment/WalletWithdrawFragment.java) reconstructs the raw `f9Reflqt3EZ` flow. The operations menu routes `BOLSAExtraccionWalletTicket` to this fragment.
+The clean [`WalletWithdrawFragment`](../app/src/main/java/cu/etecsa/transfermovil/ui/fragment/WalletWithdrawFragment.java) is body-identical to raw `f9Reflqt3EZ` after normalizing package and class name. The operations menu routes `BOLSAExtraccionWalletTicket` to this fragment.
 
 ## Entity and location selection
 
