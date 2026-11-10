@@ -48,23 +48,34 @@ public final class ChildUserPresenter {
 
     private void execute(Operation operation, Object request) {
         new AsyncTask<Void, Void, ApiResponse>() {
-            @Override protected void onPreExecute() { callback.onProgressVisibility(0); }
+            @Override protected void onPreExecute() {
+                if (callback != null) callback.onProgressVisibility(0);
+            }
             @Override protected ApiResponse doInBackground(Void... ignored) {
-                ApiClient api = ApiClient.getInstance(context);
-                if ((operation == Operation.CREATE || operation == Operation.UPDATE)
-                        && request instanceof ChildUserCreateRequest)
-                    api.prepareChildUserPhoto((ChildUserCreateRequest) request);
-                switch (operation) {
-                    case LIST: return api.listChildUsers(token);
-                    case DETAIL: return api.getChildUser(request, token);
-                    case CREATE: return api.createChildUser(request, token);
-                    case UPDATE: return api.updateChildUser(request, token);
-                    case DELETE: return api.deleteChildUser(request, token);
-                    case STATUS: return api.setChildUserStatus(request, token);
-                    default: throw new IllegalStateException(operation.name());
+                try {
+                    ApiClient api = ApiClient.getInstance(context);
+                    if ((operation == Operation.CREATE || operation == Operation.UPDATE)
+                            && request instanceof ChildUserCreateRequest)
+                        api.prepareChildUserPhoto((ChildUserCreateRequest) request);
+                    switch (operation) {
+                        case LIST: return api.listChildUsers(token);
+                        case DETAIL: return api.getChildUser(request, token);
+                        case CREATE: return api.createChildUser(request, token);
+                        case UPDATE: return api.updateChildUser(request, token);
+                        case DELETE: return api.deleteChildUser(request, token);
+                        case STATUS: return api.setChildUserStatus(request, token);
+                        default: throw new IllegalStateException(operation.name());
+                    }
+                } catch (Exception error) {
+                    ApiResponse failure = new ApiResponse();
+                    failure.setError(true);
+                    failure.setCodigoHTTP(500);
+                    failure.setMenssaje(error.getMessage() == null ? "Request failed" : error.getMessage());
+                    return failure;
                 }
             }
             @Override protected void onPostExecute(ApiResponse response) {
+                if (callback == null) return;
                 callback.onProgressVisibility(4);
                 if (operation == Operation.LIST) callback.onListResult(mapList(response));
                 else if (operation == Operation.DETAIL) callback.onDetailResult(mapDetail(response));

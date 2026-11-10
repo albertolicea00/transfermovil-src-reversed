@@ -355,6 +355,7 @@
 - [x] Migrate child-user create/update request paths to a clean presenter that prepares a nonempty photo before dispatch.
 - [ ] Connect child-user presenter results to clean UI callbacks.
 - [x] Give `ChildUserPresenter` distinct typed list, detail, and mutation callback methods.
+- [x] Deliver child-user request exceptions through the typed failure callback path and tolerate an absent UI callback.
 - [x] Map child-user list payload `dt.rows` into the clean `ChildUserListResponse` fields from source.
 - [x] Map child-user detail payload `user` into its clean response model, retaining source JSON for province/municipality catalog resolution.
 - [x] Resolve child-user province and municipality from the initialized local region tables and map them into e-commerce region models.

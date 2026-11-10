@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Routed child-user presenter exceptions through typed failure callbacks and guarded progress/result delivery when no UI callback is attached, matching the source presenter's null-view and exception handling.
 - Compared `WalletBoletoTabFragment` with `hOQ4ESKEhm`; its four management entries, dialog choices, and clean fragment routes match source.
 - Restored the classic Wallet account formatter's source `KEYCODE_DEL` listener, preserving its deletion-state handling while leaving the key event unconsumed.
 - Traced `WalletEnrollmentFragment.validateEmail()` to its lone unused declaration; the source selector-49 submit path does not validate email.
