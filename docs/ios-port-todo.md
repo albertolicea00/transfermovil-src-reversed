@@ -8,7 +8,8 @@ Target Android client: Transfermóvil 1.260416 (`cu.etecsa.cubacel.tr.tm-v162.ap
 - [ ] Test USSD feasibility on supported iPhone and iOS versions. Apple's [Phone Links documentation](https://developer.apple.com/library/archive/featuredarticles/iPhoneURLScheme_Reference/PhoneLinks/PhoneLinks.html) says `tel:` links containing `*` or `#` are not dialed and that dialing requires user confirmation. Verify current device behavior and whether any public API supports the required USSD requests and responses. Do not assume Android's `ACTION_CALL`, `sendUssdRequest()`, or accessibility-dialog capture can be replicated.
 - [ ] Check SMS parity. Apple's [Message UI](https://developer.apple.com/documentation/messageui) provides a user-facing compose screen in which the user can edit, send, or cancel. Investigate whether any public API meets the app's direct-send and incoming-response parsing needs; document the precise limits before selecting an alternative.
 - [ ] Check whether Core Telephony exposes the SIM, carrier, and line-selection information each workflow requires. Start with Apple's [Core Telephony reference](https://developer.apple.com/documentation/coretelephony).
-- [ ] Check App Store distribution requirements and any carrier/bank agreements needed for the selected approach. Record sources and dates for policy conclusions.
+- [x] Record the current App Store submission requirement relevant to banking/financial services; keep the developer entity, carrier/bank authorization, and storefront scope unresolved until a port owner is identified.
+- [ ] Confirm which legal entity can submit the port and obtain ETECSA/bank/carrier approvals for the selected markets and implementation.
 
 ## Porting work to scope after feasibility
 
@@ -32,5 +33,9 @@ Target Android client: Transfermóvil 1.260416 (`cu.etecsa.cubacel.tr.tm-v162.ap
 | QR and device integrations | Scan/render QR, access contacts/camera, notify, and update the app. | Use AVFoundation/Vision and system permission flows; app updates are distributed through platform channels rather than the Android package installer. | Rebuild Android service, file, background-work, and installer behavior individually. | Feasible per feature, subject to device testing and distribution rules. |
 
 Static source/documentation review completed 2026-11-10. The API and distribution conclusions remain provisional until current device tests and the App Store/carrier-policy review are completed.
+
+### Distribution and authorization (reviewed 2026-11-10)
+
+Apple's current [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) state that apps in highly regulated fields such as banking and financial services, or apps requiring sensitive user information, should be submitted by the legal entity providing those services. Apple's [complete-review documentation](https://developer.apple.com/help/app-review/before-submitting-for-review/complete-review/) lists partnership documentation from the financial institution or bank providing the service for financial apps. Transfermóvil's client-visible banking and wallet operations make this a material review gate, but this static review cannot determine the appropriate submitting entity, licensing status, or required agreements for a future iOS product. Those points require the service owner and Apple to confirm against the proposed feature set and target storefronts.
 
 **Done when:** The matrix cites Apple documentation and supported-device tests, names every blocked or user-assisted feature, and yields a scoped iOS implementation plan with explicit parity limits.
