@@ -12,6 +12,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecPaymentStatusFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecCardInfoQueryFragment;
+import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecInvoiceQueryFragment;
 
 /**
  * BANDEC Consultas menu with a clean route for external-payment status.
@@ -30,7 +31,11 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
 
             @Override
             public void onGetItemClick(View view, FdonIAFI9w operation) {
-                if (operation == FdonIAFI9w.BANInfoTarjeta) {
+                if (operation == FdonIAFI9w.BANConsultarServicio) {
+                    FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.containerView, new BandecInvoiceQueryFragment()).addToBackStack(null).commit();
+                } else if (operation == FdonIAFI9w.BANInfoTarjeta) {
                     FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.replace(R.id.containerView, new BandecCardInfoQueryFragment()).addToBackStack(null).commit();

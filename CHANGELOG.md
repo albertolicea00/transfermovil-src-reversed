@@ -8,6 +8,7 @@
 - Removed the misidentified `BankOperationBaseFragment` shell: mapped source `p3NpwYhcUs3` is the contracted-services operation enum, not a base fragment; clean BANDEC routes continue to use the enum values.
 - Removed seven unreachable common banking shells for electricity, fines, gas, loan amortization, public services, utility bills, and wire transfers; their source fingerprints have no callers, while reachable BANDEC operations already use bank-specific clean adapters.
 - Routed BANDEC `BANInfoTarjeta` to `BandecCardInfoQueryFragment`, preserving the source's 16-digit account validation and selector `78`; removed the obsolete common placeholder.
+- Routed BANDEC `BANConsultarServicio` to `BandecInvoiceQueryFragment`, preserving utility and ONAT query paths with selectors `47`, `56`, and `22`; removed the misnamed common placeholder.
 - Removed the unused common limit-change shell mapped to caller-free `SIxHnoWicq`; the reachable BANDEC limits action remains routed through `BandecChangeLimitFragment` from `uWkWt7AEZ5`.
 - Connected BANDEC access-key and Multibanca PIN changes to clean source-backed forms; corrected the stale `ChangePasswordFragment` mapping and preserved selectors `69`/`75`.
 - Connected BANDEC `BANAutenticar` to source-backed `AuthenticateFragment` in the clean session menu; preserved password validation and dispatch `02`/`40`.

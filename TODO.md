@@ -204,7 +204,7 @@
 - [x] Remove the unused common `ElectricityPaymentFragment` shell: source `D38ae2xieeM` has no callers; reachable electricity routes use bank-specific reconstructed screens.
 - [x] Remove the unused common `FinePaymentFragment` shell: source `CiYPvcQWEO` has no callers; no clean menu route targets it.
 - [x] Remove the unused common `GasPaymentFragment` shell: source `sT2WhSOo3S` has no callers; reachable gas routes use bank-specific reconstructed screens.
-- [ ] Trace source and callers for `ui/fragment/banking/common/InvoiceSelectionFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [x] Route BANDEC `BANConsultarServicio` to source-backed `BandecInvoiceQueryFragment`; preserve invoice/ONAT service selection and dispatch selectors `47`, `56`, and `22`, and remove the stale common shell.
 - [x] Migrate `q9DNC6bnexm` into `InvoiceTypeSelectionFragment` and route BANDEC contracted-service add/query/delete actions to it; preserve saved-invoice handling, operation arguments, confirmations, and selector `52` behavior.
 - [x] Remove the unused common `LoanAmortizationFragment` shell: source `kAazEwDasT` has no callers; the reachable BANDEC loan route uses its bank-specific screen.
 - [x] Remove the unused common `PublicServicePaymentFragment` shell: source `CA73VZ4FAR` has no callers; live public-service routes use their specific clean screens.
