@@ -354,9 +354,9 @@
 ## Cubacel Mobile
 
 - [x] Identify plan consultation features (data, voice, SMS, amigos)
-- [ ] Decompile mobile top-up flow (OP_Recg_movil)
+- [x] Trace agent-mode mobile top-up (`OP_Recg_movil`), including validation, saved-number behavior, and selector `12` ([recharge notes](docs/wallet-mobile-recharge.md#agent-mode-mobile-recharge-ussd)).
 - [x] Document plan purchase flows (compraplanescubacel.json)
-- [ ] Trace phone debt consultation (OP_Deuda_Telefono)
+- [x] Trace agent-mode fixed-phone debt query (`OP_Deuda_Telefono`), including saved-number behavior and selector `1` ([fixed-phone notes](docs/wallet-fixed-phone-payment.md#agent-mode-fixed-phone-debt-query-ussd)).
 - [x] Document the client-visible bonus status query and coupon-key recharge flow, with carrier-side rules explicitly left unknown ([telephony notes](docs/telephony.md#cubacel-bonus-flows-static-source-evidence)).
 
 ## Dynamic Checks (When Emulator Available)

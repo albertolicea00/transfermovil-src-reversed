@@ -15,3 +15,7 @@ For CUP, the form selects service `54` and `tipoBolsa=2`; for USD, service `23` 
 - [`WalletTopupFragment.java`](../app/src/main/java/cu/etecsa/transfermovil/ui/fragment/WalletTopupFragment.java) and [`MainBankingTabFragment.java`](../app/src/main/java/cu/etecsa/transfermovil/banking/ui/tabs/MainBankingTabFragment.java): clean form and route.
 
 The dispatcher request is source-confirmed; this note does not claim carrier-side acceptance or runtime behavior.
+
+## Agent-mode mobile recharge (USSD)
+
+The agent mobile drawer (`g1bQ0lLj6na`) labels its third row `OP_Recg_movil` and routes it to `A9IFPpW4HW`. This is a separate USSD flow from the MiTransfer wallet top-up above. The form accepts an 8-digit phone and a nonempty amount (the source does not parse or numerically validate the amount), adds a previously unseen phone to the saved mobile list, then asks for confirmation and dispatches selector `12` with `<phone>*<amount>`. The confirmation text identifies CUP. Evidence: `g1bQ0lLj6na`, `A9IFPpW4HW`; runtime carrier behavior is not verified.
