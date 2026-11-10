@@ -24,6 +24,7 @@
 - Added exact source annotations to fourteen migrated MiBoleto, ticket reservation, OFA, TFA, Cubacel package, fixed-phone, and Voto Móvil screens; the unlinked main-package count is now 242.
 - Linked the BFI enterprise transfer, classic transfer, MiBoleto purchase, and Wallet extra-package screens to their source classes; 238 main-package sources remain unlinked.
 - Migrated BANDEC registration from the raw fragment into clean Java, restored its card-icon mapping from archived smali, and reduced the unmapped main-package source count to 237.
+- Migrated the BANDEC card-status query to clean Java, restored its card-icon mapping from smali, and reduced the unmapped main-package count to 236.
 - Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Added a provisional iOS screen/feature scope and a gated, read-only USSD feasibility proof-of-concept.
 - Restored the reachable e-commerce profile PNG/base64 conversion helper and closed source-call audits for unused multipart and EXIF image utilities.
