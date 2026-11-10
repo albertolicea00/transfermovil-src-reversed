@@ -3,6 +3,7 @@ package cu.etecsa.transfermovil.sms;
 import android.content.ContentResolver;
 import android.os.AsyncTask;
 import android.util.Log;
+import cu.etecsa.transfermovil.banking.ui.OffersResultCallback;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,16 +21,17 @@ import java.util.Date;
 public class OffersSmsTask extends AsyncTask<Void, Integer, Boolean> {
     private ContentResolver contentResolver;
     private int nuevasOfertas = 0;
-    // private SYLBHJttme resultView;
+    private OffersResultCallback resultView;
 
-    public OffersSmsTask(ContentResolver contentResolver) {
+    public OffersSmsTask(ContentResolver contentResolver, OffersResultCallback resultView) {
         this.contentResolver = contentResolver;
+        this.resultView = resultView;
     }
 
     @Override
     public void onPreExecute() {
         super.onPreExecute();
-        // setProgressBarVisibility(View.VISIBLE);
+        setProgressBarVisibility(0);
     }
 
     @Override
@@ -39,10 +41,20 @@ public class OffersSmsTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Override
     public void onPostExecute(Boolean result) {
-        // setProgressBarVisibility(View.GONE);
-        // String mensaje = result ? nuevasOfertas + " nuevas ofertas procesadas"
-        //                         : "Error al procesar ofertas";
-        // if (resultView != null) resultView.onOfertasResult(result, nuevasOfertas, mensaje);
+        setProgressBarVisibility(4);
+        if (this.resultView != null) {
+            boolean success = result.booleanValue();
+            String message = success
+                    ? this.nuevasOfertas + " nuevas ofertas procesadas"
+                    : "Error al procesar ofertas";
+            this.resultView.onOfertasResult(success, this.nuevasOfertas, message);
+        }
+    }
+
+    public void setProgressBarVisibility(int visibility) {
+        if (this.resultView != null) {
+            this.resultView.onSetProgressBarVisibility(visibility);
+        }
     }
 
     private boolean procesarSMSOfertas() {
@@ -59,13 +71,13 @@ public class OffersSmsTask extends AsyncTask<Void, Integer, Boolean> {
             if (sms == null) {
                 return false;
             }
-            // g0xM9kQCsqu parseSMS = new g0xM9kQCsqu();
+            SmsParser parser = new SmsParser();
             boolean processedAny = false;
             for (int i = 0; i < sms.size(); i++) {
                 SmsMessage smsProperty = sms.get(i);
                 Date smsDate = smsProperty.getDate();
                 if (smsDate != null && !smsDate.before(startOfTodayDate)) {
-                    // parseSMS.parseOfertasBoleto(smsProperty);
+                    parser.parseOfertasBoleto(smsProperty);
                     processedAny = true;
                 }
             }

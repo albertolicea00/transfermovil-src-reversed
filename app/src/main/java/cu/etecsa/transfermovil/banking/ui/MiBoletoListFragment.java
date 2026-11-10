@@ -39,13 +39,13 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.transfermovil.banking.AuthValidator;
 import cu.etecsa.transfermovil.core.enums.OperationType;
 import cu.etecsa.transfermovil.banking.ui.OffersResultCallback;
+import cu.etecsa.transfermovil.sms.OffersSmsTask;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AOperKey;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CompraBoleto;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.QRMiBoleto;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.ZUoEY89WdA;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.DHfGEge8yT;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.HrLy23Pb9b;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
@@ -147,7 +147,7 @@ public class MiBoletoListFragment extends AuthValidator implements DmvQBLZLbV.Vi
     public void onResume() {
         super.onResume();
         validate();
-        new DHfGEge8yT(getContext().getContentResolver(), this).execute(new Void[0]);
+        new OffersSmsTask(getContext().getContentResolver(), this).execute(new Void[0]);
     }
 
     private void loadData(boolean isAutenticated) {
@@ -177,7 +177,7 @@ public class MiBoletoListFragment extends AuthValidator implements DmvQBLZLbV.Vi
         progressDialog.setMessage("Actualizando boletos...");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        new DHfGEge8yT(getActivity().getContentResolver(), new SYLBHJttme() { // from class: cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.MiBoletoListFragment.5
+        new OffersSmsTask(getActivity().getContentResolver(), new OffersResultCallback() { // from class: cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.MiBoletoListFragment.5
             @Override
             public void onSetProgressBarVisibility(int visibility) {
             }

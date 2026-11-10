@@ -32,11 +32,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.transfermovil.sms.OffersSmsTask;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CompraBoleto;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.QRMiBoleto;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.ZUoEY89WdA;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.DHfGEge8yT;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0;
 import java.text.SimpleDateFormat;
@@ -46,7 +46,7 @@ import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.j1jiweJ8ci */
-public class MiBoletoEditFragment extends Fragment implements SYLBHJttme {
+public class MiBoletoEditFragment extends Fragment implements OffersResultCallback {
     public Activity activity;
     public ImageView btHelp;
     public ImageView btHelpEstado;
@@ -235,7 +235,7 @@ public class MiBoletoEditFragment extends Fragment implements SYLBHJttme {
                 progressDialog.setMessage("Actualizando boleto...");
                 progressDialog.setCancelable(false);
                 progressDialog.show();
-                new DHfGEge8yT(getActivity().getContentResolver(), new SYLBHJttme() { // from class: cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.MiBoletoEditFragment.7
+                new OffersSmsTask(getActivity().getContentResolver(), new OffersResultCallback() { // from class: cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.MiBoletoEditFragment.7
                     @Override // cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.SYLBHJttme
                     public void onSetProgressBarVisibility(int visibility) {
                     }

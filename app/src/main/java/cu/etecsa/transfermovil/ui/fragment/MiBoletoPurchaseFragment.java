@@ -43,16 +43,16 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.j256.ormlite.field.FieldType;
+import cu.etecsa.transfermovil.banking.ui.OffersResultCallback;
+import cu.etecsa.transfermovil.sms.OffersSmsTask;
 import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.OfertasBoleto;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.SYLBHJttme;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.As6QBoLoQJ;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.DHfGEge8yT;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
@@ -313,7 +313,7 @@ public class MiBoletoPurchaseFragment extends Fragment implements pAzq93vIl3.Uss
             progressDialog.setMessage("Actualizando ofertas de MiBoleto...");
             progressDialog.setCancelable(false);
             progressDialog.show();
-            new DHfGEge8yT(MiBoletoPurchaseFragment.this.getActivity().getContentResolver(), new SYLBHJttme() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.MiBoletoPurchaseFragment.4.1
+            new OffersSmsTask(MiBoletoPurchaseFragment.this.getActivity().getContentResolver(), new OffersResultCallback() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.MiBoletoPurchaseFragment.4.1
                 @Override // cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.SYLBHJttme
                 public void onSetProgressBarVisibility(int visibility) {
                 }

@@ -23,13 +23,19 @@ decrypt and delete, matching the raw parser's sequence.
 `FuelSmsImportTask` invokes that parser for each inbox message, matching
 `XYfkGsUkKH`.
 
-The main `SmsParser.parse` now routes PAGOxMOVIL transaction and service
-messages into records, including same-day promotions and plan-catalog updates.
+The SMS parser now includes the transaction, wallet, fuel, ticket-offer,
+purchase-confirmation, and app-data methods from `g0xM9kQCsqu`. The main
+`SmsParser.parse` routes PAGOxMOVIL transaction and service messages into
+records, including same-day promotions and plan-catalog updates. MiBoleto offer
+parsing persists offer lists and ticket purchases, applies status/token updates,
+and refreshes attraction data from purchase confirmations.
 `SmsImportTask` stores parsed records with their inbox timestamp and skips an
 existing record with the same transaction ID and service type, matching
-`HPuMiTypoW`. Ticket-offer parsing and the separate purchase-confirmation
-handler remain to be reconstructed. The fuel task's UI callback contract
-matches raw `XYfkGsUkKH`/`Ti8eM28U2E`: visibility `0` in
+`HPuMiTypoW`. `OffersSmsTask` filters inbox messages from the start of the
+current day and passes each eligible message to the ticket parser, matching
+`DHfGEge8yT`; its source counter is never incremented, so the callback reports
+zero new offers. The three clean MiBoleto screens now use this clean task. The
+fuel task's UI callback contract matches raw `XYfkGsUkKH`/`Ti8eM28U2E`: visibility `0` in
 `onPreExecute`, visibility `4` in `onPostExecute`, followed by
 `onCuentasResult(true, 1, "ok")` regardless of the background result. The
 two-argument constructor also matches the raw task call used by the ticket

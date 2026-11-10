@@ -1,5 +1,7 @@
 package cu.etecsa.transfermovil.sms;
 
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +22,8 @@ import cu.etecsa.transfermovil.data.entity.TransportTicket;
 import cu.etecsa.transfermovil.data.entity.WalletCurrency;
 import cu.etecsa.transfermovil.data.entity.CubacelPlan;
 import cu.etecsa.transfermovil.data.entity.SmsPromotion;
+import cu.etecsa.transfermovil.data.entity.TicketPurchase;
+import cu.etecsa.transfermovil.data.entity.TicketOffer;
 import cu.etecsa.transfermovil.core.enums.BankType;
 import cu.etecsa.transfermovil.core.enums.AgentSource;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0;
@@ -288,7 +292,7 @@ public class SmsParser {
                     record.setServicio("Pago Teléfono(P)");
                     record.setMostrar(true);
                 } catch (Exception e3) {
-                    e = e3;
+                    // Source intentionally ignores malformed partial phone-bill records.
                 }
             }
             if (sms.contains("El pago de la factura del agua fue completado.")) {
@@ -949,7 +953,572 @@ public class SmsParser {
      *
      * @return RecordSMS for ticket operation, or null
      */
-    // public RecordSMS parseOfertasBoleto(SmsMessage sms_properties) { ... }
+    public SmsRecord parseOfertasBoleto(SmsMessage sms_properties) {
+        String str;
+        String str2;
+        String str3;
+        String[] bloques;
+        String CONS_ID_OFERTA;
+        String CONS_NOMBRE;
+        String CONS_NOMBRE2;
+        int i;
+        String CONS_DATOS;
+        String CONS_FECHA_INIC;
+        int i2;
+        SmsRecord record = new SmsRecord();
+        try {
+            String datos = sms_properties.getBody();
+            if (datos.contains("Consulta de las ofertas disponibles Mi Boleto")) {
+                try {
+                    procesarListadoOfertas(datos, sms_properties.getDate());
+                } catch (Exception e) {
+                    Log.e("parseOfertasBoleto", "Error: " + e.getMessage(), e);
+                    return null;
+                }
+            }
+            String transaccion = "Importe pagado:";
+            String transferencia = "Id_Banco:";
+            String moneda = "Id_tm:";
+            String fechaVenc = "Nombre:";
+            String nombre = "Atraccion;Nombre;Monto/cantidad;Moneda";
+            String ci = "Token:";
+            String fechaComp = "IdOferta:";
+            if (datos.contains("Mi Boleto: La compra de la oferta se realizo correctamente.")) {
+                String idOferta = getElement("IdOferta:", datos);
+                String nombre2 = getElementLine("Nombre:", datos);
+                String token = getElement("Token:", datos);
+                String transaccion2 = getElement("Id_tm:", datos);
+                String transferencia2 = getElement("Id_Banco:", datos);
+                String precio = getElement("Importe pagado:", datos);
+                String moneda2 = getElement("Moneda:", datos);
+                String ci2 = getElement("CI Beneficiario:", datos);
+                String compra = getElement("Compra:", datos);
+                String fechaInic = getElement("Fecha Inicial Oferta:", datos);
+                String fechaVenc2 = getElement("Fecha Final Oferta:", datos);
+                String datos2 = extractAttractionData(datos, "Atraccion;Nombre;Monto/cantidad;Moneda");
+                record.setIdTransaccion(transaccion2);
+                record.setMonto(precio);
+                str = "Fecha Final Oferta:";
+                record.setMoneda(moneda2);
+                str2 = "CI Beneficiario:";
+                record.setServicio("Compra Mi Boleto");
+                str3 = "Moneda:";
+                record.setMostrar(true);
+                if (DatabaseHelper.getInstance().getCompraBoleto(idOferta).size() == 0) {
+                    TicketPurchase nueva = new TicketPurchase();
+                    try {
+                        nueva.setIdOferta(idOferta);
+                        nueva.setAlias(nombre2);
+                        nueva.setToken(token);
+                        nueva.setIdTransaccion(transaccion2);
+                        nueva.setIdTransferencia(transferencia2);
+                        nueva.setPrecio(Double.parseDouble(precio));
+                        nueva.setMoneda(moneda2);
+                        nueva.setCi(ci2);
+                        nueva.setTipoCompra(compra);
+                        nueva.setFechaCompra(sms_properties.getDate());
+                        nueva.setFechaInicial(parseFecha(fechaInic));
+                        nueva.setFechaVencimiento(parseFecha(fechaVenc2));
+                        nueva.setFechaActualizacion(sms_properties.getDate());
+                        nueva.setDatos(datos2);
+                        nueva.setConsumido(false);
+                        nueva.setEstado("ACTIVA");
+                        DatabaseHelper.getInstance().addCompraMiBoleto(nueva);
+                    } catch (Exception e2) {
+                        Log.e("parseOfertasBoleto", "Error: " + e2.getMessage(), e2);
+                        return null;
+                    }
+                }
+            } else {
+                str = "Fecha Final Oferta:";
+                str2 = "CI Beneficiario:";
+                str3 = "Moneda:";
+            }
+            if (datos.contains("Mi Boleto: Cambio de Pin completado.")) {
+                String idOferta2 = getElement("IdOferta:", datos);
+                String token2 = getElement("Token:", datos);
+                String datos3 = extractAttractionData(datos, "Atraccion;Nombre;Monto/cantidad;Moneda");
+                List<TicketPurchase> existentes = DatabaseHelper.getInstance().getCompraBoleto(idOferta2);
+                if (existentes.size() != 0) {
+                    TicketPurchase existente = existentes.get(0);
+                    if (sms_properties.getDate().after(existente.getFechaActualizacion())) {
+                        existente.setEstado("ACTIVA");
+                        existente.setToken(token2);
+                        existente.setDatos(datos3);
+                        existente.setConsumido(false);
+                        existente.setFechaActualizacion(sms_properties.getDate());
+                        DatabaseHelper.getInstance().updateCompraMiboleto(existente);
+                    }
+                }
+            }
+            String CONS_DATOS2 = "Personal";
+            String token3 = "Fecha Compra:";
+            if (!datos.contains("Mi Boleto: La consulta se realizo correctamente")) {
+                datos = datos;
+                token3 = "Fecha Compra:";
+                transaccion = "Importe pagado:";
+                transferencia = "Id_Banco:";
+                moneda = "Id_tm:";
+                fechaVenc = "Nombre:";
+                nombre = "Atraccion;Nombre;Monto/cantidad;Moneda";
+                ci = "Token:";
+                fechaComp = "IdOferta:";
+            } else {
+                String CONS_MONEDA = str3;
+                String CONS_CI_BENEFICIARIO = str2;
+                String idOferta3 = getElement("IdOferta:", datos);
+                String nombre3 = getElementLine("Nombre:", datos);
+                String token4 = getElement("Token:", datos);
+                String transaccion3 = getElement("Id_tm:", datos);
+                String transferencia3 = getElement("Id_Banco:", datos);
+                String precio2 = getElement("Importe pagado:", datos);
+                String moneda3 = getElement(CONS_MONEDA, datos);
+                String ci3 = getElement(CONS_CI_BENEFICIARIO, datos);
+                String fechaVenc3 = getElement("Fecha Oferta:", datos);
+                String fechaComp2 = getElement("Fecha Compra:", datos);
+                String fechaEnd = getElement("Fecha Final Disfrute:", datos);
+                String estado = getElement("Estado:", datos);
+                String datos4 = extractAttractionData(datos, "Atraccion;Nombre;Monto/cantidad;Moneda");
+                List<TicketPurchase> existentes2 = DatabaseHelper.getInstance().getCompraBoleto(idOferta3);
+                if (existentes2.size() != 0) {
+                    TicketPurchase existente2 = existentes2.get(0);
+                    if (sms_properties.getDate().after(existente2.getFechaActualizacion())) {
+                        existente2.setIdOferta(idOferta3);
+                        existente2.setAlias(nombre3);
+                        existente2.setToken(token4);
+                        existente2.setIdTransaccion(transaccion3);
+                        existente2.setIdTransferencia(transferencia3);
+                        existente2.setPrecio(Double.parseDouble(precio2));
+                        existente2.setMoneda(moneda3);
+                        existente2.setCi(ci3);
+                        existente2.setFechaCompra(parseFecha(fechaComp2));
+                        existente2.setFechaInicial(parseFecha(fechaVenc3));
+                        existente2.setFechaActualizacion(sms_properties.getDate());
+                        existente2.setDatos(datos4);
+                        existente2.setConsumido(false);
+                        if (!estado.equals("Activo")) {
+                            existente2.setConsumido(true);
+                        }
+                        DatabaseHelper.getInstance().updateCompraMiboleto(existente2);
+                    }
+                } else {
+                    token3 = "Fecha Compra:";
+                    nombre = "Atraccion;Nombre;Monto/cantidad;Moneda";
+                    transaccion = "Importe pagado:";
+                    transferencia = "Id_Banco:";
+                    moneda = "Id_tm:";
+                    ci = "Token:";
+                    fechaVenc = "Nombre:";
+                    fechaComp = "IdOferta:";
+                    datos = datos;
+                    TicketPurchase nueva2 = new TicketPurchase();
+                    nueva2.setIdOferta(idOferta3);
+                    nueva2.setAlias(nombre3);
+                    nueva2.setToken(token4);
+                    nueva2.setIdTransaccion(transaccion3);
+                    nueva2.setIdTransferencia(transferencia3);
+                    nueva2.setPrecio(Double.parseDouble(precio2));
+                    nueva2.setMoneda(moneda3);
+                    nueva2.setCi(ci3);
+                    nueva2.setTipoCompra("Personal");
+                    nueva2.setFechaCompra(parseFecha(fechaComp2));
+                    nueva2.setFechaInicial(parseFecha(fechaVenc3));
+                    nueva2.setFechaVencimiento(parseFecha(fechaEnd));
+                    nueva2.setFechaActualizacion(sms_properties.getDate());
+                    nueva2.setDatos(datos4);
+                    nueva2.setEstado("ACTIVA");
+                    nueva2.setConsumido(false);
+                    DatabaseHelper.getInstance().addCompraMiBoleto(nueva2);
+                }
+            }
+            String sms = datos;
+            if (sms.contains("Mi Boleto: La consulta de las ofertas adquiridas antes de")) {
+                List<TicketPurchase> boletos = new ArrayList<>();
+                String[] bloques2 = sms.split("\\*{6}");
+                String CONS_ID_OFERTA2 = fechaComp;
+                String CONS_FECHA_INIC2 = fechaVenc;
+                String CONS_TOKEN = ci;
+                String CONS_TRANSACCION = moneda;
+                String CONS_TRANSFERENCIA = transferencia;
+                String CONS_PRECIO = transaccion;
+                String CONS_MONEDA2 = str3;
+                String CONS_CI_BENEFICIARIO2 = str2;
+                String CONS_FECHA_COMPRA = token3;
+                String CONS_DATOS3 = "Fecha Inicio Oferta:";
+                String CONS_FECHA_ATRACCION = str;
+                String CONS_DATOS4 = nombre;
+                int i3 = 1;
+                while (i3 < bloques2.length) {
+                    String bloque = bloques2[i3].trim();
+                    if (bloque.isEmpty()) {
+                        bloques = bloques2;
+                        CONS_ID_OFERTA = CONS_ID_OFERTA2;
+                        CONS_NOMBRE = CONS_FECHA_INIC2;
+                        CONS_NOMBRE2 = CONS_DATOS3;
+                        CONS_FECHA_INIC = CONS_DATOS4;
+                        CONS_DATOS2 = CONS_DATOS2;
+                        i2 = i3;
+                    } else {
+                        try {
+                            TicketPurchase boleto = new TicketPurchase();
+                            bloques = bloques2;
+                            i = i3;
+                            try {
+                                boleto.setIdOferta(getElementLine(CONS_ID_OFERTA2, bloque));
+                                boleto.setAlias(getElementLine(CONS_FECHA_INIC2, bloque));
+                                boleto.setToken(getElementLine(CONS_TOKEN, bloque));
+                                boleto.setIdTransaccion(getElementLine(CONS_TRANSACCION, bloque));
+                                boleto.setIdTransferencia(getElementLine(CONS_TRANSFERENCIA, bloque));
+                                String precioStr = getElementLine(CONS_PRECIO, bloque);
+                                if (precioStr == null) {
+                                    CONS_ID_OFERTA = CONS_ID_OFERTA2;
+                                    CONS_NOMBRE = CONS_FECHA_INIC2;
+                                } else {
+                                    CONS_ID_OFERTA = CONS_ID_OFERTA2;
+                                    CONS_NOMBRE = CONS_FECHA_INIC2;
+                                    try {
+                                        boleto.setPrecio(Double.parseDouble(precioStr));
+                                    } catch (Exception e3) {
+                                        CONS_NOMBRE2 = CONS_DATOS3;
+                                        CONS_DATOS = CONS_DATOS4;
+                                        CONS_FECHA_INIC = CONS_DATOS;
+                                        StringBuilder sb = new StringBuilder();
+                                        sb.append("Error procesando boleto ");
+                                        i2 = i;
+                                        sb.append(i2);
+                                        Log.e("BOLETO_ERROR", sb.toString(), e3);
+                                        procesarBoletos(boletos);
+                                        i3 = i2 + 1;
+                                        CONS_DATOS2 = CONS_DATOS2;
+                                        bloques2 = bloques;
+                                        CONS_ID_OFERTA2 = CONS_ID_OFERTA;
+                                        CONS_DATOS4 = CONS_FECHA_INIC;
+                                        CONS_DATOS3 = CONS_NOMBRE2;
+                                        CONS_FECHA_INIC2 = CONS_NOMBRE;
+                                    }
+                                }
+                                try {
+                                    String CONS_ID_OFERTA3 = getElementLine(CONS_MONEDA2, bloque);
+                                    boleto.setMoneda(CONS_ID_OFERTA3);
+                                    boleto.setCi(getElementLine(CONS_CI_BENEFICIARIO2, bloque));
+                                    String fechaCompraStr = getElementLine(CONS_FECHA_COMPRA, bloque);
+                                    CONS_NOMBRE2 = CONS_DATOS3;
+                                    try {
+                                        String fechaInic2 = getElementLine(CONS_NOMBRE2, bloque);
+                                        String precioStr2 = CONS_FECHA_ATRACCION;
+                                        try {
+                                            String fechaAtraccionStr = getElementLine(precioStr2, bloque);
+                                            CONS_FECHA_ATRACCION = precioStr2;
+                                            boleto.setFechaCompra(parseFecha(fechaCompraStr));
+                                            boleto.setFechaInicial(parseFecha(fechaInic2));
+                                            boleto.setFechaVencimiento(parseFecha(fechaAtraccionStr));
+                                            CONS_DATOS = CONS_DATOS4;
+                                            try {
+                                                String fechaAtraccionStr2 = extractAttractionData(bloque, CONS_DATOS);
+                                                boleto.setDatos(fechaAtraccionStr2);
+                                                boleto.setEstado("ACTIVA");
+                                                boleto.setTipoCompra(CONS_DATOS2);
+                                                boleto.setConsumido(false);
+                                                boleto.setFechaActualizacion(sms_properties.getDate());
+                                                boletos.add(boleto);
+                                                CONS_FECHA_INIC = CONS_DATOS;
+                                                i2 = i;
+                                            } catch (Exception e4) {
+                                                CONS_FECHA_INIC = CONS_DATOS;
+                                                StringBuilder sb2 = new StringBuilder();
+                                                sb2.append("Error procesando boleto ");
+                                                i2 = i;
+                                                sb2.append(i2);
+                                                Log.e("BOLETO_ERROR", sb2.toString(), e4);
+                                            }
+                                        } catch (Exception e5) {
+                                            CONS_FECHA_ATRACCION = precioStr2;
+                                            CONS_DATOS = CONS_DATOS4;
+                                        }
+                                    } catch (Exception e6) {
+                                        CONS_DATOS = CONS_DATOS4;
+                                    }
+                                } catch (Exception e7) {
+                                    CONS_NOMBRE2 = CONS_DATOS3;
+                                    CONS_DATOS = CONS_DATOS4;
+                                }
+                            } catch (Exception e8) {
+                                CONS_ID_OFERTA = CONS_ID_OFERTA2;
+                                CONS_NOMBRE = CONS_FECHA_INIC2;
+                                CONS_NOMBRE2 = CONS_DATOS3;
+                                CONS_DATOS = CONS_DATOS4;
+                            }
+                        } catch (Exception e9) {
+                            bloques = bloques2;
+                            CONS_ID_OFERTA = CONS_ID_OFERTA2;
+                            CONS_NOMBRE = CONS_FECHA_INIC2;
+                            CONS_NOMBRE2 = CONS_DATOS3;
+                            i = i3;
+                            CONS_DATOS = CONS_DATOS4;
+                        }
+                        procesarBoletos(boletos);
+                    }
+                    i3 = i2 + 1;
+                    CONS_DATOS2 = CONS_DATOS2;
+                    bloques2 = bloques;
+                    CONS_ID_OFERTA2 = CONS_ID_OFERTA;
+                    CONS_DATOS4 = CONS_FECHA_INIC;
+                    CONS_DATOS3 = CONS_NOMBRE2;
+                    CONS_FECHA_INIC2 = CONS_NOMBRE;
+                }
+            }
+            if (sms.contains("Mi Boleto: La operacion se realizo correctamente")) {
+                procesarConfirmacionCompra(sms, sms_properties.getDate());
+            }
+            if (sms.contains("Mi Boleto: Error en la reserva")) {
+                String CONS_ID_OFERTA4 = fechaComp;
+                String CONS_TOKEN2 = ci;
+                String idOferta4 = getElement(CONS_ID_OFERTA4, sms);
+                String token5 = getElement(CONS_TOKEN2, sms);
+                List<TicketPurchase> existentes3 = DatabaseHelper.getInstance().getCompraBoleto(idOferta4);
+                if (existentes3.size() != 0) {
+                    TicketPurchase existente3 = existentes3.get(0);
+                    if (sms_properties.getDate().after(existente3.getFechaActualizacion())) {
+                        existente3.setToken(token5);
+                        existente3.setConsumido(false);
+                        existente3.setFechaActualizacion(sms_properties.getDate());
+                        DatabaseHelper.getInstance().updateCompraMiboleto(existente3);
+                    }
+                }
+            }
+            return record;
+        } catch (Exception e10) {
+            return null;
+        }
+    }
+
+    private void procesarListadoOfertas(String sms, Date sms_date) {
+        String CONS_TRANSACCION;
+        String ic_control;
+        String ofertaLimpia;
+        String CONS_CABECERA = "Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad";
+        String CONS_TRANSACCION2 = "Id_tm:";
+        String ic_control2 = getElement("Id_tm:", sms);
+        long id_tm = Long.parseLong(ic_control2);
+        if (esIdTmValido(id_tm) && sms.contains("Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad")) {
+            try {
+                DatabaseHelper.getInstance().deleteOfertasWithIdTmLess(id_tm);
+                int startIndex = "Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad".length() + sms.indexOf("Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad");
+                String ofertasPart = sms.substring(startIndex).trim();
+                String[] ofertas = ofertasPart.split("\\|");
+                int length = ofertas.length;
+                int i = 0;
+                while (i < length) {
+                    String oferta = ofertas[i];
+                    String ofertaLimpia2 = oferta.trim();
+                    if (ofertaLimpia2.isEmpty()) {
+                        CONS_TRANSACCION = CONS_TRANSACCION2;
+                        ic_control = ic_control2;
+                        ofertaLimpia = CONS_CABECERA;
+                    } else {
+                        String[] campos = ofertaLimpia2.split(";");
+                        ofertaLimpia = CONS_CABECERA;
+                        if (campos.length >= 7) {
+                            try {
+                                TicketOffer nuevaOferta = new TicketOffer();
+                                nuevaOferta.setId(campos[0].trim());
+                                nuevaOferta.setNombre(campos[1].trim());
+                                CONS_TRANSACCION = CONS_TRANSACCION2;
+                                try {
+                                    nuevaOferta.setFecha(sms_date);
+                                    String intervaloFechas = campos[4].trim();
+                                    nuevaOferta.setFechaOferta(intervaloFechas);
+                                    nuevaOferta.setValidDays(Integer.parseInt(campos[5]));
+                                    nuevaOferta.setCantPersona(Integer.parseInt(campos[6]));
+                                    nuevaOferta.setId_control(id_tm);
+                                    try {
+                                        ic_control = ic_control2;
+                                        try {
+                                            try {
+                                                nuevaOferta.setPrecio(Double.parseDouble(campos[2].trim()));
+                                                nuevaOferta.setMoneda(campos[3].trim());
+                                                DatabaseHelper.getInstance().addOfertasMiBoleto(nuevaOferta);
+                                            } catch (NumberFormatException e) {
+                                                Log.e("Ofertas", "Formato de precio inválido: " + campos[2]);
+                                            }
+                                        } catch (Exception e2) {
+                                            Log.e("Ofertas", "Error procesando ofertas: " + e2.getMessage(), e2);
+                                            return;
+                                        }
+                                    } catch (NumberFormatException e3) {
+                                        ic_control = ic_control2;
+                                    }
+                                } catch (Exception e4) {
+                                    Log.e("Ofertas", "Error procesando ofertas: " + e4.getMessage(), e4);
+                                    return;
+                                }
+                            } catch (Exception e5) {
+                            }
+                        } else {
+                            CONS_TRANSACCION = CONS_TRANSACCION2;
+                            ic_control = ic_control2;
+                            Log.e("Ofertas", "Formato incorrecto, campos insuficientes: " + ofertaLimpia2);
+                        }
+                    }
+                    i++;
+                    CONS_CABECERA = ofertaLimpia;
+                    CONS_TRANSACCION2 = CONS_TRANSACCION;
+                    ic_control2 = ic_control;
+                }
+                Log.i("Ofertas", "Ofertas actualizadas correctamente. ID_TM: " + id_tm);
+            } catch (Exception e6) {
+            }
+        }
+    }
+
+    private boolean esIdTmValido(long id_tm) {
+        try {
+            List<TicketOffer> boletos = DatabaseHelper.getInstance().getAllOfertasmiBoletoOrderBy();
+            if (boletos != null && !boletos.isEmpty()) {
+                long primerIdControl = boletos.get(0).getId_control();
+                return id_tm >= primerIdControl;
+            }
+            return true;
+        } catch (Exception e) {
+            Log.e("Ofertas", "Error validando ID_TM: " + e.getMessage(), e);
+            return false;
+        }
+    }
+
+    public void procesarConfirmacionCompra(String sms, Date fechaSms) {
+        try {
+            String idOferta = getElement("IdOferta:", sms);
+            String token = getElement("Token:", sms);
+            try {
+                String datosAtraccion = extractAttractionData(sms, "Atraccion;Nombre;Monto/cantidad;Moneda");
+                if (datosAtraccion != null && !datosAtraccion.isEmpty()) {
+                    String[] atracciones = datosAtraccion.split("\\|");
+                    for (String atraccion : atracciones) {
+                        String[] campos = atraccion.split(";");
+                        if (campos.length >= 4) {
+                            String idAtraccion = campos[0].trim();
+                            String nombreAtraccion = campos[1].trim();
+                            String montoAtraccion = campos[2].trim();
+                            String monedaAtraccion = campos[3].trim();
+                            actualizarAtraccionEnOferta(idOferta, idAtraccion, nombreAtraccion, montoAtraccion, monedaAtraccion, token, fechaSms);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("ProcesarConfirmacion", "Error al procesar confirmación: " + e.getMessage(), e);
+            }
+        } catch (Exception e2) {
+        }
+    }
+
+    private void actualizarAtraccionEnOferta(String idOferta, String idAtraccion, String nombre, String monto, String moneda, String token, Date fecha) {
+        List<TicketPurchase> ofertas;
+        try {
+            List<TicketPurchase> ofertas2 = DatabaseHelper.getInstance().getCompraBoleto(idOferta);
+            TicketPurchase oferta = ofertas2.get(0);
+            if (oferta == null) {
+                Log.e("ActualizarAtraccion", "No se encontró la oferta con ID: " + idOferta);
+                return;
+            }
+            if (fecha.after(oferta.getFechaActualizacion())) {
+                String datosActuales = oferta.getDatos();
+                try {
+                    if (datosActuales == null || datosActuales.isEmpty()) {
+                        Log.e("ActualizarAtraccion", "La oferta no tiene datos de atracciones");
+                        return;
+                    }
+                    StringBuilder nuevosDatos = new StringBuilder();
+                    String[] atracciones = datosActuales.split("\\|");
+                    int length = atracciones.length;
+                    int i = 0;
+                    while (i < length) {
+                        String atraccion = atracciones[i].trim();
+                        if (atraccion.isEmpty()) {
+                            ofertas = ofertas2;
+                            datosActuales = datosActuales;
+                        } else {
+                            String[] campos = atraccion.split(";");
+                            ofertas = ofertas2;
+                            if (campos.length < 4) {
+                                datosActuales = datosActuales;
+                            } else {
+                                String idActual = campos[0].trim();
+                                if (!idActual.equals(idAtraccion)) {
+                                    nuevosDatos.append(atraccion);
+                                } else if (!monto.equals("0")) {
+                                    nuevosDatos.append(String.format(Locale.US, "%s;%s;%s;%s", idAtraccion, nombre, monto, moneda));
+                                }
+                                if (nuevosDatos.length() > 0 && !nuevosDatos.toString().endsWith(" | ")) {
+                                    nuevosDatos.append(" | ");
+                                }
+                            }
+                        }
+                        i++;
+                        ofertas2 = ofertas;
+                        datosActuales = datosActuales;
+                    }
+                    oferta.setDatos(nuevosDatos.toString());
+                    oferta.setToken(token);
+                    oferta.setFechaActualizacion(fecha);
+                    DatabaseHelper.getInstance().updateCompraMiboleto(oferta);
+                    Log.i("ActualizarAtraccion", "Atracción actualizada en oferta: " + idOferta);
+                } catch (Exception e) {
+                    Log.e("ActualizarAtraccion", "Error al actualizar atracción: " + e.getMessage(), e);
+                }
+            }
+        } catch (Exception e2) {
+        }
+    }
+
+    private void procesarBoletos(List<TicketPurchase> boletos) {
+        if (boletos == null || boletos.isEmpty()) {
+            return;
+        }
+        try {
+            for (TicketPurchase boletoSMS : boletos) {
+                List<TicketPurchase> existentes = DatabaseHelper.getInstance().getCompraBoleto(boletoSMS.getIdOferta());
+                if (existentes != null && !existentes.isEmpty()) {
+                    TicketPurchase existente = existentes.get(0);
+                    if (boletoSMS.getFechaActualizacion().after(existente.getFechaActualizacion())) {
+                        existente.setToken(boletoSMS.getToken());
+                        existente.setIdTransaccion(boletoSMS.getIdTransaccion());
+                        existente.setIdTransferencia(boletoSMS.getIdTransferencia());
+                        existente.setPrecio(boletoSMS.getPrecio());
+                        existente.setMoneda(boletoSMS.getMoneda());
+                        existente.setFechaVencimiento(boletoSMS.getFechaVencimiento());
+                        existente.setEstado(boletoSMS.getEstado());
+                        existente.setDatos(boletoSMS.getDatos());
+                        existente.setConsumido(boletoSMS.isConsumido());
+                        existente.setFechaActualizacion(new Date());
+                        DatabaseHelper.getInstance().updateCompraMiboleto(existente);
+                    }
+                } else {
+                    DatabaseHelper.getInstance().addCompraMiBoleto(boletoSMS);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("DB_BOLETOS", "Error guardando boletos", e);
+        }
+    }
+
+    private String extractAttractionData(String sms, String startLabel) {
+        int startIndex = sms.indexOf(startLabel);
+        if (startIndex == -1) {
+            return BuildConfig.FLAVOR;
+        }
+        int dataStart = startLabel.length() + startIndex;
+        String remainingSMS = sms.substring(dataStart).trim();
+        StringBuilder result = new StringBuilder();
+        String[] lines = remainingSMS.split("\\r?\\n");
+        for (String str : lines) {
+            String line = str.trim();
+            if (line.matches("^\\d+;.*")) {
+                result.append(line);
+                result.append("\n");
+            }
+        }
+        return result.toString().trim();
+    }
 
     // --- Purchase confirmation (lines 1536–1624) ---
 
@@ -957,7 +1526,7 @@ public class SmsParser {
      * Processes purchase confirmation SMS (Cubacel plans, etc).
      * Updates CompraPlanesCubacel records with confirmation status.
      */
-    // public void procesarConfirmacionCompra(String sms, Date fechaSms) { ... }
+
 
     // --- App data extraction (lines 1625–1676) ---
 
@@ -1303,18 +1872,23 @@ public class SmsParser {
         return "";
     }
 
-    /**
-     * Parses date string in multiple formats (dd/MM/yyyy HH:mm:ss, etc).
-     */
     private Date parseFecha(String fechaStr) {
-        String[] formats = {"dd/MM/yyyy HH:mm:ss", "dd/MM/yyyy", "yyyy-MM-dd HH:mm:ss"};
-        for (String fmt : formats) {
-            try {
-                return new SimpleDateFormat(fmt).parse(fechaStr);
-            } catch (Exception e) {
-                // try next format
-            }
+        if (fechaStr == null || fechaStr.isEmpty()) {
+            return null;
         }
-        return null;
+        try {
+            String[] partes = fechaStr.split("/");
+            if (partes.length != 3) {
+                return null;
+            }
+            String mes = partes[1];
+            String dia = partes[0];
+            String fechaInvertida = dia + "-" + mes + "-" + partes[2];
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            return sdf.parse(fechaInvertida);
+        } catch (Exception e) {
+            Log.e("DATE_ERROR", "Error al parsear fecha", e);
+            return null;
+        }
     }
 }
