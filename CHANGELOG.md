@@ -21,6 +21,8 @@
 - Migrated classic MiTransfer account association to clean Java, preserving selector 111, source validation, account persistence, and both menu routes.
 - Preserved partial saved-account prefill lengths in the classic-account form's grouped display.
 - Refreshed reconstruction inventory after linking classic-account association; 228 main-package sources remain unlinked.
+- Linked and compared BFI enterprise external payment with `Eqj43O0pUx`; confirmed validation, QR payloads, selector routing, and partial-USSD packet construction.
+- Refreshed the source inventory after linking BFI external payment; 227 main-package sources remain unlinked.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.

@@ -51,6 +51,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.VW6IL66KC6M.Eqj43O0pUx */
 public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
     private static final int MAX_LENGHT = 130;
     private static final int MAX_LENGHT_ID = 15;
