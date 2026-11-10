@@ -16,6 +16,7 @@
 - Migrated BANDEC account-limit, latest-operations, and payment-status form bodies into the clean screens, preserving selector and payload order while retaining their shared source account-selection base.
 - Reconstructed the shared BANDEC account-selection base as clean code, adapted its saved-account access to clean entities, restored card rendering from archived smali, and rewired the three query forms.
 - Refreshed the source inventory after adding the exact `DQIrxODoMU` base link; main-package unlinked sources now total 230.
+- Migrated MiTransfer enrollment into clean Java and routed the menu to its selector-49 form, preserving validation and partial-USSD dispatch.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.

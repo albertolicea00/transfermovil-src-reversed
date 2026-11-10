@@ -299,7 +299,8 @@
 - [x] Restore the OFA visit-query form from `dYBdUyjb1D`, replace its mislabeled settings stub, and connect the General-mode dialog while preserving selectors, argument handling, validation, and selector 9.
 - [x] Reconstruct and route MiTransfer Voto Móvil from `cdINOtQ3iN`; preserve selector 215, encoded 454 dispatch, and channel validation.
 - [x] Document Cubacel plan purchase flow (`compraplanescubacel.json`), catalog version field, and selector payload construction.
-- [ ] Decompile and migrate remaining MiTransfer wallet flows.
+- [x] Migrate MiTransfer enrollment (`eUkRSfpCKs`) to clean Java and route selector 49, including partial-USSD dispatch.
+- [ ] Migrate remaining MiTransfer wallet registration and classic-account association flows (`KtF0PRB8vS`, `HTmIvOo9nb`, and related routes).
 - [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and tolerate agency-only arguments without invoice-prefill access.
 - [x] Migrate General account-statement query `qAMfdm9Kls`; preserve six-month date pickers, CUP/USD, email validation/encoding, and selector-26 full/partial branches.
 - [x] Migrate General union-payment query `SlZq2dCM9i` by routing to its clean equivalent; preserve QR CI prefill, agency mapping, and selector 121.

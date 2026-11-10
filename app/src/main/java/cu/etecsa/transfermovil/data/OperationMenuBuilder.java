@@ -1267,7 +1267,7 @@ public class OperationMenuBuilder {
         bolsa2.setTitulo(context.getString(R.string.tx_registrarse));
         bolsa2.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
         bolsa2.setImagen(R.drawable.ic_registrarse_bolsa);
-        bolsa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.eUkRSfpCKs");
+        bolsa2.setFragment_name("cu.etecsa.transfermovil.banking.ui.wallet.WalletEnrollmentFragment");
         BankType r1sDOSqZ2z6 = BankType.MiTransfer;
         bolsa2.setTipo_serivicio(r1sDOSqZ2z6);
         bolsa2.setOrder(1);
@@ -2906,7 +2906,7 @@ public class OperationMenuBuilder {
         bolsa2.setTitulo(this.context.getString(R.string.tx_registrarse));
         bolsa2.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
         bolsa2.setImagen(R.drawable.ic_registrarse_bolsa);
-        bolsa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.eUkRSfpCKs");
+        bolsa2.setFragment_name("cu.etecsa.transfermovil.banking.ui.wallet.WalletEnrollmentFragment");
         BankType r1sDOSqZ2z = BankType.MiTransfer;
         bolsa2.setTipo_serivicio(r1sDOSqZ2z);
         bolsa2.setOrder(1);
