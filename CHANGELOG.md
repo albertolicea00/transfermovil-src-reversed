@@ -7,6 +7,7 @@
 - Linked the BANDEC invoice-debt and postal-order query screens to their exact JADX source classes; refreshed the reconstruction inventory.
 - Restored fuel coupon SMS parsing and ticket updates from JADX, adapting the database entities, then reconnected the fuel inbox import loop from smali.
 - Documented the Wallet union-dues query's selector-121 route, bank IDs, identity handling, and encoded dispatcher payload.
+- Restored the SMS parser's encrypted wallet-currency refresh and agent telecom-wallet confirmation branches from JADX.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.

@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,9 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import cu.etecsa.transfermovil.data.DatabaseHelper;
 import cu.etecsa.transfermovil.data.entity.SmsRecord;
 import cu.etecsa.transfermovil.data.entity.TransportTicket;
+import cu.etecsa.transfermovil.data.entity.WalletCurrency;
+import cu.etecsa.transfermovil.core.enums.AgentSource;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0;
 
 /**
  * @original_apk_version 1.260416
@@ -93,7 +97,6 @@ public class SmsParser {
      * Parses "Wallet:" SMS responses to update TMonedasWallet table.
      * Extracts currency list and allowTransfer flags.
      */
-    // public void parseMonedasWallet(String sms) { ... }
 
     // --- Agent/Telecom wallet (lines 816–882) ---
 
@@ -101,7 +104,138 @@ public class SmsParser {
      * Parses agent telecom wallet operation responses.
      * @return RecordSMS for the wallet transaction
      */
-    // public RecordSMS parseAgentesTelecomWallet(String sms) { ... }
+
+    /** Replaces saved wallet currencies from an encrypted Wallet SMS. */
+    public void parseMonedasWallet(String sms) {
+        String data = getElement("Informacion:", sms);
+        String transaccionBanco = getElement("Id Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+        String transaccionTM = getElement("ID TM:", sms).replace(".", BuildConfig.FLAVOR);
+        byte[] bArr = new byte[0];
+        try {
+            byte[] salt = transaccionBanco.getBytes("UTF-8");
+            try {
+                String vSer = V5FFEZ0Qrr0.decryptMonedasWallet(data, transaccionTM, salt, 2);
+                if (vSer != null) {
+                    try {
+                        String[] list = vSer.split("\\|");
+                        boolean deleted = DatabaseHelper.getInstance().deleteMonedasWallet();
+                        if (deleted) {
+                            WalletCurrency mon = new WalletCurrency();
+                            mon.setId("1");
+                            mon.setDescripcion("Cuenta USD");
+                            mon.setCurrency("USD");
+                            mon.setFecha(new Date());
+                            mon.setAllowTransfer(1);
+                            DatabaseHelper.getInstance().addMonedasWallet(mon);
+                            mon.setId("2");
+                            mon.setDescripcion("Cuenta CUP");
+                            mon.setCurrency("CUP");
+                            mon.setFecha(new Date());
+                            mon.setAllowTransfer(1);
+                            DatabaseHelper.getInstance().addMonedasWallet(mon);
+                            mon.setId("-MIS CUENTAS-");
+                            mon.setDescripcion("-MIS CUENTAS-");
+                            mon.setCurrency("-MIS CUENTAS-");
+                            mon.setFecha(new Date());
+                            mon.setAllowTransfer(1);
+                            DatabaseHelper.getInstance().addMonedasWallet(mon);
+                            int length = list.length;
+                            int i = 0;
+                            while (i < length) {
+                                String moneda = list[i];
+                                String[] uyh0pxs9m37in = moneda.split(";");
+                                int i2 = length;
+                                if (uyh0pxs9m37in.length == 4) {
+                                    WalletCurrency mon2 = new WalletCurrency();
+                                    mon2.setId(uyh0pxs9m37in[0]);
+                                    mon2.setDescripcion(uyh0pxs9m37in[1]);
+                                    mon2.setCurrency(uyh0pxs9m37in[2]);
+                                    mon2.setAllowTransfer(Integer.parseInt(uyh0pxs9m37in[3]));
+                                    mon2.setFecha(new Date());
+                                    DatabaseHelper.getInstance().addMonedasWallet(mon2);
+                                }
+                                i++;
+                                length = i2;
+                            }
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            } catch (Exception e2) {
+                throw new RuntimeException(e2);
+            }
+        } catch (UnsupportedEncodingException e3) {
+            throw new RuntimeException(e3);
+        }
+    }
+
+    /** Parses agent telecom wallet recharge, Nauta, and phone-bill confirmations. */
+    public SmsRecord parseAgentesTelecomWallet(String sms) {
+        SmsRecord record = new SmsRecord();
+        try {
+            if (sms.contains("La recarga se realizo con exito.")) {
+                String transaccionBanco = getElement("Id transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie = getElement("Telefono:", sms).replace(".", BuildConfig.FLAVOR);
+                String importe = getElement("Saldo acreditado:", sms);
+                String valor = "Saldo acreditado: " + importe;
+                String moneda = getElement(valor, sms).substring(0, 3);
+                record.setCuenta(idSerie);
+                record.setMonto(importe);
+                record.setMoneda(moneda);
+                record.setIdTransaccion(transaccionBanco);
+                record.setServicio("Recarga Móvil");
+                record.setTipo_servicio(AgentSource.Agentes);
+                record.setMostrar(true);
+            }
+            if (sms.contains("La cuenta Nauta Hogar:") && sms.contains("ha sido pagada con")) {
+                String transaccion = getElement("Id Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra = getElement("Nauta Hogar:", sms);
+                String importe2 = getElement("pagada con", sms);
+                String valor2 = "pagada con " + importe2;
+                String CONS_NO_TRANSACCION = getElement(valor2, sms);
+                String moneda2 = CONS_NO_TRANSACCION.substring(0, 3);
+                record.setCuenta(idcompra);
+                record.setMonto(importe2);
+                record.setMoneda(moneda2);
+                record.setIdTransaccion(transaccion);
+                record.setServicio("Nauta Hogar");
+                record.setTipo_servicio(AgentSource.Agentes);
+                record.setMostrar(true);
+            }
+            if (sms.contains("La cuenta :") && sms.contains("ha sido recargada con")) {
+                String transaccionBanco2 = getElement("Id Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idSerie2 = getElement("La cuenta :", sms).replace(".", BuildConfig.FLAVOR);
+                String importe3 = getElement("ha sido recargada con", sms);
+                String valor3 = "ha sido recargada con " + importe3;
+                String moneda3 = getElement(valor3, sms).substring(0, 3);
+                record.setCuenta(idSerie2);
+                record.setMonto(importe3);
+                record.setMoneda(moneda3);
+                record.setIdTransaccion(transaccionBanco2);
+                record.setServicio("Recarga Nauta");
+                record.setTipo_servicio(AgentSource.Agentes);
+                record.setMostrar(true);
+            }
+            if (sms.contains("El pago de la factura telefonica fue completado") && sms.contains("Monto Pagado:")) {
+                String transaccion2 = getElement("Nro. Transaccion:", sms).replace(".", BuildConfig.FLAVOR);
+                String idcompra2 = getElement("Nro. Factura Pagada:", sms);
+                String importe4 = getElement("Monto Pagado:", sms);
+                String valor4 = "Monto Pagado: " + importe4;
+                String moneda4 = getElement(valor4, sms).substring(0, 3);
+                record.setCuenta(idcompra2);
+                record.setMonto(importe4);
+                record.setMoneda(moneda4);
+                record.setIdTransaccion(transaccion2);
+                record.setServicio("Factura Telefónica");
+                record.setTipo_servicio(AgentSource.Agentes);
+                record.setMostrar(true);
+                return record;
+            }
+            return record;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     // --- Fuel/Combustible (source lines 883–1090) ---
 
