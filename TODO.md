@@ -130,7 +130,8 @@
 ## SMS
 - [ ] Reconstruct the omitted `g0xM9kQCsqu` SMS parser methods for transaction, wallet, fuel, ticket, purchase-confirmation, and app-data messages.
 - [ ] Restore `SmsImportTask` parsing, transaction/service deduplication, database insertion, and result behavior from `HPuMiTypoW`.
-- [ ] Restore `FuelSmsImportTask` parsing and `Ti8eM28U2E` progress/completion callbacks from `XYfkGsUkKH`.
+- [ ] Restore `FuelSmsImportTask` fuel parsing from `XYfkGsUkKH` once `SmsParser.parseCombustible` is reconstructed.
+- [x] Restore `FuelSmsImportTask` constructor and `Ti8eM28U2E` progress/completion callback contract from `XYfkGsUkKH`.
 
 - [x] Identify SMS receiver (X9ZiE8XZNKy)
 - [x] Decompile SMS receiver — stub/no-op, real handling elsewhere

@@ -20,11 +20,14 @@ the inbox: its parse, deduplication, and database insertion body is commented
 out. Raw `HPuMiTypoW` parses each message and inserts records not already
 present by transaction ID and service type.
 
-The clean `FuelSmsImportTask` similarly reads the inbox but has its parser loop
-and UI callback commented out. Raw `XYfkGsUkKH` parses every message as fuel,
-shows/hides progress through `Ti8eM28U2E`, and reports completion in
-`onPostExecute`. The parser and importer differences are tracked as migration
-work below; inbox-read success alone does not mean records were imported.
+The clean `FuelSmsImportTask` similarly reads the inbox but its parser loop
+remains commented out. Its UI callback contract now matches raw
+`XYfkGsUkKH`/`Ti8eM28U2E`: visibility `0` in `onPreExecute`, visibility `4`
+in `onPostExecute`, followed by `onCuentasResult(true, 1, "ok")` regardless of
+the background result. The two-argument constructor also matches the raw task
+call used by the ticket screen. Fuel parsing is still blocked on reconstructing
+`SmsParser.parseCombustible`; inbox-read success alone does not mean records
+were imported.
 
 ## QR and barcode scanning
 

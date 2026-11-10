@@ -3,6 +3,7 @@ package cu.etecsa.transfermovil.sms;
 import android.content.ContentResolver;
 import android.os.AsyncTask;
 import android.util.Log;
+import cu.etecsa.transfermovil.banking.ui.AccountsResultCallback;
 import java.util.ArrayList;
 
 /**
@@ -17,20 +18,23 @@ import java.util.ArrayList;
  */
 public class FuelSmsImportTask extends AsyncTask<Void, Integer, Boolean> {
     public ContentResolver cs;
-    // public Ti8eM28U2E resultView; // UI callback
+    public AccountsResultCallback resultView;
 
-    public FuelSmsImportTask(ContentResolver contentResolver) {
+    public FuelSmsImportTask(ContentResolver contentResolver, AccountsResultCallback resultView) {
         this.cs = contentResolver;
+        this.resultView = resultView;
     }
 
-    // public void setProgressBarVisibility(int visibility) {
-    //     if (resultView != null) resultView.onSetProgressBarVisibility(visibility);
-    // }
+    public void setProgressBarVisiblity(int visibility) {
+        if (this.resultView != null) {
+            this.resultView.onSetProgressBarVisibility(visibility);
+        }
+    }
 
     @Override
     public void onPreExecute() {
         super.onPreExecute();
-        // setProgressBarVisibility(View.VISIBLE);
+        setProgressBarVisiblity(0);
     }
 
     @Override
@@ -41,8 +45,10 @@ public class FuelSmsImportTask extends AsyncTask<Void, Integer, Boolean> {
 
     @Override
     public void onPostExecute(Boolean result) {
-        // setProgressBarVisibility(View.GONE);
-        // if (resultView != null) resultView.onCuentasResult(true, 1, "ok");
+        setProgressBarVisiblity(4);
+        if (this.resultView != null) {
+            this.resultView.onCuentasResult(true, 1, "ok");
+        }
     }
 
     public boolean sms_actualizar_bd() {
