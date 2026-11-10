@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WyYHxgzYyW */
 public class CubacelPackagePurchaseFragment extends Fragment {
     public static final int PICK_CONTACT_REQUEST = 1;
     private ArrayAdapter adapterPaquetes;

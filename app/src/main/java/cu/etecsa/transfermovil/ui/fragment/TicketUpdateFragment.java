@@ -11,6 +11,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 
 /** MiBoleto key update, reconstructed from {@code hjX8MS8xO9}. */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.hjX8MS8xO9 */
 public class TicketUpdateFragment extends MiBoletoTicketBaseFragment {
 
     public Button btnAceptar;

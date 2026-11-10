@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.XnVSHGPTkK */
 public class TicketReservationCreateFragment extends Fragment {
     public static final int PICK_CONTACT_REQUEST = 1;
     public static List<ServicioSucursal> serviciosMiTurnoList = new ArrayList();

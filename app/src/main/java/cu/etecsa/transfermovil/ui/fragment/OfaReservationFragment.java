@@ -49,6 +49,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dWLcK5oQoS */
 public class OfaReservationFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
     public static final int PICK_CONTACT_REQUEST = 1;
     public Activity activity;

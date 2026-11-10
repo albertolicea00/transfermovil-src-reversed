@@ -28,6 +28,7 @@ import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.b7zSZMAX7cN */
 public class TfaRechargeFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
     public static final int PICK_CONTACT_REQUEST = 1;
     public ArrayAdapter<CharSequence> adapterTipoBolsa;

@@ -26,6 +26,7 @@ import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.i9I9XZGnR3 */
 public class TicketLastOpsFragment extends MiBoletoTicketBaseFragment implements pAzq93vIl3.UssdResponseObserver {
     public ImageView btHelp;
     public Button btnAceptar;

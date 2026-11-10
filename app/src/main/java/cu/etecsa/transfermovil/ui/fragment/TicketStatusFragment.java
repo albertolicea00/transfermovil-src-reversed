@@ -11,6 +11,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 
 /** MiBoleto status lookup, reconstructed from {@code w7mHpmOa4EP}. */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.w7mHpmOa4EP */
 public class TicketStatusFragment extends MiBoletoTicketBaseFragment {
 
     public Button btnAceptar;

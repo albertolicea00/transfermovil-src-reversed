@@ -15,6 +15,7 @@ import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.dYBdUyjb1D */
 public class OfaVisitQueryFragment extends Fragment {
     private Button btnAceptar;
     public Context context;

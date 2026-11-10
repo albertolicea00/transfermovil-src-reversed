@@ -30,6 +30,7 @@ import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import java.util.Calendar;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.OXpoe3K2m1 */
 public class TicketIntegratedQueryFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
     public ImageView btHelp;
     public Button btnAceptar;

@@ -38,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.cdINOtQ3iN */
 public class MobileVotingFragment extends Fragment {
     private static final int CAMERA_PERMISSION_REQUEST = 100;
     private static final Pattern PATRON_TEXTO_VALIDO = Pattern.compile("^[a-zA-Z0-9]+$");

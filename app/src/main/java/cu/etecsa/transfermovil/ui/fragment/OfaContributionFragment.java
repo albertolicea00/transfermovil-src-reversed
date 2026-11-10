@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.C6ZYln3x19W */
 public class OfaContributionFragment extends qHxc7HcCDX implements pAzq93vIl3.UssdResponseObserver {
     public Button btnAceptar;
     public String fecha;
