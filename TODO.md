@@ -70,6 +70,7 @@
 - [x] Compare BFI change-PIN validation and USSD construction with source; retain the repeat-field error-clearing behavior, four-digit constraints, payload `05*old*new`, and selector `69`.
 - [x] Restore the public `WalletPinEntryFragment.submitForm()` visibility from source; preserve its selector-40 authentication dispatch.
 - [x] Compare `WalletClassicAccountAssociationFragment` with source; preserve private `submitForm()`, selector-111 `08*account*authorization*terminal` payload, and account/authorization/terminal validations.
+- [x] Restore the classic Wallet account formatter's source Backspace listener so deletion keeps the original grouping behavior.
 - [x] Restore public `WalletLatestOperationsFragment.submitForm()` visibility and compare selector-48 full/partial dispatch with source; retain value-based agency comparison.
 - [x] Compare `BfiExternalPaymentFragment` with `Eqj43O0pUx`; confirm PIN/account/currency validation, QR variants, selectors `30`/`31`, packet marker `05`, and truncation branches.
 - [x] Compare `BfiQrAccountFragment` with `LgiFGRpiEl`; link the identical QR/contact behavior and document the clean shared account-callback base.

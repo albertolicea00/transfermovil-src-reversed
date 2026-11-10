@@ -12,6 +12,7 @@ import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.StyleSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -151,6 +152,10 @@ public class WalletClassicAccountAssociationFragment extends Fragment
     }
 
     private void installAccountFormatting() {
+        inputCuenta.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_DEL) keyDel = 1;
+            return false;
+        });
         inputCuenta.addTextChangedListener(new TextWatcher() {
             private boolean formatting;
 
