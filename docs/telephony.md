@@ -13,8 +13,9 @@ cover runtime permission or provider behavior.
 ## SMS import pipeline coverage
 
 The raw `g0xM9kQCsqu` parser is about 1,830 lines. The clean `sms/SmsParser`
-contains getters, regex/date helpers, app-data extraction, fuel coupon parsing,
-wallet-currency refresh, and agent telecom-wallet confirmation parsing. Fuel parsing preserves
+contains getters, regex/date helpers, app-data extraction, Cubacel plan-catalog
+persistence, fuel coupon parsing, wallet-currency refresh, and agent
+telecom-wallet confirmation parsing. Fuel parsing preserves
 coupon confirmations, status/token updates, coupon-list updates, and ticket
 persistence through the clean `TransportTicket` entity. Wallet refresh decrypts
 the currency list and replaces the `WalletCurrency` rows only after a successful

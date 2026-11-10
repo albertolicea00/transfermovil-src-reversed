@@ -18,6 +18,7 @@ import cu.etecsa.transfermovil.data.DatabaseHelper;
 import cu.etecsa.transfermovil.data.entity.SmsRecord;
 import cu.etecsa.transfermovil.data.entity.TransportTicket;
 import cu.etecsa.transfermovil.data.entity.WalletCurrency;
+import cu.etecsa.transfermovil.data.entity.CubacelPlan;
 import cu.etecsa.transfermovil.core.enums.AgentSource;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0;
 
@@ -319,6 +320,21 @@ public class SmsParser {
             return true;
         }
         return false;
+    }
+
+    /** Persists plan-catalog rows received by SMS. */
+    private void procesarPlan(String codigo, String descripcion, String version, Date fecha) {
+        int cod = Integer.parseInt(codigo);
+        int ver = Integer.parseInt(version);
+        try {
+            CubacelPlan nuevoPlan = new CubacelPlan();
+            nuevoPlan.setId(cod);
+            nuevoPlan.setNombre(descripcion);
+            nuevoPlan.setVersion_ussd(ver);
+            nuevoPlan.setFechaAct(fecha);
+            DatabaseHelper.getInstance().addPaquetes(nuevoPlan);
+        } catch (Exception e) {
+        }
     }
 
     /** Parses fuel coupon confirmations, status updates, and coupon listings. */
