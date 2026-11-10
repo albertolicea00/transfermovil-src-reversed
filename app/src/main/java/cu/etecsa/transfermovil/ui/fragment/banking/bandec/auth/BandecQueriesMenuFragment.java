@@ -15,6 +15,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecPaymentStatusFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecCardInfoQueryFragment;
@@ -25,6 +26,7 @@ import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecAccou
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecRecentPaymentsFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecAccountStatementFragment;
 import cu.etecsa.transfermovil.ui.fragment.wallet.WalletTicketQueryFragment;
+import cu.etecsa.transfermovil.ui.fragment.wallet.WalletSyndicateQueryFragment;
 
 /**
  * BANDEC Consultas menu with clean routes for source-backed query forms.
@@ -53,6 +55,15 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                     showFineQueryTypeDialog();
                 } else if (operation == FdonIAFI9w.BANConsultaTicket) {
                     showTicketQueryTypeDialog();
+                } else if (operation == FdonIAFI9w.BANConsultaSindicato) {
+                    FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    Bundle arguments = new Bundle();
+                    arguments.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.BANDEC);
+                    arguments.putSerializable("Nl0yptXmjQ", Nl0yptXmjQ.ConsultarPagosSindicato);
+                    WalletSyndicateQueryFragment fragment = new WalletSyndicateQueryFragment();
+                    fragment.setArguments(arguments);
+                    transaction.replace(R.id.containerView, fragment).addToBackStack(null).commit();
                 } else if (operation == FdonIAFI9w.BANUltimasoperaciones) {
                     FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
