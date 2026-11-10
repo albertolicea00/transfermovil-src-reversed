@@ -47,6 +47,8 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                     transaction.replace(R.id.containerView, new BandecAccountStatementFragment()).addToBackStack(null).commit();
                 } else if (operation == FdonIAFI9w.BANConsultarTodasCuentas) {
                     showAllAccountsConfirmation();
+                } else if (operation == FdonIAFI9w.BANConsultaMulta) {
+                    showFineQueryTypeDialog();
                 } else if (operation == FdonIAFI9w.BANUltimasoperaciones) {
                     FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
@@ -100,6 +102,32 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void showFineQueryTypeDialog() {
+        final String[] fineTypes = {"Multa de contravención", "Multa de tránsito"};
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.alert_msg_conulta_tipo))
+                .setSingleChoiceItems(fineTypes, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        BandecFineQueryFragment.TipoMulta fineType = which == 0
+                                ? BandecFineQueryFragment.TipoMulta.Contravension
+                                : BandecFineQueryFragment.TipoMulta.Transito;
+                        FragmentManager manager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        transaction.replace(R.id.containerView, BandecFineQueryFragment.newInstance(fineType))
+                                .addToBackStack(null).commit();
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Salir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
