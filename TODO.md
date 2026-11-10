@@ -303,9 +303,10 @@
 - [x] Decompile API client — y6NQQxH0NI singleton, getUnsafeOkHttpClient
 - [x] Document authentication flow (/loginapk, /loginfactorapk, Bearer+XSRF)
 - [x] Restore the `EcommerceActivity` host layout, initial menu, toolbar, splash menu, and back/quit flow from `QqWqw83vJf`.
-- [ ] Reconstruct the reachable profile and child-user photo path, including PNG/base64 conversion and its request call sites.
-- [ ] Identify callers and endpoint paths for `processPUTImage`/`processPOSTImage`; migrate the multipart overloads only after establishing that they are active, including their boundary behavior.
-- [ ] Determine whether `normalizeImageForUri`, EXIF rotation, and the bitmap-to-URI writer are used; port only the reachable behavior.
+- [ ] Migrate the reachable profile and child-user presenter request call sites that use PNG/base64 photos; the clean conversion helper is restored.
+- [x] Audit callers for `processPUTImage`/`processPOSTImage`; no Java callers or endpoint paths were found, so the multipart overloads remain unported and their boundary behavior unverified.
+- [x] Audit `normalizeImageForUri`, EXIF rotation, and bitmap-to-URI writer callers; none were found in the checked Java tree, so these paths remain unported.
+- [x] Restore `ApiClient.convertImageToSend` PNG/base64 conversion from `y6NQQxH0NI`, including half-size Glide decoding and quality-50 PNG output.
 - [x] Restore the unauthenticated-session action from `UhA7J2923N`: clear the token, open Login, and reset the activity task stack.
 - [x] Reconcile HTTP messages, operation-specific error mappings, and log formats in clean `MessageHandler` with `UhA7J2923N`/`IGxV3uh9sw` ([error notes](docs/ecommerce-errors.md)).
 - [x] Match clean numeric permission checks to `UhA7J2923N.checkUserPermission(enum)`, including enum IDs and null/empty/malformed grant behavior ([e-commerce notes](docs/ecommerce.md#session-data-sharedpreferences)).

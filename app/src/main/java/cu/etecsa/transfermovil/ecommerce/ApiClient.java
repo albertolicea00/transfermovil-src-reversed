@@ -1,13 +1,21 @@
 package cu.etecsa.transfermovil.ecommerce;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.util.Base64;
 import android.util.Log;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -185,6 +193,37 @@ public class ApiClient {
             return executeSync(request);
         } catch (Exception e) {
             Log.e(LOG_TAG, e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Converts a profile image path to the PNG data URI sent by the raw client.
+     * Glide decodes it at half the source dimensions before PNG compression.
+     */
+    public String convertImageToSend(String sourceImageFile) {
+        return reduceBase64ImageBitmap(new File(sourceImageFile));
+    }
+
+    public String reduceBase64ImageBitmap(File imageFile) {
+        String filePath = imageFile.getPath();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
+        Bitmap bitmap = resizeImage(Uri.fromFile(new File(filePath)), options.outWidth / 2, options.outHeight / 2);
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, output);
+        return "data:image/png;base64," + Base64.encodeToString(output.toByteArray(), Base64.NO_WRAP);
+    }
+
+    private Bitmap resizeImage(Uri uri, int width, int height) {
+        try {
+            return Glide.with(context).asBitmap().load(uri).override(width, height).submit().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
             return null;
         }
     }

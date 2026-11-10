@@ -24,11 +24,11 @@ Content type: `application/json` via Gson serialization.
 
 The clean `ecommerce/ApiClient` implements the singleton, the four JSON POST
 variants, authenticated PUT/GET, synchronous response bridge, cookie/CSRF
-handling, and the unsafe TLS client. It is a partial reconstruction rather
-than a stub. The source also exposes multipart `processPUTImage` overloads,
-`processPOSTImage`, image reduction/base64 conversion, URI normalization, and
-Glide-based image correction; those are not present in the clean client and
-remain a migration task.
+handling, the unsafe TLS client, and the reachable PNG/base64 conversion
+helper. It is a partial reconstruction rather than a stub. The source also
+exposes multipart `processPUTImage` overloads, `processPOSTImage`, URI
+normalization, and a bitmap-to-file writer; they have no Java callers in the
+checked tree and are not included in the clean client.
 
 ### TLS Configuration
 
@@ -161,9 +161,9 @@ The seller screen `H9l22AIYKkA` requires a selected payment source and a nonempt
 
 ### Image upload and profile-photo paths
 
-The reachable profile and child-user presenters call `convertImageToSend`; it halves the decoded image dimensions through Glide, compresses PNG at quality `50`, and serializes a `data:image/png;base64,` data URI into the JSON profile request. Evidence: `PWf5TMuFy2`, `MNdSLKzqqG`, and `y6NQQxH0NI`.
+The reachable profile and child-user presenters call `convertImageToSend`; the clean `ApiClient` now has the same conversion helper. It decodes the source bounds, asks Glide for half-width/half-height, compresses PNG at quality `50`, and serializes a `data:image/png;base64,` URI with no line wrapping. The presenters themselves are still raw-source-only, so their clean request call sites and surrounding profile UI have not been migrated. Evidence: `PWf5TMuFy2`, `MNdSLKzqqG`, and `y6NQQxH0NI`.
 
-The same API client has three multipart helpers (`processPUTImage` overloads and `processPOSTImage`) that resize a file to half its original dimensions, write a shared `newthub.jpg` at JPEG quality `50`, then send a multipart body with a hardcoded `Content-Type` boundary. No Java call sites for those multipart helpers were found in the checked `src/` tree, so their intended endpoints and whether the header boundary matches the builder-generated body remain unconfirmed. `normalizeImageForUri` and its EXIF rotation helper also have no Java call sites found; the private URI-to-file bitmap writer is likewise unreferenced. Treat these as unverified helper paths until callers or bytecode evidence are available.
+The same raw API client has three multipart helpers (`processPUTImage` overloads and `processPOSTImage`) that resize a file to half its original dimensions, write a shared `newthub.jpg` at JPEG quality `50`, then send a multipart body with a hardcoded `Content-Type` boundary. No Java call sites for those multipart helpers were found in the checked `src/` tree, so no endpoint or caller is identified and the overloads were not ported. Whether the header boundary matches the builder-generated body remains unconfirmed. `normalizeImageForUri`, its EXIF rotation helper, and the private URI-to-file bitmap writer likewise have no Java call sites found and were not ported.
 
 ### Refunds
 | Endpoint | Purpose |
