@@ -357,7 +357,7 @@
 - [ ] Decompile mobile top-up flow (OP_Recg_movil)
 - [x] Document plan purchase flows (compraplanescubacel.json)
 - [ ] Trace phone debt consultation (OP_Deuda_Telefono)
-- [ ] Document bonus/bono mechanism
+- [x] Document the client-visible bonus status query and coupon-key recharge flow, with carrier-side rules explicitly left unknown ([telephony notes](docs/telephony.md#cubacel-bonus-flows-static-source-evidence)).
 
 ## Dynamic Checks (When Emulator Available)
 

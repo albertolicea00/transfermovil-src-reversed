@@ -291,6 +291,14 @@ Two USSD gateways are used: `*222` (Transfermóvil/Metropolitano/BPA/Wallet) and
 | `*222` | Base service selector |
 | `*222*264` | Metropolitano/BPA banking |
 | `*222*266` | Bonus/wallet operation |
+
+### Cubacel bonus flows (static source evidence)
+
+The general-mode **Seguridad** menu in `LALCrDPvhM` exposes “Consultar estado del bono” as its fifth row (zero-based position 4). After confirmation, `showSendUSSD("222", "266", ...)` constructs `tel:*222*266%23` and launches `ACTION_CALL`. This is a carrier query; the client does not parse a returned balance or define bonus expiry rules.
+
+The same menu routes “Gestión de planes” separately to `*133#`, and data, voice, SMS, and Amigos plan queries to `*222*328#`, `*222*869#`, `*222*767#`, and `*222*264#`. They should not be conflated with the bonus-status query.
+
+The menu's first recarga action opens `b0kkzvOCEu`, which requires a nonblank bonus key, allows scanning a QR code tagged as `Recarga_Cupon` for ETECSA, then dispatches `662*<key>` through the activity's USSD handler with a confirmation message. Static code establishes the client-side key validation and request construction only; it does not reveal the carrier's bonus accounting, eligibility, or response semantics. Source evidence: `LALCrDPvhM`, `b0kkzvOCEu`, and `ICmtk949Og`.
 | `*222*328` | Data/invoice operation |
 | `*222*767` | Service operation |
 | `*222*869` | Service operation |
