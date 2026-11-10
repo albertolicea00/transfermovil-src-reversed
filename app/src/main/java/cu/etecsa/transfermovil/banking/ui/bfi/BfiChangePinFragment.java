@@ -51,20 +51,36 @@ public class BfiChangePinFragment extends Fragment {
         String oldPin = inputPin.getText().toString().trim();
         String newPin = inputNewpin.getText().toString().trim();
         String repeatedPin = inputRepeatpin.getText().toString().trim();
-        if (!validate(inputPin, inputLayout, oldPin, R.string.err_msg_empty_newpin, R.string.err_msg_len_newpin)
-                || !validate(inputNewpin, inputLayoutNewpin, newPin, R.string.err_msg_empty_newpin, R.string.err_msg_len_newpin)
-                || !validate(inputRepeatpin, inputLayoutRepeatpin, repeatedPin, R.string.err_msg_empty_repeatpin, R.string.err_msg_len_repeatpin)) return;
-        if (!repeatedPin.equals(newPin)) {
+        if (oldPin.isEmpty()) {
+            inputLayout.setError(getString(R.string.err_msg_empty_newpin));
+            requestFocus(inputPin);
+            return;
+        }
+        if (oldPin.length() != 4) {
+            inputLayout.setError("Escriba clave actual");
+            requestFocus(inputPin);
+            return;
+        }
+        inputLayout.setErrorEnabled(false);
+        if (!validate(inputNewpin, inputLayoutNewpin, newPin, R.string.err_msg_empty_newpin, R.string.err_msg_len_newpin)
+                || !validate(inputRepeatpin, inputLayoutRepeatpin, repeatedPin, R.string.err_msg_empty_repeatpin, R.string.err_msg_len_repeatpin, false)) return;
+        if (!inputRepeatpin.getText().toString().equals(inputNewpin.getText().toString())) {
             inputLayoutRepeatpin.setError(getString(R.string.err_msg_match_pin));
             requestFocus(inputRepeatpin);
             return;
         }
+        inputLayoutNewpin.setErrorEnabled(false);
         String payload = "05*" + oldPin + "*" + newPin;
         ViewGroup form = rootView.findViewById(R.id.frmChangePassBanco);
         FBsQzP3Zfj.actionCallUSSDBack(context, "69", payload, getString(R.string.confirm_cambio_clave), form, getFragmentManager());
     }
 
     private boolean validate(AutoCompleteTextView field, TextInputLayout layout, String value, int emptyError, int lengthError) {
+        return validate(field, layout, value, emptyError, lengthError, true);
+    }
+
+    private boolean validate(AutoCompleteTextView field, TextInputLayout layout, String value,
+                              int emptyError, int lengthError, boolean clearErrorOnSuccess) {
         if (value.isEmpty()) {
             layout.setError(getString(emptyError));
             requestFocus(field);
@@ -75,7 +91,7 @@ public class BfiChangePinFragment extends Fragment {
             requestFocus(field);
             return false;
         }
-        layout.setErrorEnabled(false);
+        if (clearErrorOnSuccess) layout.setErrorEnabled(false);
         return true;
     }
 
