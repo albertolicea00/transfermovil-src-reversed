@@ -318,7 +318,7 @@
 - [ ] Document TLS configuration (min version, cipher suites)
 - [x] Identify custom trust manager — e-commerce uses getUnsafeOkHttpClient (trusts ALL certs)
 - [x] Document the app-wide cleartext manifest policy and the source-confirmed HTTP update-download host; there is no per-host network security configuration ([networking notes](docs/networking.md#cleartext-scope)).
-- [ ] Trace self-update mechanism (REQUEST_INSTALL_PACKAGES)
+- [x] Trace the self-update download and `REQUEST_INSTALL_PACKAGES` installer handoff; the method has no located caller and runtime installation remains unverified ([networking notes](docs/networking.md#self-update-download-and-installer-handoff)).
 
 ## Security & Crypto
 

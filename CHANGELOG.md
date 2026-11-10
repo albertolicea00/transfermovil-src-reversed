@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Traced the self-update HTTP download and APK installer handoff, noting missing integrity verification and the lack of a located caller.
 - Documented app-wide cleartext policy and the source-confirmed HTTP self-update host; noted that host-specific runtime behavior is not established.
 - Traced agent-mode Cubacel mobile recharge and fixed-phone debt-query forms, documenting number validation/storage and USSD selectors `12` and `1`.
 - Documented Cubacel bonus status and coupon-key recharge client flows from their menu/forms, distinguishing them from plan management and recording unknown carrier-side behavior.

@@ -14,6 +14,10 @@ Analysis of network clients, endpoints, TLS configuration, and local persistence
 
 The decoded manifest sets `android:usesCleartextTraffic="true"` on the whole application and does not reference a `networkSecurityConfig`; the project also has no `res/xml/network_security_config.xml`. The source-level operational cleartext URL found is the self-update APK download at `http://www.etecsa.cu/descargas/transfermovil/?d=<sha>`, in `BaseMainActivity.DownloadNewVersion` (raw equivalent: `rDEl7rW1aN`). Other documented service URLs use HTTPS. This establishes the app policy and observed URL, not which redirects or server-side endpoints might be used at runtime.
 
+### Self-update download and installer handoff
+
+`BaseMainActivity.DownloadNewVersion` (raw `rDEl7rW1aN.DownloadNewVersion`) appends its `url_sha` argument as the `d` query parameter, performs an `HttpURLConnection` GET, and replaces `/Download/transfermovil_new_version.apk` with the response body. It displays indeterminate then percentage progress and reports a generic failure toast on exceptions. It does not check the downloaded bytes against the supplied value or verify the APK signature in this method. On success it starts `ACTION_VIEW` with MIME `application/vnd.android.package-archive` and a `file://` URI. The manifest declares `REQUEST_INSTALL_PACKAGES`; it also declares a `FileProvider`, but this installer path does not use it. No invocation of `DownloadNewVersion` was found in the inspected source, so reachability from the UI remains unresolved. This is a static source trace; the Android-version-specific install handoff is not runtime-verified.
+
 ### TLS / Certificate Handling
 
 String evidence from binary:
