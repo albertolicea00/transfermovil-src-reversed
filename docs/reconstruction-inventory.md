@@ -193,8 +193,8 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 357 | 437 | 0 |
-| Main app package | 596 | 226 | 370 | 0 |
+| All `src/` | 794 | 356 | 438 | 0 |
+| Main app package | 596 | 225 | 371 | 0 |
 
 Generated with `python3 scripts/reconstruction-inventory.py` from the current
 `src/`, clean Java tree, and `mappings/classes.json`. The live inventory reports
@@ -206,11 +206,11 @@ Activity mapping was removed because the active source is a static helper
 called directly by the app. These are exact-link counts only and do not
 establish behavioral completeness.
 
-The 226 unlinked main-package sources group by first package segment as follows:
+The 225 unlinked main-package sources group by first package segment as follows:
 
 | Original package segment | Unlinked files |
 | --- | ---: |
-| `B0jOLrWx09th` | 152 |
+| `B0jOLrWx09th` | 151 |
 | `l08fNVC4KOKK` | 20 |
 | `B21UyndcVvF` | 16 |
 | `ZNRpoHwtLXM` | 13 |
@@ -223,8 +223,8 @@ Linked five BANDEC query wrappers and their shared account-selection base to
 their exact source classes, reducing main-package unlinked sources from 236 to
 230. Then linked the MiTransfer enrollment screen, reducing the count to 229,
 linked classic-account association, reducing it to 228, linked BFI external
-payment, reducing it to 227, and linked the BFI QR/contact base, reducing it to
-226.
+payment, reducing it to 227, linked the BFI QR/contact base, reducing it to
+226, and linked the MiTransfer Nauta household form, reducing it to 225.
 This refresh establishes the current package distribution only. It does not
 classify the obfuscated classes as generated code, Android glue, or application
 behavior; that source-by-source review and exact-link cleanup remain open.

@@ -2,7 +2,7 @@
 
 ## Source and route
 
-The General MiTransfer menu routes `BOLSARecargaNauta` to `NautaUserFragment`, reconstructed from the raw JADX class `KtF0PRB8vS`. This is the general Wallet menu form; the bank-specific `WalletNautaRechargeFragment` (`PqTzgaEYF6`) is a separate flow and uses bank agency markers.
+The General MiTransfer menu routes `BOLSARecargaNauta` to [`NautaUserFragment`](../app/src/main/java/cu/etecsa/transfermovil/ui/fragment/NautaUserFragment.java), reconstructed from the raw JADX class `KtF0PRB8vS`. Their bodies are identical after normalizing the package and class name. Both dynamic menu definitions now point to the clean class. This is the general Wallet menu form; the bank-specific `WalletNautaRechargeFragment` (`PqTzgaEYF6`) is a separate flow and uses bank agency markers.
 
 The screen accepts a Nauta account, account type, amount, optional recipient mobile, and a bolsa choice. The account-type labels are “Navegación Internacional” (`1`, `@nauta.com.cu`) and “Navegación Nacional” (`2`, `@nauta.co.cu`). It also has Nauta Hogar switches for a home-internet top-up and for paying outstanding debt.
 

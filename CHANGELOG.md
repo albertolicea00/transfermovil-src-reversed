@@ -25,6 +25,8 @@
 - Refreshed the source inventory after linking BFI external payment; 227 main-package sources remain unlinked.
 - Linked the clean BFI QR/contact base to `LgiFGRpiEl` after confirming its normalized source body is identical; documented the shared callback adapter boundary.
 - Refreshed the reconstruction inventory after linking the BFI QR/contact base; 226 main-package sources remain unlinked.
+- Linked MiTransfer Nauta household recharge to its identical `KtF0PRB8vS` source body and routed both dynamic menu entries to `NautaUserFragment`.
+- Refreshed reconstruction inventory after linking MiTransfer Nauta household recharge; 225 main-package sources remain unlinked.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.

@@ -1338,7 +1338,7 @@ public class OperationMenuBuilder {
         bolsa8.setTitulo(context.getString(R.string.title_recarga_nauta));
         bolsa8.setSubtitulo(context.getString(R.string.tx_subtexto_bolsa));
         bolsa8.setImagen(R.drawable.ic_pago_nauta_hogar_bolsa);
-        bolsa8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.KtF0PRB8vS");
+        bolsa8.setFragment_name("cu.etecsa.transfermovil.ui.fragment.NautaUserFragment");
         bolsa8.setTipo_serivicio(r1sDOSqZ2z6);
         bolsa8.setOrder(14);
         bolsa8.setActivo(true);
@@ -2977,7 +2977,7 @@ public class OperationMenuBuilder {
         bolsa8.setTitulo(this.context.getString(R.string.title_recarga_nauta));
         bolsa8.setSubtitulo(this.context.getString(R.string.tx_subtexto_bolsa));
         bolsa8.setImagen(R.drawable.ic_pago_nauta_hogar_bolsa);
-        bolsa8.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.KtF0PRB8vS");
+        bolsa8.setFragment_name("cu.etecsa.transfermovil.ui.fragment.NautaUserFragment");
         bolsa8.setTipo_serivicio(r1sDOSqZ2z);
         bolsa8.setOrder(14);
         bolsa8.setActivo(true);
