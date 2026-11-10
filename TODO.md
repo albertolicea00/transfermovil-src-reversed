@@ -157,6 +157,7 @@
 - [ ] Restore `SmsImportTask` parsing, transaction/service deduplication, database insertion, and result behavior from `HPuMiTypoW`.
 - [x] Restore fuel coupon confirmation, status, and listing parsing plus the `FuelSmsImportTask` inbox loop from `g0xM9kQCsqu` and `XYfkGsUkKH`.
 - [x] Restore encrypted Wallet currency-list updates and agent telecom-wallet confirmation parsing from `g0xM9kQCsqu`.
+- [x] Restore phone, version, and service activation-code extraction from `Datos App` and activation SMS.
 - [x] Restore `FuelSmsImportTask` constructor and `Ti8eM28U2E` progress/completion callback contract from `XYfkGsUkKH`.
 
 - [x] Identify SMS receiver (X9ZiE8XZNKy)

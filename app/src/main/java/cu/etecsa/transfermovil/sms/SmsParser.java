@@ -268,18 +268,58 @@ public class SmsParser {
 
     // --- App data extraction (lines 1625–1676) ---
 
-    /**
-     * Parses "Datos App:" SMS to extract configuration:
-     *   - Phone number → numero_telefonico
-     *   - App version → version
-     *   - Agent code → code_agent
-     *   - Bank code → code_bank
-     *   - Boulevard code → code_bulevar
-     *   - Ticket code → code_boleto
-     *
-     * @return true if any data was extracted
-     */
-    // public boolean parse_fill_sms_data(String sms) { ... }
+    /** Extracts activation, phone, and module-code data from service SMS. */
+    public boolean parse_fill_sms_data(String sms) {
+        if (sms.contains("Bienvenido al sistema TRANSFERMOVIL") && sms.contains("Su número: ")) {
+            String[] msg_separate = sms.split(" ");
+            this.numero_telefonico = msg_separate[6];
+            this.version = msg_separate[10];
+            return true;
+        }
+        if (sms.contains("Bienvenido al sistema TRANSFERMOVIL") && sms.contains("Su numero: ")) {
+            String[] msg_separate2 = sms.split(" ");
+            this.numero_telefonico = msg_separate2[6];
+            this.version = msg_separate2[10];
+            return true;
+        }
+        if (sms.contains("Su número:") && sms.contains("actualice su aplicación.")) {
+            String[] msg_separate3 = sms.split(" ");
+            this.numero_telefonico = msg_separate3[2];
+            this.version = msg_separate3[6];
+            return true;
+        }
+        if (sms.contains("Su numero:") && sms.contains("actualice su aplicacion.")) {
+            String[] msg_separate4 = sms.split(" ");
+            this.numero_telefonico = msg_separate4[2];
+            this.version = msg_separate4[6];
+            return true;
+        }
+        if (sms.contains("El código de activación del número") && sms.contains("Debe insertarlo")) {
+            String[] msg_separate5 = sms.split(" ");
+            this.numero_telefonico = msg_separate5[6];
+            if (sms.contains("para agentes")) {
+                this.code_agent = msg_separate5[14];
+            } else if (sms.contains("para el Modulo de Banco")) {
+                this.code_bank = msg_separate5[17];
+            }
+            return true;
+        }
+        if (sms.contains("El codigo de activacion del numero") && sms.contains("Debe insertarlo")) {
+            String[] msg_separate6 = sms.split(" ");
+            this.numero_telefonico = msg_separate6[6];
+            if (sms.contains("para agentes")) {
+                this.code_agent = msg_separate6[14];
+            } else if (sms.contains("para el Modulo de Banco")) {
+                this.code_bank = msg_separate6[17];
+            } else if (sms.contains("para el Modulo Bulevar")) {
+                this.code_bulevar = msg_separate6[14];
+            } else if (sms.contains("para el Modulo Mi Boleto")) {
+                this.code_boleto = msg_separate6[13];
+            }
+            return true;
+        }
+        return false;
+    }
 
     /** Parses fuel coupon confirmations, status updates, and coupon listings. */
     public SmsRecord parseCombustible(SmsMessage sms_properties) {
