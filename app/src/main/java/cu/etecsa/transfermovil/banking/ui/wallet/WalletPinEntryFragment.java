@@ -45,7 +45,7 @@ public class WalletPinEntryFragment extends Fragment {
         return this.rootView;
     }
 
-    void submitForm() {
+    public void submitForm() {
         if (!validateClave()) {
             return;
         }
