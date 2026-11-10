@@ -206,7 +206,7 @@ Activity mapping was removed because the active source is a static helper
 called directly by the app. These are exact-link counts only and do not
 establish behavioral completeness.
 
-The 236 unlinked main-package sources group by first package segment as follows:
+The 231 unlinked main-package sources group by first package segment as follows:
 
 | Original package segment | Unlinked files |
 | --- | ---: |
