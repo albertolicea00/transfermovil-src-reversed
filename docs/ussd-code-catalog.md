@@ -28,6 +28,7 @@ selectors represent different user-visible operations.
 
 | Service / bank | User action | Dial string template | Construction algorithm | Source evidence | Confidence |
 | --- | --- | --- | --- | --- | --- |
+| Banking / MiTransfer | Query union dues by identity number | `tel:*<access>*121*E(<bank-id>*<identity-number>)*<version>%23` | Bank IDs are `1` BPA, `2` BANDEC, `3` Metropolitano, and `4` MiTransfer. The identity text is checked for nonblank content but sent without trimming. The shared dispatcher encodes the payload and adds the configured version. | `WalletSyndicateQueryFragment.submitForm` / `SlZq2dCM9i`; `FBsQzP3Zfj.actionCallUSSDBack(Context, String, String, String, ViewGroup, FragmentManager)` | Confirmed client route |
 | General mode | Query prepaid balance | `tel:*222%23` | The carrier-services menu opens a confirmation dialog and dispatches the literal `*222` through the direct-code helper. | `nljtDl5MIf` (`ConsultaSaldo222`); `FBsQzP3Zfj.getDialogOperation`, case 3 | Confirmed |
 | General mode | Query postpaid balance | `tel:*111%23` | The carrier-services menu opens a confirmation dialog and dispatches the literal `*111` through the direct-code helper. | `nljtDl5MIf` (`ConsultaSaldo111`); `FBsQzP3Zfj.getDialogOperation`, case 4 | Confirmed |
 | General mode | Query bonus status | `tel:*222*266%23` | Confirmation dialog dispatches this literal carrier code. | `nljtDl5MIf` (`ConsultarEstadoBono`); `FBsQzP3Zfj.getDialogOperation`, case 19 | Confirmed |
