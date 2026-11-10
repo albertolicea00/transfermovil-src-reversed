@@ -22,6 +22,14 @@ Singleton with 4 `processPOST` overloads:
 
 Content type: `application/json` via Gson serialization.
 
+The clean `ecommerce/ApiClient` implements the singleton, the four JSON POST
+variants, authenticated PUT/GET, synchronous response bridge, cookie/CSRF
+handling, and the unsafe TLS client. It is a partial reconstruction rather
+than a stub. The source also exposes multipart `processPUTImage` overloads,
+`processPOSTImage`, image reduction/base64 conversion, URI normalization, and
+Glide-based image correction; those are not present in the clean client and
+remain a migration task.
+
 ### TLS Configuration
 
 **`getUnsafeOkHttpClient()`** — **completely disables TLS verification**:
@@ -71,6 +79,14 @@ POST /loginfactorapk
 - `LOGIN_SIN_TOKEN` — login without token (needs CSRF flow?)
 
 ### Session Data (SharedPreferences)
+
+The clean `ecommerce/SessionManager` implements persistence for the session
+and preference keys, numeric grant checks, asset loading, and a session-expiry
+dialog. The source `UhA7J2923N` also has message/log helpers, typed error
+message dispatch, an unauthenticated-session flow, and enum-based permission
+checking. Clean equivalents are split across `MessageHandler` and the current
+session UI, but their source parity still needs review; `hasPermission(int)`
+does not by itself establish parity with `checkUserPermission(enum)`.
 
 | Key | Purpose |
 |:---|:---|

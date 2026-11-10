@@ -71,8 +71,8 @@
 - [x] Reconcile the General data-management pager with source `wTZi6Zeikv`; preserve its eight ordered tabs, titles, contact permission request, and fixed-tab setup.
 - [x] Audit `crypto/CryptoProvider.java` against `V5FFEZ0Qrr0`; document its implemented scheme coverage, renamed API, raw call sites, and static-audit limit in [security notes](docs/security.md).
 - [x] Audit `data/DatabaseHelper.java` against `unYp8VQThY`; document its matching public API breadth and the remaining static-only query/migration limits in [storage notes](docs/storage.md).
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/ApiClient.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/SessionManager.java`.
+- [x] Audit `ecommerce/ApiClient.java` against `y6NQQxH0NI`; document the implemented request paths and missing image APIs in [e-commerce notes](docs/ecommerce.md).
+- [x] Audit `ecommerce/SessionManager.java` against `UhA7J2923N`; document implemented persistence and remaining auth/error API parity in [e-commerce notes](docs/ecommerce.md).
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/FuelSmsImportTask.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsImportTask.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsParser.java`.
@@ -298,6 +298,8 @@
 - [x] Identify base URL for API (dynamic from SharedPreferences, not hardcoded)
 - [x] Decompile API client — y6NQQxH0NI singleton, getUnsafeOkHttpClient
 - [x] Document authentication flow (/loginapk, /loginfactorapk, Bearer+XSRF)
+- [ ] Migrate the source multipart image endpoints and image conversion/normalization methods from `y6NQQxH0NI` into a clean API/media client.
+- [ ] Reconcile `UhA7J2923N` message/log, typed error, unauthenticated-session, and enum permission behavior with the clean e-commerce session flow.
 - [ ] Map business/merchant registration flow
 - [ ] Trace payment processing flow (/api/payment/store)
 - [ ] Document refund flow (/api/refunds/store)
