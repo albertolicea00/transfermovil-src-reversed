@@ -185,6 +185,10 @@ Each bank/module replicates the same operation set with its own prefix:
 4. **No encryption layer visible** between entity fields and SQLite storage (ORMLite writes fields directly)
 5. Combined with `allowBackup=true` + `debuggable=true` → trivial data extraction via ADB
 
+## Bank Account Add/Edit Form
+
+`BankAccountEditFragment` reconstructs `oaEWezaNAI` and is used by the bank-account list plus BANDEC, BFI, and Wallet transfer forms. It strips visual separators before validating the 16-character account number, checks duplicates on new accounts, validates an optional eight-digit phone number, and warns when the card prefix does not identify a supported bank. A missing client assignment prompts for explicit confirmation; save then stores the account, optional description/phone/client, refreshes the Agent or General menu, and returns to the prior screen. The card icon follows archived smali mappings for BPA, BANDEC, Metropolitano, Clásica, BFI, and Clásica Empresarial.
+
 ## Wallet Transfer Card Logos
 
 `WalletBankTransferFragment.mostrarTarjeta()` renders the right-side bank icon and selects the first loaded transfer agency whose code contains the inferred bank index. PANs beginning with `92` use characters 5–6: `12` selects BPA, `06` BANDEC, and `95` Metropolitano. Other account numbers use the first two characters: `12` BPA, `06` BANDEC, and `05` Metropolitano. The agency indices are `1`, `2`, and `3` respectively. Unknown prefixes clear the icon and still run the source's agency search with index `0`; malformed PAN substrings are ignored through exception handling. The three drawables are loaded and scaled during view setup. This matches the archived smali for `H0oV6Ot0bS.mostrarTarjeta`.

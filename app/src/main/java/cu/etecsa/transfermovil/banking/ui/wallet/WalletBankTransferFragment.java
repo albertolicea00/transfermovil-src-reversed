@@ -40,7 +40,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CuentaBanco;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Empresa;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.oaEWezaNAI;
+import cu.etecsa.transfermovil.banking.ui.BankAccountEditFragment;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
@@ -196,7 +196,7 @@ public class WalletBankTransferFragment extends EV9Tu0zIL4 implements pAzq93vIl3
                     public void onClick(DialogInterface dialog, int which) {
                         FragmentManager mFragmentManager = WalletBankTransferFragment.this.getActivity().getSupportFragmentManager();
                         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-                        oaEWezaNAI editTarjeta = new oaEWezaNAI();
+                        BankAccountEditFragment editTarjeta = new BankAccountEditFragment();
                         mFragmentTransaction.replace(R.id.containerView, editTarjeta).addToBackStack(null).commit();
                     }
                 });

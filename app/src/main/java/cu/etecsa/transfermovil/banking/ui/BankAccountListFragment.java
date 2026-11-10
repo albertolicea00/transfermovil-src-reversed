@@ -94,7 +94,7 @@ public class BankAccountListFragment extends Fragment implements QJoZrWCCWp.View
                 }
                 FragmentManager mFragmentManager = BankAccountListFragment.this.getActivity().getSupportFragmentManager();
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-                oaEWezaNAI cuentalFragment = new oaEWezaNAI();
+                BankAccountEditFragment cuentalFragment = new BankAccountEditFragment();
                 mFragmentTransaction.replace(R.id.containerView, cuentalFragment).addToBackStack(null).commit();
             }
         });
@@ -179,7 +179,7 @@ public class BankAccountListFragment extends Fragment implements QJoZrWCCWp.View
         CuentaBanco cuenta = this.cLists.get(position);
         FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        oaEWezaNAI editFijo = new oaEWezaNAI();
+        BankAccountEditFragment editFijo = new BankAccountEditFragment();
         Bundle b = new Bundle();
         b.putString("cuenta_id", String.valueOf(cuenta.getId()));
         editFijo.setArguments(b);
