@@ -53,6 +53,8 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                     showAllAccountsConfirmation();
                 } else if (operation == FdonIAFI9w.BANConsultarSaldo) {
                     showQueryConfirmation("¿Desea consultar el saldo de su tarjeta? ", "46");
+                } else if (operation == FdonIAFI9w.BANTipoCambio) {
+                    showQueryConfirmation("¿Desea consultar el tipo de cambio vigente? ", "85");
                 } else if (operation == FdonIAFI9w.BANConsultaMulta) {
                     showFineQueryTypeDialog();
                 } else if (operation == FdonIAFI9w.BANConsultaTicket) {
