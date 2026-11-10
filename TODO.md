@@ -69,6 +69,7 @@
 - [x] Compare method signatures for BFI external payment, QR account base, and enterprise transfer against their annotated JADX sources; confirm no method is missing or extra.
 - [x] Compare BFI change-PIN validation and USSD construction with source; retain the repeat-field error-clearing behavior, four-digit constraints, payload `05*old*new`, and selector `69`.
 - [x] Restore the public `WalletPinEntryFragment.submitForm()` visibility from source; preserve its selector-40 authentication dispatch.
+- [x] Match `WalletClassicAccountAssociationFragment.submitForm()` visibility to its public source method; confirm selector-111 payload and account/authorization/terminal validations.
 - [x] Compare `BfiExternalPaymentFragment` with `Eqj43O0pUx`; confirm PIN/account/currency validation, QR variants, selectors `30`/`31`, packet marker `05`, and truncation branches.
 - [x] Compare `BfiQrAccountFragment` with `LgiFGRpiEl`; link the identical QR/contact behavior and document the clean shared account-callback base.
 - [x] Migrate the BANDEC account-limit, latest-operations, and payment-status form bodies into their clean screens; record selectors `62`, `48`, and `89`.

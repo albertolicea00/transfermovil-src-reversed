@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Restored public visibility for classic Wallet account-association `submitForm()` and compared its selector-111 validations/payload with `HTmIvOo9nb`.
 - Restored public visibility for Wallet PIN-entry `submitForm()` to match `R5fFZkKuVnr`; selector-40 behavior is unchanged.
 - Compared BFI change-PIN validation against JADX; confirmed four-digit checks, repeat-match validation, error-clearing behavior, and selector-69 `05*old*new` payload.
 - Compared BFI external-payment, QR-account-base, and enterprise-transfer method signatures against their annotated JADX sources; all signatures are present on both sides.
