@@ -17,6 +17,7 @@ import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecPosta
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecLatestOperationsFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecAccountLimitQueryFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecRecentPaymentsFragment;
+import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecAccountStatementFragment;
 
 /**
  * BANDEC Consultas menu with a clean route for external-payment status.
@@ -35,7 +36,11 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
 
             @Override
             public void onGetItemClick(View view, FdonIAFI9w operation) {
-                if (operation == FdonIAFI9w.BANUltimasoperaciones) {
+                if (operation == FdonIAFI9w.BANEstadoCuentas) {
+                    FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.containerView, new BandecAccountStatementFragment()).addToBackStack(null).commit();
+                } else if (operation == FdonIAFI9w.BANUltimasoperaciones) {
                     FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.replace(R.id.containerView, new BandecLatestOperationsFragment()).addToBackStack(null).commit();

@@ -193,10 +193,10 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 396 | 398 | 0 |
-| Main app package | 596 | 265 | 331 | 0 |
+| All `src/` | 794 | 395 | 399 | 0 |
+| Main app package | 596 | 264 | 332 | 0 |
 
-The live inventory reports 448 clean Java files, 86 mapping entries, no mapping
+The live inventory reports 449 clean Java files, 86 mapping entries, no mapping
 issues, and 50 clean files without source annotations. The duplicate candidates
 were resolved by reusing shared BFI authentication/registration screens and
 removing a false source tag from a derived helper. These are exact-link counts
