@@ -7,6 +7,7 @@ import cu.etecsa.transfermovil.ecommerce.model.request.BanUserRequest;
 import cu.etecsa.transfermovil.ecommerce.model.request.ChildUserCreateRequest;
 import cu.etecsa.transfermovil.ecommerce.model.request.IdRequest;
 import cu.etecsa.transfermovil.ecommerce.model.response.ChildUserListResponse;
+import cu.etecsa.transfermovil.ecommerce.model.response.UserWithRolesResponse;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,7 +61,10 @@ public final class ChildUserPresenter {
             }
             @Override protected void onPostExecute(ApiResponse response) {
                 callback.onProgressVisibility(4);
-                callback.onResult(operation, operation == Operation.LIST ? mapList(response) : response);
+                Object mapped = response;
+                if (operation == Operation.LIST) mapped = mapList(response);
+                else if (operation == Operation.DETAIL) mapped = mapDetail(response);
+                callback.onResult(operation, mapped);
             }
         }.execute();
     }
@@ -94,6 +98,34 @@ public final class ChildUserPresenter {
             users.add(user);
         }
         result.setItemsList(users);
+        result.setOK(true);
+        return result;
+    }
+
+    private UserWithRolesResponse mapDetail(ApiResponse raw) {
+        UserWithRolesResponse result = new UserWithRolesResponse();
+        if (raw == null) { result.setOK(false); result.setHttpCode(500); return result; }
+        result.setHttpCode(raw.getCodigoHTTP());
+        result.setJsonObject(raw.getJsonObject());
+        JSONObject body = raw.getJsonObject();
+        JSONObject user = body == null ? null : body.optJSONObject("user");
+        if (raw.isError() || raw.getCodigoHTTP() != 200 || body == null
+                || !body.optString("code").contains("Ok") || user == null) {
+            result.setOK(false);
+            result.setMenssage(raw.getMenssaje());
+            return result;
+        }
+        UserWithRolesResponse.User detail = new UserWithRolesResponse.User();
+        detail.setId(user.optInt("id"));
+        detail.setUsername(user.optString("username", null));
+        detail.setEmail(user.optString("email", null));
+        detail.setDni(user.optString("dni", null));
+        detail.setPhone(user.optString("phone", null));
+        detail.setAddress(user.optString("address", null));
+        detail.setUpdateAt(user.optString("updated_at", null));
+        if (!user.isNull("photo")) detail.setPhoto(SessionManager.getInstance().getApiUrl()
+                + "/user/photo/" + user.optString("id"));
+        result.setUser(detail);
         result.setOK(true);
         return result;
     }
