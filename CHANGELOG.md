@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Added an official-Apple static iOS feature matrix for USSD, SMS, telephony, commerce, storage, and QR; kept device and distribution checks open.
 - Matched clean e-commerce permission checks to raw enum behavior, including the null-grant exception and malformed-entry handling.
 - Confirmed clean e-commerce HTTP/error messages and log formats match the recorded `UhA7J2923N` bytecode evidence.
 - Restored the e-commerce session-expiry Login redirect and task-stack reset from `UhA7J2923N`.
