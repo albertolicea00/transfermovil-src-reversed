@@ -313,6 +313,7 @@
 - [x] Route classic and classic-enterprise association to `HTmIvOo9nb` and `l2FaHPPBDa` respectively, preserving the MiTransfer/`CLASICAEMP` saved-account types.
 - [x] Compare `BfiTransferFragment` with `Z3kYdPwq6K2`; confirm enterprise Wallet selector `220`, agency `08`, field validation, and three dispatch branches.
 - [x] Compare `WalletWithdrawFragment` with `f9Reflqt3EZ`; link its identical clean body and verify the selector-95 cash-ticket form remains routed from the Wallet menu.
+- [x] Confirm source-only `WalletEnrollmentFragment.validateEmail()` is dead code: `submitForm()` and all class call sites omit it, so the clean selector-49 route does not add email validation.
 - [ ] Review remaining MiTransfer and Boleto-tab management flows for clean model and dispatcher adapters.
 - [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and guard optional invoice/type prefills when arguments are incomplete.
 - [x] Migrate General account-statement query `qAMfdm9Kls`; preserve six-month date pickers, CUP/USD, email validation/encoding, and selector-26 full/partial branches.

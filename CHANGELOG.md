@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Traced `WalletEnrollmentFragment.validateEmail()` to its lone unused declaration; the source selector-49 submit path does not validate email.
 - Restored public visibility for the Wallet latest-operations form submitter and compared full/partial selector-48 dispatch against `dI2tctjNbR`.
 - Restored public visibility for classic Wallet account-association `submitForm()` and compared its selector-111 validations/payload with `HTmIvOo9nb`.
 - Restored public visibility for Wallet PIN-entry `submitForm()` to match `R5fFZkKuVnr`; selector-40 behavior is unchanged.
