@@ -316,6 +316,7 @@
 - [x] Compare `WalletWithdrawFragment` with `f9Reflqt3EZ`; link its identical clean body and verify the selector-95 cash-ticket form remains routed from the Wallet menu.
 - [x] Confirm source-only `WalletEnrollmentFragment.validateEmail()` is dead code: `submitForm()` and all class call sites omit it, so the clean selector-49 route does not add email validation.
 - [ ] Review remaining MiTransfer and Boleto-tab management flows for clean model and dispatcher adapters.
+- [x] Compare `WalletBoletoTabFragment` with `hOQ4ESKEhm`; confirm its four entries, deletion/association choices, and clean routes match the source.
 - [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and guard optional invoice/type prefills when arguments are incomplete.
 - [x] Migrate General account-statement query `qAMfdm9Kls`; preserve six-month date pickers, CUP/USD, email validation/encoding, and selector-26 full/partial branches.
 - [x] Migrate General union-payment query `SlZq2dCM9i` by routing to its clean equivalent; preserve QR CI prefill, agency mapping, and selector 121.
