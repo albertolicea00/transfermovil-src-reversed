@@ -18,19 +18,32 @@ The decoded manifest sets `android:usesCleartextTraffic="true"` on the whole app
 
 `BaseMainActivity.DownloadNewVersion` (raw `rDEl7rW1aN.DownloadNewVersion`) appends its `url_sha` argument as the `d` query parameter, performs an `HttpURLConnection` GET, and replaces `/Download/transfermovil_new_version.apk` with the response body. It displays indeterminate then percentage progress and reports a generic failure toast on exceptions. It does not check the downloaded bytes against the supplied value or verify the APK signature in this method. On success it starts `ACTION_VIEW` with MIME `application/vnd.android.package-archive` and a `file://` URI. The manifest declares `REQUEST_INSTALL_PACKAGES`; it also declares a `FileProvider`, but this installer path does not use it. No invocation of `DownloadNewVersion` was found in the inspected source, so reachability from the UI remains unresolved. This is a static source trace; the Android-version-specific install handoff is not runtime-verified.
 
-### TLS / Certificate Handling
+### TLS, interceptors, and certificate handling
 
-String evidence from binary:
+An audit of app-owned `OkHttpClient` construction sites in `src/` found no
+`CertificatePinner`, application/network interceptor registration, custom
+`ConnectionSpec`, protocol list, TLS version, or cipher-suite configuration.
+The strings `Pinned certificates for`, `Peer certificate chain:`, and
+`ConnectionSpec.Builder` are present in bundled OkHttp/library code; by
+themselves they do not show that Transfermóvil configures certificate pinning.
+No pinned certificate or pin-to-host mapping was found in the reviewed app
+sources.
 
-- `tlsVersions=` — TLS version configuration
-- `Pinned certificates for` — **certificate pinning** is implemented
-- `Peer certificate chain:` — certificate chain inspection
-- `certificates` — general cert handling
-- `getSslSocketFactoryOrNull$okhttp` — SSL socket factory access
-- `getX509TrustManagerOrNull$okhttp` — trust manager access
-- `ConnectionSpec$Builder` — OkHttp connection spec customization
+The observed app-owned clients are:
 
-> **Hypothesis:** The app likely pins specific certificates for its backend connections. The `ConnectionSpec.Builder` usage suggests custom TLS configuration beyond defaults. Requires decompiled code to identify pinned certificates and whether pinning can be bypassed (relevant for interception analysis).
+| Source | TLS behavior | Host scope |
+| --- | --- | --- |
+| `y6NQQxH0NI.getUnsafeOkHttpClient` | Trust-all `X509TrustManager`, `SSLContext("SSL")`, and hostname verifier that always returns true. | E-commerce base URL is loaded dynamically from session preferences; exact host is not established here. |
+| `mB0ZJmAKFb.getUnsafeOkHttpClient` | Same trust-all certificate and hostname behavior, also set as Socket.IO's default HTTP/WebSocket factories. | `https://mitransfer-notification.tur.cu`. |
+| `OHp1RKP2M0.getCSRFCookie` | Default `OkHttpClient.Builder`; no custom TLS or interceptor configuration. | Request URL is not set in the shown builder path. |
+| `dST9RIJkDp` | Default `new OkHttpClient()`; no custom TLS or interceptor configuration. | Update API base is supplied at runtime. |
+
+No application interceptor chain was found in these constructors. Where the
+app uses default OkHttp TLS, the negotiated protocol/cipher depends on the
+OkHttp build and Android runtime; static source does not establish what a
+particular device negotiates. The e-commerce and WebSocket trust-all clients
+disable certificate and hostname authentication, so their HTTPS connections
+do not provide normal server identity verification.
 
 ## Known URLs
 

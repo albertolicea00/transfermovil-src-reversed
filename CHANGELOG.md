@@ -6,6 +6,7 @@
 - Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Added a provisional iOS screen/feature scope and a gated, read-only USSD feasibility proof-of-concept.
 - Restored the reachable e-commerce profile PNG/base64 conversion helper and closed source-call audits for unused multipart and EXIF image utilities.
+- Replaced generic OkHttp string evidence with a source audit of client builders: no app pinning, interceptors, or custom TLS policy; trust-all clients remain identified.
 - Restored the fuel SMS task's two-argument callback contract and exact progress/result callbacks; left parsing open because the clean parser method is absent.
 - Recorded current Apple App Review requirements for financial apps and separated the unresolved submitting-entity and carrier/bank authorization decisions.
 - Added an official-Apple static iOS feature matrix for USSD, SMS, telephony, commerce, storage, and QR; kept device and distribution checks open.

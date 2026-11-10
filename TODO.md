@@ -319,10 +319,10 @@
 ## Networking & TLS
 
 - [x] Identify OkHttp 4.2.2 as HTTP client
-- [x] Note certificate pinning evidence
-- [ ] Decompile OkHttp interceptor chain
-- [ ] Extract pinned certificates and target hosts
-- [ ] Document TLS configuration (min version, cipher suites)
+- [x] Audit OkHttp library pinning strings against app configuration; no app-level certificate pinning was found.
+- [x] Audit app-owned OkHttp client builders; no custom interceptor chain was found.
+- [x] Search app code for pinned certificate declarations and host associations; none were found.
+- [x] Document absence of app-level TLS version/cipher configuration; negotiated values remain runtime-dependent.
 - [x] Identify custom trust manager — e-commerce uses getUnsafeOkHttpClient (trusts ALL certs)
 - [x] Document the app-wide cleartext manifest policy and the source-confirmed HTTP update-download host; there is no per-host network security configuration ([networking notes](docs/networking.md#cleartext-scope)).
 - [x] Trace the self-update download and `REQUEST_INSTALL_PACKAGES` installer handoff; the method has no located caller and runtime installation remains unverified ([networking notes](docs/networking.md#self-update-download-and-installer-handoff)).
@@ -334,7 +334,7 @@
 - [x] Decompile CryptoProvider — identify algorithms (AES? RSA?)
 - [x] Determine what data is encrypted and when
 - [x] Check for hardcoded keys or predictable IVs
-- [ ] Audit certificate pinning implementation strength
+- [x] Audit certificate pinning implementation strength; app clients have no pin configuration, and Bulevar/WebSocket clients trust all certificates and hostnames.
 - [x] Audit SharedPreferences for sensitive data storage
 - [x] Check for root/emulator detection — none found
 - [x] Audit exported components for unprotected access
