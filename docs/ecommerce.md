@@ -154,6 +154,12 @@ The Bulevar account screen (`RjBvMOuknd`) opens `nCeySAq4vz` to create, rename, 
 
 The seller screen `H9l22AIYKkA` requires a selected payment source and a nonempty amount. It sends `Ph6mQUZRw4` with `amount` (the keypad formats integer digits as a decimal amount), `description`, and `sources` (the selected source ID) through `iHni1rlkwr` to `/api/payment/store`. On HTTP 200, the client requires a response `code` containing `Ok`, parses the `qr` JSON into transaction ID, amount, currency, and provider number, and sets QR version `5`. It renders a QR and shareable deep link, then checks the transaction by payment code using polling or a provider listener depending on WebSocket configuration. Amount validation checks only that the entry is nonempty; there is no positive minimum in the screen. Evidence: `H9l22AIYKkA`, `iHni1rlkwr`, `ruM2FlC2jP`, `g7q75bsZ7U4`, and `IIvRN9WfE5`. The source proves client flow, not settlement behavior.
 
+### Image upload and profile-photo paths
+
+The reachable profile and child-user presenters call `convertImageToSend`; it halves the decoded image dimensions through Glide, compresses PNG at quality `50`, and serializes a `data:image/png;base64,` data URI into the JSON profile request. Evidence: `PWf5TMuFy2`, `MNdSLKzqqG`, and `y6NQQxH0NI`.
+
+The same API client has three multipart helpers (`processPUTImage` overloads and `processPOSTImage`) that resize a file to half its original dimensions, write a shared `newthub.jpg` at JPEG quality `50`, then send a multipart body with a hardcoded `Content-Type` boundary. No Java call sites for those multipart helpers were found in the checked `src/` tree, so their intended endpoints and whether the header boundary matches the builder-generated body remain unconfirmed. `normalizeImageForUri` and its EXIF rotation helper also have no Java call sites found; the private URI-to-file bitmap writer is likewise unreferenced. Treat these as unverified helper paths until callers or bytecode evidence are available.
+
 ### Refunds
 | Endpoint | Purpose |
 |:---|:---|

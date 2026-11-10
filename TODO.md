@@ -301,7 +301,9 @@
 - [x] Decompile API client — y6NQQxH0NI singleton, getUnsafeOkHttpClient
 - [x] Document authentication flow (/loginapk, /loginfactorapk, Bearer+XSRF)
 - [x] Restore the `EcommerceActivity` host layout, initial menu, toolbar, splash menu, and back/quit flow from `QqWqw83vJf`.
-- [ ] Migrate the source multipart image endpoints and image conversion/normalization methods from `y6NQQxH0NI` into a clean API/media client.
+- [ ] Reconstruct the reachable profile and child-user photo path, including PNG/base64 conversion and its request call sites.
+- [ ] Identify callers and endpoint paths for `processPUTImage`/`processPOSTImage`; migrate the multipart overloads only after establishing that they are active, including their boundary behavior.
+- [ ] Determine whether `normalizeImageForUri`, EXIF rotation, and the bitmap-to-URI writer are used; port only the reachable behavior.
 - [ ] Reconcile `UhA7J2923N` message/log, typed error, unauthenticated-session, and enum permission behavior with the clean e-commerce session flow.
 - [x] Map the Bulevar business-profile create/update/delete workflow and its `GESTIONAR_NEGOCIO` permission gate ([e-commerce notes](docs/ecommerce.md#business-management-flow)); no separate merchant onboarding flow was found.
 - [x] Trace the dynamic-payment form, request, QR response, share link, and payment-status follow-up ([e-commerce notes](docs/ecommerce.md#payments)).
