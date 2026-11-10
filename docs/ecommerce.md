@@ -87,8 +87,11 @@ dialog. Its expiry action now clears the access token, starts clean
 `a7Y4bbw8Os`. The source also has message/log helpers, typed error-message
 dispatch, and enum-based permission checking. Clean equivalents are split
 across `MessageHandler` and `SessionManager`; their exact message/log and
-permission parity still needs review. `hasPermission(int)` alone does not
-establish parity with `checkUserPermission(enum)`.
+permission parity is tracked below. `SessionManager.hasPermission(int)` now
+matches `UhA7J2923N.checkUserPermission(enum)`: numeric grant IDs match the
+enum values (including `VER_ESTADISTICA=1000` and `VER_GRUPO_ENTIDAD=1001`),
+empty or malformed entries are ignored, and a null grant string throws during
+`split` in both implementations.
 
 | Key | Purpose |
 |:---|:---|

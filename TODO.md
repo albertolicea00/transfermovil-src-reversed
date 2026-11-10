@@ -306,7 +306,7 @@
 - [ ] Determine whether `normalizeImageForUri`, EXIF rotation, and the bitmap-to-URI writer are used; port only the reachable behavior.
 - [x] Restore the unauthenticated-session action from `UhA7J2923N`: clear the token, open Login, and reset the activity task stack.
 - [x] Reconcile HTTP messages, operation-specific error mappings, and log formats in clean `MessageHandler` with `UhA7J2923N`/`IGxV3uh9sw` ([error notes](docs/ecommerce-errors.md)).
-- [ ] Compare clean numeric grant checks with `UhA7J2923N.checkUserPermission(enum)` for null/empty/malformed grant data and enum coverage.
+- [x] Match clean numeric permission checks to `UhA7J2923N.checkUserPermission(enum)`, including enum IDs and null/empty/malformed grant behavior ([e-commerce notes](docs/ecommerce.md#session-data-sharedpreferences)).
 - [x] Map the Bulevar business-profile create/update/delete workflow and its `GESTIONAR_NEGOCIO` permission gate ([e-commerce notes](docs/ecommerce.md#business-management-flow)); no separate merchant onboarding flow was found.
 - [x] Trace the dynamic-payment form, request, QR response, share link, and payment-status follow-up ([e-commerce notes](docs/ecommerce.md#payments)).
 - [x] Document refund form validation, request fields, endpoint, and response handling ([e-commerce notes](docs/ecommerce.md#refunds)).

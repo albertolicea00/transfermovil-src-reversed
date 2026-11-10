@@ -198,7 +198,6 @@ public class SessionManager extends Application {
      */
     public boolean hasPermission(int grantId) {
         String grants = getGrants();
-        if (grants == null) return false;
         for (String item : grants.split(Pattern.quote("|"))) {
             try {
                 if (Integer.parseInt(item) == grantId) return true;
