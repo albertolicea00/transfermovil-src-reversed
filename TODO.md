@@ -66,6 +66,7 @@
 - [x] Repair BPA account/session menu dispatch to use the source agent-code helper and existing activity interfaces; replace unresolved close-session dispatcher calls.
 - [x] Replace seven invalid static `UssdDispatcher.actionCallUSSDBack` calls in BPA and MiTransfer forms with the matching source `FBsQzP3Zfj` overloads.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
+- [x] Compare method signatures for BFI external payment, QR account base, and enterprise transfer against their annotated JADX sources; confirm no method is missing or extra.
 - [x] Compare `BfiExternalPaymentFragment` with `Eqj43O0pUx`; confirm PIN/account/currency validation, QR variants, selectors `30`/`31`, packet marker `05`, and truncation branches.
 - [x] Compare `BfiQrAccountFragment` with `LgiFGRpiEl`; link the identical QR/contact behavior and document the clean shared account-callback base.
 - [x] Migrate the BANDEC account-limit, latest-operations, and payment-status form bodies into their clean screens; record selectors `62`, `48`, and `89`.
