@@ -304,7 +304,7 @@
 - [ ] Migrate the source multipart image endpoints and image conversion/normalization methods from `y6NQQxH0NI` into a clean API/media client.
 - [ ] Reconcile `UhA7J2923N` message/log, typed error, unauthenticated-session, and enum permission behavior with the clean e-commerce session flow.
 - [x] Map the Bulevar business-profile create/update/delete workflow and its `GESTIONAR_NEGOCIO` permission gate ([e-commerce notes](docs/ecommerce.md#business-management-flow)); no separate merchant onboarding flow was found.
-- [ ] Trace payment processing flow (/api/payment/store)
+- [x] Trace the dynamic-payment form, request, QR response, share link, and payment-status follow-up ([e-commerce notes](docs/ecommerce.md#payments)).
 - [x] Document refund form validation, request fields, endpoint, and response handling ([e-commerce notes](docs/ecommerce.md#refunds)).
 - [x] Map child-user permission loading, selectable grant codes, status/update sequence, and UI permission gates ([e-commerce notes](docs/ecommerce.md#child-users)).
 - [x] Document payment-source activation/deactivation confirmation, request payload, endpoint selection, and response handling ([e-commerce notes](docs/ecommerce.md#payment-sources)).

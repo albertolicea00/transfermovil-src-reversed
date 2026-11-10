@@ -2,6 +2,7 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Traced dynamic Bulevar payment creation through `/api/payment/store`, QR/deep-link generation, and payment-status follow-up.
 - Traced child-user permission loading and updates, including available/current grant merge, status submission, grant-code payload, and UI gates.
 - Documented Bulevar business-profile CRUD, the permission gate, request fields, and confirmed endpoints; distinguished it from merchant onboarding.
 - Documented e-commerce refund validation, serialized request fields, endpoint response handling, and the missing positive-amount bound.

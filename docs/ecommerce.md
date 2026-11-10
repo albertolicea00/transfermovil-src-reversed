@@ -152,6 +152,8 @@ The Bulevar account screen (`RjBvMOuknd`) opens `nCeySAq4vz` to create, rename, 
 | `/api/payment/sumOfsales` | Sales summary |
 | `/api/payment_refunds/list` | List refunds |
 
+The seller screen `H9l22AIYKkA` requires a selected payment source and a nonempty amount. It sends `Ph6mQUZRw4` with `amount` (the keypad formats integer digits as a decimal amount), `description`, and `sources` (the selected source ID) through `iHni1rlkwr` to `/api/payment/store`. On HTTP 200, the client requires a response `code` containing `Ok`, parses the `qr` JSON into transaction ID, amount, currency, and provider number, and sets QR version `5`. It renders a QR and shareable deep link, then checks the transaction by payment code using polling or a provider listener depending on WebSocket configuration. Amount validation checks only that the entry is nonempty; there is no positive minimum in the screen. Evidence: `H9l22AIYKkA`, `iHni1rlkwr`, `ruM2FlC2jP`, `g7q75bsZ7U4`, and `IIvRN9WfE5`. The source proves client flow, not settlement behavior.
+
 ### Refunds
 | Endpoint | Purpose |
 |:---|:---|
