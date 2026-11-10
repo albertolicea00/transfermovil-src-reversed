@@ -196,6 +196,7 @@
 - [x] Remove the misidentified `BankOperationBaseFragment` shell: its `p3NpwYhcUs3` mapping is an enum (`Agregar`, `Pago`, `Eliminar`, `Consulta`), not a Fragment; the enum is retained and used by the BANDEC contracted-services routes.
 - [x] Remove the unused `BranchSelectionFragment` shell: its stale `vVF87n7MnK` mapping is the BANDEC card-reprint form, now represented by `BandecCardReprintFragment` and connected from Configuración; the common shell had no callers.
 - [x] Route BANDEC `BANInfoTarjeta` from Consultas to source-backed `BandecCardInfoQueryFragment`; preserve 16-digit account validation and selector `78`, and remove the stale common shell.
+- [x] Expose clean BANDEC Consultas routes for latest operations (`48`), account limits (`62`), and recent payments (`63`) using correctly named source adapters.
 - [x] Remove the unused common `ChangeLimitFragment` shell: `SIxHnoWicq` has no callers; the reachable BANDEC limits action uses `uWkWt7AEZ5`, already routed as `BandecChangeLimitFragment` (selector `61`).
 - [x] Correct the `ChangePasswordFragment` draft to `MultibancaPinChangeFragment`; route `BANCambioPinMultibanca` through the clean settings menu and preserve source validation and selector `75`.
 - [x] Route BANDEC `BANCambiarclave` through clean `ChangePinFragment`; preserve access-key validation and selector `69`.

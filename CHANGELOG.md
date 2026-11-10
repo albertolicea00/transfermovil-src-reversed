@@ -11,6 +11,7 @@
 - Routed BANDEC `BANConsultarServicio` to `BandecInvoiceQueryFragment`, preserving utility and ONAT query paths with selectors `47`, `56`, and `22`; removed the misnamed common placeholder.
 - Routed all three BANDEC `BANRegistrarse` operation entries to `BandecRegistrationFragment`; preserved the source account/card validation and selector `49` plus packet dispatch `110`.
 - Routed BANDEC `BANConsultarGiroPostal` to `BandecPostalOrderQueryFragment`, preserving identity-based pending-order lookup and selector `65`; removed the stale common shell.
+- Added named BANDEC query adapters for latest operations, account limits, and recent payments; routed Consultas actions and preserved selectors `48`, `62`, and `63`.
 - Removed the unused common limit-change shell mapped to caller-free `SIxHnoWicq`; the reachable BANDEC limits action remains routed through `BandecChangeLimitFragment` from `uWkWt7AEZ5`.
 - Connected BANDEC access-key and Multibanca PIN changes to clean source-backed forms; corrected the stale `ChangePasswordFragment` mapping and preserved selectors `69`/`75`.
 - Connected BANDEC `BANAutenticar` to source-backed `AuthenticateFragment` in the clean session menu; preserved password validation and dispatch `02`/`40`.
