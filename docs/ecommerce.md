@@ -82,11 +82,13 @@ POST /loginfactorapk
 
 The clean `ecommerce/SessionManager` implements persistence for the session
 and preference keys, numeric grant checks, asset loading, and a session-expiry
-dialog. The source `UhA7J2923N` also has message/log helpers, typed error
-message dispatch, an unauthenticated-session flow, and enum-based permission
-checking. Clean equivalents are split across `MessageHandler` and the current
-session UI, but their source parity still needs review; `hasPermission(int)`
-does not by itself establish parity with `checkUserPermission(enum)`.
+dialog. Its expiry action now clears the access token, starts clean
+`LoginActivity`, and resets the task stack like raw `UhA7J2923N` starts
+`a7Y4bbw8Os`. The source also has message/log helpers, typed error-message
+dispatch, and enum-based permission checking. Clean equivalents are split
+across `MessageHandler` and `SessionManager`; their exact message/log and
+permission parity still needs review. `hasPermission(int)` alone does not
+establish parity with `checkUserPermission(enum)`.
 
 | Key | Purpose |
 |:---|:---|

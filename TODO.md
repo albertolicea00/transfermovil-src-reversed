@@ -304,7 +304,9 @@
 - [ ] Reconstruct the reachable profile and child-user photo path, including PNG/base64 conversion and its request call sites.
 - [ ] Identify callers and endpoint paths for `processPUTImage`/`processPOSTImage`; migrate the multipart overloads only after establishing that they are active, including their boundary behavior.
 - [ ] Determine whether `normalizeImageForUri`, EXIF rotation, and the bitmap-to-URI writer are used; port only the reachable behavior.
-- [ ] Reconcile `UhA7J2923N` message/log, typed error, unauthenticated-session, and enum permission behavior with the clean e-commerce session flow.
+- [x] Restore the unauthenticated-session action from `UhA7J2923N`: clear the token, open Login, and reset the activity task stack.
+- [ ] Reconcile `UhA7J2923N` message/log and typed-error behavior with clean `MessageHandler`.
+- [ ] Compare clean numeric grant checks with `UhA7J2923N.checkUserPermission(enum)` for null/empty/malformed grant data and enum coverage.
 - [x] Map the Bulevar business-profile create/update/delete workflow and its `GESTIONAR_NEGOCIO` permission gate ([e-commerce notes](docs/ecommerce.md#business-management-flow)); no separate merchant onboarding flow was found.
 - [x] Trace the dynamic-payment form, request, QR response, share link, and payment-status follow-up ([e-commerce notes](docs/ecommerce.md#payments)).
 - [x] Document refund form validation, request fields, endpoint, and response handling ([e-commerce notes](docs/ecommerce.md#refunds)).

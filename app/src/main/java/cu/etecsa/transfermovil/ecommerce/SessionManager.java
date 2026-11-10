@@ -233,7 +233,11 @@ public class SessionManager extends Application {
         dialog.setMessage("Su sesión ha expirado. Debe autenticarse para continuar el uso del Bulevar.");
         dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Autenticar", (d, w) -> {
             setAccessToken(null);
-            // Redirects to login activity (a7Y4bbw8Os in obfuscated source)
+            Intent intent = new Intent(activity, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            activity.startActivity(intent);
             activity.finish();
         });
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cerrar", (d, w) -> activity.finish());
