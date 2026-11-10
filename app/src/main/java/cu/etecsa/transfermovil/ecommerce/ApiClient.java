@@ -229,6 +229,22 @@ public class ApiClient {
         if (photo != null && !photo.isEmpty()) request.getUser().setPhoto(convertImageToSend(photo));
     }
 
+    public ApiResponse listChildUsers(String bearerToken) {
+        return postAuthenticated("/api/childusers/list", null, bearerToken);
+    }
+
+    public ApiResponse getChildUser(Object request, String bearerToken) {
+        return postAuthenticated("/api/user/get", request, bearerToken);
+    }
+
+    public ApiResponse deleteChildUser(Object request, String bearerToken) {
+        return postAuthenticated("/api/user/destroy", request, bearerToken);
+    }
+
+    public ApiResponse setChildUserStatus(Object request, String bearerToken) {
+        return postAuthenticated("/api/user/banned", request, bearerToken);
+    }
+
     /**
      * Converts a profile image path to the PNG data URI sent by the raw client.
      * Glide decodes it at half the source dimensions before PNG compression.
