@@ -13,6 +13,7 @@
 - Restored SMS Cubacel plan-catalog persistence with the clean `CubacelPlan` entity.
 - Restored the main PAGOxMOVIL SMS routing parser and inbox import deduplication by transaction ID and service type.
 - Restored MiBoleto offer parsing, ticket purchase/update persistence, and today's offer SMS task; routed the three clean MiBoleto screens through it.
+- Migrated BANDEC account-limit, latest-operations, and payment-status form bodies into the clean screens, preserving selector and payload order while retaining their shared source account-selection base.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.

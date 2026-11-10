@@ -66,6 +66,7 @@
 - [x] Repair BPA account/session menu dispatch to use the source agent-code helper and existing activity interfaces; replace unresolved close-session dispatcher calls.
 - [x] Replace seven invalid static `UssdDispatcher.actionCallUSSDBack` calls in BPA and MiTransfer forms with the matching source `FBsQzP3Zfj` overloads.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
+- [x] Migrate the BANDEC account-limit, latest-operations, and payment-status form bodies into their clean screens; record selectors `62`, `48`, and `89`.
 - [x] Compare `WalletWaterPaymentFragment` with `U1sIOmca96i`; confirm selector routing, payload order, and source validation quirks are represented in [wallet water notes](docs/wallet-water-payment.md).
 - [x] Compare Wallet bank-transfer and Metro coordinate-transfer card-prefix helpers with archived smali; restore the bank-transfer agency inference and confirm Metro only updates the logo.
 - [x] Compare `BfiAssociateAccountFragment` with source `F2leFVNWrdy`; account formatting/length, foreign-bank confirmation, random coordinate challenge, and selector `60` payload match.
