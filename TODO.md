@@ -212,7 +212,7 @@
 - [x] Remove the unused common `SecurityMenuFragment` shell: `eRe5PTC1On` has no source or clean callers; the live BPA/BFI/BANDEC security routes use their bank-specific menus.
 - [x] Remove the unused common `UtilityBillPaymentFragment` shell: source `hvC0UGR2L0` has no callers; live BANDEC water uses `BandecUtilityPaymentFragment`.
 - [x] Remove the unused common `WireTransferFragment` shell: source `fvzO0qRHbu` has no callers; BANDEC postal order uses `BandecPostalOrderFragment`.
-- [ ] Trace source and callers for `ui/fragment/banking/common/WireTransferQueryFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [x] Route BANDEC `BANConsultarGiroPostal` from Consultas to `BandecPostalOrderQueryFragment`; preserve CI-based pending-order lookup and selector `65`, and remove the stale common shell.
 
 ## MiTransfer (Wallet)
 
