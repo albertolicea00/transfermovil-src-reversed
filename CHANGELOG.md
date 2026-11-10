@@ -11,6 +11,7 @@
 - Compared the clean Wallet water-payment form with `U1sIOmca96i`; documented parity for selector routes, payload, and preserved validation quirks.
 - Refreshed reconstruction inventory: 257 unmapped main-package files remain, with current package-segment counts recorded.
 - Added exact source annotations to seven Wallet/FWA forms and regenerated the source-link inventory.
+- Corrected shared PAN currency parsing to read source characters 3–4, separate from the bank code at characters 5–6.
 - Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Added a provisional iOS screen/feature scope and a gated, read-only USSD feasibility proof-of-concept.
 - Restored the reachable e-commerce profile PNG/base64 conversion helper and closed source-call audits for unused multipart and EXIF image utilities.

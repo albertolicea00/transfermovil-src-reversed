@@ -68,7 +68,7 @@ public abstract class BankingAccountValidatorFragment extends Fragment {
             }
 
             if (datos.tipo == x8AaGMBO19.PAN) {
-                String moneda = tarjeta.substring(4, 6);
+                String moneda = tarjeta.substring(2, 4);
                 datos.isValidCurrency = true;
                 if (moneda.contains("25") || moneda.contains("26") || moneda.contains("28")
                         || moneda.contains("29") || moneda.contains("35") || moneda.contains("45")) {
