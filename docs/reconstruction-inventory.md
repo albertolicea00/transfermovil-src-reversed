@@ -193,12 +193,12 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 362 | 432 | 0 |
-| Main app package | 596 | 231 | 365 | 0 |
+| All `src/` | 794 | 361 | 433 | 0 |
+| Main app package | 596 | 230 | 366 | 0 |
 
 Generated with `python3 scripts/reconstruction-inventory.py` from the current
 `src/`, clean Java tree, and `mappings/classes.json`. The live inventory reports
-449 clean Java files, 85 mapping entries, no mapping issues or duplicate
+450 clean Java files, 85 mapping entries, no mapping issues or duplicate
 candidates, and 17 clean files without source annotations. Duplicate candidates
 were resolved by reusing shared BFI authentication/registration screens and
 removing false source tags from derived helpers. The unused `UssdDispatcher`
@@ -206,11 +206,11 @@ Activity mapping was removed because the active source is a static helper
 called directly by the app. These are exact-link counts only and do not
 establish behavioral completeness.
 
-The 231 unlinked main-package sources group by first package segment as follows:
+The 230 unlinked main-package sources group by first package segment as follows:
 
 | Original package segment | Unlinked files |
 | --- | ---: |
-| `B0jOLrWx09th` | 157 |
+| `B0jOLrWx09th` | 156 |
 | `l08fNVC4KOKK` | 20 |
 | `B21UyndcVvF` | 16 |
 | `ZNRpoHwtLXM` | 13 |
@@ -219,8 +219,9 @@ The 231 unlinked main-package sources group by first package segment as follows:
 | `h4VIMAs7y2v` | 2 |
 | `BuildConfig`, `R` | 2 |
 
-Linked five BANDEC query wrappers to their exact source classes, reducing
-main-package unlinked sources from 236 to 231. This refresh establishes the
+Linked five BANDEC query wrappers and their shared account-selection base to
+their exact source classes, reducing main-package unlinked sources from 236 to
+230. This refresh establishes the
 current package distribution only. It does not
 classify the obfuscated classes as generated code, Android glue, or application
 behavior; that source-by-source review and exact-link cleanup remain open.

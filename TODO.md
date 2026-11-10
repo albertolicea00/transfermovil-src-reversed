@@ -67,6 +67,7 @@
 - [x] Replace seven invalid static `UssdDispatcher.actionCallUSSDBack` calls in BPA and MiTransfer forms with the matching source `FBsQzP3Zfj` overloads.
 - [ ] Review remaining partial BFI/Wallet implementations and compare their behavior with source before claiming feature completeness.
 - [x] Migrate the BANDEC account-limit, latest-operations, and payment-status form bodies into their clean screens; record selectors `62`, `48`, and `89`.
+- [x] Reconstruct BANDEC's shared account selector from `DQIrxODoMU`, restore its card-logo method from archived smali, and rewire the three clean query forms.
 - [x] Compare `WalletWaterPaymentFragment` with `U1sIOmca96i`; confirm selector routing, payload order, and source validation quirks are represented in [wallet water notes](docs/wallet-water-payment.md).
 - [x] Compare Wallet bank-transfer and Metro coordinate-transfer card-prefix helpers with archived smali; restore the bank-transfer agency inference and confirm Metro only updates the logo.
 - [x] Compare `BfiAssociateAccountFragment` with source `F2leFVNWrdy`; account formatting/length, foreign-bank confirmation, random coordinate challenge, and selector `60` payload match.
@@ -95,8 +96,8 @@
 - [x] Compare BFI balance, limit, and latest-operation forms with JADX; confirm selectors `46`, `62`, and `48`, their payload construction, and partial-USSD marker `05`.
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
-- [ ] Review the remaining 231 main-package source files without exact reconstruction links; distinguish generated code from application logic.
-- [ ] Inventory the 231 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
+- [ ] Review the remaining 230 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [ ] Inventory the 230 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
 - [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
