@@ -11,7 +11,7 @@
 - Routed BANDEC `BANConsultarTodasCuentas` through a clean confirmation and preserved agent-aware selector `58` dispatch.
 - Routed BANDEC fine consultation through a clean type chooser and source-linked form adapter, preserving the Contravension/Transito arguments and Metropolitano agency.
 - Routed BANDEC ticket consultation through the source-backed two-choice dialog, preserving agent-aware selector `103` and the BANDEC reservation lookup form.
-- Routed BANDEC union-dues consultation to its source-linked identity-card form with selector `121` and BANDEC agency mapping.
+- Confirmed the source-only BANDEC union-dues callback has no visible menu row; its inherited destination remains available to direct callbacks with selector `121` and BANDEC agency mapping.
 - Routed BANDEC balance consultation through a clean confirmation and preserved agent-aware selector `46` dispatch.
 - Routed BANDEC exchange-rate consultation through a clean confirmation and preserved agent-aware selector `85` dispatch.
 - Routed BANDEC fuel consultation through its four source-linked coupon forms in the source menu's original order.

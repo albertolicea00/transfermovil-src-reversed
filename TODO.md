@@ -172,7 +172,7 @@
 - [x] Route `BANCambioMensualidad` to source-backed `BandecMonthlyPaymentChangeFragment`; preserve the source selector `25` form.
 - [x] Correct the `BandecReprintFragment` mapping: `m0X6Kxdhmv` changes loan monthly payment (selector `25`), not card reprint; route that operation as `BandecMonthlyPaymentChangeFragment` and connect actual `BANReimpresion` to `BandecCardReprintFragment` (selector `74`).
 - [x] Correct the mislabeled `BandecAuthenticateFragment` draft: source `rvxiiV3tYu` is the three-action BANDEC Sesión menu. Route the tab through `BandecSessionMenuFragment` and preserve authentication, disconnect, and card selection destinations.
-- [x] Correct the mislabeled `BandecBalanceQueryFragment` draft: source `R7PmVxXLJZC` is the 14-item BANDEC Consultas menu. Route the tab through `BandecQueriesMenuFragment` and preserve the source-backed menu destinations; individual query forms remain separate tasks.
+- [x] Correct the mislabeled `BandecBalanceQueryFragment` draft: source `R7PmVxXLJZC` is the 14-item BANDEC Consultas menu. Route all visible rows through `BandecQueriesMenuFragment` and preserve their source-backed destinations.
 - [x] Migrate the BANDEC operation router from `bLlRBTTLue`; preserve all 26 source menu entries and original destinations, while routing `BANTransferencia` to the clean transfer form.
 - [x] Correct the mislabeled `BandecRegistrationFragment` draft: source `X7obECfkKf` is the nine-action BANDEC Configuración menu. Route the tab through `BandecSettingsMenuFragment` and preserve registration and the other settings destinations.
 - [x] Remove the mislabeled `BandecCardRenewalFragment` shell: its `gaJlF6dT3z` source is BANDEC latest-operations query (selector `48`), routed by `R7PmVxXLJZC` under `BANUltimasoperaciones`; the clean shell had no callers.
@@ -206,7 +206,7 @@
 - [x] Route BANDEC `BANConsultarTodasCuentas` through an explicit Sí/No confirmation and preserve source agent-aware selector `58` dispatch.
 - [x] Route BANDEC `BANConsultaMulta` through a clean fine-type chooser and source-linked adapter; preserve the Metropolitano agency argument for both fine types.
 - [x] Route BANDEC `BANConsultaTicket` through its original two-choice dialog; preserve the agent-aware `103` call and BANDEC reservation lookup (`107`).
-- [x] Route BANDEC `BANConsultaSindicato` to the source-linked identity-card form with the BANDEC agency argument and selector `121`.
+- [x] Confirm `BANConsultaSindicato` has no visible BANDEC Consultas row: source `initData()` creates 14 entries without it; keep its inherited switch destination without inventing a menu action.
 - [x] Route BANDEC `BANConsultarSaldo` through the source confirmation and preserve agent-aware selector `46` dispatch.
 - [x] Route BANDEC `BANTipoCambio` through the source confirmation and preserve agent-aware selector `85` dispatch.
 - [x] Route BANDEC fuel consultation choices to their four source-linked coupon forms in original order.
