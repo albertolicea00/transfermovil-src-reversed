@@ -185,3 +185,19 @@ methods missing from JADX were recovered from archived smali. These screens
 retain raw service, model, or child-fragment dependencies.
 Source links do not establish that screens compile or run; the inventory
 progress bar remains separate from source-link coverage.
+
+## 2026-11-10 snapshot
+
+Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
+`b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
+
+| Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
+| --- | ---: | ---: | ---: | ---: |
+| All `src/` | 794 | 396 | 395 | 3 |
+| Main app package | 596 | 265 | 328 | 3 |
+
+The live inventory reports 450 clean Java files, 86 mapping entries, no mapping
+issues, and 49 clean files without source annotations. The remaining three
+multiple-candidate sources are `Agg55uYctq`, `SvY0xjeNSz`, and `umjSGajOy3`;
+their canonical implementations or duplicate annotations still need review.
+These are exact-link counts only and do not establish behavioral completeness.
