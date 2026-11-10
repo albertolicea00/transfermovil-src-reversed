@@ -30,6 +30,8 @@
 - Restored Wallet tab registration, PIN-change, and both deletion fragments from their source forms; replaced missing registration route with the migrated enrollment screen.
 - Restored Wallet tab classic/enterprise association routes, using the source's saved-account agency to select `MiTransfer` versus `CLASICAEMP`.
 - Refreshed reconstruction inventory after linking four Wallet configuration forms; 221 main-package sources remain unlinked.
+- Linked and compared General Wallet enterprise transfer with `Z3kYdPwq6K2`; confirmed selector `220`, agency `08`, validations, and dispatcher variants.
+- Refreshed source inventory after linking General Wallet enterprise transfer; 220 main-package sources remain unlinked.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.

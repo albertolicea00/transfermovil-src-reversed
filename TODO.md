@@ -98,8 +98,8 @@
 - [x] Compare BFI balance, limit, and latest-operation forms with JADX; confirm selectors `46`, `62`, and `48`, their payload construction, and partial-USSD marker `05`.
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
-- [ ] Review the remaining 221 main-package source files without exact reconstruction links; distinguish generated code from application logic.
-- [ ] Inventory the 221 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
+- [ ] Review the remaining 220 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [ ] Inventory the 220 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
 - [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
@@ -306,6 +306,7 @@
 - [x] Link `NautaUserFragment` to the exact `KtF0PRB8vS` source, confirm normalized source-body identity, and route both dynamic General-menu entries to the clean class.
 - [x] Restore Wallet tab routes for registration, PIN change, wallet registration deletion, and classic-account registration deletion from `eUkRSfpCKs`, `Cmok7CcIR9`, `Nju5UJgFce`, and `m44wUnA8d5`.
 - [x] Route classic and classic-enterprise association to `HTmIvOo9nb` and `l2FaHPPBDa` respectively, preserving the MiTransfer/`CLASICAEMP` saved-account types.
+- [x] Compare `BfiTransferFragment` with `Z3kYdPwq6K2`; confirm enterprise Wallet selector `220`, agency `08`, field validation, and three dispatch branches.
 - [ ] Review remaining MiTransfer and Boleto-tab management flows for clean model and dispatcher adapters.
 - [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and tolerate agency-only arguments without invoice-prefill access.
 - [x] Migrate General account-statement query `qAMfdm9Kls`; preserve six-month date pickers, CUP/USD, email validation/encoding, and selector-26 full/partial branches.

@@ -24,3 +24,9 @@ empresarial” to `l2FaHPPBDa`, which stores it under `CLASICAEMP`. The delete
 registration choices route to `Nju5UJgFce` (wallet registration) and
 `m44wUnA8d5` (saved classic/enterprise account); PIN change routes to
 `Cmok7CcIR9`. Their clean counterparts now back the tab actions.
+
+The General Wallet enterprise transfer form, [`BfiTransferFragment`](../app/src/main/java/cu/etecsa/transfermovil/ui/fragment/BfiTransferFragment.java),
+matches source `Z3kYdPwq6K2` after package and class-name normalization. It
+validates destination, amount, category, wallet type, optional source account,
+and phone fields; sends selector `220` with agency `08`; and preserves the
+partial-USSD, ordinary, and return-observer dispatch branches.
