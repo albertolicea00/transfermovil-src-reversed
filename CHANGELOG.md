@@ -6,6 +6,7 @@
 - Added source-confirmed child-user create/update API adapters and nested-photo preparation helper.
 - Added the remaining source-confirmed child-user list, detail, delete, and status API adapters.
 - Added `ChildUserPresenter` for all six source-backed operations and pre-dispatch photo conversion on create/update; typed response/UI integration remains pending.
+- Mapped the child-user list response's `dt.rows` payload into clean `ChildUserListResponse` records using the JADX field mapping.
 - Listed the nine clean files without source annotations in the inventory and clarified that listener references alone do not prove the enclosing screen's source identity.
 - Restored Wallet bank-transfer agency inference from destination-card prefixes using archived smali evidence.
 - Linked the BANDEC account-limit, latest-operations, and recent-payments screens to their exact JADX source classes; refreshed the reconstruction inventory.

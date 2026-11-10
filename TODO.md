@@ -346,6 +346,7 @@
 - [x] Add clean profile API routes and `ProfilePresenter` for current profile, profile update, and password change; convert a selected photo before update.
 - [x] Migrate child-user create/update request paths to a clean presenter that prepares a nonempty photo before dispatch.
 - [ ] Adapt child-user response JSON to the original typed list/detail models and connect clean UI callbacks.
+- [x] Map child-user list payload `dt.rows` into the clean `ChildUserListResponse` fields from source.
 - [x] Add source-backed child-user API routes for list, detail, delete, and status alongside create/update.
 - [x] Add clean child-user create/update API adapters for source-confirmed endpoints and nested-photo preparation.
 - [x] Audit callers for `processPUTImage`/`processPOSTImage`; no Java callers or endpoint paths were found, so the multipart overloads remain unported and their boundary behavior unverified.

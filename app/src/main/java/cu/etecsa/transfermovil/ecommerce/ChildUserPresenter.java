@@ -2,16 +2,21 @@ package cu.etecsa.transfermovil.ecommerce;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import cu.etecsa.transfermovil.ecommerce.domain.entity.ChildUser;
 import cu.etecsa.transfermovil.ecommerce.model.request.BanUserRequest;
 import cu.etecsa.transfermovil.ecommerce.model.request.ChildUserCreateRequest;
 import cu.etecsa.transfermovil.ecommerce.model.request.IdRequest;
+import cu.etecsa.transfermovil.ecommerce.model.response.ChildUserListResponse;
+import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /** Source-backed child-user request adapter for MNdSLKzqqG. */
 public final class ChildUserPresenter {
     public enum Operation { LIST, DETAIL, CREATE, UPDATE, DELETE, STATUS }
     public interface Callback {
         void onProgressVisibility(int visibility);
-        void onResult(Operation operation, ApiResponse response);
+        void onResult(Operation operation, Object response);
     }
 
     private final Context context;
@@ -55,8 +60,41 @@ public final class ChildUserPresenter {
             }
             @Override protected void onPostExecute(ApiResponse response) {
                 callback.onProgressVisibility(4);
-                callback.onResult(operation, response);
+                callback.onResult(operation, operation == Operation.LIST ? mapList(response) : response);
             }
         }.execute();
+    }
+
+    private static ChildUserListResponse mapList(ApiResponse raw) {
+        ChildUserListResponse result = new ChildUserListResponse();
+        if (raw == null) { result.setOK(false); result.setHttpCode(500); return result; }
+        result.setHttpCode(raw.getCodigoHTTP());
+        result.setJsonObject(raw.getJsonObject());
+        JSONObject body = raw.getJsonObject();
+        if (raw.isError() || raw.getCodigoHTTP() != 200 || body == null
+                || !body.optString("code").contains("Ok")) {
+            result.setOK(false);
+            result.setMenssage(raw.getMenssaje());
+            return result;
+        }
+        ArrayList<ChildUser> users = new ArrayList<>();
+        JSONObject data = body.optJSONObject("dt");
+        JSONArray rows = data == null ? null : data.optJSONArray("rows");
+        if (rows != null) for (int i = 0; i < rows.length(); i++) {
+            JSONObject row = rows.optJSONObject(i);
+            if (row == null) continue;
+            ChildUser user = new ChildUser();
+            user.setIdUser(row.optInt("id"));
+            user.setNombre(row.optString("username", null));
+            user.setCorreo(row.optString("email", null));
+            user.setCreado(row.optString("created_at", null));
+            user.setUpdateAt(row.optString("updated_at", null));
+            if (!row.isNull("banned")) user.setActivo(row.optInt("banned") == 0);
+            user.setAvatar(SessionManager.getInstance().getApiUrl() + "/user/photo/" + row.optString("id"));
+            users.add(user);
+        }
+        result.setItemsList(users);
+        result.setOK(true);
+        return result;
     }
 }
