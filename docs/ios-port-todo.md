@@ -14,12 +14,12 @@ Target Android client: Transfermóvil 1.260416 (`cu.etecsa.cubacel.tr.tm-v162.ap
 ## Porting work to scope after feasibility
 
 - [ ] Separate platform-independent rules (operation definitions, USSD parameter encoding, response formats, validation) from Android-only code. Define Swift-compatible fixtures and offline tests for protocol behavior.
-- [ ] Map Android UI and navigation to iOS screens, accessibility, localization, and system permission flows. Inventory agent, banking, wallet, QR/boleto, and e-commerce features separately.
+- [x] Map Android navigation and major agent, banking, wallet, QR/boleto, and e-commerce feature families to a provisional iOS screen scope below; accessibility, localization, and permission design remain implementation work.
 - [ ] Rebuild online flows with `URLSession`, including authentication, session renewal, deep links, and errors. Audit the backend rather than copying the Android client's trust-all TLS behavior. Apple's [App Transport Security](https://developer.apple.com/documentation/BundleResources/Information-Property-List/NSAppTransportSecurity) documents the default HTTPS and trust requirements.
 - [ ] Map SQLite/ORMLite entities and preferences to an iOS data model. Plan migration only for data the user can legitimately export or re-enter. Store secrets with [Keychain Services](https://developer.apple.com/documentation/security/keychain-services).
 - [ ] Compare all protocol-compatible cryptography with known-answer test vectors. Treat insecure Android schemes as interoperability constraints to assess, not design patterns to copy into new features.
 - [ ] Replace Android-specific camera, QR, notifications, background jobs, contacts, files, and app-update flows with supported iOS APIs where each feature is still required.
-- [ ] Define a small proof of concept for the highest-risk requirement before committing to a full port: one end-to-end banking or wallet flow using only public iOS APIs and a safe test environment.
+- [x] Define a gated proof-of-concept for the highest-risk requirement below; execution remains blocked on a carrier/service-owner test environment and authorization.
 
 ## Decision record to fill in
 
@@ -31,6 +31,40 @@ Target Android client: Transfermóvil 1.260416 (`cu.etecsa.cubacel.tr.tm-v162.ap
 | Online commerce | Authenticate, call the e-commerce API, open deep links, and render QR/payment flows. | [`URLSession`](https://developer.apple.com/documentation/foundation/urlsession) and registered/custom links provide platform building blocks. No device-specific blocker identified from the current client sources. | Must use verified TLS and confirm backend support; Android trust-all behavior is not an acceptable design target. | Feasible to prototype after backend/API review. |
 | Local data and secrets | Store preferences, records, and credentials. | Use Core Data/SwiftData and [Keychain Services](https://developer.apple.com/documentation/security/keychain-services); confirm schema and migration needs against the data inventory. | ORMLite/SQLite schema and Android preferences need a migration policy. | Feasible; migrate only data needed for the iOS feature set. |
 | QR and device integrations | Scan/render QR, access contacts/camera, notify, and update the app. | Use AVFoundation/Vision and system permission flows; app updates are distributed through platform channels rather than the Android package installer. | Rebuild Android service, file, background-work, and installer behavior individually. | Feasible per feature, subject to device testing and distribution rules. |
+
+### Provisional screen map and port scope
+
+This maps the source-backed Android navigation to iOS feature families; it is a
+scope proposal, not a claim that every operation can be ported.
+
+| Android area | User-facing feature families | Provisional iOS scope |
+| --- | --- | --- |
+| Shared home and settings | Operation shortcuts, preferences, help, local catalogs | Port the navigation and catalog experiences; redesign permissions and accessibility for iOS. |
+| General mode | Carrier services, SMS shortcuts, useful numbers, MiTransfer, MiBoleto, banks, Bulevar, statistics | Port informational and QR/UI surfaces. Carrier and bank operations need a supported service API or explicit user handoff; no silent SMS/inbox parity. |
+| Agent mode | Agent operations and services, MiTransfer, MiBoleto, banks, Bulevar, statistics | Port screens only after the service owner supplies supported APIs and approves the agent workflow; local form validation can be reused after protocol review. |
+| Banking and wallet tabs | BPA, BANDEC, Metropolitano, BFI, MiTransfer balance, transfers, payments, statements, limits | Preserve the information architecture only where the operation backend is approved. USSD-dependent actions are out of parity under the reviewed public iOS APIs. |
+| Bulevar commerce | Login, product browsing, cart/checkout, payment QR/deep links, refunds and business tools | Candidate for an API-backed iOS module after backend, TLS, legal-entity, and service-owner review. |
+| QR and ticket workflows | Scan QR, MiBoleto and MiTurno lookup/purchase/reservation | Candidate for a native camera/QR flow; every submit action still depends on an approved backend or supported carrier integration. |
+| SMS-driven records and updates | Import transaction/activation SMS; download and install APK updates | No direct parity plan. Replace with an authorized server feed or user-export/import flow; distribute iOS updates through Apple's channels. |
+
+### Gated proof-of-concept
+
+The highest-risk dependency is an end-to-end USSD banking or wallet request with
+the reply needed to continue the transaction. The reviewed public APIs do not
+provide an app-controlled USSD request/response channel. Do not build the full
+USSD feature set on the assumption that a `tel:` link can carry `*`/`#` or expose
+the interactive response.
+
+Before any port commitment, the service owner and carrier would need to provide
+a written-authorized test account/line and a non-production endpoint or
+carrier-supported iOS integration. The experiment should use one read-only
+balance query, public iOS APIs only, and record whether it can submit the
+request, obtain each interactive response, handle cancellation, and avoid
+exposing account secrets. Pass only if the complete response loop is supported
+without private APIs; otherwise mark USSD-dependent banking/wallet operations
+out of parity and scope a server API or manual carrier handoff separately.
+This gate is defined but not executed because the required test environment
+and authorization are not present in the repository.
 
 Static source/documentation review completed 2026-11-10. The API and distribution conclusions remain provisional until current device tests and the App Store/carrier-policy review are completed.
 
