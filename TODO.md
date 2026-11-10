@@ -94,10 +94,11 @@
 - [x] Compare BFI balance, limit, and latest-operation forms with JADX; confirm selectors `46`, `62`, and `48`, their payload construction, and partial-USSD marker `05`.
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
-- [ ] Review the remaining 257 main-package source files without exact reconstruction links; distinguish generated code from application logic.
-- [ ] Inventory the 257 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
+- [ ] Review the remaining 256 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [ ] Inventory the 256 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
 - [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
+- [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
 - [x] Compare `BankingAccountValidatorFragment` with archived `EV9Tu0zIL4`; correct the PAN currency slice to source characters 3–4 and record the bank/currency offsets.
 - [x] Reconstruct `BankAccountEditFragment` from `oaEWezaNAI`, recover its card-prefix icon method from archived smali, and route account-list, BANDEC, BFI, and Wallet entry points to the clean screen.
 - [x] Compare `BfiChangePinFragment` with `KvpkEH7lRr`; restore the source short-old-PIN message, raw equality comparison, and error-field clearing behavior.

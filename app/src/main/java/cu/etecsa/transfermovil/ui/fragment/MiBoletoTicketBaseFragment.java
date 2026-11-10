@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.L4aAENEGbqv */
 public class MiBoletoTicketBaseFragment extends Fragment {
     public ImageButton btSearchAccount;
     public List<String> cList;

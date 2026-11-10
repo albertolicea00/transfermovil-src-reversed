@@ -20,6 +20,7 @@
 - Matched BFI change-PIN short-value messaging, repeated-PIN comparison, and successful-field error clearing to `KvpkEH7lRr`.
 - Confirmed BFI registration payload, selector-49 partial path, field errors, and PIN-change restriction match `umjSGajOy3`.
 - Confirmed Wallet gas/electricity invoice persistence, validation, payloads, and full/partial dispatch match their source forms.
+- Linked `MiBoletoTicketBaseFragment` to its exact `L4aAENEGbqv` source and refreshed reconstruction counts: 256 main-package files remain unlinked.
 - Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Added a provisional iOS screen/feature scope and a gated, read-only USSD feasibility proof-of-concept.
 - Restored the reachable e-commerce profile PNG/base64 conversion helper and closed source-call audits for unused multipart and EXIF image utilities.
