@@ -9,6 +9,9 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.OQcONjDATJ;
+import cu.etecsa.cubacel.tr.tm.us8tbD58ow4.D1rOcltDGsD;
 
 /**
  * @original_apk_version 1.260416
@@ -26,23 +29,26 @@ public class EcommerceMenuFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // View rootView = inflater.inflate(R.layout.ku004pfrbslmu, container, false);
-        // context = container.getContext();
-        // Button btnGestion = rootView.findViewById(R.id.btn_gestion);
-        // btnGestion.setOnClickListener(v -> {
-        //     FragmentManager fm = getActivity().getSupportFragmentManager();
-        //     fm.beginTransaction()
-        //       .replace(R.id.containerView, new OQcONjDATJ())
-        //       .addToBackStack(null).commit();
-        // });
-        // Button btnEstadisticas = rootView.findViewById(R.id.btn_estadisticas);
-        // btnEstadisticas.setOnClickListener(v -> {
-        //     FragmentManager fm = getActivity().getSupportFragmentManager();
-        //     fm.beginTransaction()
-        //       .replace(R.id.containerView, new D1rOcltDGsD())
-        //       .addToBackStack(null).commit();
-        // });
-        // return rootView;
-        return null;
+        View rootView = inflater.inflate(R.layout.ku004pfrbslmu, container, false);
+        this.context = container.getContext();
+        Button btnGestion = (Button) rootView.findViewById(R.id.btn_gestion);
+        btnGestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.containerView, new OQcONjDATJ()).addToBackStack(null).commit();
+            }
+        });
+        Button btnEstadisticas = (Button) rootView.findViewById(R.id.btn_estadisticas);
+        btnEstadisticas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.containerView, new D1rOcltDGsD()).addToBackStack(null).commit();
+            }
+        });
+        return rootView;
     }
 }

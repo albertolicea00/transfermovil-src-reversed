@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
+import cu.etecsa.cubacel.tr.tm.R;
 
 /**
  * @original_apk_version 1.260416
@@ -14,7 +15,6 @@ import androidx.fragment.app.Fragment;
 public class AboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // return inflater.inflate(R.layout.uri5reecnl343, null);
-        return null;
+        return inflater.inflate(R.layout.uri5reecnl343, (ViewGroup) null);
     }
 }

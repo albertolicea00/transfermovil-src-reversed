@@ -22,18 +22,18 @@ public class EcommerceActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.shnhr8qmyvcga);
-        // FragmentManager fm = getSupportFragmentManager();
-        // fm.beginTransaction()
-        //   .replace(R.id.containerView, new EcommerceMenuFragment())
-        //   .commit();
-        // toolbar = findViewById(R.id.toolbar);
-        // setSupportActionBar(toolbar);
+        setContentView(cu.etecsa.cubacel.tr.tm.R.layout.shnhr8qmyvcga);
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(cu.etecsa.cubacel.tr.tm.R.id.containerView, new EcommerceMenuFragment()).commit();
+        Toolbar toolbar = (Toolbar) findViewById(cu.etecsa.cubacel.tr.tm.R.id.toolbar);
+        this.toolbar = toolbar;
+        setSupportActionBar(toolbar);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // getMenuInflater().inflate(R.menu.menu_splash, menu);
+        getMenuInflater().inflate(cu.etecsa.cubacel.tr.tm.R.menu.menu_splash, menu);
         return true;
     }
 
@@ -54,8 +54,8 @@ public class EcommerceActivity extends AppCompatActivity {
 
     private void openQuitDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        // builder.setTitle(getString(R.string.confirm));
-        // builder.setMessage(getString(R.string.confirm_close));
+        builder.setTitle(getString(cu.etecsa.cubacel.tr.tm.R.string.confirm));
+        builder.setMessage(getString(cu.etecsa.cubacel.tr.tm.R.string.confirm_close));
         builder.setPositiveButton("Cerrar", (dialog, id) -> finish());
         builder.setNegativeButton("No", null);
         builder.create().show();

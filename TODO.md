@@ -75,8 +75,8 @@
 - [x] Audit `ecommerce/SessionManager.java` against `UhA7J2923N`; document implemented persistence and remaining auth/error API parity in [e-commerce notes](docs/ecommerce.md).
 - [x] Audit `sms/FuelSmsImportTask.java`, `SmsImportTask.java`, and `SmsParser.java` against their raw sources; document their unimplemented parser/import behavior in [telephony notes](docs/telephony.md).
 - [x] Compare `sms/SmsSender.java` with `HzjedYqYeh`; document matching send/fallback/inbox behavior and the source cursor early-return limitation in [telephony notes](docs/telephony.md).
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/AboutFragment.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/EcommerceMenuFragment.java`.
+- [x] Restore `AboutFragment` layout inflation from `ESS7dlKa1m`.
+- [x] Restore the Bulevar management/statistics menu and both destinations from `KiXWwF51Aq`.
 - [x] Reconcile `ui/qr/QrCodeGenerator.java` with source `ZUoEY89WdA`; retain all QR generation, image-processing, and decoding entry points under clean method names.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `update/UpdateApiClient.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ussd/UssdDispatcher.java`.
@@ -299,6 +299,7 @@
 - [x] Identify base URL for API (dynamic from SharedPreferences, not hardcoded)
 - [x] Decompile API client — y6NQQxH0NI singleton, getUnsafeOkHttpClient
 - [x] Document authentication flow (/loginapk, /loginfactorapk, Bearer+XSRF)
+- [x] Restore the `EcommerceActivity` host layout, initial menu, toolbar, splash menu, and back/quit flow from `QqWqw83vJf`.
 - [ ] Migrate the source multipart image endpoints and image conversion/normalization methods from `y6NQQxH0NI` into a clean API/media client.
 - [ ] Reconcile `UhA7J2923N` message/log, typed error, unauthenticated-session, and enum permission behavior with the clean e-commerce session flow.
 - [ ] Map business/merchant registration flow
