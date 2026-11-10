@@ -70,7 +70,7 @@
 - [x] Reconcile the agent data-management pager with source `OQcONjDATJ`; preserve its 11 ordered tabs, titles, child screens, and adapter behavior.
 - [x] Reconcile the General data-management pager with source `wTZi6Zeikv`; preserve its eight ordered tabs, titles, contact permission request, and fixed-tab setup.
 - [x] Audit `crypto/CryptoProvider.java` against `V5FFEZ0Qrr0`; document its implemented scheme coverage, renamed API, raw call sites, and static-audit limit in [security notes](docs/security.md).
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `data/DatabaseHelper.java`.
+- [x] Audit `data/DatabaseHelper.java` against `unYp8VQThY`; document its matching public API breadth and the remaining static-only query/migration limits in [storage notes](docs/storage.md).
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/ApiClient.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ecommerce/SessionManager.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/FuelSmsImportTask.java`.

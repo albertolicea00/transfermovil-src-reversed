@@ -4,6 +4,8 @@ Analysis of SQLite database, SharedPreferences, and data persistence in Transfer
 
 ## Database
 
+The clean `data/DatabaseHelper` is a substantive DAO facade mapped to raw `unYp8VQThY`, not an empty placeholder: both expose 196 public methods, and the clean facade is used throughout the reconstructed app. It wraps `TransferMobilDatabaseOpenHelper` and covers the same entity/query areas described below. The audit checked static API breadth and representative behavior, not every query predicate, migration, or runtime failure path; query wrappers intentionally return `null`, `false`, or `0` on several database errors.
+
 | Property | Value |
 |:---|:---|
 | File | `TransferMDB.sqlite` |
