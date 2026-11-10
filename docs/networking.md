@@ -26,6 +26,16 @@ String evidence from binary:
 
 ## Known URLs
 
+### Update API client
+
+The clean `update/UpdateApiClient` is a source-linked implementation of
+`dST9RIJkDp`, not a placeholder. Its `processGET` preserves the runtime base
+URL, JSON/cache-control headers, async OkHttp callback with `CountDownLatch`,
+and JSON/HTTP response fields. The raw source initializes `urlBase` with
+`BuildConfig.FLAVOR` (the clean class uses the equivalent empty string) and
+logs the JSON body on HTTP errors; the clean class omits that log. This does
+not trace the full APK download, permission, and installation flow below.
+
 ### ETECSA / Official
 
 | URL | Purpose |

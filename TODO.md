@@ -78,7 +78,7 @@
 - [x] Restore `AboutFragment` layout inflation from `ESS7dlKa1m`.
 - [x] Restore the Bulevar management/statistics menu and both destinations from `KiXWwF51Aq`.
 - [x] Reconcile `ui/qr/QrCodeGenerator.java` with source `ZUoEY89WdA`; retain all QR generation, image-processing, and decoding entry points under clean method names.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `update/UpdateApiClient.java`.
+- [x] Compare `update/UpdateApiClient.java` with `dST9RIJkDp`; document matching GET behavior and raw-only error logging in [networking notes](docs/networking.md).
 - [x] Remove the unused `UssdDispatcher` Activity shell mapped to static helper `FBsQzP3Zfj`; document active raw call sites and remaining clean migration in [telephony notes](docs/telephony.md).
 - [x] Compare `util/Sha256Util.java` with `UkO3Y6TcHD`; confirm UTF-8 SHA-256, lowercase hex padding, and null-on-error behavior match.
 - [x] Rebuild the clean MiBoleto ticket base from `L4aAENEGbqv`, move status/key-update/latest-operations screens off the raw base, and remove the empty base placeholder.
