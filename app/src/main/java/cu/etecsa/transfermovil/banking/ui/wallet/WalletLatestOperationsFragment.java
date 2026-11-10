@@ -94,7 +94,7 @@ public class WalletLatestOperationsFragment extends Fragment implements pAzq93vI
         return rootView;
     }
 
-    private void submitForm() {
+    public void submitForm() {
         if (!validateWallet()) return;
         if ("08".equals(agency) && !validateAccount()) return;
         String message = "Desea consultar las últimas operaciones de la cuenta: " + selectedValue;
