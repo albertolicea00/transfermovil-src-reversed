@@ -66,11 +66,6 @@
       "role": "BroadcastReceiver for SMS (stub/no-op, real handling elsewhere)",
       "confidence": "high"
     },
-    "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj": {
-      "clean": "cu.etecsa.transfermovil.ussd.UssdDispatcher",
-      "role": "USSD code construction and dispatch (8898 lines, 12 actionCallUSSD overloads)",
-      "confidence": "high"
-    },
     "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.HzjedYqYeh": {
       "clean": "cu.etecsa.transfermovil.sms.SmsSender",
       "role": "Outgoing SMS via SmsManager (send_sms method)",

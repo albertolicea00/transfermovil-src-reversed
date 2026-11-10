@@ -79,7 +79,7 @@
 - [x] Restore the Bulevar management/statistics menu and both destinations from `KiXWwF51Aq`.
 - [x] Reconcile `ui/qr/QrCodeGenerator.java` with source `ZUoEY89WdA`; retain all QR generation, image-processing, and decoding entry points under clean method names.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `update/UpdateApiClient.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `ussd/UssdDispatcher.java`.
+- [x] Remove the unused `UssdDispatcher` Activity shell mapped to static helper `FBsQzP3Zfj`; document active raw call sites and remaining clean migration in [telephony notes](docs/telephony.md).
 - [x] Compare `util/Sha256Util.java` with `UkO3Y6TcHD`; confirm UTF-8 SHA-256, lowercase hex padding, and null-on-error behavior match.
 - [x] Rebuild the clean MiBoleto ticket base from `L4aAENEGbqv`, move status/key-update/latest-operations screens off the raw base, and remove the empty base placeholder.
 - [x] Reconcile `b6FtEHgm1B` against `QrDynamicPaymentFragment`: same base, layout, QR parsing/menu flow and selectors `31`/`30`; retain the richer clean screen with wallet currencies and stricter amount checks, and remove the null-returning duplicate shell.
@@ -113,6 +113,7 @@
 - [x] Document the e-commerce Bulevar entry from both mode drawers and startup routing by token state.
 
 ## USSD / Telephony
+- [ ] Migrate the active `FBsQzP3Zfj` action overloads and operation routing into a clean USSD dispatch/navigation component.
 
 - [ ] Complete the dedicated [USSD code catalog](docs/ussd-code-catalog.md): every executed code, purpose, construction algorithm, and source evidence.
 - [x] Document USSD send mechanism (tel: intent + CALL_PHONE)

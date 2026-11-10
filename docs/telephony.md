@@ -149,7 +149,12 @@ tel:*{codeAcceso}*{codeService}#{encoded}
 
 ### USSD Dispatch Class: `FBsQzP3Zfj`
 
-8898-line static utility class. All USSD dialing goes through here. ~12 overloads:
+Static utility used directly by reconstructed screens and `OperationsGridAdapter`;
+the mapped clean `UssdDispatcher` shell was an unused `Activity` with no-op
+methods, so it has been removed. USSD dialing and operation routing still call
+the tracked raw `FBsQzP3Zfj` from forms and the operation grid.
+`BaseMainActivity` contains separate direct-dial overloads. A clean migration
+of the helper remains pending. The active raw utility exposes these overloads:
 
 | Method | Behavior |
 |:---|:---|
@@ -550,7 +555,7 @@ Also has `readSmsInbox(ContentResolver)` returning `ArrayList<rIgmgP6JXL>` — r
 | `IHVTCBmiLV` | **Agent mode main activity** — extends `rDEl7rW1aN`, uses `drawermenu` (full agent menu) |
 | `prPzLeyxKk` | **Splash/router activity** — 3s splash, `generalVsAgentVersion()` decides which main activity to launch |
 | `rDEl7rW1aN` | Base activity — USSD dialing, SMS extraction, encryption, code construction |
-| `FBsQzP3Zfj` | **USSD dispatch class** — 12 `actionCallUSSD*` overloads, dialog management, fragment navigation |
+| `FBsQzP3Zfj` | Raw USSD utility — `actionCallUSSD*` overloads, dialog management, fragment navigation; still called directly |
 | `HzjedYqYeh` | SMS sender (`send_sms` static) + inbox reader |
 | `O7xyZJJBFWg` | Accessibility service for USSD response capture |
 | `Ax4arraYwv` | Singleton callback holder for USSD responses |
