@@ -196,10 +196,29 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 | All `src/` | 794 | 395 | 399 | 0 |
 | Main app package | 596 | 264 | 332 | 0 |
 
-The live inventory reports 449 clean Java files, 85 mapping entries, no mapping
-issues, and 50 clean files without source annotations. Duplicate candidates
+Generated with `python3 scripts/reconstruction-inventory.py` from the current
+`src/`, clean Java tree, and `mappings/classes.json`. The live inventory reports
+449 clean Java files, 85 mapping entries, no mapping issues or duplicate
+candidates, and 50 clean files without source annotations. Duplicate candidates
 were resolved by reusing shared BFI authentication/registration screens and
 removing false source tags from derived helpers. The unused `UssdDispatcher`
 Activity mapping was removed because the active source is a static helper
 called directly by the app. These are exact-link counts only and do not
 establish behavioral completeness.
+
+The 264 unlinked main-package sources group by first package segment as follows:
+
+| Original package segment | Unlinked files |
+| --- | ---: |
+| `B0jOLrWx09th` | 190 |
+| `l08fNVC4KOKK` | 20 |
+| `B21UyndcVvF` | 16 |
+| `ZNRpoHwtLXM` | 13 |
+| `us8tbD58ow4` | 11 |
+| `oEpx7i6I9Bq` | 10 |
+| `h4VIMAs7y2v` | 2 |
+| `BuildConfig`, `R` | 2 |
+
+This refresh establishes the current package distribution only. It does not
+classify the obfuscated classes as generated code, Android glue, or application
+behavior; that source-by-source review and exact-link cleanup remain open.

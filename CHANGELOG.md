@@ -2,6 +2,8 @@
 
 ## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Refreshed reconstruction inventory: 264 unmapped main-package files remain, with current package-segment counts recorded.
+- Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Restored the fuel SMS task's two-argument callback contract and exact progress/result callbacks; left parsing open because the clean parser method is absent.
 - Recorded current Apple App Review requirements for financial apps and separated the unresolved submitting-entity and carrier/bank authorization decisions.
 - Added an official-Apple static iOS feature matrix for USSD, SMS, telephony, commerce, storage, and QR; kept device and distribution checks open.
