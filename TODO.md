@@ -98,8 +98,8 @@
 - [x] Compare BFI balance, limit, and latest-operation forms with JADX; confirm selectors `46`, `62`, and `48`, their payload construction, and partial-USSD marker `05`.
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
-- [ ] Review the remaining 219 main-package source files without exact reconstruction links; distinguish generated code from application logic.
-- [ ] Inventory the 219 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
+- [ ] Review the remaining 216 main-package source files without exact reconstruction links; distinguish generated code from application logic.
+- [ ] Inventory the 216 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
 - [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
@@ -309,10 +309,11 @@
 - [x] Compare `BfiTransferFragment` with `Z3kYdPwq6K2`; confirm enterprise Wallet selector `220`, agency `08`, field validation, and three dispatch branches.
 - [x] Compare `WalletWithdrawFragment` with `f9Reflqt3EZ`; link its identical clean body and verify the selector-95 cash-ticket form remains routed from the Wallet menu.
 - [ ] Review remaining MiTransfer and Boleto-tab management flows for clean model and dispatcher adapters.
-- [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and tolerate agency-only arguments without invoice-prefill access.
+- [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and guard optional invoice/type prefills when arguments are incomplete.
 - [x] Migrate General account-statement query `qAMfdm9Kls`; preserve six-month date pickers, CUP/USD, email validation/encoding, and selector-26 full/partial branches.
 - [x] Migrate General union-payment query `SlZq2dCM9i` by routing to its clean equivalent; preserve QR CI prefill, agency mapping, and selector 121.
 - [x] Migrate General telephone-invoice query `HFzgpLELho`; preserve phone-number validation, operation arguments, saved-number insertion/menu refresh, and selector-47 dispatch.
+- [x] Link and compare the three clean General service-debt, phone-invoice, and account-statement screens to their source classes; record the guarded-prefill behavior difference.
 - [x] Replace the `WalletRechargeFragment` stub and connect `BOLSARecargaCUPWalletTicket` to clean UI with selector-17 full/partial dispatch parity.
 - [x] Document wallet authentication (`frmAuthBolsa`): four-digit PIN validation and selector-40 payload construction are recorded in the USSD catalog.
 - [x] Trace MiTransfer saved-account balance query and partial-USSD packet route; record the construction in the USSD catalog.

@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.qAMfdm9Kls */
 public class GeneralWalletStatementFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
     public ArrayAdapter<CharSequence> adapterTipoBolsa;
     public R1sDOSqZ2z agencia;

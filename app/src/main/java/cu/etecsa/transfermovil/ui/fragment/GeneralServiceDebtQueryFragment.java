@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qcFLXVxM456.k5fNqiPSlwb */
 public class GeneralServiceDebtQueryFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
     public ArrayAdapter<CharSequence> adapter;
     public ImageButton btSearchAccount;
