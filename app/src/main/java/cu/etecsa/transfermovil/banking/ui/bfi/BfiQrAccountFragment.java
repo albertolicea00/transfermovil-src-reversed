@@ -38,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.VW6IL66KC6M.LgiFGRpiEl */
 public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
     public static final int PICK_CONTACT_REQUEST = 1;
     public Activity activity;

@@ -10,3 +10,10 @@ dynamic/static QR payments, optional certification and confirmation phones,
 selectors `30`/`31`, and partial-USSD marker `05` with six-parameter packets.
 The source truncates long account strings before dispatch in the documented
 branches; the clean implementation retains those same branches.
+
+The shared clean [`BfiQrAccountFragment`](../app/src/main/java/cu/etecsa/transfermovil/banking/ui/bfi/BfiQrAccountFragment.java)
+matches `LgiFGRpiEl` after accounting for its renamed class/package and the
+clean inheritance adapter. QR parsing, contact selection, confirmation-phone
+state, and auxiliary QR data handling are the same. `BfiUssdAccountFragment`
+is a clean shared callback/packet-state adapter; it does not claim a separate
+one-to-one source class.
