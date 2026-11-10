@@ -8,6 +8,7 @@
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.
 - Added the MiTransfer selector-20 FWA balance-recharge payload, validation, and standard dispatch route to the catalog.
 - Added MiTransfer and bank water-payment selector-19/21 payload variants, regional selector-51 routing, and partial-USSD markers to the catalog.
+- Compared the clean Wallet water-payment form with `U1sIOmca96i`; documented parity for selector routes, payload, and preserved validation quirks.
 - Refreshed reconstruction inventory: 264 unmapped main-package files remain, with current package-segment counts recorded.
 - Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Added a provisional iOS screen/feature scope and a gated, read-only USSD feasibility proof-of-concept.
