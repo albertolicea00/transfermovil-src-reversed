@@ -208,7 +208,7 @@
 - [x] Migrate `q9DNC6bnexm` into `InvoiceTypeSelectionFragment` and route BANDEC contracted-service add/query/delete actions to it; preserve saved-invoice handling, operation arguments, confirmations, and selector `52` behavior.
 - [x] Remove the unused common `LoanAmortizationFragment` shell: source `kAazEwDasT` has no callers; the reachable BANDEC loan route uses its bank-specific screen.
 - [x] Remove the unused common `PublicServicePaymentFragment` shell: source `CA73VZ4FAR` has no callers; live public-service routes use their specific clean screens.
-- [ ] Trace source and callers for `ui/fragment/banking/common/RegisterFragment.java`; migrate its behavior or remove the empty placeholder after confirming it is unused.
+- [x] Route BANDEC `BANRegistrarse` grid entries in all three `OperationMenuBuilder` profiles to source-backed `BandecRegistrationFragment`; preserve the original enrollment validation and selectors `49`/packet `110`.
 - [x] Remove the unused common `SecurityMenuFragment` shell: `eRe5PTC1On` has no source or clean callers; the live BPA/BFI/BANDEC security routes use their bank-specific menus.
 - [x] Remove the unused common `UtilityBillPaymentFragment` shell: source `hvC0UGR2L0` has no callers; live BANDEC water uses `BandecUtilityPaymentFragment`.
 - [x] Remove the unused common `WireTransferFragment` shell: source `fvzO0qRHbu` has no callers; BANDEC postal order uses `BandecPostalOrderFragment`.

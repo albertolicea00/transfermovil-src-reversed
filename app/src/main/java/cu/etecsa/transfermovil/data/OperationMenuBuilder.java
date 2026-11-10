@@ -696,7 +696,7 @@ public class OperationMenuBuilder {
         bandec9.setTitulo("Registrarse");
         bandec9.setSubtitulo("BANDEC");
         bandec9.setImagen(R.drawable.ic_registrarse_bandec);
-        bandec9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.wLHKkaC4Ha");
+        bandec9.setFragment_name("cu.etecsa.transfermovil.ui.fragment.banking.bandec.auth.BandecRegistrationFragment");
         bandec9.setTipo_serivicio(r1sDOSqZ2z4);
         bandec9.setOrder(7);
         bandec9.setActivo(true);
@@ -2259,7 +2259,7 @@ public class OperationMenuBuilder {
         bandec9.setTitulo("Registrarse");
         bandec9.setSubtitulo("BANDEC");
         bandec9.setImagen(R.drawable.ic_registrarse_bandec);
-        bandec9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.wLHKkaC4Ha");
+        bandec9.setFragment_name("cu.etecsa.transfermovil.ui.fragment.banking.bandec.auth.BandecRegistrationFragment");
         bandec9.setTipo_serivicio(r1sDOSqZ2z);
         bandec9.setOrder(-1);
         bandec9.setActivo(true);
@@ -3457,7 +3457,7 @@ public class OperationMenuBuilder {
         DatabaseHelper.getInstance().updateOperacion(bandec8);
         Operation bandec9 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANRegistrarse);
         bandec9.setImagen(R.drawable.banco_bandec_register);
-        bandec9.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.wLHKkaC4Ha");
+        bandec9.setFragment_name("cu.etecsa.transfermovil.ui.fragment.banking.bandec.auth.BandecRegistrationFragment");
         bandec9.setActivo(true);
         DatabaseHelper.getInstance().updateOperacion(bandec9);
         Operation bandec10 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BANCambiarclave);
