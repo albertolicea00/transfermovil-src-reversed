@@ -10,6 +10,22 @@ before closing the cursor when the body column is absent or the inbox is empty;
 they also assume the query returns a non-null cursor. This parity note does not
 cover runtime permission or provider behavior.
 
+## SMS import pipeline coverage
+
+The raw `g0xM9kQCsqu` parser is about 1,830 lines. The clean `sms/SmsParser`
+currently contains getters, regex helpers, and a date parser, while its
+transaction, wallet, fuel, ticket-offer, purchase-confirmation, and app-data
+parsers remain comments. Consequently, the clean `SmsImportTask` only reads
+the inbox: its parse, deduplication, and database insertion body is commented
+out. Raw `HPuMiTypoW` parses each message and inserts records not already
+present by transaction ID and service type.
+
+The clean `FuelSmsImportTask` similarly reads the inbox but has its parser loop
+and UI callback commented out. Raw `XYfkGsUkKH` parses every message as fuel,
+shows/hides progress through `Ti8eM28U2E`, and reports completion in
+`onPostExecute`. The parser and importer differences are tracked as migration
+work below; inbox-read success alone does not mean records were imported.
+
 ## QR and barcode scanning
 
 The shared scanner is `OJ3XxacXOT`. It accepts camera input and images selected

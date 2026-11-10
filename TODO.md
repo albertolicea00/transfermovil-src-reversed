@@ -73,9 +73,7 @@
 - [x] Audit `data/DatabaseHelper.java` against `unYp8VQThY`; document its matching public API breadth and the remaining static-only query/migration limits in [storage notes](docs/storage.md).
 - [x] Audit `ecommerce/ApiClient.java` against `y6NQQxH0NI`; document the implemented request paths and missing image APIs in [e-commerce notes](docs/ecommerce.md).
 - [x] Audit `ecommerce/SessionManager.java` against `UhA7J2923N`; document implemented persistence and remaining auth/error API parity in [e-commerce notes](docs/ecommerce.md).
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/FuelSmsImportTask.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsImportTask.java`.
-- [ ] Recover source behavior or document evidence-based limits for the placeholder in `sms/SmsParser.java`.
+- [x] Audit `sms/FuelSmsImportTask.java`, `SmsImportTask.java`, and `SmsParser.java` against their raw sources; document their unimplemented parser/import behavior in [telephony notes](docs/telephony.md).
 - [x] Compare `sms/SmsSender.java` with `HzjedYqYeh`; document matching send/fallback/inbox behavior and the source cursor early-return limitation in [telephony notes](docs/telephony.md).
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/AboutFragment.java`.
 - [ ] Recover source behavior or document evidence-based limits for the placeholder in `ui/EcommerceMenuFragment.java`.
@@ -129,6 +127,9 @@
 - [x] Map USSD code format: `*{access}*{service}#` via actionCallUSSD
 
 ## SMS
+- [ ] Reconstruct the omitted `g0xM9kQCsqu` SMS parser methods for transaction, wallet, fuel, ticket, purchase-confirmation, and app-data messages.
+- [ ] Restore `SmsImportTask` parsing, transaction/service deduplication, database insertion, and result behavior from `HPuMiTypoW`.
+- [ ] Restore `FuelSmsImportTask` parsing and `Ti8eM28U2E` progress/completion callbacks from `XYfkGsUkKH`.
 
 - [x] Identify SMS receiver (X9ZiE8XZNKy)
 - [x] Decompile SMS receiver — stub/no-op, real handling elsewhere
