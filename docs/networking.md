@@ -10,6 +10,10 @@ Analysis of network clients, endpoints, TLS configuration, and local persistence
 | Protocol support | HTTP/2 (Huffman, HPACK, frame handling present) |
 | Cleartext traffic | Allowed (`usesCleartextTraffic=true` in manifest) |
 
+### Cleartext scope
+
+The decoded manifest sets `android:usesCleartextTraffic="true"` on the whole application and does not reference a `networkSecurityConfig`; the project also has no `res/xml/network_security_config.xml`. The source-level operational cleartext URL found is the self-update APK download at `http://www.etecsa.cu/descargas/transfermovil/?d=<sha>`, in `BaseMainActivity.DownloadNewVersion` (raw equivalent: `rDEl7rW1aN`). Other documented service URLs use HTTPS. This establishes the app policy and observed URL, not which redirects or server-side endpoints might be used at runtime.
+
 ### TLS / Certificate Handling
 
 String evidence from binary:

@@ -317,7 +317,7 @@
 - [ ] Extract pinned certificates and target hosts
 - [ ] Document TLS configuration (min version, cipher suites)
 - [x] Identify custom trust manager — e-commerce uses getUnsafeOkHttpClient (trusts ALL certs)
-- [ ] Document cleartext traffic usage (which hosts allow HTTP?)
+- [x] Document the app-wide cleartext manifest policy and the source-confirmed HTTP update-download host; there is no per-host network security configuration ([networking notes](docs/networking.md#cleartext-scope)).
 - [ ] Trace self-update mechanism (REQUEST_INSTALL_PACKAGES)
 
 ## Security & Crypto
