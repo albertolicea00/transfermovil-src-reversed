@@ -4,6 +4,7 @@
 
 - Restored Wallet bank-transfer agency inference from destination-card prefixes using archived smali evidence.
 - Linked the BANDEC account-limit, latest-operations, and recent-payments screens to their exact JADX source classes; refreshed the reconstruction inventory.
+- Linked the BANDEC invoice-debt and postal-order query screens to their exact JADX source classes; refreshed the reconstruction inventory.
 - Compared Wallet bank-transfer and Metro coordinate-transfer card-prefix behavior against archived smali and recorded their distinct agency-selection behavior.
 - Added the MiTransfer selector-17 CUP cash-deposit ticket path, validation, and partial-USSD route to the catalog.
 - Added the MiTransfer selector-18 FWA data-package offer request and its fixed USD payload to the catalog.
