@@ -345,10 +345,11 @@
 - [x] Restore the `EcommerceActivity` host layout, initial menu, toolbar, splash menu, and back/quit flow from `QqWqw83vJf`.
 - [x] Add clean profile API routes and `ProfilePresenter` for current profile, profile update, and password change; convert a selected photo before update.
 - [x] Migrate child-user create/update request paths to a clean presenter that prepares a nonempty photo before dispatch.
-- [ ] Connect child-user presenter results to clean UI callbacks; geographic catalog resolution remains incomplete.
+- [ ] Connect child-user presenter results to clean UI callbacks.
 - [x] Give `ChildUserPresenter` distinct typed list, detail, and mutation callback methods.
 - [x] Map child-user list payload `dt.rows` into the clean `ChildUserListResponse` fields from source.
 - [x] Map child-user detail payload `user` into its clean response model, retaining source JSON for province/municipality catalog resolution.
+- [x] Resolve child-user province and municipality from the initialized local region tables and map them into e-commerce region models.
 - [x] Require HTTP 200 plus response `code` containing `Ok` for child-user mutation success, matching the source parser.
 - [x] Add source-backed child-user API routes for list, detail, delete, and status alongside create/update.
 - [x] Add clean child-user create/update API adapters for source-confirmed endpoints and nested-photo preparation.

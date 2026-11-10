@@ -2,6 +2,9 @@ package cu.etecsa.transfermovil.ecommerce;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import cu.etecsa.transfermovil.data.DatabaseHelper;
+import cu.etecsa.transfermovil.data.entity.Municipality;
+import cu.etecsa.transfermovil.data.entity.Province;
 import cu.etecsa.transfermovil.ecommerce.domain.entity.ChildUser;
 import cu.etecsa.transfermovil.ecommerce.model.request.BanUserRequest;
 import cu.etecsa.transfermovil.ecommerce.model.request.ChildUserCreateRequest;
@@ -124,6 +127,40 @@ public final class ChildUserPresenter {
         detail.setPhone(user.optString("phone", null));
         detail.setAddress(user.optString("address", null));
         detail.setUpdateAt(user.optString("updated_at", null));
+        String provinceCode = user.optString("province", null);
+        String municipalityCode = user.optString("municipality", null);
+        DatabaseHelper database = DatabaseHelper.getInstance();
+        if (database != null && provinceCode != null) {
+            java.util.List<Province> provinces = database.getAllProvinciasLists();
+            if (provinces != null) for (Province province : provinces) {
+                if (provinceCode.equals(province.getCod_provincia())) {
+                    cu.etecsa.transfermovil.ecommerce.data.geo.Province mapped =
+                            new cu.etecsa.transfermovil.ecommerce.data.geo.Province();
+                    mapped.setCod_provincia(province.getCod_provincia());
+                    mapped.setAbreviatura(province.getAbreviatura());
+                    mapped.setNombre(province.getNombre());
+                    detail.setProvince(mapped);
+                    break;
+                }
+            }
+            java.util.List<Municipality> municipalities = database.getAllMunipiosLists(provinceCode);
+            if (municipalities != null && municipalityCode != null) for (Municipality municipality : municipalities) {
+                String shortCode = municipalityCode.length() == 4
+                        ? municipalityCode.substring(2, 4) : municipalityCode;
+                if (shortCode.equals(municipality.getCod_municipio())
+                        || municipalityCode.equals(municipality.getId())) {
+                    cu.etecsa.transfermovil.ecommerce.data.geo.Municipality mapped =
+                            new cu.etecsa.transfermovil.ecommerce.data.geo.Municipality();
+                    mapped.setId(municipality.getId());
+                    mapped.setCod_provincia(municipality.getCod_provincia());
+                    mapped.setCod_municipio(municipality.getCod_municipio());
+                    mapped.setAbreviatura(municipality.getAbreviatura());
+                    mapped.setNombre(municipality.getNombre());
+                    detail.setMunicipality(mapped);
+                    break;
+                }
+            }
+        }
         if (!user.isNull("photo")) detail.setPhoto(SessionManager.getInstance().getApiUrl()
                 + "/user/photo/" + user.optString("id"));
         result.setUser(detail);
