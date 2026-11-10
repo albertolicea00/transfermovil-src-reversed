@@ -14,6 +14,7 @@
 - Routed BANDEC union-dues consultation to its source-linked identity-card form with selector `121` and BANDEC agency mapping.
 - Routed BANDEC balance consultation through a clean confirmation and preserved agent-aware selector `46` dispatch.
 - Routed BANDEC exchange-rate consultation through a clean confirmation and preserved agent-aware selector `85` dispatch.
+- Routed BANDEC fuel consultation through its four source-linked coupon forms in the source menu's original order.
 - Removed the unreferenced common `BranchSelectionFragment` shell after tracing its stale `vVF87n7MnK` mapping to BANDEC card reprint, already routed through `BandecCardReprintFragment` from Configuración.
 - Removed the unused common `BankAuthMenuFragment` and `SecurityMenuFragment` shells after confirming neither legacy menu has callers; the bank-specific security menus remain the active routes, and `KmgeIVr5RG` has an empty item callback.
 - Removed two stale common shells: `CoordinateAuthFragment` duplicated the routed BANDEC digital-PIN source `RYCvQK4nkF` (selector `79`), while `DisconnectFragment` actually mapped to registration deletion `sxbhjZQZxo` (selector `68`); disconnect remains in the session-menu confirmation.

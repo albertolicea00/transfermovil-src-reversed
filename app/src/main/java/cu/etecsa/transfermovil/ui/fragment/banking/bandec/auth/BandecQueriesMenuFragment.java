@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.TJzyszIDKqc.R7PmVxXLJZC;
@@ -27,6 +28,10 @@ import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecRecen
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecAccountStatementFragment;
 import cu.etecsa.transfermovil.ui.fragment.wallet.WalletTicketQueryFragment;
 import cu.etecsa.transfermovil.ui.fragment.wallet.WalletSyndicateQueryFragment;
+import cu.etecsa.transfermovil.ui.fragment.wallet.fuel.WalletFuelLastOpsFragment;
+import cu.etecsa.transfermovil.ui.fragment.wallet.fuel.WalletFuelPurchaseFragment;
+import cu.etecsa.transfermovil.ui.fragment.wallet.fuel.WalletFuelStatusFragment;
+import cu.etecsa.transfermovil.ui.fragment.wallet.fuel.WalletFuelActivateTokenFragment;
 
 /**
  * BANDEC Consultas menu with clean routes for source-backed query forms.
@@ -68,6 +73,8 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                     WalletSyndicateQueryFragment fragment = new WalletSyndicateQueryFragment();
                     fragment.setArguments(arguments);
                     transaction.replace(R.id.containerView, fragment).addToBackStack(null).commit();
+                } else if (operation == FdonIAFI9w.BANCombustibleConsultas) {
+                    showFuelQueryTypeDialog();
                 } else if (operation == FdonIAFI9w.BANUltimasoperaciones) {
                     FragmentManager manager = BandecQueriesMenuFragment.this.getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
@@ -188,6 +195,48 @@ public class BandecQueriesMenuFragment extends R7PmVxXLJZC {
                     }
                 })
                 .setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void showFuelQueryTypeDialog() {
+        final String[] queryTypes = {
+                "Últimas operaciones realizadas", "Consulta de cupones",
+                "Consulta estado de cupones", "Actualizar clave de cupones"
+        };
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.alert_msg_consulta_combustible))
+                .setSingleChoiceItems(queryTypes, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Fragment fragment;
+                        switch (which) {
+                            case 0:
+                                fragment = new WalletFuelLastOpsFragment();
+                                break;
+                            case 1:
+                                fragment = new WalletFuelStatusFragment();
+                                break;
+                            case 2:
+                                fragment = new WalletFuelPurchaseFragment();
+                                break;
+                            case 3:
+                                fragment = new WalletFuelActivateTokenFragment();
+                                break;
+                            default:
+                                return;
+                        }
+                        FragmentManager manager = getActivity().getSupportFragmentManager();
+                        manager.beginTransaction().replace(R.id.containerView, fragment)
+                                .addToBackStack(null).commit();
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Salir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
