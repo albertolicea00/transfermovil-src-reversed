@@ -102,6 +102,7 @@
 - [x] Compare `FwaDataPackagePurchaseFragment` with `q55ExEc6x2l`; confirm contact permission gating, validation, selector-18 payload, and offer-confirmation text match.
 - [x] Compare `FwaBalanceRechargeFragment` with `wbFn8tBw8W`; confirm account/amount/bundle validation and selector-20 payload order match.
 - [x] Restore the Wallet CUP recharge `btHelp` dialog and source help text omitted from the clean `P8DtkaSW4dR` screen.
+- [x] Compare Wallet CUP recharge form with `P8DtkaSW4dR`; confirm amount validation, selector-17 payload, and standard/partial dispatch after restoring help UI.
 - [x] Refresh the exact unmapped main-package count and package-segment distribution from the reproducible inventory.
 - [x] Resolve the duplicate `Agg55uYctq` candidate: keep `BaseBankingFragment` as the source-backed reconstruction and remove the false source annotation from derived helper `BfiUssdAccountFragment`.
 - [x] Share the single `SvY0xjeNSz` PIN-auth implementation between BFI and Metro menus; route Metro to `BfiPinAuthFragment` and remove its duplicate screen copy.

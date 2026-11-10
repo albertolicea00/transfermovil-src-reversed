@@ -15,6 +15,7 @@
 - Confirmed the clean FWA package-purchase form preserves source contact permission gating, validation, selector-18 payload, and offer-confirmation text.
 - Confirmed the clean FWA balance-recharge form preserves source account/amount/bundle validation and selector-20 payload order.
 - Restored the Wallet CUP recharge help-button dialog and source help text from `P8DtkaSW4dR`.
+- Compared Wallet CUP recharge validation and both USSD dispatch branches with `P8DtkaSW4dR`; payload and routing match.
 - Added source-backed selector-98 fine-query and selector-119 QR-ticket validation routes to the USSD catalog.
 - Added a provisional iOS screen/feature scope and a gated, read-only USSD feasibility proof-of-concept.
 - Restored the reachable e-commerce profile PNG/base64 conversion helper and closed source-call audits for unused multipart and EXIF image utilities.
