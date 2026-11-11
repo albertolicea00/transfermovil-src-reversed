@@ -8,7 +8,7 @@ Snapshot generated from `scripts/reconstruction-inventory.py` on 2026-11-11.
 
 This ledger retains the baseline cohort of 213 Java source files in the main application package that lacked exact clean-source links when review began. Two cohort members, `MEqNzldfDl` and `KeTIEVSfVo`, now have exact clean-source annotations; 211 remain currently unlinked. The ledger is an audit queue, not a decompilation-success metric. Current JADX output reports 98.8% class decompilation success (40 errors); this queue measures source-to-clean class identity links. Those are separate measures, and a link does not prove behavioral equivalence.
 
-Assign one primary category only after checking the source body and, where useful, callers/usages. The review is organized by package segment and nested package so it can reveal which files contain Transfermóvil behavior/support and which are generated or third-party code. The `oEpx7i6I9Bq` package has ten confirmed application-behavior screens, all 16 `B21UyndcVvF` rows are classified as app behavior/support, `iN1lHDKE5h` is confirmed application behavior, `H0oV6Ot0bS$$ExternalSyntheticApiModelOutline0` is confirmed generated glue, and `BuildConfig`/`R` are confirmed generated classes; the other 183 rows remain pending:
+Assign one primary category only after checking the source body and, where useful, callers/usages. The review is organized by package segment and nested package so it can reveal which files contain Transfermóvil behavior/support and which are generated or third-party code. The `oEpx7i6I9Bq` package has ten confirmed application-behavior screens, all 16 `B21UyndcVvF` rows are classified as app behavior/support, `iN1lHDKE5h` is confirmed application behavior, `GVEefrRz76` is confirmed app support, `H0oV6Ot0bS$$ExternalSyntheticApiModelOutline0` is confirmed generated glue, and `BuildConfig`/`R` are confirmed generated classes; the other 182 rows remain pending:
 
 - `application behavior`: UI, routing, domain rules, persistence, protocol, network, or security logic.
 - `generated`: resource/build output, synthetic bridges, binding code, or compiler-generated machinery.
@@ -22,7 +22,7 @@ Package location or class name alone is not enough to classify a source. For eve
 
 | Package segment | Sources | Initial review focus | Status |
 | --- | ---: | --- | --- |
-| `B0jOLrWx09th` | 139 | Review fragments, activities, dialogs, generated callbacks, and support classes individually; `iN1lHDKE5h` is application behavior and one empty R8 outline class is generated. | Partial: 1 behavior, 1 generated, 137 pending |
+| `B0jOLrWx09th` | 139 | Review fragments, activities, dialogs, generated callbacks, and support classes individually; `iN1lHDKE5h` is behavior, `GVEefrRz76` is shared account-selection support, and one empty R8 outline class is generated. | Partial: 1 behavior, 1 support, 1 generated, 136 pending |
 | `l08fNVC4KOKK` | 20 | 20 shared runtime sources; distinguish app protocol/telephony helpers from generic adapters and generated glue. | Pending |
 | `B21UyndcVvF` | 16 | App-specific operation/list adapters and sticky-header RecyclerView support; reviewed from class bodies and callers. | Reviewed: app behavior/support |
 | `ZNRpoHwtLXM` | 13 | 13 data/domain sources; classify entities, DAOs, helpers, enums, and database/generated support. | Pending |
@@ -38,7 +38,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 | Source identifier | File | Category | Role / evidence |
 | --- | --- | --- | --- |
-| `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.GVEefrRz76` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/GVEefrRz76.java` | Pending | Pending |
+| `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.GVEefrRz76` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/GVEefrRz76.java` | application support | Shared source-account selector, saved/new account state, currency-dependent selection, card artwork/classification, and validation hooks; active caller `WalletBillPaymentFragment` extends this class and delegates its account and submit UI to it. |
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.I1YePWjLywK9.CBIHzlCw60` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/MqnAp2jnnon/I1YePWjLywK9/CBIHzlCw60.java` | Pending | Pending |
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.I1YePWjLywK9.Kw29o4NNrz` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/MqnAp2jnnon/I1YePWjLywK9/Kw29o4NNrz.java` | Pending | Pending |
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.I1YePWjLywK9.NdeFyyhxF1` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/MqnAp2jnnon/I1YePWjLywK9/NdeFyyhxF1.java` | Pending | Pending |
@@ -294,7 +294,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 ## Completion criteria
 
-- Every one of the 213 baseline rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, `iN1lHDKE5h`, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, 11 statistics behavior/support classes, and 3 generated classes are confirmed, leaving 170 rows pending classification. Two rows now have exact clean-source links, so current main-package link coverage is 385/596.
+- Every one of the 213 baseline rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, `iN1lHDKE5h`, `GVEefrRz76`, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, 11 statistics behavior/support classes, and 3 generated classes are confirmed, leaving 169 rows pending classification. Two rows now have exact clean-source links, so current main-package link coverage is 385/596.
 - Generated and third-party/library rows have evidence and a reason they do not need a clean application reconstruction.
 - Every application-behavior source has an exact clean link or a written, evidence-backed exclusion.
 - Refresh package counts and the source-link metric whenever exact links or classifications change.

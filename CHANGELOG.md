@@ -5,6 +5,7 @@
 - Clarified the 213-source review tasks as package-by-package inventories with per-source behavior/support/generated/library classifications and source evidence; added a follow-up scope-adjusted reconstruction metric while keeping it separate from JADX decompilation success and exact source-link coverage.
 - Classified the extended BPA transfer source `iN1lHDKE5h` as application behavior after tracing its saved/new origin modes, CUP/CUC/USD checks, optional agency/PIN, contact/message/flags, selector-45 payload branches, and partial packet helper; recorded its migration separately from the clean short transfer form.
 - Classified `H0oV6Ot0bS$$ExternalSyntheticApiModelOutline0` as generated R8 glue from its synthetic-class marker and empty class body; the 213-source review now has 43 classified rows and 170 pending.
+- Classified `GVEefrRz76` as application support from its shared account/currency selection helpers and the active `WalletBillPaymentFragment` subclass; the baseline review now has 44 classified rows and 169 pending.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
