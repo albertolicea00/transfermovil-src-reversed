@@ -12,6 +12,7 @@
 - Classified Nauta balance query `pECcPKxF9i` as application behavior from its account-type selection, persistence, and selector-92 submission; the baseline review now has 48 classified rows and 165 pending.
 - Classified the shared USSD dispatcher `FBsQzP3Zfj` as application support from its AppConfig-based dial construction, transformed payload, confirmation/navigation, and observer variants; the baseline review now has 49 classified rows and 164 pending.
 - Classified `MX9gh9mLxd$$ExternalSyntheticApiModelOutline0` as generated R8 glue from its synthetic marker and empty class body; the baseline review now has 50 classified rows and 163 pending.
+- Classified the partial-USSD dialog `IixRWvtdZG`, packet adapter `iNEsCMH3jK`, and packet DTO `QfruhfaN5Z` as app behavior/support using their callback flow to `pAzq93vIl3`; the baseline review now has 53 classified rows and 160 pending.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
