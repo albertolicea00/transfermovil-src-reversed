@@ -19,6 +19,7 @@
 - Classified the platform-switch helper `T7hdFVrmeS5` as app support; its body selects modern TelephonyManager versus legacy accessibility sending, but no tracked callers use it. The baseline review now has 57 classified rows and 156 pending.
 - Traced active partial-USSD chunking and corrected the docs: active grouping is character-limit based with a hard-coded allowance, while the six-parameter splitter and alternate sequence method are unused; documented sequence IDs, multi-request submission, SDK paths, and the absence of retries.
 - Classified `H5bNyNZfB5K` as app-specific legacy USSD accessibility support; manifest and caller inspection shows the registered service is `O7xyZJJBFWg` and the only tracked construction is in the unreferenced `T7hdFVrmeS5` facade. Corrected ledger totals to 58 classified / 155 pending (27 behavior, 27 support, 4 generated) and made the 213-class audit deliverable explicit in TODO.
+- Classified `HEi1mzxf5v$$ExternalSyntheticApiModelOutline0` as generated R8 glue from its `R8$$SyntheticClass` marker and empty body; clarified that the similarly named parent class is the app's import/export progress component. The 213-row ledger now has 59 classified / 154 pending.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
