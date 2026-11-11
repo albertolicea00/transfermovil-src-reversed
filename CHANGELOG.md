@@ -16,6 +16,7 @@
 - Classified coordinator `pAzq93vIl3` as application behavior from its packet construction, Android-version-specific send paths, and manual/automatic response sequencing; the baseline review now has 54 classified rows and 159 pending.
 - Classified `MX9gh9mLxd` as app support from its Android 8+ `TelephonyManager` packet sending and response-driven progress/error handling; the baseline review now has 55 classified rows and 158 pending.
 - Classified optional-next-request helper `WV9lIl58Oa` as app support from its `TelephonyManager` callback flow and `T7hdFVrmeS5` caller; documented its silent failure/permission behavior. The baseline review now has 56 classified rows and 157 pending.
+- Classified the platform-switch helper `T7hdFVrmeS5` as app support; its body selects modern TelephonyManager versus legacy accessibility sending, but no tracked callers use it. The baseline review now has 57 classified rows and 156 pending.
 - Traced active partial-USSD chunking and corrected the docs: active grouping is character-limit based with a hard-coded allowance, while the six-parameter splitter and alternate sequence method are unused; documented sequence IDs, multi-request submission, SDK paths, and the absence of retries.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
