@@ -301,6 +301,9 @@
 - [x] Reconstruct and route MiTransfer MiBoleto purchase from `TBaFnBLjEA`; preserve selector 118, currency mapping, and shared booking reset.
 - [x] Restore the MiBoleto ticket-status screen from `w7mHpmOa4EP`, route the General MiBoleto menu to the clean screen, and preserve saved-series selection and selector 114 dispatch.
 - [x] Restore MiBoleto key update from `hjX8MS8xO9`, route the General MiBoleto menu to the clean screen, and preserve saved-series validation and selector 115 dispatch.
+- [ ] Migrate MiTransfer saved-account list `KeTIEVSfVo` to a clean `MobileCardBank` adapter, preserving add/edit/delete/QR/share actions and transfer routing.
+- [ ] Migrate MiTransfer saved-account editor `MEqNzldfDl`; recover `mostrarTarjeta()` and `getBanco()` behavior from smali, and preserve validation, persistence, and post-save association shortcut.
+- [ ] Route Agent and General account-management menu entries to the clean MiTransfer saved-account list and reconcile its downstream routes.
 - [x] Restore MiBoleto latest operations from `i9I9XZGnR3`, route the General menu to the clean screen, and preserve optional email encoding and selector 113 full/partial dispatch.
 - [x] Restore MiBoleto integrated ticket query from `OXpoe3K2m1`, route the General menu to the clean screen, and preserve date/email validation and selector 112 full/partial dispatch.
 - [x] Restore the MiTurno reservation lookup from `x12rSjPY6pZ`, route the General ticket-query choice to the clean screen, and preserve CI input, QR prefill/scan, and selector 107.

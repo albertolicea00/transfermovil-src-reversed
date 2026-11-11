@@ -1,7 +1,8 @@
 # Changelog
 
-## 2026-11-10 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Scoped the still-raw MiTransfer saved-account management flow into list, editor, and Agent/General route tasks; the editor has two JADX stubs that need smali recovery.
 - Linked `WalletTopupFragment` to `zzyNbaqs1U` after a normalized full-body match; main-package unlinked sources decrease from 216 to 215.
 - Routed child-user presenter exceptions through typed failure callbacks and guarded progress/result delivery when no UI callback is attached, matching the source presenter's null-view and exception handling.
 - Compared `WalletBoletoTabFragment` with `hOQ4ESKEhm`; its four management entries, dialog choices, and clean fragment routes match source.

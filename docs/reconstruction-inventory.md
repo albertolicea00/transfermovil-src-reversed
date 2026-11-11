@@ -252,3 +252,11 @@ they remain unlinked until the outer source body is located and compared.
 This refresh establishes the current package distribution only. It does not
 classify the obfuscated classes as generated code, Android glue, or application
 behavior; that source-by-source review and exact-link cleanup remain open.
+
+The Agent and General activities still route saved mobile-card accounts to raw
+`KeTIEVSfVo`; its add/edit path opens raw `MEqNzldfDl`. These are user-facing
+MiTransfer account-management flows, separate from the clean `CuentaBanco`
+editor/list. `MEqNzldfDl` also contains JADX throwing stubs for `mostrarTarjeta()`
+and `getBanco()`, so the clean migration needs smali recovery and explicit
+downstream route handling. The TODO splits this gap into list, editor, and
+activity-routing work.
