@@ -7,11 +7,11 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-November%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[███████████████████████████████████████████████░░░] 94%</code></span>
+<span style="white-space: nowrap;"><code>[███████████████████████████████████████████████░░░] 95%</code></span>
 
-**Task-list progress: 386/407 completed; 21 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 387/407 completed; 20 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
-**Main-package exact source links: 383/596 (64%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks classification of the 213 sources still lacking clean links. It currently has 30 classified rows and 183 pending review. Classification helps scope reconstruction, but does not itself increase this link-coverage percentage.
+**Main-package exact source links: 383/596 (64%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks classification of the 213 sources still lacking clean links. It currently has 41 classified rows and 172 pending review. Classification helps scope reconstruction, but does not itself increase this link-coverage percentage.
 
 ## Overview
 

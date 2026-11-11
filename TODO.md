@@ -108,7 +108,7 @@
 - [ ] Classify each of the 20 unlinked `l08fNVC4KOKK` shared-runtime sources; distinguish protocol/telephony behavior from adapters and generated glue in the source review ledger.
 - [x] Classify all 16 unlinked `B21UyndcVvF` adapter/view-holder sources from their bodies and callers; record app-specific behavior/support roles and evidence in the source review ledger.
 - [ ] Classify each of the 13 unlinked `ZNRpoHwtLXM` data/domain sources; distinguish app entities/helpers from generated or library code in the source review ledger.
-- [ ] Classify each of the 11 unlinked `us8tbD58ow4` sources from body and caller evidence; record role and category in the source review ledger.
+- [x] Classify all 11 unlinked `us8tbD58ow4` statistics sources from body and caller evidence; record feature, model, and chart-support roles in the source review ledger.
 - [x] Classify all 10 unlinked `oEpx7i6I9Bq` sources as app behavior from their Fragment bodies, database actions, activation/update flows, and configuration-menu callers; record roles/evidence in the source review ledger.
 - [x] Classify both unlinked `h4VIMAs7y2v` QR scanner fragments from their camera, gallery, barcode-processing, and caller flows; record feature roles in the source review ledger.
 - [x] Confirm the unlinked `BuildConfig` and `R` files as generated Android outputs from their constant-only class bodies, and record the evidence in the source review ledger.

@@ -26,7 +26,7 @@ Package location or class name alone is not enough to classify a source. For eve
 | `l08fNVC4KOKK` | 20 | 20 shared runtime sources; distinguish app protocol/telephony helpers from generic adapters and generated glue. | Pending |
 | `B21UyndcVvF` | 16 | App-specific operation/list adapters and sticky-header RecyclerView support; reviewed from class bodies and callers. | Reviewed: app behavior/support |
 | `ZNRpoHwtLXM` | 13 | 13 data/domain sources; classify entities, DAOs, helpers, enums, and database/generated support. | Pending |
-| `us8tbD58ow4` | 11 | 11 sources; inspect class roles/callers before deciding whether they are app behavior or support. | Pending |
+| `us8tbD58ow4` | 11 | Statistics history, SMS records, and chart fragments/models; reviewed from source bodies and screen callers. | Reviewed: application behavior/support |
 | `oEpx7i6I9Bq` | 10 | Saved-account, transfer, configuration, activation, backup/restore, and update UI. | Reviewed: 10 application behavior |
 | `h4VIMAs7y2v` | 2 | QR payment/transfer scanner fragments; reviewed from camera/gallery flows and callers. | Reviewed: application behavior |
 | `BuildConfig` | 1 | 1 generated build-configuration source. | Reviewed: generated |
@@ -246,17 +246,17 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 | Source identifier | File | Category | Role / evidence |
 | --- | --- | --- | --- |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.B2duAUYNOU` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/B2duAUYNOU.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.D1rOcltDGsD` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/D1rOcltDGsD.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.LxRjrwTADB` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/LxRjrwTADB.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.BXJNp1qv2n` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/BXJNp1qv2n.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.FlNVShJWtm` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/FlNVShJWtm.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.dI57nRThKt` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/dI57nRThKt.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.o3etZ8qrxr` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/o3etZ8qrxr.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.oy860zvrlY` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/oy860zvrlY.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.tGolNOl3DN` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/tGolNOl3DN.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.mYaQ7jnA3Y` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/mYaQ7jnA3Y.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.postcP0gVS` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/postcP0gVS.java` | Pending | Pending |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.B2duAUYNOU` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/B2duAUYNOU.java` | application behavior | Displays operation-summary rows from `unYp8VQThY`; uses app adapter `aKh5ZFPmqR` and refresh task. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.D1rOcltDGsD` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/D1rOcltDGsD.java` | application behavior | SMS/statistics detail screen; queries `RecordSMS` by service/date/currency and supports search/import/export. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.LxRjrwTADB` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/LxRjrwTADB.java` | application behavior | Tabbed statistics detail host for Agent, BPA, Bandec, Metro, and Wallet records. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.BXJNp1qv2n` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/BXJNp1qv2n.java` | application support | Currency enum used to group and label app statistics/chart series. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.FlNVShJWtm` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/FlNVShJWtm.java` | application support | Operation aggregate model: date, amount, currency, operation enum, and chart color. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.dI57nRThKt` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/dI57nRThKt.java` | application support | App-specific chart `SliceValue` carrying a `Nl0yptXmjQ` operation for selection. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.o3etZ8qrxr` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/o3etZ8qrxr.java` | application support | Aggregates operation/currency statistics into chart values and legend labels. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.oy860zvrlY` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/oy860zvrlY.java` | application support | ArrayAdapter renders legend rows with app currency and amount formatting. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.hMfWZ7cboKl.tGolNOl3DN` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/hMfWZ7cboKl/tGolNOl3DN.java` | application support | Legend-row model for currency, operation, color, amount, and label. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.mYaQ7jnA3Y` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/mYaQ7jnA3Y.java` | application behavior | Monthly operation-history screen; creates the chart/history adapter and resets cached data on refresh. |
+| `cu.etecsa.cubacel.tr.tm.us8tbD58ow4.postcP0gVS` | `src/cu/etecsa/cubacel/tr/tm/us8tbD58ow4/postcP0gVS.java` | application behavior | Statistics tab host mapping five financial services to `D1rOcltDGsD` detail fragments. |
 
 ### `oEpx7i6I9Bq` — 10 sources
 
@@ -294,7 +294,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 ## Completion criteria
 
-- Every one of the 213 rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, and 2 generated classes are confirmed, leaving 183 rows pending. Classification does not change the 383/596 exact-link rate.
+- Every one of the 213 rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, 11 statistics behavior/support classes, and 2 generated classes are confirmed, leaving 172 rows pending. Classification does not change the 383/596 exact-link rate.
 - Generated and third-party/library rows have evidence and a reason they do not need a clean application reconstruction.
 - Every application-behavior source has an exact clean link or a written, evidence-backed exclusion.
 - Refresh package counts and the source-link metric whenever exact links or classifications change.
