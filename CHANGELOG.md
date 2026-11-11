@@ -6,6 +6,7 @@
 - Confirmed `BuildConfig` and `R` as generated constant-only sources; two ledger rows are classified with source-structure evidence.
 - Reviewed all ten `oEpx7i6I9Bq` sources; classified their saved-account, configuration, activation, backup/restore, and update fragments as application behavior with source/caller evidence.
 - Reviewed all 16 `B21UyndcVvF` sources; classified two operation/history adapters as application behavior and 14 list/menu components as application support, with body and caller evidence.
+- Reviewed both unlinked `h4VIMAs7y2v` scanner fragments; classified their camera, gallery, QR decoding, and result-routing flows as application behavior.
 - Linked `CreditPaymentFragment` to `xb7DiohJuX` after normalized full-body comparison; main-package unlinked sources decrease from 214 to 213.
 - Linked `WalletTransferFragment` to `LjOlaYSSMH` after normalized full-body comparison; the main-package unlinked source count decreases from 215 to 214.
 - Compared `WalletQrPaymentFragment` with `l2FaHPPBDa`; normalized full bodies match, including the Backspace listener, account formatting, contact handling, validations, and selector dispatch.

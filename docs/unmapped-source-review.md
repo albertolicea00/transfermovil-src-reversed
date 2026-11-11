@@ -28,7 +28,7 @@ Package location or class name alone is not enough to classify a source. For eve
 | `ZNRpoHwtLXM` | 13 | 13 data/domain sources; classify entities, DAOs, helpers, enums, and database/generated support. | Pending |
 | `us8tbD58ow4` | 11 | 11 sources; inspect class roles/callers before deciding whether they are app behavior or support. | Pending |
 | `oEpx7i6I9Bq` | 10 | Saved-account, transfer, configuration, activation, backup/restore, and update UI. | Reviewed: 10 application behavior |
-| `h4VIMAs7y2v` | 2 | 2 QR/image utility sources; distinguish app-specific QR behavior from generic codec/helper code. | Pending |
+| `h4VIMAs7y2v` | 2 | QR payment/transfer scanner fragments; reviewed from camera/gallery flows and callers. | Reviewed: application behavior |
 | `BuildConfig` | 1 | 1 generated build-configuration source. | Reviewed: generated |
 | `R` | 1 | 1 generated Android resource identifier source. | Reviewed: generated |
 
@@ -277,8 +277,8 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 | Source identifier | File | Category | Role / evidence |
 | --- | --- | --- | --- |
-| `cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT` | `src/cu/etecsa/cubacel/tr/tm/h4VIMAs7y2v/OJ3XxacXOT.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.f6Y2Wmtg6jQ` | `src/cu/etecsa/cubacel/tr/tm/h4VIMAs7y2v/f6Y2Wmtg6jQ.java` | Pending | Pending |
+| `cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT` | `src/cu/etecsa/cubacel/tr/tm/h4VIMAs7y2v/OJ3XxacXOT.java` | application behavior | QR scanning fragment: camera/ML Kit and ZXing analysis, gallery import, tap-to-focus, and result routing; used by payment/transfer and ticket screens. |
+| `cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.f6Y2Wmtg6jQ` | `src/cu/etecsa/cubacel/tr/tm/h4VIMAs7y2v/f6Y2Wmtg6jQ.java` | application behavior | QR scanner variant with camera/gallery decoding and payment-option/result flows; callback is implemented by `AgentMainActivity`, `GeneralMainActivity`, and `S9ycHcoxAzy`. |
 
 ### `BuildConfig` — 1 source
 
@@ -294,7 +294,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 ## Completion criteria
 
-- Every one of the 213 rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, 16 `B21UyndcVvF` behavior/support classes, and 2 generated classes are confirmed, leaving 185 rows pending. Classification does not change the 383/596 exact-link rate.
+- Every one of the 213 rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, and 2 generated classes are confirmed, leaving 183 rows pending. Classification does not change the 383/596 exact-link rate.
 - Generated and third-party/library rows have evidence and a reason they do not need a clean application reconstruction.
 - Every application-behavior source has an exact clean link or a written, evidence-backed exclusion.
 - Refresh package counts and the source-link metric whenever exact links or classifications change.
