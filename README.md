@@ -7,9 +7,11 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-November%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[███████████████████████████████████████████████░░░] 95%</code></span>
+<span style="white-space: nowrap;"><code>[███████████████████████████████████████████████░░░] 94%</code></span>
 
-**Task-list progress: 382/401 completed; 19 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 383/407 completed; 24 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+
+**Main-package exact source links: 383/596 (64%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks classifications for the remaining 213 sources.
 
 ## Overview
 
@@ -37,7 +39,7 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 | Area | Status | Current state |
 | :--- | :--- | :--- |
 | APK identification and extraction | Complete for the current APK | Metadata, manifest, resources, JADX Java, and smali are available. |
-| Clean Java reconstruction | In progress | 457 files exist; some are partial or contain stubs. The source-link inventory currently has no duplicate candidates. |
+| Clean Java reconstruction | In progress | 458 files exist; some are partial or contain stubs. The source-link inventory currently has no duplicate candidates. |
 | Protocol and feature analysis | In progress | Topic documents contain findings; the complete USSD code catalog remains a TODO. |
 | iOS port research | Planned | Feasibility, platform limits, and feature parity remain TODOs. |
 | Build and behavioral validation | Pending | The reconstructed Java tree has not been compiled or verified as a working app. |
@@ -91,6 +93,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [E-commerce errors](docs/ecommerce-errors.md) | Error-code messages recovered from smali and checked against bytecode evidence. |
 | [Versioning](docs/versioning.md) | Repository versions, tags, and cross-version comparisons. |
 | [Reconstruction inventory](docs/reconstruction-inventory.md) | Reproducible source links, duplicate candidates, mapping conflicts, and review limits. |
+| [Unlinked-source review ledger](docs/unmapped-source-review.md) | Per-source classification and evidence for unlinked main-package Java files. |
 | [iOS port TODO](docs/ios-port-todo.md) | Planned feasibility study, platform limits, and feature parity decisions. |
 
 For work in progress, use the [task list](TODO.md). Paused sessions also provide `.workspace/handoff.md`. [CHANGELOG.md](CHANGELOG.md) records completed changes; [AGENTS.md](AGENTS.md) is the repository guide for contributors and coding agents.

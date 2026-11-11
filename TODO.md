@@ -104,9 +104,15 @@
 - [x] Compare BFI balance, limit, and latest-operation forms with JADX; confirm selectors `46`, `62`, and `48`, their payload construction, and partial-USSD marker `05`.
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
-- [ ] Review the remaining 213 main-package source files without exact reconstruction links; distinguish generated code from application logic.
-- [ ] Inventory the 213 unmapped main-package sources by package and identify which contain application behavior versus generated/library code.
-- [ ] Add exact reconstruction links for each unmapped application-behavior class that remains in scope; record excluded generated/library classes and evidence.
+- [ ] Classify each of the 139 unlinked `B0jOLrWx09th` sources; record app behavior, generated/library/support category, role, and evidence in [the source review ledger](docs/unmapped-source-review.md).
+- [ ] Classify each of the 20 unlinked `l08fNVC4KOKK` shared-runtime sources; distinguish protocol/telephony behavior from adapters and generated glue in the source review ledger.
+- [ ] Classify each of the 16 unlinked `B21UyndcVvF` adapter/view-holder sources; record whether it is app-specific, generated, or reusable UI support in the source review ledger.
+- [ ] Classify each of the 13 unlinked `ZNRpoHwtLXM` data/domain sources; distinguish app entities/helpers from generated or library code in the source review ledger.
+- [ ] Classify each of the 11 unlinked `us8tbD58ow4` sources from body and caller evidence; record role and category in the source review ledger.
+- [ ] Classify each of the 10 unlinked `oEpx7i6I9Bq` account/menu sources; prioritize saved-account flows and record role and category in the source review ledger.
+- [ ] Classify both unlinked `h4VIMAs7y2v` QR/image utilities; distinguish Transfermóvil-specific behavior from generic image/codec support in the source review ledger.
+- [x] Confirm the unlinked `BuildConfig` and `R` files as generated Android outputs from their constant-only class bodies, and record the evidence in the source review ledger.
+- [ ] Add exact clean-source links for every unlinked application-behavior class that remains in scope; document generated/library exclusions with evidence.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
 - [x] Link fourteen source-confirmed MiBoleto, ticket reservation, OFA, TFA, Cubacel-package, fixed-phone, and Voto Móvil screens; regenerate the exact-link inventory.

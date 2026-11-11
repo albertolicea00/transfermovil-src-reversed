@@ -17,6 +17,8 @@ Each original has a `link_status`: `unlinked`, `single_candidate`, or
 A single candidate can still contain stubs, omitted methods, or incorrect behavior.
 Generated and library classes are included in the full inventory; filter the
 `original` field to `cu.etecsa.cubacel.tr.tm.` for the main application package.
+Use [the unlinked-source review ledger](unmapped-source-review.md) to classify
+the remaining main-package source files and record per-class evidence.
 
 `mapping_issues` distinguishes absent original paths (`source_not_found`), absent
 clean classes (`clean_not_found`), and disagreement between a mapping entry and a
