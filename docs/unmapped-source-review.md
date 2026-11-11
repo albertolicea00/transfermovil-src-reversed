@@ -8,7 +8,7 @@ Snapshot generated from `scripts/reconstruction-inventory.py` on 2026-11-11.
 
 This ledger tracks the 213 Java source files in the main application package that have no exact clean-source link. The ledger is an audit queue, not a decompilation-success metric. Current JADX output reports 98.8% class decompilation success (40 errors); this queue measures source-to-clean class identity links. Those are separate measures, and a link does not prove behavioral equivalence.
 
-Assign one primary category only after checking the source body and, where useful, callers/usages. The two generated classes (`BuildConfig` and `R`) are confirmed; the other 211 rows remain pending:
+Assign one primary category only after checking the source body and, where useful, callers/usages. The `oEpx7i6I9Bq` package has ten confirmed application-behavior screens, and `BuildConfig`/`R` are confirmed generated classes; the other 201 rows remain pending:
 
 - `application behavior`: UI, routing, domain rules, persistence, protocol, network, or security logic.
 - `generated`: resource/build output, synthetic bridges, binding code, or compiler-generated machinery.
@@ -27,7 +27,7 @@ Package location or class name alone is not enough to classify a source. For eve
 | `B21UyndcVvF` | 16 | 16 list, view-holder, adapter, and UI support sources; verify whether each is app-specific or reusable/generated. | Pending |
 | `ZNRpoHwtLXM` | 13 | 13 data/domain sources; classify entities, DAOs, helpers, enums, and database/generated support. | Pending |
 | `us8tbD58ow4` | 11 | 11 sources; inspect class roles/callers before deciding whether they are app behavior or support. | Pending |
-| `oEpx7i6I9Bq` | 10 | 10 saved-account, transfer, and menu sources; prioritize user-facing account management and classify remaining helpers. | Pending |
+| `oEpx7i6I9Bq` | 10 | Saved-account, transfer, configuration, activation, backup/restore, and update UI. | Reviewed: 10 application behavior |
 | `h4VIMAs7y2v` | 2 | 2 QR/image utility sources; distinguish app-specific QR behavior from generic codec/helper code. | Pending |
 | `BuildConfig` | 1 | 1 generated build-configuration source. | Reviewed: generated |
 | `R` | 1 | 1 generated Android resource identifier source. | Reviewed: generated |
@@ -262,16 +262,16 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 | Source identifier | File | Category | Role / evidence |
 | --- | --- | --- | --- |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.KeTIEVSfVo` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/KeTIEVSfVo.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.MEqNzldfDl` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/MEqNzldfDl.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.ULtRAlRy1V` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/ULtRAlRy1V.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.UUlOTi00Yp` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/UUlOTi00Yp.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.UoWmGAF016` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/UoWmGAF016.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.W2FmEAMdovs` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/W2FmEAMdovs.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.WBJpHonI92` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/WBJpHonI92.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.b3vEPrhNHF` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/b3vEPrhNHF.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.eD2GCZ4Vix` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/eD2GCZ4Vix.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.xtUiphIcBa` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/xtUiphIcBa.java` | Pending | Pending |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.KeTIEVSfVo` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/KeTIEVSfVo.java` | application behavior | Saved mobile-card account list; `fillAdapter`, account CRUD actions, QR/share and transfer callbacks; opened by both main activities. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.MEqNzldfDl` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/MEqNzldfDl.java` | application behavior | Saved mobile-card account add/edit UI; validates account/alias, persists `MCBank`, and launches classic association; `mostrarTarjeta`/`getBanco` are JADX stubs. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.ULtRAlRy1V` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/ULtRAlRy1V.java` | application behavior | Database backup/restore screen; file document launchers, export/import tasks, and data presenter. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.UUlOTi00Yp` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/UUlOTi00Yp.java` | application behavior | Application settings; persists partial-USSD and QR-improvement switches in `AppConfig`. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.UoWmGAF016` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/UoWmGAF016.java` | application behavior | Configuration menu; source routes entries to app update, activation, account management, backup/restore, and settings fragments. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.W2FmEAMdovs` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/W2FmEAMdovs.java` | application behavior | Agent-version activation; validates activation code against app version/phone, stores agent code, enables ETECSA operations, and requests USSD authorization. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.WBJpHonI92` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/WBJpHonI92.java` | application behavior | Update/download screen; shows current version and invokes the app APK download manager for ETECSA/APK sources. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.b3vEPrhNHF` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/b3vEPrhNHF.java` | application behavior | MiBoleto seller activation; validates activation code and enables the MiBoleto module in app configuration. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.eD2GCZ4Vix` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/eD2GCZ4Vix.java` | application behavior | Bank-module activation; validates code, enables bank operations and stores bank activation settings. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.xtUiphIcBa` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/xtUiphIcBa.java` | application behavior | Bulevar bank-module activation; validates code and requests authorization through the USSD dispatcher. |
 
 ### `h4VIMAs7y2v` — 2 sources
 
@@ -294,7 +294,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 ## Completion criteria
 
-- Every one of the 213 rows has a supported primary category and role/evidence note; 2 generated classes are already confirmed and 211 rows remain pending.
+- Every one of the 213 rows has a supported primary category and role/evidence note; 10 application-behavior screens and 2 generated classes are confirmed, leaving 201 rows pending.
 - Generated and third-party/library rows have evidence and a reason they do not need a clean application reconstruction.
 - Every application-behavior source has an exact clean link or a written, evidence-backed exclusion.
 - Refresh package counts and the source-link metric whenever exact links or classifications change.

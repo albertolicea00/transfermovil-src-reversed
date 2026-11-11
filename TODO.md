@@ -109,7 +109,7 @@
 - [ ] Classify each of the 16 unlinked `B21UyndcVvF` adapter/view-holder sources; record whether it is app-specific, generated, or reusable UI support in the source review ledger.
 - [ ] Classify each of the 13 unlinked `ZNRpoHwtLXM` data/domain sources; distinguish app entities/helpers from generated or library code in the source review ledger.
 - [ ] Classify each of the 11 unlinked `us8tbD58ow4` sources from body and caller evidence; record role and category in the source review ledger.
-- [ ] Classify each of the 10 unlinked `oEpx7i6I9Bq` account/menu sources; prioritize saved-account flows and record role and category in the source review ledger.
+- [x] Classify all 10 unlinked `oEpx7i6I9Bq` sources as app behavior from their Fragment bodies, database actions, activation/update flows, and configuration-menu callers; record roles/evidence in the source review ledger.
 - [ ] Classify both unlinked `h4VIMAs7y2v` QR/image utilities; distinguish Transfermóvil-specific behavior from generic image/codec support in the source review ledger.
 - [x] Confirm the unlinked `BuildConfig` and `R` files as generated Android outputs from their constant-only class bodies, and record the evidence in the source review ledger.
 - [ ] Add exact clean-source links for every unlinked application-behavior class that remains in scope; document generated/library exclusions with evidence.
