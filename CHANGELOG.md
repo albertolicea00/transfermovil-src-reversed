@@ -15,6 +15,7 @@
 - Classified the partial-USSD dialog `IixRWvtdZG`, packet adapter `iNEsCMH3jK`, and packet DTO `QfruhfaN5Z` as app behavior/support using their callback flow to `pAzq93vIl3`; the baseline review now has 53 classified rows and 160 pending.
 - Classified coordinator `pAzq93vIl3` as application behavior from its packet construction, Android-version-specific send paths, and manual/automatic response sequencing; the baseline review now has 54 classified rows and 159 pending.
 - Classified `MX9gh9mLxd` as app support from its Android 8+ `TelephonyManager` packet sending and response-driven progress/error handling; the baseline review now has 55 classified rows and 158 pending.
+- Traced active partial-USSD chunking and corrected the docs: active grouping is character-limit based with a hard-coded allowance, while the six-parameter splitter and alternate sequence method are unused; documented sequence IDs, multi-request submission, SDK paths, and the absence of retries.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

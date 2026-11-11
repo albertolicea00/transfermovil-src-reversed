@@ -11,15 +11,16 @@ The current [telephony analysis](telephony.md) is the starting point. Its lists 
 - [ ] Resolve every `BankOperationCode`/menu operation to its actual USSD invocation. Mark operations handled by SMS or HTTP as out of scope rather than guessing a USSD code.
 - [ ] Distinguish gateway prefixes, operation selectors, parameters, packet sequence fields, version fields, and the final `#` terminator. Record the order and any escaping or URI encoding.
 - [ ] Trace `rDEl7rW1aN.code()` and `AFm1GraXBXUkpF1hmOdV.Tz34gww2TFwrsuT8ukpL`: input types, lookup data, transformation steps, padding, and output. Separate verified behavior from hypotheses.
-- [ ] Trace `pAzq93vIl3` packet splitting, sequence generation, retries, and multi-step calls. Record when one user action sends more than one USSD request.
-- [ ] Compare the `ACTION_CALL` path with `TelephonyManager.sendUssdRequest()` and note any format or response-handling differences.
+- [x] Trace `pAzq93vIl3` packet splitting, sequence generation, retries, and multi-step calls; record that one form submission sends multiple requests when the active splitter yields multiple chunks. See [packet protocol notes](telephony.md#ussd-packet-protocol-pazq93vil3).
+- [x] Compare the `ACTION_CALL` path with `TelephonyManager.sendUssdRequest()` and document the format, SDK, permission, and response-handling differences in [telephony notes](telephony.md#ussd-packet-protocol-pazq93vil3).
 - [ ] Add offline test vectors using dummy access codes, accounts, PINs, and amounts. Never record live credentials or submit real requests.
 
 ## Confirmed banking entries (initial subset)
 
-The operations listed here are confirmed from the reconstructed call sites and the
-shared `FBsQzP3Zfj.actionCallUSSDBack(...)` implementation. The list is a partial
-catalog; packet splitting for partial USSD paths is still under investigation.
+The operations listed here are confirmed from reconstructed call sites and shared
+dispatchers. The list is a partial catalog; packet mechanics are documented in
+[telephony notes](telephony.md#ussd-packet-protocol-pazq93vil3), while operation
+and menu coverage remains open.
 
 A static scan of banking UI source currently finds 66 single-line
 `actionCallUSSDBack(...)` call sites using 32 distinct service selectors. This

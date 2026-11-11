@@ -348,11 +348,13 @@ Full USSD code format per packet:
 | `encoded_params` | `rDEl7rW1aN.code()` | Encoded parameters (PINs, amounts, accounts) |
 | `version` | `AppConfig.getNumber()` | App version/identifier |
 
-**Packet splitting:** Parameters split by `*` delimiter. `MAX_PARAMETERS_TOTAL` = 52 chars. `MAX_PARAMETERS_TO_PACKAGE` = 6 (default, configurable). If payload exceeds limit → split into multiple USSD calls with position/total/sequence metadata.
+**Active packet splitting:** `encpackageUSSDByLimitChar()` splits the encoded payload only at literal `*` boundaries. It grows each chunk while `currentChunk.length + nextToken.length + 32 <= MAX_PARAMETERS_TOTAL` (`MAX_PARAMETERS_TOTAL` is 52); the first token is accepted without that length check. The fixed 32-character allowance is a source constant, not calculated from the emitted header. Every chunk receives 2-digit position and total fields plus `idsecuencia`, operation, agency, and app version. One form submission can therefore trigger several USSD requests when this method returns multiple chunks.
+
+`MAX_PARAMETERS_TO_PACKAGE` (default 6) is used by the separate `encpackageUSSD()` splitter, but that method has no call sites in this class. The active overload that accepts `maxParametersXPqte` stores it, and the other overload assigns `countGroups(...)`; neither value affects `encpackageUSSDByLimitChar()`. These are not active parameter-count limits.
 
 **Sequence ID generation:**
-- SDK < 26: `generarSecuenciaBasica()` → `mmss` (minutes + seconds)
-- SDK ≥ 26: `generarSecuencia()` → `dMHHmss` + last year digit + random 0-9
+- All active packet-send overloads call `generarSecuenciaBasica()` → local `mmss` (minutes + seconds), including SDK ≥ 26.
+- `generarSecuencia()` (date/time, year digit, random digit) is declared but has no call sites in this class.
 
 **Two execution paths based on SDK level:**
 
@@ -362,6 +364,8 @@ Full USSD code format per packet:
 | < 26 | Accessibility service | `START_LISTENING` broadcast → `sendDataUSSD(0)` → accessibility reads response → `onUssdReceived()` → sends next packet |
 
 **Declared constant:** `MAX_FALLAS_USSD` = 3; source search found no use of this field, so it does not implement retries.
+
+The `fallas` field is reset before sending but is never incremented or used to retry. The count-based `encpackageUSSD()` splitter and `generarSecuencia()` are also uncalled; they must not be described as active behavior.
 
 ### Numeric Parameter Encoding
 
