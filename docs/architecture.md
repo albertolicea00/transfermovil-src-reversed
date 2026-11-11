@@ -215,7 +215,7 @@ separately by menu setup and runtime state.
 | `metro` | `BIc10fn03P` (`MetroTabHostFragment`) | same |
 | `bandec` | `z5XKGtUeX8` (`BandecTabHostFragment`) | same |
 | `bfi` | `HBFPOv3Hig` (`BfiTabHostFragment`) | same |
-| `cuentas` | `KeTIEVSfVo` (raw source only) | same |
+| `cuentas` | `MobileCardBankListFragment` (clean list; two bank transfer destinations remain raw) | same |
 | `bulevar` | Launches e-commerce activity `a7Y4bbw8Os` | same |
 | `bolsa_etecsa` | `gCD4Z8F6ml` (`BankingPagerFragment`) | `ofOuyCSKWI` (`WalletPagerFragment`) |
 | `vendedor_miboleto` | `wfroNBIJF7` (raw source only) | same |

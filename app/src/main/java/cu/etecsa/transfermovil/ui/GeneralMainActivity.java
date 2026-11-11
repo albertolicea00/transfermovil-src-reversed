@@ -72,7 +72,7 @@ import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 import cu.etecsa.cubacel.tr.tm.nNLWm3R1aPI.BOf8kgNm7V;
 import cu.etecsa.cubacel.tr.tm.nNLWm3R1aPI.wComYkZMDc;
-import cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.KeTIEVSfVo;
+import cu.etecsa.transfermovil.banking.ui.wallet.MobileCardBankListFragment;
 import cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.UoWmGAF016;
 import cu.etecsa.cubacel.tr.tm.us8tbD58ow4.LxRjrwTADB;
 import cu.etecsa.cubacel.tr.tm.us8tbD58ow4.mYaQ7jnA3Y;
@@ -547,7 +547,7 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                 if (menuItem.getItemId() == R.id.cuentas) {
                     menuItem.setChecked(true);
                     FragmentTransaction xfragmentTransaction13 = GeneralMainActivity.this.getSupportFragmentManager().beginTransaction();
-                    xfragmentTransaction13.replace(R.id.containerView, new KeTIEVSfVo()).addToBackStack(null).commit();
+                    xfragmentTransaction13.replace(R.id.containerView, new MobileCardBankListFragment()).addToBackStack(null).commit();
                     return true;
                 }
                 if (menuItem.getItemId() == R.id.bulevar) {

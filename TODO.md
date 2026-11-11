@@ -104,15 +104,16 @@
 - [x] Compare BFI balance, limit, and latest-operation forms with JADX; confirm selectors `46`, `62`, and `48`, their payload construction, and partial-USSD marker `05`.
 - [x] Compare general-fine and traffic-fine Wallet forms with JADX; confirm selectors `96`/`97`, field order, and the absence of partial-packet dispatch in both screens.
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
-- [ ] Classify each of the 139 unlinked `B0jOLrWx09th` sources; record app behavior, generated/library/support category, role, and evidence in [the source review ledger](docs/unmapped-source-review.md).
-- [ ] Classify each of the 20 unlinked `l08fNVC4KOKK` shared-runtime sources; distinguish protocol/telephony behavior from adapters and generated glue in the source review ledger.
+- [ ] Inventory all 139 unlinked `B0jOLrWx09th` sources by nested package; inspect bodies/callers and classify each as application behavior, app support, generated, third-party/library, or unknown with evidence in [the source review ledger](docs/unmapped-source-review.md).
+- [ ] Inventory all 20 unlinked `l08fNVC4KOKK` shared-runtime sources by nested package; identify protocol/telephony behavior versus generic adapters, generated glue, and library code, with source evidence in the ledger.
 - [x] Classify all 16 unlinked `B21UyndcVvF` adapter/view-holder sources from their bodies and callers; record app-specific behavior/support roles and evidence in the source review ledger.
-- [ ] Classify each of the 13 unlinked `ZNRpoHwtLXM` data/domain sources; distinguish app entities/helpers from generated or library code in the source review ledger.
+- [ ] Inventory all 13 unlinked `ZNRpoHwtLXM` data/domain sources by nested package; classify app entities/helpers versus generated/library code from source and caller evidence in the ledger.
 - [x] Classify all 11 unlinked `us8tbD58ow4` statistics sources from body and caller evidence; record feature, model, and chart-support roles in the source review ledger.
 - [x] Classify all 10 unlinked `oEpx7i6I9Bq` sources as app behavior from their Fragment bodies, database actions, activation/update flows, and configuration-menu callers; record roles/evidence in the source review ledger.
 - [x] Classify both unlinked `h4VIMAs7y2v` QR scanner fragments from their camera, gallery, barcode-processing, and caller flows; record feature roles in the source review ledger.
 - [x] Confirm the unlinked `BuildConfig` and `R` files as generated Android outputs from their constant-only class bodies, and record the evidence in the source review ledger.
 - [ ] Add exact clean-source links for every unlinked application-behavior class that remains in scope; document generated/library exclusions with evidence.
+- [ ] After classifying the 213-source baseline cohort, publish category totals and a scope-adjusted clean reconstruction coverage metric that excludes evidenced generated/library code; keep it separate from JADX decompilation success and exact-link coverage.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
 - [x] Link fourteen source-confirmed MiBoleto, ticket reservation, OFA, TFA, Cubacel-package, fixed-phone, and Voto Móvil screens; regenerate the exact-link inventory.
@@ -309,10 +310,10 @@
 - [x] Reconstruct and route MiTransfer MiBoleto purchase from `TBaFnBLjEA`; preserve selector 118, currency mapping, and shared booking reset.
 - [x] Restore the MiBoleto ticket-status screen from `w7mHpmOa4EP`, route the General MiBoleto menu to the clean screen, and preserve saved-series selection and selector 114 dispatch.
 - [x] Restore MiBoleto key update from `hjX8MS8xO9`, route the General MiBoleto menu to the clean screen, and preserve saved-series validation and selector 115 dispatch.
-- [ ] Migrate MiTransfer saved-account list `KeTIEVSfVo` to a clean `MobileCardBank` adapter, preserving add/edit/delete/QR/share actions and transfer routing.
+- [x] Migrate MiTransfer saved-account list `KeTIEVSfVo` to `MobileCardBankListFragment`/`MobileCardBankAdapter`; preserve add/edit/delete/QR/share and all six bank-specific transfer routes.
 - [x] Recover the MiTransfer saved-account editor's bank classifier and card-icon behavior from archived smali; preserve distinct `92` offsets, standard prefixes, classic-card currency choices, and unknown-card handling in the clean editor draft.
-- [ ] Migrate MiTransfer saved-account editor `MEqNzldfDl`; recover `mostrarTarjeta()` and `getBanco()` behavior from smali, and preserve validation, persistence, and post-save association shortcut.
-- [ ] Route Agent and General account-management menu entries to the clean MiTransfer saved-account list and reconcile its downstream routes.
+- [x] Migrate MiTransfer saved-account editor `MEqNzldfDl` to `MobileCardBankEditFragment`; recover `mostrarTarjeta()` and `getBanco()` from smali, and preserve validation, persistence, and post-save association shortcut.
+- [x] Route Agent and General account-management menu entries to the clean MiTransfer saved-account list; retain source destinations for bank transfer forms without clean counterparts.
 - [x] Restore MiBoleto latest operations from `i9I9XZGnR3`, route the General menu to the clean screen, and preserve optional email encoding and selector 113 full/partial dispatch.
 - [x] Restore MiBoleto integrated ticket query from `OXpoe3K2m1`, route the General menu to the clean screen, and preserve date/email validation and selector 112 full/partial dispatch.
 - [x] Restore the MiTurno reservation lookup from `x12rSjPY6pZ`, route the General ticket-query choice to the clean screen, and preserve CI input, QR prefill/scan, and selector 107.
