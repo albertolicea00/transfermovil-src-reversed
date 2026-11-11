@@ -25,7 +25,7 @@ Package location or class name alone is not enough to classify a source. For eve
 | `B0jOLrWx09th` | 139 | Review fragments, activities, dialogs, generated callbacks, and support classes individually; `iN1lHDKE5h`/`CBIHzlCw60`/`NdeFyyhxF1`/`Kw29o4NNrz`/`pECcPKxF9i` are behavior, `GVEefrRz76` is shared account-selection support, and one empty R8 outline class is generated. | Partial: 5 behavior, 1 support, 1 generated, 132 pending |
 | `l08fNVC4KOKK` | 20 | 20 shared runtime sources; distinguish app protocol/telephony helpers from generic adapters and generated glue; the packet coordinator, platform dispatch facade, dialogs, TelephonyManager senders, adapter, and DTO are classified separately. | Partial: 2 behavior, 6 support, 1 generated |
 | `B21UyndcVvF` | 16 | App-specific operation/list adapters and sticky-header RecyclerView support; reviewed from class bodies and callers. | Reviewed: app behavior/support |
-| `ZNRpoHwtLXM` | 13 | 13 data/domain sources; classify entities, DAOs, helpers, enums, and database/generated support. | Pending |
+| `ZNRpoHwtLXM` | 13 | Data/domain models, backup/restore, cryptographic helpers, and shared local catalogues; all 13 rows checked against implementation and usages. | Reviewed: 10 application support, 2 application behavior, 1 generated |
 | `us8tbD58ow4` | 11 | Statistics history, SMS records, and chart fragments/models; reviewed from source bodies and screen callers. | Reviewed: application behavior/support |
 | `oEpx7i6I9Bq` | 10 | Saved-account, transfer, configuration, activation, backup/restore, and update UI. | Reviewed: 10 application behavior |
 | `h4VIMAs7y2v` | 2 | QR payment/transfer scanner fragments; reviewed from camera/gallery flows and callers. | Reviewed: application behavior |

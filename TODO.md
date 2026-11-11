@@ -109,7 +109,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [ ] Inventory all 139 unlinked `B0jOLrWx09th` sources by nested package; inspect bodies/callers and classify each as application behavior, app support, generated, third-party/library, or unknown with evidence in [the source review ledger](docs/unmapped-source-review.md).
 - [ ] Inventory all 20 unlinked `l08fNVC4KOKK` shared-runtime sources by nested package; identify protocol/telephony behavior versus generic adapters, generated glue, and library code, with source evidence in the ledger.
 - [x] Classify all 16 unlinked `B21UyndcVvF` adapter/view-holder sources from their bodies and callers; record app-specific behavior/support roles and evidence in the source review ledger.
-- [ ] Inventory all 13 unlinked `ZNRpoHwtLXM` data/domain sources by nested package; classify app entities/helpers versus generated/library code from source and caller evidence in the ledger.
+- [x] Classify all 13 baseline `ZNRpoHwtLXM` sources by nested package; record 10 application-support classes, two backup/restore behavior classes, and one empty generated R8 outline with source/caller evidence in the ledger.
 - [x] Classify all 11 unlinked `us8tbD58ow4` statistics sources from body and caller evidence; record feature, model, and chart-support roles in the source review ledger.
 - [x] Classify all 10 unlinked `oEpx7i6I9Bq` sources as app behavior from their Fragment bodies, database actions, activation/update flows, and configuration-menu callers; record roles/evidence in the source review ledger.
 - [x] Classify both unlinked `h4VIMAs7y2v` QR scanner fragments from their camera, gallery, barcode-processing, and caller flows; record feature roles in the source review ledger.

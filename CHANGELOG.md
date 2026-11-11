@@ -23,6 +23,7 @@
 - Classified the backup/restore subpackage: `HEi1mzxf5v` exporter and `Q94Igo6JT0` importer contain app behavior; the result DTO, callback interface, async presenter, and unreferenced legacy exporter are app support. Noted the exporter's empty listener callbacks and that `XHCKnvJV9M` has no tracked callers. Ledger totals are now 65 classified / 148 pending.
 - Classified the remaining backup data pipeline: `xNWgXsOsGx` reads 13 app tables, `fHZ2PXN4o9` encrypts and hash-checks backup files, and the backup/restore document/table models are app-specific support. Ledger totals are now 70 classified / 143 pending.
 - Classified `V9s8rJIDplX` as app-specific shared catalogue/data support after confirming its asset loaders are used by multiple clean feature screens for banking, OFA, fines, stamps, Cubacel plans, MiTurno, and voting. Ledger totals are now 71 classified / 142 pending.
+- Completed the 13-source `ZNRpoHwtLXM` review batch: 10 application-support classes, two backup/restore behavior classes, and one generated R8 outline; no third-party/library rows were found. Marked the batch complete in TODO.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
