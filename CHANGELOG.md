@@ -3,6 +3,7 @@
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Clarified the 213-source review tasks as package-by-package inventories with per-source behavior/support/generated/library classifications and source evidence; added a follow-up scope-adjusted reconstruction metric while keeping it separate from JADX decompilation success and exact source-link coverage.
+- Classified the extended BPA transfer source `iN1lHDKE5h` as application behavior after tracing its saved/new origin modes, CUP/CUC/USD checks, optional agency/PIN, contact/message/flags, selector-45 payload branches, and partial packet helper; recorded its migration separately from the clean short transfer form.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

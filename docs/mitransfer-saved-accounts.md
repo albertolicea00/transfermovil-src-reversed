@@ -15,7 +15,7 @@ The clean draft preserves account formatting, alias/account uniqueness checks, o
 
 `KeTIEVSfVo` is now represented by clean `MobileCardBankListFragment` and `MobileCardBankAdapter`. The list keeps the 20-account limit, masked PAN rows, expandable actions, edit/delete/QR/share controls, and the source's six agency routes. Agent and General account-management entries both open the clean list. BANDEC, BFI, MiTransfer, and CLASICAEMP route to clean forms; BPA and Metropolitano retain the original source-form destinations because no clean equivalents are linked yet. Editing and deleting reload the list when it resumes.
 
-Remaining work is to migrate the BPA and Metropolitano transfer destinations, then compare all saved-account screens with runtime/UI behavior. This static source comparison does not establish a successful banking transaction.
+Remaining work is to migrate the BPA and Metropolitano transfer destinations, then compare all saved-account screens with runtime/UI behavior. The BPA route is the extended source form `iN1lHDKE5h` (saved/new origin account, CUP/CUC/USD amount, optional agency/PIN, recipient phone, message, and send flags); the clean `BpaTransferFragment` is a separate short form and is not a drop-in replacement. This static source comparison does not establish a successful banking transaction.
 
 ## Evidence
 

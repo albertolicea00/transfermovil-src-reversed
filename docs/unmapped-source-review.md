@@ -8,7 +8,7 @@ Snapshot generated from `scripts/reconstruction-inventory.py` on 2026-11-11.
 
 This ledger retains the baseline cohort of 213 Java source files in the main application package that lacked exact clean-source links when review began. Two cohort members, `MEqNzldfDl` and `KeTIEVSfVo`, now have exact clean-source annotations; 211 remain currently unlinked. The ledger is an audit queue, not a decompilation-success metric. Current JADX output reports 98.8% class decompilation success (40 errors); this queue measures source-to-clean class identity links. Those are separate measures, and a link does not prove behavioral equivalence.
 
-Assign one primary category only after checking the source body and, where useful, callers/usages. The review is organized by package segment and nested package so it can reveal which files contain Transfermóvil behavior/support and which are generated or third-party code. The `oEpx7i6I9Bq` package has ten confirmed application-behavior screens, all 16 `B21UyndcVvF` rows are classified as app behavior/support, and `BuildConfig`/`R` are confirmed generated classes; the other 185 rows remain pending:
+Assign one primary category only after checking the source body and, where useful, callers/usages. The review is organized by package segment and nested package so it can reveal which files contain Transfermóvil behavior/support and which are generated or third-party code. The `oEpx7i6I9Bq` package has ten confirmed application-behavior screens, all 16 `B21UyndcVvF` rows are classified as app behavior/support, `iN1lHDKE5h` is confirmed application behavior, and `BuildConfig`/`R` are confirmed generated classes; the other 184 rows remain pending:
 
 - `application behavior`: UI, routing, domain rules, persistence, protocol, network, or security logic.
 - `generated`: resource/build output, synthetic bridges, binding code, or compiler-generated machinery.
@@ -22,7 +22,7 @@ Package location or class name alone is not enough to classify a source. For eve
 
 | Package segment | Sources | Initial review focus | Status |
 | --- | ---: | --- | --- |
-| `B0jOLrWx09th` | 139 | 139 application-package sources; review fragments, activities, dialogs, generated callbacks, and support classes individually. | Pending |
+| `B0jOLrWx09th` | 139 | Review fragments, activities, dialogs, generated callbacks, and support classes individually; `iN1lHDKE5h` is confirmed extended-transfer behavior, with 138 rows pending. | Partial: 1 application behavior |
 | `l08fNVC4KOKK` | 20 | 20 shared runtime sources; distinguish app protocol/telephony helpers from generic adapters and generated glue. | Pending |
 | `B21UyndcVvF` | 16 | App-specific operation/list adapters and sticky-header RecyclerView support; reviewed from class bodies and callers. | Reviewed: app behavior/support |
 | `ZNRpoHwtLXM` | 13 | 13 data/domain sources; classify entities, DAOs, helpers, enums, and database/generated support. | Pending |
@@ -91,7 +91,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.FX8u11r7nB` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/p1CEgMEeWUbD/DrR0lEVP3qk/gCOrME2HrQt/FX8u11r7nB.java` | Pending | Pending |
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.FgpBLXKm6t` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/p1CEgMEeWUbD/DrR0lEVP3qk/gCOrME2HrQt/FgpBLXKm6t.java` | Pending | Pending |
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.Hg2ath75ih` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/p1CEgMEeWUbD/DrR0lEVP3qk/gCOrME2HrQt/Hg2ath75ih.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/p1CEgMEeWUbD/DrR0lEVP3qk/gCOrME2HrQt/iN1lHDKE5h.java` | Pending | Pending |
+| `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/p1CEgMEeWUbD/DrR0lEVP3qk/gCOrME2HrQt/iN1lHDKE5h.java` | application behavior | Extended account transfer form: `submitForm` validates destination/origin, CUP/CUC/USD rules, recipient phone, optional message/flags, PIN/agencia mode, and selector-45 standard/partial payloads; uses account/card classifier and packet helper. Distinct from the clean short-form `BpaTransferFragment`. |
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.o6kycf55Gw` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/p1CEgMEeWUbD/DrR0lEVP3qk/gCOrME2HrQt/o6kycf55Gw.java` | Pending | Pending |
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.pxpQ3hcmYF` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/p1CEgMEeWUbD/DrR0lEVP3qk/gCOrME2HrQt/pxpQ3hcmYF.java` | Pending | Pending |
 | `cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.u4QMc0S0ZHo` | `src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/p1CEgMEeWUbD/DrR0lEVP3qk/gCOrME2HrQt/u4QMc0S0ZHo.java` | Pending | Pending |
@@ -294,7 +294,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 ## Completion criteria
 
-- Every one of the 213 baseline rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, 11 statistics behavior/support classes, and 2 generated classes are confirmed, leaving 172 rows pending classification. Two rows now have exact clean-source links, so current main-package link coverage is 385/596.
+- Every one of the 213 baseline rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, `iN1lHDKE5h`, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, 11 statistics behavior/support classes, and 2 generated classes are confirmed, leaving 171 rows pending classification. Two rows now have exact clean-source links, so current main-package link coverage is 385/596.
 - Generated and third-party/library rows have evidence and a reason they do not need a clean application reconstruction.
 - Every application-behavior source has an exact clean link or a written, evidence-backed exclusion.
 - Refresh package counts and the source-link metric whenever exact links or classifications change.

@@ -314,6 +314,7 @@
 - [x] Recover the MiTransfer saved-account editor's bank classifier and card-icon behavior from archived smali; preserve distinct `92` offsets, standard prefixes, classic-card currency choices, and unknown-card handling in the clean editor draft.
 - [x] Migrate MiTransfer saved-account editor `MEqNzldfDl` to `MobileCardBankEditFragment`; recover `mostrarTarjeta()` and `getBanco()` from smali, and preserve validation, persistence, and post-save association shortcut.
 - [x] Route Agent and General account-management menu entries to the clean MiTransfer saved-account list; retain source destinations for bank transfer forms without clean counterparts.
+- [ ] Migrate the extended saved/new-origin bank transfer `iN1lHDKE5h` to a clean form; preserve selector 45 standard/partial payload order, optional agency/PIN mode, CUP/CUC/USD rules, recipient options, and QR/contact behavior. Do not substitute the distinct short-form `I2qACpsJwr`/`BpaTransferFragment`.
 - [x] Restore MiBoleto latest operations from `i9I9XZGnR3`, route the General menu to the clean screen, and preserve optional email encoding and selector 113 full/partial dispatch.
 - [x] Restore MiBoleto integrated ticket query from `OXpoe3K2m1`, route the General menu to the clean screen, and preserve date/email validation and selector 112 full/partial dispatch.
 - [x] Restore the MiTurno reservation lookup from `x12rSjPY6pZ`, route the General ticket-query choice to the clean screen, and preserve CI input, QR prefill/scan, and selector 107.
