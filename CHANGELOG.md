@@ -7,6 +7,7 @@
 - Classified `H0oV6Ot0bS$$ExternalSyntheticApiModelOutline0` as generated R8 glue from its synthetic-class marker and empty class body; the 213-source review now has 43 classified rows and 170 pending.
 - Classified `GVEefrRz76` as application support from its shared account/currency selection helpers and the active `WalletBillPaymentFragment` subclass; the baseline review now has 44 classified rows and 169 pending.
 - Classified Nauta menu `CBIHzlCw60` as application behavior from its recharge route, selector-91 action, and latest-recharge screen choice; the baseline review now has 45 classified rows and 168 pending.
+- Classified Nauta recharge form `NdeFyyhxF1` as application behavior from its account-type, bonus validation, persistence, and selector-90 submission paths; the baseline review now has 46 classified rows and 167 pending.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
