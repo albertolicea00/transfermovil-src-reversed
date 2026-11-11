@@ -258,10 +258,10 @@ behavior; that source-by-source review and exact-link cleanup remain open.
 The Agent and General activities still route saved mobile-card accounts to raw
 `KeTIEVSfVo`; its add/edit path opens raw `MEqNzldfDl`. These are user-facing
 MiTransfer account-management flows, separate from the clean `CuentaBanco`
-editor/list. `MEqNzldfDl` also contains JADX throwing stubs for `mostrarTarjeta()`
-and `getBanco()`, so the clean migration needs smali recovery and explicit
-downstream route handling. The TODO splits this gap into list, editor, and
-activity-routing work.
+editor/list. A clean-package `MobileCardBankEditFragment` draft now uses the
+`MobileCardBank`/`DatabaseHelper` APIs, and its two issuer/card-icon methods are
+recovered from archived smali. The list, activity entry points, and downstream
+routes still need migration. The editor's source annotation adds one exact link.
 
 ## 2026-11-11 snapshot
 
@@ -270,15 +270,17 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 344 | 450 | 0 |
-| Main app package | 596 | 213 | 383 | 0 |
+| All `src/` | 794 | 343 | 451 | 0 |
+| Main app package | 596 | 212 | 384 | 0 |
 
-The live inventory reports 458 clean Java files, 88 explicit class mappings,
+The live inventory reports 459 clean Java files, 88 explicit class mappings,
 eight clean files without source annotations, and no mapping issues or duplicate
 candidates. The unlinked main-package distribution is: `B0jOLrWx09th` 139,
 `l08fNVC4KOKK` 20, `B21UyndcVvF` 16, `ZNRpoHwtLXM` 13, `us8tbD58ow4` 11,
-`oEpx7i6I9Bq` 10, `h4VIMAs7y2v` 2, and `BuildConfig`/`R` one each. `WalletTransferFragment`
+`oEpx7i6I9Bq` 9, `h4VIMAs7y2v` 2, and `BuildConfig`/`R` one each. `WalletTransferFragment`
 was linked to `LjOlaYSSMH` after normalized full-body comparison, reducing the
 main-package unlinked count from 215 to 214. `CreditPaymentFragment` was then
 linked to `xb7DiohJuX` after the same normalized full-body comparison, reducing
-the count to 213. Exact links remain distinct from behavioral completeness.
+the count to 213. `MobileCardBankEditFragment` now adds an exact link for
+`MEqNzldfDl`, reducing the current count to 212. Exact links remain distinct
+from behavioral completeness.

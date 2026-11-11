@@ -6,7 +6,7 @@ Snapshot generated from `scripts/reconstruction-inventory.py` on 2026-11-11.
 
 ## Purpose and limits
 
-This ledger tracks the 213 Java source files in the main application package that have no exact clean-source link. The ledger is an audit queue, not a decompilation-success metric. Current JADX output reports 98.8% class decompilation success (40 errors); this queue measures source-to-clean class identity links. Those are separate measures, and a link does not prove behavioral equivalence.
+This ledger retains the baseline cohort of 213 Java source files in the main application package that lacked exact clean-source links when review began. One cohort member, `MEqNzldfDl`, now has an exact clean-source annotation; 212 remain currently unlinked. The ledger is an audit queue, not a decompilation-success metric. Current JADX output reports 98.8% class decompilation success (40 errors); this queue measures source-to-clean class identity links. Those are separate measures, and a link does not prove behavioral equivalence.
 
 Assign one primary category only after checking the source body and, where useful, callers/usages. The `oEpx7i6I9Bq` package has ten confirmed application-behavior screens, all 16 `B21UyndcVvF` rows are classified as app behavior/support, and `BuildConfig`/`R` are confirmed generated classes; the other 185 rows remain pending:
 
@@ -263,7 +263,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 | Source identifier | File | Category | Role / evidence |
 | --- | --- | --- | --- |
 | `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.KeTIEVSfVo` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/KeTIEVSfVo.java` | application behavior | Saved mobile-card account list; `fillAdapter`, account CRUD actions, QR/share and transfer callbacks; opened by both main activities. |
-| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.MEqNzldfDl` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/MEqNzldfDl.java` | application behavior | Saved mobile-card account add/edit UI; validates account/alias, persists `MCBank`, and launches classic association; `mostrarTarjeta`/`getBanco` are JADX stubs. |
+| `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.MEqNzldfDl` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/MEqNzldfDl.java` | application behavior | Saved mobile-card account add/edit UI; validates account/alias, persists `MCBank`, and launches classic association. JADX stubs for `mostrarTarjeta`/`getBanco` are recovered from smali in the annotated clean editor draft. |
 | `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.ULtRAlRy1V` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/ULtRAlRy1V.java` | application behavior | Database backup/restore screen; file document launchers, export/import tasks, and data presenter. |
 | `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.UUlOTi00Yp` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/UUlOTi00Yp.java` | application behavior | Application settings; persists partial-USSD and QR-improvement switches in `AppConfig`. |
 | `cu.etecsa.cubacel.tr.tm.oEpx7i6I9Bq.UoWmGAF016` | `src/cu/etecsa/cubacel/tr/tm/oEpx7i6I9Bq/UoWmGAF016.java` | application behavior | Configuration menu; source routes entries to app update, activation, account management, backup/restore, and settings fragments. |
@@ -294,7 +294,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 ## Completion criteria
 
-- Every one of the 213 rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, 11 statistics behavior/support classes, and 2 generated classes are confirmed, leaving 172 rows pending. Classification does not change the 383/596 exact-link rate.
+- Every one of the 213 baseline rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, 11 statistics behavior/support classes, and 2 generated classes are confirmed, leaving 172 rows pending. One row now has an exact clean-source link, so current main-package link coverage is 384/596.
 - Generated and third-party/library rows have evidence and a reason they do not need a clean application reconstruction.
 - Every application-behavior source has an exact clean link or a written, evidence-backed exclusion.
 - Refresh package counts and the source-link metric whenever exact links or classifications change.

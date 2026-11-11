@@ -9,9 +9,9 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[███████████████████████████████████████████████░░░] 95%</code></span>
 
-**Task-list progress: 387/407 completed; 20 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 388/408 completed; 20 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
-**Main-package exact source links: 383/596 (64%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks classification of the 213 sources still lacking clean links. It currently has 41 classified rows and 172 pending review. Classification helps scope reconstruction, but does not itself increase this link-coverage percentage.
+**Main-package exact source links: 384/596 (64%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks the 213-source cohort that was unlinked when review began; one now has an exact link, leaving 212 currently unlinked. The ledger has 41 classified rows and 172 pending classification. Classification helps scope reconstruction, but does not itself increase this link-coverage percentage.
 
 ## Overview
 
@@ -94,6 +94,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [Versioning](docs/versioning.md) | Repository versions, tags, and cross-version comparisons. |
 | [Reconstruction inventory](docs/reconstruction-inventory.md) | Reproducible source links, duplicate candidates, mapping conflicts, and review limits. |
 | [Unlinked-source review ledger](docs/unmapped-source-review.md) | Per-source classification and evidence for unlinked main-package Java files. |
+| [MiTransfer saved accounts](docs/mitransfer-saved-accounts.md) | Source-backed account editor migration, recovered card routing, and remaining list/editor navigation work. |
 | [iOS port TODO](docs/ios-port-todo.md) | Planned feasibility study, platform limits, and feature parity decisions. |
 
 For work in progress, use the [task list](TODO.md). Paused sessions also provide `.workspace/handoff.md`. [CHANGELOG.md](CHANGELOG.md) records completed changes; [AGENTS.md](AGENTS.md) is the repository guide for contributors and coding agents.

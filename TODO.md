@@ -310,6 +310,7 @@
 - [x] Restore the MiBoleto ticket-status screen from `w7mHpmOa4EP`, route the General MiBoleto menu to the clean screen, and preserve saved-series selection and selector 114 dispatch.
 - [x] Restore MiBoleto key update from `hjX8MS8xO9`, route the General MiBoleto menu to the clean screen, and preserve saved-series validation and selector 115 dispatch.
 - [ ] Migrate MiTransfer saved-account list `KeTIEVSfVo` to a clean `MobileCardBank` adapter, preserving add/edit/delete/QR/share actions and transfer routing.
+- [x] Recover the MiTransfer saved-account editor's bank classifier and card-icon behavior from archived smali; preserve distinct `92` offsets, standard prefixes, classic-card currency choices, and unknown-card handling in the clean editor draft.
 - [ ] Migrate MiTransfer saved-account editor `MEqNzldfDl`; recover `mostrarTarjeta()` and `getBanco()` behavior from smali, and preserve validation, persistence, and post-save association shortcut.
 - [ ] Route Agent and General account-management menu entries to the clean MiTransfer saved-account list and reconcile its downstream routes.
 - [x] Restore MiBoleto latest operations from `i9I9XZGnR3`, route the General menu to the clean screen, and preserve optional email encoding and selector 113 full/partial dispatch.

@@ -2,6 +2,7 @@
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Added the clean `MobileCardBankEditFragment` draft on the `MobileCardBank`/`DatabaseHelper` model and recovered its issuer/card-icon methods from archived smali; the new exact source annotation raises main-package links to 384/596, while list routing remains pending.
 - Promoted the source-identical classic-card transfer form to `WalletClassicTransferFragment` and routed the MiTransfer “Clásica” choice to it; the destination no longer carries a misleading BFI name.
 - Compared the normalized clean and raw form bodies; their only structural difference is the clean source annotation/class naming. Selector 45, PIN/account/card branches, validation, and partial-USSD packet handling remain source-identical.
 
