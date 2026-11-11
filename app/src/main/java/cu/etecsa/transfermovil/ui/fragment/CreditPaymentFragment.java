@@ -28,7 +28,7 @@ import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
-/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.xb7DiohJuX */
 public class CreditPaymentFragment extends Agg55uYctq {
     public static final int PICK_CONTACT_REQUEST = 1;
     public ArrayAdapter<CharSequence> adapterOrganizacion;

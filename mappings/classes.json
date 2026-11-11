@@ -440,6 +440,11 @@
       "clean": "cu.etecsa.transfermovil.ui.fragment.WalletTransferFragment",
       "role": "MiTransfer mobile-to-mobile transfer form; exact clean body match",
       "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.xb7DiohJuX": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.CreditPaymentFragment",
+      "role": "Credit installment payment form; exact clean body match",
+      "confidence": "high"
     }
   },
   "fields": {

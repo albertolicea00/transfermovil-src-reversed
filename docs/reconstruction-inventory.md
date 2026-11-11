@@ -268,14 +268,15 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 345 | 449 | 0 |
-| Main app package | 596 | 214 | 382 | 0 |
+| All `src/` | 794 | 344 | 450 | 0 |
+| Main app package | 596 | 213 | 383 | 0 |
 
-The live inventory reports 458 clean Java files, 87 explicit class mappings,
-nine clean files without source annotations, and no mapping issues or duplicate
-candidates. The unlinked main-package distribution is: `B0jOLrWx09th` 140,
+The live inventory reports 458 clean Java files, 88 explicit class mappings,
+eight clean files without source annotations, and no mapping issues or duplicate
+candidates. The unlinked main-package distribution is: `B0jOLrWx09th` 139,
 `l08fNVC4KOKK` 20, `B21UyndcVvF` 16, `ZNRpoHwtLXM` 13, `us8tbD58ow4` 11,
 `oEpx7i6I9Bq` 10, `h4VIMAs7y2v` 2, and `BuildConfig`/`R` one each. `WalletTransferFragment`
 was linked to `LjOlaYSSMH` after normalized full-body comparison, reducing the
-main-package unlinked count from 215 to 214. Exact links remain distinct from
-behavioral completeness.
+main-package unlinked count from 215 to 214. `CreditPaymentFragment` was then
+linked to `xb7DiohJuX` after the same normalized full-body comparison, reducing
+the count to 213. Exact links remain distinct from behavioral completeness.
