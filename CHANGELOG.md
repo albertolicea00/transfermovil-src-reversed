@@ -2,6 +2,11 @@
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Promoted the source-identical classic-card transfer form to `WalletClassicTransferFragment` and routed the MiTransfer “Clásica” choice to it; the destination no longer carries a misleading BFI name.
+- Compared the normalized clean and raw form bodies; their only structural difference is the clean source annotation/class naming. Selector 45, PIN/account/card branches, validation, and partial-USSD packet handling remain source-identical.
+
+## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
 - Expanded the 213-source audit into eight package-specific TODO batches and added a per-class classification/evidence ledger; clarified that task progress, exact source-link coverage, and JADX decompilation success are different measures.
 - Confirmed `BuildConfig` and `R` as generated constant-only sources; two ledger rows are classified with source-structure evidence.
 - Reviewed all ten `oEpx7i6I9Bq` sources; classified their saved-account, configuration, activation, backup/restore, and update fragments as application behavior with source/caller evidence.

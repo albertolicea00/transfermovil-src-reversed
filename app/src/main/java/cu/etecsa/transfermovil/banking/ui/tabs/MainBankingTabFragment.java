@@ -24,7 +24,7 @@ import cu.etecsa.transfermovil.ui.fragment.WalletRechargeFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletTopupFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletTransferFragment;
 import cu.etecsa.transfermovil.ui.fragment.WalletWithdrawFragment;
-import cu.etecsa.transfermovil.ui.fragment.BankTransferBfiFragment;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletClassicTransferFragment;
 import cu.etecsa.transfermovil.ui.fragment.NautaUserFragment;
 import cu.etecsa.transfermovil.ui.fragment.NautaPlusRechargeFragment;
 import cu.etecsa.transfermovil.ui.fragment.OwnCardPaymentFragment;
@@ -93,7 +93,7 @@ import java.util.List;
  *   BOLSAVotoMovil → cdINOtQ3iN (mobile voting)
  *
  * Dialogs:
- *   showDialogTransferencia() — MiTransfer vs Clásica → WalletTransferFragment / BankTransferBfiFragment
+ *   showDialogTransferencia() — MiTransfer vs Clásica → WalletTransferFragment / WalletClassicTransferFragment
  *   showDialogNautaPlus() — sin/con cuenta → HZgbT8IXPf with AccountType
  *   showDialog4G() — FWA recharge vs query → wbFn8tBw8W / q55ExEc6x2l
  *   showDialogReservasTicket() — reserve/delete/change → XnVSHGPTkK/QVPgkl8ZGC/Wwc5crW71D
@@ -311,7 +311,7 @@ public class MainBankingTabFragment extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // 0 → MiTransfer, 1 → Clásica
                 FragmentManager fragmentManager = MainBankingTabFragment.this.getActivity().getSupportFragmentManager();
-                Fragment fragment = i == 0 ? new WalletTransferFragment() : new BankTransferBfiFragment();
+                Fragment fragment = i == 0 ? new WalletTransferFragment() : new WalletClassicTransferFragment();
                 fragmentManager.beginTransaction().replace(R.id.containerView, fragment)
                         .addToBackStack(null).commit();
                 dialogInterface.dismiss();

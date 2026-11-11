@@ -13,6 +13,7 @@ After confirmation the form builds `<destination>*<amount>*0*<send-to-own-phone-
 - [`LjOlaYSSMH.java`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/hTZG5yFgyZY/QM5YzxsQFRH/LjOlaYSSMH.java): raw MiTransfer mobile-transfer form.
 - [`MainBankingTabFragment.java`](../app/src/main/java/cu/etecsa/transfermovil/banking/ui/tabs/MainBankingTabFragment.java): clean menu choice routing.
 - [`WalletTransferFragment.java`](../app/src/main/java/cu/etecsa/transfermovil/ui/fragment/WalletTransferFragment.java): clean form reconstruction.
-- [`l3GXbXAyUW.java`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/hTZG5yFgyZY/QM5YzxsQFRH/l3GXbXAyUW.java): retained source destination for the classic-transfer choice.
+- [`WalletClassicTransferFragment.java`](../app/src/main/java/cu/etecsa/transfermovil/banking/ui/wallet/WalletClassicTransferFragment.java): clean destination for the “Clásica” choice, migrated from the source form below.
+- [`l3GXbXAyUW.java`](../src/cu/etecsa/cubacel/tr/tm/B0jOLrWx09th/hTZG5yFgyZY/QM5YzxsQFRH/l3GXbXAyUW.java): original classic-card transfer implementation.
 
-The client construction is established statically; this note does not claim server-side acceptance.
+The client construction is established statically; this note does not claim server-side acceptance. The dialog now routes MiTransfer to `WalletTransferFragment` and “Clásica” to `WalletClassicTransferFragment`; both transfers use selector 45 but have separate forms and payloads.

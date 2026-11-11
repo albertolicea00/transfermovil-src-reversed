@@ -1,4 +1,4 @@
-package cu.etecsa.transfermovil.ui.fragment;
+package cu.etecsa.transfermovil.banking.ui.wallet;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -53,7 +53,7 @@ import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.l3GXbXAyUW */
-public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
+public class WalletClassicTransferFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
     public static final int PICK_CONTACT_REQUEST = 1;
     public ArrayAdapter<CharSequence> adapterTipoBolsa;
     private R1sDOSqZ2z agency;
@@ -104,35 +104,35 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
     public int MAX_PARAMETERS_PQUETE = 4;
     public boolean isPartialUSSD = false;
     public boolean isDirectScan = false;
-    private View.OnClickListener btnContactsOnClick = new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.3
+    private View.OnClickListener btnContactsOnClick = new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.3
         @Override // android.view.View.OnClickListener
         public void onClick(View v) {
             try {
-                if (Build.VERSION.SDK_INT < 23 || BankTransferBfiFragment.this.context.checkSelfPermission("android.permission.READ_CONTACTS") != -1) {
-                    BankTransferBfiFragment.this.busk_contactos(v);
+                if (Build.VERSION.SDK_INT < 23 || WalletClassicTransferFragment.this.context.checkSelfPermission("android.permission.READ_CONTACTS") != -1) {
+                    WalletClassicTransferFragment.this.busk_contactos(v);
                 } else {
-                    BankTransferBfiFragment.this.requestPermissions(new String[]{"android.permission.READ_CONTACTS"}, 0);
+                    WalletClassicTransferFragment.this.requestPermissions(new String[]{"android.permission.READ_CONTACTS"}, 0);
                 }
             } catch (Exception e) {
             }
         }
     };
-    public jN13TOyLMX.OnItemClickListener spClickBolsa = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.4
+    public jN13TOyLMX.OnItemClickListener spClickBolsa = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.4
         @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
         public void onItemClick(View view, int position) {
-            BankTransferBfiFragment l3gxbxayuw = BankTransferBfiFragment.this;
+            WalletClassicTransferFragment l3gxbxayuw = WalletClassicTransferFragment.this;
             l3gxbxayuw.tipoBolsa = position + 1;
             if (position == 0) {
                 l3gxbxayuw.txMonedaImporte.setText("USD");
             }
             switch (position) {
                 case 0:
-                    if (!BankTransferBfiFragment.this.cargarMisCuentas()) {
-                        BankTransferBfiFragment.this.showDialogNoTieneCuentas();
-                        BankTransferBfiFragment.this.inputLayoutMisCuentas.setVisibility(8);
-                        BankTransferBfiFragment.this.seleccionTransferencia = false;
+                    if (!WalletClassicTransferFragment.this.cargarMisCuentas()) {
+                        WalletClassicTransferFragment.this.showDialogNoTieneCuentas();
+                        WalletClassicTransferFragment.this.inputLayoutMisCuentas.setVisibility(8);
+                        WalletClassicTransferFragment.this.seleccionTransferencia = false;
                     } else {
-                        BankTransferBfiFragment l3gxbxayuw2 = BankTransferBfiFragment.this;
+                        WalletClassicTransferFragment l3gxbxayuw2 = WalletClassicTransferFragment.this;
                         l3gxbxayuw2.seleccionTransferencia = true;
                         l3gxbxayuw2.inputLayoutMisCuentas.setVisibility(0);
                     }
@@ -140,11 +140,11 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
             }
         }
     };
-    private jN13TOyLMX.OnItemClickListener spClickMisCuentas = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.5
+    private jN13TOyLMX.OnItemClickListener spClickMisCuentas = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.5
         @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
         public void onItemClick(View view, int position) {
-            MCBank mcBank = BankTransferBfiFragment.this.mcBankArrayAdapter.getItem(position);
-            BankTransferBfiFragment.this.miCuentaSeleccion = mcBank.getCuenta();
+            MCBank mcBank = WalletClassicTransferFragment.this.mcBankArrayAdapter.getItem(position);
+            WalletClassicTransferFragment.this.miCuentaSeleccion = mcBank.getCuenta();
         }
     };
 
@@ -206,15 +206,15 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
             } catch (Exception e) {
             }
         }
-        this.btnCuentaDestino.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.1
+        this.btnCuentaDestino.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.1
             @Override // android.view.View.OnClickListener
             public void onClick(View v) {
                 if (unYp8VQThY.getInstance().getCuentasLists() != null && unYp8VQThY.getInstance().getCuentasLists().size() > 0) {
-                    BankTransferBfiFragment.this.spinnerDialog.showSpinerDialog();
+                    WalletClassicTransferFragment.this.spinnerDialog.showSpinerDialog();
                     return;
                 }
-                AlertDialog.Builder builder = new AlertDialog.Builder(BankTransferBfiFragment.this.context);
-                builder.setTitle("Notificación").setMessage("No tiene cuentas registradas. Para insertarlas debe ir a Gestión->Cuentas Banco.").setPositiveButton("OK", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.1.1
+                AlertDialog.Builder builder = new AlertDialog.Builder(WalletClassicTransferFragment.this.context);
+                builder.setTitle("Notificación").setMessage("No tiene cuentas registradas. Para insertarlas debe ir a Gestión->Cuentas Banco.").setPositiveButton("OK", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.1.1
                     @Override // android.content.DialogInterface.OnClickListener
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -225,10 +225,10 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
         this.btnContacts.setOnClickListener(this.btnContactsOnClick);
         Button button = (Button) this.rootView.findViewById(R.id.btn_aceptar);
         this.btnAceptar = button;
-        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.2
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.2
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                BankTransferBfiFragment.this.submitForm();
+                WalletClassicTransferFragment.this.submitForm();
             }
         });
         TextView textView = (TextView) this.rootView.findViewById(R.id.txContacto);
@@ -550,7 +550,7 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Aviso");
         builder.setMessage("No tiene cuentas registradas para este banco");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.6
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.6
             @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
@@ -574,11 +574,11 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
             AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) this.rootView.findViewById(R.id.input_cuenta);
             this.inputCuenta = autoCompleteTextView;
             autoCompleteTextView.setAdapter(adapter);
-            this.inputCuenta.setOnFocusChangeListener(new View.OnFocusChangeListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.7
+            this.inputCuenta.setOnFocusChangeListener(new View.OnFocusChangeListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.7
                 @Override // android.view.View.OnFocusChangeListener
                 public void onFocusChange(View view, boolean hasFocus) {
                     if (hasFocus) {
-                        BankTransferBfiFragment.this.inputCuenta.showDropDown();
+                        WalletClassicTransferFragment.this.inputCuenta.showDropDown();
                     }
                 }
             });
@@ -612,19 +612,19 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
         this.spinnerDialog = spinnerDialog;
         spinnerDialog.setCancellable(true);
         this.spinnerDialog.setShowKeyboard(false);
-        this.spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.8
+        this.spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.8
             @Override // in.galaxyofandroid.spinerdialog.OnSpinerItemClick
             public void onClick(String uyh0pxs9m37in2, int position) {
-                CuentaBanco cuenta = (CuentaBanco) BankTransferBfiFragment.this.lCuentas.get(position);
-                BankTransferBfiFragment.this.inputCuentaDestino.setText(BankTransferBfiFragment.this.getCuentaFormateada(cuenta.getCuenta()));
-                BankTransferBfiFragment l3gxbxayuw = BankTransferBfiFragment.this;
+                CuentaBanco cuenta = (CuentaBanco) WalletClassicTransferFragment.this.lCuentas.get(position);
+                WalletClassicTransferFragment.this.inputCuentaDestino.setText(WalletClassicTransferFragment.this.getCuentaFormateada(cuenta.getCuenta()));
+                WalletClassicTransferFragment l3gxbxayuw = WalletClassicTransferFragment.this;
                 l3gxbxayuw.cuentaDestino = l3gxbxayuw.inputCuentaDestino.getText().toString().trim().replace("-", BuildConfig.FLAVOR);
                 if (cuenta.getMovil() == null || cuenta.getMovil().length() <= 0 || (cuenta.getMovil().length() != 8 && cuenta.getMovil().length() != 10)) {
-                    BankTransferBfiFragment.this.inputCuenta.setText(BuildConfig.FLAVOR);
-                    BankTransferBfiFragment.this.checkBoxMyPhone.setEnabled(false);
+                    WalletClassicTransferFragment.this.inputCuenta.setText(BuildConfig.FLAVOR);
+                    WalletClassicTransferFragment.this.checkBoxMyPhone.setEnabled(false);
                 } else {
-                    BankTransferBfiFragment.this.inputCuenta.setText(cuenta.getMovil());
-                    BankTransferBfiFragment.this.checkBoxMyPhone.setEnabled(true);
+                    WalletClassicTransferFragment.this.inputCuenta.setText(cuenta.getMovil());
+                    WalletClassicTransferFragment.this.checkBoxMyPhone.setEnabled(true);
                 }
             }
         });
@@ -710,12 +710,12 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
     }
 
     private void cuentaOnListeners() {
-        this.inputCuentaDestino.setOnKeyListener(new View.OnKeyListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.9
+        this.inputCuentaDestino.setOnKeyListener(new View.OnKeyListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.9
             @Override // android.view.View.OnKeyListener
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == 67) {
                     try {
-                        BankTransferBfiFragment.this.keyDel = 1;
+                        WalletClassicTransferFragment.this.keyDel = 1;
                         return false;
                     } catch (Exception e) {
                         return false;
@@ -724,41 +724,41 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
                 return false;
             }
         });
-        this.inputCuentaDestino.addTextChangedListener(new TextWatcher() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.BankTransferBfiFragment.10
+        this.inputCuentaDestino.addTextChangedListener(new TextWatcher() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.WalletClassicTransferFragment.10
             @Override // android.text.TextWatcher
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     if (count == 16) {
-                        BankTransferBfiFragment.this.inputCuentaDestino.setText(BankTransferBfiFragment.this.getCuentaFormateada(s.toString()));
+                        WalletClassicTransferFragment.this.inputCuentaDestino.setText(WalletClassicTransferFragment.this.getCuentaFormateada(s.toString()));
                         return;
                     }
                     if (count == 0) {
-                        BankTransferBfiFragment.this.keyDel = 1;
+                        WalletClassicTransferFragment.this.keyDel = 1;
                     }
                     boolean flag = true;
-                    String[] eachBlock = BankTransferBfiFragment.this.inputCuentaDestino.getText().toString().split("-");
+                    String[] eachBlock = WalletClassicTransferFragment.this.inputCuentaDestino.getText().toString().split("-");
                     for (String str : eachBlock) {
                         if (str.length() > 4) {
                             flag = false;
                         }
                     }
                     if (!flag) {
-                        BankTransferBfiFragment.this.inputCuentaDestino.setText(BankTransferBfiFragment.this.cuentaCaracteres);
+                        WalletClassicTransferFragment.this.inputCuentaDestino.setText(WalletClassicTransferFragment.this.cuentaCaracteres);
                         return;
                     }
-                    BankTransferBfiFragment l3gxbxayuw = BankTransferBfiFragment.this;
+                    WalletClassicTransferFragment l3gxbxayuw = WalletClassicTransferFragment.this;
                     if (l3gxbxayuw.keyDel != 0) {
                         l3gxbxayuw.cuentaCaracteres = l3gxbxayuw.inputCuentaDestino.getText().toString();
-                        BankTransferBfiFragment.this.keyDel = 0;
+                        WalletClassicTransferFragment.this.keyDel = 0;
                         return;
                     }
                     int length = l3gxbxayuw.inputCuentaDestino.getText().length() + 1;
-                    float length2 = (BankTransferBfiFragment.this.inputCuentaDestino.getText().length() + 1) % 5;
-                    if ((BankTransferBfiFragment.this.inputCuentaDestino.getText().length() + 1) % 5 == 0 && BankTransferBfiFragment.this.inputCuentaDestino.getText().toString().split("-").length <= 3) {
-                        BankTransferBfiFragment.this.inputCuentaDestino.setText(((Object) BankTransferBfiFragment.this.inputCuentaDestino.getText()) + "-");
-                        BankTransferBfiFragment.this.inputCuentaDestino.setSelection(BankTransferBfiFragment.this.inputCuentaDestino.getText().length());
+                    float length2 = (WalletClassicTransferFragment.this.inputCuentaDestino.getText().length() + 1) % 5;
+                    if ((WalletClassicTransferFragment.this.inputCuentaDestino.getText().length() + 1) % 5 == 0 && WalletClassicTransferFragment.this.inputCuentaDestino.getText().toString().split("-").length <= 3) {
+                        WalletClassicTransferFragment.this.inputCuentaDestino.setText(((Object) WalletClassicTransferFragment.this.inputCuentaDestino.getText()) + "-");
+                        WalletClassicTransferFragment.this.inputCuentaDestino.setSelection(WalletClassicTransferFragment.this.inputCuentaDestino.getText().length());
                     }
-                    BankTransferBfiFragment l3gxbxayuw2 = BankTransferBfiFragment.this;
+                    WalletClassicTransferFragment l3gxbxayuw2 = WalletClassicTransferFragment.this;
                     l3gxbxayuw2.cuentaCaracteres = l3gxbxayuw2.inputCuentaDestino.getText().toString();
                 } catch (Exception ex) {
                     Log.e("ERROR-SEPARADOR_CUENTA", ex.getMessage());
@@ -771,8 +771,8 @@ public class BankTransferBfiFragment extends Fragment implements pAzq93vIl3.Ussd
 
             @Override // android.text.TextWatcher
             public void afterTextChanged(Editable s) {
-                BankTransferBfiFragment l3gxbxayuw = BankTransferBfiFragment.this;
-                l3gxbxayuw.mostrarTarjeta(l3gxbxayuw.inputCuentaDestino, BankTransferBfiFragment.this.inputCuentaDestino.getText().toString());
+                WalletClassicTransferFragment l3gxbxayuw = WalletClassicTransferFragment.this;
+                l3gxbxayuw.mostrarTarjeta(l3gxbxayuw.inputCuentaDestino, WalletClassicTransferFragment.this.inputCuentaDestino.getText().toString());
             }
         });
     }

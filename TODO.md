@@ -286,7 +286,7 @@
 - [x] Link `WalletTransferFragment` to `LjOlaYSSMH` after normalized full-body comparison; refresh exact-source inventory counts.
 - [x] Link `CreditPaymentFragment` to `xb7DiohJuX` after normalized full-body comparison; refresh exact-source inventory counts.
 - [x] Reconstruct the MiTransfer cash-ticket withdrawal form from `f9Reflqt3EZ` and connect its menu route; preserve selector 95, currency/entity selection, optional location fields, and partial-USSD behavior.
-- [x] Reconstruct the classic-card transfer form from `l3GXbXAyUW` and connect the “Clásica” dialog choice; preserve selector 45, card/PIN branches, validation, and partial-USSD behavior.
+- [x] Reconstruct the classic-card transfer form from `l3GXbXAyUW` as `WalletClassicTransferFragment`, route the “Clásica” dialog choice to it, and keep it distinct from BFI transfer; preserve selector 45, card/PIN branches, validation, and partial-USSD behavior.
 - [x] Reconstruct the bank-to-wallet transfer form from `H0oV6Ot0bS` and connect `BOLSATransferirBancos`; preserve selector 16, local agency data, validation, and partial-USSD behavior.
 - [x] Reconstruct the MiTransfer electricity form from `dwdZ5sHcFR` and connect `BOLSAElectricidad`; preserve selector 41, CUP invoice payload, local invoice persistence, and partial-USSD behavior.
 - [x] Reconstruct the MiTransfer water form from `U1sIOmca96i`, reuse the mapped clean shared account base, and connect `BOLSAAgua`; preserve region selectors 19/21 and saved invoice handling.
