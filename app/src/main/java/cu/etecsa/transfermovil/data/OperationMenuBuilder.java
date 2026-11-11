@@ -325,7 +325,7 @@ public class OperationMenuBuilder {
         bpa2.setTitulo("Transferencia");
         bpa2.setSubtitulo("BPA");
         bpa2.setImagen(R.drawable.ic_transferencia_bpa);
-        bpa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h");
+        bpa2.setFragment_name("cu.etecsa.transfermovil.banking.ui.bpa.BpaExtendedTransferFragment");
         bpa2.setTipo_serivicio(r1sDOSqZ2z3);
         bpa2.setOrder(-1);
         bpa2.setActivo(true);
@@ -1965,7 +1965,7 @@ public class OperationMenuBuilder {
         bpa2.setTitulo("Transferencia");
         bpa2.setSubtitulo("BPA");
         bpa2.setImagen(R.drawable.ic_transferencia_bpa);
-        bpa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h");
+        bpa2.setFragment_name("cu.etecsa.transfermovil.banking.ui.bpa.BpaExtendedTransferFragment");
         bpa2.setTipo_serivicio(r1sDOSqZ2z);
         bpa2.setOrder(-1);
         bpa2.setActivo(true);
@@ -3297,7 +3297,7 @@ public class OperationMenuBuilder {
         DatabaseHelper.getInstance().updateOperacion(bpa1);
         Operation bpa2 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPATransferencia);
         bpa2.setImagen(R.drawable.banco_bpa_transferencia);
-        bpa2.setFragment_name("cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h");
+        bpa2.setFragment_name("cu.etecsa.transfermovil.banking.ui.bpa.BpaExtendedTransferFragment");
         bpa2.setActivo(true);
         DatabaseHelper.getInstance().updateOperacion(bpa2);
         Operation bpa3 = DatabaseHelper.getInstance().getOperacion(BankOperationCode.BPAElectricidad);

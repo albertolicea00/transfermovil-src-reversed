@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.WriterException;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.gCOrME2HrQt.iN1lHDKE5h;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.x6Wob3Sa98U;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiEnterpriseTransferFragment;
@@ -164,7 +163,7 @@ public class MobileCardBankListFragment extends Fragment implements MobileCardBa
         } else if (bank == BankType.BANDEC) {
             navigate(new BandecTransferFragment(), args);
         } else if (bank == BankType.BPA) {
-            navigate(new iN1lHDKE5h(), args);
+            navigate(new BpaExtendedTransferFragment(), args);
         } else if (bank == BankType.BFI) {
             showBfiTransferChoices();
         } else if (bank == BankType.MiTransfer) {

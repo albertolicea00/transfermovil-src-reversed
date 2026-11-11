@@ -24,6 +24,7 @@
 - Classified the remaining backup data pipeline: `xNWgXsOsGx` reads 13 app tables, `fHZ2PXN4o9` encrypts and hash-checks backup files, and the backup/restore document/table models are app-specific support. Ledger totals are now 70 classified / 143 pending.
 - Classified `V9s8rJIDplX` as app-specific shared catalogue/data support after confirming its asset loaders are used by multiple clean feature screens for banking, OFA, fines, stamps, Cubacel plans, MiTurno, and voting. Ledger totals are now 71 classified / 142 pending.
 - Completed the 13-source `ZNRpoHwtLXM` review batch: 10 application-support classes, two backup/restore behavior classes, and one generated R8 outline; no third-party/library rows were found. Marked the batch complete in TODO.
+- Migrated the extended BPA selector-45 form into `BpaExtendedTransferFragment` and routed saved-account plus operation-menu entries to it. Preserved the distinct short BPA form, saved/new origins, PIN/agency prefix, CUP/CUC/USD validation, recipient/contact options, message/flags, and standard/partial dispatch. Recovered the JADX `mostrarTarjeta()` switch from archived smali, then mechanically compared the remaining body after package/class renaming.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
