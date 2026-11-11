@@ -316,6 +316,7 @@
 - [x] Link `NautaUserFragment` to the exact `KtF0PRB8vS` source, confirm normalized source-body identity, and route both dynamic General-menu entries to the clean class.
 - [x] Restore Wallet tab routes for registration, PIN change, wallet registration deletion, and classic-account registration deletion from `eUkRSfpCKs`, `Cmok7CcIR9`, `Nju5UJgFce`, and `m44wUnA8d5`.
 - [x] Route classic and classic-enterprise association to `HTmIvOo9nb` and `l2FaHPPBDa` respectively, preserving the MiTransfer/`CLASICAEMP` saved-account types.
+- [x] Compare `WalletQrPaymentFragment` with `l2FaHPPBDa`; normalized full bodies match, including Backspace grouping, contact handling, account validation, and selector dispatch.
 - [x] Compare `BfiTransferFragment` with `Z3kYdPwq6K2`; confirm enterprise Wallet selector `220`, agency `08`, field validation, and three dispatch branches.
 - [x] Compare `WalletWithdrawFragment` with `f9Reflqt3EZ`; link its identical clean body and verify the selector-95 cash-ticket form remains routed from the Wallet menu.
 - [x] Confirm source-only `WalletEnrollmentFragment.validateEmail()` is dead code: `submitForm()` and all class call sites omit it, so the clean selector-49 route does not add email validation.
