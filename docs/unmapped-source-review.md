@@ -8,7 +8,7 @@ Snapshot generated from `scripts/reconstruction-inventory.py` on 2026-11-11.
 
 This ledger tracks the 213 Java source files in the main application package that have no exact clean-source link. The ledger is an audit queue, not a decompilation-success metric. Current JADX output reports 98.8% class decompilation success (40 errors); this queue measures source-to-clean class identity links. Those are separate measures, and a link does not prove behavioral equivalence.
 
-Assign one primary category only after checking the source body and, where useful, callers/usages. The `oEpx7i6I9Bq` package has ten confirmed application-behavior screens, and `BuildConfig`/`R` are confirmed generated classes; the other 201 rows remain pending:
+Assign one primary category only after checking the source body and, where useful, callers/usages. The `oEpx7i6I9Bq` package has ten confirmed application-behavior screens, all 16 `B21UyndcVvF` rows are classified as app behavior/support, and `BuildConfig`/`R` are confirmed generated classes; the other 185 rows remain pending:
 
 - `application behavior`: UI, routing, domain rules, persistence, protocol, network, or security logic.
 - `generated`: resource/build output, synthetic bridges, binding code, or compiler-generated machinery.
@@ -24,7 +24,7 @@ Package location or class name alone is not enough to classify a source. For eve
 | --- | ---: | --- | --- |
 | `B0jOLrWx09th` | 139 | 139 application-package sources; review fragments, activities, dialogs, generated callbacks, and support classes individually. | Pending |
 | `l08fNVC4KOKK` | 20 | 20 shared runtime sources; distinguish app protocol/telephony helpers from generic adapters and generated glue. | Pending |
-| `B21UyndcVvF` | 16 | 16 list, view-holder, adapter, and UI support sources; verify whether each is app-specific or reusable/generated. | Pending |
+| `B21UyndcVvF` | 16 | App-specific operation/list adapters and sticky-header RecyclerView support; reviewed from class bodies and callers. | Reviewed: app behavior/support |
 | `ZNRpoHwtLXM` | 13 | 13 data/domain sources; classify entities, DAOs, helpers, enums, and database/generated support. | Pending |
 | `us8tbD58ow4` | 11 | 11 sources; inspect class roles/callers before deciding whether they are app behavior or support. | Pending |
 | `oEpx7i6I9Bq` | 10 | Saved-account, transfer, configuration, activation, backup/restore, and update UI. | Reviewed: 10 application behavior |
@@ -207,22 +207,22 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 | Source identifier | File | Category | Role / evidence |
 | --- | --- | --- | --- |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.ByJot7nE5d` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/ByJot7nE5d.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.DmvQBLZLbV` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/DmvQBLZLbV.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.J9bkD55BKNh` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/J9bkD55BKNh.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.JPTJLdwS9n` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/JPTJLdwS9n.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.QJoZrWCCWp` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/QJoZrWCCWp.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.QV8ylwbhfB` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/QV8ylwbhfB.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.BolUq6wGDu` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XPH60zChinL/BolUq6wGDu.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.gNS2UxRuVW` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XPH60zChinL/gNS2UxRuVW.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.ouX1muv8Hd` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XPH60zChinL/ouX1muv8Hd.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XPH60zChinL/rBXnNc0Kx4.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XvulaG5FAh` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XvulaG5FAh.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.aKh5ZFPmqR` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/aKh5ZFPmqR.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.khginYXYg6` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/khginYXYg6.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.lTi2u1QNOn` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/lTi2u1QNOn.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.xToaaw6pAW` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/xToaaw6pAW.java` | Pending | Pending |
-| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.xy8ZrFR33a` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/xy8ZrFR33a.java` | Pending | Pending |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.ByJot7nE5d` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/ByJot7nE5d.java` | application behavior | Chart adapter for account/operation history; used by `us8tbD58ow4.mYaQ7jnA3Y`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.DmvQBLZLbV` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/DmvQBLZLbV.java` | application support | Binds `yHdVJARBHM` rows; used by `c69cv...x5ijzOU4VE`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.J9bkD55BKNh` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/J9bkD55BKNh.java` | application support | Binds saved mobile-card accounts for `KeTIEVSfVo`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.JPTJLdwS9n` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/JPTJLdwS9n.java` | application support | Swipe/drag callback used by `us8tbD58ow4.D1rOcltDGsD`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.QJoZrWCCWp` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/QJoZrWCCWp.java` | application support | Binds bank account rows; used by `c69cv...OxDrWxtsSZ`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.QV8ylwbhfB` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/QV8ylwbhfB.java` | application support | Searchable SMS/statistics adapter over `M7OG7jG8CS` / `RecordSMS`; used by `D1rOcltDGsD`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.BolUq6wGDu` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XPH60zChinL/BolUq6wGDu.java` | application support | Custom RecyclerView attaches the package's sticky-header decoration. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.gNS2UxRuVW` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XPH60zChinL/gNS2UxRuVW.java` | application behavior | DiffUtil operation-menu adapter over `WUULVgZq02`; binds sticky section headers across two screens. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.ouX1muv8Hd` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XPH60zChinL/ouX1muv8Hd.java` | application support | Sticky-header decoration used by `gNS2UxRuVW` operation menus. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XPH60zChinL/rBXnNc0Kx4.java` | application support | Defines `Post`/`Header` item types for grouped menu rows. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XvulaG5FAh` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/XvulaG5FAh.java` | application support | Dynamic-data adapter for `yHdVJARBHM` list pages; called by multiple screens. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.aKh5ZFPmqR` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/aKh5ZFPmqR.java` | application behavior | Operations-list adapter over `qcI22KekhL`; used by `us8tbD58ow4.B2duAUYNOU`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.khginYXYg6` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/khginYXYg6.java` | application support | Binds app-data rows; used by `c69cv...JntDz3d2vV`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.lTi2u1QNOn` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/lTi2u1QNOn.java` | application support | App-list adapter with 50-row cap and active/inactive view types. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.xToaaw6pAW` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/xToaaw6pAW.java` | application support | Binds `yHdVJARBHM` app rows; used by `c69cv...MmUcSVNG36`. |
+| `cu.etecsa.cubacel.tr.tm.B21UyndcVvF.xy8ZrFR33a` | `src/cu/etecsa/cubacel/tr/tm/B21UyndcVvF/xy8ZrFR33a.java` | application support | Searchable RecyclerView adapter over `M7OG7jG8CS`. |
 
 ### `ZNRpoHwtLXM` — 13 sources
 
@@ -294,7 +294,7 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 ## Completion criteria
 
-- Every one of the 213 rows has a supported primary category and role/evidence note; 10 application-behavior screens and 2 generated classes are confirmed, leaving 201 rows pending.
+- Every one of the 213 rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, 16 `B21UyndcVvF` behavior/support classes, and 2 generated classes are confirmed, leaving 185 rows pending. Classification does not change the 383/596 exact-link rate.
 - Generated and third-party/library rows have evidence and a reason they do not need a clean application reconstruction.
 - Every application-behavior source has an exact clean link or a written, evidence-backed exclusion.
 - Refresh package counts and the source-link metric whenever exact links or classifications change.

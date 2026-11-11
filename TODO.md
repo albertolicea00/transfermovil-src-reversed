@@ -106,7 +106,7 @@
 - [x] Migrate the BFI transfer/payment operations menu and its three-mode dialogs; keep source forms as destinations pending their own clean migrations.
 - [ ] Classify each of the 139 unlinked `B0jOLrWx09th` sources; record app behavior, generated/library/support category, role, and evidence in [the source review ledger](docs/unmapped-source-review.md).
 - [ ] Classify each of the 20 unlinked `l08fNVC4KOKK` shared-runtime sources; distinguish protocol/telephony behavior from adapters and generated glue in the source review ledger.
-- [ ] Classify each of the 16 unlinked `B21UyndcVvF` adapter/view-holder sources; record whether it is app-specific, generated, or reusable UI support in the source review ledger.
+- [x] Classify all 16 unlinked `B21UyndcVvF` adapter/view-holder sources from their bodies and callers; record app-specific behavior/support roles and evidence in the source review ledger.
 - [ ] Classify each of the 13 unlinked `ZNRpoHwtLXM` data/domain sources; distinguish app entities/helpers from generated or library code in the source review ledger.
 - [ ] Classify each of the 11 unlinked `us8tbD58ow4` sources from body and caller evidence; record role and category in the source review ledger.
 - [x] Classify all 10 unlinked `oEpx7i6I9Bq` sources as app behavior from their Fragment bodies, database actions, activation/update flows, and configuration-menu callers; record roles/evidence in the source review ledger.
