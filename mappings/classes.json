@@ -435,6 +435,11 @@
       "clean": "cu.etecsa.transfermovil.ui.fragment.WalletTopupFragment",
       "role": "MiTransfer CUP/USD mobile-wallet recharge form; exact clean body match",
       "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.LjOlaYSSMH": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.WalletTransferFragment",
+      "role": "MiTransfer mobile-to-mobile transfer form; exact clean body match",
+      "confidence": "high"
     }
   },
   "fields": {

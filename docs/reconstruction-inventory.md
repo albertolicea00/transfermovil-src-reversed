@@ -260,3 +260,22 @@ editor/list. `MEqNzldfDl` also contains JADX throwing stubs for `mostrarTarjeta(
 and `getBanco()`, so the clean migration needs smali recovery and explicit
 downstream route handling. The TODO splits this gap into list, editor, and
 activity-routing work.
+
+## 2026-11-11 snapshot
+
+Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
+`b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
+
+| Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
+| --- | ---: | ---: | ---: | ---: |
+| All `src/` | 794 | 345 | 449 | 0 |
+| Main app package | 596 | 214 | 382 | 0 |
+
+The live inventory reports 458 clean Java files, 87 explicit class mappings,
+nine clean files without source annotations, and no mapping issues or duplicate
+candidates. The unlinked main-package distribution is: `B0jOLrWx09th` 140,
+`l08fNVC4KOKK` 20, `B21UyndcVvF` 16, `ZNRpoHwtLXM` 13, `us8tbD58ow4` 11,
+`oEpx7i6I9Bq` 10, `h4VIMAs7y2v` 2, and `BuildConfig`/`R` one each. `WalletTransferFragment`
+was linked to `LjOlaYSSMH` after normalized full-body comparison, reducing the
+main-package unlinked count from 215 to 214. Exact links remain distinct from
+behavioral completeness.
