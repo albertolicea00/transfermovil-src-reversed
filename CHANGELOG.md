@@ -4,6 +4,7 @@
 
 - Migrated the active BPA Operations tab `voNSkP3P8q` to `BpaOperationsTabFragment`, routed the host tab to the clean fragment, and connected its selector-45 action to `BpaExtendedTransferFragment`; logged the class as application behavior in the 213-source review ledger.
 - Classified five Cubacel/agent recharge sources as application behavior from their form validation, phone persistence, USSD selectors/payloads, and menu callers; the baseline ledger now has 77 classified rows and 136 pending.
+- Classified six fixed-phone service sources as application behavior from their PIN/phone forms, saved values, selectors `0`–`4`, and menu routes; the baseline ledger now has 83 classified rows and 130 pending.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
