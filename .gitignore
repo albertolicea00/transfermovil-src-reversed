@@ -49,3 +49,4 @@ dist/
 !.workspace/**/.gitkeep
 !.workspace/handoff.md
 scripts/*.cpython-312.pyc
+scripts/__pycache__/*
