@@ -8,7 +8,7 @@ Snapshot generated from `scripts/reconstruction-inventory.py` on 2026-11-12.
 
 This ledger retains the baseline cohort of 213 Java source files in the main application package that lacked exact clean-source links when review began. Four cohort members, `MEqNzldfDl`, `KeTIEVSfVo`, `iN1lHDKE5h`, and `voNSkP3P8q`, now have exact clean-source annotations; 209 remain currently unlinked. The ledger is an audit queue, not a decompilation-success metric. Current JADX output reports 98.8% class decompilation success (40 errors); this queue measures source-to-clean class identity links. Those are separate measures, and a link does not prove behavioral equivalence.
 
-Assign one primary category only after checking the source body and relevant callers. The review is organized by package segment and nested package to distinguish Transfermóvil behavior/support from generated or third-party code. Current totals: 83 application-behavior rows, 37 application-support rows, five generated rows, and 88 pending rows (213 total). Recent B0 behavior classifications cover BPA/Nauta services, agent and fixed-phone operations, banking QR payments, ticket queries, an incomplete USSD fragment, package purchases, Nauta/Nauta Hogar recharges, mobile call/balance actions, emergency contacts, coupon recharge, SMS offers, and BPA payment/credit forms. Support examples include the shared USSD dispatchers and data helpers; generated examples include R8 synthetic outlines and Android `BuildConfig`/`R` classes.
+The baseline classification is complete: 160 application-behavior rows, 48 application-support rows, five generated rows, zero third-party/library rows, and zero unknown or pending rows (213 unique sources). Classification records each source's role and evidence; it does not establish that a clean equivalent exists. The remaining 209 unlinked sources include 204 application behavior/support classes and the five evidenced generated exclusions. Support examples include the shared USSD dispatchers and data helpers; generated examples include R8 synthetic outlines and Android `BuildConfig`/`R` classes.
 
 - `application behavior`: UI, routing, domain rules, persistence, protocol, network, or security logic.
 - `generated`: resource/build output, synthetic bridges, binding code, or compiler-generated machinery.
@@ -16,23 +16,29 @@ Assign one primary category only after checking the source body and relevant cal
 - `application support`: app-specific adapter/helper that supports behavior but is not itself a user-facing feature.
 - `unknown`: evidence is insufficient; retain it in scope and explain what needs inspection.
 
-Package location or class name alone is not enough to classify a source. For every reviewed row, record the category, a short role, and evidence (source methods, callers, resource use, or dependency signatures). Exact-link eligible application behavior to clean code or document why it is excluded. Do not remove generated/library rows from counts until the classification evidence supports exclusion. Once all rows are classified, publish category totals and calculate a scope-adjusted clean reconstruction coverage using only in-scope application behavior/support. Keep that metric separate from JADX decompilation success (98.8%) and exact source-link coverage (387/596), since they measure distinct things.
+Package location or class name alone is not enough to classify a source. For every reviewed row, retain the category, a short role, and evidence (source methods, callers, resource use, or dependency signatures). Exact-link eligible application behavior to clean code or document why it is excluded. Classification is complete for this baseline cohort; exact clean-source linking and behavioral reconstruction remain open.
+
+## Scope-adjusted source-link coverage
+
+The conservative scope-adjusted reconstruction **identity-link** metric is **387 / (596 − 5) = 387/591 (65.48%)**. Its numerator is the main-package sources with one exact clean candidate; its denominator retains all main-package sources except the five generated classes evidenced in this ledger. All five exclusions are currently unlinked. No library exclusions were established. Sources outside the baseline cohort remain in scope without further classification; this is an adjustment based only on the reviewed cohort, not a complete generated/library audit of all 596 sources.
+
+Of the 591 retained sources, 387 are linked and 204 are unlinked. A linked class may still be partial or contain stubs, so this metric is a source-identity proxy for reconstruction progress, not verified behavioral coverage or a working-app percentage. Raw exact-link coverage remains 387/596 (64.93%); JADX's 98.8% decompilation success measures extraction into Java, a separate stage. See [the inventory](reconstruction-inventory.md#scope-adjusted-identity-link-metric) for reproduction commands and limits.
 
 ## Package batches
 
 | Package segment | Sources | Initial review focus | Status |
 | --- | ---: | --- | --- |
-| `B0jOLrWx09th` | 139 | Review fragments, activities, dialogs, generated callbacks, and support classes individually; classified behavior includes BPA transfers/payments/credit, Nauta, Cubacel/agent recharge, and fixed-phone account flows; `GVEefrRz76` is shared account-selection support, and one empty R8 outline class is generated. | Partial: 59 behavior, 1 support, 1 generated, 78 pending |
-| `l08fNVC4KOKK` | 20 | 20 shared runtime sources; distinguish app protocol/telephony helpers from generic adapters and generated glue; the packet coordinator, platform dispatch facade, dialogs, TelephonyManager senders, adapter, and DTO are classified separately. | Partial: 2 behavior, 6 support, 1 generated |
-| `B21UyndcVvF` | 16 | App-specific operation/list adapters and sticky-header RecyclerView support; reviewed from class bodies and callers. | Reviewed: app behavior/support |
-| `ZNRpoHwtLXM` | 13 | Data/domain models, backup/restore, cryptographic helpers, and shared local catalogues; all 13 rows checked against implementation and usages. | Reviewed: 10 application support, 2 application behavior, 1 generated |
-| `us8tbD58ow4` | 11 | Statistics history, SMS records, and chart fragments/models; reviewed from source bodies and screen callers. | Reviewed: application behavior/support |
-| `oEpx7i6I9Bq` | 10 | Saved-account, transfer, configuration, activation, backup/restore, and update UI. | Reviewed: 10 application behavior |
-| `h4VIMAs7y2v` | 2 | QR payment/transfer scanner fragments; reviewed from camera/gallery flows and callers. | Reviewed: application behavior |
+| `B0jOLrWx09th` | 139 | Review fragments, activities, dialogs, generated callbacks, and support classes individually; classified behavior includes BPA transfers/payments/credit, Nauta, Cubacel/agent recharge, and fixed-phone account flows; `GVEefrRz76` is shared account-selection support, and one empty R8 outline class is generated. | Reviewed: 134 behavior, 4 support, 1 generated |
+| `l08fNVC4KOKK` | 20 | 20 shared runtime sources; distinguish app protocol/telephony helpers from generic adapters and generated glue; the packet coordinator, platform dispatch facade, dialogs, TelephonyManager senders, adapter, and DTO are classified separately. | Reviewed: 4 behavior, 15 support, 1 generated |
+| `B21UyndcVvF` | 16 | App-specific operation/list adapters and sticky-header RecyclerView support; reviewed from class bodies and callers. | Reviewed: 3 behavior, 13 support |
+| `ZNRpoHwtLXM` | 13 | Data/domain models, backup/restore, cryptographic helpers, and shared local catalogues; all 13 rows checked against implementation and usages. | Reviewed: 2 behavior, 10 support, 1 generated |
+| `us8tbD58ow4` | 11 | Statistics history, SMS records, and chart fragments/models; reviewed from source bodies and screen callers. | Reviewed: 5 behavior, 6 support |
+| `oEpx7i6I9Bq` | 10 | Saved-account, transfer, configuration, activation, backup/restore, and update UI. | Reviewed: 10 behavior |
+| `h4VIMAs7y2v` | 2 | QR payment/transfer scanner fragments; reviewed from camera/gallery flows and callers. | Reviewed: 2 behavior |
 | `BuildConfig` | 1 | 1 generated build-configuration source. | Reviewed: generated |
 | `R` | 1 | 1 generated Android resource identifier source. | Reviewed: generated |
 
-Reviewed source ledger; pending classifications use the `Pending` marker:
+Reviewed source ledger (all 213 baseline sources classified):
 
 ### `B0jOLrWx09th` — 139 sources
 
@@ -284,17 +290,17 @@ Reviewed source ledger; pending classifications use the `Pending` marker:
 
 | Source identifier | File | Category | Role / evidence |
 | --- | --- | --- | --- |
-| `cu.etecsa.cubacel.tr.tm.BuildConfig` | `src/cu/etecsa/cubacel/tr/tm/BuildConfig.java` | Generated | Constant-only application/build/version identifiers; no executable methods. |
+| `cu.etecsa.cubacel.tr.tm.BuildConfig` | `src/cu/etecsa/cubacel/tr/tm/BuildConfig.java` | generated | Constant-only application/build/version identifiers; no executable methods. |
 
 ### `R` — 1 source
 
 | Source identifier | File | Category | Role / evidence |
 | --- | --- | --- | --- |
-| `cu.etecsa.cubacel.tr.tm.R` | `src/cu/etecsa/cubacel/tr/tm/R.java` | Generated | Nested Android resource-ID constants only; references resources, no feature logic. |
+| `cu.etecsa.cubacel.tr.tm.R` | `src/cu/etecsa/cubacel/tr/tm/R.java` | generated | Nested Android resource-ID constants only; references resources, no feature logic. |
 
-## Completion criteria
+## Completion status and remaining work
 
-- Every one of the 213 baseline rows has a supported primary category and role/evidence note; 10 `oEpx7i6I9Bq` screens, `iN1lHDKE5h`, `CBIHzlCw60`, `NdeFyyhxF1`, `Kw29o4NNrz`, `pECcPKxF9i`, `IixRWvtdZG`, `pAzq93vIl3`, `GVEefrRz76`, `FBsQzP3Zfj`, `MX9gh9mLxd`, `WV9lIl58Oa`, `T7hdFVrmeS5`, `iNEsCMH3jK`, `QfruhfaN5Z`, 16 `B21UyndcVvF` behavior/support classes, 2 QR scanner fragments, 11 statistics behavior/support classes, and 4 generated classes are confirmed, leaving 156 rows pending classification. Two rows now have exact clean-source links, so current main-package link coverage is 385/596.
-- Generated and third-party/library rows have evidence and a reason they do not need a clean application reconstruction.
-- Every application-behavior source has an exact clean link or a written, evidence-backed exclusion.
-- Refresh package counts and the source-link metric whenever exact links or classifications change.
+- Complete: all 213 baseline rows have a supported primary category and role/evidence note; no rows remain pending or unknown.
+- Complete: the five generated exclusions have source evidence; no third-party/library exclusions were identified.
+- Open: add exact clean links for the remaining in-scope application behavior/support sources, or document evidence-backed exclusions. Classification alone does not complete reconstruction.
+- Ongoing: refresh package counts and both source-link metrics whenever exact links or classifications change.

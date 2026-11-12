@@ -301,3 +301,55 @@ candidates. `BpaExtendedTransferFragment` links `iN1lHDKE5h`; `BpaOperationsTabF
 links `voNSkP3P8q` and replaces the raw fragment in the active BPA Operations tab.
 The main-package link count rises from 385 to 387; both are source identity links,
 not proof of complete runtime behavior.
+
+### Scope-adjusted identity-link metric
+
+The [baseline review ledger](unmapped-source-review.md) now classifies all 213
+sources: 160 application behavior, 48 application support, five generated,
+zero third-party/library, and zero unknown/pending. Four cohort sources have
+subsequently gained exact clean links. The five generated exclusions are all
+unlinked: Android `BuildConfig` and `R`, plus the three synthetic API-model
+outline classes identified with evidence in the ledger.
+
+Retaining every other main-package source gives **387/(596−5) = 387/591
+(65.48%)** scope-adjusted identity-link coverage, with 204 retained sources
+still unlinked. The raw exact-link ratio is **387/596 (64.93%)**. Exclusions
+are established only for the reviewed cohort; linked sources outside it remain
+in scope without an additional generated/library audit. A candidate link can
+still point to incomplete code. This is a reconstruction identity-link proxy,
+not behavioral equivalence, runtime validation, or JADX's distinct 98.8%
+decompilation-success metric.
+
+Reproduce the counts from the current tree with Python 3 (the command reads
+the ledger and inventory without modifying files):
+
+```sh
+python3 - <<'PY'
+import importlib.util
+from collections import Counter
+from pathlib import Path
+
+root = Path.cwd()
+spec = importlib.util.spec_from_file_location(
+    "inventory", root / "scripts/reconstruction-inventory.py")
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+rows = [line.split("|") for line in
+        (root / "docs/unmapped-source-review.md").read_text().splitlines()
+        if line.startswith("| `cu.etecsa.")]
+classifications = {row[1].strip(" `"): row[3].strip().lower()
+                   for row in rows}
+assert len(rows) == len(classifications) == 213
+print("Baseline categories:", dict(Counter(classifications.values())))
+main = [row for row in module.inventory(root)["sources"]
+        if row["original"].startswith("cu.etecsa.cubacel.tr.tm.")]
+excluded = {name for name, category in classifications.items()
+            if category in {"generated", "third-party/library"}}
+assert excluded <= {row["original"] for row in main}
+retained = [row for row in main if row["original"] not in excluded]
+linked = sum(row["link_status"] == "single_candidate" for row in retained)
+print("Main sources:", len(main), "Excluded:", len(excluded))
+print(f"Adjusted identity links: {linked}/{len(retained)} "
+      f"({100 * linked / len(retained):.2f}%)")
+PY
+```
