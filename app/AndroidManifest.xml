@@ -73,6 +73,7 @@
         <activity android:name="cu.etecsa.tm.ecommerce.H9l22AIYKkA" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
         <activity android:name="cu.etecsa.tm.ecommerce.C1b1PWKeZSE" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
         <activity android:name="cu.etecsa.tm.ecommerce.hd5jZHAGaN" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
+        <activity android:name="cu.etecsa.transfermovil.ecommerce.EcommerceHomeActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
         <activity android:label="@string/title_activity_scrolling" android:name="cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.vHqHzxi5J3" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
         <service android:enabled="false" android:exported="false" android:name="androidx.camera.core.impl.MetadataHolderService">
             <meta-data android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER" android:value="androidx.camera.camera2.Camera2Config$DefaultProvider"/>

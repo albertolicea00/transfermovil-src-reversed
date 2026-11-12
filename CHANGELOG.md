@@ -2,6 +2,8 @@
 
 ## 2026-11-12 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Recorded a fresh continuation checkpoint with completed validations, remaining migration boundaries, and the observed concurrent Git activity.
+- Connected typed child-user list/detail results to a source-backed clean list and authenticated-startup home route; retained legacy adapter, editor/detail, and permission boundaries. Reused source session preferences and region catalog when clean bootstrap is absent, and checked detail-to-editor field conversion on the JVM. Full mutation-screen migration and Android runtime validation remain pending.
 - Updated the isolated menu oracle for five reviewed clean fragment destinations; require each destination annotation to identify an existing raw source before adapting its exact class literal. The comparison again passes all 85 public-method/scenario pairs without normalizing other menu data.
 - Repaired saved MiBoleto ticket navigation to the clean editor and three invalid copied listener captures; compared 14 navigation, QR, and selector-114/115 method bodies against JADX while retaining the raw model/dispatcher boundary.
 - Closed the 213-source classification audit: validated unique source IDs, reconciled package summaries to 160 application-behavior, 48 support, and five generated rows, and marked the two remaining package batches complete.

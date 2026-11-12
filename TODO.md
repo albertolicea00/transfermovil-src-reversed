@@ -387,6 +387,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Add clean profile API routes and `ProfilePresenter` for current profile, profile update, and password change; convert a selected photo before update.
 - [x] Migrate child-user create/update request paths to a clean presenter that prepares a nonempty photo before dispatch.
 - [ ] Connect child-user presenter results to clean UI callbacks.
+- [x] Connect child-user list/detail results to the clean list screen, preserve legacy editor/permission boundaries, and route the authenticated startup home to it; retain full detail/editor mutation migration as pending.
 - [x] Give `ChildUserPresenter` distinct typed list, detail, and mutation callback methods.
 - [x] Deliver child-user request exceptions through the typed failure callback path and tolerate an absent UI callback.
 - [x] Map child-user list payload `dt.rows` into the clean `ChildUserListResponse` fields from source.

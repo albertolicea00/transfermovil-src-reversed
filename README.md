@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[████████████████████████████████████████████████░░] 96%</code></span>
 
-**Task-list progress: 411/425 completed; 14 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 412/426 completed; 14 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 **Main-package exact source links: 387/596 (65%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks the 213-source cohort that was unlinked when review began; four now have exact links, leaving 209 currently unlinked. The baseline ledger is fully classified: 160 application-behavior, 48 application-support, and five generated classes; no rows remain pending. Excluding only those five evidenced generated sources gives a provisional scope-adjusted identity-link metric of **387/591 (65.48%)**. Sources outside the reviewed cohort remain in scope. These links do not establish behavioral completeness. JADX's 98.8% decompilation-success result measures a different stage.
 
@@ -39,7 +39,7 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 | Area | Status | Current state |
 | :--- | :--- | :--- |
 | APK identification and extraction | Complete for the current APK | Metadata, manifest, resources, JADX Java, and smali are available. |
-| Clean Java reconstruction | In progress | 458 files exist; some are partial or contain stubs. The source-link inventory currently has no duplicate candidates. |
+| Clean Java reconstruction | In progress | 466 files exist; some are partial or contain stubs. The source-link inventory currently has no duplicate candidates. |
 | Protocol and feature analysis | In progress | Topic documents contain findings; the complete USSD code catalog remains a TODO. |
 | iOS port research | Planned | Feasibility, platform limits, and feature parity remain TODOs. |
 | Build and behavioral validation | Pending | The reconstructed Java tree has not been compiled or verified as a working app. |

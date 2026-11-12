@@ -83,7 +83,11 @@ public class ApiClient {
     }
 
     public static ApiClient getInstance(Context ctx) {
-        context = ctx;
+        context = ctx.getApplicationContext();
+        // The manifest still uses the original Application; read the shared
+        // source session even when the clean Application has not been created.
+        INSTANCE.baseUrl = context.getSharedPreferences("SESSION_SHARE_DATA", 0)
+                .getString("API_URL", "");
         return INSTANCE;
     }
 

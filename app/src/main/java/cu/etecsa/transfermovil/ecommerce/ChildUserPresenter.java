@@ -27,12 +27,17 @@ public final class ChildUserPresenter {
 
     private final Context context;
     private final String token;
+    private final String apiUrl;
     private final Callback callback;
 
     public ChildUserPresenter(Context context, String token, Callback callback) {
         this.context = context.getApplicationContext();
-        String sessionToken = SessionManager.getInstance().getAccessToken();
+        android.content.SharedPreferences session = this.context.getSharedPreferences("SESSION_SHARE_DATA", 0);
+        String storedToken = session.getString("ACCESS_TOKEN", null);
+        String sessionToken = storedToken == null || storedToken.contains("Bearer")
+                ? storedToken : "Bearer " + storedToken;
         this.token = token == null ? sessionToken : token;
+        this.apiUrl = session.getString("API_URL", null);
         this.callback = callback;
     }
 
@@ -78,13 +83,24 @@ public final class ChildUserPresenter {
                 if (callback == null) return;
                 callback.onProgressVisibility(4);
                 if (operation == Operation.LIST) callback.onListResult(mapList(response));
-                else if (operation == Operation.DETAIL) callback.onDetailResult(mapDetail(response));
+                else if (operation == Operation.DETAIL) {
+                    UserWithRolesResponse detail;
+                    try {
+                        detail = mapDetail(response);
+                    } catch (Exception error) {
+                        detail = new UserWithRolesResponse();
+                        detail.setOK(false);
+                        detail.setHttpCode(500);
+                        detail.setMenssage(error.getMessage() == null ? "Request failed" : error.getMessage());
+                    }
+                    callback.onDetailResult(detail);
+                }
                 else callback.onMutationResult(operation, mapMutation(response));
             }
         }.execute();
     }
 
-    private static ChildUserListResponse mapList(ApiResponse raw) {
+    private ChildUserListResponse mapList(ApiResponse raw) {
         ChildUserListResponse result = new ChildUserListResponse();
         if (raw == null) { result.setOK(false); result.setHttpCode(500); return result; }
         result.setHttpCode(raw.getCodigoHTTP());
@@ -109,7 +125,7 @@ public final class ChildUserPresenter {
             user.setCreado(row.optString("created_at", null));
             user.setUpdateAt(row.optString("updated_at", null));
             if (!row.isNull("banned")) user.setActivo(row.optInt("banned") == 0);
-            user.setAvatar(SessionManager.getInstance().getApiUrl() + "/user/photo/" + row.optString("id"));
+            user.setAvatar(apiUrl + "/user/photo/" + row.optString("id"));
             users.add(user);
         }
         result.setItemsList(users);
@@ -172,7 +188,47 @@ public final class ChildUserPresenter {
                 }
             }
         }
-        if (!user.isNull("photo")) detail.setPhoto(SessionManager.getInstance().getApiUrl()
+        if (database == null) {
+            // The running source Application has its own initialized region
+            // repository. Reuse it while clean database bootstrap is pending.
+            cu.etecsa.tm.ecommerce.Dyporpu9vbM.FstCIiz1Qil.ldmbl4HatR regions =
+                    new cu.etecsa.tm.ecommerce.Dyporpu9vbM.FstCIiz1Qil.ldmbl4HatR();
+            if (cu.etecsa.tm.ecommerce.Dyporpu9vbM.FstCIiz1Qil.ldmbl4HatR.provinciaList.isEmpty()
+                    || cu.etecsa.tm.ecommerce.Dyporpu9vbM.FstCIiz1Qil.ldmbl4HatR.municipiosList.isEmpty()) {
+                regions.loadData(context);
+            }
+            if (provinceCode != null) {
+                cu.etecsa.tm.ecommerce.Dyporpu9vbM.G6liG5If2lu.njwILmSkGJ province =
+                        regions.getProvincia(provinceCode, context);
+                if (province != null) {
+                    cu.etecsa.transfermovil.ecommerce.data.geo.Province mapped =
+                            new cu.etecsa.transfermovil.ecommerce.data.geo.Province();
+                    mapped.setCod_provincia(province.getCod_provincia());
+                    mapped.setAbreviatura(province.getAbreviatura());
+                    mapped.setNombre(province.getNombre());
+                    detail.setProvince(mapped);
+                }
+            }
+            if (municipalityCode != null && municipalityCode.length() == 4) {
+                cu.etecsa.tm.ecommerce.Dyporpu9vbM.G6liG5If2lu.I7Szcu2IgpM municipality =
+                        regions.getMunicipio(municipalityCode, context);
+                if (municipality != null) {
+                    cu.etecsa.transfermovil.ecommerce.data.geo.Municipality mapped =
+                            new cu.etecsa.transfermovil.ecommerce.data.geo.Municipality();
+                    mapped.setId(municipality.getId());
+                    mapped.setCod_provincia(municipality.getCod_provincia());
+                    mapped.setCod_municipio(municipality.getCod_municipio());
+                    mapped.setAbreviatura(municipality.getAbreviatura());
+                    mapped.setNombre(municipality.getNombre());
+                    detail.setMunicipality(mapped);
+                }
+            }
+        }
+        if (provinceCode != null && !provinceCode.isEmpty() && detail.getProvince() == null)
+            throw new IllegalStateException("Unable to resolve child-user province");
+        if (municipalityCode != null && !municipalityCode.isEmpty() && detail.getMunicipality() == null)
+            throw new IllegalStateException("Unable to resolve child-user municipality");
+        if (!user.isNull("photo")) detail.setPhoto(apiUrl
                 + "/user/photo/" + user.optString("id"));
         result.setUser(detail);
         result.setOK(true);

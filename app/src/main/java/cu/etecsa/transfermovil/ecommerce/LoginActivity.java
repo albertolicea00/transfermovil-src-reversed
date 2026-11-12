@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements zWwX278fcd {
                     break;
                 case 3:
                     Log.i(this.HEAD_LOG + "initResult", "LOGINOK");
-                    Intent intent2 = new Intent(this, (Class<?>) hd5jZHAGaN.class);
+                    Intent intent2 = new Intent(this, (Class<?>) EcommerceHomeActivity.class);
                     startActivity(intent2);
                     finish();
                     break;
