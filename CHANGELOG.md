@@ -6,6 +6,7 @@
 - Classified five Cubacel/agent recharge sources as application behavior from their form validation, phone persistence, USSD selectors/payloads, and menu callers; the baseline ledger now has 77 classified rows and 136 pending.
 - Classified six fixed-phone service sources as application behavior from their PIN/phone forms, saved values, selectors `0`–`4`, and menu routes; the baseline ledger now has 83 classified rows and 130 pending.
 - Classified `wRqLBJvNq6` as the agent mobile-recharge host tab from its pager implementation and `IHVTCBmiLV` route; the baseline ledger now has 84 classified rows and 129 pending.
+- Removed duplicate pending ledger rows for the six fixed-phone sources and the agent host tab so the review queue remains exactly 213 baseline sources.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
