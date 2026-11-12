@@ -110,6 +110,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Classify `wRqLBJvNq6` as the agent mobile-recharge host tab from its pager route and `IHVTCBmiLV` caller; record evidence in the ledger.
 - [x] Classify all six fixed-phone service sources under `MqnAp2jnnon/XJnzkvfXNkI` from their form validation, saved phone/PIN behavior, USSD selectors, and menu routes; record evidence in the ledger.
 - [x] Classify the four bank QR payment sources in `VW6IL66KC6M` from their QR parsing, account/currency validation, selector payloads, partial-USSD paths, and callers; record evidence in the ledger.
+- [x] Classify `Z4cR6n2oFo` as an incomplete/unreferenced app-specific USSD fragment from its empty send/observer methods and lack of tracked callers; document the evidence and limitation.
 - [ ] Inventory all 139 unlinked `B0jOLrWx09th` sources by nested package; inspect bodies/callers and classify each as application behavior, app support, generated, third-party/library, or unknown with evidence in [the source review ledger](docs/unmapped-source-review.md).
 - [ ] Inventory all 20 unlinked `l08fNVC4KOKK` shared-runtime sources by nested package; identify protocol/telephony behavior versus generic adapters, generated glue, and library code, with source evidence in the ledger.
 - [x] Classify all 16 unlinked `B21UyndcVvF` adapter/view-holder sources from their bodies and callers; record app-specific behavior/support roles and evidence in the source review ledger.
