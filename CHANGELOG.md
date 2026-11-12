@@ -15,6 +15,7 @@
 - Simplified the ledger summary to report current category totals and representative feature groups without maintaining a sprawling list of class names.
 - Classified `tKjjxHr2PT` and `yww1pS0VKU` as package-purchase and Nauta/Nauta Hogar recharge behavior from their plan loading, validations, persistence, selectors `10`/`14`/`15`/`86`, and operation-catalog entries; the baseline ledger now has 101 classified rows and 112 pending.
 - Classified mobile-service menu `FNRzUmC7E5` and call form `GMFMyKMnO2` from their balance codes, normal/`*99` call routes, contact handling, and operation-menu callers; the baseline ledger now has 103 classified rows and 110 pending.
+- Classified 11 mobile-service, Nauta, ETecsa-offer, Voto Móvil, coupon, and emergency-service sources from their forms, menu routes, SMS/USSD actions, and pager hosts; the baseline ledger now has 114 classified rows and 99 pending.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
