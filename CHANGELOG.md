@@ -13,6 +13,7 @@
 - Classified five mobile/landline/Nauta recharge and payment forms under `rq5HBT3ZZCR` from validation, persistence, selectors `3`/`4`/`90`/`91`, and operation-menu callers; the baseline ledger now has 98 classified rows and 115 pending.
 - Classified `wfroNBIJF7` as the ticket QR scanner from its CameraX/ML Kit analysis, QR amount-limit checks, selector-119 payload, and two activity routes; the baseline ledger now has 99 classified rows and 114 pending.
 - Simplified the ledger summary to report current category totals and representative feature groups without maintaining a sprawling list of class names.
+- Classified `tKjjxHr2PT` and `yww1pS0VKU` as package-purchase and Nauta/Nauta Hogar recharge behavior from their plan loading, validations, persistence, selectors `10`/`14`/`15`/`86`, and operation-catalog entries; the baseline ledger now has 101 classified rows and 112 pending.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

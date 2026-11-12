@@ -114,6 +114,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Classify four Nauta Plus, own-card, bank-payment, and ticket-query sources from their validation, saved-account behavior, selectors, and UI/QR callers; record evidence in the ledger.
 - [x] Classify the five mobile/landline/Nauta recharge and payment forms under `rq5HBT3ZZCR` from their validations, persistence, selectors, and operation-menu routes; record evidence in the ledger.
 - [x] Classify `wfroNBIJF7` ticket QR scanner from CameraX/ML Kit parsing, QR amount limits, selector-119 payload, and activity routes; record evidence in the ledger.
+- [x] Classify the Cubacel package-purchase and Nauta/Nauta Hogar recharge forms `tKjjxHr2PT` and `yww1pS0VKU` from their package loading, validations, saved accounts, selectors, and operation-catalog entries; record evidence in the ledger.
 - [ ] Inventory all 139 unlinked `B0jOLrWx09th` sources by nested package; inspect bodies/callers and classify each as application behavior, app support, generated, third-party/library, or unknown with evidence in [the source review ledger](docs/unmapped-source-review.md).
 - [ ] Inventory all 20 unlinked `l08fNVC4KOKK` shared-runtime sources by nested package; identify protocol/telephony behavior versus generic adapters, generated glue, and library code, with source evidence in the ledger.
 - [x] Classify all 16 unlinked `B21UyndcVvF` adapter/view-holder sources from their bodies and callers; record app-specific behavior/support roles and evidence in the source review ledger.
