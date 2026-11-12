@@ -232,7 +232,7 @@ public class MiBoletoListFragment extends AuthValidator implements DmvQBLZLbV.Vi
         CompraBoleto ticket = this.cLists.get(position);
         FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        j1jiweJ8ci tcTicketFragment = new j1jiweJ8ci();
+        MiBoletoEditFragment tcTicketFragment = new MiBoletoEditFragment();
         Bundle b = new Bundle();
         b.putString("id", String.valueOf(ticket.getId()));
         tcTicketFragment.setArguments(b);
@@ -292,7 +292,7 @@ public class MiBoletoListFragment extends AuthValidator implements DmvQBLZLbV.Vi
             builder.setPositiveButton("Generar QR", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.MiBoletoListFragment$$ExternalSyntheticLambda1
                 @Override // android.content.DialogInterface.OnClickListener
                 public final void onClick(DialogInterface dialogInterface, int i2) {
-                    this.f$0.lambda$showQRDetailsDialog$1(seleccion, detallesList, ticket, dialogInterface, i2);
+                    MiBoletoListFragment.this.lambda$showQRDetailsDialog$1(seleccion, detallesList, ticket, dialogInterface, i2);
                 }
             });
             builder.setNegativeButton("Cancelar", null);

@@ -120,7 +120,7 @@ public class MiBoletoEditFragment extends Fragment implements OffersResultCallba
         this.ivQR.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.MiBoletoEditFragment$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                this.f$0.lambda$onCreateView$0(view);
+                MiBoletoEditFragment.this.lambda$onCreateView$0(view);
             }
         });
         ImageView imageView = (ImageView) this.rootView.findViewById(R.id.btHelpEstado);
@@ -492,7 +492,7 @@ public class MiBoletoEditFragment extends Fragment implements OffersResultCallba
             builder.setPositiveButton("Generar QR", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.MiBoletoEditFragment$$ExternalSyntheticLambda2
                 @Override // android.content.DialogInterface.OnClickListener
                 public final void onClick(DialogInterface dialogInterface, int i2) {
-                    this.f$0.lambda$showQRDetailsDialog$2(seleccion, detallesList, dialogInterface, i2);
+                    MiBoletoEditFragment.this.lambda$showQRDetailsDialog$2(seleccion, detallesList, dialogInterface, i2);
                 }
             });
             builder.setNegativeButton("Cancelar", null);
