@@ -17,9 +17,37 @@ PACKAGE = "cu.etecsa.transfermovil"
 SOURCE = ROOT / "src/cu/etecsa/cubacel/tr/tm/ZNRpoHwtLXM/nljtDl5MIf.java"
 
 
+# Reviewed navigation migrations. Check each identity annotation before adapting
+# the oracle's class-name literal; all other menu data remains byte-for-byte.
+MIGRATED_DESTINATIONS = (
+    "banking.ui.bpa.BpaExtendedTransferFragment",
+    "ui.fragment.banking.bandec.auth.BandecRegistrationFragment",
+    "banking.ui.wallet.WalletEnrollmentFragment",
+    "ui.fragment.NautaUserFragment",
+    "banking.ui.wallet.WalletClassicAccountAssociationFragment",
+)
+
+
+def migrate_reference_destinations(text):
+    for suffix in MIGRATED_DESTINATIONS:
+        clean_name = PACKAGE + "." + suffix
+        path = CLEAN / (clean_name.replace(".", "/") + ".java")
+        annotations = re.findall(r"@obfuscated_class\s+([\w.]+)", path.read_text())
+        if len(annotations) != 1:
+            raise ValueError(f"Expected one source identity for {clean_name}")
+        original = annotations[0]
+        if not (ROOT / "src" / (original.replace(".", "/") + ".java")).is_file():
+            raise ValueError(f"Missing source for {clean_name}: {original}")
+        literal = '"' + original + '"'
+        if literal not in text:
+            raise ValueError(f"Original menu lacks destination {original}")
+        text = text.replace(literal, '"' + clean_name + '"')
+    return text
+
+
 def reference_source():
-    """Adapt dependency names only; keep all original menu statements/literals."""
-    text = SOURCE.read_text()
+    """Adapt dependencies and reviewed routes; retain menu behavior and data."""
+    text = migrate_reference_destinations(SOURCE.read_text())
     text = re.sub(r"^package .*?;|^import cu\..*?;", "", text, flags=re.MULTILINE)
     names = {"nljtDl5MIf": "ReferenceMenu", "unYp8VQThY": "DatabaseHelper",
              "FdonIAFI9w": "BankOperationCode", "R1sDOSqZ2z": "BankType",

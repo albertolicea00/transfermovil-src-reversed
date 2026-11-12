@@ -2,6 +2,7 @@
 
 ## 2026-11-12 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Updated the isolated menu oracle for five reviewed clean fragment destinations; require each destination annotation to identify an existing raw source before adapting its exact class literal. The comparison again passes all 85 public-method/scenario pairs without normalizing other menu data.
 - Repaired saved MiBoleto ticket navigation to the clean editor and three invalid copied listener captures; compared 14 navigation, QR, and selector-114/115 method bodies against JADX while retaining the raw model/dispatcher boundary.
 - Closed the 213-source classification audit: validated unique source IDs, reconciled package summaries to 160 application-behavior, 48 support, and five generated rows, and marked the two remaining package batches complete.
 - Published provisional scope-adjusted source-link coverage of 387/591 (65.48%), excluding only the five evidenced generated sources; retained unreviewed sources in scope and kept identity links separate from verified behavior. Refreshed task progress and removed the resumed session handoff.
