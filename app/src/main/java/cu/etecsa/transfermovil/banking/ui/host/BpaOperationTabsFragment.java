@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaOperationsTabFragment;
 import com.google.android.material.tabs.TabLayout;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.kmO9Md6JHr;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.p97uirGL7T;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.voNSkP3P8q;
 import cu.etecsa.cubacel.tr.tm.R;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -51,7 +51,7 @@ public class BpaOperationTabsFragment extends Fragment {
                 case 1:
                     return new kmO9Md6JHr();
                 case 2:
-                    return new voNSkP3P8q();
+                    return new BpaOperationsTabFragment();
                 case 3:
                     return new f5AFyaj0rtx();
                 default:

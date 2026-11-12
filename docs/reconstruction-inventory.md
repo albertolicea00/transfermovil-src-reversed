@@ -258,9 +258,9 @@ behavior; that source-by-source review and exact-link cleanup remain open.
 The Agent and General activities now route saved mobile-card accounts to clean
 `MobileCardBankListFragment`; its add/edit path uses clean
 `MobileCardBankEditFragment`. Both exact source links are annotated. The clean
-list preserves the six agency choices; four routes are clean and BPA/Metro
-transfer destinations remain raw pending their migrations. This remains an
-identity inventory, not a behavioral-equivalence measure.
+list preserves the six agency choices; five transfer routes are clean,
+including the extended BPA form, and the Metro transfer destination remains raw.
+This remains an identity inventory, not a behavioral-equivalence measure.
 
 ## 2026-11-11 snapshot
 
@@ -284,3 +284,20 @@ the count to 213. `MobileCardBankEditFragment` adds an exact link for
 `MEqNzldfDl`, and `MobileCardBankListFragment` adds one for `KeTIEVSfVo`,
 reducing the current unlinked count to 211. Exact links remain distinct from
 behavioral completeness.
+
+## 2026-11-12 snapshot
+
+Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
+`b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
+
+| Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
+| --- | ---: | ---: | ---: | ---: |
+| All `src/` | 794 | 340 | 454 | 0 |
+| Main app package | 596 | 209 | 387 | 0 |
+
+The live inventory reports 463 clean Java files, 88 explicit class mappings,
+nine clean files without source annotations, and no mapping issues or duplicate
+candidates. `BpaExtendedTransferFragment` links `iN1lHDKE5h`; `BpaOperationsTabFragment`
+links `voNSkP3P8q` and replaces the raw fragment in the active BPA Operations tab.
+The main-package link count rises from 385 to 387; both are source identity links,
+not proof of complete runtime behavior.

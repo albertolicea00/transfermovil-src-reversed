@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-12 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Migrated the active BPA Operations tab `voNSkP3P8q` to `BpaOperationsTabFragment`, routed the host tab to the clean fragment, and connected its selector-45 action to `BpaExtendedTransferFragment`; logged the class as application behavior in the 213-source review ledger.
+
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Clarified the 213-source review tasks as package-by-package inventories with per-source behavior/support/generated/library classifications and source evidence; added a follow-up scope-adjusted reconstruction metric while keeping it separate from JADX decompilation success and exact source-link coverage.
