@@ -7,11 +7,11 @@
 ![Last Update](https://img.shields.io/badge/Last%20Update-November%202026-lightgrey?style=flat-square)
 
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
-<span style="white-space: nowrap;"><code>[███████████████████████████████████████████████░░░] 95%</code></span>
+<span style="white-space: nowrap;"><code>[████████████████████████████████████████████████░░] 96%</code></span>
 
-**Task-list progress: 407/424 completed; 17 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 410/424 completed; 14 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
-**Main-package exact source links: 387/596 (65%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks the 213-source cohort that was unlinked when review began; four now have exact links, leaving 209 currently unlinked. The ledger has 125 classified rows (83 behavior, 37 support, 5 generated) and 88 pending classification. Package-by-package classification will distinguish Transfermóvil behavior/support from generated and third-party code, enabling a scope-adjusted reconstruction metric once complete. It will not change JADX's 98.8% decompilation-success result, which measures a different stage.
+**Main-package exact source links: 387/596 (65%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks the 213-source cohort that was unlinked when review began; four now have exact links, leaving 209 currently unlinked. The baseline ledger is fully classified: 160 application-behavior, 48 application-support, and five generated classes; no rows remain pending. Excluding only those five evidenced generated sources gives a provisional scope-adjusted identity-link metric of **387/591 (65.48%)**. Sources outside the reviewed cohort remain in scope. These links do not establish behavioral completeness. JADX's 98.8% decompilation-success result measures a different stage.
 
 ## Overview
 

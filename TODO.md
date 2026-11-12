@@ -119,8 +119,8 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Classify the 11 mobile-services, Nauta, ETecsa offers, Voto Móvil, coupon, and emergency-service sources in `ivq3YYEGPZM` from their menus, form rules, SMS/USSD calls, and routes; record evidence in the ledger.
 - [x] Classify the ten BPA operation forms under `gCOrME2HrQt` from their account/amount validation, selectors `19`/`21`/`41`–`43`/`51`/`54`/`55`/`64`/`67`/`81`, and BPA host routes; record the JADX stub limitation for `AXjqRy5YBz` in the source review ledger.
 - [x] Classify BPA inquiry/security menu `kmO9Md6JHr` from its 14 operation entries, query dialogs, selectors, and routes to dedicated forms; record evidence in the source review ledger.
-- [ ] Inventory all 139 unlinked `B0jOLrWx09th` sources by nested package; inspect bodies/callers and classify each as application behavior, app support, generated, third-party/library, or unknown with evidence in [the source review ledger](docs/unmapped-source-review.md).
-- [ ] Inventory all 20 unlinked `l08fNVC4KOKK` shared-runtime sources by nested package; identify protocol/telephony behavior versus generic adapters, generated glue, and library code, with source evidence in the ledger.
+- [x] Inventory all 139 unlinked `B0jOLrWx09th` sources by nested package; inspect bodies/callers and classify each as application behavior, app support, generated, third-party/library, or unknown with evidence in [the source review ledger](docs/unmapped-source-review.md).
+- [x] Inventory all 20 unlinked `l08fNVC4KOKK` shared-runtime sources by nested package; identify protocol/telephony behavior versus generic adapters, generated glue, and library code, with source evidence in the ledger.
 - [x] Classify all 16 unlinked `B21UyndcVvF` adapter/view-holder sources from their bodies and callers; record app-specific behavior/support roles and evidence in the source review ledger.
 - [x] Classify all 13 baseline `ZNRpoHwtLXM` sources by nested package; record 10 application-support classes, two backup/restore behavior classes, and one empty generated R8 outline with source/caller evidence in the ledger.
 - [x] Classify all 11 unlinked `us8tbD58ow4` statistics sources from body and caller evidence; record feature, model, and chart-support roles in the source review ledger.
@@ -128,7 +128,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Classify both unlinked `h4VIMAs7y2v` QR scanner fragments from their camera, gallery, barcode-processing, and caller flows; record feature roles in the source review ledger.
 - [x] Confirm the unlinked `BuildConfig` and `R` files as generated Android outputs from their constant-only class bodies, and record the evidence in the source review ledger.
 - [ ] Add exact clean-source links for every unlinked application-behavior class that remains in scope; document generated/library exclusions with evidence.
-- [ ] After classifying the 213-source baseline cohort, publish category totals and a scope-adjusted clean reconstruction coverage metric that excludes evidenced generated/library code; keep it separate from JADX decompilation success and exact-link coverage.
+- [x] After classifying the 213-source baseline cohort, publish category totals and a scope-adjusted clean reconstruction coverage metric that excludes evidenced generated/library code; keep it separate from JADX decompilation success and exact-link coverage.
 - [x] Add verified exact source annotations for the Wallet/FWA recharge, bank transfer, electricity, gas, and water forms; regenerate the exact-link inventory.
 - [x] Add the verified `L4aAENEGbqv` source annotation to `MiBoletoTicketBaseFragment` and refresh the exact-link inventory.
 - [x] Link fourteen source-confirmed MiBoleto, ticket reservation, OFA, TFA, Cubacel-package, fixed-phone, and Voto Móvil screens; regenerate the exact-link inventory.
