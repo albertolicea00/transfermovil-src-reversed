@@ -9,6 +9,7 @@
 - Removed duplicate pending ledger rows for the six fixed-phone sources and the agent host tab so the review queue remains exactly 213 baseline sources.
 - Classified four banking QR payment screens as application behavior from their QR parsing, account/currency checks, selector payloads, partial-USSD paths, and callers; the baseline ledger now has 88 classified rows and 125 pending.
 - Classified `Z4cR6n2oFo` as an incomplete, unreferenced app-specific USSD fragment because its send/observer methods are empty and no tracked callers instantiate it; the baseline ledger now has 89 classified rows and 124 pending.
+- Classified four Nauta Plus, own-card, bank-payment, and ticket-query screens from validation, saved-account behavior, selectors `34`/`77`/`30`/`31`/`107`, and their menu/QR callers; the baseline ledger now has 93 classified rows and 120 pending.
 
 ## 2026-11-11 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
