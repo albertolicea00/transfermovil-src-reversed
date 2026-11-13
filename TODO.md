@@ -168,6 +168,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [ ] Migrate the active `FBsQzP3Zfj` action overloads and operation routing into a clean USSD dispatch/navigation component.
 
 - [ ] Complete the dedicated [USSD code catalog](docs/ussd-code-catalog.md): every executed code, purpose, construction algorithm, and source evidence.
+- [x] Generate a reproducible raw-source USSD appendix covering 797 invocation sites and 53 sink/template lines; document construction families, direct codes, offline vectors, and unresolved semantic dataflow.
 - [x] Record MiTransfer selector-17 CUP cash-deposit ticket request, amount validation, and partial packet marker in the USSD catalog.
 - [x] Record MiTransfer selector-18 FWA data-package offer request, account validation, and fixed USD payload in the USSD catalog.
 - [x] Record MiTransfer selector-20 FWA balance-recharge payload, validation, and dispatcher path in the USSD catalog.
@@ -469,7 +470,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 
 ## iOS Port
 
-- [ ] Complete the [iOS port feasibility and plan](docs/ios-port-todo.md), including public API limits and a feature parity decision.
+- [x] Complete the [iOS port feasibility and plan](docs/ios-port-todo.md), including public API limits and a feature parity decision.
 
 ## Miscellaneous
 

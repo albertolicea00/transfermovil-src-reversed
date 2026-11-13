@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-13 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Added a reproducible 797-site USSD invocation inventory across 317 raw source files and 53 execution/template lines; expanded the catalog with direct codes, dynamic selector families, packet construction, smali-backed encoding vectors, and explicit unresolved semantic/reachability limits.
+- Completed the iOS public-API feasibility review and implementation plan with official Apple references, feature dispositions, acceptance gates, and external device/provider/authorization requirements.
+
 ## 2026-11-12 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Recorded a fresh continuation checkpoint with completed validations, remaining migration boundaries, and the observed concurrent Git activity.

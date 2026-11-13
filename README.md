@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of TODO tasks --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[████████████████████████████████████████████████░░] 96%</code></span>
 
-**Task-list progress: 412/426 completed; 14 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
+**Task-list progress: 414/427 completed; 13 pending.** Tasks have equal weight. This is not verified code coverage or a working-app percentage. The value can fall when scope grows. Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).
 
 **Main-package exact source links: 387/596 (65%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts, and the [unlinked-source review ledger](docs/unmapped-source-review.md) tracks the 213-source cohort that was unlinked when review began; four now have exact links, leaving 209 currently unlinked. The baseline ledger is fully classified: 160 application-behavior, 48 application-support, and five generated classes; no rows remain pending. Excluding only those five evidenced generated sources gives a provisional scope-adjusted identity-link metric of **387/591 (65.48%)**. Sources outside the reviewed cohort remain in scope. These links do not establish behavioral completeness. JADX's 98.8% decompilation-success result measures a different stage.
 
@@ -84,7 +84,7 @@ See the [task list](TODO.md) for specific remaining work. Paused sessions record
 | [Agent statistics](docs/agent-statistics.md) | Source-backed summary/detail paths, local SMS data, filters, and the summary loader's static risk. |
 | [Architecture](docs/architecture.md) | Manifest components, app modes, navigation, dependencies, and assets. |
 | [Telephony](docs/telephony.md) | Current USSD and SMS analysis, including dispatch and response handling. |
-| [USSD code catalog TODO](docs/ussd-code-catalog.md) | Planned inventory of executed codes, their purposes, and construction algorithms. |
+| [USSD code catalog](docs/ussd-code-catalog.md) | Confirmed construction families, purposes, offline vectors, and a complete lexical invocation appendix; semantic gaps remain. |
 | [Networking](docs/networking.md) | HTTP stack, URLs, tokens, TLS, and local persistence. |
 | [Security](docs/security.md) | Cryptography, key handling, and security findings. |
 | [Storage](docs/storage.md) | SQLite schema, ORMLite entities, migrations, and preferences. |

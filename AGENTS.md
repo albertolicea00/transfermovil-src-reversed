@@ -5,7 +5,8 @@
 - `docs/target-metadata.md`: how to extract package, version, SDK levels, and SHA-256 from an APK.
 - `docs/architecture.md`: manifest components, navigation structure, dependencies, obfuscation, asset data.
 - `docs/telephony.md`: USSD codes, SMS handling, accessibility-based USSD response capture.
-- `docs/ussd-code-catalog.md`: TODO for an evidence-backed catalog of executed USSD codes, purposes, and construction algorithms.
+- `docs/ussd-code-catalog.md`: source-backed USSD construction families, confirmed purposes, encoding vectors, and remaining semantic gaps.
+- `docs/ussd-dispatch-inventory.md`: reproducible raw-source appendix of USSD invocation operands and execution sinks.
 - `docs/networking.md`: OkHttp stack, known URLs, auth tokens, TLS/cert pinning, local storage (ORMLite/SharedPrefs).
 - `docs/security.md`: cryptographic schemes (7 AES variants), hardcoded keys, key derivation, security assessment.
 - `docs/storage.md`: SQLite schema (26 tables), ORMLite entities, migration logic, SharedPreferences.
@@ -13,7 +14,7 @@
 - `docs/ecommerce.md`: e-commerce API client, 33 endpoints, login flow, TLS bypass, session management.
 - `docs/ecommerce-errors.md`: smali-backed error-code messages, null/default behavior, and reproducible JVM checks.
 - `docs/versioning.md`: `<APK versionName>.<versionCode>-v<internal version>` release/tag scheme, local smali archives, and cross-version diffing.
-- `docs/ios-port-todo.md`: TODO for iOS port feasibility, platform limits, and feature-by-feature migration planning.
+- `docs/ios-port-todo.md`: iOS public-API feasibility decisions, feature scope, implementation gates, and external validation requirements.
 - `.workspace/handoff.md`: current pause/resume handoff; update it when stopping work and remove it when work resumes.
 - `mappings/classes.json`: obfuscated → clean class/field/enum name mappings with roles and confidence.
 - `docs/reconstruction-inventory.md`: reproducible source-to-clean review queue, duplicate candidates, mapping conflicts, and coverage limits.

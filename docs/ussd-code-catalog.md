@@ -1,31 +1,23 @@
-# USSD code catalog — TODO
+# USSD code catalog and dispatch evidence
 
 Target: Transfermóvil 1.260416 (`cu.etecsa.cubacel.tr.tm-v162.apk`). This document is reserved **only** for USSD codes sent by the client, what each code does, and how each dial string is constructed. SMS, HTTP, and UI implementation details belong in their existing documents.
 
 The current [telephony analysis](telephony.md) is the starting point. Its lists and inferred purposes need to be checked against callers before they become entries here. No code should be dialed while building this catalog; use static analysis and offline examples with dummy values.
 
-## Inventory to complete
+## Coverage and reproduction
 
-- [ ] Enumerate every USSD dispatch call and literal prefix. Start with `*222`, `*444`, `*100`, `*111`, `*133`, and `*234`, then search for dynamically assembled prefixes.
-- [ ] For each call, record the exact source class/method and line, bank or service, user action, operation identifier, and whether the purpose is confirmed or inferred.
-- [ ] Resolve every `BankOperationCode`/menu operation to its actual USSD invocation. Mark operations handled by SMS or HTTP as out of scope rather than guessing a USSD code.
-- [ ] Distinguish gateway prefixes, operation selectors, parameters, packet sequence fields, version fields, and the final `#` terminator. Record the order and any escaping or URI encoding.
-- [ ] Trace `rDEl7rW1aN.code()` and `AFm1GraXBXUkpF1hmOdV.Tz34gww2TFwrsuT8ukpL`: input types, lookup data, transformation steps, padding, and output. Separate verified behavior from hypotheses.
-- [x] Trace `pAzq93vIl3` packet splitting, sequence generation, retries, and multi-step calls; record that one form submission sends multiple requests when the active splitter yields multiple chunks. See [packet protocol notes](telephony.md#ussd-packet-protocol-pazq93vil3).
-- [x] Compare the `ACTION_CALL` path with `TelephonyManager.sendUssdRequest()` and document the format, SDK, permission, and response-handling differences in [telephony notes](telephony.md#ussd-packet-protocol-pazq93vil3).
-- [ ] Add offline test vectors using dummy access codes, accounts, PINs, and amounts. Never record live credentials or submit real requests.
+Static catalog refreshed 2026-11-13. The [complete dispatch evidence inventory](ussd-dispatch-inventory.md) contains **797 syntactic invocations across 317 raw Java files**, including multiline and dynamic calls, plus **53 URI/platform-send evidence lines**. It preserves every ordered argument expression and source location. Counts overlap between wrapper and platform layers; they are neither executed-operation counts nor proof of runtime reachability. SMS/HTTP-only operations and ordinary telephone calls are distinguished below.
 
-## Confirmed banking entries (initial subset)
+Run `python3 scripts/ussd-inventory.py --check` to verify the appendix or use `--json` for machine-readable operands. The semantic table remains a confirmed subset; construction families, direct codes, dynamic-selector variants, numeric/text encoding, packets and uncertainty boundaries follow it. The appendix makes remaining variable/dataflow questions reviewable without pretending that a lexical scan resolved them.
+
+## Confirmed semantic entries
 
 The operations listed here are confirmed from reconstructed call sites and shared
 dispatchers. The list is a partial catalog; packet mechanics are documented in
 [telephony notes](telephony.md#ussd-packet-protocol-pazq93vil3), while operation
 and menu coverage remains open.
 
-A static scan of banking UI source currently finds 66 single-line
-`actionCallUSSDBack(...)` call sites using 32 distinct service selectors. This
-count excludes multiline and dynamically assembled calls, and does not mean all
-selectors represent different user-visible operations.
+The source paths below provide readable semantic examples. The generated appendix, rather than a single-line grep count, is the reproducible call-site inventory.
 
 | Service / bank | User action | Dial string template | Construction algorithm | Source evidence | Confidence |
 | --- | --- | --- | --- | --- | --- |
@@ -59,7 +51,7 @@ selectors represent different user-visible operations.
 | Banking / Wallet | Change PIN | `tel:*<access>*69*E(<new-PIN-or-prefix*old-PIN*new-PIN>)*<version>%23` | The seven literal selector-`69` call sites use three observed payload forms: new PIN alone; old PIN + new PIN; or a literal bank-specific prefix (`03` or `05`) + old PIN + new PIN. Forms validate matching PIN confirmation; observed new-PIN lengths are four digits, except a BANDEC-labeled screen requiring five. Wallet partial-USSD calls use gateway `110`, selector `69`, agency marker `04`. | `PQmKwgxZd1.submitForm`, `B0Bcr9KURy.submitForm`, `ToMfHpA64Q.submitForm`, `FtAKxvNjrD.submitForm`, `KvpkEH7lRr.submitForm`, `FLftkSrl5R.submitForm`, `Cmok7CcIR9.submitForm` | Confirmed payload variants |
 | Metropolitano | Query operations by service type | `tel:*<access>*48*E(<service-type>*<currency>)*<version>%23` | Service type is spinner position + 1, followed by currency. | `MetroBalanceQueryFragment.submitForm`; dispatcher | Confirmed |
 | Metropolitano | Pay water bill | `tel:*<access>*51*E(<account>*0*<currency>)*<version>%23` | Transform account, fixed service field `0`, and currency. | `MetroServiceQueryFragment.submitForm`; dispatcher | Confirmed |
-| MiTransfer | Pay water bill | `tel:*<access>*19*E(1*<invoice>*<amount>*<payment-type>*0000*2)*<version>%23` for Havana; `tel:*<access>*21*E(2*<invoice>*<amount>*<payment-type>*0000*2)*<version>%23` for Varadero | Uses region IDs `1`/`2`; payment type and amount are selected by the form, and wallet type is fixed to `2`. Partial requests use gateway `110`, marker `04`, and a four-parameter packet limit. | `U1sIOmca96i.submitForm`; clean `WalletWaterPaymentFragment`; `wallet-water-payment.md` | Confirmed |
+| MiTransfer | Pay water bill | `tel:*<access>*19*E(1*<invoice>*<amount>*<payment-type>*0000*2)*<version>%23` for Havana; `tel:*<access>*21*E(2*<invoice>*<amount>*<payment-type>*0000*2)*<version>%23` for Varadero | Uses region IDs `1`/`2`; payment type and amount are selected by the form, and wallet type is fixed to `2`. Partial requests use gateway `110`, marker `04`, and a stored parameter-count hint of four (unused by the active character splitter). | `U1sIOmca96i.submitForm`; clean `WalletWaterPaymentFragment`; `wallet-water-payment.md` | Confirmed |
 | Bank water-payment forms | Pay water bill (Havana region) | `tel:*<access>*19*E(1*<invoice>*<amount>*<payment-type>*<currency-or-0>*<source-account>)*<version>%23` | Three forms use the same selector/payload layout with varying partial gateway markers: `01` (`zOs55UzH6z`), `03` (`BoMBck6OXT`), and `05` (`LHLbFzX21y`). A BANDEC-oriented form uses literal `0` in the currency slot and marker `02` (`T4RQ5wDJDt`). | `zOs55UzH6z`, `BoMBck6OXT`, `LHLbFzX21y`, `T4RQ5wDJDt`; `pAzq93vIl3` | Confirmed source variants |
 | Bank water-payment form | Pay water bill (other region choices) | `tel:*<access>*51*E(2*<invoice>*<amount>*<payment-type>*<source-account>)*<version>%23`; `tel:*<access>*21*E(3*<invoice>*<amount>*<payment-type>*0*<source-account>)*<version>%23` | In `T4RQ5wDJDt`, region `2` routes selector `51` without the zero field; other region choice routes selector `21` with the zero field. Both partial routes use gateway `110`, marker `02`, four parameters. | `T4RQ5wDJDt.submitForm`; `pAzq93vIl3` | Confirmed |
 | Metropolitano | Change ATM/POS limits | `tel:*<access>*61*E(<ATM>*<POS>*<ATM+POS>*<currency>)*<version>%23` | Total is integer ATM + POS; a second source screen sends the same payload. | `MetroLimitChangeFragment.submitForm`, `MetroEstadoCuentasFragment.submitForm`; dispatcher | Confirmed |
@@ -75,12 +67,12 @@ selectors represent different user-visible operations.
 | BANDEC | Register banking access | `tel:*<access>*49*E(02*<account>*<name>*<identity>)*<version>%23` | Partial USSD uses gateway `110`, agency marker `02`. | `wLHKkaC4Ha.submitForm`; BANDEC menu `BANRegistrarse` | Confirmed |
 | Metropolitano | Register banking access | `tel:*<access>*49*E(03*<account>*<name>*<surname1>*<surname2>*<identity>)*<version>%23` | Partial USSD uses gateway `110`, agency marker `03`. | `RFBEnXW0Xr.submitForm`; menu `METRORegistrarse` | Confirmed |
 | MiTransfer | Register account access | `tel:*<access>*49*E(04*0000*<identity>*<PIN>)*<version>%23` | This Wallet registration form requests identity and a PIN; its partial path uses gateway `110`, agency marker `04`. | `eUkRSfpCKs.submitForm`; menu `BOLSARegistrarse` | Confirmed |
-| MiTransfer | Authenticate wallet session | `tel:*04*40*E(04*<PIN>)*<version>%23` | Accepts exactly four PIN characters, prefixes the payload with `04*`, and dispatches using access code `04` and selector `40`; the shared dispatcher transforms the payload, appends the configured version, asks for confirmation, and starts `ACTION_CALL`. | `R5fFZkKuVnr.submitForm`; clean `WalletPinEntryFragment.submitForm`; `FBsQzP3Zfj.actionCallUSSDBack(String, ...)` | Confirmed |
-| MiTransfer | Query wallet balance for a saved account | `tel:*<access>*46*E(1*<16-digit-account>*<wallet-type>)*<version>%23` | The account selector combines saved MiTransfer and enterprise classic accounts. Wallet type is the selected spinner position plus one; `tipo` remains `1`. When partial USSD is enabled, it uses gateway `110`, selector `46`, marker `08`, and a four-parameter packet limit. | `GvNasrezHU.submitForm`; `GvNasrezHU.cargarMisCuentas`; `FBsQzP3Zfj.actionCallUSSDBack` / `pAzq93vIl3.principalEnviarUSSD` | Confirmed |
-| MiTransfer | Request CUP cash-deposit ticket | `tel:*<access>*17*E(<amount>*CUP)*<version>%23` | The wallet form requires an amount of at least `1` unless its `pagoTotal` mode is set. It confirms the amount as a CADECA deposit ticket to the CUP account. Partial mode uses gateway `110`, selector `17`, marker `04`, and a four-parameter limit. The response callback does not process the USSD result. | `P8DtkaSW4dR.submitForm` / `validateMonto`; clean `WalletRechargeFragment`; dispatcher and `pAzq93vIl3.principalEnviarUSSD` | Confirmed |
+| MiTransfer | Authenticate wallet session | `tel:*<access>*40*E(04*<PIN>)*<version>%23` | Accepts exactly four PIN characters, prefixes the payload with `04*`, and dispatches using bank-session marker `04` and selector `40`; the actual access prefix remains configured in `AppConfig`; the shared dispatcher transforms the payload, appends the configured version, asks for confirmation, and starts `ACTION_CALL`. | `R5fFZkKuVnr.submitForm`; clean `WalletPinEntryFragment.submitForm`; `FBsQzP3Zfj.actionCallUSSDBack(String, ...)` | Confirmed |
+| MiTransfer | Query wallet balance for a saved account | `tel:*<access>*46*E(1*<16-digit-account>*<wallet-type>)*<version>%23` | The account selector combines saved MiTransfer and enterprise classic accounts. Wallet type is the selected spinner position plus one; `tipo` remains `1`. When partial USSD is enabled, it uses gateway `110`, selector `46`, marker `08`, and a stored parameter-count hint of four (unused by the active character splitter). | `GvNasrezHU.submitForm`; `GvNasrezHU.cargarMisCuentas`; `FBsQzP3Zfj.actionCallUSSDBack` / `pAzq93vIl3.principalEnviarUSSD` | Confirmed |
+| MiTransfer | Request CUP cash-deposit ticket | `tel:*<access>*17*E(<amount>*CUP)*<version>%23` | The wallet form requires an amount of at least `1` unless its `pagoTotal` mode is set. It confirms the amount as a CADECA deposit ticket to the CUP account. Partial mode uses gateway `110`, selector `17`, marker `04`, and a stored parameter-count hint of four (unused by the active character splitter). The response callback does not process the USSD result. | `P8DtkaSW4dR.submitForm` / `validateMonto`; clean `WalletRechargeFragment`; dispatcher and `pAzq93vIl3.principalEnviarUSSD` | Confirmed |
 | MiTransfer | Request FWA data-package offers | `tel:*<access>*18*E(<account>*1501*USD*1)*<version>%23` | Requires an account string of length 8 or 10 and the USD wallet option. The hidden service-type selector does not affect the request; the final wallet-type field is `1`. The form asks for confirmation to display available offers. The observed path uses the standard dispatcher, with no partial-USSD branch. | `q55ExEc6x2l.submitForm` / `validateCuenta`; clean `FwaDataPackagePurchaseFragment`; `wallet-fwa.md` | Confirmed client request; offer retrieval not independently observed |
 | MiTransfer | Recharge FWA balance | `tel:*<access>*20*E(<account>*<amount>*USD*1)*<version>%23` | Account must be 8 or 10 characters and amount must be nonempty; the form does not parse the amount or enforce a numeric range. USD is the only wallet option and maps to `1`. The standard dispatcher is used, with no partial-USSD branch. | `wbFn8tBw8W.submitForm` / `validateCuenta` / `validateMonto`; clean `FwaBalanceRechargeFragment`; `wallet-fwa.md` | Confirmed |
-| MiTransfer | Query latest operations | `tel:*<access>*48*E(1*<account-or-currency>*<wallet-type>)*<version>%23` | Uses selector `48`, with `tipo` fixed at `1` and Wallet type set to spinner position + 1. Saved MiTransfer/enterprise accounts select agency marker `08` and require a 16-character account; CUP/USD options use marker `04` and send the selected currency string. Partial USSD uses gateway `110` and a four-parameter limit. | `dI2tctjNbR.submitForm`; `dI2tctjNbR.spClickBolsa`; `dI2tctjNbR.cargarMisCuentas`; clean `WalletLatestOperationsFragment` | Confirmed and migrated into clean Java |
+| MiTransfer | Query latest operations | `tel:*<access>*48*E(1*<account-or-currency>*<wallet-type>)*<version>%23` | Uses selector `48`, with `tipo` fixed at `1` and Wallet type set to spinner position + 1. Saved MiTransfer/enterprise accounts select agency marker `08` and require a 16-character account; CUP/USD options use marker `04` and send the selected currency string. Partial USSD uses gateway `110` and a stored parameter-count hint of four (unused by the active character splitter). | `dI2tctjNbR.submitForm`; `dI2tctjNbR.spClickBolsa`; `dI2tctjNbR.cargarMisCuentas`; clean `WalletLatestOperationsFragment` | Confirmed and migrated into clean Java |
 | BFI | Register banking access | `tel:*<access>*49*E(05*<current-PIN>*<new-PIN>*<identity>)*<version>%23` | The form validates current/new PINs and identity; partial USSD uses gateway `110`, agency marker `05`. | `umjSGajOy3.submitForm`; BFI menu `BFIRegistrarse` | Confirmed |
 | Banking / Wallet | Pay fixed telephone bill | `tel:*<access>*42*E(<invoice>*<amount-or-0>*<currency>)*<version>%23` | For partial payment, sends the entered amount; for full payment, sends literal `0`. The currency field comes from the selected payment currency, separate from the invoice's detected CUP/CUC label. | `AckAnySXkn.submitForm`; variants `l2i2DeDgof.submitForm`, `p5B8KozjvpQ.submitForm`, `pxpQ3hcmYF.submitForm` | Confirmed |
 | ONAT | Buy stamp (personal or company) | `tel:*<access>*43*E(2*<DPA>*<NIT>*<tax-code>*<MM/YYYY>*<amount>*<entity>*<currency>*<account>)*<version>%23` | Selector `43` has multiple ONAT payload variants. The stamp form builds the sequence shown; partial USSD uses gateway `110` and rearranges tax-code/NIT in the packet payload. | `TGMSi5UDp7.submitForm`; `FBsQzP3Zfj.actionCallUSSDBack` | Confirmed |
@@ -104,27 +96,130 @@ Here `E(x)` is the existing `rDEl7rW1aN.code(x)` transformation, `<access>` and
 `ACTION_CALL`. This table describes source behavior only and does not dial any
 code or include live credentials.
 
-A static source scan finds 91 distinct numeric literal service selectors in
-single-line `actionCallUSSDBack(...)` invocations under `src/`. The selector
-count is not a count of user-visible operations: several operations share a
-selector, and other call sites use dynamic selectors or different dispatch
-overloads. The inventory is therefore still incomplete.
+## Construction families
 
-## Entry format
+`A` means the first configured `AppConfig.getCodigo()`; `V` means its `getNumber()`. These are configuration strings, not necessarily a bank identifier or APK `versionName`. Some overloads use the `codigoAcceso` resource if no configuration exists; others leave empty strings. `P` is the caller's ordered payload, `S` a selector, and `E(P)` the encoder below. A selector has meaning inside its gateway and payload schema; it is not an enum ordinal.
 
-Use one row per **executed** USSD variant, not one row per UI label:
+| Family / source | Actual URI or request construction | Important distinction |
+| --- | --- | --- |
+| `rDEl7rW1aN.actionCallUSSD(codeAcc, S, P, message, group)` at line 636 | `tel:*codeAcc*S*P%23` | Explicit gateway, raw payload, no configured version or `E`. Used by mobile `234` forms. |
+| Three-argument `actionCallUSSD(codeToSend, message, group)` at line 656 | `tel:*codeToSend%23` | Raw carrier code, such as `662*coupon`; no configured access code. |
+| One-argument `actionCallUSSD(S)` at line 676 | `tel:*A*S%23` | No payload or version; `S` can itself contain `*`, e.g. `11*2`. |
+| Two-/four-argument `actionCallUSSD(S,P,...)`, `actionCallUSSDBack`, `actionCallUSSDCodeAccess` | `tel:*A*S*E(P)*V%23` | The explicit `CodeAccess` variant substitutes its supplied access value. Confirmation/back-stack behavior differs; bytes follow the same family. |
+| `FBsQzP3Zfj.actionCallUSSDBack` and observer/return/HTTP variants | `tel:*A*S*E(P)*V%23` | The three-argument instance method returns a URI rather than executing a call. Methods computing URI length are not dispatches. |
+| `FBsQzP3Zfj.actionCallUSSDBack(banco,context,S,P,...)` at lines 503/547 | `tel:*A*S*E(P)*V%23` | `banco` sets local bank-session metadata; it does **not** replace `A`. |
+| `FBsQzP3Zfj.actionCallUSSDSimple` at line 112 | `tel:*A*S*P*V%23` | Raw payload; surveys deliberately skip `E`. |
+| `FBsQzP3Zfj.getAlertDialogBuilder` at line 1513 | Default `tel:codeToSend%23`; nonempty access-platform argument selects configured encoded family | Source tests string-reference inequality against `BuildConfig.FLAVOR`, not value equality. Current literal-code routes pass that exact empty constant. |
+| Four activation-screen local helpers `actionCallUSSDSoloSolHabilitarCodigo` | `tel:*A*S*P%23` | Raw activation payload already embeds app version; no second version suffix. Missing config falls back to access resource. |
+| `LALCrDPvhM.showSendUSSD(source,operation,...)` | `tel:*source[*operation]%23` | Optional second segment omitted only for empty operation. |
+| `principalEnviarUSSD` / `pAzq93vIl3` | `*A*gateway*PPNN*mmss*operation*agency*chunk*V#` | See packet rules below. Gateway `110` is an envelope; original operation remains a separate field. |
 
-| Service / bank | User action | Dial string template | Construction algorithm | Source evidence | Confidence |
-| --- | --- | --- | --- | --- | --- |
-| TODO | TODO | TODO | TODO | TODO | TODO |
+Source bodies: [base overloads](../src/cu/etecsa/cubacel/tr/tm/l08fNVC4KOKK/rDEl7rW1aN.java#L636), [shared overloads](../src/cu/etecsa/cubacel/tr/tm/l08fNVC4KOKK/FBsQzP3Zfj.java#L96), and every original operand/URI expression in the [dispatch evidence inventory](ussd-dispatch-inventory.md). `%23` is only URI escaping for the terminator. Other user payload fields are not generally URI-escaped by these builders; encoding and field validation are separate operations.
 
-For any nontrivial algorithm, add a short subsection with inputs, ordered transformations, packet rules, and one dummy input/output example. Link to the original Java source at the exact method. Avoid copying sensitive constants into this catalog when a source link suffices.
+## Literal carrier and legacy-menu codes
 
-## Source starting points
+These bypass configured `A`/`V` and `E`. The table records client intent from the source enum/menu and confirmation, without asserting carrier-side behavior. Duplicate direct/menu routes are retained in the appendix.
 
-- `src/cu/etecsa/cubacel/tr/tm/l08fNVC4KOKK/FBsQzP3Zfj.java` — dispatch overloads.
-- `src/cu/etecsa/cubacel/tr/tm/l08fNVC4KOKK/rDEl7rW1aN.java` — `code()` and dialing flow.
-- `src/AFm1GraXBXUkpF1hmOdV/Tz34gww2TFwrsuT8ukpL.java` — numeric transformation.
-- `src/cu/etecsa/cubacel/tr/tm/l08fNVC4KOKK/FY4jCHXwyiP/ZJaneAnYYBm/pAzq93vIl3.java` — packet construction.
+| Literal dial string | Client purpose / source operation | Evidence |
+| --- | --- | --- |
+| `*222#` | Prepaid balance (`ConsultaSaldo222`) | `FBsQzP3Zfj.getDialogOperation`, case 3; `FNRzUmC7E5` line 105 |
+| `*111#` | Postpaid balance (`ConsultaSaldo111`) | Case 4; `FNRzUmC7E5` line 127 |
+| `*222*266#` | Bonus status | Case 19; `LALCrDPvhM.showSendUSSD` caller |
+| `*133#` | Plan-management menu | Case 20; same carrier helper |
+| `*222*328#` | Data plan | Case 21 |
+| `*222*869#` | Voice plan | Case 22 |
+| `*222*767#` | SMS plan | Case 23 |
+| `*222*264#` | Amigos plan | Case 24 |
+| `*234*3#` | Advance balance | Case 31 |
+| `*234*1*phone*PIN*amount#` | Mobile balance transfer | `C8l2t8799rL.submitForm`; explicit-gateway base overload |
+| `*234*2*PIN*repeat#` | Recharge-PIN change | `E1lhoLKryWP.submitForm`; same explicit-gateway overload |
+| `*662*coupon#` | Coupon recharge | `b0kkzvOCEu.submitForm`; raw-code overload |
+| `*444*3#` | Agent latest fixed-phone payments (`AGUltimosPago`) | `getDialogOperation` case 5 |
+| `*444*13#` | Agent recharge stock balance (`AGConsultarSaldo`) | Case 6 |
+| `*444*15#` | Agent latest mobile recharges (`AGUltimasRecargas`) | Case 7 |
+| `*444*16#` | Agent recharge disconnect (`AGDesconectar`) | Case 8 |
+| `*444*91#` | Agent latest Nauta recharges (`AGConsultarNautaUlt`) | Case 9 |
+| `*444*46#` | Card balance | Case 13 |
+| `*444*48#` | Latest banking operations | Case 14 |
+| `*444*70#` | Disconnect bank/wallet session | Cases 12/15/17/64 |
+| `*444*68*02#` | Delete BANDEC registration | Case 16 |
+| `*444*62#` | Banking limits | Case 26 |
+| `*444*58#` | All-account balance | Cases 28/30 |
 
-**Done when:** Every distinct executed USSD path has an evidence-backed purpose and reproducible construction description, and uncertain mappings are explicitly labeled.
+The literal `444` menu routes coexist with configured-access routes; do not rewrite them as `A` merely because a default configuration may use that value. `tel:104`–`107`, `tel:103`, normal mobile calls and `tel:*99phone` are telephone call paths, not USSD submissions. They remain visible in the sink audit to make that exclusion reviewable. The current `getDialogOperation` cases and their enum switch mapping are in [FBsQzP3Zfj](../src/cu/etecsa/cubacel/tr/tm/l08fNVC4KOKK/FBsQzP3Zfj.java#L882).
+
+## Configuration, activation and dynamic selector variants
+
+| Dial schema / selector | Client action and payload algorithm | Evidence |
+| --- | --- | --- |
+| `*A*100*V#` | First configuration/version validation; both main activities send this when creating `AppConfig` or handling its `new_version` marker. No payload transform. | `IHVTCBmiLV.ValidateVersion` lines 871/882; `S9ycHcoxAzy` lines 760/771 |
+| `*A*80*1*app-version#` | Request agent activation code | `W2FmEAMdovs.solicitarCodigoAuthUSSD`, lines 193–209 |
+| `*A*80*10*app-version#` | Request module activation code; subtype `10` is a literal in both source helpers | `eD2GCZ4Vix` lines 215–231; `xtUiphIcBa` lines 178–194 |
+| `*A*123*11*app-version#` | Request MiBoleto module activation code | `b3vEPrhNHF` lines 199–215 |
+| `*A*80*3*rating*V#` | User experience survey: integer rating sent raw; one UI variant checks `rating>0`, the other does not | `FBsQzP3Zfj.crearEncuestaUsuarios` / `encuestaUsuarios`, lines 817/838 |
+| `*A*11*2#`, `*A*11*4#`, `*A*11*6#` | Agent recharge stock, latest recharges, and disconnect; one-argument raw configured dispatcher | `g1bQ0lLj6na` lines 106/147/126 |
+| Encoded selector `13` | Agent/general mobile recharge form's declared `codeService`; payload `phone*amount*currencyOrBag` | `f03gMUuBeK` field line 63 and submit line 155 |
+| Encoded selector `10` | Agent/general Cubacel packages: `phone*package-id*package-ussd-version*currency*wallet-type` | `tKjjxHr2PT` field line 68 and submit lines 198–200 |
+| Encoded selector `6` | MiTransfer Cubacel packages; same package metadata field order, wallet selections differ | `WyYHxgzYyW` field line 68 and submit line 200 |
+| Encoded selectors `54` / `23` | MiTransfer mobile top-up branch sets `codeService` by selected wallet/currency; do not collapse the two paths | `zzyNbaqs1U` lines 108/112 and submit line 157 |
+| Encoded selector `215` | Channel-dependent payment form; payload and channel-dependent confirmation come from the form, not a universal “voting” selector | `cdINOtQ3iN`, `actionCallUSSDBack454` line 419 |
+| Encoded selector `220` | Extended account transfer with optional PIN/flags; packet gateway `110`, agency `08`; ordinary vs return callback branches share selector | `Z3kYdPwq6K2`, lines 424–428 |
+
+Other dynamically passed selectors (`operacion`, `codeOper`) belong to shared menu/packet wrappers. Their original caller operands are preserved in the appendix rather than replaced with guessed numeric values. The full 332-value `FdonIAFI9w`/`BankOperationCode` enum also includes settings, screen routing and SMS/HTTP actions; its ordinal is not a USSD code. For example `VotoMovil` routes to SMS and `Bulevar` is commerce. An enum-only or database-defined route is not evidence that a corresponding USSD request exists. Source `goToFragment` chooses a database fragment or the central dialog switch; bank-specific menus also bypass that registry. This is why the catalog follows dispatch operands and sinks instead of asserting one code per enum.
+
+## Payload transform `E`
+
+The smali-backed algorithm has these ordered steps:
+
+1. Split the caller payload on literal `*` using Java `String.split`, including its trailing-empty-field behavior. Record the original length of every digit-only field; mark nonnumeric fields with length `0`. `esEntero` uses `Character.isDigit`, not an ASCII-only regular expression; later decimal parsing can still fail for some inputs.
+2. Build a substitution permutation from the **1,250-bit** `crude_code` and the **18-digit** `code_version`. For each version digit, skip that many bits, consume the next eight as a binary integer, and cycle the version index back to zero after its last digit. The current constants produce **100 distinct entries, 0–99**, consuming the input exactly.
+3. Draw one integer seed `0..99` for the call. Substitute numeric fields in two-digit groups through the table; pad each substituted pair to two decimal digits. For an odd final digit, use the single-digit permutation obtained by retaining table values below ten in table order.
+4. Form the per-field XOR key starting again at the same seed for each field. For each input character, if the index equals `table.size()-1` (99), append `table[0]` and set the index to `1`; otherwise append `table[index]` and increment it. This preserves the source's unusual skip of key-table slot 99 rather than substituting ordinary modulo-100 wrapping. Concatenate those values' unpadded decimal spellings and truncate to the substituted numeric text's length. Parse both as Java `long` and XOR them. Decimal output is not padded back to the input width; the original-length prefix preserves that information. Overflow/empty numeric text can throw.
+5. Nonnumeric fields use `kR22DOzTiB.getCodes` and `EKB7Plln4L`'s character dictionary. Preserve numeric and text fields in their original order. Unknown dictionary characters stringify as `null` rather than receiving an invented replacement. All-text inputs use seed prefix `00`.
+6. Prefix seed and original field lengths with at least two decimal digits. Concatenate seed plus first length/value; join subsequent field length/value pairs with literal `*`. A text field's length marker is `00`, regardless of its original character count.
+
+**Decompiler repair and verification limit:** JADX's `YzK9tTZsYVnC5kFxSie` loses the version-index reset, holds the final digit, and eventually throws when only six bits remain for `substring(0,8)`. Earlier JVM comparisons could pass by matching that exception in both original/clean code. The APK's actual loop resets the index at `:goto_0`; this is a source-oracle repair justified by bytecode, not an intentional protocol change. Clean implementation/tests must compare successful values as well as exceptions. Raw JADX is retained unchanged as evidence.
+
+Reproduce bytecode evidence without touching tracked source:
+
+```sh
+apktool d -r -o /tmp/transfermovil-ussd-smali .workspace/bin/cu.etecsa.cubacel.tr.tm-v162.apk
+# Inspect AFm1GraXBXUkpF1hmOdV/YzK9tTZsYVnC5kFxSie.smali under the decoded smali directory.
+# At the last code_version digit: if-ne v3,last,:cond_0; goto :goto_0.
+# :goto_0 sets v3=0; the non-last branch increments and jumps to :goto_1.
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/tests -p test_ussd_encoding.py -v
+```
+
+### Offline fixed-seed vectors
+
+These outputs were derived from the source encoder with the smali-backed reset and seed fixed to `42` in temporary JVM copies. The production seed remains random. All credentials/account-like strings below are dummy inputs; no request was sent.
+
+| Input `P` | `E(P)` at seed 42 |
+| --- | --- |
+| `1` | `42013` |
+| `12` | `42025` |
+| `1*0` | `42013*011` |
+| `1*2` | `42013*014` |
+| `01*0000000000000001` | `420257*167167513568805339` |
+| `1*user@nauta.cu` | `42013*0081199331649259814559158281` |
+| `CUP` | `0000601044` |
+| Empty string | `NumberFormatException` |
+| `***` | `ArrayIndexOutOfBoundsException` after Java splitting removes all trailing empty fields |
+
+For dummy `A=999`, `S=46`, `P=1*0`, `V=00`, the encoded URI family yields `tel:*999*46*42013*011*00%23`. The literal carrier family for `234`, option `1`, dummy phone `50000000`, PIN `0000`, amount `1` yields `tel:*234*1*50000000*0000*1%23`; it never calls `E`. These examples illustrate wire construction, not accepted bank/carrier credentials.
+
+## Packet construction and response sequencing
+
+The active character splitter takes `E(P)`, splits at `*`, and grows chunks under `currentLength + nextTokenLength + 32 <= 52`. The first token of a chunk is accepted even if over the budget, so 52 is not an independently enforced maximum emitted request length. Empty tokens are skipped. Each chunk starts with `*` inside the concatenated packet body.
+
+For one-based position `p` and packet count `n`, pad each to at least two decimal digits and concatenate `PPNN`; append local `mmss` as the sequence ID. Emit `*A*gateway*PPNN*mmss*operation*agency*chunk*V`. `agency` is the caller's packet routing marker, not the AppConfig access prefix. Typical markers are `01` BPA, `02` BANDEC, `03` Metropolitano, `04` MiTransfer, `05` BFI and `08` account/classic flows; retain the exact caller value for a variant. The hint called `MAX_PARAMETERS_PQUETE`/`maxParametersXPqte` is stored, but the active character splitter does not use it. A declared value of four does not establish a four-field packet limit.
+
+On Android 26+, `MX9gh9mLxd.sendNextUssd()` appends literal `#` and uses `TelephonyManager.sendUssdRequest`, not a `tel:` URI. It advances after a response containing `siendo procesada,`; other responses and failures stop that automatic chain. Below 26, accessibility capture advances `sendDataUSSD`, which appends `Uri.encode("#")` to a `tel:` URI. The nine-argument overload's pre-26 one-packet branch falls back to the ordinary encoded dispatcher, so it emits the original operation family rather than the packet envelope. A manual send callback can select a packet explicitly. `MAX_FALLAS_USSD=3` is not an active retry policy: no increment/retry use was found. Detailed state flow and platform limits remain in [telephony notes](telephony.md#ussd-packet-protocol-pazq93vil3).
+
+Packet examples must fix `mmss`, seed and configuration to compare bytes. With dummy `A=999`, gateway `110`, operation `46`, agency `05`, `E(P)=42013*011`, `V=00`, `mmss=1234`, the tokens fit one chunk, giving `*999*110*0101*1234*46*05*42013*011*00#` on the API-26+ send path. Pre-26 via the nine-argument single-packet fallback emits the ordinary `*999*46*E(P)*00#` family instead. No packet is sent by these offline examples.
+
+## Remaining uncertainty boundaries
+
+- The appendix enumerates every tracked Java call in the documented dispatch families and every literal telephone construction line. It does not prove that every call is reachable in a real account/device state or recover code missing from JADX methods automatically.
+- Confirmed table rows describe caller intent and ordered fields. The appendix retains all other caller operands and baseline source roles so unresolved variable- or database-defined routing remains visible; there is no invented one-to-one mapping from all 332 operation enum values to selectors.
+- Client code cannot establish carrier acceptance, server accounting effects, live permissions/SIM behavior, backend response contracts, or feature availability. Those remain unexecuted external validation, not completed static findings.
