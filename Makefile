@@ -20,7 +20,7 @@
 #   make stats
 #   make search Q="ACCESS_TOKEN"
 
-.PHONY: help decompile verify stats inventory progress test-reconstruction search search-smali search-all clean-src
+.PHONY: compile-audit help decompile verify stats inventory progress test-reconstruction search search-smali search-all clean-src
 
 # Default APK path
 APK ?= .workspace/bin/cu.etecsa.cubacel.tr.tm-v162.apk
@@ -68,3 +68,7 @@ clean-src: ## Remove decompiled source (src/ and smali/) — keeps app/ clean so
 	@read -p "Continue? [y/N] " confirm && [ "$$confirm" = "y" ] || exit 1
 	rm -rf src/ smali/
 	@echo "Removed src/ and smali/"
+
+compile-audit: ## Compile clean Java against local jars (ANDROID_JAR=... BYTECODE_JAR=...)
+	@test -n "$(ANDROID_JAR)" || { echo "Set ANDROID_JAR to the installed SDK android.jar"; exit 2; }
+	@python3 scripts/compile-reconstruction.py --android-jar "$(ANDROID_JAR)" --bytecode-jar "$(or $(BYTECODE_JAR),.workspace/tools/target-bytecode.jar)" --apk "$(APK)"

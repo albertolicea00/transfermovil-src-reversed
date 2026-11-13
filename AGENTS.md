@@ -22,3 +22,5 @@
 - Keep detailed procedures in separate `docs/*.md` files and add a one-line summary and link here for each new document.
 - Read only the documentation relevant to the current task.
 - Update `CHANGELOG.md` for every completed change; put the date, APK filename, and SHA-256 in each analysis session's `##` heading.
+
+- `docs/java-compilation.md`: reproducible dependency-backed Java compiler audit and limits of APK-derived classpaths.
