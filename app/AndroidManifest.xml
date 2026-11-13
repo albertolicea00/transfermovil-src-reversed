@@ -34,12 +34,13 @@
             <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility_service_config"/>
         </service>
         <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="cu.etecsa.transfermovil.ui.AgentMainActivity" android:screenOrientation="portrait"/>
-        <activity android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.prPzLeyxKk">
+        <activity android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.transfermovil.ui.SplashActivity"/>
+        <activity-alias android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.cubacel.tr.tm.prPzLeyxKk" android:targetActivity="cu.etecsa.transfermovil.ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
+        </activity-alias>
         <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/app_name" android:name="cu.etecsa.transfermovil.ui.GeneralMainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
@@ -67,13 +68,15 @@
         <activity android:name="ar.com.daidalos.afiledialog.FileChooserActivity"/>
         <activity android:name="cu.etecsa.tm.ecommerce.yzjeVbN3sq"/>
         <activity android:label="@string/title_activity_main" android:name="cu.etecsa.tm.ecommerce.mBdwa3RRkn" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
-        <activity android:name="cu.etecsa.tm.ecommerce.a7Y4bbw8Os" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
         <activity android:name="cu.etecsa.transfermovil.ecommerce.LoginActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
         <activity android:label="@string/app_name" android:name="cu.etecsa.tm.ecommerce.bAogvejtBb" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
         <activity android:name="cu.etecsa.tm.ecommerce.H9l22AIYKkA" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
-        <activity android:name="cu.etecsa.tm.ecommerce.C1b1PWKeZSE" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
-        <activity android:name="cu.etecsa.tm.ecommerce.hd5jZHAGaN" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
         <activity android:name="cu.etecsa.transfermovil.ecommerce.EcommerceHomeActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
+        <activity android:name="cu.etecsa.transfermovil.ecommerce.CredentialLoginActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar"/>
+        <!-- Keep source Intent component names reachable through clean routes. -->
+        <activity-alias android:name="cu.etecsa.tm.ecommerce.a7Y4bbw8Os" android:targetActivity="cu.etecsa.transfermovil.ecommerce.LoginActivity" android:exported="false"/>
+        <activity-alias android:name="cu.etecsa.tm.ecommerce.C1b1PWKeZSE" android:targetActivity="cu.etecsa.transfermovil.ecommerce.CredentialLoginActivity" android:exported="false"/>
+        <activity-alias android:name="cu.etecsa.tm.ecommerce.hd5jZHAGaN" android:targetActivity="cu.etecsa.transfermovil.ecommerce.EcommerceHomeActivity" android:exported="false"/>
         <activity android:label="@string/title_activity_scrolling" android:name="cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.vHqHzxi5J3" android:screenOrientation="portrait" android:theme="@style/AppThemeBulevar.NoActionBar"/>
         <service android:enabled="false" android:exported="false" android:name="androidx.camera.core.impl.MetadataHolderService">
             <meta-data android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER" android:value="androidx.camera.camera2.Camera2Config$DefaultProvider"/>

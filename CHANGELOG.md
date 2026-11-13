@@ -2,6 +2,7 @@
 
 ## 2026-11-13 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Reconstructed child-user detail, editor, permissions, and row-adapter UI with typed create/update/photo/delete/status callbacks; restored credential/2FA and reauthentication routes to the clean home, unified the API response type, and connected the launcher alias to the clean splash. Source-backed request and callback comparisons pass; live authentication remains unverified.
 - Added a full reconstructed-Java compiler audit using explicit local Android and APK-derived dependency jars, real resource constants, stable-input fingerprints, and machine-readable per-file diagnostics; the initial source tree exposed 801 errors after its first syntax repair.
 - Added a reproducible 797-site USSD invocation inventory across 317 raw source files and 53 execution/template lines; expanded the catalog with direct codes, dynamic selector families, packet construction, smali-backed encoding vectors, and explicit unresolved semantic/reachability limits.
 - Completed the iOS public-API feasibility review and implementation plan with official Apple references, feature dispositions, acceptance gates, and external device/provider/authorization requirements.

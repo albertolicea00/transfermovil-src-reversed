@@ -1,12 +1,8 @@
 package cu.etecsa.transfermovil.ecommerce;
 
-import cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.p5UHWIhp4aH;
-import cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.ibvd0DUkXb;
-import cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.xoBMVddCFw;
 import cu.etecsa.transfermovil.ecommerce.model.response.ChildUserListResponse;
 import cu.etecsa.transfermovil.ecommerce.model.response.UserWithRolesResponse;
 import cu.etecsa.transfermovil.ecommerce.domain.entity.ChildUser;
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,11 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import cu.etecsa.tm.ecommerce.I3ki0FxWzgdY.IEapoTwbnMK.JpFlOZXEDx;
-import cu.etecsa.tm.ecommerce.I3ki0FxWzgdY.s7v6K7WoKk7;
-import cu.etecsa.tm.ecommerce.LaIvmOMkyve.QKj1EC9b3YL.GB0CGE0H88;
 import cu.etecsa.tm.ecommerce.R;
-import cu.etecsa.tm.ecommerce.UE0rwmdgIVT.XiLHuwQSoCT.ME8KWex9OS;
 import cu.etecsa.tm.ecommerce.qHBfDCWv13G.ThptISKBHA;
 import cu.etecsa.tm.ecommerce.qHBfDCWv13G.UhA7J2923N;
 import java.util.List;
@@ -46,32 +38,32 @@ import java.util.List;
 /**
  * @obfuscated_class cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.hktnNTZUSX
  * @original_apk_version 1.260416
- * List UI migrated to typed results; detail/editor/grants remain legacy screens.
+ * List UI uses typed results and clean detail/editor screens.
  */
-public class ChildUserListFragment extends Fragment implements ChildUserPresenter.Callback, p5UHWIhp4aH {
+public class ChildUserListFragment extends Fragment implements ChildUserPresenter.Callback, ChildUserRefreshCallback {
     public Activity activity;
     public FloatingActionButton btAdd;
     public Context context;
-    public s7v6K7WoKk7 listUserAdapter;
+    public ChildUserAdapter listUserAdapter;
     private ProgressBar mProgressView;
-    public s7v6K7WoKk7.OnItemClickListener onItemClickListener = new s7v6K7WoKk7.OnItemClickListener() { // from class: cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.ChildUserListFragment.3
-        @Override // cu.etecsa.tm.ecommerce.I3ki0FxWzgdY.s7v6K7WoKk7.OnItemClickListener
+    public ChildUserAdapter.OnItemClickListener onItemClickListener = new ChildUserAdapter.OnItemClickListener() { // from class: cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.ChildUserListFragment.3
+        @Override // cu.etecsa.tm.ecommerce.I3ki0FxWzgdY.ChildUserAdapter.OnItemClickListener
         public void onGetItemClick(View view, int position, int id) {
             FragmentManager mFragmentManager = ChildUserListFragment.this.getActivity().getSupportFragmentManager();
             FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-            xoBMVddCFw child = new xoBMVddCFw();
+            ChildUserDetailFragment child = new ChildUserDetailFragment();
             Bundle arg = new Bundle();
             arg.putInt("ID", id);
             child.setArguments(arg);
             mFragmentTransaction.replace(R.id.containerView, child).addToBackStack(null).commit();
         }
 
-        @Override // cu.etecsa.tm.ecommerce.I3ki0FxWzgdY.s7v6K7WoKk7.OnItemClickListener
+        @Override // cu.etecsa.tm.ecommerce.I3ki0FxWzgdY.ChildUserAdapter.OnItemClickListener
         public void onGetLongItemClick(View view, int position, int id) {
             ChildUserListFragment.this.usersListPresenter.detail(id);
         }
 
-        @Override // cu.etecsa.tm.ecommerce.I3ki0FxWzgdY.s7v6K7WoKk7.OnItemClickListener
+        @Override // cu.etecsa.tm.ecommerce.I3ki0FxWzgdY.ChildUserAdapter.OnItemClickListener
         public void onPermisosItemClick(View view, int id, boolean activo) {
             ChildUserListFragment.this.mostrarPermisos(id, activo);
         }
@@ -153,20 +145,8 @@ public class ChildUserListFragment extends Fragment implements ChildUserPresente
         if (response.isOK()) {
             List<ChildUser> users = response.getItemsList();
             if (users != null && !users.isEmpty()) {
-                ArrayList<JpFlOZXEDx> rows = new ArrayList<>();
-                for (ChildUser user : users) {
-                    JpFlOZXEDx row = new JpFlOZXEDx();
-                    row.setIdUser(user.getIdUser());
-                    row.setNombre(user.getNombre());
-                    row.setCorreo(user.getCorreo());
-                    row.setAvatar(user.getAvatar());
-                    row.setCreado(user.getCreado());
-                    row.setUpdateAt(user.getUpdateAt());
-                    row.setActivo(user.isActivo());
-                    rows.add(row);
-                }
-                txTotal.setText(String.valueOf(rows.size()));
-                listUserAdapter = new s7v6K7WoKk7(context, rows);
+                txTotal.setText(String.valueOf(users.size()));
+                listUserAdapter = new ChildUserAdapter(context, users);
                 listUserAdapter.setOnItemClickListener(onItemClickListener);
                 rvList.setAdapter(listUserAdapter);
             } else {
@@ -181,7 +161,7 @@ public class ChildUserListFragment extends Fragment implements ChildUserPresente
     public void onDetailResult(UserWithRolesResponse response) {
         if (rootView == null) return;
         if (response.isOK() && response.getUser() != null) {
-            mostrarUpdateUser(toLegacyUser(response.getUser()));
+            mostrarUpdateUser(response.getUser());
         } else if (response.getHttpCode() == 401) {
             UhA7J2923N.getInstance().finilizarNoAutenticado(getActivity());
         } else {
@@ -194,38 +174,6 @@ public class ChildUserListFragment extends Fragment implements ChildUserPresente
         // Like the source list, mutations are owned by the editor/detail dialogs.
     }
 
-    /** Explicit boundary while the source-backed editor still takes raw models. */
-    private static ME8KWex9OS.YjMcWATWMD toLegacyUser(UserWithRolesResponse.User user) {
-        ME8KWex9OS.YjMcWATWMD result = new ME8KWex9OS.YjMcWATWMD();
-        result.setId(user.getId());
-        result.setUsername(user.getUsername());
-        result.setEmail(user.getEmail());
-        result.setDni(user.getDni());
-        result.setPhone(user.getPhone());
-        result.setAddress(user.getAddress());
-        result.setPhoto(user.getPhoto());
-        result.setUpdateAt(user.getUpdateAt());
-        if (user.getProvince() != null) {
-            cu.etecsa.tm.ecommerce.Dyporpu9vbM.G6liG5If2lu.njwILmSkGJ province =
-                    new cu.etecsa.tm.ecommerce.Dyporpu9vbM.G6liG5If2lu.njwILmSkGJ();
-            province.setCod_provincia(user.getProvince().getCod_provincia());
-            province.setAbreviatura(user.getProvince().getAbreviatura());
-            province.setNombre(user.getProvince().getNombre());
-            result.setProvince(province);
-        }
-        if (user.getMunicipality() != null) {
-            cu.etecsa.tm.ecommerce.Dyporpu9vbM.G6liG5If2lu.I7Szcu2IgpM municipality =
-                    new cu.etecsa.tm.ecommerce.Dyporpu9vbM.G6liG5If2lu.I7Szcu2IgpM();
-            municipality.setId(user.getMunicipality().getId());
-            municipality.setCod_provincia(user.getMunicipality().getCod_provincia());
-            municipality.setCod_municipio(user.getMunicipality().getCod_municipio());
-            municipality.setAbreviatura(user.getMunicipality().getAbreviatura());
-            municipality.setNombre(user.getMunicipality().getNombre());
-            result.setMunicipality(municipality);
-        }
-        return result;
-    }
-
     @Override // androidx.fragment.app.Fragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == 1) {
@@ -235,7 +183,7 @@ public class ChildUserListFragment extends Fragment implements ChildUserPresente
 
     /* JADX INFO: Access modifiers changed from: private */
     public void mostrarCrearUser() {
-        ibvd0DUkXb dialogFrag = new ibvd0DUkXb();
+        ChildUserEditorDialog dialogFrag = new ChildUserEditorDialog();
         dialogFrag.setListener(this);
         if (dialogFrag.getDialog() != null) {
             dialogFrag.getDialog().setCanceledOnTouchOutside(true);
@@ -262,8 +210,8 @@ public class ChildUserListFragment extends Fragment implements ChildUserPresente
         });
     }
 
-    private void mostrarUpdateUser(ME8KWex9OS.YjMcWATWMD userChild) {
-        ibvd0DUkXb dialogFrag = ibvd0DUkXb.newInstance(userChild);
+    private void mostrarUpdateUser(UserWithRolesResponse.User userChild) {
+        ChildUserEditorDialog dialogFrag = ChildUserEditorDialog.newInstance(userChild);
         dialogFrag.setListener(this);
         if (dialogFrag.getDialog() != null) {
             dialogFrag.getDialog().setCanceledOnTouchOutside(true);
@@ -298,7 +246,7 @@ public class ChildUserListFragment extends Fragment implements ChildUserPresente
         return activeNetwork != null && activeNetwork.isConnected();
     }
 
-    @Override // cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.p5UHWIhp4aH
+    @Override // cu.etecsa.tm.ecommerce.LaIvmOMkyve.isyTi1whjIo.ChildUserRefreshCallback
     public void refreshData() {
         if (isOnline()) {
             this.usersListPresenter.list();
@@ -310,10 +258,10 @@ public class ChildUserListFragment extends Fragment implements ChildUserPresente
 
     /* JADX INFO: Access modifiers changed from: private */
     public void mostrarPermisos(int id, boolean activo) {
-        GB0CGE0H88.PermisosDialogRequest request = new GB0CGE0H88.PermisosDialogRequest();
+        ChildUserPermissionsDialog.PermisosDialogRequest request = new ChildUserPermissionsDialog.PermisosDialogRequest();
         request.setEstado(activo);
         request.setIdUsuario(id);
-        GB0CGE0H88 dialogFrag = GB0CGE0H88.newInstance(request);
+        ChildUserPermissionsDialog dialogFrag = ChildUserPermissionsDialog.newInstance(request);
         dialogFrag.setTargetFragment(this, 1);
         dialogFrag.show(getFragmentManager(), "fragment_alert");
     }

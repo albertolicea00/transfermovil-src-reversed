@@ -347,23 +347,6 @@ public class ApiClient {
 
     // --- Inner classes ---
 
-    /** Minimal API response wrapper. */
-    public static class ApiResponse {
-        private boolean error;
-        private int httpCode;
-        private String message;
-        private JSONObject jsonObject;
-
-        public boolean isError() { return error; }
-        public void setError(boolean error) { this.error = error; }
-        public int getHttpCode() { return httpCode; }
-        public void setHttpCode(int code) { this.httpCode = code; }
-        public String getMessage() { return message; }
-        public void setMessage(String msg) { this.message = msg; }
-        public JSONObject getJsonObject() { return jsonObject; }
-        public void setJsonObject(JSONObject obj) { this.jsonObject = obj; }
-    }
-
     /** OkHttp async callback that fills ApiResponse and counts down latch. */
     private static class ResponseCallback implements Callback {
         private final ApiResponse response;
@@ -379,7 +362,7 @@ public class ApiClient {
         @Override
         public void onFailure(Call call, IOException e) {
             response.setError(true);
-            response.setMessage(e.getMessage());
+            response.setMenssaje(e.getMessage());
             latch.countDown();
         }
 
@@ -388,8 +371,8 @@ public class ApiClient {
             try {
                 int code = resp.networkResponse().code();
                 String message = resp.networkResponse().message();
-                response.setHttpCode(code);
-                response.setMessage(message != null ? message : "error");
+                response.setCodigoHTTP(code);
+                response.setMenssaje(message != null ? message : "error");
 
                 try {
                     response.setJsonObject(new JSONObject(resp.body().string()));

@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements zWwX278fcd {
                     break;
                 case 2:
                     Log.i(this.HEAD_LOG + "initResult", "LOGIN_SIN_TOKEN");
-                    Intent intent = new Intent(this, (Class<?>) C1b1PWKeZSE.class);
+                    Intent intent = new Intent(this, (Class<?>) CredentialLoginActivity.class);
                     startActivity(intent);
                     finish();
                     break;
