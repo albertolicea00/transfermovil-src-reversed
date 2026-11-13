@@ -7,21 +7,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletPinEntryFragment;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
 import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
-import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
 import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 import java.util.ArrayList;
@@ -33,30 +28,32 @@ import java.util.List;
  */
 public class WalletOperationsTabFragment extends Fragment {
     public Context context;
-    public vD9rc3MbTL.OnItemClickListener onItemClickListener = new vD9rc3MbTL.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletOperationsTabFragment.1
-        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
-        public void onItemClick(View view, int position) {
-        }
+    private enum Action { AUTHENTICATE, DISCONNECT }
 
-        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
-        public void onGetItemClick(View view, FdonIAFI9w operacion) {
-            FragmentManager mFragmentManager = WalletOperationsTabFragment.this.getActivity().getSupportFragmentManager();
-            FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-            if (operacion != null) {
-                switch (AnonymousClass4.$SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[operacion.ordinal()]) {
-                    case 1:
-                        mFragmentTransaction.replace(R.id.containerView, new WalletPinEntryFragment()).addToBackStack(null).commit();
-                        break;
-                    case 2:
-                        WalletOperationsTabFragment.this.showDialogCerrarSession();
-                        break;
-                    default:
-                        Toast.makeText(WalletOperationsTabFragment.this.context, operacion.toString(), 1).show();
-                        break;
-                }
-            }
+    private static final class MenuRow {
+        final String title;
+        final String subtitle;
+        final int icon;
+        final Action action;
+
+        MenuRow(String title, String subtitle, int icon, Action action) {
+            this.title = title;
+            this.subtitle = subtitle;
+            this.icon = icon;
+            this.action = action;
         }
-    };
+    }
+
+    private void selectAction(Action action) {
+        if (action == Action.AUTHENTICATE) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.containerView, new WalletPinEntryFragment())
+                    .addToBackStack(null).commit();
+        } else if (action == Action.DISCONNECT) {
+            showDialogCerrarSession();
+        }
+    }
+
     public View rootView;
     public RecyclerView rvseguridad;
 
@@ -75,42 +72,64 @@ public class WalletOperationsTabFragment extends Fragment {
     }
 
     private void initData() {
-        List<WUULVgZq02> itemsOperaciones = new ArrayList<>();
-        WUULVgZq02 autenticarse = new WUULVgZq02();
-        autenticarse.setTitulo(getString(R.string.tx_autenticarse));
-        autenticarse.setSubtitulo(getString(R.string.tx_acceder_al_sistema));
-        autenticarse.setIcono(R.drawable.ic_autenticacion_bolsa);
-        Integer num = rBXnNc0Kx4.Post;
-        autenticarse.setType(num);
-        autenticarse.setOperacion(FdonIAFI9w.BOLSAAutenticarse);
-        itemsOperaciones.add(autenticarse);
-        WUULVgZq02 close = new WUULVgZq02();
-        close.setTitulo(this.context.getString(R.string.banco_desconectar));
-        close.setSubtitulo(this.context.getString(R.string.banco_sub_desconectar));
-        close.setIcono(R.drawable.ic_desconectarse_bolsa);
-        close.setType(num);
-        close.setOperacion(FdonIAFI9w.BOLSADesconectar);
-        itemsOperaciones.add(close);
-        vD9rc3MbTL adapterSeguridad = new vD9rc3MbTL(this.context, itemsOperaciones);
-        this.rvseguridad.setAdapter(adapterSeguridad);
-        adapterSeguridad.setOnItemClickListener(this.onItemClickListener);
+        List<MenuRow> rows = new ArrayList<>();
+        rows.add(new MenuRow(getString(R.string.tx_autenticarse),
+                getString(R.string.tx_acceder_al_sistema),
+                R.drawable.ic_autenticacion_bolsa, Action.AUTHENTICATE));
+        rows.add(new MenuRow(context.getString(R.string.banco_desconectar),
+                context.getString(R.string.banco_sub_desconectar),
+                R.drawable.ic_desconectarse_bolsa, Action.DISCONNECT));
+        rvseguridad.setAdapter(new MenuAdapter(rows));
     }
 
-    /* JADX INFO: renamed from: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletOperationsTabFragment$4, reason: invalid class name */
-    public static /* synthetic */ class AnonymousClass4 {
-        public static final /* synthetic */ int[] $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w;
+    private final class MenuAdapter extends RecyclerView.Adapter<RowHolder> {
+        private final List<MenuRow> rows;
 
-        static {
-            int[] iArr = new int[FdonIAFI9w.values().length];
-            $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w = iArr;
-            try {
-                iArr[FdonIAFI9w.BOLSAAutenticarse.ordinal()] = 1;
-            } catch (NoSuchFieldError e) {
-            }
-            try {
-                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSADesconectar.ordinal()] = 2;
-            } catch (NoSuchFieldError e2) {
-            }
+        MenuAdapter(List<MenuRow> rows) {
+            this.rows = rows;
+        }
+
+        @Override
+        public RowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.dpiivfe2yk6mn, parent, false);
+            return new RowHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(RowHolder holder, int position) {
+            MenuRow row = rows.get(position);
+            holder.title.setText(row.title);
+            holder.subtitle.setText(row.subtitle);
+            holder.icon.setImageResource(row.icon);
+            holder.action = row.action;
+        }
+
+        @Override
+        public int getItemCount() {
+            return rows.size();
+        }
+    }
+
+    private final class RowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        final TextView title;
+        final TextView subtitle;
+        final ImageView icon;
+        Action action;
+
+        RowHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.titulo);
+            subtitle = (TextView) view.findViewById(R.id.subtitulo);
+            icon = (ImageView) view.findViewById(R.id.icono);
+            view.findViewById(R.id.mainHolder).setOnClickListener(this);
+            view.setClickable(true);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            selectAction(action);
         }
     }
 

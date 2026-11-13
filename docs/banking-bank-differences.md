@@ -54,3 +54,25 @@ This review establishes the local metadata rules, not gateway acceptance or
 full feature equivalence. Validation was a static comparison against the
 method's bytecode branches and catch handlers; no runtime tests were run for
 this change.
+
+
+## BFI external-payment link callback review
+
+`banking/ui/bfi/BfiExternalPaymentFragment.onActivityResult()` corresponds to
+`B0jOLrWx09th/VW6IL66KC6M/Eqj43O0pUx.smali` →
+`onActivityResult(IILandroid/content/Intent;)V`. For the imported payment-link
+branch, bytecode groups JSON writes into three ranges: transaction/amount,
+currency, and provider/version. Their `JSONException` handlers (`:catch_3`,
+`:catch_2`, and `:catch_1`) all join `:goto_2`, which invokes
+`Throwable.printStackTrace()`, before `:goto_3` calls `JSONCompleteFields()` and
+`putData()`.
+
+The clean reconstruction printed the provider/version failure but silently
+assigned dead aliases for the other two failure branches. Those two branches
+now print the original exception as the APK does. The request construction,
+partial JSON object, continued field completion, and outer `Enlace incorrecto`
+notification behavior are retained. This restores diagnostics, not a new
+validation rule or a successful-payment guarantee. The comparison was static
+against the exact method's bytecode catch/continuation labels; no tests or
+carrier requests were run. No divergence in the selector 30/31 submission
+logic is claimed by this callback review.

@@ -785,9 +785,11 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
                             }
                         } catch (JSONException e3) {
                             JSONException e = e3;
+                            e.printStackTrace();
                         }
                     } catch (JSONException e4) {
                         JSONException e = e4;
+                        e.printStackTrace();
                     }
                     JSONCompleteFields(obj.toString());
                     putData();
