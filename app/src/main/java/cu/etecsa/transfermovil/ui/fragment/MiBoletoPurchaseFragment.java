@@ -53,7 +53,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.As6QBoLoQJ;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
@@ -257,7 +257,7 @@ public class MiBoletoPurchaseFragment extends Fragment implements pAzq93vIl3.Uss
         this.spOferta.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.MiBoletoPurchaseFragment$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                this.f$0.lambda$onCreateView$0(view);
+                MiBoletoPurchaseFragment.this.lambda$onCreateView$0(view);
             }
         });
         Button btnActualizar = (Button) this.rootView.findViewById(R.id.btnActualizarOfertas);
@@ -270,7 +270,7 @@ public class MiBoletoPurchaseFragment extends Fragment implements pAzq93vIl3.Uss
         this.btHelp.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.MiBoletoPurchaseFragment$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                this.f$0.lambda$onCreateView$1(view);
+                MiBoletoPurchaseFragment.this.lambda$onCreateView$1(view);
             }
         });
         this.btReload.setOnClickListener(new AnonymousClass4());
@@ -387,7 +387,7 @@ public class MiBoletoPurchaseFragment extends Fragment implements pAzq93vIl3.Uss
         if (this.isPartialUSSD) {
             this.manager.principalEnviarUSSD(this.context, "110", "118", "04", this.MAX_PARAMETERS_PQUETE, cadena, msg2, group, getFragmentManager());
         } else {
-            FBsQzP3Zfj.actionCallUSSDBackHttp(this.context, "118", cadena, spannableString, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBackHttp(this.context, "118", cadena, spannableString, group, getFragmentManager());
         }
     }
 
@@ -733,6 +733,8 @@ public class MiBoletoPurchaseFragment extends Fragment implements pAzq93vIl3.Uss
                 if (intervaloFechas.equals("-")) {
                     MiBoletoPurchaseFragment.this.configurarFechasPorDefecto(sum);
                 } else {
+                    // APK TBaFnBLjEA$10.onClick: all parse/UI failures join one
+                    // catch handler; successful ranges skip that handler.
                     try {
                         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
                         String[] fechas = intervaloFechas.split("-");
@@ -742,102 +744,52 @@ public class MiBoletoPurchaseFragment extends Fragment implements pAzq93vIl3.Uss
                         hoy.set(13, 0);
                         hoy.set(14, 0);
                         Date fechaActual = hoy.getTime();
-                        try {
-                            if (fechas.length == 2) {
-                                Date fechaInicioIntervalo = sdf.parse(fechas[0].trim());
-                                Date fechaFinIntervalo = sdf.parse(fechas[1].trim());
-                                if (validDays > 0) {
-                                    try {
-                                        Calendar calFechaMinima = Calendar.getInstance();
-                                        calFechaMinima.setTime(fechaActual);
-                                        calFechaMinima.add(5, validDays);
-                                        Date fechaMinimaDisponible = calFechaMinima.getTime();
-                                        if (fechaMinimaDisponible.after(fechaInicioIntervalo)) {
-                                            try {
-                                                minDate = fechaMinimaDisponible.getTime();
-                                            } catch (Exception e) {
-                                                e = e;
-                                            }
-                                        } else {
-                                            minDate = fechaInicioIntervalo.getTime();
-                                        }
-                                        try {
-                                            if (minDate > fechaFinIntervalo.getTime()) {
-                                                try {
-                                                    try {
-                                                        Toast.makeText(MiBoletoPurchaseFragment.this.context, "No hay fechas disponibles para esta oferta", 0).show();
-                                                        return;
-                                                    } catch (Exception e2) {
-                                                        e = e2;
-                                                    }
-                                                } catch (Exception e3) {
-                                                    e = e3;
-                                                }
-                                            } else {
-                                                try {
-                                                    long maxDate = fechaFinIntervalo.getTime();
-                                                    MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMinDate(minDate);
-                                                    try {
-                                                        MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMaxDate(maxDate);
-                                                        Calendar calMinDate = Calendar.getInstance();
-                                                        calMinDate.setTimeInMillis(minDate);
-                                                        MiBoletoPurchaseFragment.this.fIniciodatePicker.updateDate(calMinDate.get(1), calMinDate.get(2), calMinDate.get(5));
-                                                    } catch (Exception e4) {
-                                                        e = e4;
-                                                        Log.e("FechaConfig", "Error al parsear fechas: " + e.getMessage());
-                                                        MiBoletoPurchaseFragment.this.configurarFechasPorDefecto(sum);
-                                                    }
-                                                } catch (Exception e5) {
-                                                    e = e5;
-                                                }
-                                            }
-                                        } catch (Exception e6) {
-                                            e = e6;
-                                        }
-                                    } catch (Exception e7) {
-                                        e = e7;
-                                    }
-                                    Log.e("FechaConfig", "Error al parsear fechas: " + e.getMessage());
-                                    MiBoletoPurchaseFragment.this.configurarFechasPorDefecto(sum);
-                                } else {
-                                    long minDate2 = fechaInicioIntervalo.before(fechaActual) ? fechaActual.getTime() : fechaInicioIntervalo.getTime();
-                                    long maxDate2 = fechaFinIntervalo.getTime();
-                                    MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMinDate(minDate2);
-                                    MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMaxDate(maxDate2);
-                                    Calendar calMinDate2 = Calendar.getInstance();
-                                    calMinDate2.setTimeInMillis(minDate2);
-                                    MiBoletoPurchaseFragment.this.fIniciodatePicker.updateDate(calMinDate2.get(1), calMinDate2.get(2), calMinDate2.get(5));
+                        if (fechas.length == 2) {
+                            Date inicio = sdf.parse(fechas[0].trim());
+                            Date fin = sdf.parse(fechas[1].trim());
+                            if (validDays > 0) {
+                                Calendar minimo = Calendar.getInstance();
+                                minimo.setTime(fechaActual);
+                                minimo.add(5, validDays);
+                                Date disponible = minimo.getTime();
+                                minDate = disponible.after(inicio) ? disponible.getTime() : inicio.getTime();
+                                if (minDate > fin.getTime()) {
+                                    Toast.makeText(MiBoletoPurchaseFragment.this.context,
+                                            "No hay fechas disponibles para esta oferta", 0).show();
+                                    return;
                                 }
-                            } else if (fechas.length == 1) {
-                                Date fechaUnica = sdf.parse(fechas[0].trim());
-                                if (validDays > 0) {
-                                    Calendar fechaLimiteCompra = Calendar.getInstance();
-                                    fechaLimiteCompra.setTime(fechaUnica);
-                                    fechaLimiteCompra.add(5, -validDays);
-                                    if (!fechaActual.before(fechaLimiteCompra.getTime()) || fechaActual.after(fechaUnica)) {
-                                        Toast.makeText(MiBoletoPurchaseFragment.this.context, "Esta fecha ya no está disponible para compra", 0).show();
-                                        MiBoletoPurchaseFragment.this.configurarFechasPorDefecto(sum);
-                                        return;
-                                    } else {
-                                        MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMinDate(fechaUnica.getTime());
-                                        MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMaxDate(fechaUnica.getTime());
-                                        Calendar calFechaUnica = Calendar.getInstance();
-                                        calFechaUnica.setTime(fechaUnica);
-                                        MiBoletoPurchaseFragment.this.fIniciodatePicker.updateDate(calFechaUnica.get(1), calFechaUnica.get(2), calFechaUnica.get(5));
-                                    }
-                                } else {
-                                    MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMinDate(fechaUnica.getTime());
-                                    MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMaxDate(fechaUnica.getTime());
-                                    Calendar calFechaUnica2 = Calendar.getInstance();
-                                    calFechaUnica2.setTime(fechaUnica);
-                                    MiBoletoPurchaseFragment.this.fIniciodatePicker.updateDate(calFechaUnica2.get(1), calFechaUnica2.get(2), calFechaUnica2.get(5));
+                            } else {
+                                minDate = inicio.before(fechaActual) ? fechaActual.getTime() : inicio.getTime();
+                            }
+                            MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMinDate(minDate);
+                            MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMaxDate(fin.getTime());
+                            Calendar seleccion = Calendar.getInstance();
+                            seleccion.setTimeInMillis(minDate);
+                            MiBoletoPurchaseFragment.this.fIniciodatePicker.updateDate(
+                                    seleccion.get(1), seleccion.get(2), seleccion.get(5));
+                        } else if (fechas.length == 1) {
+                            Date fecha = sdf.parse(fechas[0].trim());
+                            if (validDays > 0) {
+                                Calendar limite = Calendar.getInstance();
+                                limite.setTime(fecha);
+                                limite.add(5, -validDays);
+                                if (!fechaActual.before(limite.getTime()) || fechaActual.after(fecha)) {
+                                    Toast.makeText(MiBoletoPurchaseFragment.this.context,
+                                            "Esta fecha ya no está disponible para compra", 0).show();
+                                    MiBoletoPurchaseFragment.this.configurarFechasPorDefecto(sum);
+                                    return;
                                 }
                             }
-                        } catch (Exception e8) {
-                            e = e8;
+                            MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMinDate(fecha.getTime());
+                            MiBoletoPurchaseFragment.this.fIniciodatePicker.getDatePicker().setMaxDate(fecha.getTime());
+                            Calendar seleccion = Calendar.getInstance();
+                            seleccion.setTime(fecha);
+                            MiBoletoPurchaseFragment.this.fIniciodatePicker.updateDate(
+                                    seleccion.get(1), seleccion.get(2), seleccion.get(5));
                         }
-                    } catch (Exception e9) {
-                        e = e9;
+                    } catch (Exception failure) {
+                        Log.e("FechaConfig", "Error al parsear fechas: " + failure.getMessage());
+                        MiBoletoPurchaseFragment.this.configurarFechasPorDefecto(sum);
                     }
                 }
                 MiBoletoPurchaseFragment.this.fIniciodatePicker.show();
@@ -1016,7 +968,7 @@ public class MiBoletoPurchaseFragment extends Fragment implements pAzq93vIl3.Uss
         FragmentActivity activity = getActivity();
         uyh0pxs9m37in.toString();
         Bundle arg = new Bundle();
-        arg.putSerializable("Nl0yptXmjQ", Nl0yptXmjQ.MiBoletoPurchaseFragment);
+        arg.putSerializable("Nl0yptXmjQ", Nl0yptXmjQ.TBaFnBLjEA);
         arg.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.MiTransfer);
         saveFormData();
         switch (uyh0pxs9m37in.getItemId()) {

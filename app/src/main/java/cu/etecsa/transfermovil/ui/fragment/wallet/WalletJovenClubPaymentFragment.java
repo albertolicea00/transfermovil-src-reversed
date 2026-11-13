@@ -12,7 +12,7 @@ import android.widget.Button;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
@@ -128,7 +128,7 @@ public class WalletJovenClubPaymentFragment extends BaseBankingFragment {
         if (this.isPartialUSSD) {
             this.manager.principalEnviarUSSD(this.context, "110", "93", this.agencyL, this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         } else {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "93", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "93", cadena, msg, group, getFragmentManager());
         }
     }
 

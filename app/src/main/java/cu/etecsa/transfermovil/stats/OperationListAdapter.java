@@ -19,7 +19,7 @@ import java.util.List;
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B21UyndcVvF.lkLP9buUCl
  * @fingerprint Adapter binding title, subtitle, and icon for operation items with click listener and inner ViewHolder
  */
-public class OperationListAdapter extends RecyclerView.Adapter<OperationItemViewHolder> {
+public class OperationListAdapter extends RecyclerView.Adapter<OperationListAdapter.InnerViewHolder> {
     private Context context;
     private List<OperationListItem> itemList;
     public OnItemClickListener mItemClickListener;
@@ -34,14 +34,14 @@ public class OperationListAdapter extends RecyclerView.Adapter<OperationItemView
     }
 
     @Override
-    public OperationItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public InnerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dpiivfe2yk6mn, viewGroup, false);
-        OperationItemViewHolder viewHolder = new OperationItemViewHolder(view);
+        InnerViewHolder viewHolder = new InnerViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(OperationItemViewHolder customViewHolder, int i) {
+    public void onBindViewHolder(InnerViewHolder customViewHolder, int i) {
         customViewHolder.tituloTextView.setText(this.itemList.get(i).getTitulo());
         customViewHolder.subtituloTextView.setText(this.itemList.get(i).getSubtitulo());
         customViewHolder.iconoImageView.setImageResource(this.itemList.get(i).getIcono());

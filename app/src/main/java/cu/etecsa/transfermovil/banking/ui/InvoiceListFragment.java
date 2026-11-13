@@ -88,7 +88,7 @@ public class InvoiceListFragment extends Fragment implements XvulaG5FAh.ViewHold
             public void onClick(View v) {
                 FragmentManager mFragmentManager = InvoiceListFragment.this.getActivity().getSupportFragmentManager();
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-                bJaiFoVYfK editFactura = new bJaiFoVYfK();
+                InvoiceEditFragment editFactura = new InvoiceEditFragment();
                 mFragmentTransaction.replace(R.id.containerView, editFactura).addToBackStack(null).commit();
             }
         });
@@ -162,7 +162,7 @@ public class InvoiceListFragment extends Fragment implements XvulaG5FAh.ViewHold
         Factura Factura = this.FacturaLists.get(position);
         FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        bJaiFoVYfK editFijo = new bJaiFoVYfK();
+        InvoiceEditFragment editFijo = new InvoiceEditFragment();
         Bundle b = new Bundle();
         b.putString("Id", String.valueOf(Factura.getId()));
         editFijo.setArguments(b);

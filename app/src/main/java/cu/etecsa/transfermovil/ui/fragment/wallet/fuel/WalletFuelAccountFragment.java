@@ -20,7 +20,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import com.j256.ormlite.field.FieldType;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
@@ -131,7 +131,7 @@ public class WalletFuelAccountFragment extends BaseBankingFragment {
             String msg = "Confirme que desea comprar un cupón de combustible por el importe de " + numberAsString + " CUP.";
             ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
             if (!this.isPartialUSSD) {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "35", cadena, msg, group, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "35", cadena, msg, group, getFragmentManager());
             } else {
                 this.manager.principalEnviarUSSD(this.context, "110", "35", this.agenciaL, this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
             }

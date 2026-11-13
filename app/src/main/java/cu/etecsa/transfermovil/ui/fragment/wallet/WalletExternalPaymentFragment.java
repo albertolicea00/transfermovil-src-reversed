@@ -21,7 +21,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Client;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TarjetaPropia;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.qTDVwLFEjE;
@@ -223,7 +223,7 @@ public class WalletExternalPaymentFragment extends BaseBankingFragment {
         String msg = "Confirme los siguientes datos de la tarjeta propia a recargar: Serie: " + this.serie + " importe a recargar: " + numberAsString + " " + this.monedaSerie + ".";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "77", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "77", cadena, msg, group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "77", this.agencyL, this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         }

@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.*;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -46,7 +46,7 @@ public class BfiConsultarPrelacionPagoFragment extends BaseTwoAccountFragment {
         nuevoDatos();
         String cadena = this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "28", cadena, "¿Desea realizar la consulta de la prelación de pago?", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "28", cadena, "¿Desea realizar la consulta de la prelación de pago?", group, getFragmentManager());
     }
 
     @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b

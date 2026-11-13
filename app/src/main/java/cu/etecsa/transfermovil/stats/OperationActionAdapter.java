@@ -20,7 +20,7 @@ import java.util.List;
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL
  * @fingerprint Adapter displaying operation items with title/subtitle/icon and dispatching both position and operation-typed click events
  */
-public class OperationActionAdapter extends RecyclerView.Adapter<OperationItemViewHolder> {
+public class OperationActionAdapter extends RecyclerView.Adapter<OperationActionAdapter.InnerViewHolder> {
     private Context context;
     private List<OperationListItem> itemList;
     public OnItemClickListener mItemClickListener;
@@ -37,17 +37,18 @@ public class OperationActionAdapter extends RecyclerView.Adapter<OperationItemVi
     }
 
     @Override
-    public OperationItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public InnerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dpiivfe2yk6mn, viewGroup, false);
-        OperationItemViewHolder viewHolder = new OperationItemViewHolder(view);
+        InnerViewHolder viewHolder = new InnerViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(OperationItemViewHolder customViewHolder, int i) {
+    public void onBindViewHolder(InnerViewHolder customViewHolder, int i) {
         customViewHolder.tituloTextView.setText(this.itemList.get(i).getTitulo());
         customViewHolder.subtituloTextView.setText(this.itemList.get(i).getSubtitulo());
         customViewHolder.iconoImageView.setImageResource(this.itemList.get(i).getIcono());
+        customViewHolder.operacion = this.itemList.get(i).getOperacion();
     }
 
     @Override

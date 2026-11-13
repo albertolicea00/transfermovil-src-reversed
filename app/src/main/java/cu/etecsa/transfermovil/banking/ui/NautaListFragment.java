@@ -87,7 +87,7 @@ public class NautaListFragment extends Fragment implements XvulaG5FAh.ViewHolder
             public void onClick(View v) {
                 FragmentManager mFragmentManager = NautaListFragment.this.getActivity().getSupportFragmentManager();
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-                l4Cg8Kc9ars editNauta = new l4Cg8Kc9ars();
+                NautaBankEditFragment editNauta = new NautaBankEditFragment();
                 mFragmentTransaction.replace(R.id.containerView, editNauta).addToBackStack(null).commit();
             }
         });
@@ -159,7 +159,7 @@ public class NautaListFragment extends Fragment implements XvulaG5FAh.ViewHolder
         Nauta nauta = this.nautaLists.get(position);
         FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        l4Cg8Kc9ars editFijo = new l4Cg8Kc9ars();
+        NautaBankEditFragment editFijo = new NautaBankEditFragment();
         Bundle b = new Bundle();
         b.putString("Id", String.valueOf(nauta.getId()));
         editFijo.setArguments(b);

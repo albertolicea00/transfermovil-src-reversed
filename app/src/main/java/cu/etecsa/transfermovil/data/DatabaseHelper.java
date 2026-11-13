@@ -14,7 +14,7 @@ import cu.etecsa.transfermovil.core.enums.BankType;
 import cu.etecsa.transfermovil.core.enums.Currency;
 import cu.etecsa.transfermovil.core.enums.OperationType;
 import cu.etecsa.transfermovil.data.entity.*;
-import cu.etecsa.transfermovil.stats.TransactionStatsModel;
+import cu.etecsa.transfermovil.stats.ServiceSummaryItem;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -223,13 +223,13 @@ public class DatabaseHelper {
         }
     }
 
-    public List<TransactionStatsModel> getResumenRecordLists() {
-        List<TransactionStatsModel> resumen = new ArrayList<>();
+    public List<ServiceSummaryItem> getResumenRecordLists() {
+        List<ServiceSummaryItem> resumen = new ArrayList<>();
         try {
             GenericRawResults<String[]> rawResults = getHelper().getRecordSMSListDao().queryRaw(
                     "select servicio, moneda,sum(monto), count(id) from recordsms group by servicio, moneda order by servicio, moneda", new String[0]);
             for (String[] resultArray : rawResults) {
-                TransactionStatsModel item = new TransactionStatsModel();
+                ServiceSummaryItem item = new ServiceSummaryItem();
                 item.setServicio(resultArray[0]);
                 item.setMoneda(resultArray[1]);
                 item.setMonto(resultArray[2]);

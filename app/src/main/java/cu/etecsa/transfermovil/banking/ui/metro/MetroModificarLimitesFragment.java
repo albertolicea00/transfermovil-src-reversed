@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.transfermovil.banking.ui.bfi.BaseBankingFragment;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
@@ -73,7 +73,7 @@ public class MetroModificarLimitesFragment extends BaseBankingFragment {
         if (this.isPartialUSSD) {
             this.manager.principalEnviarUSSD(this.context, "110", "61", "05", this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         } else {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "61", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "61", cadena, msg, group, getFragmentManager());
         }
     }
 

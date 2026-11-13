@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.sJ0peDJzVjo.e45kqwgCv4Ah.p8fd3aGf9lK */
@@ -59,7 +59,7 @@ public class WalletFuelActivateTokenFragment extends WalletFuelBaseFragment {
             String cadena = this.txSerie.getText().toString().trim();
             String msg = "¿Desea actualizar la clave del cupón de combustible con número de serie: " + cadena + " ? ";
             ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "39", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "39", cadena, msg, group, getFragmentManager());
         } catch (Exception e) {
             Toast.makeText(this.context, "Error intentelo de nuevo", 0).show();
         }

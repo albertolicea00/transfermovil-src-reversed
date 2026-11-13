@@ -84,7 +84,7 @@ public class LandlineListFragment extends Fragment implements XvulaG5FAh.ViewHol
             public void onClick(View v) {
                 FragmentManager mFragmentManager = LandlineListFragment.this.getActivity().getSupportFragmentManager();
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-                bflirTWE7f editFijo = new bflirTWE7f();
+                LandlineEditFragment editFijo = new LandlineEditFragment();
                 mFragmentTransaction.replace(R.id.containerView, editFijo).addToBackStack(null).commit();
             }
         });
@@ -153,7 +153,7 @@ public class LandlineListFragment extends Fragment implements XvulaG5FAh.ViewHol
         TelfFijo fijo = this.fijosLists.get(position);
         FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        bflirTWE7f editFijo = new bflirTWE7f();
+        LandlineEditFragment editFijo = new LandlineEditFragment();
         Bundle b = new Bundle();
         b.putString("Id", String.valueOf(fijo.getId()));
         editFijo.setArguments(b);

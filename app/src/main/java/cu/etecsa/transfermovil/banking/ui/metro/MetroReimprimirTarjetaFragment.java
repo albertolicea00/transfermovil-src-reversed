@@ -16,7 +16,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Municipio;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalBancaria;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.util.List;
@@ -41,9 +41,9 @@ public class MetroReimprimirTarjetaFragment extends BaseCommissionAccountFragmen
     public jN13TOyLMX.OnItemClickListener spClickMunicipio = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.hqlegRdVXsu.WoIpvvMtRp.2
         @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
         public void onItemClick(View view, int position) {
-            WoIpvvMtRp woIpvvMtRp = MetroReimprimirTarjetaFragment.this;
+            MetroReimprimirTarjetaFragment woIpvvMtRp = MetroReimprimirTarjetaFragment.this;
             woIpvvMtRp.municipio = woIpvvMtRp.municipioArrayAdapter.getItem(position);
-            WoIpvvMtRp woIpvvMtRp2 = MetroReimprimirTarjetaFragment.this;
+            MetroReimprimirTarjetaFragment woIpvvMtRp2 = MetroReimprimirTarjetaFragment.this;
             woIpvvMtRp2.sucursal = null;
             woIpvvMtRp2.spSucursal.setText(BuildConfig.FLAVOR);
             MetroReimprimirTarjetaFragment.this.loadSucursales(MetroReimprimirTarjetaFragment.this.municipio.getCod_provincia() + MetroReimprimirTarjetaFragment.this.municipio.getCod_municipio());
@@ -52,7 +52,7 @@ public class MetroReimprimirTarjetaFragment extends BaseCommissionAccountFragmen
     public jN13TOyLMX.OnItemClickListener spClickSucursal = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.hqlegRdVXsu.WoIpvvMtRp.3
         @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
         public void onItemClick(View view, int position) {
-            WoIpvvMtRp woIpvvMtRp = MetroReimprimirTarjetaFragment.this;
+            MetroReimprimirTarjetaFragment woIpvvMtRp = MetroReimprimirTarjetaFragment.this;
             woIpvvMtRp.sucursal = woIpvvMtRp.sucursalArrayAdapter.getItem(position);
         }
     };
@@ -100,7 +100,7 @@ public class MetroReimprimirTarjetaFragment extends BaseCommissionAccountFragmen
         nuevoDatos();
         String cadena = this.monedaTarjeta + "*" + this.cuentaOrigen + "*" + this.cuentaOrigenComision + "*" + municipioSeleccionado + "*" + surcursalSeleccionado;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "74", cadena, "¿Desea reimprimir su tarjeta?", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "74", cadena, "¿Desea reimprimir su tarjeta?", group, getFragmentManager());
     }
 
     @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b

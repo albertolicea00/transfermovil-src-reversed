@@ -151,6 +151,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Share the single `SvY0xjeNSz` PIN-auth implementation between BFI and Metro menus; route Metro to `BfiPinAuthFragment` and remove its duplicate screen copy.
 - [x] Share the single `umjSGajOy3` registration implementation between BFI and Metro menus; route Metro to `BfiRegistrationFragment` and remove its duplicate screen copy.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
+- [x] Compile all 475 clean Java files against explicit Android/APK-derived dependencies with zero errors; validate mock dispatch, smali-backed encoding, menu/adapter bodies, SMS labels/catalog failures, and MiBoleto date boundaries. Standalone APK and full runtime parity remain separate.
 
 ## Architecture & Navigation
 
@@ -165,7 +166,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Document the e-commerce Bulevar entry from both mode drawers and startup routing by token state.
 
 ## USSD / Telephony
-- [ ] Migrate the active `FBsQzP3Zfj` action overloads and operation routing into a clean USSD dispatch/navigation component.
+- [x] Migrate the active `FBsQzP3Zfj` action overloads and operation routing into a clean USSD dispatch/navigation component.
 
 - [ ] Complete the dedicated [USSD code catalog](docs/ussd-code-catalog.md): every executed code, purpose, construction algorithm, and source evidence.
 - [x] Generate a reproducible raw-source USSD appendix covering 797 invocation sites and 53 sink/template lines; document construction families, direct codes, offline vectors, and unresolved semantic dataflow.
@@ -464,7 +465,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [ ] Install APK on emulator and capture launch behavior
 - [ ] Capture logcat during registration/login flow
 - [ ] Inspect UI hierarchy and compare with static menu analysis
-- [ ] Test USSD code sending (with mock/test only)
+- [x] Test USSD code sending (with mock/test only)
 - [ ] Capture network traffic for API calls
 - [ ] Test deep link handling
 

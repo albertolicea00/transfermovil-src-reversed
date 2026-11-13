@@ -41,7 +41,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CuentaBanco;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
@@ -424,9 +424,9 @@ public class BfiTransferFragment extends Fragment implements pAzq93vIl3.UssdResp
         if (this.isPartialUSSD) {
             this.manager.principalEnviarUSSD(this.context, "110", "220", "08", this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         } else if (!this.isWithPin) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "220", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "220", cadena, msg, group, getFragmentManager());
         } else {
-            FBsQzP3Zfj.actionCallUSSDBackWithRetun(this.context, "220", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBackWithRetun(this.context, "220", cadena, msg, group, getFragmentManager());
         }
     }
 

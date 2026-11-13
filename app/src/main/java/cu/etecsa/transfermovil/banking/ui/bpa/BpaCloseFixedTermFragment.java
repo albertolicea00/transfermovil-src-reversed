@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.auVvnTnpCQ */
@@ -69,7 +69,7 @@ public class BpaCloseFixedTermFragment extends Fragment {
         String msg = "Desea cerrar la cuenta a plazo fijo: " + cuenta;
         String cadena = cuenta;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "82", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "82", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCuenta(String cuenta) {

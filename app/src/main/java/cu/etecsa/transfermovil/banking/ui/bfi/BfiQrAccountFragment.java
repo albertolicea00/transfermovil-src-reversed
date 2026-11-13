@@ -131,7 +131,7 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
     public boolean manipulateExtraQRData(String extraData, String idTransaccion, String noProveedor) {
         boolean isOk;
         Date fAhora;
-        boolean isVencida;
+        boolean isVencida = false;
         boolean isOk2 = true;
         try {
             String data = procesarExtra(extraData, noProveedor, idTransaccion);
@@ -186,12 +186,12 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
                                                 Toast.makeText(this.context, "QR no disponible", 1).show();
                                             }
                                         } catch (Exception e3) {
-                                            ex = e3;
+                                            Exception ex = e3;
                                             Log.e("EXC", ex.getMessage());
                                         }
                                     }
                                 } catch (Exception e4) {
-                                    ex = e4;
+                                    Exception ex = e4;
                                     fAhora = fAhora2;
                                 }
                                 try {
@@ -202,7 +202,7 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
                                             try {
                                                 Toast.makeText(this.context, "QR vencido", 1).show();
                                             } catch (Exception e5) {
-                                                ex = e5;
+                                                Exception ex = e5;
                                                 isVencida2 = true;
                                                 Log.e("EXC", ex.getMessage());
                                                 isVencida = isVencida2;
@@ -214,7 +214,7 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
                                         isVencida = false;
                                     }
                                 } catch (Exception e6) {
-                                    ex = e6;
+                                    Exception ex = e6;
                                 }
                                 if (isNoVigente || isVencida) {
                                     isOk2 = false;
@@ -228,7 +228,7 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
                                 this.isEnviarAuxDat = true;
                             }
                         } catch (Exception e7) {
-                            e = e7;
+                            Exception e = e7;
                             e.printStackTrace();
                             return isOk2;
                         }
@@ -252,7 +252,7 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
                         }
                     }
                 } catch (Exception e8) {
-                    e = e8;
+                    Exception e = e8;
                 }
             }
         } catch (Exception e9) {
@@ -282,7 +282,6 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
             this.dataSendQR = BuildConfig.FLAVOR;
             String idTransaccion = BuildConfig.FLAVOR;
             try {
-                try {
                     JSONObject jsonObj = new JSONObject(qrdata);
                     String importe = "0";
                     String moneda = "CUP";
@@ -377,15 +376,10 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
                     e = e;
                     e.printStackTrace();
                 } catch (Exception e2) {
-                    ex = e2;
+                    Exception ex = e2;
                     ex.printStackTrace();
                     Toast.makeText(this.context, "ERROR no es posible leer el Código QR.", 1);
                     this.isShareQR = false;
-                }
-            } catch (JSONException e3) {
-                e = e3;
-            } catch (Exception e4) {
-                ex = e4;
             }
         }
     }

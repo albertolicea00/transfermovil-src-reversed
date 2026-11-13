@@ -21,7 +21,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.EV9Tu0zIL4;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import java.util.Random;
 
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.F2leFVNWrdy */
@@ -88,7 +88,7 @@ public class BfiAssociateAccountFragment extends EV9Tu0zIL4 {
         String valorCoordenadas = this.inputCoordenadas.getText().toString().trim();
         String cadena = cuenta + "*" + coordenadasMatriz + "*" + valorCoordenadas;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "60", cadena, "Desea actualizar su cuenta", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "60", cadena, "Desea actualizar su cuenta", group, getFragmentManager());
     }
 
     private boolean validateCuenta(String cuenta) {

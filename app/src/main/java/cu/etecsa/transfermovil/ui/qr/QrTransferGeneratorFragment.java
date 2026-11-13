@@ -22,7 +22,7 @@ import cu.etecsa.transfermovil.data.DatabaseHelper;
 import cu.etecsa.transfermovil.data.BankCodeAccessor;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.transfermovil.core.enums.BankType;
-import cu.etecsa.transfermovil.core.OperationType;
+import cu.etecsa.transfermovil.core.enums.OperationType;
 
 /**
  * @original_apk_version 1.260416

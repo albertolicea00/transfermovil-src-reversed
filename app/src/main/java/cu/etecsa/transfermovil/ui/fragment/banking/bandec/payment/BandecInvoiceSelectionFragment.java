@@ -19,7 +19,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Factura;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -185,7 +185,7 @@ public class BandecInvoiceSelectionFragment extends Agg55uYctq {
         String cadena = this.operacion + "*" + idTipo + "*" + factura + "*" + this.monedaTarjeta + "*" + this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTelefono);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "52", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "52", cadena, msg, group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "52", "02", this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         }

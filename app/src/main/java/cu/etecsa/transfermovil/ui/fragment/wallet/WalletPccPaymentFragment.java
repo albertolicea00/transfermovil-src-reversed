@@ -25,7 +25,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import com.j256.ormlite.field.FieldType;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.util.List;
@@ -185,7 +185,7 @@ public class WalletPccPaymentFragment extends BaseBankingFragment {
         String cadena = ci + "*" + this.importe + "*" + this.monedaTarjeta + "*" + movilConfirmar + "*" + this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmElectricidad);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "7", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "7", cadena, msg, group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "7", this.agencyL, this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         }

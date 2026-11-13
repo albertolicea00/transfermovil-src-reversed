@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import java.util.Random;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -84,7 +84,7 @@ public class MetroCoordinatesTransferFragment extends Fragment {
         this.inputCoordenadas2.getText().toString().trim();
         String cadena = cuenta + "*" + coordenadasMatriz + "*" + valorCoordenadas;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "79", cadena, "Confirme que desea generar el código pin", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "79", cadena, "Confirme que desea generar el código pin", group, getFragmentManager());
     }
 
     private boolean validateCuenta(String cuenta) {

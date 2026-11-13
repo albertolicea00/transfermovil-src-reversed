@@ -10,7 +10,7 @@ import android.widget.TextView;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.transfermovil.data.DatabaseHelper;
 import cu.etecsa.transfermovil.core.enums.BankType;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.D0gaXBEFITec.ikSs6fqL5Q */
@@ -48,7 +48,7 @@ public class BandecAccountLimitQueryFragment extends BandecAccountSelectionFragm
         nuevoDatos();
         String cadena = this.monedaTarjeta + "*" + this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "62", cadena, "¿Desea consultar los límites de sus cuentas bancarias?", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "62", cadena, "¿Desea consultar los límites de sus cuentas bancarias?", group, getFragmentManager());
     }
 
     @Override // BandecAccountSelectionFragment

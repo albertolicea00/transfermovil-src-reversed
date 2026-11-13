@@ -17,7 +17,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ObligacionesOFA;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import java.util.ArrayList;
@@ -125,7 +125,7 @@ public class OfaContributionFragment extends qHxc7HcCDX implements pAzq93vIl3.Us
         } catch (Exception e) {
         }
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "94", cadena, "¿Desea realizar el pago? ", group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "94", cadena, "¿Desea realizar el pago? ", group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "94", "04", this.MAX_PARAMETERS_PQUETE, cadena, "¿Desea realizar el pago? ", group, getFragmentManager());
         }

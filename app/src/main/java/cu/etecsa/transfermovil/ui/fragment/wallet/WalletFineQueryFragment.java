@@ -15,7 +15,7 @@ import android.widget.DatePicker;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -223,7 +223,7 @@ public class WalletFineQueryFragment extends BaseBankingFragment {
         if (this.isPartialUSSD) {
             this.manager.principalEnviarUSSD(this.context, "110", "96", this.agenciaL, this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         } else {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "96", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "96", cadena, msg, group, getFragmentManager());
         }
     }
 

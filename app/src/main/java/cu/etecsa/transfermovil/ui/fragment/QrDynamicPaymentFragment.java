@@ -28,7 +28,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TMonedasWallet;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
@@ -309,7 +309,7 @@ public class QrDynamicPaymentFragment extends LgiFGRpiEl {
             }
             Log.i("CADENATM", cadena2);
             if (!isPartialUSSD) {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "31", cadena2, "¿Desea proceder con el pago?", group, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "31", cadena2, "¿Desea proceder con el pago?", group, getFragmentManager());
             } else {
                 this.manager.principalEnviarUSSD(this.context, "110", "31", agency, this.MAX_PARAMETERS_PQUETE, cadena2, "¿Desea proceder con el pago?", group, getFragmentManager());
             }
@@ -331,7 +331,7 @@ public class QrDynamicPaymentFragment extends LgiFGRpiEl {
             U6ucOCBccJ.pmoneda = 0;
             U6ucOCBccJ.pdata = BuildConfig.FLAVOR;
             Log.i("CADENATM", cadena4);
-            FBsQzP3Zfj.actionCallUSSDNOBack(this.context, this.activity, "30", cadena4, "¿Desea proceder con el pago?", group2, getFragmentManager());
+            UssdDispatcher.actionCallUSSDNOBack(this.context, this.activity, "30", cadena4, "¿Desea proceder con el pago?", group2, getFragmentManager());
         } else {
             if (this.isEnviarAuxDat) {
                 String movilConfirmar3 = "0000";
@@ -355,7 +355,7 @@ public class QrDynamicPaymentFragment extends LgiFGRpiEl {
             U6ucOCBccJ.pdata = BuildConfig.FLAVOR;
             Log.i("CADENATM", cadena3);
             if (!isPartialUSSD) {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "30", cadena3, "¿Desea proceder con el pago?", group3, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "30", cadena3, "¿Desea proceder con el pago?", group3, getFragmentManager());
             } else {
                 this.manager.principalEnviarUSSD(this.context, "110", "30", agency, this.MAX_PARAMETERS_PQUETE, cadena3, "¿Desea proceder con el pago?", group3, getFragmentManager());
             }
@@ -667,14 +667,14 @@ public class QrDynamicPaymentFragment extends LgiFGRpiEl {
                                     obj.put("numero_proveedor", new Integer(numero_proveedor));
                                     obj.put("version", BuildConfig.FLAVOR);
                                 } catch (JSONException e2) {
-                                    e = e2;
+                                    JSONException e = e2;
                                     e.printStackTrace();
                                 }
                             } catch (JSONException e3) {
-                                e = e3;
+                                JSONException e = e3;
                             }
                         } catch (JSONException e4) {
-                            e = e4;
+                            JSONException e = e4;
                         }
                         JSONCompleteFields(obj.toString());
                         putData();

@@ -88,7 +88,7 @@ public class PublicServiceListFragment extends Fragment implements XvulaG5FAh.Vi
             public void onClick(View v) {
                 FragmentManager mFragmentManager = PublicServiceListFragment.this.getActivity().getSupportFragmentManager();
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-                R2dyFo85vQ4 editServ = new R2dyFo85vQ4();
+                PublicServiceEditFragment editServ = new PublicServiceEditFragment();
                 mFragmentTransaction.replace(R.id.containerView, editServ).addToBackStack(null).commit();
             }
         });
@@ -162,7 +162,7 @@ public class PublicServiceListFragment extends Fragment implements XvulaG5FAh.Vi
         ServicioPublico servicioPublico = this.servicioPublicoList.get(position);
         FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        R2dyFo85vQ4 editFijo = new R2dyFo85vQ4();
+        PublicServiceEditFragment editFijo = new PublicServiceEditFragment();
         Bundle b = new Bundle();
         b.putString("Id", String.valueOf(servicioPublico.getId()));
         editFijo.setArguments(b);

@@ -6,26 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-
 import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.textfield.TextInputLayout;
+import cu.etecsa.transfermovil.banking.ui.bfi.BaseBankingFragment;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
-import cu.etecsa.transfermovil.banking.BankOperationBaseFragment;
-import cu.etecsa.transfermovil.banking.BankType;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
-
-/**
- * BPA fragment for temporarily modifying ATM/POS transaction limits.
- * <p>
- * Collects ATM limit, POS limit (auto-computes total), validates both are
- * positive, then sends USSD code "61" with "atm*pos*total*currency*account".
- *
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.qmcwKV1fzU
- * @original_apk_version 1.260416
- */
-public class BpaModifyLimitsFragment extends BankOperationBaseFragment {
-
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.qmcwKV1fzU */
+public class BpaModifyLimitsFragment extends BaseBankingFragment {
     private Button btnAceptar;
     private AutoCompleteTextView inputATM;
     private TextInputLayout inputLayoutATM;
@@ -34,119 +24,101 @@ public class BpaModifyLimitsFragment extends BankOperationBaseFragment {
     private AutoCompleteTextView inputPOS;
     private AutoCompleteTextView inputTOTAL;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.vx38bjtn0eckz, container, false);
-        context = container.getContext();
-
-        inputLayoutATM = (TextInputLayout) rootView.findViewById(R.id.input__layout_atm);
-        inputATM = (AutoCompleteTextView) rootView.findViewById(R.id.input_atm);
-        inputLayoutPOS = (TextInputLayout) rootView.findViewById(R.id.input__layout_pos);
-        inputPOS = (AutoCompleteTextView) rootView.findViewById(R.id.input_pos);
-        inputLayoutTOTAL = (TextInputLayout) rootView.findViewById(R.id.input__layout_total);
-        inputTOTAL = (AutoCompleteTextView) rootView.findViewById(R.id.input_limite_total);
-        inputLayoutTOTAL.setVisibility(View.GONE);
-
-        initComponentesCuentas(rootView, BankType.BPA);
-
-        Button button = (Button) rootView.findViewById(R.id.btn_aceptar);
-        btnAceptar = button;
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
+        this.rootView = inflater.inflate(R.layout.vx38bjtn0eckz, container, false);
+        this.context = container.getContext();
+        this.inputLayoutATM = (TextInputLayout) this.rootView.findViewById(R.id.input__layout_atm);
+        this.inputATM = (AutoCompleteTextView) this.rootView.findViewById(R.id.input_atm);
+        this.inputLayoutPOS = (TextInputLayout) this.rootView.findViewById(R.id.input__layout_pos);
+        this.inputPOS = (AutoCompleteTextView) this.rootView.findViewById(R.id.input_pos);
+        this.inputLayoutTOTAL = (TextInputLayout) this.rootView.findViewById(R.id.input__layout_total);
+        this.inputTOTAL = (AutoCompleteTextView) this.rootView.findViewById(R.id.input_limite_total);
+        this.inputLayoutTOTAL.setVisibility(8);
+        initComponentesCuentas(this.rootView, R1sDOSqZ2z.BPA);
+        Button button = (Button) this.rootView.findViewById(R.id.btn_aceptar);
+        this.btnAceptar = button;
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.qmcwKV1fzU.1
+            @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                submitForm();
+                BpaModifyLimitsFragment.this.submitForm();
             }
         });
-
-        return rootView;
+        return this.rootView;
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.Agg55uYctq
     public void submitForm() {
         super.submitForm();
         if (!validateCuenta() || !validateSumaApp() || !validateSelectionAccounts()) {
             return;
         }
-
-        String atm = inputATM.getText().toString().trim();
-        String pos = inputPOS.getText().toString().trim();
-
+        String atm = this.inputATM.getText().toString().trim();
+        String pos = this.inputPOS.getText().toString().trim();
         int sumaTotal = 0;
         try {
-            int atmValue = Integer.parseInt(atm);
-            int posValue = Integer.parseInt(pos);
-            sumaTotal = atmValue + posValue;
+            int atmF = Integer.parseInt(atm);
+            int posF = Integer.parseInt(pos);
+            sumaTotal = atmF + posF;
         } catch (Exception e) {
         }
         String total = String.valueOf(sumaTotal);
-
-        String msg = String.format(
-                "¿Desea modificar los límites temporalmente de sus cuentas bancarias? "
-                        + "Límites temporales establecidos: ATM: %s, POS:%s y Total: %s.",
-                atm, pos, total);
-        String cadena = atm + "*" + pos + "*" + total + "*" + monedaTarjeta + "*" + cuentaOrigen;
-        ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmLimiteBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(context, "61", cadena, msg, group, getFragmentManager());
+        String msg = String.format("¿Desea modificar los límites temporalmente de sus cuentas bancarias? Límites temporales establecidos: ATM: %s, POS:%s y Total: %s.", atm, pos, total);
+        String cadena = atm + "*" + pos + "*" + total + "*" + this.monedaTarjeta + "*" + this.cuentaOrigen;
+        ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmLimiteBanco);
+        UssdDispatcher.actionCallUSSDBack(this.context, "61", cadena, msg, group, getFragmentManager());
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.Agg55uYctq
     public void nuevoDatos() {
     }
 
-    /**
-     * Validates that both ATM and POS input fields are non-empty.
-     */
     private boolean validateCuenta() {
-        if (inputATM.getText().toString().trim().isEmpty()) {
-            inputLayoutATM.setError(getString(R.string.err_msg_empty_cuenta));
-            requestFocus(inputATM);
+        if (this.inputATM.getText().toString().trim().isEmpty()) {
+            this.inputLayoutATM.setError(getString(R.string.err_msg_empty_cuenta));
+            requestFocus(this.inputATM);
             return false;
         }
-        inputLayoutATM.setErrorEnabled(false);
-
-        if (inputPOS.getText().toString().trim().isEmpty()) {
-            inputLayoutPOS.setError(getString(R.string.err_msg_empty_cuenta));
-            requestFocus(inputPOS);
+        this.inputLayoutATM.setErrorEnabled(false);
+        if (this.inputPOS.getText().toString().trim().isEmpty()) {
+            this.inputLayoutPOS.setError(getString(R.string.err_msg_empty_cuenta));
+            requestFocus(this.inputPOS);
             return false;
         }
-        inputLayoutPOS.setErrorEnabled(false);
+        this.inputLayoutPOS.setErrorEnabled(false);
         return true;
     }
 
-    /**
-     * Validates that both ATM and POS values are positive numbers.
-     */
     private boolean validateSumaApp() {
         try {
-            float atm = Float.parseFloat(inputATM.getText().toString().trim());
-            float pos = Float.parseFloat(inputPOS.getText().toString().trim());
-
+            float atm = Float.parseFloat(this.inputATM.getText().toString().trim());
+            float pos = Float.parseFloat(this.inputPOS.getText().toString().trim());
             if (atm > 0.0f) {
-                inputLayoutATM.setErrorEnabled(false);
+                this.inputLayoutATM.setErrorEnabled(false);
                 if (pos > 0.0f) {
-                    inputLayoutPOS.setErrorEnabled(false);
+                    this.inputLayoutPOS.setErrorEnabled(false);
                     return true;
                 }
-                inputLayoutPOS.setError("El valor de POS debe ser mayor que cero");
-                requestFocus(inputPOS);
+                this.inputLayoutPOS.setError("El valor de POS debe ser mayor que cero");
+                requestFocus(this.inputPOS);
                 return false;
             }
-            inputLayoutATM.setError("El valor de ATM debe ser mayor que cero");
-            requestFocus(inputATM);
+            this.inputLayoutATM.setError("El valor de ATM debe ser mayor que cero");
+            requestFocus(this.inputATM);
             return false;
         } catch (Exception e) {
-            inputLayoutATM.setError("Valor incorrecto");
-            requestFocus(inputATM);
-            inputLayoutPOS.setError("Valor incorrecto");
+            this.inputLayoutATM.setError("Valor incorrecto");
+            requestFocus(this.inputATM);
+            this.inputLayoutPOS.setError("Valor incorrecto");
             return false;
         }
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3.UssdResponseObserver
     public void onUssdResponseReceived(String response) {
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3.UssdResponseObserver
     public void onCloseAndBack() {
         try {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

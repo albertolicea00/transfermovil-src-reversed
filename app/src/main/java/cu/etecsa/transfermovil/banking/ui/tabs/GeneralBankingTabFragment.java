@@ -14,326 +14,415 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import cu.etecsa.transfermovil.base.BaseMainActivity;
-import cu.etecsa.transfermovil.banking.BankOperationCode;
-import cu.etecsa.transfermovil.banking.ui.wallet.WalletLatestOperationsFragment;
-import cu.etecsa.transfermovil.stats.OperationItem;
-import cu.etecsa.transfermovil.stats.OperationListAdapter;
 import cu.etecsa.transfermovil.ui.fragment.BalanceQueryFragment;
+import cu.etecsa.transfermovil.ui.fragment.TicketIntegratedQueryFragment;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletLatestOperationsFragment;
+import cu.etecsa.transfermovil.ui.fragment.OfaVisitQueryFragment;
+import cu.etecsa.transfermovil.ui.fragment.TicketUpdateFragment;
+import cu.etecsa.transfermovil.ui.fragment.TicketLastOpsFragment;
+import cu.etecsa.transfermovil.ui.fragment.TicketStatusFragment;
+import cu.etecsa.transfermovil.ui.fragment.TicketReservationViewFragment;
+import cu.etecsa.transfermovil.ui.fragment.GeneralPhoneInvoiceQueryFragment;
+import cu.etecsa.transfermovil.ui.fragment.GeneralServiceDebtQueryFragment;
+import cu.etecsa.transfermovil.ui.fragment.GeneralWalletStatementFragment;
+import cu.etecsa.transfermovil.ui.fragment.wallet.WalletSyndicateQueryFragment;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
+import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.UMVR3qrc3V
- *
- * General queries tab — "Consultas". 7 menu items for wallet query operations.
- *
- * Menu items:
- *   BOLSAConsultarSaldo → dialog: wallet balance / classic balance (USSD 46)
- *   BOLSAUltimasOperaciones → QM5YzxsQFRH.dI2tctjNbR (agent operation fragment)
- *   BOLSAConsultaServicio → agent check: phone bill fragment or dialog
- *   BOLSAEstadoCuenta → General MiTransfer account-statement form (selector 26)
- *   BOLSAConsultaReservaOFA → dialog: OFA reservation query type
- *   BOLSAConsultaTicket → dialog: ticket query (USSD 103) or per-ticket lookup
- *   BOLSAConsultaMiBoleto → dialog: 5 MiBoleto sub-options
- *   BOLSAConsultaSindicato → navigate to sindicato payment query
- *
- * Dialogs:
- *   showDialogConsultaSaldo() — wallet vs classic account (array_bolsa_consulta_saldo)
- *   showDialogConsultaTicket() — USSD 103 vs per-ticket (array_bolsa_consulta_ticket)
- *   showDialogReservaOFA() — OFA visit/tour type (array_consulta_reserva_ofa)
- *   showAGConsulta() — agent query: phone bill vs general bill
- *   showConsultaMiBoleto() — 5 options: offers/last ops/tickets/status/update key
- *   goToConsultaSindicato() — navigates with BankType.MiTransfer + OperationType.ConsultarPagosSindicato
+ * @original_apk_version 1.260416
  */
 public class GeneralBankingTabFragment extends Fragment {
-
     public Context context;
-    public View rootView;
-    public RecyclerView recyclerView;
-
-    public OperationListAdapter.OnItemClickListener onItemClickListener = new OperationListAdapter.OnItemClickListener() {
-        @Override
+    public vD9rc3MbTL.OnItemClickListener onItemClickListener = new vD9rc3MbTL.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.1
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
         public void onItemClick(View view, int position) {
         }
 
-        @Override
-        public void onGetItemClick(View view, BankOperationCode operacion) {
-            FragmentManager fm = GeneralBankingTabFragment.this.getActivity().getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
+        public void onGetItemClick(View view, FdonIAFI9w operacion) {
+            FragmentManager mFragmentManager = GeneralBankingTabFragment.this.getActivity().getSupportFragmentManager();
+            FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
             if (operacion != null) {
-                switch (operacion) {
-                    case BOLSAConsultarSaldo:
+                switch (AnonymousClass14.$SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[operacion.ordinal()]) {
+                    case 1:
                         GeneralBankingTabFragment.this.showDialogConsultaSaldo();
                         break;
-                    case BOLSAUltimasOperaciones:
-                        ft.replace(R.id.containerView, new WalletLatestOperationsFragment())
-                                .addToBackStack(null).commit();
+                    case 2:
+                        mFragmentTransaction.replace(R.id.containerView, new WalletLatestOperationsFragment()).addToBackStack(null).commit();
                         break;
-                    case BOLSAConsultaServicio:
-                        if (cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ.isAGTelecom(this.context)) {
+                    case 3:
+                        if (U6ucOCBccJ.isAGTelecom(GeneralBankingTabFragment.this.context)) {
                             GeneralBankingTabFragment.this.showAGConsulta();
                         } else {
-                            ft.replace(R.id.containerView,
-                                    new cu.etecsa.transfermovil.ui.fragment.GeneralServiceDebtQueryFragment())
-                                    .addToBackStack(null).commit();
+                            mFragmentTransaction.replace(R.id.containerView, new GeneralServiceDebtQueryFragment()).addToBackStack(null).commit();
                         }
                         break;
-                    case BOLSAEstadoCuenta:
-                        ft.replace(R.id.containerView,
-                                new cu.etecsa.transfermovil.ui.fragment.GeneralWalletStatementFragment())
-                                .addToBackStack(null).commit();
+                    case 4:
+                        mFragmentTransaction.replace(R.id.containerView, new GeneralWalletStatementFragment()).addToBackStack(null).commit();
                         break;
-                    case BOLSAConsultaReservaOFA:
+                    case 5:
                         GeneralBankingTabFragment.this.showDialogReservaOFA();
                         break;
-                    case BOLSAConsultaTicket:
+                    case 6:
                         GeneralBankingTabFragment.this.showDialogConsultaTicket();
                         break;
-                    case BOLSAConsultaMiBoleto:
+                    case 7:
                         GeneralBankingTabFragment.this.showConsultaMiBoleto();
                         break;
-                    case BOLSAConsultaSindicato:
+                    case 8:
                         GeneralBankingTabFragment.this.goToConsultaSindicato();
                         break;
                     default:
-                        Toast.makeText(GeneralBankingTabFragment.this.context, operacion.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(GeneralBankingTabFragment.this.context, operacion.toString(), 1).show();
                         break;
                 }
             }
         }
     };
+    public View rootView;
+    public RecyclerView rvseguridad;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.rootView = inflater.inflate(R.layout.p1r9hi3qhdlpun, container, false);
         this.context = container.getContext();
-        RecyclerView rv = (RecyclerView) this.rootView.findViewById(R.id.drawerList);
-        this.recyclerView = rv;
-        rv.setItemAnimator(new DefaultItemAnimator());
-        this.recyclerView.setHasFixedSize(true);
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.context));
+        RecyclerView recyclerView = (RecyclerView) this.rootView.findViewById(R.id.drawerList);
+        this.rvseguridad = recyclerView;
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        this.rvseguridad.setHasFixedSize(true);
+        LinearLayoutManager llmSegidad = new LinearLayoutManager(this.context);
+        this.rvseguridad.setLayoutManager(llmSegidad);
         initData();
         return this.rootView;
     }
 
     private void initData() {
-        List<OperationItem> items = new ArrayList<>();
-        Integer type = OperationItem.TYPE_POST;
-
-        OperationItem consultaSaldo = new OperationItem();
-        consultaSaldo.setTitulo(getString(R.string.tx_consultar_saldo));
-        consultaSaldo.setSubtitulo(getString(R.string.tx_consultar_saldo_actual));
-        consultaSaldo.setIcono(R.drawable.ic_consulta_saldo_bolsa);
-        consultaSaldo.setType(type);
-        consultaSaldo.setOperacion(BankOperationCode.BOLSAConsultarSaldo);
-        items.add(consultaSaldo);
-
-        OperationItem ultOperaciones = new OperationItem();
-        ultOperaciones.setTitulo(getString(R.string.tx_ultimas_operaciones));
-        ultOperaciones.setSubtitulo(getString(R.string.tx_sub_ultimas_operaciones_bolsa));
-        ultOperaciones.setIcono(R.drawable.ic_consulta_utlimas_oper_bolsa);
-        ultOperaciones.setType(type);
-        ultOperaciones.setOperacion(BankOperationCode.BOLSAUltimasOperaciones);
-        items.add(ultOperaciones);
-
-        OperationItem consultaServicios = new OperationItem();
+        List<WUULVgZq02> itemsOperaciones = new ArrayList<>();
+        WUULVgZq02 consulta_saldo = new WUULVgZq02();
+        consulta_saldo.setTitulo(getString(R.string.tx_consultar_saldo));
+        consulta_saldo.setSubtitulo(getString(R.string.tx_consultar_saldo_actual));
+        consulta_saldo.setIcono(R.drawable.ic_consulta_saldo_bolsa);
+        Integer num = rBXnNc0Kx4.Post;
+        consulta_saldo.setType(num);
+        consulta_saldo.setOperacion(FdonIAFI9w.BOLSAConsultarSaldo);
+        itemsOperaciones.add(consulta_saldo);
+        WUULVgZq02 ult_operaciones = new WUULVgZq02();
+        ult_operaciones.setTitulo(getString(R.string.tx_ultimas_operaciones));
+        ult_operaciones.setSubtitulo(getString(R.string.tx_sub_ultimas_operaciones_bolsa));
+        ult_operaciones.setIcono(R.drawable.ic_consulta_utlimas_oper_bolsa);
+        ult_operaciones.setType(num);
+        ult_operaciones.setOperacion(FdonIAFI9w.BOLSAUltimasOperaciones);
+        itemsOperaciones.add(ult_operaciones);
+        WUULVgZq02 consultaServicios = new WUULVgZq02();
         consultaServicios.setTitulo(getString(R.string.tx_consultar_servicio_bolsa));
         consultaServicios.setSubtitulo(getString(R.string.tx_sub_consultar_servicio_bolsa));
         consultaServicios.setIcono(R.drawable.ic_consultar_servicio_bolsa);
-        consultaServicios.setType(type);
-        consultaServicios.setOperacion(BankOperationCode.BOLSAConsultaServicio);
-        items.add(consultaServicios);
-
-        OperationItem estadoCuenta = new OperationItem();
+        consultaServicios.setType(num);
+        consultaServicios.setOperacion(FdonIAFI9w.BOLSAConsultaServicio);
+        itemsOperaciones.add(consultaServicios);
+        WUULVgZq02 estadoCuenta = new WUULVgZq02();
         estadoCuenta.setTitulo("Estado Cuentas");
         estadoCuenta.setSubtitulo("Solicitar estado de una cuenta");
         estadoCuenta.setIcono(R.drawable.ic_consulta_estado_cuenta_bolsa);
-        estadoCuenta.setType(type);
-        estadoCuenta.setOperacion(BankOperationCode.BOLSAEstadoCuenta);
-        items.add(estadoCuenta);
-
-        OperationItem consultaOFA = new OperationItem();
+        estadoCuenta.setType(num);
+        estadoCuenta.setOperacion(FdonIAFI9w.BOLSAEstadoCuenta);
+        itemsOperaciones.add(estadoCuenta);
+        WUULVgZq02 consultaOFA = new WUULVgZq02();
         consultaOFA.setTitulo(getString(R.string.title_consulta_reservas_ofa));
         consultaOFA.setSubtitulo(getString(R.string.subtitle_consulta_reservas_ofa));
         consultaOFA.setIcono(R.drawable.ic_consulta_ofa_bolsa_nuevo);
-        consultaOFA.setType(type);
-        consultaOFA.setOperacion(BankOperationCode.BOLSAConsultaReservaOFA);
-        items.add(consultaOFA);
-
-        OperationItem consultaTicket = new OperationItem();
-        consultaTicket.setTitulo(getString(R.string.title_reserva_ticket_consulta));
-        consultaTicket.setSubtitulo(getString(R.string.title_reserva_ticket_consulta));
-        consultaTicket.setIcono(R.drawable.ic_consulta_miturno_bolsa);
-        consultaTicket.setType(type);
-        consultaTicket.setOperacion(BankOperationCode.BOLSAConsultaTicket);
-        items.add(consultaTicket);
-
-        OperationItem consultaMiBoleto = new OperationItem();
-        consultaMiBoleto.setTitulo(getString(R.string.title_consulta_miboleto));
-        consultaMiBoleto.setSubtitulo(getString(R.string.subtitle_consulta_miboleto));
-        consultaMiBoleto.setIcono(R.drawable.ic_consulta_miboleto_bolsa);
-        consultaMiBoleto.setType(type);
-        consultaMiBoleto.setOperacion(BankOperationCode.BOLSAConsultaMiBoleto);
-        items.add(consultaMiBoleto);
-
-        OperationListAdapter adapter = new OperationListAdapter(this.context, items);
-        this.recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(this.onItemClickListener);
+        consultaOFA.setType(num);
+        consultaOFA.setOperacion(FdonIAFI9w.BOLSAConsultaReservaOFA);
+        itemsOperaciones.add(consultaOFA);
+        WUULVgZq02 consulta_ticket = new WUULVgZq02();
+        consulta_ticket.setTitulo(getString(R.string.title_reserva_ticket_consulta));
+        consulta_ticket.setSubtitulo(getString(R.string.title_reserva_ticket_consulta));
+        consulta_ticket.setIcono(R.drawable.ic_consulta_miturno_bolsa);
+        consulta_ticket.setType(num);
+        consulta_ticket.setOperacion(FdonIAFI9w.BOLSAConsultaTicket);
+        itemsOperaciones.add(consulta_ticket);
+        WUULVgZq02 consulta_miboleto = new WUULVgZq02();
+        consulta_miboleto.setTitulo(getString(R.string.title_consulta_miboleto));
+        consulta_miboleto.setSubtitulo(getString(R.string.subtitle_consulta_miboleto));
+        consulta_miboleto.setIcono(R.drawable.ic_consulta_miboleto_bolsa);
+        consulta_miboleto.setType(num);
+        consulta_miboleto.setOperacion(FdonIAFI9w.BOLSAConsultaMiBoleto);
+        itemsOperaciones.add(consulta_miboleto);
+        vD9rc3MbTL adapterSeguridad = new vD9rc3MbTL(this.context, itemsOperaciones);
+        this.rvseguridad.setAdapter(adapterSeguridad);
+        adapterSeguridad.setOnItemClickListener(this.onItemClickListener);
     }
 
-    void showDialogConsultaSaldo() {
+    /* JADX INFO: renamed from: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment$14, reason: invalid class name */
+    public static /* synthetic */ class AnonymousClass14 {
+        public static final /* synthetic */ int[] $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w;
+
+        static {
+            int[] iArr = new int[FdonIAFI9w.values().length];
+            $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w = iArr;
+            try {
+                iArr[FdonIAFI9w.BOLSAConsultarSaldo.ordinal()] = 1;
+            } catch (NoSuchFieldError e) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAUltimasOperaciones.ordinal()] = 2;
+            } catch (NoSuchFieldError e2) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAConsultaServicio.ordinal()] = 3;
+            } catch (NoSuchFieldError e3) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAEstadoCuenta.ordinal()] = 4;
+            } catch (NoSuchFieldError e4) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAConsultaReservaOFA.ordinal()] = 5;
+            } catch (NoSuchFieldError e5) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAConsultaTicket.ordinal()] = 6;
+            } catch (NoSuchFieldError e6) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAConsultaMiBoleto.ordinal()] = 7;
+            } catch (NoSuchFieldError e7) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAConsultaSindicato.ordinal()] = 8;
+            } catch (NoSuchFieldError e8) {
+            }
+        }
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showDialogConsultaSaldo() {
         CharSequence[] items = getResources().getStringArray(R.array.array_bolsa_consulta_saldo);
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione el tipo de cuenta: ");
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            @Override
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.2
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == 1) {
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.beginTransaction().replace(R.id.containerView, new BalanceQueryFragment())
-                            .addToBackStack(null).commit();
+                    FragmentManager mFragmentManager = GeneralBankingTabFragment.this.getActivity().getSupportFragmentManager();
+                    FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+                    mFragmentTransaction.replace(R.id.containerView, new BalanceQueryFragment()).addToBackStack(null).commit();
                 } else {
-                    ((BaseMainActivity) getActivity()).actionCallUSSD("46");
+                    rDEl7rW1aN bs = new rDEl7rW1aN();
+                    if (bs.getCodeAgent() == null || bs.getCodeAgent().getCode().contains("-1")) {
+                        ((S9ycHcoxAzy) GeneralBankingTabFragment.this.getActivity()).actionCallUSSD("46");
+                    } else {
+                        ((IHVTCBmiLV) GeneralBankingTabFragment.this.getActivity()).actionCallUSSD("46");
+                    }
                 }
                 dialogInterface.dismiss();
             }
         });
-        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
-            @Override
+        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.3
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        builder.create().show();
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    void showDialogConsultaTicket() {
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showDialogConsultaTicket() {
         CharSequence[] items = getResources().getStringArray(R.array.array_bolsa_consulta_ticket);
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione el tipo de consulta: ");
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            @Override
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.4
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == 0) {
-                    ((BaseMainActivity) getActivity()).actionCallUSSD("103");
+                    rDEl7rW1aN bs = new rDEl7rW1aN();
+                    if (bs.getCodeAgent() == null || bs.getCodeAgent().getCode().contains("-1")) {
+                        ((S9ycHcoxAzy) GeneralBankingTabFragment.this.getActivity()).actionCallUSSD("103");
+                    } else {
+                        ((IHVTCBmiLV) GeneralBankingTabFragment.this.getActivity()).actionCallUSSD("103");
+                    }
                 } else {
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.containerView, new cu.etecsa.transfermovil.ui.fragment.TicketReservationViewFragment())
-                            .addToBackStack(null).commit();
+                    FragmentManager mFragmentManager = GeneralBankingTabFragment.this.getActivity().getSupportFragmentManager();
+                    FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+                    mFragmentTransaction.replace(R.id.containerView, new TicketReservationViewFragment()).addToBackStack(null).commit();
                 }
                 dialogInterface.dismiss();
             }
         });
-        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
-            @Override
+        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.5
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        builder.create().show();
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    void showDialogReservaOFA() {
+    private void showDialogUltimasOperaciones() {
+        CharSequence[] items = getResources().getStringArray(R.array.array_bolsa_ult_oper);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+        builder.setTitle("Seleccione el tipo de cuenta: ");
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.6
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (i == 2) {
+                    FragmentManager mFragmentManager = GeneralBankingTabFragment.this.getActivity().getSupportFragmentManager();
+                    FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+                    mFragmentTransaction.replace(R.id.containerView, new WalletLatestOperationsFragment()).addToBackStack(null).commit();
+                } else {
+                    int position = i + 1;
+                    String pos = String.valueOf(position);
+                    rDEl7rW1aN bs = new rDEl7rW1aN();
+                    if (bs.getCodeAgent() == null || bs.getCodeAgent().getCode().contains("-1")) {
+                        ((S9ycHcoxAzy) GeneralBankingTabFragment.this.getActivity()).actionCallUSSD("48", pos);
+                    } else {
+                        ((IHVTCBmiLV) GeneralBankingTabFragment.this.getActivity()).actionCallUSSD("48", pos);
+                    }
+                }
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.7
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showDialogReservaOFA() {
         CharSequence[] items = getResources().getStringArray(R.array.array_consulta_reserva_ofa);
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione el tipo de consulta de Visita/Recorrido: ");
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            @Override
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.8
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialogInterface, int i) {
-                Bundle args = new Bundle();
-                args.putSerializable("R1sDOSqZ2z", cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z.MiTransfer);
-                args.putSerializable("Opcion", Integer.valueOf(i + 1));
-                cu.etecsa.transfermovil.ui.fragment.OfaVisitQueryFragment fragment =
-                        new cu.etecsa.transfermovil.ui.fragment.OfaVisitQueryFragment();
-                fragment.setArguments(args);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerView, fragment).addToBackStack(null).commit();
+                Bundle arg = new Bundle();
+                FragmentManager mFragmentManager = GeneralBankingTabFragment.this.getActivity().getSupportFragmentManager();
+                FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+                OfaVisitQueryFragment consultaReservasOFA = new OfaVisitQueryFragment();
+                arg.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.MiTransfer);
+                arg.putSerializable("Opcion", Integer.valueOf(i + 1));
+                consultaReservasOFA.setArguments(arg);
+                mFragmentTransaction.replace(R.id.containerView, consultaReservasOFA).addToBackStack(null).commit();
                 dialogInterface.dismiss();
             }
         });
-        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
-            @Override
+        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.9
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        builder.create().show();
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    void showConsultaMiBoleto() {
-        CharSequence[] items = {"Consulta de Ofertas", "Últimas operaciones realizadas",
-                "Consulta de boletos", "Consulta estado de boleto", "Actualizar clave de boleto"};
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showAGConsulta() {
+        CharSequence[] items = {this.context.getString(R.string.tx_modal_head_consulat_ag_op1), this.context.getString(R.string.tx_modal_head_consulat_ag_op2)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
-        builder.setTitle(this.context.getString(R.string.alert_msg_consulta_combustible));
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            @Override
+        builder.setTitle(this.context.getString(R.string.tx_modal_head_consulat_ag));
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.10
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialogInterface, int i) {
+                Bundle arg = new Bundle();
+                FragmentManager mFragmentManager = GeneralBankingTabFragment.this.getActivity().getSupportFragmentManager();
+                FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+                arg.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.MiTransfer);
                 switch (i) {
-                    case 0: // USSD 117: query offers
-                        ((BaseMainActivity) getActivity()).actionCallUSSD("117");
+                    case 0:
+                        mFragmentTransaction.replace(R.id.containerView, new GeneralPhoneInvoiceQueryFragment()).addToBackStack(null).commit();
                         break;
-                    case 1: // → i9I9XZGnR3 (MiBoleto last ops)
-                        navigateToMiBoletoFragment(
-                                new cu.etecsa.transfermovil.ui.fragment.TicketLastOpsFragment());
-                        break;
-                    case 2: // → OXpoe3K2m1 (ticket query)
-                        navigateToMiBoletoFragment(
-                                new cu.etecsa.transfermovil.ui.fragment.TicketIntegratedQueryFragment());
-                        break;
-                    case 3: // → w7mHpmOa4EP (ticket status)
-                        navigateToMiBoletoFragment(
-                                new cu.etecsa.transfermovil.ui.fragment.TicketStatusFragment());
-                        break;
-                    case 4: // → hjX8MS8xO9 (update ticket key)
-                        navigateToMiBoletoFragment(
-                                new cu.etecsa.transfermovil.ui.fragment.TicketUpdateFragment());
+                    case 1:
+                        mFragmentTransaction.replace(R.id.containerView, new GeneralServiceDebtQueryFragment()).addToBackStack(null).commit();
                         break;
                 }
                 dialogInterface.dismiss();
             }
         });
-        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
-            @Override
+        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.11
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        builder.create().show();
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    void goToConsultaSindicato() {
-        Bundle args = new Bundle();
-        args.putSerializable("R1sDOSqZ2z", cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z.MiTransfer);
-        args.putSerializable("Nl0yptXmjQ", cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ.ConsultarPagosSindicato);
-        cu.etecsa.transfermovil.ui.fragment.wallet.WalletSyndicateQueryFragment fragment =
-                new cu.etecsa.transfermovil.ui.fragment.wallet.WalletSyndicateQueryFragment();
-        fragment.setArguments(args);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.containerView, fragment).addToBackStack(null).commit();
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showConsultaMiBoleto() {
+        CharSequence[] items = {"Consulta de Ofertas", "Últimas operaciones realizadas", "Consulta de boletos", "Consulta estado de boleto", "Actualizar clave de boleto"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+        builder.setTitle(this.context.getString(R.string.alert_msg_consulta_combustible));
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.12
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialogInterface, int i) {
+                FragmentManager mFragmentManager = GeneralBankingTabFragment.this.getActivity().getSupportFragmentManager();
+                FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+                new Bundle();
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                switch (i) {
+                    case 0:
+                        if (bs.getCodeAgent() == null || bs.getCodeAgent().getCode().contains("-1")) {
+                            ((S9ycHcoxAzy) GeneralBankingTabFragment.this.getActivity()).actionCallUSSD("117");
+                        } else {
+                            ((IHVTCBmiLV) GeneralBankingTabFragment.this.getActivity()).actionCallUSSD("117");
+                        }
+                        break;
+                    case 1:
+                        TicketLastOpsFragment miboleto = new TicketLastOpsFragment();
+                        mFragmentTransaction.replace(R.id.containerView, miboleto).addToBackStack(null).commit();
+                        break;
+                    case 2:
+                        TicketIntegratedQueryFragment miboleto2 = new TicketIntegratedQueryFragment();
+                        mFragmentTransaction.replace(R.id.containerView, miboleto2).addToBackStack(null).commit();
+                        break;
+                    case 3:
+                        TicketStatusFragment miboleto3 = new TicketStatusFragment();
+                        mFragmentTransaction.replace(R.id.containerView, miboleto3).addToBackStack(null).commit();
+                        break;
+                    case 4:
+                        TicketUpdateFragment miboleto4 = new TicketUpdateFragment();
+                        mFragmentTransaction.replace(R.id.containerView, miboleto4).addToBackStack(null).commit();
+                        break;
+                }
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.GeneralBankingTabFragment.13
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    private void showAGConsulta() {
-        CharSequence[] items = {
-                this.context.getString(R.string.tx_modal_head_consulat_ag_op1),
-                this.context.getString(R.string.tx_modal_head_consulat_ag_op2)
-        };
-        new AlertDialog.Builder(this.context)
-                .setTitle(R.string.tx_modal_head_consulat_ag)
-                .setSingleChoiceItems(items, -1, (dialog, index) -> {
-                    Fragment destination = index == 0
-                            ? new cu.etecsa.transfermovil.ui.fragment.GeneralPhoneInvoiceQueryFragment()
-                            : new cu.etecsa.transfermovil.ui.fragment.GeneralServiceDebtQueryFragment();
-                    Bundle args = new Bundle();
-                    args.putSerializable("R1sDOSqZ2z",
-                            cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z.MiTransfer);
-                    destination.setArguments(args);
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.containerView, destination).addToBackStack(null).commit();
-                    dialog.dismiss();
-                })
-                .setNegativeButton("Salir", (dialog, which) -> dialog.dismiss())
-                .show();
-    }
-
-    private void navigateToMiBoletoFragment(Fragment fragment) {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.containerView, fragment).addToBackStack(null).commit();
+    /* JADX INFO: Access modifiers changed from: private */
+    public void goToConsultaSindicato() {
+        Bundle arg = new Bundle();
+        arg.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.MiTransfer);
+        arg.putSerializable("Nl0yptXmjQ", Nl0yptXmjQ.ConsultarPagosSindicato);
+        WalletSyndicateQueryFragment ticket = new WalletSyndicateQueryFragment();
+        ticket.setArguments(arg);
+        FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.replace(R.id.containerView, ticket).addToBackStack(null).commit();
     }
 }

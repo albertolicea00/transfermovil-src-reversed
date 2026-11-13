@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.sJ0peDJzVjo.VqOJe4IEq3 */
@@ -83,7 +83,7 @@ public class WalletStampQueryFragment extends Fragment {
             String cadena = ci + "*1";
             String msg = "¿Desea consultar los últimos sellos para el carné de identidad: " + cadena + " ?";
             ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "110", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "110", cadena, msg, group, getFragmentManager());
         } catch (Exception e) {
             Toast.makeText(this.context, "Error intentelo de nuevo", 0).show();
         }

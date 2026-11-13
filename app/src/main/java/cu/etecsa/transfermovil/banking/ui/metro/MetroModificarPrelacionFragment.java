@@ -12,7 +12,7 @@ import cu.etecsa.transfermovil.banking.ui.bfi.BaseTwoAccountFragment;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TipoPrelacion;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class MetroModificarPrelacionFragment extends BaseTwoAccountFragment {
     public jN13TOyLMX.OnItemClickListener spPrelacionOnClickListener = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.hqlegRdVXsu.wJLggUmg0M.2
         @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
         public void onItemClick(View view, int position) {
-            wJLggUmg0M wjlggumg0m = MetroModificarPrelacionFragment.this;
+            MetroModificarPrelacionFragment wjlggumg0m = MetroModificarPrelacionFragment.this;
             wjlggumg0m.prelacion = wjlggumg0m.prelacionArrayAdapter.getItem(position);
         }
     };
@@ -65,7 +65,7 @@ public class MetroModificarPrelacionFragment extends BaseTwoAccountFragment {
         nuevoDatos();
         String cadena = this.prelacion.getCode() + "*" + this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "27", cadena, "¿Desea realizar la modificación de la prelación de pago?", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "27", cadena, "¿Desea realizar la modificación de la prelación de pago?", group, getFragmentManager());
     }
 
     @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b

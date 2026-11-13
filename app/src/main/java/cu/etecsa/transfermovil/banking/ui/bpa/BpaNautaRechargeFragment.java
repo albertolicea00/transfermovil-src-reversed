@@ -11,7 +11,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -86,7 +86,7 @@ public class BpaNautaRechargeFragment extends Fragment {
         String msg = String.format("¿Desea amortizar  la cuenta: %s  y mensualidad: %s en la moneda de la cuenta seleccionada?", cuenta, mensualidad);
         String cadena = cuenta + "*" + mensualidad + "*" + this.moneda;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "55", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "55", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCuenta() {

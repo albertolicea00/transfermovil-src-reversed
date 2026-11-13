@@ -21,7 +21,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import com.j256.ormlite.field.FieldType;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.qTDVwLFEjE;
@@ -154,7 +154,7 @@ public class WalletTopupFragment extends Fragment {
         if (str != null && str.length() > 0) {
             String cadena = cuenta + "*" + monto + "*0*" + this.tipoBolsa;
             ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTelefono);
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, this.codeService, cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, this.codeService, cadena, msg, group, getFragmentManager());
             return;
         }
         Toast.makeText(this.context, "Ha ocurrido un error", 1).show();

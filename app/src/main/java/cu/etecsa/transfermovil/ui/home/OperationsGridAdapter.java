@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.cubacel.tr.tm.V3QHJhzixi7i.O2oXWQuRDi;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.transfermovil.core.GlobalState;
 import cu.etecsa.transfermovil.core.enums.BankType;
 import cu.etecsa.transfermovil.data.DatabaseHelper;
@@ -128,7 +128,7 @@ public class OperationsGridAdapter extends RecyclerView.Adapter<OperationsGridAd
 
     private void openOperation(OperationMenuItem item) {
         try {
-            O2oXWQuRDi result = FBsQzP3Zfj.goToFragment(activity, parentHome, context, item.getId());
+            O2oXWQuRDi result = UssdDispatcher.goToFragment(activity, parentHome, context, item.getId());
             if (result == null) return;
             if (result.getFragment() != null) {
                 activity.getSupportFragmentManager().beginTransaction()

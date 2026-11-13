@@ -34,7 +34,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AppConfig;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CompraPlanesCubacel;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.HPuMiTypoW;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
@@ -286,7 +286,7 @@ public class WalletCubacelPackagesFragment extends BaseBankingFragment {
         }
         String cadena = cuenta + "*" + this.paqueteSeleccionado.getId() + "*" + this.paqueteSeleccionado.getVersion_ussd() + "*" + this.monedaTarjeta + "*" + this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "6", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "6", cadena, msg, group, getFragmentManager());
     }
 
     @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.Agg55uYctq

@@ -16,7 +16,7 @@ import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
 import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.transfermovil.base.BaseMainActivity;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiPinAuthFragment;
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class BfiSessionMenuFragment extends Fragment {
     }
 
     private void showCloseSessionDialog() {
-        FBsQzP3Zfj.closeSessionBank(getActivity());
+        UssdDispatcher.closeSessionBank(getActivity());
         new AlertDialog.Builder(context)
                 .setTitle("Seleccione")
                 .setMessage(getString(R.string.msg_confirm_close_session))

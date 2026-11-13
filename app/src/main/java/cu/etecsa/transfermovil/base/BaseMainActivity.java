@@ -1,5 +1,8 @@
 package cu.etecsa.transfermovil.base;
 
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.transfermovil.crypto.ussd.UssdCipherOrchestrator;
+import cu.etecsa.transfermovil.config.NautaCodeEncoder;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import cu.etecsa.transfermovil.crypto.CryptoProvider;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AppConfig;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.AgentService;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,7 +50,7 @@ import javax.crypto.SecretKey;
  *
  * @security cv = "708091521823824654864548452244" — hardcoded AES key for bank PIN encryption.
  * @security code_version = "372653282298718711" — USSD encoding version identifier.
- * @security crude_code — 1024-char binary substitution table for USSD param encoding.
+ * @security crude_code — 1250-char binary substitution table for USSD param encoding.
  * @security DownloadNewVersion uses plain HTTP: http://www.etecsa.cu/descargas/transfermovil/
  * @security mReceivedSMSReceiver processes raw PDUs without validation.
  *
@@ -148,7 +152,14 @@ public class BaseMainActivity extends AppCompatActivity {
     /**
      * Returns the first AgentService record, or null if none registered.
      */
-    // public AgentService getCodeAgent() { ... }
+    public AgentService getCodeAgent() {
+        List<AgentService> agentServiceLists = unYp8VQThY.getInstance().getAllAgentServiceLists();
+        if (agentServiceLists.size() <= 0) {
+            return null;
+        }
+        AgentService code = agentServiceLists.get(0);
+        return code;
+    }
 
     // --- SMS inbox parsing methods ---
     // public boolean sms_actualizar_bd(ContentResolver cs) — parse all PAGOxMOVIL SMS → RecordSMS
@@ -333,6 +344,11 @@ public class BaseMainActivity extends AppCompatActivity {
             encodedFields.addAll(numericOutput.subList(1, numericOutput.size()));
         }
 
+        // Java split drops all trailing empty fields; the original assembler
+        // still reads the first field and rejects an all-separator input.
+        if (originalLengths.length == 0) {
+            throw new ArrayIndexOutOfBoundsException(0);
+        }
         StringBuilder encoded = new StringBuilder();
         if (is_item_old_version && numericFields.isEmpty()) {
             encoded.append("00");
@@ -340,7 +356,7 @@ public class BaseMainActivity extends AppCompatActivity {
             encoded.append(seed);
         }
         for (int i = 0; i < encodedFields.size(); i++) {
-            if (i > 0 && (is_item_old_version || i > 1)) {
+            if (i > 0) {
                 encoded.append('*');
             }
             String length = String.valueOf(originalLengths[i]);

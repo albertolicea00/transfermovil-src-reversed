@@ -14,174 +14,193 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import cu.etecsa.transfermovil.banking.BankOperationCode;
-import cu.etecsa.transfermovil.banking.ui.wallet.WalletClassicAccountAssociationFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletChangePinFragment;
-import cu.etecsa.transfermovil.banking.ui.wallet.WalletQrPaymentFragment;
-import cu.etecsa.transfermovil.banking.ui.wallet.WalletEnrollmentFragment;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletClassicAccountAssociationFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletRegistrationFragment;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletEnrollmentFragment;
+import cu.etecsa.transfermovil.banking.ui.wallet.WalletQrPaymentFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletAccountSelectorFragment;
-import cu.etecsa.transfermovil.stats.OperationItem;
-import cu.etecsa.transfermovil.stats.OperationListAdapter;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.hOQ4ESKEhm
- *
- * Wallet configuration tab — "Configuración". Shows wallet management operations:
- * register, change PIN, delete registration, associate classic account.
- *
- * Routes:
- *   BOLSARegistrarse → WalletEnrollmentFragment
- *   BOLSACambioPin → WalletChangePinFragment
- *   BOLSAEliminarRegistro → dialog: wallet delete / classic delete
- *   BOLSAAsociarCuenta → dialog: classic / enterprise classic
+ * @original_apk_version 1.260416
  */
 public class WalletBoletoTabFragment extends Fragment {
-
     public Context context;
     public boolean isMiBoletoActive = false;
-    public View rootView;
-    public RecyclerView recyclerView;
-
-    public OperationListAdapter.OnItemClickListener onItemClickListener = new OperationListAdapter.OnItemClickListener() {
-        @Override
+    public vD9rc3MbTL.OnItemClickListener onItemClickListener = new vD9rc3MbTL.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletBoletoTabFragment.1
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
         public void onItemClick(View view, int position) {
         }
 
-        @Override
-        public void onGetItemClick(View view, BankOperationCode operacion) {
-            FragmentManager fm = WalletBoletoTabFragment.this.getActivity().getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
+        public void onGetItemClick(View view, FdonIAFI9w operacion) {
+            FragmentManager mFragmentManager = WalletBoletoTabFragment.this.getActivity().getSupportFragmentManager();
+            FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
             if (operacion != null) {
-                switch (operacion) {
-                    case BOLSARegistrarse:
-                        ft.replace(R.id.containerView, new WalletEnrollmentFragment()).addToBackStack(null).commit();
+                switch (AnonymousClass6.$SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[operacion.ordinal()]) {
+                    case 1:
+                        mFragmentTransaction.replace(R.id.containerView, new WalletEnrollmentFragment()).addToBackStack(null).commit();
                         break;
-                    case BOLSACambioPin:
-                        ft.replace(R.id.containerView, new WalletChangePinFragment()).addToBackStack(null).commit();
+                    case 2:
+                        mFragmentTransaction.replace(R.id.containerView, new WalletChangePinFragment()).addToBackStack(null).commit();
                         break;
-                    case BOLSAEliminarRegistro:
+                    case 3:
                         WalletBoletoTabFragment.this.showDialogEliminarRegistro();
                         break;
-                    case BOLSAAsociarCuenta:
+                    case 4:
                         WalletBoletoTabFragment.this.showDialogAsocClasica();
                         break;
                     default:
-                        Toast.makeText(WalletBoletoTabFragment.this.context, operacion.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(WalletBoletoTabFragment.this.context, operacion.toString(), 1).show();
                         break;
                 }
             }
         }
     };
+    public View rootView;
+    public RecyclerView rvseguridad;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.rootView = inflater.inflate(R.layout.p1r9hi3qhdlpun, container, false);
         this.context = container.getContext();
-        RecyclerView rv = (RecyclerView) this.rootView.findViewById(R.id.drawerList);
-        this.recyclerView = rv;
-        rv.setItemAnimator(new DefaultItemAnimator());
-        this.recyclerView.setHasFixedSize(true);
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.context));
+        RecyclerView recyclerView = (RecyclerView) this.rootView.findViewById(R.id.drawerList);
+        this.rvseguridad = recyclerView;
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        this.rvseguridad.setHasFixedSize(true);
+        LinearLayoutManager llmSegidad = new LinearLayoutManager(this.context);
+        this.rvseguridad.setLayoutManager(llmSegidad);
         initData();
         return this.rootView;
     }
 
     private void initData() {
-        List<OperationItem> items = new ArrayList<>();
-
-        OperationItem registro = new OperationItem();
+        List<WUULVgZq02> itemsOperaciones = new ArrayList<>();
+        WUULVgZq02 registro = new WUULVgZq02();
         registro.setTitulo(getString(R.string.tx_registrarse));
         registro.setSubtitulo(getString(R.string.tx_sub_registro_bolsa));
         registro.setIcono(R.drawable.ic_registrarse_bolsa);
-        registro.setType(OperationItem.TYPE_POST);
-        registro.setOperacion(BankOperationCode.BOLSARegistrarse);
-        items.add(registro);
-
-        OperationItem cambioclave = new OperationItem();
+        Integer num = rBXnNc0Kx4.Post;
+        registro.setType(num);
+        registro.setOperacion(FdonIAFI9w.BOLSARegistrarse);
+        itemsOperaciones.add(registro);
+        WUULVgZq02 cambioclave = new WUULVgZq02();
         cambioclave.setTitulo(getString(R.string.tx_cambio_pin_bolsa));
         cambioclave.setSubtitulo(getString(R.string.tx_sub_cambio_pin_bolsa));
         cambioclave.setIcono(R.drawable.ic_cambio_pin_bolsa);
-        cambioclave.setType(OperationItem.TYPE_POST);
-        cambioclave.setOperacion(BankOperationCode.BOLSACambioPin);
-        items.add(cambioclave);
-
-        OperationItem eliminarreg = new OperationItem();
+        cambioclave.setType(num);
+        cambioclave.setOperacion(FdonIAFI9w.BOLSACambioPin);
+        itemsOperaciones.add(cambioclave);
+        WUULVgZq02 eliminarreg = new WUULVgZq02();
         eliminarreg.setTitulo(getString(R.string.tx_eliminar_registro));
         eliminarreg.setSubtitulo(getString(R.string.tx_sub_eliminar_registro));
         eliminarreg.setIcono(R.drawable.ic_eliminar_registro_bolsa);
-        eliminarreg.setType(OperationItem.TYPE_POST);
-        eliminarreg.setOperacion(BankOperationCode.BOLSAEliminarRegistro);
-        items.add(eliminarreg);
-
-        OperationItem asociarClasica = new OperationItem();
+        eliminarreg.setType(num);
+        eliminarreg.setOperacion(FdonIAFI9w.BOLSAEliminarRegistro);
+        itemsOperaciones.add(eliminarreg);
+        WUULVgZq02 asociarClasica = new WUULVgZq02();
         asociarClasica.setTitulo(getString(R.string.tx_title_clasica));
         asociarClasica.setSubtitulo(getString(R.string.tx_subtitle_clasica));
         asociarClasica.setIcono(R.drawable.ic_asociar_cuenta_bolsa);
-        asociarClasica.setType(OperationItem.TYPE_POST);
-        asociarClasica.setOperacion(BankOperationCode.BOLSAAsociarCuenta);
-        items.add(asociarClasica);
-
-        OperationListAdapter adapter = new OperationListAdapter(this.context, items);
-        this.recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(this.onItemClickListener);
+        asociarClasica.setType(num);
+        asociarClasica.setOperacion(FdonIAFI9w.BOLSAAsociarCuenta);
+        itemsOperaciones.add(asociarClasica);
+        vD9rc3MbTL adapterSeguridad = new vD9rc3MbTL(this.context, itemsOperaciones);
+        this.rvseguridad.setAdapter(adapterSeguridad);
+        adapterSeguridad.setOnItemClickListener(this.onItemClickListener);
     }
 
-    void showDialogEliminarRegistro() {
+    /* JADX INFO: renamed from: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletBoletoTabFragment$6, reason: invalid class name */
+    public static /* synthetic */ class AnonymousClass6 {
+        public static final /* synthetic */ int[] $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w;
+
+        static {
+            int[] iArr = new int[FdonIAFI9w.values().length];
+            $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w = iArr;
+            try {
+                iArr[FdonIAFI9w.BOLSARegistrarse.ordinal()] = 1;
+            } catch (NoSuchFieldError e) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSACambioPin.ordinal()] = 2;
+            } catch (NoSuchFieldError e2) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAEliminarRegistro.ordinal()] = 3;
+            } catch (NoSuchFieldError e3) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAAsociarCuenta.ordinal()] = 4;
+            } catch (NoSuchFieldError e4) {
+            }
+        }
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showDialogEliminarRegistro() {
         CharSequence[] items = {this.context.getString(R.string.eliminar_registro_wallet), this.context.getString(R.string.title_eliminar_registro_clasica)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione el Registro a Eliminar");
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            @Override
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletBoletoTabFragment.2
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialogInterface, int i) {
-                FragmentManager fm = WalletBoletoTabFragment.this.getActivity().getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
+                FragmentManager mFragmentManager = WalletBoletoTabFragment.this.getActivity().getSupportFragmentManager();
+                FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
                 switch (i) {
                     case 0:
-                        ft.replace(R.id.containerView, new WalletRegistrationFragment()).addToBackStack(null).commit();
+                        mFragmentTransaction.replace(R.id.containerView, new WalletRegistrationFragment()).addToBackStack(null).commit();
                         break;
                     case 1:
-                        ft.replace(R.id.containerView, new WalletAccountSelectorFragment()).addToBackStack(null).commit();
+                        mFragmentTransaction.replace(R.id.containerView, new WalletAccountSelectorFragment()).addToBackStack(null).commit();
                         break;
                 }
                 dialogInterface.dismiss();
             }
         });
-        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
-            @Override
+        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletBoletoTabFragment.3
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        builder.create().show();
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    void showDialogAsocClasica() {
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showDialogAsocClasica() {
         CharSequence[] items = {this.context.getString(R.string.tx_title_clasica), this.context.getString(R.string.tx_title_clasica_empresarial)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle(this.context.getString(R.string.hint_seleccione_tipo_cuenta_movil));
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            @Override
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletBoletoTabFragment.4
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialogInterface, int i) {
-                FragmentManager fm = WalletBoletoTabFragment.this.getActivity().getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
+                FragmentManager mFragmentManager = WalletBoletoTabFragment.this.getActivity().getSupportFragmentManager();
+                FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
                 switch (i) {
                     case 0:
-                        ft.replace(R.id.containerView, new WalletClassicAccountAssociationFragment()).addToBackStack(null).commit();
+                        mFragmentTransaction.replace(R.id.containerView, new WalletClassicAccountAssociationFragment()).addToBackStack(null).commit();
                         break;
                     case 1:
-                        ft.replace(R.id.containerView, new WalletQrPaymentFragment()).addToBackStack(null).commit();
+                        mFragmentTransaction.replace(R.id.containerView, new WalletQrPaymentFragment()).addToBackStack(null).commit();
                         break;
                 }
                 dialogInterface.dismiss();
             }
         });
-        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
-            @Override
+        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletBoletoTabFragment.5
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        builder.create().show();
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

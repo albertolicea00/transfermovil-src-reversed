@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.EIfp9Vz3ur */
@@ -52,7 +52,7 @@ public class MetroTelebancaCardFragment extends Fragment {
         String ci = this.inputCi.getText().toString().trim();
         String cadena = ci + "*" + cuenta;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "53", cadena, "Desea actualizar su cuenta", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "53", cadena, "Desea actualizar su cuenta", group, getFragmentManager());
     }
 
     private boolean validateCuenta() {

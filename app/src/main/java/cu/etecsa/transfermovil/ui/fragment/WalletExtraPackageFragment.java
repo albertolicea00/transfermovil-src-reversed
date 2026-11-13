@@ -20,7 +20,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import com.j256.ormlite.field.FieldType;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -108,7 +108,7 @@ public class WalletExtraPackageFragment extends Fragment {
         String msg = "¿ Desea comprar un plan Extra en USD para el móvil " + cuenta + ", usando su cuenta USD ? Si desea continuar marque confirmar para mostrar las ofertas disponibles";
         String cadena = cuenta + "*" + this.tipoBolsa;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTelefono);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "33", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "33", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCuenta() {

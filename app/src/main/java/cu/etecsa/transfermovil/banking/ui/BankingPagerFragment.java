@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.banking.ui;
 
+import cu.etecsa.cubacel.tr.tm.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

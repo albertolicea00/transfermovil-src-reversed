@@ -1,7 +1,7 @@
 package cu.etecsa.transfermovil.core;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts$RequestPermission;
 import androidx.fragment.app.FragmentActivity;
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class PermissionRequester {
 
     public void startpermissionrequest(FragmentActivity fr, final PermissionGrantCallback callback, String manifest) {
-        ActivityResultContracts.RequestPermission contract = new ActivityResultContracts.RequestPermission();
+        ActivityResultContracts$RequestPermission contract = new ActivityResultContracts$RequestPermission();
         Objects.requireNonNull(callback);
         ActivityResultLauncher<String> resultPermissionLauncher = fr.registerForActivityResult(
                 contract,

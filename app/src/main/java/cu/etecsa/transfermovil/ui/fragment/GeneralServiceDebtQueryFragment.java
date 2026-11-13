@@ -21,7 +21,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Client;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Factura;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ServicioPublico;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.y2Cht3lmjg;
@@ -228,7 +228,7 @@ public class GeneralServiceDebtQueryFragment extends Fragment implements pAzq93v
         } catch (Exception e) {
         }
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "47", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "47", cadena, msg, group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "47", "04", this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         }

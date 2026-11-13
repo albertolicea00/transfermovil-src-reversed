@@ -20,7 +20,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Client;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Factura;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ServicioPublico;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.y2Cht3lmjg;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
@@ -244,7 +244,7 @@ public class MetroServicePaymentFragment extends Fragment {
             String factura = this.inputCuenta.getText().toString().trim();
             String msg = "Desea consultar la deuda del servicio: " + factura;
             String cadena = idTipo2 + "*" + factura;
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "47", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "47", cadena, msg, group, getFragmentManager());
             return;
         }
         if (i != 4 || !validatePagoParcialMensual()) {
@@ -254,7 +254,7 @@ public class MetroServicePaymentFragment extends Fragment {
         String rcAux = this.inputOnatAux.getText().toString().trim();
         String cadena2 = rc05 + "*" + rcAux;
         String msg2 = "Desea realizar la consulta para ONAT del vector fiscal, del siguente RC05: " + rc05 + "  Código de barra: " + rcAux;
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "56", cadena2, msg2, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "56", cadena2, msg2, group, getFragmentManager());
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -274,7 +274,7 @@ public class MetroServicePaymentFragment extends Fragment {
             String cadena = ci + "*1";
             String msg = "¿Desea consultar los últimos sellos para el carné de identidad: " + ci + " ?";
             ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTelefono);
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "22", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "22", cadena, msg, group, getFragmentManager());
             return true;
         } catch (Exception e) {
             Toast.makeText(this.context, "Error intentelo de nuevo", 0).show();

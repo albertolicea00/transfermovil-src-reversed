@@ -11,7 +11,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
@@ -109,7 +109,7 @@ public class MetroWireTransferFragment extends Fragment {
         String msg = "Desea realizar un giro postal al propietario del carnet de identidad: " + ciD + ", giro cuentaCaracteres enviar: " + monto + " CUP. El costo total de la operación es de: " + U6ucOCBccJ.calculate_importe_giro(Double.parseDouble(monto)) + " CUP. ";
         String cadena = ciO + "*" + ciD + "*" + monto + "*" + this.moneda + "*" + idTipoGiro + "*" + destinatario;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTranferencia);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "64", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "64", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCIOrigen() {

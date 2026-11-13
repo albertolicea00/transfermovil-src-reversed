@@ -65,7 +65,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.wTZi6Zeikv;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.f6Y2Wmtg6jQ;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.ysmUbWW79P;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.HPuMiTypoW;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -131,7 +131,22 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
     /* JADX WARN: Code duplicated, block: B:83:0x023b A[Catch: Exception -> 0x027c, TryCatch #4 {Exception -> 0x027c, blocks: (B:67:0x01f0, B:73:0x021a, B:75:0x0225, B:81:0x0235, B:83:0x023b, B:85:0x024a, B:90:0x026f, B:79:0x0230), top: B:114:0x01f0, inners: #1 }] */
     /* JADX WARN: Code duplicated, block: B:85:0x024a A[Catch: Exception -> 0x027c, TRY_LEAVE, TryCatch #4 {Exception -> 0x027c, blocks: (B:67:0x01f0, B:73:0x021a, B:75:0x0225, B:81:0x0235, B:83:0x023b, B:85:0x024a, B:90:0x026f, B:79:0x0230), top: B:114:0x01f0, inners: #1 }] */
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public void onCreate(Bundle savedInstanceState) throws ParseException {
+    public void onCreate(Bundle savedInstanceState) {
+        try {
+            onCreateFromSource(savedInstanceState);
+        } catch (ParseException error) {
+            // DEX permits this checked exception to escape the Android callback.
+            // Preserve that exception rather than changing its runtime type.
+            GeneralMainActivity.<RuntimeException>throwFromSource(error);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T extends Throwable> void throwFromSource(Throwable error) throws T {
+        throw (T) error;
+    }
+
+    private void onCreateFromSource(Bundle savedInstanceState) throws ParseException {
         List<AppConfig> appConfigList;
         DateFormat formatter;
         Date today;
@@ -160,7 +175,7 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
             this.msap.getPhone(getBaseContext());
             Menu menu = this.mNavigationView.getMenu();
             this.nav_Menu = menu;
-            FBsQzP3Zfj.menuControlBanks(menu);
+            UssdDispatcher.menuControlBanks(menu);
             new HPuMiTypoW(getContentResolver()).execute(new Void[0]);
             if ((!this.msap.getCodigoBanco().contains("-1") || this.msap.getCodigoBanco().isEmpty()) && this.msap.getCodigoBanco().length() > 3) {
                 this.nav_Menu.findItem(R.id.group_comercio).setVisible(true);
@@ -187,8 +202,8 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                                 app_data.setEvaluacion(-1);
                                 unYp8VQThY.getInstance().updateAppConfig(app_data);
                             }
-                            if (!appConfigList.get(0).isNoMostrarEncuesta() && FBsQzP3Zfj.validateExperienciaUsuario()) {
-                                FBsQzP3Zfj.encuestaUsuarios(this.activity, this.context);
+                            if (!appConfigList.get(0).isNoMostrarEncuesta() && UssdDispatcher.validateExperienciaUsuario()) {
+                                UssdDispatcher.encuestaUsuarios(this.activity, this.context);
                             }
                         }
                         Toolbar version_app = (Toolbar) findViewById(R.id.toolbar);
@@ -277,7 +292,7 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                                 unYp8VQThY.getInstance().updateAppConfig(app_data2);
                             }
                             if (!appConfigList.get(0).isNoMostrarEncuesta()) {
-                                FBsQzP3Zfj.encuestaUsuarios(this.activity, this.context);
+                                UssdDispatcher.encuestaUsuarios(this.activity, this.context);
                             }
                         }
                         Toolbar version_app2 = (Toolbar) findViewById(R.id.toolbar);
@@ -366,7 +381,7 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                         unYp8VQThY.getInstance().updateAppConfig(app_data3);
                     }
                     if (!appConfigList.get(0).isNoMostrarEncuesta()) {
-                        FBsQzP3Zfj.encuestaUsuarios(this.activity, this.context);
+                        UssdDispatcher.encuestaUsuarios(this.activity, this.context);
                     }
                 }
                 Toolbar version_app3 = (Toolbar) findViewById(R.id.toolbar);
@@ -623,7 +638,7 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
             getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() { // from class: cu.etecsa.cubacel.tr.tm.GeneralMainActivity$$ExternalSyntheticLambda1
                 @Override // androidx.fragment.app.FragmentManager.OnBackStackChangedListener
                 public final void onBackStackChanged() {
-                    this.f$0.lambda$onCreate$0();
+                    GeneralMainActivity.this.lambda$onCreate$0();
                 }
             });
         } catch (Exception e7) {
@@ -752,7 +767,7 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
         } else {
             element.setTitle(getString(R.string.gestion));
         }
-        FBsQzP3Zfj.menuControlBanks(this.nav_Menu);
+        UssdDispatcher.menuControlBanks(this.nav_Menu);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -873,13 +888,13 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                                 }
                             }
                         } catch (JSONException e2) {
-                            e = e2;
+                            Exception e = e2;
                         }
                     } catch (JSONException e3) {
-                        e = e3;
+                        Exception e = e3;
                     }
                 } catch (JSONException e4) {
-                    e = e4;
+                    Exception e = e4;
                 }
                 enviarDatos(obj.toString());
                 return;
@@ -908,18 +923,18 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                                             obj2.put("descripcion", descripcion2);
                                         }
                                     } catch (JSONException e5) {
-                                        e = e5;
+                                        Exception e = e5;
                                         e.printStackTrace();
                                     }
                                 }
                             } catch (JSONException e6) {
-                                e = e6;
+                                Exception e = e6;
                             }
                         } catch (JSONException e7) {
-                            e = e7;
+                            Exception e = e7;
                         }
                     } catch (JSONException e8) {
-                        e = e8;
+                        Exception e = e8;
                     }
                     enviarDatos(obj2.toString());
                 }
@@ -1051,7 +1066,7 @@ public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
         f6Y2Wmtg6jQ qr = new f6Y2Wmtg6jQ(new ysmUbWW79P() { // from class: cu.etecsa.cubacel.tr.tm.GeneralMainActivity$$ExternalSyntheticLambda0
             @Override // cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.ysmUbWW79P
             public final void onCommunicatorQRScannerResponse(boolean z, String str) {
-                this.f$0.onCommunicatorQRScannerResponse(z, str);
+                GeneralMainActivity.this.onCommunicatorQRScannerResponse(z, str);
             }
         });
         Bundle arg = new Bundle();

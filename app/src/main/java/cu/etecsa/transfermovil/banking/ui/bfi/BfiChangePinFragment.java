@@ -11,7 +11,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.hqlegRdVXsu.KvpkEH7lRr */
 public class BfiChangePinFragment extends Fragment {
@@ -72,7 +72,7 @@ public class BfiChangePinFragment extends Fragment {
         inputLayoutNewpin.setErrorEnabled(false);
         String payload = "05*" + oldPin + "*" + newPin;
         ViewGroup form = rootView.findViewById(R.id.frmChangePassBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(context, "69", payload, getString(R.string.confirm_cambio_clave), form, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(context, "69", payload, getString(R.string.confirm_cambio_clave), form, getFragmentManager());
     }
 
     private boolean validate(AutoCompleteTextView field, TextInputLayout layout, String value, int emptyError, int lengthError) {

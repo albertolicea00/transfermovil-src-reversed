@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
  * @original_apk_version 1.260416
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.V3QHJhzixi7i.O2oXWQuRDi
  * @fingerprint POJO holding a Fragment + AlertDialog.Builder pair.
- *              Used by FBsQzP3Zfj.goToFragment() to return either a fragment
+ *              Used by UssdDispatcher.goToFragment() to return either a fragment
  *              to navigate to or a dialog to display.
  */
 public class FragmentDialogResult {

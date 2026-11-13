@@ -15,7 +15,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -117,7 +117,7 @@ public class BfiConsultarSaldoFragment extends BaseBankingFragment {
         String cadena = this.monedaTarjeta + "*" + this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "46", cadena, "¿Desea consultar el saldo de su cuenta?", group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "46", cadena, "¿Desea consultar el saldo de su cuenta?", group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "46", "05", this.MAX_PARAMETERS_PQUETE, cadena, "¿Desea consultar el saldo de su cuenta?", group, getFragmentManager());
         }

@@ -15,7 +15,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ServicioPublico;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +105,7 @@ public class BpaTaxPaymentFragment extends Fragment {
         String cadena = licencia + "*" + monto + "*" + moneda;
         String msg = "Desea pagar la ONAT, RC04A: " + this.inputRC04.getText().toString() + ", RC05: " + this.inputRC05.getText().toString();
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmOnat);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "43", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "43", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateLicencia() {

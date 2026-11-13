@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.P8DtkaSW4dR */
@@ -83,7 +83,7 @@ public class WalletRechargeFragment extends Fragment implements pAzq93vIl3.UssdR
             isPartialUSSD = false;
         }
         if (!isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(context, "17", payload, message, form, getParentFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(context, "17", payload, message, form, getParentFragmentManager());
         } else {
             manager.principalEnviarUSSD(context, "110", "17", "04", maxParametersPerPacket,
                     payload, message, form, getParentFragmentManager());

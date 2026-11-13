@@ -32,7 +32,7 @@ public class BfiEnterpriseTabHostFragment extends Fragment {
             public void run() {
                 try {
                     BfiEnterpriseTabHostFragment.tabLayout.setupWithViewPager(BfiEnterpriseTabHostFragment.viewPager);
-                    Context ct = k7f9P3HfZ4.this.getContext();
+                    Context ct = BfiEnterpriseTabHostFragment.this.getContext();
                     TextView tabTwo = (TextView) LayoutInflater.from(ct).inflate(R.layout.qk38evge3cdbu, (ViewGroup) null);
                     tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.logo_bfi_color_blanco, 0, 0);
                     BfiEnterpriseTabHostFragment.tabLayout.getTabAt(0).setCustomView(tabTwo);

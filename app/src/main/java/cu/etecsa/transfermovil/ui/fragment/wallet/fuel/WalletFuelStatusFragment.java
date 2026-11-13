@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import java.util.Calendar;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -87,7 +87,7 @@ public class WalletFuelStatusFragment extends Fragment {
     public void enviarUSSD() {
         try {
             ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "37", this.fechaInicio, "¿Desea obtener los últimos cupones de combustible en el rango de fecha especificado?", group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "37", this.fechaInicio, "¿Desea obtener los últimos cupones de combustible en el rango de fecha especificado?", group, getFragmentManager());
         } catch (Exception e) {
             Toast.makeText(this.context, "Error intentelo de nuevo", 0).show();
         }

@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.zxing.WriterException;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.x6Wob3Sa98U;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.EJvHfXHGTV8.x6Wob3Sa98U;
 import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaExtendedTransferFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiEnterpriseTransferFragment;
 import cu.etecsa.transfermovil.ui.fragment.banking.bandec.payment.BandecTransferFragment;
 import cu.etecsa.transfermovil.core.enums.BankType;
@@ -137,20 +137,16 @@ public class MobileCardBankListFragment extends Fragment implements MobileCardBa
 
     @Override
     public void onQr(MobileCardBank account) {
-        try {
-            String payload = QR_TRANSFER_HEADER + "," + account.getCuenta() + ","
-                    + account.getMovil_notificar() + ",";
-            Bitmap logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.etecsa);
-            Bitmap qr = QrCodeGenerator.ProductLogo(logo, payload, false, R.color.primaryDarkColor);
-            Dialog dialog = new Dialog(context);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            View content = LayoutInflater.from(context).inflate(R.layout.qtpdr8ekovu2m, null);
-            ((ImageView) content.findViewById(R.id.profile_img_popup)).setImageBitmap(qr);
-            dialog.setContentView(content);
-            dialog.show();
-        } catch (WriterException e) {
-            android.util.Log.e("MobileCardBankList", "QR generation failed", e);
-        }
+        String payload = QR_TRANSFER_HEADER + "," + account.getCuenta() + ","
+                + account.getMovil_notificar() + ",";
+        Bitmap logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.etecsa);
+        Bitmap qr = QrCodeGenerator.ProductLogo(logo, payload, false, R.color.primaryDarkColor);
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        View content = LayoutInflater.from(context).inflate(R.layout.qtpdr8ekovu2m, null);
+        ((ImageView) content.findViewById(R.id.profile_img_popup)).setImageBitmap(qr);
+        dialog.setContentView(content);
+        dialog.show();
     }
 
     @Override

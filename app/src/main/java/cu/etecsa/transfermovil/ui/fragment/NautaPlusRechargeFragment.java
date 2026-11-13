@@ -27,7 +27,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Nauta;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TeflMovil;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.transfermovil.core.enums.AccountType;
@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.HZgbT8IXPf */
 public class NautaPlusRechargeFragment extends Fragment {
     public static final int PICK_CONTACT_REQUEST = 1;
     public ArrayAdapter<CharSequence> adapterTipoBolsa;
@@ -256,7 +257,7 @@ public class NautaPlusRechargeFragment extends Fragment {
                     }
                     String msg = "Confirme los siguientes datos del beneficiario de la compra de nauta Plus. " + msgUser + movil;
                     ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmNautaBanco);
-                    FBsQzP3Zfj.actionCallUSSDBack(this.context, "34", cadena, msg, group, getFragmentManager());
+                    UssdDispatcher.actionCallUSSDBack(this.context, "34", cadena, msg, group, getFragmentManager());
                     return;
                 } catch (Exception e) {
                     return;
@@ -275,7 +276,7 @@ public class NautaPlusRechargeFragment extends Fragment {
                     String movil2 = "Móvil del beneficiario:" + ((Object) this.inputNumeroDestinatario.getText()) + "</font>";
                     String msg2 = "Confirme el móvil del beneficiario de la compra de nauta Plus. " + movil2;
                     ViewGroup group2 = (ViewGroup) this.rootView.findViewById(R.id.frmNautaBanco);
-                    FBsQzP3Zfj.actionCallUSSDBack(this.context, "34", cadena2, msg2, group2, getFragmentManager());
+                    UssdDispatcher.actionCallUSSDBack(this.context, "34", cadena2, msg2, group2, getFragmentManager());
                 }
             } catch (Exception e2) {
             }

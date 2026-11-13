@@ -64,7 +64,7 @@ public class OwnCardListFragment extends Fragment implements xToaaw6pAW.ViewHold
             public void onClick(View v) {
                 FragmentManager mFragmentManager = OwnCardListFragment.this.getActivity().getSupportFragmentManager();
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-                mznuZkZXP3 tarjetaFragment = new mznuZkZXP3();
+                OwnCardEditFragment tarjetaFragment = new OwnCardEditFragment();
                 mFragmentTransaction.replace(R.id.containerView, tarjetaFragment).addToBackStack(null).commit();
             }
         });
@@ -150,7 +150,7 @@ public class OwnCardListFragment extends Fragment implements xToaaw6pAW.ViewHold
         TarjetaPropia cuenta = this.cLists.get(position);
         FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-        mznuZkZXP3 editPropia = new mznuZkZXP3();
+        OwnCardEditFragment editPropia = new OwnCardEditFragment();
         Bundle b = new Bundle();
         b.putString("cuenta_id", String.valueOf(cuenta.getId()));
         editPropia.setArguments(b);

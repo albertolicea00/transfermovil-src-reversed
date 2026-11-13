@@ -42,7 +42,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.transfermovil.banking.ui.BankAccountEditFragment;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
@@ -423,9 +423,9 @@ public class WalletBankTransferFragment extends EV9Tu0zIL4 implements pAzq93vIl3
         if (this.isPartialUSSD) {
             this.manager.principalEnviarUSSD(this.context, "110", "16", "04", this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         } else if (!this.isWithPin) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "16", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "16", cadena, msg, group, getFragmentManager());
         } else {
-            FBsQzP3Zfj.actionCallUSSDBackWithRetun(this.context, "16", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBackWithRetun(this.context, "16", cadena, msg, group, getFragmentManager());
         }
     }
 

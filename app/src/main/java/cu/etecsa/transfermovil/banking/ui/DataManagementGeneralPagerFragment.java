@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.banking.ui;
 
+import cu.etecsa.cubacel.tr.tm.R;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,8 +49,8 @@ public class DataManagementGeneralPagerFragment extends Fragment {
         View x = inflater.inflate(R.layout.uwsf4ji3yumwn, null);
         tabLayout = (TabLayout) x.findViewById(R.id.tabs);
         viewPager = (ViewPager) x.findViewById(R.id.viewpager);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setTabGravity(1);
+        tabLayout.setTabMode(0);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
         tabLayout.post(() -> tabLayout.setupWithViewPager(viewPager));
         return x;

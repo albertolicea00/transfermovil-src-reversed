@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.ui.fragment.banking.bandec.auth;
 
+import cu.etecsa.transfermovil.ui.fragment.banking.bandec.operations.BandecFineQueryFragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;

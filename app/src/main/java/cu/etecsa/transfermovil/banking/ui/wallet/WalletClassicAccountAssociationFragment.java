@@ -26,7 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.transfermovil.base.BaseMainActivity;
 import cu.etecsa.transfermovil.core.enums.BankType;
@@ -37,7 +37,7 @@ import java.util.List;
 
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.HTmIvOo9nb */
 public class WalletClassicAccountAssociationFragment extends Fragment
-        implements FBsQzP3Zfj.UssdBaseObserver {
+        implements UssdDispatcher.UssdBaseObserver {
     private Activity activity;
     private Context context;
     private View rootView;
@@ -94,7 +94,7 @@ public class WalletClassicAccountAssociationFragment extends Fragment
         String account = cuenta.replace("-", BuildConfig.FLAVOR);
         String payload = "08*" + account + "*" + authorization + "*" + terminal;
         ViewGroup form = rootView.findViewById(R.id.frmAsocClasica);
-        FBsQzP3Zfj.actionCallUSSDBackAsocClasica(context, "111", payload,
+        UssdDispatcher.actionCallUSSDBackAsocClasica(context, "111", payload,
                 "Desea asociar la cuenta: " + account + "?", form, getFragmentManager(), this);
     }
 

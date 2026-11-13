@@ -233,7 +233,11 @@ public class QrCodeGenerator {
             if (size > MAX_INPUT_GIF_SIZE) {
                 frame = Bitmap.createScaledBitmap(frame, MAX_INPUT_GIF_SIZE, MAX_INPUT_GIF_SIZE, false);
             }
-            output[i] = Product(txt, frame, colorful, color);
+            try {
+                output[i] = Product(txt, frame, colorful, color);
+            } catch (WriterException failure) {
+                QrCodeGenerator.<RuntimeException>throwUnchecked(failure);
+            }
         }
         return output;
     }
@@ -492,5 +496,10 @@ public class QrCodeGenerator {
             }
         }
         return image;
+    }
+    /** Keep the source no-throws API while propagating the same bytecode exception. */
+    @SuppressWarnings("unchecked")
+    private static <T extends Throwable> void throwUnchecked(Throwable failure) throws T {
+        throw (T) failure;
     }
 }

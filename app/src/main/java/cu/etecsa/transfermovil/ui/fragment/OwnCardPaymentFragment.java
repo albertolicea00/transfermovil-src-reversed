@@ -17,7 +17,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Client;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TarjetaPropia;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.qTDVwLFEjE;
@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.JrjJL8mtlI */
 public class OwnCardPaymentFragment extends Fragment implements pAzq93vIl3.UssdResponseObserver {
     public ArrayAdapter<CharSequence> adapterTipoBolsa;
     public ImageButton btSearchAccount;
@@ -174,7 +175,7 @@ public class OwnCardPaymentFragment extends Fragment implements pAzq93vIl3.UssdR
         } catch (Exception e) {
         }
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "77", cadena, msg2, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "77", cadena, msg2, group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "77", "04", this.MAX_PARAMETERS_PQUETE, cadena, msg2, group, getFragmentManager());
         }

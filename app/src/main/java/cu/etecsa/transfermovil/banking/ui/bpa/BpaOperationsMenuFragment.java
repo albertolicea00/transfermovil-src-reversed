@@ -20,7 +20,7 @@ import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 import java.util.ArrayList;
 import java.util.List;
@@ -258,7 +258,7 @@ public class BpaOperationsMenuFragment extends Fragment {
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        FBsQzP3Zfj.closeSessionBank(getActivity());
+        UssdDispatcher.closeSessionBank(getActivity());
         AlertDialog alert = builder.create();
         alert.show();
     }

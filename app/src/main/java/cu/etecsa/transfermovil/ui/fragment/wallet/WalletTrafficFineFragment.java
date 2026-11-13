@@ -15,7 +15,7 @@ import android.widget.DatePicker;
 import androidx.appcompat.app.AlertDialog;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.util.Calendar;
@@ -218,7 +218,7 @@ public class WalletTrafficFineFragment extends BaseTwoAccountFragment {
         String numberAsString = String.format("%.2f", Float.valueOf(importe));
         String msg = "Confirme que desea pagar el siguiente identificador de multa: ID de Multa: " + idMulta + ",  importe a pagar : " + numberAsString + " " + monedaImporteTx + ".";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "96", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "96", cadena, msg, group, getFragmentManager());
     }
 
     @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b

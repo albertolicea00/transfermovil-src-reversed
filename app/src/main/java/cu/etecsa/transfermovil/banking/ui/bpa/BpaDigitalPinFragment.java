@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.ocoSQMhcgK */
@@ -80,7 +80,7 @@ public class BpaDigitalPinFragment extends Fragment {
         this.inputCoordenadas2.getText().toString().trim();
         String cadena = cuenta + "*0000*0000";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "79", cadena, "Confirme que desea generar el código pin", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "79", cadena, "Confirme que desea generar el código pin", group, getFragmentManager());
     }
 
     private boolean validateCuenta(String cuenta) {

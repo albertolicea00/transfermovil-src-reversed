@@ -23,7 +23,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
@@ -144,7 +144,7 @@ public class WalletSyndicateQueryFragment extends Fragment {
         String cadena = String.valueOf(this.banco) + "*" + this.txCI.getText().toString();
         String msg = "¿Desea consultar los pagos realizados del sindicato para el CI: " + this.txCI.getText().toString() + "?";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTicket);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "121", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "121", cadena, msg, group, getFragmentManager());
     }
 
     public boolean validateCI() {

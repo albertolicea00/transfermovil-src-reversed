@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.lzGEfceoJu */
@@ -45,7 +45,7 @@ public class BpaAuthFragment extends Fragment {
         }
         String clave = "01*" + this.inputClave.getText().toString().trim();
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmAuthBanco);
-        FBsQzP3Zfj.actionCallUSSDBack("01", this.context, "40", clave, "Desea autenticarse en el sistema", group, getFragmentManager(), getActivity());
+        UssdDispatcher.actionCallUSSDBack("01", this.context, "40", clave, "Desea autenticarse en el sistema", group, getFragmentManager(), getActivity());
     }
 
     private boolean validateClave() {

@@ -1,6 +1,7 @@
 package cu.etecsa.transfermovil.sms;
 
 import android.util.Log;
+import cu.etecsa.cubacel.tr.tm.R;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -11,8 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.io.UnsupportedEncodingException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.github.paolorotolo.appintro.BuildConfig;
 
@@ -98,11 +97,11 @@ public class SmsParser {
      */
     /** Parses transaction, promotion, service, and plan-update SMS records. */
     public SmsRecord parse(SmsMessage sms_properties) {
-        CharSequence charSequence;
-        CharSequence charSequence2;
-        CharSequence charSequence3;
-        CharSequence charSequence4;
-        CharSequence charSequence5;
+        CharSequence charSequence = "Monedero Mi Transfer";
+        CharSequence charSequence2 = "Metropolitano";
+        CharSequence charSequence3 = "Bandec";
+        CharSequence charSequence4 = "Popular de Ahorros";
+        CharSequence charSequence5 = "Popular de Ahorro";
         String CONS_DATOS;
         String cadena;
         SmsRecord record = new SmsRecord();
@@ -259,7 +258,6 @@ public class SmsParser {
                     return record;
                 }
                 return null;
-                return null;
             }
             if (!sms.contains("Id Compra:")) {
                 if (sms.contains("Popular de Ahorros")) {
@@ -370,11 +368,11 @@ public class SmsParser {
                 record.setMostrar(true);
             }
             if (!sms.contains("Pago completado.") || !sms.contains("Id Compra:")) {
-                charSequence = r10;
-                charSequence2 = r5;
-                charSequence3 = r6;
-                charSequence4 = r8;
-                charSequence5 = r7;
+                charSequence = "Monedero Mi Transfer";
+                charSequence2 = "Metropolitano";
+                charSequence3 = "Bandec";
+                charSequence4 = "Popular de Ahorros";
+                charSequence5 = "Popular de Ahorro";
             } else {
                 charSequence5 = "Popular de Ahorro";
                 if (sms.contains(charSequence5)) {
@@ -384,31 +382,31 @@ public class SmsParser {
                     charSequence3 = "Bandec";
                     charSequence4 = "Popular de Ahorros";
                 } else {
-                    charSequence4 = r8;
+                    charSequence4 = "Popular de Ahorros";
                     if (sms.contains(charSequence4)) {
                         record.setTipo_servicio(AgentSource.BancoBPA);
-                        charSequence = r10;
-                        charSequence2 = r5;
-                        charSequence3 = r6;
+                        charSequence = "Monedero Mi Transfer";
+                        charSequence2 = "Metropolitano";
+                        charSequence3 = "Bandec";
                     } else {
-                        charSequence3 = r6;
+                        charSequence3 = "Bandec";
                         if (sms.contains(charSequence3)) {
                             record.setTipo_servicio(AgentSource.BancoBANDEC);
-                            charSequence = r10;
-                            charSequence2 = r5;
+                            charSequence = "Monedero Mi Transfer";
+                            charSequence2 = "Metropolitano";
                         } else {
-                            charSequence2 = r5;
+                            charSequence2 = "Metropolitano";
                             if (sms.contains(charSequence2)) {
                                 record.setTipo_servicio(AgentSource.BancoMetro);
-                                charSequence = r10;
+                                charSequence = "Monedero Mi Transfer";
                             } else if (sms.contains(charSequence)) {
-                                charSequence = r10;
+                                charSequence = "Monedero Mi Transfer";
                                 record.setTipo_servicio(AgentSource.BolsaEtecsa);
                             }
                         }
                     }
                 }
-                charSequence = r10;
+                charSequence = "Monedero Mi Transfer";
                 String transaccion = getElement("No. Transaccion:", sms);
                 String idcompra = getElement("Id Compra:", sms);
                 String importe6 = getElement("Importe: ", sms);
@@ -1147,126 +1145,39 @@ public class SmsParser {
                 String CONS_DATOS3 = "Fecha Inicio Oferta:";
                 String CONS_FECHA_ATRACCION = str;
                 String CONS_DATOS4 = nombre;
-                int i3 = 1;
-                while (i3 < bloques2.length) {
-                    String bloque = bloques2[i3].trim();
-                    if (bloque.isEmpty()) {
-                        bloques = bloques2;
-                        CONS_ID_OFERTA = CONS_ID_OFERTA2;
-                        CONS_NOMBRE = CONS_FECHA_INIC2;
-                        CONS_NOMBRE2 = CONS_DATOS3;
-                        CONS_FECHA_INIC = CONS_DATOS4;
-                        CONS_DATOS2 = CONS_DATOS2;
-                        i2 = i3;
-                    } else {
-                        try {
-                            TicketPurchase boleto = new TicketPurchase();
-                            bloques = bloques2;
-                            i = i3;
-                            try {
-                                boleto.setIdOferta(getElementLine(CONS_ID_OFERTA2, bloque));
-                                boleto.setAlias(getElementLine(CONS_FECHA_INIC2, bloque));
-                                boleto.setToken(getElementLine(CONS_TOKEN, bloque));
-                                boleto.setIdTransaccion(getElementLine(CONS_TRANSACCION, bloque));
-                                boleto.setIdTransferencia(getElementLine(CONS_TRANSFERENCIA, bloque));
-                                String precioStr = getElementLine(CONS_PRECIO, bloque);
-                                if (precioStr == null) {
-                                    CONS_ID_OFERTA = CONS_ID_OFERTA2;
-                                    CONS_NOMBRE = CONS_FECHA_INIC2;
-                                } else {
-                                    CONS_ID_OFERTA = CONS_ID_OFERTA2;
-                                    CONS_NOMBRE = CONS_FECHA_INIC2;
-                                    try {
-                                        boleto.setPrecio(Double.parseDouble(precioStr));
-                                    } catch (Exception e3) {
-                                        CONS_NOMBRE2 = CONS_DATOS3;
-                                        CONS_DATOS = CONS_DATOS4;
-                                        CONS_FECHA_INIC = CONS_DATOS;
-                                        StringBuilder sb = new StringBuilder();
-                                        sb.append("Error procesando boleto ");
-                                        i2 = i;
-                                        sb.append(i2);
-                                        Log.e("BOLETO_ERROR", sb.toString(), e3);
-                                        procesarBoletos(boletos);
-                                        i3 = i2 + 1;
-                                        CONS_DATOS2 = CONS_DATOS2;
-                                        bloques2 = bloques;
-                                        CONS_ID_OFERTA2 = CONS_ID_OFERTA;
-                                        CONS_DATOS4 = CONS_FECHA_INIC;
-                                        CONS_DATOS3 = CONS_NOMBRE2;
-                                        CONS_FECHA_INIC2 = CONS_NOMBRE;
-                                    }
-                                }
-                                try {
-                                    String CONS_ID_OFERTA3 = getElementLine(CONS_MONEDA2, bloque);
-                                    boleto.setMoneda(CONS_ID_OFERTA3);
-                                    boleto.setCi(getElementLine(CONS_CI_BENEFICIARIO2, bloque));
-                                    String fechaCompraStr = getElementLine(CONS_FECHA_COMPRA, bloque);
-                                    CONS_NOMBRE2 = CONS_DATOS3;
-                                    try {
-                                        String fechaInic2 = getElementLine(CONS_NOMBRE2, bloque);
-                                        String precioStr2 = CONS_FECHA_ATRACCION;
-                                        try {
-                                            String fechaAtraccionStr = getElementLine(precioStr2, bloque);
-                                            CONS_FECHA_ATRACCION = precioStr2;
-                                            boleto.setFechaCompra(parseFecha(fechaCompraStr));
-                                            boleto.setFechaInicial(parseFecha(fechaInic2));
-                                            boleto.setFechaVencimiento(parseFecha(fechaAtraccionStr));
-                                            CONS_DATOS = CONS_DATOS4;
-                                            try {
-                                                String fechaAtraccionStr2 = extractAttractionData(bloque, CONS_DATOS);
-                                                boleto.setDatos(fechaAtraccionStr2);
-                                                boleto.setEstado("ACTIVA");
-                                                boleto.setTipoCompra(CONS_DATOS2);
-                                                boleto.setConsumido(false);
-                                                boleto.setFechaActualizacion(sms_properties.getDate());
-                                                boletos.add(boleto);
-                                                CONS_FECHA_INIC = CONS_DATOS;
-                                                i2 = i;
-                                            } catch (Exception e4) {
-                                                CONS_FECHA_INIC = CONS_DATOS;
-                                                StringBuilder sb2 = new StringBuilder();
-                                                sb2.append("Error procesando boleto ");
-                                                i2 = i;
-                                                sb2.append(i2);
-                                                Log.e("BOLETO_ERROR", sb2.toString(), e4);
-                                            }
-                                        } catch (Exception e5) {
-                                            CONS_FECHA_ATRACCION = precioStr2;
-                                            CONS_DATOS = CONS_DATOS4;
-                                        }
-                                    } catch (Exception e6) {
-                                        CONS_DATOS = CONS_DATOS4;
-                                    }
-                                } catch (Exception e7) {
-                                    CONS_NOMBRE2 = CONS_DATOS3;
-                                    CONS_DATOS = CONS_DATOS4;
-                                }
-                            } catch (Exception e8) {
-                                CONS_ID_OFERTA = CONS_ID_OFERTA2;
-                                CONS_NOMBRE = CONS_FECHA_INIC2;
-                                CONS_NOMBRE2 = CONS_DATOS3;
-                                CONS_DATOS = CONS_DATOS4;
-                            }
-                        } catch (Exception e9) {
-                            bloques = bloques2;
-                            CONS_ID_OFERTA = CONS_ID_OFERTA2;
-                            CONS_NOMBRE = CONS_FECHA_INIC2;
-                            CONS_NOMBRE2 = CONS_DATOS3;
-                            i = i3;
-                            CONS_DATOS = CONS_DATOS4;
-                        }
-                        procesarBoletos(boletos);
+                // Smali parseOfertasBoleto :goto_5..:goto_9: one increment
+                // per block and one shared failure handler, then persist the
+                // accumulated list after each nonempty block (source behavior).
+                for (int index = 1; index < bloques2.length; index++) {
+                    String bloque = bloques2[index].trim();
+                    if (bloque.isEmpty()) continue;
+                    try {
+                        TicketPurchase boleto = new TicketPurchase();
+                        boleto.setIdOferta(getElementLine(CONS_ID_OFERTA2, bloque));
+                        boleto.setAlias(getElementLine(CONS_FECHA_INIC2, bloque));
+                        boleto.setToken(getElementLine(CONS_TOKEN, bloque));
+                        boleto.setIdTransaccion(getElementLine(CONS_TRANSACCION, bloque));
+                        boleto.setIdTransferencia(getElementLine(CONS_TRANSFERENCIA, bloque));
+                        String precio = getElementLine(CONS_PRECIO, bloque);
+                        if (precio != null) boleto.setPrecio(Double.parseDouble(precio));
+                        boleto.setMoneda(getElementLine(CONS_MONEDA2, bloque));
+                        boleto.setCi(getElementLine(CONS_CI_BENEFICIARIO2, bloque));
+                        boleto.setFechaCompra(parseFecha(getElementLine(CONS_FECHA_COMPRA, bloque)));
+                        boleto.setFechaInicial(parseFecha(getElementLine(CONS_DATOS3, bloque)));
+                        boleto.setFechaVencimiento(parseFecha(getElementLine(CONS_FECHA_ATRACCION, bloque)));
+                        boleto.setDatos(extractAttractionData(bloque, CONS_DATOS4));
+                        boleto.setEstado("ACTIVA");
+                        boleto.setTipoCompra(CONS_DATOS2);
+                        boleto.setConsumido(false);
+                        boleto.setFechaActualizacion(sms_properties.getDate());
+                        boletos.add(boleto);
+                    } catch (Exception failure) {
+                        Log.e("BOLETO_ERROR", "Error procesando boleto " + index, failure);
                     }
-                    i3 = i2 + 1;
-                    CONS_DATOS2 = CONS_DATOS2;
-                    bloques2 = bloques;
-                    CONS_ID_OFERTA2 = CONS_ID_OFERTA;
-                    CONS_DATOS4 = CONS_FECHA_INIC;
-                    CONS_DATOS3 = CONS_NOMBRE2;
-                    CONS_FECHA_INIC2 = CONS_NOMBRE;
+                    procesarBoletos(boletos);
                 }
             }
+
             if (sms.contains("Mi Boleto: La operacion se realizo correctamente")) {
                 procesarConfirmacionCompra(sms, sms_properties.getDate());
             }
@@ -1293,81 +1204,41 @@ public class SmsParser {
     }
 
     private void procesarListadoOfertas(String sms, Date sms_date) {
-        String CONS_TRANSACCION;
-        String ic_control;
-        String ofertaLimpia;
-        String CONS_CABECERA = "Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad";
-        String CONS_TRANSACCION2 = "Id_tm:";
-        String ic_control2 = getElement("Id_tm:", sms);
-        long id_tm = Long.parseLong(ic_control2);
-        if (esIdTmValido(id_tm) && sms.contains("Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad")) {
-            try {
-                DatabaseHelper.getInstance().deleteOfertasWithIdTmLess(id_tm);
-                int startIndex = "Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad".length() + sms.indexOf("Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad");
-                String ofertasPart = sms.substring(startIndex).trim();
-                String[] ofertas = ofertasPart.split("\\|");
-                int length = ofertas.length;
-                int i = 0;
-                while (i < length) {
-                    String oferta = ofertas[i];
-                    String ofertaLimpia2 = oferta.trim();
-                    if (ofertaLimpia2.isEmpty()) {
-                        CONS_TRANSACCION = CONS_TRANSACCION2;
-                        ic_control = ic_control2;
-                        ofertaLimpia = CONS_CABECERA;
-                    } else {
-                        String[] campos = ofertaLimpia2.split(";");
-                        ofertaLimpia = CONS_CABECERA;
-                        if (campos.length >= 7) {
-                            try {
-                                TicketOffer nuevaOferta = new TicketOffer();
-                                nuevaOferta.setId(campos[0].trim());
-                                nuevaOferta.setNombre(campos[1].trim());
-                                CONS_TRANSACCION = CONS_TRANSACCION2;
-                                try {
-                                    nuevaOferta.setFecha(sms_date);
-                                    String intervaloFechas = campos[4].trim();
-                                    nuevaOferta.setFechaOferta(intervaloFechas);
-                                    nuevaOferta.setValidDays(Integer.parseInt(campos[5]));
-                                    nuevaOferta.setCantPersona(Integer.parseInt(campos[6]));
-                                    nuevaOferta.setId_control(id_tm);
-                                    try {
-                                        ic_control = ic_control2;
-                                        try {
-                                            try {
-                                                nuevaOferta.setPrecio(Double.parseDouble(campos[2].trim()));
-                                                nuevaOferta.setMoneda(campos[3].trim());
-                                                DatabaseHelper.getInstance().addOfertasMiBoleto(nuevaOferta);
-                                            } catch (NumberFormatException e) {
-                                                Log.e("Ofertas", "Formato de precio inválido: " + campos[2]);
-                                            }
-                                        } catch (Exception e2) {
-                                            Log.e("Ofertas", "Error procesando ofertas: " + e2.getMessage(), e2);
-                                            return;
-                                        }
-                                    } catch (NumberFormatException e3) {
-                                        ic_control = ic_control2;
-                                    }
-                                } catch (Exception e4) {
-                                    Log.e("Ofertas", "Error procesando ofertas: " + e4.getMessage(), e4);
-                                    return;
-                                }
-                            } catch (Exception e5) {
-                            }
-                        } else {
-                            CONS_TRANSACCION = CONS_TRANSACCION2;
-                            ic_control = ic_control2;
-                            Log.e("Ofertas", "Formato incorrecto, campos insuficientes: " + ofertaLimpia2);
-                        }
-                    }
-                    i++;
-                    CONS_CABECERA = ofertaLimpia;
-                    CONS_TRANSACCION2 = CONS_TRANSACCION;
-                    ic_control2 = ic_control;
+        String header = "Codigo;Nombre;Precio;Moneda;Fecha;Plazo;Cantidad";
+        long control = Long.parseLong(getElement("Id_tm:", sms));
+        if (!esIdTmValido(control) || !sms.contains(header)) return;
+        // APK bytecode has one outer failure handler; only malformed prices
+        // are recoverable per offer. Invalid deadline/count aborts the batch.
+        try {
+            DatabaseHelper.getInstance().deleteOfertasWithIdTmLess(control);
+            String data = sms.substring(sms.indexOf(header) + header.length()).trim();
+            for (String entry : data.split("\\|")) {
+                String trimmed = entry.trim();
+                if (trimmed.isEmpty()) continue;
+                String[] fields = trimmed.split(";");
+                if (fields.length < 7) {
+                    Log.e("Ofertas", "Formato incorrecto, campos insuficientes: " + trimmed);
+                    continue;
                 }
-                Log.i("Ofertas", "Ofertas actualizadas correctamente. ID_TM: " + id_tm);
-            } catch (Exception e6) {
+                TicketOffer offer = new TicketOffer();
+                offer.setId(fields[0].trim());
+                offer.setNombre(fields[1].trim());
+                offer.setFecha(sms_date);
+                offer.setFechaOferta(fields[4].trim());
+                offer.setValidDays(Integer.parseInt(fields[5]));
+                offer.setCantPersona(Integer.parseInt(fields[6]));
+                offer.setId_control(control);
+                try {
+                    offer.setPrecio(Double.parseDouble(fields[2].trim()));
+                    offer.setMoneda(fields[3].trim());
+                    DatabaseHelper.getInstance().addOfertasMiBoleto(offer);
+                } catch (NumberFormatException failure) {
+                    Log.e("Ofertas", "Formato de precio inválido: " + fields[2]);
+                }
             }
+            Log.i("Ofertas", "Ofertas actualizadas correctamente. ID_TM: " + control);
+        } catch (Exception failure) {
+            Log.e("Ofertas", "Error procesando ofertas: " + failure.getMessage(), failure);
         }
     }
 
@@ -1849,27 +1720,41 @@ public class SmsParser {
     // --- Utility methods ---
 
     /**
-     * Extracts first match of regex pattern from string.
+     * Extracts the next space-delimited token after the literal label, preserving source missing-label behavior.
      */
     public static String getElement(String patron, String cadena) {
-        Pattern pattern = Pattern.compile(patron);
-        Matcher matcher = pattern.matcher(cadena);
-        if (matcher.find()) {
-            return matcher.group(1);
+        try {
+            int intIndex = cadena.indexOf(patron);
+            int proximoElemento = patron.length() + intIndex;
+            String cadenaRestante = cadena.substring(proximoElemento).replace("\n", " ");
+            String[] elementos = cadenaRestante.trim().split(" ");
+            String valor = elementos[0];
+            return valor;
+        } catch (Exception ex) {
+            Log.e("PARSESMS-EXCEPTION", ex.getMessage());
+            return null;
         }
-        return "";
     }
 
     /**
-     * Extracts match across line boundaries.
+     * Extracts the trimmed line after a literal label; missing labels return null.
      */
     public static String getElementLine(String patron, String cadena) {
-        Pattern pattern = Pattern.compile(patron, Pattern.DOTALL);
-        Matcher matcher = pattern.matcher(cadena);
-        if (matcher.find()) {
-            return matcher.group(1);
+        try {
+            int startIndex = cadena.indexOf(patron);
+            if (startIndex == -1) {
+                return null;
+            }
+            int valueStart = patron.length() + startIndex;
+            int endIndex = cadena.indexOf("\n", valueStart);
+            if (endIndex == -1) {
+                return cadena.substring(valueStart).trim();
+            }
+            return cadena.substring(valueStart, endIndex).trim();
+        } catch (Exception ex) {
+            Log.e("PARSESMS-EXCEPTION", ex.getMessage());
+            return null;
         }
-        return "";
     }
 
     private Date parseFecha(String fechaStr) {

@@ -61,7 +61,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
                             float dX, float dY, int actionState, boolean isCurrentlyActive) {
-        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+        if (actionState == 1 /* ACTION_STATE_SWIPE */) {
             float alpha = ALPHA_FULL - Math.abs(dX) / viewHolder.itemView.getWidth();
             viewHolder.itemView.setAlpha(alpha);
             viewHolder.itemView.setTranslationX(dX);
@@ -72,7 +72,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-        if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
+        if (actionState != 0 /* ACTION_STATE_IDLE */) {
             if (viewHolder instanceof ItemSelectionListener) {
                 ((ItemSelectionListener) viewHolder).onItemSelected();
             }

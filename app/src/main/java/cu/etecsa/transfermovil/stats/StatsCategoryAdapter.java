@@ -19,7 +19,7 @@ import java.util.List;
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B21UyndcVvF.n1lAq5KrpfE
  * @fingerprint Adapter displaying category items with title, subtitle, icon, and count text with click delegation
  */
-public class StatsCategoryAdapter extends RecyclerView.Adapter<OperationItemViewHolder> {
+public class StatsCategoryAdapter extends RecyclerView.Adapter<StatsCategoryAdapter.InnerViewHolder> {
     private Context context;
     private List<StatsCategoryItem> itemList;
     public OnItemClickListener mItemClickListener;
@@ -34,17 +34,18 @@ public class StatsCategoryAdapter extends RecyclerView.Adapter<OperationItemView
     }
 
     @Override
-    public OperationItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public InnerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.j090c4o52czjo2, viewGroup, false);
-        OperationItemViewHolder viewHolder = new OperationItemViewHolder(view);
+        InnerViewHolder viewHolder = new InnerViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(OperationItemViewHolder customViewHolder, int i) {
+    public void onBindViewHolder(InnerViewHolder customViewHolder, int i) {
         customViewHolder.tituloTextView.setText(this.itemList.get(i).getTitulo());
         customViewHolder.subtituloTextView.setText(this.itemList.get(i).getSubtitulo());
         customViewHolder.iconoImageView.setImageResource(this.itemList.get(i).getIcono());
+        customViewHolder.cantidadTextView.setText(this.itemList.get(i).getCantidad());
     }
 
     @Override

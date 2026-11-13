@@ -26,7 +26,7 @@ public class UssdCipherOrchestrator {
 
     /**
      * @param codeVersion  "372653282298718711" — controls binary parsing shifts
-     * @param crudeCode    1024-char binary string — the substitution lookup table
+     * @param crudeCode    1250-char binary string — the substitution lookup table
      */
     public UssdCipherOrchestrator(String codeVersion, String crudeCode) {
         this.tableBuilder = new SubstitutionTableBuilder(crudeCode, codeVersion);

@@ -11,7 +11,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -88,7 +88,7 @@ public class BpaExternalPaymentFragment extends Fragment {
         String msg = String.format("¿Desea modificar los límites temporalmente de sus cuentas bancarias? Límites temporales establecidos: ATM: %s, POS:%s y Total: %s.", atm, pos, total);
         String cadena = atm + "*" + pos + "*" + total + "*" + this.moneda;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmLimiteBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "61", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "61", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCuenta() {

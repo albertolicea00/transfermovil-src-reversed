@@ -65,7 +65,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.OQcONjDATJ;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.f6Y2Wmtg6jQ;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.ysmUbWW79P;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.HPuMiTypoW;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -125,7 +125,22 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
     /* JADX WARN: Code duplicated, block: B:63:0x01c4 A[Catch: Exception -> 0x0201, TryCatch #7 {Exception -> 0x0201, blocks: (B:48:0x0181, B:53:0x01a3, B:55:0x01ae, B:61:0x01be, B:63:0x01c4, B:65:0x01cf, B:70:0x01f4, B:59:0x01b9), top: B:95:0x0181, inners: #2 }] */
     /* JADX WARN: Code duplicated, block: B:65:0x01cf A[Catch: Exception -> 0x0201, TRY_LEAVE, TryCatch #7 {Exception -> 0x0201, blocks: (B:48:0x0181, B:53:0x01a3, B:55:0x01ae, B:61:0x01be, B:63:0x01c4, B:65:0x01cf, B:70:0x01f4, B:59:0x01b9), top: B:95:0x0181, inners: #2 }] */
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public void onCreate(Bundle savedInstanceState) throws ParseException {
+    public void onCreate(Bundle savedInstanceState) {
+        try {
+            onCreateFromSource(savedInstanceState);
+        } catch (ParseException error) {
+            // DEX permits this checked exception to escape the Android callback.
+            // Preserve that exception rather than changing its runtime type.
+            AgentMainActivity.<RuntimeException>throwFromSource(error);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T extends Throwable> void throwFromSource(Throwable error) throws T {
+        throw (T) error;
+    }
+
+    private void onCreateFromSource(Bundle savedInstanceState) throws ParseException {
         List<AppConfig> appConfigList;
         DateFormat formatter;
         Date today;
@@ -191,8 +206,8 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                             }
                         });
                         appConfigList = unYp8VQThY.getInstance().getAppConfigLists();
-                        if (!appConfigList.get(0).isNoMostrarEncuesta() && FBsQzP3Zfj.validateExperienciaUsuario()) {
-                            FBsQzP3Zfj.encuestaUsuarios(this.activity, this.context);
+                        if (!appConfigList.get(0).isNoMostrarEncuesta() && UssdDispatcher.validateExperienciaUsuario()) {
+                            UssdDispatcher.encuestaUsuarios(this.activity, this.context);
                         }
                         try {
                             formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -271,7 +286,7 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                         });
                         appConfigList = unYp8VQThY.getInstance().getAppConfigLists();
                         if (!appConfigList.get(0).isNoMostrarEncuesta()) {
-                            FBsQzP3Zfj.encuestaUsuarios(this.activity, this.context);
+                            UssdDispatcher.encuestaUsuarios(this.activity, this.context);
                         }
                         formatter = new SimpleDateFormat("dd/MM/yyyy");
                         today = new Date();
@@ -351,7 +366,7 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                 });
                 appConfigList = unYp8VQThY.getInstance().getAppConfigLists();
                 if (!appConfigList.get(0).isNoMostrarEncuesta()) {
-                    FBsQzP3Zfj.encuestaUsuarios(this.activity, this.context);
+                    UssdDispatcher.encuestaUsuarios(this.activity, this.context);
                 }
                 formatter = new SimpleDateFormat("dd/MM/yyyy");
                 today = new Date();
@@ -577,7 +592,7 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
             getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() { // from class: cu.etecsa.cubacel.tr.tm.AgentMainActivity$$ExternalSyntheticLambda0
                 @Override // androidx.fragment.app.FragmentManager.OnBackStackChangedListener
                 public final void onBackStackChanged() {
-                    this.f$0.lambda$onCreate$0();
+                    AgentMainActivity.this.lambda$onCreate$0();
                 }
             });
         } catch (Exception e7) {
@@ -646,7 +661,7 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
             sColored.setSpan(new ForegroundColorSpan(-1), s.length() - 3, s.length(), 0);
             element.setTitle(sColored);
         }
-        FBsQzP3Zfj.menuControlBanks(this.nav_Menu);
+        UssdDispatcher.menuControlBanks(this.nav_Menu);
     }
 
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, android.app.Activity
@@ -720,13 +735,13 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                                 }
                             }
                         } catch (JSONException e2) {
-                            e = e2;
+                            Exception e = e2;
                         }
                     } catch (JSONException e3) {
-                        e = e3;
+                        Exception e = e3;
                     }
                 } catch (JSONException e4) {
-                    e = e4;
+                    Exception e = e4;
                 }
                 enviarDatos(obj.toString());
                 return;
@@ -755,18 +770,18 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                                             obj2.put("descripcion", descripcion2);
                                         }
                                     } catch (JSONException e5) {
-                                        e = e5;
+                                        Exception e = e5;
                                         e.printStackTrace();
                                     }
                                 }
                             } catch (JSONException e6) {
-                                e = e6;
+                                Exception e = e6;
                             }
                         } catch (JSONException e7) {
-                            e = e7;
+                            Exception e = e7;
                         }
                     } catch (JSONException e8) {
-                        e = e8;
+                        Exception e = e8;
                     }
                     enviarDatos(obj2.toString());
                 }
@@ -940,7 +955,7 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
         f6Y2Wmtg6jQ qr = new f6Y2Wmtg6jQ(new ysmUbWW79P() { // from class: cu.etecsa.cubacel.tr.tm.AgentMainActivity$$ExternalSyntheticLambda1
             @Override // cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.ysmUbWW79P
             public final void onCommunicatorQRScannerResponse(boolean z, String str) {
-                this.f$0.onCommunicatorQRScannerResponse(z, str);
+                AgentMainActivity.this.onCommunicatorQRScannerResponse(z, str);
             }
         });
         Bundle arg = new Bundle();

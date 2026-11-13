@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.banking.ui.metro;
 
+import cu.etecsa.transfermovil.banking.ui.metro.MetroChangePinFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,7 +38,7 @@ public class MetroNavigationFragment extends Fragment {
                     mFragmentTransaction.replace(R.id.containerView, new BfiPinAuthFragment()).addToBackStack(null).commit();
                     break;
                 case 2:
-                    mFragmentTransaction.replace(R.id.containerView, new ToMfHpA64Q()).addToBackStack(null).commit();
+                    mFragmentTransaction.replace(R.id.containerView, new MetroChangePinFragment()).addToBackStack(null).commit();
                     break;
                 default:
                     Toast.makeText(MetroNavigationFragment.this.context, "Seguridad " + position, 0).show();

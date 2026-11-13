@@ -7,86 +7,68 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.fragment.app.FragmentManager;
+import cu.etecsa.transfermovil.banking.ui.bfi.BaseBankingFragment;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
-import cu.etecsa.transfermovil.banking.BankOperationBaseFragment;
-import cu.etecsa.transfermovil.banking.BankType;
-import cu.etecsa.transfermovil.data.DatabaseHelper;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
-import cu.etecsa.transfermovil.ussd.UssdFormManager;
-
-/**
- * BPA fragment for requesting a card reprint.
- * <p>
- * Sends USSD code "74" (or partial "110"/"74"/"01") with the selected
- * currency and account. Asks confirmation to reprint the bank card.
- *
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.kWnV7nzNWl
- * @original_apk_version 1.260416
- */
-public class BpaReprintCardFragment extends BankOperationBaseFragment {
-
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.kWnV7nzNWl */
+public class BpaReprintCardFragment extends BaseBankingFragment {
     private Button btnAceptar;
     public String tipoServicio = "0";
     public TextView toolbar_title;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.jozkrainwpt1o, container, false);
+        this.rootView = inflater.inflate(R.layout.jozkrainwpt1o, container, false);
         Context context = container.getContext();
         this.context = context;
-        this.manager = new UssdFormManager(context, this);
-        DatabaseHelper.init(this.context);
-
-        TextView textView = (TextView) rootView.findViewById(R.id.toolbar_title);
-        toolbar_title = textView;
+        this.manager = new pAzq93vIl3(context, this);
+        unYp8VQThY.init(this.context);
+        TextView textView = (TextView) this.rootView.findViewById(R.id.toolbar_title);
+        this.toolbar_title = textView;
         textView.setText("Reimprimir Tarjeta");
-
-        initComponentesCuentas(rootView, BankType.BPA);
-
-        Button button = (Button) rootView.findViewById(R.id.btn_aceptar);
-        btnAceptar = button;
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
+        initComponentesCuentas(this.rootView, R1sDOSqZ2z.BPA);
+        Button button = (Button) this.rootView.findViewById(R.id.btn_aceptar);
+        this.btnAceptar = button;
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.kWnV7nzNWl.1
+            @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                submitForm();
+                BpaReprintCardFragment.this.submitForm();
             }
         });
-
-        return rootView;
+        return this.rootView;
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.Agg55uYctq
     public void submitForm() {
         super.submitForm();
         if (!validateSelectionAccounts()) {
             return;
         }
         nuevoDatos();
-        String cadena = monedaTarjeta + "*" + cuentaOrigen;
-        ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmView);
-        if (!isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(context, "74", cadena,
-                    "¿Desea reimprimir su tarjeta?",
-                    group, getFragmentManager());
+        String cadena = this.monedaTarjeta + "*" + this.cuentaOrigen;
+        ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
+        if (!this.isPartialUSSD) {
+            UssdDispatcher.actionCallUSSDBack(this.context, "74", cadena, "¿Desea reimprimir su tarjeta?", group, getFragmentManager());
         } else {
-            manager.principalEnviarUSSD(context, "110", "74", "01",
-                    MAX_PARAMETERS_PQUETE, cadena,
-                    "¿Desea reimprimir su tarjeta?",
-                    group, getFragmentManager());
+            this.manager.principalEnviarUSSD(this.context, "110", "74", "01", this.MAX_PARAMETERS_PQUETE, cadena, "¿Desea reimprimir su tarjeta?", group, getFragmentManager());
         }
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.Agg55uYctq
     public void nuevoDatos() {
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3.UssdResponseObserver
     public void onUssdResponseReceived(String response) {
     }
 
-    @Override
+    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3.UssdResponseObserver
     public void onCloseAndBack() {
         try {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

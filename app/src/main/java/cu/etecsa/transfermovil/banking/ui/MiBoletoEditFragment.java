@@ -37,7 +37,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CompraBoleto;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.QRMiBoleto;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.ZUoEY89WdA;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -331,7 +331,7 @@ public class MiBoletoEditFragment extends Fragment implements OffersResultCallba
         String cadena = String.valueOf(this.ticket.getIdOferta());
         String msg = "¿Desea consultar el estado del boleto de la serie siguiente " + cadena + " ?";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-        FBsQzP3Zfj.actionCallUSSDNoBackSimple(this.context, "114", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDNoBackSimple(this.context, "114", cadena, msg, group, getFragmentManager());
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -339,7 +339,7 @@ public class MiBoletoEditFragment extends Fragment implements OffersResultCallba
         String cadena = String.valueOf(this.ticket.getIdOferta());
         String msg = "¿Desea actualizar el boleto de la serie siguiente " + cadena + " ? ";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-        FBsQzP3Zfj.actionCallUSSDNoBackSimple(this.context, "115", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDNoBackSimple(this.context, "115", cadena, msg, group, getFragmentManager());
     }
 
     @Override // cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.SYLBHJttme

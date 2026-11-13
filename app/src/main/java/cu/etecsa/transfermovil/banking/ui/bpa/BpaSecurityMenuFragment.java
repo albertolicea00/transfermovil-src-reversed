@@ -1,5 +1,8 @@
 package cu.etecsa.transfermovil.banking.ui.bpa;
 
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaRegistrationFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaAuthFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaChangePinFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,13 +32,13 @@ public class BpaSecurityMenuFragment extends Fragment {
             FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
             switch (position) {
                 case 0:
-                    mFragmentTransaction.replace(R.id.containerView, new IixhA1yamp()).addToBackStack(null).commit();
+                    mFragmentTransaction.replace(R.id.containerView, new BpaRegistrationFragment()).addToBackStack(null).commit();
                     break;
                 case 1:
-                    mFragmentTransaction.replace(R.id.containerView, new lzGEfceoJu()).addToBackStack(null).commit();
+                    mFragmentTransaction.replace(R.id.containerView, new BpaAuthFragment()).addToBackStack(null).commit();
                     break;
                 case 2:
-                    mFragmentTransaction.replace(R.id.containerView, new PQmKwgxZd1()).addToBackStack(null).commit();
+                    mFragmentTransaction.replace(R.id.containerView, new BpaChangePinFragment()).addToBackStack(null).commit();
                     break;
                 default:
                     Toast.makeText(BpaSecurityMenuFragment.this.context, "Seguridad " + position, 0).show();

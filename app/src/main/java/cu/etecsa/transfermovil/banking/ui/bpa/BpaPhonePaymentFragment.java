@@ -15,7 +15,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Factura;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +111,7 @@ public class BpaPhonePaymentFragment extends Fragment {
         String msg = "¿ Desea pagar la cuenta: " + cuenta + ", con el monto: " + monto + " " + monedaFactura + " ?. El monto y moneda corresponde a la moneda de la cuenta";
         String cadena = cuenta + "*" + monto + "*" + this.moneda;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTelefono);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "42", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "42", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCuenta() {

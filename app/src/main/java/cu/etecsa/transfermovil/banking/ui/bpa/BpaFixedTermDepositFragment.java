@@ -14,7 +14,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -176,7 +176,7 @@ public class BpaFixedTermDepositFragment extends Fragment {
         String cadena = String.valueOf(this.importe) + "*" + plazoEnvio + "*" + interesEnvio + "*" + this.moneda;
         String msg = "Desea formalizar el depósito a plazo fijo por un importe de " + this.importe + " CUP, en un período de " + this.mesesPeriodo + ". Al vencimiento del plazo se prorrogará de oficio en los mismos términos a la tasa vigente.";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmNautaBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "81", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "81", cadena, msg, group, getFragmentManager());
     }
 
     /* JADX INFO: Access modifiers changed from: private */

@@ -12,7 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.transfermovil.banking.ui.bfi.BaseCommissionAccountFragment;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -69,7 +69,7 @@ public class BfiAccountStatementFragment extends BaseCommissionAccountFragment {
         String correo = this.txEmail.getText().toString().toLowerCase().trim();
         String cadena = correo + "*" + this.fechaInicio + "*" + this.fechaFin + "*" + this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "26", cadena, "¿Desea obtener el estado de la cuenta seleccionada? Esta operación realiza un cobro de comisión a la cuenta selecionada", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "26", cadena, "¿Desea obtener el estado de la cuenta seleccionada? Esta operación realiza un cobro de comisión a la cuenta selecionada", group, getFragmentManager());
     }
 
     private void fechaInicioConfig() {

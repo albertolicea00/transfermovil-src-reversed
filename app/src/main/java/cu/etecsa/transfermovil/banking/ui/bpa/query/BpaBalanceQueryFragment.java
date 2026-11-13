@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import cu.etecsa.transfermovil.banking.ui.bfi.BaseBankingFragment;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -52,7 +52,7 @@ public class BpaBalanceQueryFragment extends BaseBankingFragment {
         String cadena = this.monedaTarjeta + "*" + this.cuentaOrigen;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "62", cadena, "¿Desea consultar los límites de sus cuentas bancarias?", group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "62", cadena, "¿Desea consultar los límites de sus cuentas bancarias?", group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "62", "01", this.MAX_PARAMETERS_PQUETE, cadena, "¿Desea consultar los límites de sus cuentas bancarias?", group, getFragmentManager());
         }

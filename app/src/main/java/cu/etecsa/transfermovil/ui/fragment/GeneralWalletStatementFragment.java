@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -127,7 +127,7 @@ public class GeneralWalletStatementFragment extends Fragment implements pAzq93vI
         String cadena = correo + "*" + this.fechaInicio + "*" + this.fechaFin + "*" + this.tipoBolsaDescripcion;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmView);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "26", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "26", cadena, msg, group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "26", "04", this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         }

@@ -19,7 +19,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.ServicioPublico;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.y2Cht3lmjg;
 import java.util.ArrayList;
@@ -182,7 +182,7 @@ public class MetroTaxPaymentFragment extends Fragment {
         String cadena = formaPago + "*" + rc04 + "*" + rc05 + "*" + codTributo + "*" + importe + "*" + moneda;
         String msg = "Desea realizar el pago del impuesto con el siguiente RC05: " + rc05;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmOnat);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "43", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "43", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateLicencia() {

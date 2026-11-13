@@ -11,7 +11,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
@@ -137,7 +137,7 @@ public class WalletJovenClubFragment extends Fragment {
         String numberAsString = String.format("%.2f", monto);
         String msg = "Confirme los siguientes datos a recargar: Usuario: " + usuario + ", Carnet de identidad: " + ci + ", Importe a recargar: " + numberAsString + " CUP";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "93", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "93", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateUsuario() {

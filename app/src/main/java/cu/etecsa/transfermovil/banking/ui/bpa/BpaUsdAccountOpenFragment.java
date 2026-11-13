@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.banking.ui.bpa;
 
+import android.R;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,196 +9,176 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-
+import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
-
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Municipio;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Provincia;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalBancaria;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.util.List;
 
-import cu.etecsa.transfermovil.data.DatabaseHelper;
-import cu.etecsa.transfermovil.data.entity.Municipio;
-import cu.etecsa.transfermovil.data.entity.Provincia;
-import cu.etecsa.transfermovil.data.entity.SucursalBancaria;
-import cu.etecsa.transfermovil.data.json.JsonFilesManager;
-import cu.etecsa.transfermovil.ui.widget.MaterialSpinner;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
-import cu.etecsa.transfermovil.banking.BankType;
-
-/**
- * BPA fragment for opening a USD account backed by MLC at a selected bank branch.
- * <p>
- * Presents cascading province → municipality → branch selectors, then sends
- * USSD code "76" with the selected branch code.
- *
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.T7bvG7kpeae
- * @original_apk_version 1.260416
- */
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.T7bvG7kpeae */
 public class BpaUsdAccountOpenFragment extends Fragment {
-
     private Button btnAceptar;
     public Context context;
-    public JsonFilesManager jsonFilesManager;
-
+    public V9s8rJIDplX jsonFilesManager;
     private TextInputLayout lyMunicipio;
     private TextInputLayout lyProvincia;
     private TextInputLayout lySucursal;
-
     public Municipio municipio;
     public ArrayAdapter<Municipio> municipioArrayAdapter;
     public List<Municipio> municipiosList;
-
     public Provincia provincia;
     public List<Provincia> provinciaList;
     public ArrayAdapter<Provincia> provinciasArrayAdapter;
-
     public View rootView;
-
-    private MaterialSpinner spMunicipio;
-    private MaterialSpinner spProvincia;
-    private MaterialSpinner spSucursal;
-
+    private jN13TOyLMX spMunicipio;
+    private jN13TOyLMX spProvincia;
+    private jN13TOyLMX spSucursal;
     public SucursalBancaria sucursal;
     public ArrayAdapter<SucursalBancaria> sucursalArrayAdapter;
     public List<SucursalBancaria> sucursalList;
-
-    /** Province selection listener — loads municipalities for the selected province. */
-    public MaterialSpinner.OnItemClickListener spClickProvincias = new MaterialSpinner.OnItemClickListener() {
-        @Override
+    public jN13TOyLMX.OnItemClickListener spClickProvincias = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.T7bvG7kpeae.2
+        @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
         public void onItemClick(View view, int position) {
-            provincia = provinciasArrayAdapter.getItem(position);
-            municipio = null;
-            spMunicipio.setText("");
-            sucursal = null;
-            spSucursal.setText("");
-            loadMunicipio(provincia.getCod_provincia());
+            BpaUsdAccountOpenFragment t7bvG7kpeae = BpaUsdAccountOpenFragment.this;
+            t7bvG7kpeae.provincia = t7bvG7kpeae.provinciasArrayAdapter.getItem(position);
+            BpaUsdAccountOpenFragment t7bvG7kpeae2 = BpaUsdAccountOpenFragment.this;
+            t7bvG7kpeae2.municipio = null;
+            t7bvG7kpeae2.spMunicipio.setText(BuildConfig.FLAVOR);
+            BpaUsdAccountOpenFragment t7bvG7kpeae3 = BpaUsdAccountOpenFragment.this;
+            t7bvG7kpeae3.sucursal = null;
+            t7bvG7kpeae3.spSucursal.setText(BuildConfig.FLAVOR);
+            BpaUsdAccountOpenFragment t7bvG7kpeae4 = BpaUsdAccountOpenFragment.this;
+            t7bvG7kpeae4.loadMunicipio(t7bvG7kpeae4.provincia.getCod_provincia());
         }
     };
-
-    /** Municipality selection listener — loads bank branches for the selected municipality. */
-    public MaterialSpinner.OnItemClickListener spClickMunicipio = new MaterialSpinner.OnItemClickListener() {
-        @Override
+    public jN13TOyLMX.OnItemClickListener spClickMunicipio = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.T7bvG7kpeae.3
+        @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
         public void onItemClick(View view, int position) {
-            municipio = municipioArrayAdapter.getItem(position);
-            sucursal = null;
-            spSucursal.setText("");
-            if (!loadSucursales(municipio.getCod_provincia() + municipio.getCod_municipio())) {
-                Toast.makeText(context, "No hay sucursales en el municipio seleccionado", Toast.LENGTH_LONG).show();
-                sucursalArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line);
-                sucursalArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spSucursal.setAdapter(sucursalArrayAdapter);
-                spSucursal.setOnItemClickListener(spSucursal);
-                sucursalArrayAdapter.notifyDataSetChanged();
+            BpaUsdAccountOpenFragment t7bvG7kpeae = BpaUsdAccountOpenFragment.this;
+            t7bvG7kpeae.municipio = t7bvG7kpeae.municipioArrayAdapter.getItem(position);
+            BpaUsdAccountOpenFragment t7bvG7kpeae2 = BpaUsdAccountOpenFragment.this;
+            t7bvG7kpeae2.sucursal = null;
+            t7bvG7kpeae2.spSucursal.setText(BuildConfig.FLAVOR);
+            if (!BpaUsdAccountOpenFragment.this.loadSucursales(BpaUsdAccountOpenFragment.this.municipio.getCod_provincia() + BpaUsdAccountOpenFragment.this.municipio.getCod_municipio())) {
+                Toast.makeText(BpaUsdAccountOpenFragment.this.context, "No hay sucursales en el municipio seleccionado", 1).show();
+                BpaUsdAccountOpenFragment.this.sucursalArrayAdapter = new ArrayAdapter<>(BpaUsdAccountOpenFragment.this.context, R.layout.simple_dropdown_item_1line);
+                BpaUsdAccountOpenFragment.this.sucursalArrayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+                BpaUsdAccountOpenFragment.this.spSucursal.setAdapter(BpaUsdAccountOpenFragment.this.sucursalArrayAdapter);
+                BpaUsdAccountOpenFragment.this.spSucursal.setOnItemClickListener(BpaUsdAccountOpenFragment.this.spSucursal);
+                BpaUsdAccountOpenFragment.this.sucursalArrayAdapter.notifyDataSetChanged();
             }
         }
     };
-
-    /** Branch selection listener — stores the selected branch. */
-    public MaterialSpinner.OnItemClickListener spClickSucursal = new MaterialSpinner.OnItemClickListener() {
-        @Override
+    public jN13TOyLMX.OnItemClickListener spClickSucursal = new jN13TOyLMX.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.T7bvG7kpeae.4
+        @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX.OnItemClickListener
         public void onItemClick(View view, int position) {
-            sucursal = sucursalArrayAdapter.getItem(position);
+            BpaUsdAccountOpenFragment t7bvG7kpeae = BpaUsdAccountOpenFragment.this;
+            t7bvG7kpeae.sucursal = t7bvG7kpeae.sucursalArrayAdapter.getItem(position);
         }
     };
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.qjaqwnuvvtujy, container, false);
-        context = container.getContext();
-
-        JsonFilesManager manager = new JsonFilesManager();
-        jsonFilesManager = manager;
-        manager.loadData(context, BankType.BPA);
-
-        lyProvincia = (TextInputLayout) rootView.findViewById(R.id.lyProvincia);
-        spProvincia = (MaterialSpinner) rootView.findViewById(R.id.spProvincia);
-        lyMunicipio = (TextInputLayout) rootView.findViewById(R.id.lyMunicipio);
-        spMunicipio = (MaterialSpinner) rootView.findViewById(R.id.spMunicipio);
-        lySucursal = (TextInputLayout) rootView.findViewById(R.id.lySucursal);
-        spSucursal = (MaterialSpinner) rootView.findViewById(R.id.spSucursal);
-
+        this.rootView = inflater.inflate(cu.etecsa.cubacel.tr.tm.R.layout.qjaqwnuvvtujy, container, false);
+        this.context = container.getContext();
+        V9s8rJIDplX v9s8rJIDplX = new V9s8rJIDplX();
+        this.jsonFilesManager = v9s8rJIDplX;
+        v9s8rJIDplX.loadData(this.context, R1sDOSqZ2z.BPA);
+        this.lyProvincia = (TextInputLayout) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.lyProvincia);
+        this.spProvincia = (jN13TOyLMX) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.spProvincia);
+        this.lyMunicipio = (TextInputLayout) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.lyMunicipio);
+        this.spMunicipio = (jN13TOyLMX) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.spMunicipio);
+        this.lySucursal = (TextInputLayout) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.lySucursal);
+        this.spSucursal = (jN13TOyLMX) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.spSucursal);
         loadProvincias();
-
-        Button button = (Button) rootView.findViewById(R.id.btn_aceptar);
-        btnAceptar = button;
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
+        Button button = (Button) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.btn_aceptar);
+        this.btnAceptar = button;
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.r1lhlGiU6g65.T7bvG7kpeae.1
+            @Override // android.view.View.OnClickListener
             public void onClick(View view) {
-                submitForm();
+                BpaUsdAccountOpenFragment.this.submitForm();
             }
         });
-
-        return rootView;
+        return this.rootView;
     }
 
-    private void submitForm() {
+    /* JADX INFO: Access modifiers changed from: private */
+    public void submitForm() {
         if (!validateMunicipio() || !validateSucursal()) {
             return;
         }
-        String codigoMunicipio = provincia.getCod_provincia() + municipio.getCod_municipio();
-        String sucursalSeleccionada = sucursal.getCodigoSucursal();
-        ViewGroup group = (ViewGroup) rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(context, "76", sucursalSeleccionada,
-                "¿Desea realizar la apertura de cuenta en USD con respaldo en MLC?",
-                group, getFragmentManager());
+        String str = this.provincia.getCod_provincia() + this.municipio.getCod_municipio();
+        String surcursalSeleccionado = this.sucursal.getCodigoSucursal();
+        ViewGroup group = (ViewGroup) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.frmRegistroBanco);
+        UssdDispatcher.actionCallUSSDBack(this.context, "76", surcursalSeleccionado, "¿Desea realizar la apertura de cuenta en USD con respaldo en MLC?", group, getFragmentManager());
     }
 
     private boolean loadProvincias() {
         try {
-            List<Provincia> list = DatabaseHelper.getInstance().getAllProvinciasLists();
+            List<Provincia> list = unYp8VQThY.getInstance().getAllProvinciasLists();
             if (list == null || list.size() <= 0) {
                 return false;
             }
-            provinciaList = list;
-            provinciasArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line);
-            for (Provincia p : list) {
-                provinciasArrayAdapter.add(p);
+            this.provinciaList = list;
+            this.provinciasArrayAdapter = new ArrayAdapter<>(this.context, R.layout.simple_dropdown_item_1line);
+            for (Provincia uyh0pxs9m37in : list) {
+                this.provinciasArrayAdapter.add(uyh0pxs9m37in);
             }
-            provinciasArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spProvincia.setAdapter(provinciasArrayAdapter);
-            spProvincia.setOnItemClickListener(spClickProvincias);
+            this.provinciasArrayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            this.spProvincia.setAdapter(this.provinciasArrayAdapter);
+            this.spProvincia.setOnItemClickListener(this.spClickProvincias);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    /* JADX INFO: Access modifiers changed from: private */
     public boolean loadMunicipio(String codigo) {
         try {
-            List<Municipio> list = DatabaseHelper.getInstance().getAllMunipiosLists(codigo);
+            List<Municipio> list = unYp8VQThY.getInstance().getAllMunipiosLists(codigo);
             if (list == null || list.size() <= 0) {
                 return false;
             }
-            municipiosList = list;
-            municipioArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line);
-            for (Municipio m : list) {
-                municipioArrayAdapter.add(m);
+            this.municipiosList = list;
+            this.municipioArrayAdapter = new ArrayAdapter<>(this.context, R.layout.simple_dropdown_item_1line);
+            for (Municipio uyh0pxs9m37in : list) {
+                this.municipioArrayAdapter.add(uyh0pxs9m37in);
             }
-            municipioArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spMunicipio.setAdapter(municipioArrayAdapter);
-            spMunicipio.setOnItemClickListener(spClickMunicipio);
-            municipioArrayAdapter.notifyDataSetChanged();
+            this.municipioArrayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            this.spMunicipio.setAdapter(this.municipioArrayAdapter);
+            this.spMunicipio.setOnItemClickListener(this.spClickMunicipio);
+            this.municipioArrayAdapter.notifyDataSetChanged();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    /* JADX INFO: Access modifiers changed from: private */
     public boolean loadSucursales(String codigo) {
         try {
-            List<SucursalBancaria> list = jsonFilesManager.getSucursalxDPA(codigo, context);
+            List<SucursalBancaria> list = this.jsonFilesManager.getSucursalxDPA(codigo, this.context);
             if (list == null || list.size() <= 0) {
                 return false;
             }
-            sucursalList = list;
-            sucursalArrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line);
-            for (SucursalBancaria s : list) {
-                sucursalArrayAdapter.add(s);
+            this.sucursalList = list;
+            this.sucursalArrayAdapter = new ArrayAdapter<>(this.context, R.layout.simple_dropdown_item_1line);
+            for (SucursalBancaria uyh0pxs9m37in : list) {
+                this.sucursalArrayAdapter.add(uyh0pxs9m37in);
             }
-            sucursalArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spSucursal.setAdapter(sucursalArrayAdapter);
-            spSucursal.setOnItemClickListener(spClickSucursal);
-            sucursalArrayAdapter.notifyDataSetChanged();
+            this.sucursalArrayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            this.spSucursal.setAdapter(this.sucursalArrayAdapter);
+            this.spSucursal.setOnItemClickListener(this.spClickSucursal);
+            this.sucursalArrayAdapter.notifyDataSetChanged();
             return true;
         } catch (Exception e) {
             return false;
@@ -205,24 +186,24 @@ public class BpaUsdAccountOpenFragment extends Fragment {
     }
 
     private boolean validateMunicipio() {
-        lyMunicipio.setErrorEnabled(false);
-        if (spMunicipio.getText().toString().trim().isEmpty()) {
-            lyMunicipio.setError("Seleccione el municipio");
-            requestFocus(spMunicipio);
+        this.lyMunicipio.setErrorEnabled(false);
+        if (this.spMunicipio.getText().toString().trim().isEmpty()) {
+            this.lyMunicipio.setError("Seleccione el municipio");
+            requestFocus(this.spMunicipio);
             return false;
         }
-        lyMunicipio.setErrorEnabled(false);
+        this.lyMunicipio.setErrorEnabled(false);
         return true;
     }
 
     private boolean validateSucursal() {
-        lySucursal.setErrorEnabled(false);
-        if (spSucursal.getText().toString().trim().isEmpty()) {
-            lySucursal.setError("Seleccione la sucursal");
-            requestFocus(spSucursal);
+        this.lySucursal.setErrorEnabled(false);
+        if (this.spSucursal.getText().toString().trim().isEmpty()) {
+            this.lySucursal.setError("Seleccione la sucursal");
+            requestFocus(this.spSucursal);
             return false;
         }
-        lySucursal.setErrorEnabled(false);
+        this.lySucursal.setErrorEnabled(false);
         return true;
     }
 

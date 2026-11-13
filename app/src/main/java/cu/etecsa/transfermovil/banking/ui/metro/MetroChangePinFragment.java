@@ -11,7 +11,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.ToMfHpA64Q */
@@ -54,7 +54,7 @@ public class MetroChangePinFragment extends Fragment {
         String pin = this.inputNewpin.getText().toString().trim();
         String msg = getString(R.string.confirm_cambio_clave);
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmChangePassBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "69", pin, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "69", pin, msg, group, getFragmentManager());
     }
 
     private boolean validatePin() {

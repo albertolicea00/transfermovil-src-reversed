@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.HgJHxigegS */
 public class BandecCardInfoQueryFragment extends Fragment {
@@ -70,7 +70,7 @@ public class BandecCardInfoQueryFragment extends Fragment {
         String msg = "Desea consultar el estado de la tarjeta: " + this.cuenta;
         String cadena = this.cuenta;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "78", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "78", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCuenta(String cuenta) {
@@ -214,3 +214,4 @@ public class BandecCardInfoQueryFragment extends Fragment {
             // The source leaves the current drawable unchanged when a prefix is malformed.
         }
     }
+}

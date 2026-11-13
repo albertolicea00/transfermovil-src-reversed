@@ -14,108 +14,133 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import cu.etecsa.transfermovil.banking.BankOperationCode;
-import cu.etecsa.transfermovil.base.BaseMainActivity;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletPinEntryFragment;
-import cu.etecsa.transfermovil.stats.OperationItem;
-import cu.etecsa.transfermovil.stats.OperationListAdapter;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
+import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.H0kVHR7zuu
- *
- * Wallet session tab — "Sesión". Shows authenticate + disconnect options.
- * On authenticate → navigates to WalletPinEntryFragment.
- * On disconnect → shows confirmation dialog, sends USSD code 70.
+ * @original_apk_version 1.260416
  */
 public class WalletOperationsTabFragment extends Fragment {
-
     public Context context;
-    public View rootView;
-    public RecyclerView recyclerView;
-
-    public OperationListAdapter.OnItemClickListener onItemClickListener = new OperationListAdapter.OnItemClickListener() {
-        @Override
+    public vD9rc3MbTL.OnItemClickListener onItemClickListener = new vD9rc3MbTL.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletOperationsTabFragment.1
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
         public void onItemClick(View view, int position) {
         }
 
-        @Override
-        public void onGetItemClick(View view, BankOperationCode operacion) {
-            FragmentManager fm = WalletOperationsTabFragment.this.getActivity().getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
+        public void onGetItemClick(View view, FdonIAFI9w operacion) {
+            FragmentManager mFragmentManager = WalletOperationsTabFragment.this.getActivity().getSupportFragmentManager();
+            FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
             if (operacion != null) {
-                switch (operacion) {
-                    case BOLSAAutenticarse:
-                        ft.replace(R.id.containerView, new WalletPinEntryFragment()).addToBackStack(null).commit();
+                switch (AnonymousClass4.$SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[operacion.ordinal()]) {
+                    case 1:
+                        mFragmentTransaction.replace(R.id.containerView, new WalletPinEntryFragment()).addToBackStack(null).commit();
                         break;
-                    case BOLSADesconectar:
-                        WalletOperationsTabFragment.this.showDialogCloseSession();
+                    case 2:
+                        WalletOperationsTabFragment.this.showDialogCerrarSession();
                         break;
                     default:
-                        Toast.makeText(WalletOperationsTabFragment.this.context, operacion.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(WalletOperationsTabFragment.this.context, operacion.toString(), 1).show();
                         break;
                 }
             }
         }
     };
+    public View rootView;
+    public RecyclerView rvseguridad;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.rootView = inflater.inflate(R.layout.p1r9hi3qhdlpun, container, false);
         this.context = container.getContext();
-        RecyclerView rv = (RecyclerView) this.rootView.findViewById(R.id.drawerList);
-        this.recyclerView = rv;
-        rv.setItemAnimator(new DefaultItemAnimator());
-        this.recyclerView.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this.context);
-        this.recyclerView.setLayoutManager(llm);
+        RecyclerView recyclerView = (RecyclerView) this.rootView.findViewById(R.id.drawerList);
+        this.rvseguridad = recyclerView;
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        this.rvseguridad.setHasFixedSize(true);
+        LinearLayoutManager llmSegidad = new LinearLayoutManager(this.context);
+        this.rvseguridad.setLayoutManager(llmSegidad);
         initData();
         return this.rootView;
     }
 
     private void initData() {
-        List<OperationItem> items = new ArrayList<>();
-
-        OperationItem auth = new OperationItem();
-        auth.setTitulo(getString(R.string.tx_autenticarse));
-        auth.setSubtitulo(getString(R.string.tx_acceder_al_sistema));
-        auth.setIcono(R.drawable.ic_autenticacion_bolsa);
-        auth.setType(OperationItem.TYPE_POST);
-        auth.setOperacion(BankOperationCode.BOLSAAutenticarse);
-        items.add(auth);
-
-        OperationItem close = new OperationItem();
+        List<WUULVgZq02> itemsOperaciones = new ArrayList<>();
+        WUULVgZq02 autenticarse = new WUULVgZq02();
+        autenticarse.setTitulo(getString(R.string.tx_autenticarse));
+        autenticarse.setSubtitulo(getString(R.string.tx_acceder_al_sistema));
+        autenticarse.setIcono(R.drawable.ic_autenticacion_bolsa);
+        Integer num = rBXnNc0Kx4.Post;
+        autenticarse.setType(num);
+        autenticarse.setOperacion(FdonIAFI9w.BOLSAAutenticarse);
+        itemsOperaciones.add(autenticarse);
+        WUULVgZq02 close = new WUULVgZq02();
         close.setTitulo(this.context.getString(R.string.banco_desconectar));
         close.setSubtitulo(this.context.getString(R.string.banco_sub_desconectar));
         close.setIcono(R.drawable.ic_desconectarse_bolsa);
-        close.setType(OperationItem.TYPE_POST);
-        close.setOperacion(BankOperationCode.BOLSADesconectar);
-        items.add(close);
-
-        OperationListAdapter adapter = new OperationListAdapter(this.context, items);
-        this.recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(this.onItemClickListener);
+        close.setType(num);
+        close.setOperacion(FdonIAFI9w.BOLSADesconectar);
+        itemsOperaciones.add(close);
+        vD9rc3MbTL adapterSeguridad = new vD9rc3MbTL(this.context, itemsOperaciones);
+        this.rvseguridad.setAdapter(adapterSeguridad);
+        adapterSeguridad.setOnItemClickListener(this.onItemClickListener);
     }
 
-    void showDialogCloseSession() {
+    /* JADX INFO: renamed from: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletOperationsTabFragment$4, reason: invalid class name */
+    public static /* synthetic */ class AnonymousClass4 {
+        public static final /* synthetic */ int[] $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w;
+
+        static {
+            int[] iArr = new int[FdonIAFI9w.values().length];
+            $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w = iArr;
+            try {
+                iArr[FdonIAFI9w.BOLSAAutenticarse.ordinal()] = 1;
+            } catch (NoSuchFieldError e) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSADesconectar.ordinal()] = 2;
+            } catch (NoSuchFieldError e2) {
+            }
+        }
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showDialogCerrarSession() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione");
         builder.setMessage(this.context.getString(R.string.msg_confirm_close_session));
-        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-            @Override
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletOperationsTabFragment.2
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
-                ((BaseMainActivity) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        ((S9ycHcoxAzy) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
+                        return;
+                    } else {
+                        ((IHVTCBmiLV) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
+                        return;
+                    }
+                }
+                ((S9ycHcoxAzy) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletOperationsTabFragment.3
+            @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        // Source clears the local bank configuration before presenting the dialog.
-        FBsQzP3Zfj.closeSessionBank(getActivity());
+        UssdDispatcher.closeSessionBank(getActivity());
         AlertDialog alert = builder.create();
         alert.show();
     }

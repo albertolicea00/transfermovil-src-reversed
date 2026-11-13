@@ -38,7 +38,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Tributo;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.UaLAvTSm1e;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
@@ -404,7 +404,6 @@ public class WalletOnatPaymentFragment extends BaseBankingFragment {
                 nuevoDatos();
                 rc04Tributo = this.txRC04.getText().toString().trim();
                 break;
-                break;
             case 2:
                 formaPago = "2";
                 if (!validateNITCI() || !validateProvincia() || !validateMunicipio() || !validateTributo() || !validatePeriodo()) {
@@ -413,7 +412,6 @@ public class WalletOnatPaymentFragment extends BaseBankingFragment {
                 dpa = this.provincia.getCod_provincia() + this.municipio.getCod_municipio();
                 rc04Tributo = this.tributo.getCod_tributo();
                 periodo = this.fecha;
-                break;
                 break;
         }
         if (!validateMonto() || !validateSelectionAccounts()) {
@@ -434,7 +432,7 @@ public class WalletOnatPaymentFragment extends BaseBankingFragment {
         }
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmOnat);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "43", cadena, "¿ Desea realizar el pago del impuesto ? ", group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "43", cadena, "¿ Desea realizar el pago del impuesto ? ", group, getFragmentManager());
             return;
         }
         switch (AnonymousClass18.$SwitchMap$cu$etecsa$cubacel$tr$tm$l08fNVC4KOKK$piM0KeORWQz$R1sDOSqZ2z[this.agencia.ordinal()]) {

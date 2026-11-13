@@ -32,9 +32,9 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.QRCombustible;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TCTicket;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.ZUoEY89WdA;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.V5FFEZ0Qrr0;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.XYfkGsUkKH;
+import cu.etecsa.transfermovil.sms.FuelSmsImportTask;
 import java.text.SimpleDateFormat;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -115,7 +115,11 @@ public class TicketEditFragment extends Fragment implements AccountsResultCallba
             @Override // android.view.View.OnClickListener
             public void onClick(View view) {
                 TicketEditFragment gUihyrFQpq = TicketEditFragment.this;
-                gUihyrFQpq.showDialogQR(gUihyrFQpq.createBitmapQR());
+                try {
+                    gUihyrFQpq.showDialogQR(gUihyrFQpq.createBitmapQR());
+                } catch (WriterException failure) {
+                    TicketEditFragment.<RuntimeException>throwUnchecked(failure);
+                }
             }
         });
         ImageView imageView = (ImageView) this.rootView.findViewById(R.id.btHelpEstado);
@@ -208,7 +212,7 @@ public class TicketEditFragment extends Fragment implements AccountsResultCallba
         if (i == R.id.action_update) {
             if (!this.isUpdated) {
                 this.isUpdated = true;
-                new XYfkGsUkKH(getContext().getContentResolver(), this).execute(new Void[0]);
+                new FuelSmsImportTask(getContext().getContentResolver(), this).execute(new Void[0]);
             } else {
                 Toast.makeText(this.context, "Comprobando", 0).show();
             }
@@ -275,7 +279,7 @@ public class TicketEditFragment extends Fragment implements AccountsResultCallba
         String cadena = this.ticket.getSerie();
         String msg = "¿Desea consultar el estado de la serie de combustible siguiente " + cadena + " ?";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-        FBsQzP3Zfj.actionCallUSSDNoBackSimple(this.context, "38", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDNoBackSimple(this.context, "38", cadena, msg, group, getFragmentManager());
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -283,7 +287,7 @@ public class TicketEditFragment extends Fragment implements AccountsResultCallba
         String cadena = this.ticket.getSerie();
         String msg = "¿Desea actualizar el cupón de la serie de combustible siguiente " + cadena + " ? ";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmBanco);
-        FBsQzP3Zfj.actionCallUSSDNoBackSimple(this.context, "39", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDNoBackSimple(this.context, "39", cadena, msg, group, getFragmentManager());
     }
 
     @Override
@@ -314,5 +318,10 @@ public class TicketEditFragment extends Fragment implements AccountsResultCallba
                 }).show();
             }
         });
+    }
+    /** Preserve bytecode exception propagation through Android's no-throws callback. */
+    @SuppressWarnings("unchecked")
+    private static <T extends Throwable> void throwUnchecked(Throwable failure) throws T {
+        throw (T) failure;
     }
 }

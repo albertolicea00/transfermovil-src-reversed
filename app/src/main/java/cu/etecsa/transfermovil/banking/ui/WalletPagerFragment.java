@@ -17,7 +17,8 @@ import cu.etecsa.transfermovil.banking.ui.tabs.WalletBoletoTabFragment;
 import cu.etecsa.transfermovil.banking.ui.tabs.MainBankingTabFragment;
 import cu.etecsa.transfermovil.data.DatabaseHelper;
 import cu.etecsa.transfermovil.data.entity.WalletCurrency;
-import cu.etecsa.transfermovil.sms.SmsInboxReader;
+import cu.etecsa.transfermovil.sms.SmsSender;
+import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.transfermovil.sms.SmsMessage;
 import cu.etecsa.transfermovil.sms.SmsParser;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class WalletPagerFragment extends Fragment {
         viewPager = (ViewPager) x.findViewById(R.id.viewpager);
         try {
             ContentResolver cs = container.getContext().getContentResolver();
-            SmsInboxReader smsCenter = new SmsInboxReader();
+            SmsSender smsCenter = new SmsSender();
             ArrayList<SmsMessage> sms = smsCenter.readSmsInbox(cs);
             List<WalletCurrency> currencies = DatabaseHelper.getInstance().getMonedasWallet();
             if (currencies != null && currencies.size() > 0 && sms != null) {

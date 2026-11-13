@@ -8,146 +8,136 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
-import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaAuthFragment;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
+import cu.etecsa.transfermovil.ui.AgentMainActivity;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.transfermovil.ui.GeneralMainActivity;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * BPA session management sub-menu fragment.
- *
- * <p>Presents two operations: "Autenticarse" (authenticate/login) and
- * "Desconectar" (disconnect/close session). The authenticate option
- * navigates to the auth fragment; disconnect shows a confirmation dialog
- * that dispatches USSD code "70" after the local bank configuration is reset.</p>
- *
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.p97uirGL7T
- * @original_apk_version 1.260416
- */
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.p97uirGL7T */
 public class BpaSessionMenuFragment extends Fragment {
+    public Context context;
+    public vD9rc3MbTL.OnItemClickListener onItemClickListener = new vD9rc3MbTL.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.p97uirGL7T.1
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
+        public void onItemClick(View view, int position) {
+        }
 
-    private Context context;
-    private View rootView;
-    private RecyclerView recyclerView;
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
+        public void onGetItemClick(View view, FdonIAFI9w operacion) {
+            FragmentManager mFragmentManager = BpaSessionMenuFragment.this.getActivity().getSupportFragmentManager();
+            FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+            switch (AnonymousClass4.$SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[operacion.ordinal()]) {
+                case 1:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaAuthFragment()).addToBackStack(null).commit();
+                    break;
+                case 2:
+                    BpaSessionMenuFragment.this.showDialogCerrarSession();
+                    break;
+                default:
+                    Toast.makeText(BpaSessionMenuFragment.this.context, "Error! " + operacion, 0).show();
+                    break;
+            }
+        }
+    };
+    public View rootView;
+    public RecyclerView rvseguridad;
 
-    /**
-     * Click listener that routes operations:
-     * <pre>
-     *   1 → BPAAutenticarse  → lzGEfceoJu (BpaAuthFragment)
-     *   2 → BPADesconectar   → showDialogCerrarSession() → USSD "70"
-     * </pre>
-     */
-    private final OperationMenuAdapter.OnItemClickListener onItemClickListener =
-            new OperationMenuAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    // Not used; routing is by operation code
-                }
+    @Override // androidx.fragment.app.Fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.rootView = inflater.inflate(R.layout.p1r9hi3qhdlpun, container, false);
+        this.context = container.getContext();
+        RecyclerView recyclerView = (RecyclerView) this.rootView.findViewById(R.id.drawerList);
+        this.rvseguridad = recyclerView;
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        this.rvseguridad.setHasFixedSize(true);
+        LinearLayoutManager llmSegidad = new LinearLayoutManager(this.context);
+        this.rvseguridad.setLayoutManager(llmSegidad);
+        initData();
+        return this.rootView;
+    }
 
-                @Override
-                public void onGetItemClick(View view, BankOperationCode operacion) {
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    switch (operacion) {
-                        case BPAAutenticarse:
-                            ft.replace(R.id.containerView, new BpaAuthFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPADesconectar:
-                            showDialogCerrarSession();
-                            break;
-                        default:
-                            Toast.makeText(context, "Error! " + operacion,
-                                    Toast.LENGTH_SHORT).show();
-                            break;
+    private void initData() {
+        List<WUULVgZq02> itemsOperaciones = new ArrayList<>();
+        WUULVgZq02 autenticarse = new WUULVgZq02();
+        autenticarse.setTitulo("Autenticarse");
+        autenticarse.setSubtitulo("Acceder al sistema");
+        autenticarse.setIcono(R.drawable.ic_autenticacion_bpa);
+        Integer num = rBXnNc0Kx4.Post;
+        autenticarse.setType(num);
+        autenticarse.setOperacion(FdonIAFI9w.BPAAutenticarse);
+        itemsOperaciones.add(autenticarse);
+        WUULVgZq02 close = new WUULVgZq02();
+        close.setTitulo(this.context.getString(R.string.banco_desconectar));
+        close.setSubtitulo(this.context.getString(R.string.banco_sub_desconectar));
+        close.setIcono(R.drawable.ic_desconectarse_bpa);
+        close.setType(num);
+        close.setOperacion(FdonIAFI9w.BPADesconectar);
+        itemsOperaciones.add(close);
+        vD9rc3MbTL adapterSeguridad = new vD9rc3MbTL(this.context, itemsOperaciones);
+        this.rvseguridad.setAdapter(adapterSeguridad);
+        adapterSeguridad.setOnItemClickListener(this.onItemClickListener);
+    }
+
+    /* JADX INFO: renamed from: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.p97uirGL7T$4, reason: invalid class name */
+    public static /* synthetic */ class AnonymousClass4 {
+        public static final /* synthetic */ int[] $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w;
+
+        static {
+            int[] iArr = new int[FdonIAFI9w.values().length];
+            $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w = iArr;
+            try {
+                iArr[FdonIAFI9w.BPAAutenticarse.ordinal()] = 1;
+            } catch (NoSuchFieldError e) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPADesconectar.ordinal()] = 2;
+            } catch (NoSuchFieldError e2) {
+            }
+        }
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showDialogCerrarSession() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+        builder.setTitle("Seleccione");
+        builder.setMessage(this.context.getString(R.string.msg_confirm_close_session));
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.p97uirGL7T.2
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        ((GeneralMainActivity) BpaSessionMenuFragment.this.getActivity()).actionCallUSSD("70");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaSessionMenuFragment.this.getActivity()).actionCallUSSD("70");
+                        return;
                     }
                 }
-            };
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_operations_list, container, false);
-        context = container.getContext();
-        recyclerView = rootView.findViewById(R.id.drawerList);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        initData();
-        return rootView;
-    }
-
-    /**
-     * Populates the menu with 2 session operations.
-     */
-    private void initData() {
-        List<OperationMenuItem> items = new ArrayList<>();
-
-        OperationMenuItem autenticarse = new OperationMenuItem();
-        autenticarse.setTitle("Autenticarse");
-        autenticarse.setSubtitle("Acceder al sistema");
-        autenticarse.setIcon(R.drawable.ic_autenticacion_bpa);
-        autenticarse.setType(OperationMenuItem.TYPE_POST);
-        autenticarse.setOperationCode(BankOperationCode.BPAAutenticarse);
-        items.add(autenticarse);
-
-        OperationMenuItem close = new OperationMenuItem();
-        close.setTitle(context.getString(R.string.banco_desconectar));
-        close.setSubtitle(context.getString(R.string.banco_sub_desconectar));
-        close.setIcon(R.drawable.ic_desconectarse_bpa);
-        close.setType(OperationMenuItem.TYPE_POST);
-        close.setOperationCode(BankOperationCode.BPADesconectar);
-        items.add(close);
-
-        OperationMenuAdapter adapter = new OperationMenuAdapter(context, items);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(onItemClickListener);
-    }
-
-    /**
-     * Shows confirmation dialog for closing the bank session.
-     * Resets local bank configuration before showing the dialog,
-     * then dispatches USSD code "70" if user confirms.
-     */
-    private void showDialogCerrarSession() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Seleccione");
-        builder.setMessage(context.getString(R.string.msg_confirm_close_session));
-        builder.setPositiveButton("Si", (dialog, id) -> {
-            dispatchUssd("70");
-        });
-        builder.setNegativeButton("No", (dialog, id) -> { /* dismissed */ });
-        FBsQzP3Zfj.closeSessionBank(getActivity());
-        builder.create().show();
-    }
-
-    /**
-     * Dispatches a USSD code through the appropriate activity interface.
-     * Checks whether the current agent code contains "-1" to decide
-     * between legacy (S9ycHcoxAzy) and new (IHVTCBmiLV) activity cast.
-     *
-     * @param code the USSD operation code
-     */
-    private void dispatchUssd(String code) {
-        rDEl7rW1aN dispatcher = new rDEl7rW1aN();
-        if (dispatcher.getCodeAgent() != null) {
-            if (dispatcher.getCodeAgent().getCode().contains("-1")) {
-                ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code);
-            } else {
-                ((IHVTCBmiLV) getActivity()).actionCallUSSD(code);
+                ((GeneralMainActivity) BpaSessionMenuFragment.this.getActivity()).actionCallUSSD("70");
             }
-            return;
-        }
-        ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code);
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.p97uirGL7T.3
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        UssdDispatcher.closeSessionBank(getActivity());
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

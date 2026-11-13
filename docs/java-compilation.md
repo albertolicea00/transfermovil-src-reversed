@@ -141,3 +141,14 @@ hybrid compiler audit answer different questions. A future standalone
 Android build still needs explicit dependency declarations, resource/manifest
 processing, DEX/package construction, signing and supported-device tests;
 real financial/carrier behavior remains outside this offline audit.
+
+## Repaired-tree snapshot — 2026-11-13
+
+The subsequent `compile-root10` local report compiles all **475 clean Java
+files plus the real target R constants**, with **zero errors and 12 warnings**.
+The inputs were stable. The warnings concern deprecated boxed-number
+constructors; they were retained rather than changing source behavior during
+integration repair. The isolated test suite has 29 passing tests, including
+mocked USSD dispatch and smali-backed encoding, SMS and date-picker cases.
+This is a dependency-backed compiler milestone, not a standalone source build
+or a claim that every Android screen/backend workflow is complete.

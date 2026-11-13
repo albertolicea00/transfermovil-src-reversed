@@ -25,7 +25,7 @@ import com.j256.ormlite.field.FieldType;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.Agg55uYctq;
 
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
@@ -146,7 +146,7 @@ public class PublicServicePaymentFragment extends Agg55uYctq {
         String cadena = ci + "*" + this.importe + "*0000*" + movilConfirmar + "*" + this.tipoBolsa;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmElectricidad);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "7", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "7", cadena, msg, group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "7", "04", this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
         }

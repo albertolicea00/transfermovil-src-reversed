@@ -23,11 +23,12 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 
 /* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.x12rSjPY6pZ */
 public class TicketReservationViewFragment extends Fragment {
     public Activity activity;
     public AppCompatImageView btHelp;
@@ -100,7 +101,7 @@ public class TicketReservationViewFragment extends Fragment {
         String cadena = this.agencyId + "*" + this.txCI.getText().toString();
         String msg = "Desea consultar la reserva al beneficiario con CI: " + this.txCI.getText().toString() + "?";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTicket);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "107", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "107", cadena, msg, group, getFragmentManager());
     }
 
     public boolean validateCI() {

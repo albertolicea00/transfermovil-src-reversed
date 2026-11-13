@@ -32,7 +32,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Nauta;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.TeflMovil;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -354,7 +354,7 @@ public class NautaUserFragment extends Fragment implements pAzq93vIl3.UssdRespon
             String msg = "Confirme los siguientes datos de la cuenta Nauta a recargar: " + msgUser + msPin + msTipoCuenta;
             ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmNautaBanco);
             if (!this.isPartialUSSD) {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "59", cadena, msg, group, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "59", cadena, msg, group, getFragmentManager());
                 return;
             } else {
                 this.manager.principalEnviarUSSD(this.context, "110", "59", "04", this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());
@@ -379,7 +379,7 @@ public class NautaUserFragment extends Fragment implements pAzq93vIl3.UssdRespon
             String msg2 = "Nauta Hogar. Confirme los siguientes datos de la cuenta a recargar: " + msgUser2 + msPin2 + msTipoCuenta2;
             ViewGroup group2 = (ViewGroup) this.rootView.findViewById(R.id.frmNautaBanco);
             if (!this.isPartialUSSD) {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "84", cadena2, msg2, group2, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "84", cadena2, msg2, group2, getFragmentManager());
                 return;
             } else {
                 this.manager.principalEnviarUSSD(this.context, "110", "84", "04", this.MAX_PARAMETERS_PQUETE, cadena2, msg2, group2, getFragmentManager());
@@ -403,7 +403,7 @@ public class NautaUserFragment extends Fragment implements pAzq93vIl3.UssdRespon
         String msg3 = "Pago de deudas pendientes en el servicio de Nauta Hogar. Confirme los siguientes datos de la cuenta a pagar: " + msgUser3 + msPin3 + msTipoCuenta3;
         ViewGroup group3 = (ViewGroup) this.rootView.findViewById(R.id.frmNautaBanco);
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "86", cadena3, msg3, group3, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "86", cadena3, msg3, group3, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "86", "04", this.MAX_PARAMETERS_PQUETE, cadena3, msg3, group3, getFragmentManager());
         }

@@ -32,8 +32,8 @@ public class BfiTabHostFragment extends Fragment {
             public void run() {
                 try {
                     BfiTabHostFragment.tabLayout.setupWithViewPager(BfiTabHostFragment.viewPager);
-                    BfiTabHostFragment.tabLayout.setBackgroundColor(HBFPOv3Hig.this.getResources().getColor(R.color.bancoBFI));
-                    Context ct = HBFPOv3Hig.this.getContext();
+                    BfiTabHostFragment.tabLayout.setBackgroundColor(BfiTabHostFragment.this.getResources().getColor(R.color.bancoBFI));
+                    Context ct = BfiTabHostFragment.this.getContext();
                     TextView tabTwo = (TextView) LayoutInflater.from(ct).inflate(R.layout.qk38evge3cdbu, (ViewGroup) null);
                     tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.logo_bfi_color_blanco, 0, 0);
                     BfiTabHostFragment.tabLayout.getTabAt(0).setCustomView(tabTwo);

@@ -19,7 +19,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -96,7 +96,7 @@ public class BpaRegistrationFragment extends Fragment implements pAzq93vIl3.Ussd
             isPartialUSSD = false;
         }
         if (!isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "49", cadena, "Desea registrarse en el sistema", group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "49", cadena, "Desea registrarse en el sistema", group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "49", "01", this.MAX_PARAMETERS_PQUETE, cadena, "Desea registrarse en el sistema", group, getFragmentManager());
         }
@@ -275,4 +275,21 @@ public void mostrarTarjeta(AutoCompleteTextView inputField, String tarjeta) {
             // Match the original smali behavior for malformed account identifiers.
         }
     }
+
+    @Override
+    public void onUssdResponseReceived(String response) {
+                }
+
+    @Override
+    public void onCloseAndBack() {
+                    try {
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.popBackStack();
+                    } catch (Exception e) {
+                        try {
+                            getActivity().onBackPressed();
+                        } catch (Exception e2) {
+                        }
+                    }
+                }
 }

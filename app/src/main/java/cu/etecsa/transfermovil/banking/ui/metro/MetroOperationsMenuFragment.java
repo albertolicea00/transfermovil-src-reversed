@@ -1,5 +1,8 @@
 package cu.etecsa.transfermovil.banking.ui.metro;
 
+import cu.etecsa.transfermovil.banking.ui.metro.MetroCubacelPlanPurchaseFragment;
+import cu.etecsa.transfermovil.banking.ui.metro.MetroPinEntryFragment;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.B0Bcr9KURy;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,10 +32,10 @@ public class MetroOperationsMenuFragment extends Fragment {
             FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
             switch (position) {
                 case 0:
-                    mFragmentTransaction.replace(R.id.containerView, new RFBEnXW0Xr()).addToBackStack(null).commit();
+                    mFragmentTransaction.replace(R.id.containerView, new MetroCubacelPlanPurchaseFragment()).addToBackStack(null).commit();
                     break;
                 case 1:
-                    mFragmentTransaction.replace(R.id.containerView, new PAZK2sdsJ5()).addToBackStack(null).commit();
+                    mFragmentTransaction.replace(R.id.containerView, new MetroPinEntryFragment()).addToBackStack(null).commit();
                     break;
                 case 2:
                     mFragmentTransaction.replace(R.id.containerView, new B0Bcr9KURy()).addToBackStack(null).commit();

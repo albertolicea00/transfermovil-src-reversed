@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 import au.com.bytecode.opencsv.CSVWriter;
 import cu.etecsa.transfermovil.R;
-import cu.etecsa.transfermovil.core.enums.EntityExportType;
+import cu.etecsa.transfermovil.stats.StatsFilterType;
 import cu.etecsa.transfermovil.data.entity.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -32,34 +32,34 @@ public class CsvExportTask extends AsyncTask<String, Boolean, Boolean> {
 
     public Context context;
     private final ProgressDialog dialog;
-    public EntityExportType entidad;
+    public StatsFilterType entidad;
     public File exportDir;
     public String nombreFichero;
 
-    public CsvExportTask(Context context, EntityExportType entidad, File exportDir) {
+    public CsvExportTask(Context context, StatsFilterType entidad, File exportDir) {
         this.context = context;
         this.entidad = entidad;
         this.exportDir = exportDir;
         this.dialog = new ProgressDialog(context);
     }
 
-    public CsvExportTask(Context context, EntityExportType entidad, File exportDir, String nombreFich) {
+    public CsvExportTask(Context context, StatsFilterType entidad, File exportDir, String nombreFich) {
         String name = nombreFich;
         this.context = context;
         this.entidad = entidad;
         this.exportDir = exportDir;
         if (nombreFich.equals("")) {
-            if (entidad == EntityExportType.Pines) {
+            if (entidad == StatsFilterType.Pines) {
                 name = "exportPin";
-            } else if (entidad == EntityExportType.Clientes) {
+            } else if (entidad == StatsFilterType.Clientes) {
                 name = "exportClientes";
-            } else if (entidad == EntityExportType.Fijos) {
+            } else if (entidad == StatsFilterType.Fijos) {
                 name = "exportTelefonosFijos";
-            } else if (entidad == EntityExportType.Moviles) {
+            } else if (entidad == StatsFilterType.Moviles) {
                 name = "exportTelefonosMoviles";
-            } else if (entidad == EntityExportType.Nautas) {
+            } else if (entidad == StatsFilterType.Nautas) {
                 name = "exportCuentasNautas";
-            } else if (entidad == EntityExportType.Facturas) {
+            } else if (entidad == StatsFilterType.Facturas) {
                 name = "exportFacturas";
             }
         }
@@ -72,14 +72,14 @@ public class CsvExportTask extends AsyncTask<String, Boolean, Boolean> {
         if (!this.exportDir.exists()) {
             this.exportDir.mkdirs();
         }
-        if (entidad == EntityExportType.Clientes) return ExportClientes();
-        if (entidad == EntityExportType.Pines) return ExportPines();
-        if (entidad == EntityExportType.Fijos) return ExportFijos();
-        if (entidad == EntityExportType.Moviles) return ExportMoviles();
-        if (entidad == EntityExportType.Nautas) return ExportNautas();
-        if (entidad == EntityExportType.Todos) return ExportAll();
-        if (entidad == EntityExportType.RecordSMS) return ExportRecordSMS();
-        if (entidad == EntityExportType.Facturas) return ExportFacturas();
+        if (entidad == StatsFilterType.Clientes) return ExportClientes();
+        if (entidad == StatsFilterType.Pines) return ExportPines();
+        if (entidad == StatsFilterType.Fijos) return ExportFijos();
+        if (entidad == StatsFilterType.Moviles) return ExportMoviles();
+        if (entidad == StatsFilterType.Nautas) return ExportNautas();
+        if (entidad == StatsFilterType.Todos) return ExportAll();
+        if (entidad == StatsFilterType.RecordSMS) return ExportRecordSMS();
+        if (entidad == StatsFilterType.Facturas) return ExportFacturas();
         return false;
     }
 

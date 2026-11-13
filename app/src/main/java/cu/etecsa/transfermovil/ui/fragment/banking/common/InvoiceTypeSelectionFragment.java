@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.ui.fragment.banking.common;
 
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.OfZgAbz2cY8.p3NpwYhcUs3;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +23,7 @@ import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Factura;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import java.util.ArrayList;
 import java.util.List;
@@ -177,7 +178,7 @@ public class InvoiceTypeSelectionFragment extends Fragment {
         nuevoDatos();
         String cadena = this.operacion + "*" + idTipo + "*" + factura;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTelefono);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "52", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "52", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCuenta() {

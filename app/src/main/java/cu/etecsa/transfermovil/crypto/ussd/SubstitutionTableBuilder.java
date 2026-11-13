@@ -8,9 +8,10 @@ import java.util.List;
  * @obfuscated_class AFm1GraXBXUkpF1hmOdV.YzK9tTZsYVnC5kFxSie
  * @fingerprint constructor(String, String), parses binary string into int list
  *
- * Parses the 1024-char binary lookup table (crude_code) using code_version
+ * Parses the 1250-char binary lookup table (crude_code) using code_version
  * digits as shift offsets. Produces a substitution list where each entry
- * is an 8-bit integer derived from the binary string.
+ * is an 8-bit integer derived from the binary string. The target constants
+ * produce a 100-entry permutation of integers 0–99.
  */
 public class SubstitutionTableBuilder {
 
@@ -19,7 +20,7 @@ public class SubstitutionTableBuilder {
     private String binaryTable;
 
     /**
-     * @param binaryTable  crude_code — 1024-char binary string ("0"/"1")
+     * @param binaryTable  crude_code — 1250-char binary string ("0"/"1")
      * @param codeVersion  code_version — digit string controlling shift offsets
      */
     public SubstitutionTableBuilder(String binaryTable, String codeVersion) {
@@ -40,20 +41,17 @@ public class SubstitutionTableBuilder {
     private void buildSubstitutionList(String codeVersion) {
         String remaining = this.binaryTable;
         int length = remaining.length();
-        while (true) {
-            int versionIndex = 0;
-            while (length > 0) {
-                int shift = Character.getNumericValue(codeVersion.charAt(versionIndex));
-                String shifted = remaining.substring(shift, remaining.length());
-                String eightBits = shifted.substring(0, 8);
-                remaining = shifted.substring(8, shifted.length());
-                length = remaining.length();
-                this.substitutionList.add(Integer.valueOf(Integer.parseInt(eightBits, 2)));
-                if (versionIndex != codeVersion.length() - 1) {
-                    versionIndex++;
-                }
-            }
-            return;
+        int versionIndex = 0;
+        while (length > 0) {
+            int shift = Character.getNumericValue(codeVersion.charAt(versionIndex));
+            String shifted = remaining.substring(shift, remaining.length());
+            String eightBits = shifted.substring(0, 8);
+            remaining = shifted.substring(8, shifted.length());
+            length = remaining.length();
+            this.substitutionList.add(Integer.valueOf(Integer.parseInt(eightBits, 2)));
+            // APK smali returns to :goto_0 (index 0) after the final version digit;
+            // JADX incorrectly leaves that index at its last value.
+            versionIndex = versionIndex == codeVersion.length() - 1 ? 0 : versionIndex + 1;
         }
     }
 }

@@ -19,7 +19,7 @@ import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Client;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Factura;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
@@ -206,7 +206,7 @@ public class BpaServiceQueryFragment extends Fragment {
         String msg = "Desea consultar la deuda de la factura: " + factura;
         String cadena = this.idTipo + "*" + factura;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTelefono);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "47", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "47", cadena, msg, group, getFragmentManager());
     }
 
     private boolean validateCuenta() {
@@ -298,7 +298,7 @@ public class BpaServiceQueryFragment extends Fragment {
             String cadena = ci + "*1";
             String msg = "¿Desea consultar los últimos sellos para el carné de identidad: " + ci + " ?";
             ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTelefono);
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "22", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "22", cadena, msg, group, getFragmentManager());
             return true;
         } catch (Exception e) {
             Toast.makeText(this.context, "Error intentelo de nuevo", 0).show();

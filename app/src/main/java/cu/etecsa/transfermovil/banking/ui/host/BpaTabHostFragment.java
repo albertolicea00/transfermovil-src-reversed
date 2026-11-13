@@ -31,8 +31,8 @@ public class BpaTabHostFragment extends Fragment {
             @Override // java.lang.Runnable
             public void run() {
                 BpaTabHostFragment.tabLayout.setupWithViewPager(BpaTabHostFragment.viewPager);
-                BpaTabHostFragment.tabLayout.setBackgroundColor(Pg7MuGKEAe.this.getResources().getColor(R.color.bancoBPA));
-                Context ct = Pg7MuGKEAe.this.getContext();
+                BpaTabHostFragment.tabLayout.setBackgroundColor(BpaTabHostFragment.this.getResources().getColor(R.color.bancoBPA));
+                Context ct = BpaTabHostFragment.this.getContext();
                 try {
                     TextView tabOne = (TextView) LayoutInflater.from(ct).inflate(R.layout.qk38evge3cdbu, (ViewGroup) null);
                     tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_banco_bpa, 0, 0);

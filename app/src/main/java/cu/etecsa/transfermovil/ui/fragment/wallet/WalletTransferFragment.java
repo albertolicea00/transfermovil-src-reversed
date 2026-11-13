@@ -30,7 +30,7 @@ import com.j256.ormlite.field.FieldType;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.EV9Tu0zIL4;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -218,7 +218,7 @@ public class WalletTransferFragment extends BaseTwoAccountFragment implements pA
             }
         } catch (Exception e) {
         }
-        EV9Tu0zIL4.DatosTarjeta datosTarjeta = validarCuenta(this.cuentaOrigen);
+        cu.etecsa.transfermovil.banking.ui.bfi.BankingAccountValidatorFragment.DatosTarjeta datosTarjeta = validarCuenta(this.cuentaOrigen);
         String monto = this.txMonto.getText().toString().trim();
         String msg2 = "¿ Desea recargar su cuenta CUP " + cuenta + ", con el monto en CUP: " + monto + "?";
         if (datosTarjeta.currency == qTDVwLFEjE.USD) {
@@ -235,7 +235,7 @@ public class WalletTransferFragment extends BaseTwoAccountFragment implements pA
         } catch (Exception e2) {
         }
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "29", cadena, msg, group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "29", cadena, msg, group, getFragmentManager());
             return;
         }
         this.manager.principalEnviarUSSD(this.context, "110", "29", "0" + this.banco, this.MAX_PARAMETERS_PQUETE, cadena, msg, group, getFragmentManager());

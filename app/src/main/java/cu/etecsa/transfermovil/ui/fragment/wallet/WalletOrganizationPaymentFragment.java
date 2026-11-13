@@ -25,7 +25,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import com.j256.ormlite.field.FieldType;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
@@ -241,10 +241,10 @@ public class WalletOrganizationPaymentFragment extends BaseBankingFragment {
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTranferencia);
         if (!this.isPartialUSSD) {
             if (this.organizacion != 3) {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "7", cadena, msg, group, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "7", cadena, msg, group, getFragmentManager());
                 return;
             } else {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "122", cadena, msg, group, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "122", cadena, msg, group, getFragmentManager());
                 return;
             }
         }

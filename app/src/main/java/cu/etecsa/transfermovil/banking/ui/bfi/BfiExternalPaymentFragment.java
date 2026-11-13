@@ -33,7 +33,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.CuentaBanco;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
 import cu.etecsa.cubacel.tr.tm.h4VIMAs7y2v.OJ3XxacXOT;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.U6ucOCBccJ;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
@@ -210,9 +210,9 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
         }
         initComponentesCuentas(this.rootView, this.agencia);
         ArrayAdapter<CharSequence> arrayAdapterCreateFromResource2 = ArrayAdapter.createFromResource(this.context, R.array.accounts, android.R.layout.simple_list_item_1);
-        this.adapterTipoMoneda = arrayAdapterCreateFromResource2;
+        this.adapterMoneda = arrayAdapterCreateFromResource2;
         arrayAdapterCreateFromResource2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        this.spinnerTipoMoneda.setAdapter(this.adapterTipoMoneda);
+        this.spinnerTipoMoneda.setAdapter(this.adapterMoneda);
         this.spinnerTipoMoneda.setOnItemClickListener(this.spClickMoneda);
         int i = this.payType;
         if (i == 1 || i == 2) {
@@ -291,7 +291,7 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
         FragmentActivity activity = getActivity();
         uyh0pxs9m37in.toString();
         Bundle arg = new Bundle();
-        arg.putSerializable("Nl0yptXmjQ", Nl0yptXmjQ.BfiExternalPaymentFragment);
+        arg.putSerializable("Nl0yptXmjQ", Nl0yptXmjQ.Eqj43O0pUx);
         arg.putSerializable("R1sDOSqZ2z", this.agencia);
         arg.putSerializable("PayType", Integer.valueOf(this.payType));
         saveData();
@@ -399,7 +399,7 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
                     movilConfirmar = this.txPhoneConfirm.getText().toString().trim();
                 }
                 String cadena5 = agency + "*" + pin + "*" + cuenta + "*" + monto3 + "*" + idCurrencyCuenta + "*" + this.monedaTarjeta + "*" + this.noProveedor + "*" + this.aux + "*" + this.cuentaOrigen + "*" + movilConfirmar + "*" + this.idQR + "*" + this.payType + "*" + monto2 + "*" + this.categoria;
-                if (FBsQzP3Zfj.callLenght(this.context, cadena5) < MAX_LENGHT) {
+                if (UssdDispatcher.callLenght(this.context, cadena5) < MAX_LENGHT) {
                     cadena2 = cadena5;
                 } else {
                     if (cuenta.length() > 15) {
@@ -411,7 +411,7 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
                 cadena = cadena2;
             } else {
                 String cadena6 = agency + "*" + pin + "*" + cuenta + "*" + monto3 + "*" + idCurrencyCuenta + "*" + this.monedaTarjeta + "*" + this.noProveedor + "*" + this.aux + "*" + this.cuentaOrigen + "*" + this.payType + "*" + monto2 + "*" + this.categoria;
-                if (FBsQzP3Zfj.callLenght(this.context, cadena6) < MAX_LENGHT) {
+                if (UssdDispatcher.callLenght(this.context, cadena6) < MAX_LENGHT) {
                     cadena = cadena6;
                 } else {
                     if (cuenta.length() > 8) {
@@ -423,7 +423,7 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
                 }
             }
             if (!isPartialUSSD) {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "31", cadena, "¿Desea proceder con el pago?", group, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "31", cadena, "¿Desea proceder con el pago?", group, getFragmentManager());
                 return;
             } else {
                 this.manager.principalEnviarUSSD(this.context, "110", "31", "05", this.MAX_PARAMETERS_PQUETE, cadena, "¿Desea proceder con el pago?", group, getFragmentManager());
@@ -439,7 +439,7 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
                 movilConfirmar2 = this.txPhoneConfirm.getText().toString().trim();
             }
             String cadena8 = agency + "*" + pin + "*" + cuenta + "*" + monto + "*" + idCurrencyCuenta + "*" + this.monedaTarjeta + "*" + this.noProveedor + "*" + this.aux + "*" + this.cuentaOrigen + "*" + movilConfirmar2 + "*" + this.payType + "*" + movilCertifica + "*" + this.categoria;
-            if (FBsQzP3Zfj.callLenght(this.context, cadena8) < MAX_LENGHT) {
+            if (UssdDispatcher.callLenght(this.context, cadena8) < MAX_LENGHT) {
                 cadena4 = cadena8;
             } else {
                 if (cuenta.length() > 15) {
@@ -451,7 +451,7 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
             cadena3 = cadena4;
         } else {
             String cadena9 = agency + "*" + pin + "*" + cuenta + "*" + monto + "*" + idCurrencyCuenta + "*" + this.monedaTarjeta + "*" + this.noProveedor + "*" + this.aux + "*" + this.cuentaOrigen + "*" + this.payType + "*" + movilCertifica + "*" + this.categoria;
-            if (FBsQzP3Zfj.callLenght(this.context, cadena9) < MAX_LENGHT) {
+            if (UssdDispatcher.callLenght(this.context, cadena9) < MAX_LENGHT) {
                 cadena3 = cadena9;
             } else {
                 if (cuenta.length() > 15) {
@@ -463,7 +463,7 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
             }
         }
         if (!isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "30", cadena3, "¿Desea proceder con el pago?", group2, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "30", cadena3, "¿Desea proceder con el pago?", group2, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "30", "05", this.MAX_PARAMETERS_PQUETE, cadena3, "¿Desea proceder con el pago?", group2, getFragmentManager());
         }
@@ -780,14 +780,14 @@ public class BfiExternalPaymentFragment extends BfiQrAccountFragment {
                                 obj.put("numero_proveedor", new Integer(numero_proveedor));
                                 obj.put("version", BuildConfig.FLAVOR);
                             } catch (JSONException e2) {
-                                e = e2;
+                                JSONException e = e2;
                                 e.printStackTrace();
                             }
                         } catch (JSONException e3) {
-                            e = e3;
+                            JSONException e = e3;
                         }
                     } catch (JSONException e4) {
-                        e = e4;
+                        JSONException e = e4;
                     }
                     JSONCompleteFields(obj.toString());
                     putData();

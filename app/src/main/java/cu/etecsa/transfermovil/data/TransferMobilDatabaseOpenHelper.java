@@ -1,5 +1,6 @@
 package cu.etecsa.transfermovil.data;
 
+import cu.etecsa.cubacel.tr.tm.R;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;

@@ -165,12 +165,23 @@ tel:*{codeAcceso}*{codeService}#{encoded}
 
 ### USSD Dispatch Class: `FBsQzP3Zfj`
 
-Static utility used directly by reconstructed screens and `OperationsGridAdapter`;
-the mapped clean `UssdDispatcher` shell was an unused `Activity` with no-op
-methods, so it has been removed. USSD dialing and operation routing still call
-the tracked raw `FBsQzP3Zfj` from forms and the operation grid.
-`BaseMainActivity` contains separate direct-dial overloads. A clean migration
-of the helper remains pending. The active raw utility exposes these overloads:
+`ussd/UssdDispatcher.java` reconstructs the complete source utility, including
+its dispatch overloads, confirmation/cancel callbacks, bank-session helpers,
+surveys, and operation router. It is a plain utility: its callers supply the
+Android context, activity, view group, and fragment manager. All 164 clean Java
+files that previously referenced `FBsQzP3Zfj` now use this component; tracked raw
+JADX sources retain their original dependencies.
+
+The router's generated integer-switch table is replaced with direct enum cases
+for the same 84 operation identities. Its activity casts and menu refreshes use
+`AgentMainActivity`/`GeneralMainActivity`. Encoding uses the already compared
+`BaseMainActivity.code()`; its restored `getCodeAgent()` retains the source
+first-record-or-null database lookup needed by routing. Database records,
+operation enums, result holder, and unmigrated destination screens remain
+explicit raw compatibility boundaries. Reflection-based destinations still use
+the class name stored in the operation database. `BaseMainActivity` also
+contains the separate direct-dial overloads inherited from its own source.
+The clean dispatcher exposes these overloads:
 
 | Method | Behavior |
 |:---|:---|
@@ -195,26 +206,43 @@ tel:*{codigo}*{codeService}*{codeSendTo}*{number}#
 
 - `codigo` = `AppConfig.getCodigo()` — access code from registration
 - `codeService` = operation identifier passed by caller
-- `codeSendTo` = processed via `rDEl7rW1aN.code()` (may encode/transform)
+- `codeSendTo` = processed via `BaseMainActivity.code()` (may encode/transform)
 - `number` = `AppConfig.getNumber()` — app version/identifier
 - `#` is URI-encoded
 
-All overloads show a confirmation dialog ("Confirmar"/"Cancelar") before dialing, except `actionCallUSSDSimple` which may dial directly.
+Dialog overloads require confirmation ("Confirmar"/"Cancelar") before dialing.
+The three-argument instance `actionCallUSSDBack()` only builds a URI;
+`actionCallUSSDSimple()` sends an unencoded payload directly, with
+`CALL_PHONE` permission checking and the new-task flag. Other dispatch overloads
+encode parameters and preserve their original exception, dialog, observer,
+fragment-result, and back-stack behavior. The bank-string overloads still read
+the access code from `AppConfig`; the bank string updates authentication
+metadata rather than replacing the access code. The `454` variant uses access
+`454` only when an AppConfig row exists, matching the source's empty-config case.
+
+`python3 -m unittest discover -s scripts/tests -p test_ussd_dispatcher.py -v`
+compares the full reconstructed class body and all 84 router cases with source
+under explicit class-identity/switch normalization. A JVM harness compares 720
+combinations across 15 dispatch/helper variants: confirmation, cancellation,
+call failure, empty configuration, permission denial, and activity identity.
+Android dialogs, contexts, intents, and fragment managers are mocked; the tests
+make no real calls. The encoder has its separate numeric/mixed parity harness.
+Full Android compilation and live carrier behavior remain separate checks.
 
 Also contains: `closeSessionBank()`, `getDialogOperation()`, `getBundleOperation()`, `goToFragment()`, fragment navigation, and survey/evaluation UI.
 
 ### USSD Code Obfuscation (`code()` method)
 
-The `code(String)` method (745 lines) transforms USSD parameters before dialing:
+The `code(String)` method transforms USSD parameters before dialing:
 
 1. Splits input on `*`
 2. Separates numeric parts from non-numeric (e.g., Nauta email addresses)
 3. Uses `Tz34gww2TFwrsuT8ukpL` with hardcoded `code_version` and `crude_code` to encode numbers
-4. Pads single-digit encoded numbers with leading `"0"`
+4. Pads the random seed and original field lengths to at least two digits; separates subsequent encoded fields with `*`
 
 **Hardcoded constants:**
 - `code_version = "372653282298718711"`
-- `crude_code` = 1024-character binary string (lookup table for numeric encoding)
+- `crude_code` = 1250-character binary string (lookup table for numeric encoding)
 
 ### String identifiers found
 
@@ -369,16 +397,25 @@ The `fallas` field is reset before sending but is never incremented or used to r
 
 ### Numeric Parameter Encoding
 
-`BaseMainActivity.code()` (original `rDEl7rW1aN.code()`) uses a random integer from 0 through 99 as a two-digit prefix. `crude_code` is parsed into 128 byte values: each successive 8-bit chunk starts at an offset selected by cycling through the digits of `code_version` (`372653282298718711`).
+`BaseMainActivity.code()` (original `rDEl7rW1aN.code()`) uses a random integer from 0 through 99 as a two-digit prefix. `crude_code` contains 1250 bits and is parsed into a 100-entry permutation of values 0–99: each successive 8-bit chunk starts at an offset selected by cycling through the digits of `code_version` (`372653282298718711`).
 
 Each numeric field is transformed in two steps:
 
 1. Pairs of digits index the byte table; each result is formatted as two digits. For an odd-length field, the last digit uses a ten-entry map drawn from table values below 10.
 2. The substituted decimal value is XORed as a `long` with a decimal key string made by cycling through table values beginning at the random seed, then truncating the key string to the substituted value's length.
 
-Fields containing non-digits use `NautaCodeEncoder.getCodes()` and the character dictionary. Mixed inputs keep numeric and Nauta fields in their original order. The output includes a two-digit original-length prefix for every field; the legacy all-numeric format joins the first two length/value pairs without `*`, while mixed fields use `*` separators. A nonnumeric-only input uses `00` in place of the random seed. Unknown Nauta characters stringify as `null` in `getCodes()`; this behavior is preserved from source.
+Fields containing non-digits use `NautaCodeEncoder.getCodes()` and the character dictionary. Mixed inputs keep numeric and Nauta fields in their original order. The output includes a two-digit original-length prefix for every field; numeric and mixed outputs both separate subsequent length/value pairs with `*`; the seed directly precedes the first length/value pair. A nonnumeric-only input uses `00` in place of the random seed. Unknown Nauta characters stringify as `null` in `getCodes()`; this behavior is preserved from source.
 
-This is deterministic-obfuscation with a random per-call seed, not authenticated encryption: the version, lookup table, substitution, and XOR operations are all present in the client. The current clean reconstruction is compared against the original for numeric, odd/even length, mixed, and Nauta cases with a fixed test seed.
+This is deterministic-obfuscation with a random per-call seed, not authenticated encryption: the version, lookup table, substitution, and XOR operations are all present in the client. The clean table builder corrects a JADX control-flow error using APK smali:
+`YzK9tTZsYVnC5kFxSie.aSHV52SplNh3HfZBSmJe(String)` branches back to
+`:goto_0` and resets the version-digit index after its final digit. Holding the
+last index, as JADX and the former clean builder did, leaves a six-bit tail and
+throws before ordinary numeric requests can be encoded. The temporary JVM raw
+oracle repairs only that reset; tracked raw Java is unchanged. Seven seed-42
+vectors plus 49 numeric/mixed/malformed cases across all 100 seeds verify 4,607
+successful outputs and 300 expected exceptions. In particular `1*0` encodes as
+`42013*011` at seed 42, retaining the separator lost by the former clean
+assembler. See [encoding evidence](security.md#bytecode-correction-and-verification).
 
 ### USSD Failure and Timeout Behavior
 
@@ -585,7 +622,7 @@ Also has `readSmsInbox(ContentResolver)` returning `ArrayList<rIgmgP6JXL>` — r
 | `IHVTCBmiLV` | **Agent mode main activity** — extends `rDEl7rW1aN`, uses `drawermenu` (full agent menu) |
 | `prPzLeyxKk` | **Splash/router activity** — 3s splash, `generalVsAgentVersion()` decides which main activity to launch |
 | `rDEl7rW1aN` | Base activity — USSD dialing, SMS extraction, encryption, code construction |
-| `FBsQzP3Zfj` | Raw USSD utility — `actionCallUSSD*` overloads, dialog management, fragment navigation; still called directly |
+| `FBsQzP3Zfj` | Reconstructed as `ussd/UssdDispatcher` — USSD overloads, dialogs, bank-session helpers and operation navigation; clean callers migrated |
 | `HzjedYqYeh` | SMS sender (`send_sms` static) + inbox reader |
 | `O7xyZJJBFWg` | Accessibility service for USSD response capture |
 | `Ax4arraYwv` | Singleton callback holder for USSD responses |

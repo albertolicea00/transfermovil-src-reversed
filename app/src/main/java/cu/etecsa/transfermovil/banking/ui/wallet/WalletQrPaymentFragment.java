@@ -36,14 +36,14 @@ import com.j256.ormlite.field.FieldType;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.MCBank;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.qTDVwLFEjE;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.l2FaHPPBDa */
-public class WalletQrPaymentFragment extends Fragment implements FBsQzP3Zfj.UssdBaseObserver {
+public class WalletQrPaymentFragment extends Fragment implements UssdDispatcher.UssdBaseObserver {
     public static final int PICK_CONTACT_REQUEST = 1;
     public Activity activity;
     public AppCompatImageView btHelp;
@@ -156,7 +156,7 @@ public class WalletQrPaymentFragment extends Fragment implements FBsQzP3Zfj.Ussd
         String cuentaEnviar = this.cuenta.replace("-", BuildConfig.FLAVOR);
         String cadena = "08*" + cuentaEnviar + "*" + autorizo + "*" + terminal + "*" + phone + "*" + this.titular;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmAsocClasica);
-        FBsQzP3Zfj.actionCallUSSDBackAsocClasica(this.context, "111", cadena, msg, group, getFragmentManager(), this);
+        UssdDispatcher.actionCallUSSDBackAsocClasica(this.context, "111", cadena, msg, group, getFragmentManager(), this);
     }
 
     private boolean validateCuenta() {
@@ -311,14 +311,14 @@ public class WalletQrPaymentFragment extends Fragment implements FBsQzP3Zfj.Ussd
         }
     }
 
-    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj.UssdBaseObserver
+    @Override // cu.etecsa.transfermovil.ussd.UssdDispatcher.UssdBaseObserver
     public void onCloseAndBack() {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.popBackStack();
         fragmentManager.popBackStack();
     }
 
-    @Override // cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj.UssdBaseObserver
+    @Override // cu.etecsa.transfermovil.ussd.UssdDispatcher.UssdBaseObserver
     public void onClose(boolean result) {
         if (result) {
             int perfil = 0;

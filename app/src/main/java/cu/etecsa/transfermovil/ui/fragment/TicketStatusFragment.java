@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /** MiBoleto status lookup, reconstructed from {@code w7mHpmOa4EP}. */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.w7mHpmOa4EP */
@@ -38,7 +38,7 @@ public class TicketStatusFragment extends MiBoletoTicketBaseFragment {
             String serie = txSerie.getText().toString().trim();
             String prompt = "¿Desea obtener el estado del boleto con número de serie: " + serie + " ?";
             ViewGroup form = (ViewGroup) rootView.findViewById(R.id.frmBanco);
-            FBsQzP3Zfj.actionCallUSSDBack(context, "114", serie, prompt, form, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(context, "114", serie, prompt, form, getFragmentManager());
         } catch (Exception error) {
             Toast.makeText(context, "Error intentelo de nuevo", Toast.LENGTH_SHORT).show();
         }

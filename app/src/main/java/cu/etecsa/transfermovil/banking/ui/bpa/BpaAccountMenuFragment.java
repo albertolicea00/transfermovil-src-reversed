@@ -8,407 +8,511 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
-import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaRegistrationFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaAccountInfoFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaChangePinFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaUsdAccountOpenFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaRecoverPinFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaConvertCucToCupFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaReprintCardFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaModifyLimitsFragment;
+import cu.etecsa.transfermovil.banking.ui.bpa.BpaGeneratePinFragment;
+import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.sJ0peDJzVjo.EyKrF4UJ9B;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
+import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
+import cu.etecsa.transfermovil.ui.AgentMainActivity;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.transfermovil.ui.GeneralMainActivity;
+import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * BPA account management sub-menu fragment.
- *
- * <p>Presents a RecyclerView list of account-related operations for the BPA bank:
- * registration, change PIN, delete registration, change limits, associate accounts,
- * digital PIN generation, card reprint, lost PIN recovery, fiscal account opening,
- * and MLC (USD-backed) account opening.</p>
- *
- * <p>Each menu item routes to the corresponding operation fragment or shows a
- * confirmation dialog that dispatches a USSD code.</p>
- *
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx
- * @original_apk_version 1.260416
- */
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx */
 public class BpaAccountMenuFragment extends Fragment {
+    public Context context;
+    public vD9rc3MbTL.OnItemClickListener onItemClickListener = new vD9rc3MbTL.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.1
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
+        public void onItemClick(View view, int position) {
+        }
 
-    private Context context;
-    private View rootView;
-    private RecyclerView recyclerView;
+        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
+        public void onGetItemClick(View view, FdonIAFI9w operacion) {
+            FragmentManager mFragmentManager = BpaAccountMenuFragment.this.getActivity().getSupportFragmentManager();
+            FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+            switch (AnonymousClass18.$SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[operacion.ordinal()]) {
+                case 1:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaRegistrationFragment()).addToBackStack(null).commit();
+                    break;
+                case 2:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaChangePinFragment()).addToBackStack(null).commit();
+                    break;
+                case 3:
+                    BpaAccountMenuFragment.this.showDialogEliminarRegistro();
+                    break;
+                case 4:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaModifyLimitsFragment()).addToBackStack(null).commit();
+                    break;
+                case 5:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaAccountInfoFragment()).addToBackStack(null).commit();
+                    break;
+                case 6:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaGeneratePinFragment()).addToBackStack(null).commit();
+                    break;
+                case 7:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaReprintCardFragment()).addToBackStack(null).commit();
+                    break;
+                case 8:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaRecoverPinFragment()).addToBackStack(null).commit();
+                    break;
+                case 9:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaConvertCucToCupFragment()).addToBackStack(null).commit();
+                    break;
+                case 10:
+                    mFragmentTransaction.replace(R.id.containerView, new BpaUsdAccountOpenFragment()).addToBackStack(null).commit();
+                    break;
+                case 11:
+                    Bundle arg = new Bundle();
+                    arg.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.BPA);
+                    EyKrF4UJ9B cuentaFiscal = new EyKrF4UJ9B();
+                    cuentaFiscal.setArguments(arg);
+                    mFragmentTransaction.replace(R.id.containerView, cuentaFiscal).addToBackStack(null).commit();
+                    break;
+                default:
+                    Toast.makeText(BpaAccountMenuFragment.this.context, "Error! " + operacion, 0).show();
+                    break;
+            }
+        }
+    };
+    public View rootView;
+    public RecyclerView rvseguridad;
 
-    /**
-     * Click listener that routes each BankOperationCode to the appropriate
-     * fragment or confirmation dialog.
-     *
-     * Switch mapping (from AnonymousClass18 initializer):
-     * <pre>
-     *   1 → BPARegistrarse      → IixhA1yamp (BpaRegistrationFragment)
-     *   2 → BPACambiarclave      → PQmKwgxZd1 (BpaChangePinFragment)
-     *   3 → BPAEliminarRegistro  → showDialogEliminarRegistro() → USSD "68*01"
-     *   4 → BPACambioLimite      → qmcwKV1fzU (r1lhlGiU6g65 subpackage)
-     *   5 → BPAAsociarCuenta     → Ittht2aX4N (BpaAssociateAccountFragment)
-     *   6 → BPAPinDigital        → uLySWsCVTv (r1lhlGiU6g65 subpackage)
-     *   7 → BPARenovarTarj       → kWnV7nzNWl (r1lhlGiU6g65 subpackage)
-     *   8 → BPARecuperarTarj     → Yhi9DhKkMz (r1lhlGiU6g65 subpackage)
-     *   9 → BPAConvertirCuenta   → ZZ6L6QderZ (r1lhlGiU6g65 subpackage)
-     *  10 → BPAImprimirMLC       → T7bvG7kpeae (r1lhlGiU6g65 subpackage)
-     *  11 → BPACuentaFiscal      → EyKrF4UJ9B (FiscalAccountFragment, with BankType.BPA arg)
-     * </pre>
-     */
-    private final OperationMenuAdapter.OnItemClickListener onItemClickListener =
-            new OperationMenuAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    // Not used; routing is by operation code
-                }
+    @Override // androidx.fragment.app.Fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.rootView = inflater.inflate(R.layout.p1r9hi3qhdlpun, container, false);
+        this.context = container.getContext();
+        RecyclerView recyclerView = (RecyclerView) this.rootView.findViewById(R.id.drawerList);
+        this.rvseguridad = recyclerView;
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        this.rvseguridad.setHasFixedSize(true);
+        LinearLayoutManager llmSegidad = new LinearLayoutManager(this.context);
+        this.rvseguridad.setLayoutManager(llmSegidad);
+        initData();
+        return this.rootView;
+    }
 
-                @Override
-                public void onGetItemClick(View view, BankOperationCode operacion) {
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    switch (operacion) {
-                        case BPARegistrarse:
-                            ft.replace(R.id.containerView, new BpaRegistrationFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPACambiarclave:
-                            ft.replace(R.id.containerView, new BpaChangePinFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPAEliminarRegistro:
-                            showDialogEliminarRegistro();
-                            break;
-                        case BPACambioLimite:
-                            ft.replace(R.id.containerView, new BpaChangeLimitFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPAAsociarCuenta:
-                            ft.replace(R.id.containerView, new BpaAssociateAccountFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPAPinDigital:
-                            ft.replace(R.id.containerView, new BpaDigitalPinFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPARenovarTarj:
-                            ft.replace(R.id.containerView, new BpaReprintCardFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPARecuperarTarj:
-                            ft.replace(R.id.containerView, new BpaLostPinFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPAConvertirCuenta:
-                            ft.replace(R.id.containerView, new BpaConvertAccountFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPAImprimirMLC:
-                            ft.replace(R.id.containerView, new BpaOpenMlcAccountFragment())
-                                    .addToBackStack(null).commit();
-                            break;
-                        case BPACuentaFiscal:
-                            Bundle arg = new Bundle();
-                            arg.putSerializable("R1sDOSqZ2z", BankType.BPA);
-                            FiscalAccountFragment fiscalFragment = new FiscalAccountFragment();
-                            fiscalFragment.setArguments(arg);
-                            ft.replace(R.id.containerView, fiscalFragment)
-                                    .addToBackStack(null).commit();
-                            break;
-                        default:
-                            Toast.makeText(context, "Error! " + operacion, Toast.LENGTH_SHORT).show();
-                            break;
+    private void initData() {
+        List<WUULVgZq02> itemsOperaciones = new ArrayList<>();
+        WUULVgZq02 registro = new WUULVgZq02();
+        registro.setTitulo("Registrarse");
+        registro.setSubtitulo("Registrarse en el sistema");
+        registro.setIcono(R.drawable.ic_registrarse_bpa);
+        Integer num = rBXnNc0Kx4.Post;
+        registro.setType(num);
+        registro.setOperacion(FdonIAFI9w.BPARegistrarse);
+        itemsOperaciones.add(registro);
+        WUULVgZq02 changepass = new WUULVgZq02();
+        changepass.setTitulo("Cambiar Clave");
+        changepass.setSubtitulo("Cambiar la clave de acceso");
+        changepass.setIcono(R.drawable.ic_cambio_pin_bpa);
+        changepass.setType(num);
+        changepass.setOperacion(FdonIAFI9w.BPACambiarclave);
+        itemsOperaciones.add(changepass);
+        WUULVgZq02 delRegister = new WUULVgZq02();
+        delRegister.setTitulo("Eliminar Registro");
+        delRegister.setSubtitulo("Eliminar registro asociado a su cuenta");
+        delRegister.setIcono(R.drawable.ic_eliminar_registro_bpa);
+        delRegister.setType(num);
+        delRegister.setOperacion(FdonIAFI9w.BPAEliminarRegistro);
+        itemsOperaciones.add(delRegister);
+        WUULVgZq02 cambioLimite = new WUULVgZq02();
+        cambioLimite.setTitulo("Cambio de Límite");
+        cambioLimite.setSubtitulo("Cambio de límites de las cuentas bancarias");
+        cambioLimite.setIcono(R.drawable.ic_cambio_limites_bpa);
+        cambioLimite.setType(num);
+        cambioLimite.setOperacion(FdonIAFI9w.BPACambioLimite);
+        itemsOperaciones.add(cambioLimite);
+        WUULVgZq02 cambioTarjeta = new WUULVgZq02();
+        cambioTarjeta.setTitulo("Asociar Cuentas");
+        cambioTarjeta.setSubtitulo("Vincular otra cuenta bancaria");
+        cambioTarjeta.setIcono(R.drawable.ic_asociar_cuenta_bpa);
+        cambioTarjeta.setType(num);
+        cambioTarjeta.setOperacion(FdonIAFI9w.BPAAsociarCuenta);
+        itemsOperaciones.add(cambioTarjeta);
+        WUULVgZq02 pinDigital = new WUULVgZq02();
+        pinDigital.setTitulo("PIN no Impreso");
+        pinDigital.setSubtitulo("Generar Código PIN");
+        pinDigital.setIcono(R.drawable.ic_generar_pin_bpa);
+        pinDigital.setType(num);
+        pinDigital.setOperacion(FdonIAFI9w.BPAPinDigital);
+        itemsOperaciones.add(pinDigital);
+        WUULVgZq02 reimprimir = new WUULVgZq02();
+        reimprimir.setTitulo("Reimprimir Tarjeta");
+        reimprimir.setSubtitulo("Renovar tarjeta");
+        reimprimir.setIcono(R.drawable.ic_reimprimir_tarjeta_bpa);
+        reimprimir.setType(num);
+        reimprimir.setOperacion(FdonIAFI9w.BPARenovarTarj);
+        itemsOperaciones.add(reimprimir);
+        WUULVgZq02 recuperar = new WUULVgZq02();
+        recuperar.setTitulo("Pérdida de PIN");
+        recuperar.setSubtitulo("Pérdida PIN de tarjeta magnética");
+        recuperar.setIcono(R.drawable.ic_perdida_pin_bpa);
+        recuperar.setType(num);
+        recuperar.setOperacion(FdonIAFI9w.BPARecuperarTarj);
+        itemsOperaciones.add(recuperar);
+        WUULVgZq02 cuentaFiscal = new WUULVgZq02();
+        cuentaFiscal.setTitulo(getString(R.string.head_cuenta_fiscal));
+        cuentaFiscal.setSubtitulo(getString(R.string.subtitle_cuenta_fiscal));
+        cuentaFiscal.setIcono(R.drawable.ic_apertura_cuenta_fiscal_bpa);
+        cuentaFiscal.setType(num);
+        cuentaFiscal.setOperacion(FdonIAFI9w.BPACuentaFiscal);
+        itemsOperaciones.add(cuentaFiscal);
+        WUULVgZq02 mlc = new WUULVgZq02();
+        mlc.setTitulo("Apertura de Cuenta");
+        mlc.setSubtitulo("Apertura de Cuenta en USD con respaldo en MLC");
+        mlc.setIcono(R.drawable.ic_apertura_cuenta_bpa);
+        mlc.setType(num);
+        mlc.setOperacion(FdonIAFI9w.BPAImprimirMLC);
+        itemsOperaciones.add(mlc);
+        vD9rc3MbTL adapterSeguridad = new vD9rc3MbTL(this.context, itemsOperaciones);
+        this.rvseguridad.setAdapter(adapterSeguridad);
+        adapterSeguridad.setOnItemClickListener(this.onItemClickListener);
+    }
+
+    /* JADX INFO: renamed from: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx$18, reason: invalid class name */
+    public static /* synthetic */ class AnonymousClass18 {
+        public static final /* synthetic */ int[] $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w;
+
+        static {
+            int[] iArr = new int[FdonIAFI9w.values().length];
+            $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w = iArr;
+            try {
+                iArr[FdonIAFI9w.BPARegistrarse.ordinal()] = 1;
+            } catch (NoSuchFieldError e) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPACambiarclave.ordinal()] = 2;
+            } catch (NoSuchFieldError e2) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPAEliminarRegistro.ordinal()] = 3;
+            } catch (NoSuchFieldError e3) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPACambioLimite.ordinal()] = 4;
+            } catch (NoSuchFieldError e4) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPAAsociarCuenta.ordinal()] = 5;
+            } catch (NoSuchFieldError e5) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPAPinDigital.ordinal()] = 6;
+            } catch (NoSuchFieldError e6) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPARenovarTarj.ordinal()] = 7;
+            } catch (NoSuchFieldError e7) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPARecuperarTarj.ordinal()] = 8;
+            } catch (NoSuchFieldError e8) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPAConvertirCuenta.ordinal()] = 9;
+            } catch (NoSuchFieldError e9) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPAImprimirMLC.ordinal()] = 10;
+            } catch (NoSuchFieldError e10) {
+            }
+            try {
+                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BPACuentaFiscal.ordinal()] = 11;
+            } catch (NoSuchFieldError e11) {
+            }
+        }
+    }
+
+    private void showDialogCerrarSession() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+        builder.setTitle("Seleccione");
+        builder.setMessage(this.context.getString(R.string.msg_confirm_close_session));
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.2
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("70");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("70");
+                        return;
                     }
                 }
-            };
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_operations_list, container, false);
-        context = container.getContext();
-        recyclerView = rootView.findViewById(R.id.drawerList);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        initData();
-        return rootView;
-    }
-
-    /**
-     * Populates the menu with 10 account management operations.
-     *
-     * <p>All items use {@code rBXnNc0Kx4.Post} as their type (POST request type).</p>
-     */
-    private void initData() {
-        List<OperationMenuItem> items = new ArrayList<>();
-
-        OperationMenuItem registro = new OperationMenuItem();
-        registro.setTitle("Registrarse");
-        registro.setSubtitle("Registrarse en el sistema");
-        registro.setIcon(R.drawable.ic_registrarse_bpa);
-        registro.setType(OperationMenuItem.TYPE_POST);
-        registro.setOperationCode(BankOperationCode.BPARegistrarse);
-        items.add(registro);
-
-        OperationMenuItem changePass = new OperationMenuItem();
-        changePass.setTitle("Cambiar Clave");
-        changePass.setSubtitle("Cambiar la clave de acceso");
-        changePass.setIcon(R.drawable.ic_cambio_pin_bpa);
-        changePass.setType(OperationMenuItem.TYPE_POST);
-        changePass.setOperationCode(BankOperationCode.BPACambiarclave);
-        items.add(changePass);
-
-        OperationMenuItem delRegistro = new OperationMenuItem();
-        delRegistro.setTitle("Eliminar Registro");
-        delRegistro.setSubtitle("Eliminar registro asociado a su cuenta");
-        delRegistro.setIcon(R.drawable.ic_eliminar_registro_bpa);
-        delRegistro.setType(OperationMenuItem.TYPE_POST);
-        delRegistro.setOperationCode(BankOperationCode.BPAEliminarRegistro);
-        items.add(delRegistro);
-
-        OperationMenuItem cambioLimite = new OperationMenuItem();
-        cambioLimite.setTitle("Cambio de Limite");
-        cambioLimite.setSubtitle("Cambio de limites de las cuentas bancarias");
-        cambioLimite.setIcon(R.drawable.ic_cambio_limites_bpa);
-        cambioLimite.setType(OperationMenuItem.TYPE_POST);
-        cambioLimite.setOperationCode(BankOperationCode.BPACambioLimite);
-        items.add(cambioLimite);
-
-        OperationMenuItem asociarCuenta = new OperationMenuItem();
-        asociarCuenta.setTitle("Asociar Cuentas");
-        asociarCuenta.setSubtitle("Vincular otra cuenta bancaria");
-        asociarCuenta.setIcon(R.drawable.ic_asociar_cuenta_bpa);
-        asociarCuenta.setType(OperationMenuItem.TYPE_POST);
-        asociarCuenta.setOperationCode(BankOperationCode.BPAAsociarCuenta);
-        items.add(asociarCuenta);
-
-        OperationMenuItem pinDigital = new OperationMenuItem();
-        pinDigital.setTitle("PIN no Impreso");
-        pinDigital.setSubtitle("Generar Codigo PIN");
-        pinDigital.setIcon(R.drawable.ic_generar_pin_bpa);
-        pinDigital.setType(OperationMenuItem.TYPE_POST);
-        pinDigital.setOperationCode(BankOperationCode.BPAPinDigital);
-        items.add(pinDigital);
-
-        OperationMenuItem reimprimir = new OperationMenuItem();
-        reimprimir.setTitle("Reimprimir Tarjeta");
-        reimprimir.setSubtitle("Renovar tarjeta");
-        reimprimir.setIcon(R.drawable.ic_reimprimir_tarjeta_bpa);
-        reimprimir.setType(OperationMenuItem.TYPE_POST);
-        reimprimir.setOperationCode(BankOperationCode.BPARenovarTarj);
-        items.add(reimprimir);
-
-        OperationMenuItem recuperar = new OperationMenuItem();
-        recuperar.setTitle("Perdida de PIN");
-        recuperar.setSubtitle("Perdida PIN de tarjeta magnetica");
-        recuperar.setIcon(R.drawable.ic_perdida_pin_bpa);
-        recuperar.setType(OperationMenuItem.TYPE_POST);
-        recuperar.setOperationCode(BankOperationCode.BPARecuperarTarj);
-        items.add(recuperar);
-
-        OperationMenuItem cuentaFiscal = new OperationMenuItem();
-        cuentaFiscal.setTitle(getString(R.string.head_cuenta_fiscal));
-        cuentaFiscal.setSubtitle(getString(R.string.subtitle_cuenta_fiscal));
-        cuentaFiscal.setIcon(R.drawable.ic_apertura_cuenta_fiscal_bpa);
-        cuentaFiscal.setType(OperationMenuItem.TYPE_POST);
-        cuentaFiscal.setOperationCode(BankOperationCode.BPACuentaFiscal);
-        items.add(cuentaFiscal);
-
-        OperationMenuItem mlc = new OperationMenuItem();
-        mlc.setTitle("Apertura de Cuenta");
-        mlc.setSubtitle("Apertura de Cuenta en USD con respaldo en MLC");
-        mlc.setIcon(R.drawable.ic_apertura_cuenta_bpa);
-        mlc.setType(OperationMenuItem.TYPE_POST);
-        mlc.setOperationCode(BankOperationCode.BPAImprimirMLC);
-        items.add(mlc);
-
-        OperationMenuAdapter adapter = new OperationMenuAdapter(context, items);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(onItemClickListener);
-    }
-
-    /**
-     * Shows confirmation dialog for closing the bank session.
-     * Sends USSD code "70" to disconnect.
-     * Resets local bank configuration before showing the confirmation.
-     */
-    private void showDialogCerrarSession() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Seleccione");
-        builder.setMessage(context.getString(R.string.msg_confirm_close_session));
-        builder.setPositiveButton("Si", (dialog, id) -> {
-            dispatchUssd("70");
+                ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("70");
+            }
         });
-        builder.setNegativeButton("No", (dialog, id) -> { /* dismissed */ });
-        FBsQzP3Zfj.closeSessionBank(getActivity());
-        builder.create().show();
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.3
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        UssdDispatcher.closeSessionBank(getActivity());
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    /**
-     * Shows confirmation dialog for balance query.
-     * Sends USSD code "46" to query card balance.
-     */
     private void showDialogConsultaSaldo() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione");
-        builder.setMessage("Desea consultar el saldo de su tarjeta? ");
-        builder.setPositiveButton("Si", (dialog, id) -> {
-            dispatchUssd("46");
+        builder.setMessage("¿Desea consultar el saldo de su tarjeta? ");
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.4
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("46");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("46");
+                        return;
+                    }
+                }
+                ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("46");
+            }
         });
-        builder.setNegativeButton("No", (dialog, id) -> { /* dismissed */ });
-        builder.create().show();
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.5
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    /**
-     * Shows confirmation dialog for pending credits query.
-     * Sends USSD code "72" to check pending credits.
-     */
     private void showDialogConsultaCredito() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione");
-        builder.setMessage("Desea ver los creditos pendientes? ");
-        builder.setPositiveButton("Si", (dialog, id) -> {
-            dispatchUssd("72");
+        builder.setMessage("¿Desea ver los créditos pendientes? ");
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.6
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("72");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("72");
+                        return;
+                    }
+                }
+                ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("72");
+            }
         });
-        builder.setNegativeButton("No", (dialog, id) -> { /* dismissed */ });
-        builder.create().show();
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.7
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    /**
-     * Shows confirmation dialog for deleting the user's bank registration.
-     * Sends USSD code "68*01" to remove registration associated with the account
-     * and phone number.
-     */
-    private void showDialogEliminarRegistro() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    /* JADX INFO: Access modifiers changed from: private */
+    public void showDialogEliminarRegistro() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione");
-        builder.setMessage("Desea eliminar registro asociado a su cuenta y numero telefonico?.  ");
-        builder.setPositiveButton("Si", (dialog, id) -> {
-            dispatchUssd("68*01");
+        builder.setMessage("¿Desea eliminar registro asociado a su cuenta y número telefónico?.  ");
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.8
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("68*01");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("68*01");
+                        return;
+                    }
+                }
+                ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("68*01");
+            }
         });
-        builder.setNegativeButton("No", (dialog, id) -> { /* dismissed */ });
-        builder.create().show();
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.9
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    /**
-     * Shows a currency selection dialog (CUP/CUC) for querying account limits.
-     * Sends USSD code "62" with currency parameter "1" (CUP) or "2" (CUC).
-     */
     private void showDialogConsultarLimites() {
         CharSequence[] items = {"CUP", "CUC"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Para consultar los limites de sus cuentas bancarias debe seleccionar el tipo de moneda de su tarjeta:");
-        builder.setSingleChoiceItems(items, -1, (dialogInterface, i) -> {
-            if (i == 0) {
-                dispatchUssd("62", "1");
-            } else {
-                dispatchUssd("62", "2");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+        builder.setTitle("Para consultar los límites de sus cuentas bancarias debe seleccionar el tipo de moneda de su tarjeta:");
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.10
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialogInterface, int i) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        if (i == 0) {
+                            ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("62", "1");
+                            return;
+                        } else {
+                            ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("62", "2");
+                            return;
+                        }
+                    }
+                    if (i == 0) {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("62", "1");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("62", "2");
+                        return;
+                    }
+                }
+                if (i == 0) {
+                    ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("62", "1");
+                } else {
+                    ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("62", "2");
+                }
             }
         });
-        builder.setNegativeButton("Cerrar", (dialog, id) -> { /* dismissed */ });
-        builder.create().show();
+        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.11
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    /**
-     * Shows a currency selection dialog (CUP/CUC) for a given USSD operation code.
-     * Appends currency parameter "1" or "2" to the operation code.
-     *
-     * @param operationCode the USSD operation code to dispatch
-     */
-    private void showDialogTipoMoneda(final String operationCode) {
+    private void showDialogTipoMOneda(final String operacion) {
         CharSequence[] items = {"CUP", "CUC"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione el tipo de moneda de su tarjeta:");
-        builder.setSingleChoiceItems(items, -1, (dialogInterface, i) -> {
-            if (i == 0) {
-                dispatchUssd(operationCode, "1");
-            } else {
-                dispatchUssd(operationCode, "2");
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.12
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialogInterface, int i) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        if (i == 0) {
+                            ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "1");
+                            return;
+                        } else {
+                            ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "2");
+                            return;
+                        }
+                    }
+                    if (i == 0) {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "1");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "2");
+                        return;
+                    }
+                }
+                if (i == 0) {
+                    ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "1");
+                } else {
+                    ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "2");
+                }
             }
         });
-        builder.setNegativeButton("Salir", (dialog, id) -> { /* dismissed */ });
-        builder.create().show();
+        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.13
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    /**
-     * Shows a currency selection dialog for "last operations" queries.
-     * Prepends "00*" to the currency parameter before dispatching.
-     *
-     * @param operationCode the base USSD operation code
-     */
-    private void showDialogUltimosTipoMoneda(final String operationCode) {
+    private void showDialogUltimosTipoMOneda(final String operacion) {
         CharSequence[] items = {"CUP", "CUC"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione el tipo de moneda de su tarjeta:");
-        builder.setSingleChoiceItems(items, -1, (dialogInterface, i) -> {
-            if (i == 0) {
-                dispatchUssd(operationCode, "00*1");
-            } else {
-                dispatchUssd(operationCode, "00*2");
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.14
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialogInterface, int i) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        if (i == 0) {
+                            ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "00*1");
+                            return;
+                        } else {
+                            ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "00*2");
+                            return;
+                        }
+                    }
+                    if (i == 0) {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "00*1");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "00*2");
+                        return;
+                    }
+                }
+                if (i == 0) {
+                    ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "00*1");
+                } else {
+                    ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD(operacion, "00*2");
+                }
             }
         });
-        builder.setNegativeButton("Salir", (dialog, id) -> { /* dismissed */ });
-        builder.create().show();
+        builder.setNegativeButton("Salir", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.15
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    /**
-     * Shows confirmation dialog for querying all account balances.
-     * Sends USSD code "58".
-     */
     private void showDialogTodasCuentas() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Seleccione");
-        builder.setMessage("Desea consultar el importe de todas sus cuentas? ");
-        builder.setPositiveButton("Si", (dialog, id) -> {
-            dispatchUssd("58");
+        builder.setMessage("¿Desea consultar el importe de todas sus cuentas? ");
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.16
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
+                rDEl7rW1aN bs = new rDEl7rW1aN();
+                if (bs.getCodeAgent() != null) {
+                    if (bs.getCodeAgent().getCode().contains("-1")) {
+                        ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("58");
+                        return;
+                    } else {
+                        ((AgentMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("58");
+                        return;
+                    }
+                }
+                ((GeneralMainActivity) BpaAccountMenuFragment.this.getActivity()).actionCallUSSD("58");
+            }
         });
-        builder.setNegativeButton("No", (dialog, id) -> { /* dismissed */ });
-        builder.create().show();
-    }
-
-    /**
-     * Dispatches a USSD code through the appropriate activity interface.
-     * Checks whether the current agent code contains "-1" to decide
-     * between legacy (S9ycHcoxAzy) and new (IHVTCBmiLV) activity cast.
-     *
-     * @param code the USSD operation code
-     */
-    private void dispatchUssd(String code) {
-        rDEl7rW1aN dispatcher = new rDEl7rW1aN();
-        if (dispatcher.getCodeAgent() != null) {
-            if (dispatcher.getCodeAgent().getCode().contains("-1")) {
-                ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code);
-            } else {
-                ((IHVTCBmiLV) getActivity()).actionCallUSSD(code);
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.izLB5V8oGbU.f5AFyaj0rtx.17
+            @Override // android.content.DialogInterface.OnClickListener
+            public void onClick(DialogInterface dialog, int id) {
             }
-            return;
-        }
-        ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code);
-    }
-
-    /**
-     * Dispatches a USSD code with an additional parameter.
-     *
-     * @param code  the USSD operation code
-     * @param param additional parameter (e.g., currency selection)
-     */
-    private void dispatchUssd(String code, String param) {
-        rDEl7rW1aN dispatcher = new rDEl7rW1aN();
-        if (dispatcher.getCodeAgent() != null) {
-            if (dispatcher.getCodeAgent().getCode().contains("-1")) {
-                ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code, param);
-            } else {
-                ((IHVTCBmiLV) getActivity()).actionCallUSSD(code, param);
-            }
-            return;
-        }
-        ((S9ycHcoxAzy) getActivity()).actionCallUSSD(code, param);
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

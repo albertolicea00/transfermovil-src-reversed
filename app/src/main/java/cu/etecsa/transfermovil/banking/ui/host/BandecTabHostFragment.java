@@ -31,8 +31,8 @@ public class BandecTabHostFragment extends Fragment {
             @Override // java.lang.Runnable
             public void run() {
                 BandecTabHostFragment.tabLayout.setupWithViewPager(BandecTabHostFragment.viewPager);
-                BandecTabHostFragment.tabLayout.setBackgroundColor(z5XKGtUeX8.this.getResources().getColor(R.color.bancoBandec));
-                Context ct = z5XKGtUeX8.this.getContext();
+                BandecTabHostFragment.tabLayout.setBackgroundColor(BandecTabHostFragment.this.getResources().getColor(R.color.bancoBandec));
+                Context ct = BandecTabHostFragment.this.getContext();
                 try {
                     TextView tabOne = (TextView) LayoutInflater.from(ct).inflate(R.layout.qk38evge3cdbu, (ViewGroup) null);
                     tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_banco_bandec, 0, 0);

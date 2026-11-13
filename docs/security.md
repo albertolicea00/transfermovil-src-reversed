@@ -102,7 +102,7 @@ Methods: `shKey(String)`, `shKey(byte[])`, `getSha256(data)` — straightforward
 | `"ABCDEFGHIJKLMNOP"` | `encryptionKey` field | AES key for single-param encrypt/decrypt |
 | `"708091521823824654864548452244"` | `rDEl7rW1aN.cv` (static) | Key material for `generateKey()` → AES SecretKey |
 | `"372653282298718711"` | `rDEl7rW1aN.code_version` (static) | USSD code encoder version identifier |
-| `crude_code` (1024-char binary) | `rDEl7rW1aN` instance field | Binary lookup table for USSD parameter encoding |
+| `crude_code` (1250-char binary) | `rDEl7rW1aN` instance field | Binary lookup table for USSD parameter encoding |
 | `"1927271231"` | `procesarDatos`, `validarLLaveDerivada` | Salt for card decryption |
 | `"12345678"` | `cH`, `validarLLaveDerivada` | `tfmid` — likely device/app identifier |
 | `"Referencia001delbanco3"` | `validarLLaveDerivada` | Test bank reference |
@@ -178,13 +178,32 @@ The `code()` method uses a proprietary two-stage numeric cipher for USSD paramet
 
 ### Encoding flow
 
-1. Parse `crude_code` (1024-char binary string) using `code_version` digits: for each digit `d`, shift binary string left by `d` positions, take first 8 bits → int entry in substitution list
+1. Parse `crude_code` (1250-char binary string) using cyclic `code_version` digits: skip `d` bits, consume the following eight bits as an integer, then repeat. The target constants produce a 100-entry permutation of integers 0–99; restart the version index after its final digit.
 2. Generate random seed 0-99 per encoding instance
 3. For each numeric parameter:
    - **Stage 1 — Substitution**: take digit pairs (2 chars), look up combined 2-digit number in substitution list → replacement value
    - **Stage 2 — XOR**: build cyclic key stream from matrix, XOR substituted value (as long) with key (as long) via `xor-long/2addr`
-4. Pad single-digit results with leading "0"
-5. Non-numeric strings (Nauta emails) go through separate path (`kR22DOzTiB.getCodes()`)
+4. Prefix the output with the two-digit random seed and prefix each field with its original length padded to at least two digits. Separate subsequent length/value fields with `*`.
+5. Non-numeric strings (Nauta emails) use the character-dictionary path (`kR22DOzTiB.getCodes()`); all-nonnumeric input replaces the random seed prefix with `00`.
+
+### Bytecode correction and verification
+
+JADX loses the offset-index reset in
+`AFm1GraXBXUkpF1hmOdV/YzK9tTZsYVnC5kFxSie.smali`, method
+`aSHV52SplNh3HfZBSmJe(Ljava/lang/String;)V`. After the final version digit,
+bytecode branches to `:goto_0`, which sets `v3` to zero. The raw Java and the
+previous clean implementation held the final index instead, leaving a six-bit
+tail and throwing during ordinary numeric encoding. `SubstitutionTableBuilder`
+now cycles the index as the bytecode does. Tracked JADX output stays unchanged.
+
+The encoder JVM oracle repairs precisely that missing reset in a temporary raw
+helper. It verifies the full substitution permutation and seven fixed seed-42
+vectors, then compares 49 input cases at every seed 0–99: 4,607 successful output
+comparisons and 300 expected malformed-input exception comparisons overall.
+This replaces the prior fixed-seed check, whose matches were exceptions and did
+not establish valid request encoding. It also exposes and fixes a clean
+assembler bug: `1*0` at seed 42 must produce `42013*011`, including the separator.
+These checks exercise reconstructed algorithms, not the carrier gateway.
 
 ### Assessment
 

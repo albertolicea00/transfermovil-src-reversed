@@ -15,7 +15,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Municipio;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.SucursalBancaria;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.util.List;
@@ -88,7 +88,7 @@ public class MetroBranchSelectorFragment extends Fragment {
         String surcursalSeleccionado = this.sucursal.getCodigoSucursal();
         String cadena = municipioSeleccionado + "*" + surcursalSeleccionado;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "76", cadena, "¿Desea realizar la apertura de cuenta en USD con respaldo en MLC?", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "76", cadena, "¿Desea realizar la apertura de cuenta en USD con respaldo en MLC?", group, getFragmentManager());
     }
 
     private boolean loadMunicipio(String codigo) {

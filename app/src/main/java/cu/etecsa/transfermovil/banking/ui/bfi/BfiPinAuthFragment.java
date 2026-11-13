@@ -11,7 +11,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.P2MO7cFkntPD.SvY0xjeNSz */
@@ -49,7 +49,7 @@ public class BfiPinAuthFragment extends Fragment {
         }
         String clave = "05*" + this.inputClave.getText().toString().trim();
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmAuthBanco);
-        FBsQzP3Zfj.actionCallUSSDBack("05", this.context, "40", clave, "Desea autenticarse en el sistema", group, getFragmentManager(), getActivity());
+        UssdDispatcher.actionCallUSSDBack("05", this.context, "40", clave, "Desea autenticarse en el sistema", group, getFragmentManager(), getActivity());
     }
 
     private boolean validateClave() {

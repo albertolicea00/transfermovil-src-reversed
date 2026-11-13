@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.zpT98w56Knm.F5QGj1YaNB */
@@ -57,7 +57,7 @@ public class MetroRegisterFragment extends Fragment {
         String ci = this.inputCi.getText().toString().trim();
         String cadena = "03*" + ci + "*" + pin + "*" + cuenta;
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "68", cadena, "Desea eliminar su registro del sistema", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "68", cadena, "Desea eliminar su registro del sistema", group, getFragmentManager());
     }
 
     private boolean validateCuenta() {

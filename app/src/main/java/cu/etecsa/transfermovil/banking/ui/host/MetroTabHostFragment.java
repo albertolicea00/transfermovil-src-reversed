@@ -32,8 +32,8 @@ public class MetroTabHostFragment extends Fragment {
             public void run() {
                 try {
                     MetroTabHostFragment.tabLayout.setupWithViewPager(MetroTabHostFragment.viewPager);
-                    MetroTabHostFragment.tabLayout.setBackgroundColor(BIc10fn03P.this.getResources().getColor(R.color.bancoMetro));
-                    Context ct = BIc10fn03P.this.getContext();
+                    MetroTabHostFragment.tabLayout.setBackgroundColor(MetroTabHostFragment.this.getResources().getColor(R.color.bancoMetro));
+                    Context ct = MetroTabHostFragment.this.getContext();
                     TextView tabTwo = (TextView) LayoutInflater.from(ct).inflate(R.layout.qk38evge3cdbu, (ViewGroup) null);
                     tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_banco_metro, 0, 0);
                     MetroTabHostFragment.tabLayout.getTabAt(0).setCustomView(tabTwo);

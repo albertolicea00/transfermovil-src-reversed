@@ -25,7 +25,7 @@ import com.github.paolorotolo.appintro.BuildConfig;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 import java.util.Calendar;
 
@@ -240,7 +240,7 @@ public class TicketIntegratedQueryFragment extends Fragment implements pAzq93vIl
             if (this.isPartialUSSD) {
                 this.manager.principalEnviarUSSD(this.context, "110", "112", "04", this.MAX_PARAMETERS_PQUETE, cadena, "¿Desea obtener los últimos Boletos del rango de fecha especificado?", group, getFragmentManager());
             } else {
-                FBsQzP3Zfj.actionCallUSSDBack(this.context, "112", cadena, "¿Desea obtener los últimos Boletos del rango de fecha especificado?", group, getFragmentManager());
+                UssdDispatcher.actionCallUSSDBack(this.context, "112", cadena, "¿Desea obtener los últimos Boletos del rango de fecha especificado?", group, getFragmentManager());
             }
         } catch (Exception e2) {
             Toast.makeText(this.context, "Error intentelo de nuevo", 0).show();

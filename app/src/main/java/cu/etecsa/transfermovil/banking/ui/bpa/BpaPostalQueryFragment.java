@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /* JADX INFO: loaded from: classes.dex */
 /** @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.p1CEgMEeWUbD.DrR0lEVP3qk.XvOK7VM4qL */
@@ -53,7 +53,7 @@ public class BpaPostalQueryFragment extends Fragment {
         }
         String ci = this.inputCi.getText().toString().trim();
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmRegistroBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "65", ci, "¿Desea realizar la consulta de giros pendientes?", group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "65", ci, "¿Desea realizar la consulta de giros pendientes?", group, getFragmentManager());
     }
 
     private boolean validateCi() {

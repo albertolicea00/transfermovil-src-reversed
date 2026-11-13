@@ -1,5 +1,7 @@
 package cu.etecsa.transfermovil.banking.ui.wallet;
 
+import cu.etecsa.cubacel.tr.tm.R;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -10,7 +12,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 
 /**
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.qZS87tGogtP.R5fFZkKuVnr
@@ -51,7 +53,7 @@ public class WalletPinEntryFragment extends Fragment {
         }
         String clave = "04*" + this.inputClave.getText().toString().trim();
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmAuthBolsa);
-        FBsQzP3Zfj.actionCallUSSDBack("04", this.context, "40", clave,
+        UssdDispatcher.actionCallUSSDBack("04", this.context, "40", clave,
                 "Desea autenticarse en el sistema", group, getFragmentManager(), getActivity());
     }
 

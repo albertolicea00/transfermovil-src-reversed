@@ -1,5 +1,7 @@
 package cu.etecsa.transfermovil.banking.ui;
 
+import cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.GRGvmCZD7R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,60 +11,60 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-import cu.etecsa.transfermovil.core.enums.AuthAction;
+import androidx.fragment.app.FragmentManager;
+import cu.etecsa.cubacel.tr.tm.R;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.HrLy23Pb9b;
+import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.Nl0yptXmjQ;
 
-/**
- * @original_apk_version 1.260416
- * @obfuscated_class cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.G4wGs16qPA
- * @fingerprint Access code entry fragment. Receives AuthAction + Operation enums via arguments.
- *              Shows auth dialog (AuthDialogFragment) on button click.
- *              Checks parent fragment type (DataManagementGeneralPagerFragment) on activity result.
- */
+/* JADX INFO: loaded from: classes.dex */
+/** @obfuscated_class cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.G4wGs16qPA */
 public class AccessCodeFragment extends Fragment {
-
-    public AuthAction actionEntity;
+    public HrLy23Pb9b actionEntity;
     public Button btAcceder;
     public Context context;
-    // public Operation operationEntity; // Nl0yptXmjQ
+    public Nl0yptXmjQ operationEntity;
     public View rootView;
     public String titulo;
     public TextView txTextoAcceso;
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.rootView = inflater.inflate(R.layout.o263eoyep9cask, container, false);
         this.context = container.getContext();
-        if (getArguments() != null
-                && getArguments().containsKey("HrLy23Pb9b")
-                && getArguments().containsKey("Nl0yptXmjQ")) {
-            this.actionEntity = (AuthAction) getArguments().getSerializable("HrLy23Pb9b");
+        if (getArguments() != null && getArguments().containsKey("HrLy23Pb9b") && getArguments().containsKey("Nl0yptXmjQ")) {
+            this.actionEntity = (HrLy23Pb9b) getArguments().getSerializable("HrLy23Pb9b");
+            this.operationEntity = (Nl0yptXmjQ) getArguments().getSerializable("Nl0yptXmjQ");
             this.titulo = getArguments().getString("Titulo");
         }
         this.txTextoAcceso = (TextView) this.rootView.findViewById(R.id.txTextoAcceso);
         Button button = (Button) this.rootView.findViewById(R.id.btAcceder);
         this.btAcceder = button;
-        button.setOnClickListener(v -> {});
+        button.setOnClickListener(new View.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.c69cvBqjXKw.AccessCodeFragment.1
+            @Override // android.view.View.OnClickListener
+            public void onClick(View view) {
+            }
+        });
         return this.rootView;
     }
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public void onAttach(Context context) {
         super.onAttach(context);
     }
 
-    @Override
+    @Override // androidx.fragment.app.Fragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentManager mFragmentManager = getActivity().getSupportFragmentManager();
+        mFragmentManager.beginTransaction();
         if (requestCode == 1 && resultCode == 2) {
             Fragment parentFragment = getParentFragment();
-            boolean isGeneralPager = parentFragment instanceof DataManagementGeneralPagerFragment;
+            boolean z = parentFragment instanceof DataManagementGeneralPagerFragment;
         }
     }
 
     private void showDialog() {
         try {
-            AuthDialogFragment dialogFrag = AuthDialogFragment.newInstance(
-                    /* operationEntity, actionEntity, titulo */);
+            GRGvmCZD7R dialogFrag = GRGvmCZD7R.newInstance(this.operationEntity, this.actionEntity, this.titulo);
             if (dialogFrag.getDialog() != null) {
                 dialogFrag.getDialog().setCanceledOnTouchOutside(true);
             }

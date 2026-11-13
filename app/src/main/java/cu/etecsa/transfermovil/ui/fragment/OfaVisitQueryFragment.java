@@ -11,7 +11,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -94,7 +94,7 @@ public class OfaVisitQueryFragment extends Fragment {
         String cadena = this.opcion + "*" + this.txCorreo.getText().toString() + "*" + idRes + "*" + this.tipoBolsa;
         String msg = "¿Desea consultar sus visitas? El resultado será  enviado al siguiente correo electrónico: " + this.txCorreo.getText().toString() + ". Esta operación realiza un cobro de comisión a la cuenta seleccionada.";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(R.id.frmTranferencia);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "9", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "9", cadena, msg, group, getFragmentManager());
     }
 
     public boolean validateSpBolsa() {

@@ -27,7 +27,7 @@ import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Municipio;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.MZUDJuUoMJL.Provincia;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.tDZO41TAmLO.V9s8rJIDplX;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.piM0KeORWQz.R1sDOSqZ2z;
 import java.util.Calendar;
@@ -395,7 +395,7 @@ public class WalletTrafficFineDetailFragment extends BaseTwoAccountFragment {
         String cadena = idMulta + "*0000*" + this.articuloUSSD + "*" + this.incisoUSSD + "*" + municipioCod + "*" + provinciaCod + "*1*" + this.fechaMulta + "*" + this.monedaTarjeta + "*" + this.cuentaOrigen;
         String msg = "Confirme que desea pagar el siguiente identificador de multa de tránsito: ID de Multa: " + idMulta + ".";
         ViewGroup group = (ViewGroup) this.rootView.findViewById(cu.etecsa.cubacel.tr.tm.R.id.frmBanco);
-        FBsQzP3Zfj.actionCallUSSDBack(this.context, "97", cadena, msg, group, getFragmentManager());
+        UssdDispatcher.actionCallUSSDBack(this.context, "97", cadena, msg, group, getFragmentManager());
     }
 
     @Override // cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.QGQCqILT4b

@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputLayout;
 import cu.etecsa.cubacel.tr.tm.R;
 import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.unYp8VQThY;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FBsQzP3Zfj;
+import cu.etecsa.transfermovil.ussd.UssdDispatcher;
 import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.FY4jCHXwyiP.ZJaneAnYYBm.pAzq93vIl3;
 
 /* JADX INFO: loaded from: classes.dex */
@@ -71,7 +71,7 @@ public class WalletRegistrationFragment extends Fragment implements pAzq93vIl3.U
         } catch (Exception e) {
         }
         if (!this.isPartialUSSD) {
-            FBsQzP3Zfj.actionCallUSSDBack(this.context, "68", cadena, "Desea eliminar su registro del sistema", group, getFragmentManager());
+            UssdDispatcher.actionCallUSSDBack(this.context, "68", cadena, "Desea eliminar su registro del sistema", group, getFragmentManager());
         } else {
             this.manager.principalEnviarUSSD(this.context, "110", "68", "04", this.MAX_PARAMETERS_PQUETE, cadena, "Desea eliminar su registro del sistema", group, getFragmentManager());
         }
