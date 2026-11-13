@@ -163,3 +163,9 @@ dependency fingerprints remained stable during compilation. The warnings
 remain deprecated boxed-number constructors. The report and full compiler log
 are local under ignored `.workspace/compile-root12/`; they are not committed
 build products.
+
+The following `compile-root13` run added the clean `UssdHost` interface and
+verified **489 clean Java files plus the real target R constants**, with zero
+errors and 12 warnings in 32 seconds. Source and dependency fingerprints were
+stable; the report and compiler log are local under ignored
+`.workspace/compile-root13/`.

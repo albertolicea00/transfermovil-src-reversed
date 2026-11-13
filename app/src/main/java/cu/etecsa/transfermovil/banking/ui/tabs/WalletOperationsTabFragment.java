@@ -14,11 +14,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletPinEntryFragment;
-import cu.etecsa.cubacel.tr.tm.IHVTCBmiLV;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy;
+import cu.etecsa.transfermovil.ui.UssdHost;
 import cu.etecsa.transfermovil.ussd.UssdDispatcher;
-import cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.rDEl7rW1aN;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,17 +139,7 @@ public class WalletOperationsTabFragment extends Fragment {
         builder.setPositiveButton("Si", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletOperationsTabFragment.2
             @Override // android.content.DialogInterface.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
-                rDEl7rW1aN bs = new rDEl7rW1aN();
-                if (bs.getCodeAgent() != null) {
-                    if (bs.getCodeAgent().getCode().contains("-1")) {
-                        ((S9ycHcoxAzy) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
-                        return;
-                    } else {
-                        ((IHVTCBmiLV) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
-                        return;
-                    }
-                }
-                ((S9ycHcoxAzy) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
+                ((UssdHost) WalletOperationsTabFragment.this.getActivity()).actionCallUSSD("70");
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletOperationsTabFragment.3

@@ -16,9 +16,11 @@
 - Linked the 12 reconstructed landline and agent-recharge sources in the main-package ledger; exact identity links now stand at 403/596 (67.62%), or 403/591 (68.19%) after the five evidenced generated exclusions, with 188 retained sources still unlinked.
 - Replaced the MiTransfer Boleto-management tab's raw operation enum, item model, and RecyclerView adapter with a typed local action model and clean adapter; retained registration, PIN, deletion, and account-association routes.
 - Replaced the Wallet session tab's raw enum, item model, switch map, and adapter with local menu rows/actions and a clean RecyclerView adapter; retained authentication and close-session confirmation/selector-70 routes.
+- Added a clean activity contract for one-code USSD dispatch and routed the Wallet selector-70 action through it, removing raw activity-interface casts and the agent-code lookup from that UI path.
 - Restored the two missing `JSONException.printStackTrace()` diagnostics in BFI external-payment QR field handling from the APK catch-handler convergence; JSON completion and dispatch behavior remain unchanged.
 - Recompiled the complete current tree, including the 12 carrier screens and both clean Wallet management adapters: 488 Java sources plus target R constants, zero errors, and 12 deprecation warnings with stable inputs.
 - Expanded the USSD catalog with 14 more traced variants across fixed-phone service, agent recharge, and Nauta selector families, including raw/encoded account queries, disabled-PIN sentinels, locale-sensitive normalization, and agent-only dispatch guards.
+- Added a typed USSD activity-host contract for clean Wallet routing and compiled all 489 Java sources plus target R constants with zero errors and 12 warnings; source/dependency inputs remained stable.
 
 ## 2026-11-12 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

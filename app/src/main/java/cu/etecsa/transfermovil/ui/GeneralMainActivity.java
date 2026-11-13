@@ -91,7 +91,7 @@ import org.json.JSONObject;
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.S9ycHcoxAzy
  * @original_apk_version 1.260416
  */
-public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
+public class GeneralMainActivity extends rDEl7rW1aN implements ysmUbWW79P, UssdHost {
     private static final int CREATE_FILE = 1;
     public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
     private static final int PICK_PDF_FILE = 2;

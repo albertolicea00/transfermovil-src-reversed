@@ -364,7 +364,7 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 | All `src/` | 794 | 314 | 480 | 0 |
 | Main app package | 596 | 193 | 403 | 0 |
 
-There are 487 clean Java files, 88 explicit mappings, seven intentionally
+There are 489 clean Java files, 88 explicit mappings, seven intentionally
 unannotated helper/derived classes, and zero unresolved annotations or mapping
 issues. Full normalized source-body checks establish 12 additional fixed-phone
 and agent-recharge UI identities, alongside the earlier carrier/ticket links

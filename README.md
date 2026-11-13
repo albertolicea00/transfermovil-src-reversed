@@ -39,10 +39,10 @@ See [metadata extraction](docs/target-metadata.md) to reproduce these values fro
 | Area | Status | Current state |
 | :--- | :--- | :--- |
 | APK identification and extraction | Complete for the current APK | Metadata, manifest, resources, JADX Java, and smali are available. |
-| Clean Java reconstruction | In progress | 488 files exist; some are partial or contain stubs. The source-link inventory currently has no duplicate candidates. |
+| Clean Java reconstruction | In progress | 489 files exist; some are partial or contain stubs. The source-link inventory currently has no duplicate candidates. |
 | Protocol and feature analysis | In progress | Topic documents contain findings; the complete USSD code catalog remains a TODO. |
 | iOS port research | Feasibility reviewed | Public API limits and feature dispositions are documented; device/provider gates and implementation remain. |
-| Build and behavioral validation | In progress | All 488 Java files pass dependency-backed compilation; standalone source builds and full Android/backend parity remain unverified. |
+| Build and behavioral validation | In progress | All 489 Java files pass dependency-backed compilation; standalone source builds and full Android/backend parity remain unverified. |
 
 See the [task list](TODO.md) for specific remaining work. Paused sessions record a temporary checkpoint in `.workspace/handoff.md`. The bar above tracks completed checklist items; full reconstruction and Android behavior remain unverified.
 

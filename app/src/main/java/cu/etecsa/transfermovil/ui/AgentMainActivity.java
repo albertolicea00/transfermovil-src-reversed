@@ -92,7 +92,7 @@ import org.json.JSONObject;
  * @obfuscated_class cu.etecsa.cubacel.tr.tm.IHVTCBmiLV
  * @original_apk_version 1.260416
  */
-public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
+public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P, UssdHost {
     public Activity activity;
     public Context context;
     public CheckBox dontShowAgain;
