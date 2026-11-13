@@ -152,3 +152,13 @@ integration repair. The isolated test suite has 29 passing tests, including
 mocked USSD dispatch and smali-backed encoding, SMS and date-picker cases.
 This is a dependency-backed compiler milestone, not a standalone source build
 or a claim that every Android screen/backend workflow is complete.
+
+## Latest tree snapshot — 2026-11-13
+
+After restoring 12 landline/agent-recharge screens and the clean Boleto
+management adapter, `compile-root11` compiled **488 clean Java files plus the
+real target R constants** with `javac 17.0.15`, **zero errors and 12 warnings**.
+The APK, source and dependency fingerprints remained stable during the
+12.17-second run. The warnings remain deprecated boxed-number constructors.
+The report and full compiler log are local under ignored
+`.workspace/compile-root11/`; they are not committed build products.

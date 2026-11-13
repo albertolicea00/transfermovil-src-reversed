@@ -151,7 +151,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Share the single `SvY0xjeNSz` PIN-auth implementation between BFI and Metro menus; route Metro to `BfiPinAuthFragment` and remove its duplicate screen copy.
 - [x] Share the single `umjSGajOy3` registration implementation between BFI and Metro menus; route Metro to `BfiRegistrationFragment` and remove its duplicate screen copy.
 - [ ] Compile and validate reconstructed behavior before claiming functional completeness.
-- [x] Compile all 475 clean Java files against explicit Android/APK-derived dependencies with zero errors; validate mock dispatch, smali-backed encoding, menu/adapter bodies, SMS labels/catalog failures, and MiBoleto date boundaries. Standalone APK and full runtime parity remain separate.
+- [x] Compile all 488 clean Java files against explicit Android/APK-derived dependencies with zero errors; earlier offline checks cover mock dispatch, smali-backed encoding, menu/adapter bodies, SMS labels/catalog failures, and MiBoleto date boundaries. Standalone APK and full runtime parity remain separate.
 
 ## Architecture & Navigation
 
@@ -352,6 +352,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [ ] Review remaining MiTransfer and Boleto-tab management flows for clean model and dispatcher adapters.
 - [x] Repair saved MiBoleto ticket navigation and three QR listener captures against the original list/editor bodies; retain selector-114/115 dispatch and document remaining raw dependencies.
 - [x] Compare `WalletBoletoTabFragment` with `hOQ4ESKEhm`; confirm its four entries, deletion/association choices, and clean routes match the source.
+- [x] Replace `WalletBoletoTabFragment`'s raw operation enum, row model, and adapter with a typed local action model and clean RecyclerView adapter while retaining the four menu entries and dialog routes.
 - [x] Migrate General service-debt query `k5fNqiPSlwb`; preserve five service types, invoice validation, selector-47 full/partial branches, and guard optional invoice/type prefills when arguments are incomplete.
 - [x] Migrate General account-statement query `qAMfdm9Kls`; preserve six-month date pickers, CUP/USD, email validation/encoding, and selector-26 full/partial branches.
 - [x] Migrate General union-payment query `SlZq2dCM9i` by routing to its clean equivalent; preserve QR CI prefill, agency mapping, and selector 121.

@@ -20,11 +20,7 @@ import cu.etecsa.transfermovil.banking.ui.wallet.WalletRegistrationFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletEnrollmentFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletQrPaymentFragment;
 import cu.etecsa.transfermovil.banking.ui.wallet.WalletAccountSelectorFragment;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,32 +31,28 @@ import java.util.List;
 public class WalletBoletoTabFragment extends Fragment {
     public Context context;
     public boolean isMiBoletoActive = false;
-    public vD9rc3MbTL.OnItemClickListener onItemClickListener = new vD9rc3MbTL.OnItemClickListener() { // from class: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletBoletoTabFragment.1
-        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
-        public void onItemClick(View view, int position) {
-        }
-
-        @Override // cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL.OnItemClickListener
-        public void onGetItemClick(View view, FdonIAFI9w operacion) {
+    public BoletoManagementAdapter.OnItemClickListener onItemClickListener =
+            new BoletoManagementAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, BoletoManagementAdapter.Action action) {
             FragmentManager mFragmentManager = WalletBoletoTabFragment.this.getActivity().getSupportFragmentManager();
             FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-            if (operacion != null) {
-                switch (AnonymousClass6.$SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[operacion.ordinal()]) {
-                    case 1:
+            if (action != null) {
+                switch (action) {
+                    case REGISTER:
                         mFragmentTransaction.replace(R.id.containerView, new WalletEnrollmentFragment()).addToBackStack(null).commit();
-                        break;
-                    case 2:
+                        return;
+                    case CHANGE_PIN:
                         mFragmentTransaction.replace(R.id.containerView, new WalletChangePinFragment()).addToBackStack(null).commit();
-                        break;
-                    case 3:
+                        return;
+                    case DELETE_REGISTRATION:
                         WalletBoletoTabFragment.this.showDialogEliminarRegistro();
-                        break;
-                    case 4:
+                        return;
+                    case ASSOCIATE_CLASSIC_ACCOUNT:
                         WalletBoletoTabFragment.this.showDialogAsocClasica();
-                        break;
+                        return;
                     default:
-                        Toast.makeText(WalletBoletoTabFragment.this.context, operacion.toString(), 1).show();
-                        break;
+                        Toast.makeText(WalletBoletoTabFragment.this.context, action.name(), Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -83,65 +75,22 @@ public class WalletBoletoTabFragment extends Fragment {
     }
 
     private void initData() {
-        List<WUULVgZq02> itemsOperaciones = new ArrayList<>();
-        WUULVgZq02 registro = new WUULVgZq02();
-        registro.setTitulo(getString(R.string.tx_registrarse));
-        registro.setSubtitulo(getString(R.string.tx_sub_registro_bolsa));
-        registro.setIcono(R.drawable.ic_registrarse_bolsa);
-        Integer num = rBXnNc0Kx4.Post;
-        registro.setType(num);
-        registro.setOperacion(FdonIAFI9w.BOLSARegistrarse);
-        itemsOperaciones.add(registro);
-        WUULVgZq02 cambioclave = new WUULVgZq02();
-        cambioclave.setTitulo(getString(R.string.tx_cambio_pin_bolsa));
-        cambioclave.setSubtitulo(getString(R.string.tx_sub_cambio_pin_bolsa));
-        cambioclave.setIcono(R.drawable.ic_cambio_pin_bolsa);
-        cambioclave.setType(num);
-        cambioclave.setOperacion(FdonIAFI9w.BOLSACambioPin);
-        itemsOperaciones.add(cambioclave);
-        WUULVgZq02 eliminarreg = new WUULVgZq02();
-        eliminarreg.setTitulo(getString(R.string.tx_eliminar_registro));
-        eliminarreg.setSubtitulo(getString(R.string.tx_sub_eliminar_registro));
-        eliminarreg.setIcono(R.drawable.ic_eliminar_registro_bolsa);
-        eliminarreg.setType(num);
-        eliminarreg.setOperacion(FdonIAFI9w.BOLSAEliminarRegistro);
-        itemsOperaciones.add(eliminarreg);
-        WUULVgZq02 asociarClasica = new WUULVgZq02();
-        asociarClasica.setTitulo(getString(R.string.tx_title_clasica));
-        asociarClasica.setSubtitulo(getString(R.string.tx_subtitle_clasica));
-        asociarClasica.setIcono(R.drawable.ic_asociar_cuenta_bolsa);
-        asociarClasica.setType(num);
-        asociarClasica.setOperacion(FdonIAFI9w.BOLSAAsociarCuenta);
-        itemsOperaciones.add(asociarClasica);
-        vD9rc3MbTL adapterSeguridad = new vD9rc3MbTL(this.context, itemsOperaciones);
+        List<BoletoManagementAdapter.MenuItem> itemsOperaciones = new ArrayList<>();
+        itemsOperaciones.add(new BoletoManagementAdapter.MenuItem(
+                getString(R.string.tx_registrarse), getString(R.string.tx_sub_registro_bolsa),
+                R.drawable.ic_registrarse_bolsa, BoletoManagementAdapter.Action.REGISTER));
+        itemsOperaciones.add(new BoletoManagementAdapter.MenuItem(
+                getString(R.string.tx_cambio_pin_bolsa), getString(R.string.tx_sub_cambio_pin_bolsa),
+                R.drawable.ic_cambio_pin_bolsa, BoletoManagementAdapter.Action.CHANGE_PIN));
+        itemsOperaciones.add(new BoletoManagementAdapter.MenuItem(
+                getString(R.string.tx_eliminar_registro), getString(R.string.tx_sub_eliminar_registro),
+                R.drawable.ic_eliminar_registro_bolsa, BoletoManagementAdapter.Action.DELETE_REGISTRATION));
+        itemsOperaciones.add(new BoletoManagementAdapter.MenuItem(
+                getString(R.string.tx_title_clasica), getString(R.string.tx_subtitle_clasica),
+                R.drawable.ic_asociar_cuenta_bolsa, BoletoManagementAdapter.Action.ASSOCIATE_CLASSIC_ACCOUNT));
+        BoletoManagementAdapter adapterSeguridad = new BoletoManagementAdapter(itemsOperaciones);
         this.rvseguridad.setAdapter(adapterSeguridad);
         adapterSeguridad.setOnItemClickListener(this.onItemClickListener);
-    }
-
-    /* JADX INFO: renamed from: cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.GerFAWQsHQB.WalletBoletoTabFragment$6, reason: invalid class name */
-    public static /* synthetic */ class AnonymousClass6 {
-        public static final /* synthetic */ int[] $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w;
-
-        static {
-            int[] iArr = new int[FdonIAFI9w.values().length];
-            $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w = iArr;
-            try {
-                iArr[FdonIAFI9w.BOLSARegistrarse.ordinal()] = 1;
-            } catch (NoSuchFieldError e) {
-            }
-            try {
-                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSACambioPin.ordinal()] = 2;
-            } catch (NoSuchFieldError e2) {
-            }
-            try {
-                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAEliminarRegistro.ordinal()] = 3;
-            } catch (NoSuchFieldError e3) {
-            }
-            try {
-                $SwitchMap$cu$etecsa$cubacel$tr$tm$ZNRpoHwtLXM$FdonIAFI9w[FdonIAFI9w.BOLSAAsociarCuenta.ordinal()] = 4;
-            } catch (NoSuchFieldError e4) {
-            }
-        }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
