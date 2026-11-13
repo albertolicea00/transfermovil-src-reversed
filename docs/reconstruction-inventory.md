@@ -306,14 +306,14 @@ not proof of complete runtime behavior.
 
 The [baseline review ledger](unmapped-source-review.md) now classifies all 213
 sources: 160 application behavior, 48 application support, five generated,
-zero third-party/library, and zero unknown/pending. Four cohort sources have
+zero third-party/library, and zero unknown/pending. Eight cohort sources have
 subsequently gained exact clean links. The five generated exclusions are all
 unlinked: Android `BuildConfig` and `R`, plus the three synthetic API-model
 outline classes identified with evidence in the ledger.
 
-Retaining every other main-package source gives **387/(596−5) = 387/591
-(65.48%)** scope-adjusted identity-link coverage, with 204 retained sources
-still unlinked. The raw exact-link ratio is **387/596 (64.93%)**. Exclusions
+Retaining every other main-package source gives **391/(596−5) = 391/591
+(66.16%)** scope-adjusted identity-link coverage, with 200 retained sources
+still unlinked. The raw exact-link ratio is **391/596 (65.60%)**. Exclusions
 are established only for the reviewed cohort; linked sources outside it remain
 in scope without an additional generated/library audit. A candidate link can
 still point to incomplete code. This is a reconstruction identity-link proxy,
@@ -353,3 +353,24 @@ print(f"Adjusted identity links: {linked}/{len(retained)} "
       f"({100 * linked / len(retained):.2f}%)")
 PY
 ```
+
+## 2026-11-13 snapshot
+
+Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
+`b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`.
+
+| Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
+| --- | ---: | ---: | ---: | ---: |
+| All `src/` | 794 | 326 | 468 | 0 |
+| Main app package | 596 | 205 | 391 | 0 |
+
+There are 475 clean Java files, 88 explicit mappings, seven intentionally
+unannotated helper/derived classes, and zero unresolved annotations or mapping
+issues. Full normalized source-body checks establish the three additional
+carrier/ticket identities (`HZgbT8IXPf`, `JrjJL8mtlI`, `x12rSjPY6pZ`); the full
+USSD dispatcher is also linked and its source statements/router are compared.
+Bulevar adds exact identity links outside the main application package.
+
+All clean Java now passes the [hybrid compiler audit](java-compilation.md)
+against local original dependencies. Identity links, compiler success, selected
+behavior comparisons, and a standalone Android reconstruction remain distinct.

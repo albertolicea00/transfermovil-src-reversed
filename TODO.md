@@ -462,9 +462,9 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 
 ## Dynamic Checks (When Emulator Available)
 
-- [ ] Install APK on emulator and capture launch behavior
-- [ ] Capture logcat during registration/login flow
-- [ ] Inspect UI hierarchy and compare with static menu analysis
+- [x] Install a locally signed hybrid research APK on an isolated emulator and capture launch behavior ([runtime notes](docs/runtime-validation.md)); standalone packaging remains unverified.
+- [x] Capture logcat during registration/login screen navigation without submitting credentials ([runtime notes](docs/runtime-validation.md)).
+- [x] Inspect UI hierarchy and compare the main grid and registration/login screens with static menu analysis ([runtime notes](docs/runtime-validation.md)).
 - [x] Test USSD code sending (with mock/test only)
 - [ ] Capture network traffic for API calls
 - [ ] Test deep link handling

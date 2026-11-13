@@ -2,6 +2,7 @@
 
 ## 2026-11-13 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
+- Linked the Nauta Plus, own-card recharge, and ticket-reservation query forms after full source-body comparison and linked the restored dispatcher. Main-package identity links are 391/596, or 391/591 (66.16%) after five evidenced generated exclusions; 200 retained sources remain unlinked, with zero duplicate candidates or unresolved annotations.
 - Reconstructed the full clean USSD dispatcher and operation router, redirected 164 callers, restored the source agent-code accessor, and verified 720 mocked dispatch combinations plus 84 routing cases without sending carrier requests.
 - Recovered the substitution-table index reset from APK smali and restored encoded-field separators; verified seven fixed vectors, 4,607 successful comparisons, and 300 expected exception comparisons, replacing an earlier exception-only audit.
 - Repaired Java integration across BPA/BFI/Wallet menus and forms, main activities, pagers, database/statistics types, QR callbacks, and resource imports. All 475 clean sources plus the target resource constants now compile against explicit Android/APK-derived dependencies with zero errors and 12 deprecation warnings; 29 isolated tests pass.
@@ -10,6 +11,7 @@
 - Added a full reconstructed-Java compiler audit using explicit local Android and APK-derived dependency jars, real resource constants, stable-input fingerprints, and machine-readable per-file diagnostics; the initial source tree exposed 801 errors after its first syntax repair.
 - Added a reproducible 797-site USSD invocation inventory across 317 raw source files and 53 execution/template lines; expanded the catalog with direct codes, dynamic selector families, packet construction, smali-backed encoding vectors, and explicit unresolved semantic/reachability limits.
 - Completed the iOS public-API feasibility review and implementation plan with official Apple references, feature dispositions, acceptance gates, and external device/provider/authorization requirements.
+- Built a locally signed hybrid research APK and launched it in a dedicated radio-disabled API 36 emulator. Compared the home grid with the target APK and captured registration/login screen hierarchies and logcat without submitting credentials; documented the initial focus ANR and remaining runtime boundaries.
 
 ## 2026-11-12 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
