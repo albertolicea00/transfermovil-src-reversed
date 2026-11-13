@@ -14,10 +14,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.A9IFPpW4HW;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.VqNI4JnvJD;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.cwVwMsOO60;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.Tpv6wiFh8L6.yzFfgPWLpL;
+import cu.etecsa.transfermovil.ui.fragment.carrier.AgentMobileRechargeFragment;
+import cu.etecsa.transfermovil.ui.fragment.carrier.AgentRechargePinChangeFragment;
+import cu.etecsa.transfermovil.ui.fragment.carrier.AgentRechargeAuthenticationFragment;
+import cu.etecsa.transfermovil.ui.fragment.carrier.AgentRecentRechargesFragment;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.BpgQdOQz0p;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.CepWe39cnz;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.rq5HBT3ZZCR.H4bU7yMkJJK;
@@ -230,19 +230,19 @@ public class AgentOperationsTabFragment extends Fragment {
                 arg.putSerializable("R1sDOSqZ2z", R1sDOSqZ2z.MiTransfer);
                 switch (i) {
                     case 0:
-                        mFragmentTransaction.replace(R.id.containerView, new cwVwMsOO60()).addToBackStack(null).commit();
+                        mFragmentTransaction.replace(R.id.containerView, new AgentRechargeAuthenticationFragment()).addToBackStack(null).commit();
                         break;
                     case 1:
                         AgentOperationsTabFragment.this.showDialogConsultaSaldo();
                         break;
                     case 2:
-                        mFragmentTransaction.replace(R.id.containerView, new A9IFPpW4HW()).addToBackStack(null).commit();
+                        mFragmentTransaction.replace(R.id.containerView, new AgentMobileRechargeFragment()).addToBackStack(null).commit();
                         break;
                     case 3:
                         AgentOperationsTabFragment.this.showDialogUltimasRecargas();
                         break;
                     case 4:
-                        mFragmentTransaction.replace(R.id.containerView, new VqNI4JnvJD()).addToBackStack(null).commit();
+                        mFragmentTransaction.replace(R.id.containerView, new AgentRechargePinChangeFragment()).addToBackStack(null).commit();
                         break;
                     case 5:
                         AgentOperationsTabFragment.this.showDialogCerrarSession();
@@ -314,7 +314,7 @@ public class AgentOperationsTabFragment extends Fragment {
                 }
                 FragmentManager mFragmentManager = AgentOperationsTabFragment.this.getActivity().getSupportFragmentManager();
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
-                mFragmentTransaction.replace(R.id.containerView, new yzFfgPWLpL()).addToBackStack(null).commit();
+                mFragmentTransaction.replace(R.id.containerView, new AgentRecentRechargesFragment()).addToBackStack(null).commit();
             }
         });
         AlertDialog alert = builder.create();

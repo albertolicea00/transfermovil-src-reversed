@@ -39,7 +39,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.MqnAp2jnnon.wRqLBJvNq6;
+import cu.etecsa.transfermovil.ui.fragment.carrier.AgentRechargeTabsFragment;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.VW6IL66KC6M.r7Rinp9ooL;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.QM5YzxsQFRH.s9CT6pjRyD;
 import cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.hTZG5yFgyZY.RmIDjwu3SCe.wfroNBIJF7;
@@ -439,7 +439,7 @@ public class AgentMainActivity extends rDEl7rW1aN implements ysmUbWW79P {
                 if (menuItem.getItemId() == R.id.agentes) {
                     menuItem.setChecked(true);
                     FragmentTransaction xfragmentTransaction2 = AgentMainActivity.this.getSupportFragmentManager().beginTransaction();
-                    xfragmentTransaction2.replace(R.id.containerView, new wRqLBJvNq6()).addToBackStack(null).commit();
+                    xfragmentTransaction2.replace(R.id.containerView, new AgentRechargeTabsFragment()).addToBackStack(null).commit();
                     return true;
                 }
                 if (menuItem.getItemId() == R.id.generales) {

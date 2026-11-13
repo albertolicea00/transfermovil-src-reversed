@@ -123,141 +123,77 @@ public abstract class BfiQrAccountFragment extends BfiUssdAccountFragment {
         }
     }
 
-    /* JADX WARN: Code duplicated, block: B:17:0x0043 A[Catch: Exception -> 0x0134, TRY_LEAVE, TryCatch #7 {Exception -> 0x0134, blocks: (B:6:0x001b, B:15:0x003d, B:17:0x0043), top: B:98:0x001b }] */
-    /* JADX WARN: Code duplicated, block: B:20:0x0056  */
-    /* JADX WARN: Code duplicated, block: B:58:0x010e  */
-    /* JADX WARN: Code duplicated, block: B:66:0x0122  */
-    /* JADX WARN: Code duplicated, block: B:69:0x012c A[Catch: Exception -> 0x003a, TRY_LEAVE, TryCatch #5 {Exception -> 0x003a, blocks: (B:9:0x0025, B:11:0x0028, B:67:0x0124, B:69:0x012c), top: B:94:0x0025 }] */
+    /**
+     * Recovered from LgiFGRpiEl.smali, manipulateExtraQRData(String,String,String).
+     * JADX inverted the description branch and made the 16-character date gate
+     * impossible. Preserve the APK's permissive defaults and separate date catches.
+     */
     public boolean manipulateExtraQRData(String extraData, String idTransaccion, String noProveedor) {
-        boolean isOk;
-        Date fAhora;
-        boolean isVencida = false;
-        boolean isOk2 = true;
+        boolean isOk = true;
         try {
             String data = procesarExtra(extraData, noProveedor, idTransaccion);
             if (data != null) {
-                String description = BuildConfig.FLAVOR;
-                String regularExpresion = BuildConfig.FLAVOR;
-                String fechaCompleta = BuildConfig.FLAVOR;
                 try {
+                    String description = BuildConfig.FLAVOR;
+                    String regularExpresion = BuildConfig.FLAVOR;
+                    String fechaCompleta = BuildConfig.FLAVOR;
                     String[] parts = data.split(",");
-                    if (parts != null) {
+                    if (parts != null && parts.length > 0) {
+                        description = parts[0];
+                        regularExpresion = parts[1];
+                        fechaCompleta = parts[2];
+                        this.idQR = parts[3];
+                    }
+                    if (description.length() > 0) {
+                        this.lyLayoutDescripcion.setHint(description);
+                        this.txDescripcion.setEnabled(true);
+                        this.lyLayoutDescripcion.setEnabled(true);
+                    }
+                    // The APK reads this length but performs no regex check here.
+                    regularExpresion.length();
+                    if (fechaCompleta.length() > 0 && fechaCompleta.length() == 16) {
+                        boolean isNoVigente = false;
+                        boolean isVencida = false;
+                        String fechaIni = fechaCompleta.substring(0, 8);
+                        String fechaFin = fechaCompleta.substring(8, 16);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fAhora = sdf.parse(sdf.format(new Date()));
                         try {
-                            if (parts.length > 0) {
-                                description = parts[0];
-                                regularExpresion = parts[1];
-                                fechaCompleta = parts[2];
-                                this.idQR = parts[3];
-                            }
-                            if (description.length() > 0) {
-                                isOk = true;
-                            } else {
-                                this.lyLayoutDescripcion.setHint(description);
-                                isOk = true;
-                                try {
-                                    this.txDescripcion.setEnabled(true);
-                                    this.lyLayoutDescripcion.setEnabled(true);
-                                } catch (Exception e) {
-                                    e = e;
-                                    isOk2 = isOk;
-                                    try {
-                                        e.printStackTrace();
-                                    } catch (Exception e2) {
-                                    }
+                            if (!fechaIni.contains("00000000")) {
+                                Date fInit = new SimpleDateFormat("ddMMyyyy").parse(fechaIni);
+                                if (!fAhora.after(fInit) && !fAhora.equals(fInit)) {
+                                    isNoVigente = true;
+                                    Toast.makeText(this.context, "QR no disponible", 1).show();
                                 }
                             }
-                            regularExpresion.length();
-                            if (fechaCompleta.length() <= 0 && fechaCompleta.length() == 16) {
-                                boolean isNoVigente = false;
-                                String fechaIni = fechaCompleta.substring(0, 8);
-                                String fechaFin = fechaCompleta.substring(8, 16);
-                                boolean isVencida2 = false;
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                Date fAhora2 = sdf.parse(sdf.format(new Date()));
-                                try {
-                                    if (fechaIni.contains("00000000")) {
-                                        fAhora = fAhora2;
-                                    } else {
-                                        Date fInit = new SimpleDateFormat("ddMMyyyy").parse(fechaIni);
-                                        fAhora = fAhora2;
-                                        try {
-                                            if (!fAhora.after(fInit) && !fAhora.equals(fInit)) {
-                                                isNoVigente = true;
-                                                Toast.makeText(this.context, "QR no disponible", 1).show();
-                                            }
-                                        } catch (Exception e3) {
-                                            Exception ex = e3;
-                                            Log.e("EXC", ex.getMessage());
-                                        }
-                                    }
-                                } catch (Exception e4) {
-                                    Exception ex = e4;
-                                    fAhora = fAhora2;
-                                }
-                                try {
-                                    if (!fechaFin.contains("00000000")) {
-                                        Date fFin = new SimpleDateFormat("ddMMyyyy").parse(fechaFin);
-                                        if (!fAhora.before(fFin) && !fAhora.equals(fFin)) {
-                                            isVencida = true;
-                                            try {
-                                                Toast.makeText(this.context, "QR vencido", 1).show();
-                                            } catch (Exception e5) {
-                                                Exception ex = e5;
-                                                isVencida2 = true;
-                                                Log.e("EXC", ex.getMessage());
-                                                isVencida = isVencida2;
-                                            }
-                                        } else {
-                                            isVencida = false;
-                                        }
-                                    } else {
-                                        isVencida = false;
-                                    }
-                                } catch (Exception e6) {
-                                    Exception ex = e6;
-                                }
-                                if (isNoVigente || isVencida) {
-                                    isOk2 = false;
-                                } else {
-                                    isOk2 = isOk;
-                                }
-                            } else {
-                                isOk2 = isOk;
-                            }
-                            if (this.idQR.length() > 0) {
-                                this.isEnviarAuxDat = true;
-                            }
-                        } catch (Exception e7) {
-                            Exception e = e7;
-                            e.printStackTrace();
-                            return isOk2;
+                        } catch (Exception ex) {
+                            Log.e("EXC", ex.getMessage());
                         }
-                    } else {
-                        if (description.length() > 0) {
-                            isOk = true;
-                        } else {
-                            this.lyLayoutDescripcion.setHint(description);
-                            isOk = true;
-                            this.txDescripcion.setEnabled(true);
-                            this.lyLayoutDescripcion.setEnabled(true);
+                        try {
+                            if (!fechaFin.contains("00000000")) {
+                                Date fFin = new SimpleDateFormat("ddMMyyyy").parse(fechaFin);
+                                if (!fAhora.before(fFin) && !fAhora.equals(fFin)) {
+                                    isVencida = true;
+                                    Toast.makeText(this.context, "QR vencido", 1).show();
+                                }
+                            }
+                        } catch (Exception ex) {
+                            Log.e("EXC", ex.getMessage());
                         }
-                        regularExpresion.length();
-                        if (fechaCompleta.length() <= 0) {
-                            isOk2 = isOk;
-                        } else {
-                            isOk2 = isOk;
-                        }
-                        if (this.idQR.length() > 0) {
-                            this.isEnviarAuxDat = true;
+                        if (isNoVigente || isVencida) {
+                            isOk = false;
                         }
                     }
-                } catch (Exception e8) {
-                    Exception e = e8;
+                    if (this.idQR.length() > 0) {
+                        this.isEnviarAuxDat = true;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-        } catch (Exception e9) {
+        } catch (Exception ignored) {
         }
-        return isOk2;
+        return isOk;
     }
 
     public boolean validateDescriptionRegularExtrepresion(JSONObject jsonData) {

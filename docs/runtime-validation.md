@@ -14,6 +14,7 @@ The test used a separate read-only Android 16/API 36 AVD on `emulator-5582`; no 
 - The clean launcher alias reached `cu.etecsa.transfermovil.ui.GeneralMainActivity` on a warm launch. The initial cold launch encountered a system input-focus ANR at the permission handoff; after permissions were configured and the app restarted, the clean activity resumed. This first ANR is retained as an environment/runtime observation, not classified as a source defect.
 - The main screen showed the same visible operation labels in the same grid positions as the original APK capture, including registration, authentication, balance, recent operations, cash transfer, and telecom services.
 - The registration screen displayed identity and PIN fields. The authentication screen displayed a PIN field. Neither form was submitted. No fatal Java exception or `ClassCastException` appeared in the captured logcat during these screens.
+- A test-only `transfermovil://tm_compra_en_linea/action` URI with dummy transaction fields opened the bank-selection dialog. The dialog displayed BPA, BANDEC, METROPOLITANO and MITRANSFER. No bank was selected, so payment handling did not proceed; Wi-Fi/data were disabled. The hierarchy is in `.workspace/runtime-validation/hybrid-deeplink-safe.xml`.
 - Captures are in `.workspace/runtime-validation/`: `original-grid.xml`, `hybrid-grid.xml`, `hybrid-register.xml`, `hybrid-login.xml`, corresponding activity snapshots, and logcat files. These are local evidence, not tracked fixtures.
 
 ## Reproduction outline
@@ -25,4 +26,4 @@ The test used a separate read-only Android 16/API 36 AVD on `emulator-5582`; no 
 
 ## Remaining runtime gaps
 
-Authenticated login, account-backed navigation, backend traffic, registration submission, transaction flows, and carrier execution remain unverified. The manifest's deep-link route converts transaction query parameters and can proceed into payment handling, so it was not invoked without a safe inert harness. The existing offline dispatcher tests do not substitute for Android integration or provider validation. The hybrid package's original dependencies also mean successful activity launch does not establish standalone buildability.
+Authenticated login, account-backed navigation, backend traffic, registration submission, transaction flows, and carrier execution remain unverified. The deep-link route was checked only to the bank-selection boundary with inert values; selecting a bank can proceed into payment handling. The existing offline dispatcher checks do not substitute for Android integration or provider validation. The hybrid package's original dependencies also mean successful activity launch does not establish standalone buildability.

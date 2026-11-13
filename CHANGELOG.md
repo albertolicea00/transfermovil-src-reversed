@@ -12,6 +12,8 @@
 - Added a reproducible 797-site USSD invocation inventory across 317 raw source files and 53 execution/template lines; expanded the catalog with direct codes, dynamic selector families, packet construction, smali-backed encoding vectors, and explicit unresolved semantic/reachability limits.
 - Completed the iOS public-API feasibility review and implementation plan with official Apple references, feature dispositions, acceptance gates, and external device/provider/authorization requirements.
 - Built a locally signed hybrid research APK and launched it in a dedicated radio-disabled API 36 emulator. Compared the home grid with the target APK and captured registration/login screen hierarchies and logcat without submitting credentials; documented the initial focus ANR and remaining runtime boundaries.
+- Recovered `BfiQrAccountFragment`'s inverted QR description/date branches from smali and documented the retained exception/default behavior. Expanded the USSD catalog with source-backed variants for 17 selectors. Reconstructed six landline and six agent-recharge screens and connected their clean menu routes after full body comparison. Exercised the deep-link route with inert data through the bank picker without selecting a payment destination.
+- Linked the 12 reconstructed landline and agent-recharge sources in the main-package ledger; exact identity links now stand at 403/596 (67.62%), or 403/591 (68.19%) after the five evidenced generated exclusions, with 188 retained sources still unlinked.
 
 ## 2026-11-12 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

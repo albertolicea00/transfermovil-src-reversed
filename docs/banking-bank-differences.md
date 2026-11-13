@@ -17,3 +17,40 @@ This comparison summarizes only behaviors traced to form builders and menu dispa
 - The remaining source inventory includes unreconstructed classes and partially reconstructed screens. Absence from this table means “not yet traced,” not “unsupported by the app or bank.”
 
 For payload templates and dispatcher details, see the [USSD code catalog](ussd-code-catalog.md), especially registration, selector `45`, selector `62`, and selector `69` entries.
+
+
+## BFI encrypted QR metadata review
+
+`banking/ui/bfi/BfiQrAccountFragment.manipulateExtraQRData()` is reconstructed
+from APK method
+`B0jOLrWx09th/VW6IL66KC6M/LgiFGRpiEl.smali` →
+`manipulateExtraQRData(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z`.
+This is a bounded review of the shared BFI QR/payment metadata path; other
+partial BFI/Wallet implementations still require their own behavioral review.
+
+The metadata is decoded by `procesarExtra(extraData, noProveedor,
+idTransaccion)` and split into description, regex text, date window and QR ID.
+Bytecode tests the description length with `if-lez ... :cond_1`, so a nonempty
+description sets the hint and enables its input/layout. JADX inverted this
+branch in the copied clean method. The reconstructed branch follows bytecode.
+The regex field is read but not validated by this method.
+
+Bytecode also skips date checking on `if-lez ... :cond_8` and
+`if-ne ... 0x10 ... :cond_8`: a nonempty 16-character window enters date
+checking. The former clean condition required both length ≤ 0 and length 16,
+which prevented all date checks. The restored gate interprets the first eight
+characters as the start and the next eight as the end (`ddMMyyyy`). It compares
+them with today's local date normalized through `yyyy-MM-dd`. A start after
+today shows `QR no disponible`; an end before today shows `QR vencido`; either
+flag returns false. Equality with either endpoint is allowed, and `00000000`
+omits that endpoint's check.
+
+The source's permissive error behavior is retained: decoding failure or null
+data leaves the default true; malformed field arrays reach the original
+stack-trace handler; date-parse failures log `EXC` and retain that endpoint's
+false flag. Date parsing remains lenient through `SimpleDateFormat`. A nonempty
+QR ID sets `isEnviarAuxDat` after date checking even when the result is false.
+This review establishes the local metadata rules, not gateway acceptance or
+full feature equivalence. Validation was a static comparison against the
+method's bytecode branches and catch handlers; no runtime tests were run for
+this change.

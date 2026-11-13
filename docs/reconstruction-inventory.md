@@ -311,9 +311,9 @@ subsequently gained exact clean links. The five generated exclusions are all
 unlinked: Android `BuildConfig` and `R`, plus the three synthetic API-model
 outline classes identified with evidence in the ledger.
 
-Retaining every other main-package source gives **391/(596−5) = 391/591
-(66.16%)** scope-adjusted identity-link coverage, with 200 retained sources
-still unlinked. The raw exact-link ratio is **391/596 (65.60%)**. Exclusions
+Retaining every other main-package source gives **403/(596−5) = 403/591
+(68.19%)** scope-adjusted identity-link coverage, with 188 retained sources
+still unlinked. The raw exact-link ratio is **403/596 (67.62%)**. Exclusions
 are established only for the reviewed cohort; linked sources outside it remain
 in scope without an additional generated/library audit. A candidate link can
 still point to incomplete code. This is a reconstruction identity-link proxy,
@@ -361,15 +361,16 @@ Target: `cu.etecsa.cubacel.tr.tm-v162.apk`, SHA-256
 
 | Scope | Original Java files | Unlinked | Single candidate | Multiple candidates |
 | --- | ---: | ---: | ---: | ---: |
-| All `src/` | 794 | 326 | 468 | 0 |
-| Main app package | 596 | 205 | 391 | 0 |
+| All `src/` | 794 | 314 | 480 | 0 |
+| Main app package | 596 | 193 | 403 | 0 |
 
-There are 475 clean Java files, 88 explicit mappings, seven intentionally
+There are 487 clean Java files, 88 explicit mappings, seven intentionally
 unannotated helper/derived classes, and zero unresolved annotations or mapping
-issues. Full normalized source-body checks establish the three additional
-carrier/ticket identities (`HZgbT8IXPf`, `JrjJL8mtlI`, `x12rSjPY6pZ`); the full
-USSD dispatcher is also linked and its source statements/router are compared.
-Bulevar adds exact identity links outside the main application package.
+issues. Full normalized source-body checks establish 12 additional fixed-phone
+and agent-recharge UI identities, alongside the earlier carrier/ticket links
+(`HZgbT8IXPf`, `JrjJL8mtlI`, `x12rSjPY6pZ`); the full USSD dispatcher is also
+linked and its source statements/router are compared. Bulevar adds exact
+identity links outside the main application package.
 
 All clean Java now passes the [hybrid compiler audit](java-compilation.md)
 against local original dependencies. Identity links, compiler success, selected

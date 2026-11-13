@@ -467,7 +467,7 @@ The next package batches cover the full baseline cohort of 213 main-package clas
 - [x] Inspect UI hierarchy and compare the main grid and registration/login screens with static menu analysis ([runtime notes](docs/runtime-validation.md)).
 - [x] Test USSD code sending (with mock/test only)
 - [ ] Capture network traffic for API calls
-- [ ] Test deep link handling
+- [x] Test the app deep-link route through its bank-selection boundary using inert values; payment execution remains untested ([runtime notes](docs/runtime-validation.md)).
 
 ## iOS Port
 
