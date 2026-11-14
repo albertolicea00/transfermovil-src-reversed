@@ -2,7 +2,7 @@
 
 ## 2026-11-14 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
-- Added a `Related Repositories` cross-reference section in `README.md` linking the companion `enzona-src-reversed`, `todus-src-reversed`, `apklist-src-reversed`, `nauta-src-reversed`, and `bancuba-src-reversed` repositories.
+- Added an `Official References & Ecosystem Links` table (`etecsa.cu`, Apklis `cu.etecsa.cubacel.tr.tm`, EcuRed, and `miboleto.mibulevar.com`), `Compile SDK` metadata, and a `Related Repositories` cross-reference section in `README.md` linking `enzona-src-reversed`, `todus-src-reversed`, `apklist-src-reversed`, `nauta-src-reversed`, and `bancuba-src-reversed`.
 
 ## 2026-11-13 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 

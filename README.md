@@ -20,6 +20,15 @@ This repository contains reverse-engineered source code, extracted resources, an
 > [!WARNING]
 > **Disclaimer:** This repository is strictly intended for interoperability research, protocol analysis, and security auditing. All original application logic, trademarks, and associated intellectual property belong to ETECSA. No proprietary binaries are hosted for redistribution.
 
+## Official References & Ecosystem Links
+
+| Resource | URL / Identifier | Description |
+| :--- | :--- | :--- |
+| **ETECSA Official Portal** | [https://www.etecsa.cu/](https://www.etecsa.cu/) | Official ETECSA website, Transfermóvil service documentation, and APK download page (`etecsa.cu/es/aplicaciones/transfermovil`). |
+| **Android Package (Apklis)** | [`cu.etecsa.cubacel.tr.tm`](https://www.apklis.cu/application/cu.etecsa.cubacel.tr.tm) | Official distribution page on the Cuban Android application store Apklis. |
+| **Transfermóvil (EcuRed)** | [https://www.ecured.cu/Transferm%C3%B3vil](https://www.ecured.cu/Transferm%C3%B3vil) | Collaborative encyclopedia reference detailing supported banks (BPA, BANDEC, Metropolitano, BFI), MiTransfer wallet, and USSD operations. |
+| **Boulevard / MiBoleto API** | `https://miboleto.mibulevar.com/` | Backend REST API gateway for the integrated Boulevard merchant e-commerce and MiBoleto modules. |
+
 ## Current Target Metadata
 
 | Property | Value |
@@ -28,6 +37,7 @@ This repository contains reverse-engineered source code, extracted resources, an
 | **Target Version** | `1.260416` |
 | **Version Code** | `162` |
 | **Project tag** | `1.260416.162-v1.0` |
+| **Compile SDK** | `34` |
 | **Min SDK** | `21` |
 | **Target SDK** | `33` |
 | **SHA-256 Hash** | `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a` |
