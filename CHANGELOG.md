@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-14 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
+
+- Added a `Related Repositories` cross-reference section in `README.md` linking the companion `enzona-src-reversed`, `todus-src-reversed`, `apklist-src-reversed`, `nauta-src-reversed`, and `bancuba-src-reversed` repositories.
+
 ## 2026-11-13 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
 - Linked the Nauta Plus, own-card recharge, and ticket-reservation query forms after full source-body comparison and linked the restored dispatcher. Main-package identity links are 391/596, or 391/591 (66.16%) after five evidenced generated exclusions; 200 retained sources remain unlinked, with zero duplicate candidates or unresolved annotations.

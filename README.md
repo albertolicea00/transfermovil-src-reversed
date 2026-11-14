@@ -169,3 +169,13 @@ The Copyright Laws of the United States recognize "fair use" of copyrighted cont
 > "Notwithstanding the provisions of sections 106 and 106A, the fair use of a copyrighted work, including such use by reproduction in copies or phonorecords or by any other means specified by that section, for purposes such as criticism, comment, news reporting, teaching (including multiple copies for classroom use), scholarship, or research, is not an infringement of copyright."
 
 This repository and its contents are covered under fair use for the purposes of interoperability research, security auditing, and protocol analysis. Any DMCA takedown notice targeting this repository on these grounds would be invalid.
+
+## Related Repositories
+
+| Repository | Package | Description |
+| :--- | :--- | :--- |
+| [enzona-src-reversed](https://github.com/albertolicea00/enzona-src-reversed) | `cu.xetid.apk.enzona` | Reverse-engineered source code, resources, and documentation for the XETID ENZONA payment platform and Boulevard / ENZONA-TPV interoperability. |
+| [todus-src-reversed](https://github.com/albertolicea00/todus-src-reversed) | `cu.todus.android` | Reverse-engineered source code, resources, and documentation for the toDus instant messaging and collaborative platform. |
+| [apklist-src-reversed](https://github.com/albertolicea00/apklist-src-reversed) | `cu.uci.android.apklis` | Reverse-engineered source code, resources, and documentation for the official Cuban Android app store client (Apklis). |
+| [nauta-src-reversed](https://github.com/albertolicea00/nauta-src-reversed) | `cu.etecsa.enp_oficial` | Reverse-engineered source code, resources, and documentation for the official ETECSA Nauta captive portal and Wi-Fi client. |
+| [bancuba-src-reversed](https://github.com/albertolicea00/bancuba-src-reversed) | `cu.bpa.bancuba` | Reverse-engineered source code, resources, and financial calculator analysis for the Banco Popular de Ahorro (BPA) BanCuba client. |
