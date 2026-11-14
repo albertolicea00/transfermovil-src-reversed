@@ -182,6 +182,8 @@ This repository and its contents are covered under fair use for the purposes of 
 
 ## Related Repositories
 
+*Additional explorations, decompilations, and architectural analyses of Cuba's digital app and service ecosystem.*
+
 | Repository | Package | Description |
 | :--- | :--- | :--- |
 | [enzona-src-reversed](https://github.com/albertolicea00/enzona-src-reversed) | `cu.xetid.apk.enzona` | Reverse-engineered source code, resources, and documentation for the XETID ENZONA payment platform and Boulevard / ENZONA-TPV interoperability. |
