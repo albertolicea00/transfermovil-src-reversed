@@ -624,6 +624,66 @@
     "cu.etecsa.cubacel.tr.tm.l08fNVC4KOKK.jN13TOyLMX": {
       "clean": "cu.etecsa.transfermovil.ui.widget.DropdownSpinnerView",
       "role": "AutoCompleteTextView as dropdown spinner with accessibility AlertDialog fallback"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.AjGJz9tVLXv.GMFMyKMnO2": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileCallFragment",
+      "role": "Mobile voice call form (direct or *99 recipient-pays with contact picker)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.FNRzUmC7E5": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileServicesMenuFragment",
+      "role": "Mobile services menu (*222#/*111# balance queries and voice call routes)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.IVWCBH7bqvy.ICmtk949Og": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileRechargeOperationsMenuFragment",
+      "role": "Mobile recharge operations menu (coupon recharge, balance transfer, PIN change)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.LALCrDPvhM": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileOperationsMenuFragment",
+      "role": "Mobile operations menu (coupon, transfer, *234*3 advance, PIN, *222*/*133# plans)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.aQdU5kg0yGq.BktkqFBOIQ": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.EtecsaOffersMenuFragment",
+      "role": "ETECSA offers menu sending free SMS keywords (OFERTA/TARIFA/PLANES/AMIGOS) to 2266",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.aQdU5kg0yGq.XRa1KuZNBW": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileVotingSmsFragment",
+      "role": "Voto Movil SMS form (2899/3099) with VOTOMOVIL QR scan import",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.C8l2t8799rL": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileBalanceTransferFragment",
+      "role": "Mobile balance transfer form dispatching USSD selector 234*1",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.E1lhoLKryWP": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileRechargePinChangeFragment",
+      "role": "Mobile recharge PIN change form dispatching USSD selector 234*2",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.kE6CyiKsVrS.b0kkzvOCEu": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileCouponRechargeFragment",
+      "role": "Mobile coupon recharge form with QR numeric extraction dispatching USSD 662",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.s88cBrrDEaR": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.MobileServicesTabsFragment",
+      "role": "Mobile services 4-tab pager host (calls, operations, offers, emergency)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.vaYCVGq917": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.UtilityServicesTabsFragment",
+      "role": "Utility services 2-tab pager host (ETECSA offers and recharge operations)",
+      "confidence": "high"
+    },
+    "cu.etecsa.cubacel.tr.tm.B0jOLrWx09th.ivq3YYEGPZM.xLm6Wjf6gEf.s9lZwtvq9Dl": {
+      "clean": "cu.etecsa.transfermovil.ui.fragment.carrier.EmergencyServicesFragment",
+      "role": "Emergency services menu dialing 104, 105, 106, 107, and 103",
+      "confidence": "high"
     }
   }
 }
