@@ -32,17 +32,30 @@ def update(readme: str, todo: str, linked_files: int = 0, source_files: int = 0)
     overall_pct = (todo_pct + source_pct) // 2 if source_files > 0 else todo_pct
     blocks = overall_pct * 50 // 100
     bar = "█" * blocks + "░" * (50 - blocks)
-    source_pct_str = f"{(linked_files * 100 / source_files):.1f}%" if source_files > 0 else "0%"
-    replacement = (
-        '<!-- 50 blocks; each full block = 2% of combined TODO + source reconstruction progress --> '
-        + MARKER
-        + "\n"
-        f'<span style="white-space: nowrap;"><code>[{bar}] {overall_pct}%</code></span>\n\n'
-        f'**Overall progress: {overall_pct}%** '
-        f'(Task-list: {completed}/{len(tasks)} [{todo_pct}%]; '
-        f'Source reconstruction: {linked_files}/{source_files} [{source_pct_str}]). '
-        'Run `make progress` or `make inventory` to refresh from [TODO.md](TODO.md) and `make stats`.'
-    )
+    if source_files > 0:
+        source_pct_str = f"{(linked_files * 100 / source_files):.1f}%"
+        replacement = (
+            '<!-- 50 blocks; each full block = 2% of combined TODO + source reconstruction progress --> '
+            + MARKER
+            + "\n"
+            f'<span style="white-space: nowrap;"><code>[{bar}] {overall_pct}%</code></span>\n\n'
+            f'**Overall progress: {overall_pct}%** '
+            f'(Task-list: {completed}/{len(tasks)} [{todo_pct}%]; '
+            f'Source reconstruction: {linked_files}/{source_files} [{source_pct_str}]). '
+            'Run `make progress` or `make inventory` to refresh from [TODO.md](TODO.md) and `make stats`.'
+        )
+    else:
+        replacement = (
+            '<!-- 50 blocks; each full block = 2% of TODO tasks --> '
+            + MARKER
+            + "\n"
+            f'<span style="white-space: nowrap;"><code>[{bar}] {overall_pct}%</code></span>\n\n'
+            f'**Task-list progress: {completed}/{len(tasks)} completed; '
+            f'{len(tasks) - completed} pending.** '
+            'Tasks have equal weight. This is not verified code coverage or a working-app percentage. '
+            'The value can fall when scope grows. '
+            'Run `make progress` or `make inventory` to refresh it from [TODO.md](TODO.md).'
+        )
     pattern = (
         r"<!--[^\n]*" + re.escape(MARKER) + r"\n<span[^\n]*</span>"
         r"(?:\n\n\*\*(?:Task-list|Overall) progress:[^\n]*)?"
