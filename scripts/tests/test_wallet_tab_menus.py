@@ -26,7 +26,12 @@ class WalletTabMenuTest(unittest.TestCase):
             for suffix, text in [('Original', source), ('Clean', clean)]:
                 method = extract_method(text, 'private void initData()')
                 classes.append('static class Tab' + str(index) + suffix + ' extends Base {\n' + method + '\n}')
-            checks.append(f'compare(new Tab{index}Original(),new Tab{index}Clean(),"{name}");')
+            if name == 'WalletBoletoTabFragment':
+                checks.append(f'compareBoleto(new Tab{index}Original(),new Tab{index}Clean(),"{name}");')
+            elif name == 'WalletOperationsTabFragment':
+                checks.append(f'compareOperations(new Tab{index}Original(),new Tab{index}Clean(),"{name}");')
+            else:
+                checks.append(f'compare(new Tab{index}Original(),new Tab{index}Clean(),"{name}");')
         harness = '''
 import java.util.List;
 import java.util.ArrayList;
@@ -36,11 +41,41 @@ import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
 import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
 public class MenuCheck {
     static class Context { String getString(int id){return "resource:"+id;} }
-    static class Recycler { vD9rc3MbTL adapter; void setAdapter(vD9rc3MbTL value){adapter=value;} }
+    static class Recycler {
+        vD9rc3MbTL adapter;
+        BoletoManagementAdapter boletoAdapter;
+        MenuAdapter menuAdapter;
+        void setAdapter(vD9rc3MbTL value){adapter=value;}
+        void setAdapter(BoletoManagementAdapter value){boletoAdapter=value;}
+        void setAdapter(MenuAdapter value){menuAdapter=value;}
+    }
     static class vD9rc3MbTL {
         List<WUULVgZq02> rows; Object listener;
         vD9rc3MbTL(Context context,List<WUULVgZq02> values){rows=values;}
         void setOnItemClickListener(Object value){listener=value;}
+    }
+    static class BoletoManagementAdapter {
+        enum Action { REGISTER, CHANGE_PIN, DELETE_REGISTRATION, ASSOCIATE_CLASSIC_ACCOUNT }
+        static final class MenuItem {
+            final String title, subtitle; final int icon; final Action action;
+            MenuItem(String title, String subtitle, int icon, Action action) {
+                this.title = title; this.subtitle = subtitle; this.icon = icon; this.action = action;
+            }
+        }
+        final List<MenuItem> rows; Object listener;
+        BoletoManagementAdapter(List<MenuItem> rows) { this.rows = rows; }
+        void setOnItemClickListener(Object value) { listener = value; }
+    }
+    enum Action { AUTHENTICATE, DISCONNECT }
+    static final class MenuRow {
+        final String title, subtitle; final int icon; final Action action;
+        MenuRow(String title, String subtitle, int icon, Action action) {
+            this.title = title; this.subtitle = subtitle; this.icon = icon; this.action = action;
+        }
+    }
+    static final class MenuAdapter {
+        final List<MenuRow> rows;
+        MenuAdapter(List<MenuRow> rows) { this.rows = rows; }
     }
     static class Base {
         Context context=new Context(); Recycler rvseguridad=new Recycler(); Object onItemClickListener=new Object();
@@ -62,6 +97,55 @@ CLASSES
         }
         equal(clean.onItemClickListener,clean.rvseguridad.adapter.listener,label+" click listener");
         System.out.println(label+": "+clean.rvseguridad.adapter.rows.size()+" rows");
+    }
+    static FdonIAFI9w mapBoleto(BoletoManagementAdapter.Action action) {
+        switch (action) {
+            case REGISTER: return FdonIAFI9w.BOLSARegistrarse;
+            case CHANGE_PIN: return FdonIAFI9w.BOLSACambioPin;
+            case DELETE_REGISTRATION: return FdonIAFI9w.BOLSAEliminarRegistro;
+            case ASSOCIATE_CLASSIC_ACCOUNT: return FdonIAFI9w.BOLSAAsociarCuenta;
+            default: throw new AssertionError("Unknown action: "+action);
+        }
+    }
+    static FdonIAFI9w mapOperation(Action action) {
+        switch (action) {
+            case AUTHENTICATE: return FdonIAFI9w.BOLSAAutenticarse;
+            case DISCONNECT: return FdonIAFI9w.BOLSADesconectar;
+            default: throw new AssertionError("Unknown action: "+action);
+        }
+    }
+    static void compareBoleto(Base original,Base clean,String label) throws Exception {
+        build(original);build(clean);
+        List<WUULVgZq02> origRows=original.rvseguridad.adapter.rows;
+        List<BoletoManagementAdapter.MenuItem> cleanRows=clean.rvseguridad.boletoAdapter.rows;
+        equal(origRows.size(),cleanRows.size(),label+" count");
+        for(int i=0;i<origRows.size();i++) {
+            WUULVgZq02 a=origRows.get(i);
+            BoletoManagementAdapter.MenuItem b=cleanRows.get(i);
+            equal(a.titulo,b.title,label+" row "+i+" title");
+            equal(a.subtitulo,b.subtitle,label+" row "+i+" subtitle");
+            equal(a.icono,b.icon,label+" row "+i+" icon");
+            equal(a.type,rBXnNc0Kx4.Post,label+" row "+i+" type");
+            equal(a.operacion,mapBoleto(b.action),label+" row "+i+" action");
+        }
+        equal(clean.onItemClickListener,clean.rvseguridad.boletoAdapter.listener,label+" click listener");
+        System.out.println(label+": "+cleanRows.size()+" rows");
+    }
+    static void compareOperations(Base original,Base clean,String label) throws Exception {
+        build(original);build(clean);
+        List<WUULVgZq02> origRows=original.rvseguridad.adapter.rows;
+        List<MenuRow> cleanRows=clean.rvseguridad.menuAdapter.rows;
+        equal(origRows.size(),cleanRows.size(),label+" count");
+        for(int i=0;i<origRows.size();i++) {
+            WUULVgZq02 a=origRows.get(i);
+            MenuRow b=cleanRows.get(i);
+            equal(a.titulo,b.title,label+" row "+i+" title");
+            equal(a.subtitulo,b.subtitle,label+" row "+i+" subtitle");
+            equal(a.icono,b.icon,label+" row "+i+" icon");
+            equal(a.type,rBXnNc0Kx4.Post,label+" row "+i+" type");
+            equal(a.operacion,mapOperation(b.action),label+" row "+i+" action");
+        }
+        System.out.println(label+": "+cleanRows.size()+" rows");
     }
     public static void main(String[] args) throws Exception { CHECKS }
 }
