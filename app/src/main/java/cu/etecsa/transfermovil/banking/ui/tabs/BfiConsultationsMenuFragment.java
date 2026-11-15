@@ -5,16 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.WUULVgZq02;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.XPH60zChinL.rBXnNc0Kx4;
-import cu.etecsa.cubacel.tr.tm.B21UyndcVvF.vD9rc3MbTL;
 import cu.etecsa.cubacel.tr.tm.R;
-import cu.etecsa.cubacel.tr.tm.ZNRpoHwtLXM.FdonIAFI9w;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiConsultarLimiteFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiConsultarSaldoFragment;
 import cu.etecsa.transfermovil.banking.ui.bfi.BfiConsultarUltimasOperacionesFragment;
@@ -27,19 +25,32 @@ public class BfiConsultationsMenuFragment extends Fragment {
     private Context context;
     private RecyclerView recyclerView;
 
-    private final vD9rc3MbTL.OnItemClickListener listener = new vD9rc3MbTL.OnItemClickListener() {
-        @Override public void onItemClick(View view, int position) { }
-        @Override public void onGetItemClick(View view, FdonIAFI9w operation) {
-            Fragment destination;
-            if (operation == FdonIAFI9w.BFIConsultarSaldo) destination = new BfiConsultarSaldoFragment();
-            else if (operation == FdonIAFI9w.BFIUltimasoperaciones) destination = new BfiConsultarUltimasOperacionesFragment();
-            else if (operation == FdonIAFI9w.BFIConsultaLimite) destination = new BfiConsultarLimiteFragment();
-            else if (operation == FdonIAFI9w.BFIEstadoCuentas) destination = new BfiAccountStatementFragment();
-            else return;
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.containerView, destination).addToBackStack(null).commit();
+    private enum Action { BALANCE, LATEST_OPERATIONS, LIMIT, ACCOUNT_STATEMENT }
+
+    private static final class MenuRow {
+        final String title;
+        final String subtitle;
+        final int icon;
+        final Action action;
+
+        MenuRow(String title, String subtitle, int icon, Action action) {
+            this.title = title;
+            this.subtitle = subtitle;
+            this.icon = icon;
+            this.action = action;
         }
-    };
+    }
+
+    private void selectAction(Action action) {
+        Fragment destination;
+        if (action == Action.BALANCE) destination = new BfiConsultarSaldoFragment();
+        else if (action == Action.LATEST_OPERATIONS) destination = new BfiConsultarUltimasOperacionesFragment();
+        else if (action == Action.LIMIT) destination = new BfiConsultarLimiteFragment();
+        else if (action == Action.ACCOUNT_STATEMENT) destination = new BfiAccountStatementFragment();
+        else return;
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.containerView, destination).addToBackStack(null).commit();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,27 +65,70 @@ public class BfiConsultationsMenuFragment extends Fragment {
     }
 
     private void populate() {
-        List<WUULVgZq02> items = new ArrayList<>();
+        List<MenuRow> items = new ArrayList<>();
         add(items, R.string.tx_consultar_saldo, R.string.banco_sub_saldo,
-                R.drawable.ic_consulta_saldo_bfi, FdonIAFI9w.BFIConsultarSaldo);
+                R.drawable.ic_consulta_saldo_bfi, Action.BALANCE);
         add(items, R.string.tx_ultimas_operaciones, R.string.tx_sub_ultimas_operaciones_bolsa,
-                R.drawable.ic_consulta_ultimas_oper_bfi, FdonIAFI9w.BFIUltimasoperaciones);
+                R.drawable.ic_consulta_ultimas_oper_bfi, Action.LATEST_OPERATIONS);
         add(items, R.string.title_tx_consulta_limite, R.string.banco_sub_consulta_limites,
-                R.drawable.ic_consulta_limites_bfi, FdonIAFI9w.BFIConsultaLimite);
+                R.drawable.ic_consulta_limites_bfi, Action.LIMIT);
         add(items, R.string.banco_tx_estado_cuentas, R.string.banco_sub_estado_cuentas,
-                R.drawable.ic_estado_cuentas_bfi, FdonIAFI9w.BFIEstadoCuentas);
-        vD9rc3MbTL adapter = new vD9rc3MbTL(context, items);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(listener);
+                R.drawable.ic_estado_cuentas_bfi, Action.ACCOUNT_STATEMENT);
+        recyclerView.setAdapter(new MenuAdapter(items));
     }
 
-    private void add(List<WUULVgZq02> items, int title, int subtitle, int icon, FdonIAFI9w operation) {
-        WUULVgZq02 item = new WUULVgZq02();
-        item.setTitulo(getString(title));
-        item.setSubtitulo(getString(subtitle));
-        item.setIcono(icon);
-        item.setType(rBXnNc0Kx4.Post);
-        item.setOperacion(operation);
-        items.add(item);
+    private void add(List<MenuRow> items, int title, int subtitle, int icon, Action action) {
+        items.add(new MenuRow(getString(title), getString(subtitle), icon, action));
+    }
+
+    private final class MenuAdapter extends RecyclerView.Adapter<RowHolder> {
+        private final List<MenuRow> rows;
+
+        MenuAdapter(List<MenuRow> rows) {
+            this.rows = rows;
+        }
+
+        @Override
+        public RowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.dpiivfe2yk6mn, parent, false);
+            return new RowHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(RowHolder holder, int position) {
+            MenuRow row = rows.get(position);
+            holder.title.setText(row.title);
+            holder.subtitle.setText(row.subtitle);
+            holder.icon.setImageResource(row.icon);
+            holder.action = row.action;
+        }
+
+        @Override
+        public int getItemCount() {
+            return rows.size();
+        }
+    }
+
+    private final class RowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        final TextView title;
+        final TextView subtitle;
+        final ImageView icon;
+        Action action;
+
+        RowHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.titulo);
+            subtitle = (TextView) view.findViewById(R.id.subtitulo);
+            icon = (ImageView) view.findViewById(R.id.icono);
+            view.findViewById(R.id.mainHolder).setOnClickListener(this);
+            view.setClickable(true);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            selectAction(action);
+        }
     }
 }

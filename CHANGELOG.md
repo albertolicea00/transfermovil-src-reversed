@@ -4,6 +4,7 @@
 
 - Added an `Official References & Ecosystem Links` table (`etecsa.cu`, Apklis `cu.etecsa.cubacel.tr.tm`, EcuRed, and `miboleto.mibulevar.com`), `Compile SDK` metadata, and a `Related Repositories` cross-reference section in `README.md` linking `enzona-src-reversed`, `todus-src-reversed`, `apklist-src-reversed`, `nauta-src-reversed`, and `bancuba-src-reversed`.
 - Updated `scripts/update-progress.py` and `README.md` to combine `TODO.md` checklist completion (`423/429`, `98%`) with actual `make stats` source-to-clean reconstruction coverage (`480/794`, `60.5%`).
+- Refactored `BfiConsultationsMenuFragment` to replace obfuscated item/adapter/operation imports with clean inner `Action`, `MenuRow`, `MenuAdapter`, and `RowHolder` types; verified `make compile-audit` passes with 0 errors across all 489 clean sources.
 
 ## 2026-11-13 — cu.etecsa.cubacel.tr.tm-v162.apk — SHA-256: `b18475eb6911209d21e99d72e6ca888b29236a5b1e470acc70238e05a44f160a`
 
