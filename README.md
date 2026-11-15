@@ -9,7 +9,7 @@
 <!-- 50 blocks; each full block = 2% of combined TODO + source reconstruction progress --> <!-- do not delete this progress-bar-->
 <span style="white-space: nowrap;"><code>[███████████████████████████████████████░░░░░░░░░░░] 79%</code></span>
 
-**Overall progress: 79%** (Task-list: 423/429 [98%]; Source reconstruction: 480/794 [60.5%]). Run `make progress` or `make inventory` to refresh from [TODO.md](TODO.md) and `make stats`.
+**Overall progress: 79%** (Task-list: 423/429 [98%]; Source reconstruction: 492/794 [62.0%]). Run `make progress` or `make inventory` to refresh from [TODO.md](TODO.md) and `make stats`.
 
 **Main-package exact source links: 403/596 (68%).** This counts original Java classes with one exact clean-source candidate; it does not verify implementation completeness. The [reconstruction inventory](docs/reconstruction-inventory.md) reports current counts. The [213-source baseline ledger](docs/unmapped-source-review.md) has 160 application-behavior, 48 application-support, and five generated classes; 20 cohort sources now have exact links and 193 remain unlinked. Excluding only the five evidenced generated sources gives a provisional scope-adjusted identity-link metric of **403/591 (68.19%)**, leaving 188 retained sources unlinked. Sources outside the reviewed cohort remain in scope. JADX's 98.8% decompilation-success result measures a different stage.
 
